@@ -1,14 +1,15 @@
 ---
 title: Neuerungen in EF Core 5.0
+description: Übersicht über neue Features in EF Core 5.0
 author: ajcvickers
-ms.date: 03/15/2020
+ms.date: 03/30/2020
 uid: core/what-is-new/ef-core-5.0/whatsnew.md
-ms.openlocfilehash: 08a93555fd76d8a9f6d3011f59d9a34f76d0b22f
-ms.sourcegitcommit: c3b8386071d64953ee68788ef9d951144881a6ab
+ms.openlocfilehash: c047a308cadf44eea577dcab29b68b36942a50df
+ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "80136254"
+ms.lasthandoff: 04/07/2020
+ms.locfileid: "80634283"
 ---
 # <a name="whats-new-in-ef-core-50"></a>Neuerungen in EF Core 5.0
 
@@ -19,6 +20,64 @@ Auf dieser Seite wird der [Plan für EF Core 5.0](plan.md) nicht erneut aufgef
 Der Plan beschreibt die allgemeinen Themen für EF Core 5.0 einschließlich sämtlicher Features, die wir vor Auslieferung des finalen Releases integrieren möchten.
 
 Wir werden an dieser Stelle Links zur offiziellen Dokumentation einfügen, sobald diese veröffentlicht ist.
+
+## <a name="preview-2"></a>Vorschau 2
+
+### <a name="use-a-c-attribute-to-specify-a-property-backing-field"></a>Verwenden eines C#-Attributs zum Angeben eines Eigenschaftsunterstützungsfelds
+
+Es kann jetzt ein C#-Attribut verwendet werden, um das Unterstützungsfeld für eine Eigenschaft anzugeben.
+Dieses Attribut ermöglicht es EF Core, wie sonst auch in das Unterstützungsfeld zu schreiben und daraus zu lesen, auch wenn das Unterstützungsfeld nicht automatisch gefunden werden kann.
+Zum Beispiel:
+
+```CSharp
+public class Blog
+{
+    private string _mainTitle;
+
+    public int Id { get; set; }
+
+    [BackingField(nameof(_mainTitle))]
+    public string Title
+    {
+        get => _mainTitle;
+        set => _mainTitle = value;
+    }
+}
+```
+
+Die Dokumentation finden Sie im Issue [#2230](https://github.com/dotnet/EntityFramework.Docs/issues/2230).
+
+### <a name="complete-discriminator-mapping"></a>Vollständige Diskriminatorzuordnung
+
+EF Core verwendet eine Diskriminatorspalte für die [TPH-Zuordnung (Tabelle pro Hierarchie) von Vererbungshierarchien](/ef/core/modeling/inheritance).
+Es sind einige Leistungsverbesserungen möglich, solange EF Core alle möglichen Werte für den Diskriminator kennt.
+Diese Verbesserungen sind nun in EF Core 5.0 implementiert.
+
+Frühere Versionen von EF Core generierten beispielsweise für Abfragen immer einen SQL-Code wie den folgenden, in dem alle Typen in einer Hierarchie zurückgegeben wurden:
+
+```sql
+SELECT [a].[Id], [a].[Discriminator], [a].[Name]
+FROM [Animal] AS [a]
+WHERE [a].[Discriminator] IN (N'Animal', N'Cat', N'Dog', N'Human')
+```
+
+EF Core 5.0 generiert nun Folgendes, wenn eine vollständige Diskriminatorzuordnung konfiguriert ist:
+
+```sql
+SELECT [a].[Id], [a].[Discriminator], [a].[Name]
+FROM [Animal] AS [a]
+```
+
+Ab Vorschauversion 3 wird dies das Standardverhalten.
+
+### <a name="performance-improvements-in-microsoftdatasqlite"></a>Leistungsverbesserungen in Microsoft.Data.Sqlite
+
+Es wurden zwei Leistungsverbesserungen für SQLite vorgenommen:
+
+* Das Abrufen von Binär- und Zeichenfolgendaten mit GetBytes, GetChars und GetTextReader ist nun effizienter durch die Verwendung von SqliteBlob und Datenströmen.
+* Die Initialisierung von SqliteConnection ist nun verzögert.
+
+Diese Verbesserungen wurden am ADO.NET-Anbieter Microsoft.Data.Sqlite vorgenommen und führen daher auch zu Leistungsverbesserungen außerhalb von EF Core.
 
 ## <a name="preview-1"></a>Vorschauversion 1
 
@@ -33,7 +92,7 @@ Zusätzliche Dokumentation finden Sie im Issue [#2085](https://github.com/dotnet
 
 ### <a name="simple-way-to-get-generated-sql"></a>Einfache Möglichkeit zum Abrufen von generiertem SQL-Code
 
-In EF Core 5.0 wird die Erweiterungsmethode `ToQueryString` eingeführt, die die von EF Core beim Ausführen einer LINQ-Abfrage generierte SQL-Abfrage zurückgibt.
+In EF Core 5.0 wird die Erweiterungsmethode `ToQueryString` eingeführt, die den von EF Core beim Ausführen einer LINQ-Abfrage generierten SQL-Code zurückgibt.
 
 Eine vorläufige Dokumentation ist im [Wöchentlichen Status von EF vom 9. Januar 2020](https://github.com/dotnet/efcore/issues/19549#issuecomment-572823246) (in englischer Sprache) enthalten.
 
@@ -60,7 +119,7 @@ Die Dokumentation finden Sie im Issue [#2186](https://github.com/dotnet/EntityFr
 
 Es ist jetzt einfacher, eine DbContext-Instanz ohne Verbindung oder Verbindungszeichenfolge zu erstellen.
 Die Verbindung oder Verbindungszeichenfolge kann jetzt auch in der Kontextinstanz verändert werden.
-So kann ein und dieselbe Kontextinstanz dynamisch eine Verbindung mit verschiedenen Datenbanken herstellen.
+Mithilfe dieses Features kann ein und dieselbe Kontextinstanz dynamisch eine Verbindung mit verschiedenen Datenbanken herstellen.
 
 Die Dokumentation finden Sie im Issue [#2075](https://github.com/dotnet/EntityFramework.Docs/issues/2075).
 
@@ -85,7 +144,7 @@ Zusätzliche Dokumentation finden Sie im Issue [#2086](https://github.com/dotnet
 ### <a name="improved-handling-of-database-null-semantics"></a>Verbesserte Verarbeitung von NULL-Semantik in der Datenbank
 
 Relationale Datenbanken behandeln NULL in der Regel als unbekannten Wert und daher als ungleich jedem anderen NULL-Wert.
-C# dagegen behandelt NULL als definierten Wert, der gleich jedem anderen NULL-Wert sein kann.
+C# hingegen behandelt NULL als definierten Wert, der mit jedem anderen NULL-Wert übereinstimmt.
 EF Core übersetzt Abfragen standardmäßig so, dass sie die NULL-Semantik von C# verwenden.
 In EF Core 5.0 wurde die Effizienz dieser Übersetzungen erheblich verbessert.
 
@@ -94,7 +153,7 @@ Die Dokumentation finden Sie im Issue [#1612](https://github.com/dotnet/EntityFr
 ### <a name="indexer-properties"></a>Indexereigenschaften
 
 EF Core 5.0 unterstützt die Zuordnung von C#-Indexereigenschaften.
-So können Entitäten als Eigenschaftenbehälter fungieren, wobei Spalten benannten Eigenschaften im Behälter zugeordnet werden.
+Durch diese Eigenschaften können Entitäten als Eigenschaftenbehälter fungieren, wobei Spalten benannten Eigenschaften im Behälter zugeordnet werden.
 
 Die Dokumentation finden Sie im Issue [#2018](https://github.com/dotnet/EntityFramework.Docs/issues/2018).
 
@@ -104,7 +163,7 @@ EF Core 5.0-Migrationen können jetzt CHECK-Einschränkungen aus Zuordnungen d
 Zum Beispiel:
 
 ```SQL
-MyEnumColumn VARCHAR(10) NOT NULL CHECK (MyEnumColumn IN('Useful', 'Useless', 'Unknown'))
+MyEnumColumn VARCHAR(10) NOT NULL CHECK (MyEnumColumn IN ('Useful', 'Useless', 'Unknown'))
 ```
 
 Die Dokumentation finden Sie im Issue [#2082](https://github.com/dotnet/EntityFramework.Docs/issues/2082).
@@ -112,7 +171,7 @@ Die Dokumentation finden Sie im Issue [#2082](https://github.com/dotnet/EntityFr
 ### <a name="isrelational"></a>IsRelational
 
 Zusätzlich zu den existierenden `IsSqlServer`-, `IsSqlite`- und `IsInMemory`-Methoden wurde eine neue `IsRelational`-Methode hinzugefügt.
-Diese kann verwendet werden, um zu testen, ob DbContext einen Anbieter einer relationalen Datenbank verwendet.
+Diese Methode kann verwendet werden, um zu testen, ob DbContext einen Anbieter einer relationalen Datenbank verwendet.
 Zum Beispiel:
 
 ```CSharp
@@ -138,7 +197,6 @@ builder.Entity<Customer>().Property(c => c.ETag).IsEtagConcurrency();
 
 SaveChanges löst dann eine `DbUpdateConcurrencyException`-Ausnahme für einen Nebenläufigkeitskonflikt aus, die [verarbeitet werden kann](https://docs.microsoft.com/ef/core/saving/concurrency), z. B. um Wiederholungsversuche zu implementieren.
 
-
 Die Dokumentation finden Sie im Issue [#2099](https://github.com/dotnet/EntityFramework.Docs/issues/2099).
 
 ### <a name="query-translations-for-more-datetime-constructs"></a>Abfrageübersetzungen für weitere DateTime-Konstrukte
@@ -146,6 +204,7 @@ Die Dokumentation finden Sie im Issue [#2099](https://github.com/dotnet/EntityFr
 Abfragen mit neuer DateTime-Konstruktion werden jetzt übersetzt.
 
 Außerdem werden nun die folgenden SQL Server-Funktionen zugeordnet:
+
 * DateDiffWeek
 * DateFromParts
 
