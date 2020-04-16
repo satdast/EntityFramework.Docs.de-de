@@ -1,48 +1,48 @@
 ---
-title: Asynchrone Abfrage und speichern-EF6
+title: Async-Abfrage und Speichern - EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: d56e6f1d-4bd1-4b50-9558-9a30e04a8ec3
-ms.openlocfilehash: 0642dc13e7aa3906fa1495031c62701fc16f0192
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.openlocfilehash: a001df726b7cd3342fcca566c1373f452811d07d
+ms.sourcegitcommit: 144edccf9b29a7ffad119c235ac9808ec1a46193
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78414860"
+ms.lasthandoff: 04/16/2020
+ms.locfileid: "81434239"
 ---
-# <a name="async-query-and-save"></a>Asynchrone Abfrage und Speicherung
+# <a name="async-query-and-save"></a>Async-Abfrage und Speichern
 > [!NOTE]
 > **Nur EF6 und höher:** Die Features, APIs usw., die auf dieser Seite erläutert werden, wurden in Entity Framework 6 eingeführt. Wenn Sie eine frühere Version verwenden, gelten manche Informationen nicht.
 
-EF6 hat Unterstützung für asynchrone Abfragen und speichern mithilfe der [Schlüsselwörter "Async" und "warten](https://msdn.microsoft.com/library/vstudio/hh191443.aspx) " eingeführt, die in .NET 4,5 eingeführt wurden. Obwohl nicht alle Anwendungen von der Asynchronie profitieren können, kann es verwendet werden, um die Reaktionsfähigkeit von Clients und die Server Skalierbarkeit bei der Verarbeitung langer, Netzwerk-oder e/a-gebundener Aufgaben zu verbessern.
+EF6 hat die Unterstützung für asynchrone Abfragen und Speichern mithilfe der [Schlüsselwörter async und await](https://msdn.microsoft.com/library/vstudio/hh191443.aspx) eingeführt, die in .NET 4.5 eingeführt wurden. Obwohl nicht alle Anwendungen von Asynchronität profitieren, kann sie verwendet werden, um die Clientreaktionsfähigkeit und Serverskalierbarkeit bei der Verarbeitung von Langlauf-, Netzwerk- oder E/A-gebundenen Aufgaben zu verbessern.
 
-## <a name="when-to-really-use-async"></a>Verwendung von Async
+## <a name="when-to-really-use-async"></a>Wann sollte man wirklich async verwenden?
 
-In dieser exemplarischen Vorgehensweise wird erläutert, wie die asynchronen Konzepte in eine Weise eingeführt werden, die die Unterschiede zwischen der asynchronen und der synchronen Programmausführung leicht erkennen lässt. Diese exemplarische Vorgehensweise soll keines der wichtigen Szenarios veranschaulichen, in denen die asynchrone Programmierung Vorteile bietet.
+Der Zweck dieser exemplarischen Vorgehensweise besteht darin, die asynchronen Konzepte so einzuführen, dass der Unterschied zwischen asynchroner und synchroner Programmausführung leicht zu beobachten ist. Diese exemplarische Vorgehensweise dient nicht dazu, eines der wichtigsten Szenarien zu veranschaulichen, in denen die asynchrone Programmierung Vorteile bietet.
 
-Die asynchrone Programmierung konzentriert sich hauptsächlich auf die Freigabe des aktuellen verwalteten Threads (Thread, der .NET-Code ausgeführt wird), um andere Aufgaben zu erledigen, während er auf einen Vorgang wartet, der keine computezeit von einem verwalteten Thread erfordert. Wenn die Datenbank-Engine z. b. eine Abfrage verarbeitet, gibt es keinen .NET-Code.
+Die Async-Programmierung konzentriert sich in erster Linie auf die Freigabe des aktuellen verwalteten Threads (Thread, der .NET-Code ausführt), um andere Aufgaben auszuführen, während er auf einen Vorgang wartet, der keine Rechenzeit von einem verwalteten Thread erfordert. Während das Datenbankmodul beispielsweise eine Abfrage verarbeitet, ist von .NET-Code nichts zu tun.
 
-In Client Anwendungen (WinForms, WPF usw.) kann der aktuelle Thread verwendet werden, damit die Benutzeroberfläche reaktionsfähig bleibt, während der asynchrone Vorgang ausgeführt wird. In Server Anwendungen (ASP.net usw.) kann der Thread verwendet werden, um andere eingehende Anforderungen zu verarbeiten. Hierdurch kann die Speicherauslastung reduziert und/oder der Durchsatz des Servers erhöht werden.
+In Clientanwendungen (WinForms, WPF usw.) kann der aktuelle Thread verwendet werden, um die Benutzeroberflächenreaktion zu halten, während der asynchrone Vorgang ausgeführt wird. In Serveranwendungen (ASP.NET usw.) kann der Thread verwendet werden, um andere eingehende Anforderungen zu verarbeiten – dies kann die Speichernutzung reduzieren und/oder den Durchsatz des Servers erhöhen.
 
-In den meisten Anwendungen, die Async verwenden, haben Sie keinerlei spürbare Vorteile und können sogar schädlich sein. Verwenden Sie Tests, Profilerstellung und allgemeine Bedeutung, um die Auswirkungen von Async in Ihrem speziellen Szenario zu messen, bevor Sie einen Commit dafür durchführen.
+In den meisten Anwendungen, die async verwenden, hat async keine spürbaren Vorteile und könnte sogar schädlich sein. Verwenden Sie Tests, Profilerstellung und gesunden Menschenverstand, um die Auswirkungen von async in Ihrem bestimmten Szenario zu messen, bevor Sie sich darauf verpflichten.
 
-Hier finden Sie weitere Informationen zu Async:
+Hier sind einige weitere Ressourcen, um mehr über async zu erfahren:
 
--   [Brandon Bray: Übersicht über Async/Erwartung in .NET 4,5](https://blogs.msdn.com/b/dotnet/archive/2012/04/03/async-in-4-5-worth-the-await.aspx)
--   [Asynchrone Programmier](https://msdn.microsoft.com/library/hh191443.aspx) Seiten in der MSDN Library
--   [Erstellen von ASP.NET-Webanwendungen mithilfe von Async](https://channel9.msdn.com/events/teched/northamerica/2013/dev-b337) (enthält eine Demo zu erhöhtem Server Durchsatz)
+-   [Brandon Brays Übersicht über async/await in .NET 4.5](https://devblogs.microsoft.com/dotnet/async-in-4-5-worth-the-await/)
+-   [Asynchrone Programmierseiten](https://msdn.microsoft.com/library/hh191443.aspx) in der MSDN-Bibliothek
+-   [Erstellen ASP.NET Webanwendungen mit Async](https://channel9.msdn.com/events/teched/northamerica/2013/dev-b337) (enthält eine Demo mit erhöhtem Serverdurchsatz)
 
 ## <a name="create-the-model"></a>Erstellen des Modells
 
-Wir verwenden den [Code First Workflow](~/ef6/modeling/code-first/workflows/new-database.md) , um das Modell zu erstellen und die Datenbank zu generieren. die asynchronen Funktionen funktionieren jedoch mit allen EF-Modellen, einschließlich derjenigen, die mit dem EF-Designer erstellt werden.
+Wir verwenden den [Code First-Workflow,](~/ef6/modeling/code-first/workflows/new-database.md) um unser Modell zu erstellen und die Datenbank zu generieren, jedoch funktioniert die asynchrone Funktionalität mit allen EF-Modellen, einschließlich der mit dem EF-Designer erstellten.
 
--   Erstellen Sie eine Konsolenanwendung, und nennen Sie Sie **AsyncDemo** .
--   Hinzufügen des nuget-Pakets "EntityFramework"
-    -   Klicken Sie in Projektmappen-Explorer mit der rechten Maustaste auf das **AsyncDemo** -Projekt.
-    -   Wählen Sie **nuget-Pakete verwalten... aus.**
-    -   Wählen Sie im Dialogfeld nuget-Pakete verwalten die Registerkarte **Online** aus, und wählen Sie das Paket **EntityFramework** aus.
+-   Erstellen einer Konsolenanwendung und Aufrufen **von AsyncDemo**
+-   Hinzufügen des EntityFramework NuGet-Pakets
+    -   Klicken Sie im Projektmappen-Explorer mit der rechten Maustaste auf das **AsyncDemo-Projekt**
+    -   **NuGet-Pakete verwalten...**
+    -   Wählen Sie im Dialogfeld NuGet-Pakete verwalten die Registerkarte **Online** aus, und wählen Sie das **EntityFramework-Paket** aus.
     -   Klicken Sie auf **Installieren**
--   Fügen Sie eine **Model.cs** -Klasse mit der folgenden Implementierung hinzu.
+-   Hinzufügen einer **Model.cs** Klasse mit der folgenden Implementierung
 
 ``` csharp
     using System.Collections.Generic;
@@ -80,9 +80,9 @@ Wir verwenden den [Code First Workflow](~/ef6/modeling/code-first/workflows/new-
 
 ## <a name="create-a-synchronous-program"></a>Erstellen eines synchronen Programms
 
-Nachdem wir nun über ein EF-Modell verfügen, schreiben wir Code, der ihn verwendet, um Daten Zugriffe auszuführen.
+Nachdem wir nun über ein EF-Modell verfügen, schreiben wir Code, der es zum Ausführen eines Datenzugriffs verwendet.
 
--   Ersetzen Sie den Inhalt von **Program.cs** durch den folgenden Code:
+-   Ersetzen Sie den Inhalt von **Program.cs** durch den folgenden Code
 
 ``` csharp
     using System;
@@ -136,32 +136,32 @@ Nachdem wir nun über ein EF-Modell verfügen, schreiben wir Code, der ihn verwe
     }
 ```
 
-Dieser Code Ruft die **performdatabaseoperations** -Methode auf, die einen neuen **Blog** in der Datenbank speichert und dann alle **Blogs** aus der Datenbank abruft und Sie in der **Konsole**ausgibt. Danach schreibt das Programm ein Anführungszeichen in die **Konsole**.
+Dieser Code ruft die **PerformDatabaseOperations-Methode** auf, die einen neuen **Blog** in der Datenbank speichert und dann alle **Blogs** aus der Datenbank abruft und in die **Konsole**druckt. Danach schreibt das Programm ein Zitat des Tages in die **Konsole**.
 
-Da der Code synchron ist, können wir beim Ausführen des Programms den folgenden Ausführungs Ablauf beobachten:
+Da der Code synchron ist, können wir den folgenden Ausführungsfluss beobachten, wenn wir das Programm ausführen:
 
-1.  **SaveChanges** beginnt, den neuen **Blog** an die Datenbank zu überbringen.
-2.  **SaveChanges** ist abgeschlossen.
-3.  Die Abfrage für alle **Blogs** wird an die Datenbank gesendet.
-4.  Abfrage Rückgabe und Ergebnisse werden in die **Konsole** geschrieben
-5.  Das Anführungszeichen des Tages wird in die **Konsole** geschrieben.
+1.  **SaveChanges** beginnt, den neuen **Blog** in die Datenbank zu übertragen
+2.  **SaveChanges** abgeschlossen
+3.  Abfrage für alle **Blogs** wird an die Datenbank gesendet
+4.  Abfragerückgaben und Ergebnisse werden in **die Konsole** geschrieben
+5.  Zitat des Tages wird in **Konsole** geschrieben
 
-![Ausgabe synchronisieren](~/ef6/media/syncoutput.png) 
+![Sync-Ausgabe](~/ef6/media/syncoutput.png) 
 
  
 
-## <a name="making-it-asynchronous"></a>Asynchrone Erstellung
+## <a name="making-it-asynchronous"></a>Asynchron machen
 
-Nachdem das Programm jetzt betriebsbereit ist, können wir mit der Verwendung der neuen Schlüsselwörter "Async" und "Erwartung" beginnen. Wir haben die folgenden Änderungen an Program.cs vorgenommen.
+Nun, da wir unser Programm gestartet haben, können wir beginnen, die neuen async und warten Keywords zu nutzen. Wir haben die folgenden Änderungen an Program.cs
 
-1.  Zeile 2: die using-Anweisung für den **System. Data. Entity** -Namespace ermöglicht uns den Zugriff auf die EF-Async-Erweiterungs Methoden.
-2.  Zeile 4: mithilfe der using-Anweisung für den **System. Threading. Tasks** -Namespace können wir den **Tasktyp verwenden** .
-3.  Zeile 12 & 18: Wir erfassen als Task, der den Status von **performsomedatabaseoperations** (Zeile 12) überwacht und dann die Ausführung des Programms blockiert, damit diese Aufgabe abgeschlossen wird, sobald die gesamte Arbeit für das Programm abgeschlossen ist (Zeile 18).
-4.  Zeile 25: Wir haben " **performsomedatabaseoperations** " so aktualisiert, dass Sie als " **Async** " gekennzeichnet sind und eine **Aufgabe**zurückgeben.
-5.  Zeile 35: Wir rufen nun die asynchrone Version von SaveChanges auf und warten darauf, dass der Vorgang abgeschlossen ist.
+1.  Zeile 2: Die using-Anweisung für den **Namespace System.Data.Entity** gibt uns Zugriff auf die EF-async-Erweiterungsmethoden.
+2.  Zeile 4: Die using-Anweisung für den **Namespace System.Threading.Tasks** ermöglicht es uns, den **Task-Typ** zu verwenden.
+3.  Zeile 12 & 18: Wir erfassen als Aufgabe, die den Fortschritt von **PerformSomeDatabaseOperations** (Zeile 12) überwacht, und blockieren dann die Programmausführung für diese Aufgabe, sobald alle Arbeit für das Programm erledigt ist (Zeile 18).
+4.  Zeile 25: Wir haben **PerformSomeDatabaseOperations** aktualisiert, um als **async** markiert zu werden und eine **Aufgabe**zurückzugeben.
+5.  Zeile 35: Wir rufen jetzt die Async-Version von SaveChanges auf und warten auf ihre Fertigstellung.
 6.  Zeile 42: Wir rufen jetzt die Async-Version von ToList auf und warten auf das Ergebnis.
 
-Eine umfassende Liste der verfügbaren Erweiterungs Methoden im System. Data. Entity-Namespace finden Sie in der queryableextensions-Klasse. *Sie müssen auch "using System. Data. Entity" zu ihren using-Anweisungen hinzufügen.*
+Eine umfassende Liste der verfügbaren Erweiterungsmethoden im Namespace System.Data.Entity finden Sie in der QueryableExtensions-Klasse. *Außerdem müssen Sie Ihren Usinger Anweisungen "using System.Data.Entity" hinzufügen.*
 
 ``` csharp
     using System;
@@ -219,21 +219,21 @@ Eine umfassende Liste der verfügbaren Erweiterungs Methoden im System. Data. En
     }
 ```
 
-Nun, da der Code asynchron ist, können wir einen anderen Ausführungs Fluss beobachten, wenn wir das Programm ausführen:
+Da der Code nun asynchron ist, können wir einen anderen Ausführungsfluss beobachten, wenn wir das Programm ausführen:
 
-1. **SaveChanges** beginnt, den neuen **Blog** an die Datenbank zu überbringen.  
-    *Nachdem der Befehl an die Datenbank gesendet wurde, ist für den aktuell verwalteten Thread keine Compute-Zeit mehr erforderlich. Die **performdatabaseoperations** -Methode gibt zurück (obwohl die Ausführung noch nicht abgeschlossen ist), und der Programmablauf in der Main-Methode wird fortgesetzt.*
-2. **Das Anführungszeichen des Tages wird in die Konsole geschrieben.**  
-    *Da keine weiteren Aufgaben in der Main-Methode durchgeführt werden müssen, wird der verwaltete Thread für den Wait-Vorgang blockiert, bis der Daten Bank Vorgang abgeschlossen ist. Sobald der Vorgang abgeschlossen ist, werden die restlichen **performdatabaseoperations** ausgeführt.*
-3.  **SaveChanges** ist abgeschlossen.  
-4.  Die Abfrage für alle **Blogs** wird an die Datenbank gesendet.  
-    *Auch hier kann der verwaltete Thread andere Aufgaben ausführen, während die Abfrage in der Datenbank verarbeitet wird. Da die Ausführung der anderen Ausführung abgeschlossen ist, hält der Thread den Wait-Befehl jedoch nur an.*
-5.  Abfrage Rückgabe und Ergebnisse werden in die **Konsole** geschrieben  
+1. **SaveChanges** beginnt, den neuen **Blog** in die Datenbank zu übertragen  
+    *Sobald der Befehl an die Datenbank gesendet wurde, ist für den aktuellen verwalteten Thread keine Rechenzeit mehr erforderlich. Die **PerformDatabaseOperations-Methode** gibt zurück (obwohl die Ausführung noch nicht abgeschlossen ist), und der Programmfluss in der Main-Methode wird fortgesetzt.*
+2. **Zitat des Tages wird in Konsole geschrieben**  
+    *Da in der Main-Methode keine Arbeit mehr zu erledigen ist, wird der verwaltete Thread beim Wait-Aufruf blockiert, bis der Datenbankvorgang abgeschlossen ist. Sobald es abgeschlossen ist, wird der Rest unserer **PerformDatabaseOperations** ausgeführt.*
+3.  **SaveChanges** abgeschlossen  
+4.  Abfrage für alle **Blogs** wird an die Datenbank gesendet  
+    *Auch hier kann der verwaltete Thread andere Arbeiten erledigen, während die Abfrage in der Datenbank verarbeitet wird. Da alle anderen Ausführungen abgeschlossen sind, wird der Thread jedoch nur beim Wait-Aufruf angehalten.*
+5.  Abfragerückgaben und Ergebnisse werden in **die Konsole** geschrieben  
 
-![Asynchrone Ausgabe](~/ef6/media/asyncoutput.png) 
+![Async-Ausgabe](~/ef6/media/asyncoutput.png) 
 
  
 
-## <a name="the-takeaway"></a>Der Schluss
+## <a name="the-takeaway"></a>Das Mitnehmen
 
-Wir haben nun gesehen, wie einfach es ist, die asynchronen Methoden von EF zu verwenden. Obwohl die Vorteile von Async bei einer einfachen Konsolen-App möglicherweise nicht sehr offensichtlich sind, können dieselben Strategien in Situationen angewendet werden, in denen lange oder Netzwerk gebundene Aktivitäten die Anwendung andernfalls blockieren oder eine große Anzahl von Threads zu erhöhen Sie den Speicherbedarf.
+Wir haben nun gesehen, wie einfach es ist, die asynchronen Methoden von EF zu nutzen. Obwohl die Vorteile von async bei einer einfachen Konsolen-App möglicherweise nicht sehr offensichtlich sind, können dieselben Strategien in Situationen angewendet werden, in denen lang andauernde oder netzwerkgebundene Aktivitäten die Anwendung anderweitig blockieren oder dazu führen könnten, dass eine große Anzahl von Threads den Speicherbedarf erhöht.

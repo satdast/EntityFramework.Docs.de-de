@@ -1,88 +1,102 @@
 ---
-title: Typen von Keyless-Entitäten-EF Core
-description: Konfigurieren von schlüssellosen Entitäts Typen mithilfe von Entity Framework Core
+title: Schlüssellose Entitätstypen - EF Core
+description: Konfigurieren schlüsselloser Entitätstypen mithilfe von Entity Framework Core
 author: AndriySvyryd
 ms.author: ansvyryd
 ms.date: 9/13/2019
 uid: core/modeling/keyless-entity-types
-ms.openlocfilehash: 520c9ed93240c05deee36fa527a3757490fd7082
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.openlocfilehash: 496e1e8983ba2d5e15dbee02607ea3f2c861503e
+ms.sourcegitcommit: 144edccf9b29a7ffad119c235ac9808ec1a46193
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78414644"
+ms.lasthandoff: 04/16/2020
+ms.locfileid: "81434213"
 ---
 # <a name="keyless-entity-types"></a>Schlüssellose Entitätstypen
 
 > [!NOTE]
-> Diese Funktion wurde in EF Core 2,1 unter dem Namen der Abfrage Typen hinzugefügt. In EF Core 3,0 wurde das Konzept in schlüssellose Entitäts Typen umbenannt.
+> Diese Funktion wurde in EF Core 2.1 unter dem Namen der Abfragetypen hinzugefügt. In EF Core 3.0 wurde das Konzept in schlüssellose Entitätstypen umbenannt.
 
-Zusätzlich zu regulären Entitäts Typen kann ein EF Core Modell _Schlüssel-Entitäts Typen_enthalten, die verwendet werden können, um Datenbankabfragen für Daten auszuführen, die keine Schlüsselwerte enthalten.
+Zusätzlich zu den regulären Entitätstypen kann ein EF Core-Modell _schlüssellose Entitätstypen_enthalten, die zum Ausführen von Datenbankabfragen für Daten verwendet werden können, die keine Schlüsselwerte enthalten.
 
-## <a name="keyless-entity-types-characteristics"></a>Merkmale von Keyless-Entitäts Typen
+## <a name="defining-keyless-entity-types"></a>Definieren von Schlüssellosen Entitätstypen
 
-Schlüssellose Entitäts Typen unterstützen viele der gleichen Zuordnungs Funktionen wie reguläre Entitäts Typen wie Vererbungs Zuordnung und Navigations Eigenschaften. Für relationale Speicher können sie die Ziel-Datenbank-Objekte und Spalten über die Methoden der fluent-API oder datenanmerkungen konfigurieren.
+Schlüssellose Entitätstypen können entweder mit der Datenanmerkung oder der Fluent-API definiert werden:
 
-Sie unterscheiden sich jedoch von regulären Entitäts Typen darin, dass Sie:
+### <a name="data-annotations"></a>[Datenanmerkungen](#tab/data-annotations)
 
-- Ein Schlüssel kann nicht definiert werden.
-- Werden nie nach Änderungen im _dbcontext_ nachverfolgt und daher nie in der Datenbank eingefügt, aktualisiert oder gelöscht.
-- Gemäß der Konvention werden nicht ermittelt werden.
-- Unterstützt nur eine Teilmenge der Navigations Zuordnungsfunktionen, insbesondere:
-  - Sie können nicht als das prinzipalende der Beziehung fungieren.
-  - Sie haben möglicherweise keine Navigation zu besitzende Entitäten.
-  - Sie können nur Verweis Navigations Eigenschaften enthalten, die auf reguläre Entitäten verweisen.
-  - Entitäten können keine Navigations Eigenschaften für Entitäts Typen ohne Schlüssel enthalten.
-- Muss mit `.HasNoKey()` Methoden Aufrufes konfiguriert werden.
-- Kann einer _definierenden Abfrage_zugeordnet werden. Eine definierende Abfrage ist eine im Modell deklarierte Abfrage, die als Datenquelle für einen schlüssellosen Entitätstyp fungiert.
+[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Keyless.cs?Name=Keyless&highlight=1)]
+
+### <a name="fluent-api"></a>[Fluent-API](#tab/fluent-api)
+
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Keyless.cs?Name=Keyless&highlight=4)]
+
+***
+
+## <a name="keyless-entity-types-characteristics"></a>Merkmale ohne Schlüsselentitätstypen
+
+Schlüssellose Entitätstypen unterstützen viele der gleichen Zuordnungsfunktionen wie normale Entitätstypen, z. B. Vererbungszuordnung und Navigationseigenschaften. In relationalen Speichern können sie die Zieldatenbankobjekte und -spalten über fließende API-Methoden oder Datenanmerkungen konfigurieren.
+
+Sie unterscheiden sich jedoch von regulären Entitätstypen dadurch, dass sie:
+
+- Es kann kein Schlüssel definiert werden.
+- Werden nie nach Änderungen im _DbContext_ nachverfolgt und daher nie in die Datenbank eingefügt, aktualisiert oder gelöscht.
+- Werden nie durch Konvention entdeckt.
+- Unterstützen Sie nur eine Teilmenge der Navigationszuordnungsfunktionen, insbesondere:
+  - Sie dürfen niemals als wichtigstes Ende einer Beziehung fungieren.
+  - Sie verfügen möglicherweise nicht über Navigationsgeräte an eigene Unternehmen.
+  - Sie können nur Referenznavigationseigenschaften enthalten, die auf reguläre Entitäten verweisen.
+  - Entitäten können keine Navigationseigenschaften für schlüssellose Entitätstypen enthalten.
+- Sie müssen mit einer `[Keyless]` Datenanmerkung oder `.HasNoKey()` einem Methodenaufruf konfiguriert werden.
+- Kann einer _definierenden Abfrage_zugeordnet werden. Eine definierende Abfrage ist eine Abfrage, die im Modell deklariert wird und als Datenquelle für einen schlüssellosen Entitätstyp fungiert.
 
 ## <a name="usage-scenarios"></a>Verwendungsszenarios
 
-Einige der wichtigsten Verwendungs Szenarien für Typen von schlüssellosen Entitäten sind:
+Einige der wichtigsten Verwendungsszenarien für schlüssellose Entitätstypen sind:
 
-- Fungieren als Rückgabetyp für unformatierte [SQL-Abfragen](xref:core/querying/raw-sql).
-- Zuordnung zu Daten Bank Sichten, die keinen Primärschlüssel enthalten.
-- Zuordnung zu Tabellen, die nicht über einen definierten Primärschlüssel verfügen.
-- Zuordnen zu Abfragen, die im Modell definiert.
+- Dient als Rückgabetyp für [unformatierte SQL-Abfragen](xref:core/querying/raw-sql).
+- Zuordnen zu Datenbankansichten, die keinen Primärschlüssel enthalten.
+- Zuordnung zu Tabellen, für die kein Primärschlüssel definiert ist.
+- Zuordnen zu Abfragen, die im Modell definiert sind.
 
-## <a name="mapping-to-database-objects"></a>Zuordnen von Datenbankobjekten
+## <a name="mapping-to-database-objects"></a>Zuordnen zu Datenbankobjekten
 
-Die Zuordnung eines Entitäts Typs mit einer anderen Tastatur zu einem Datenbankobjekt wird mithilfe der `ToTable` oder `ToView` flüssigen API erreicht. Aus Sicht der EF Core ist das in dieser Methode angegebene Datenbankobjekt eine _Sicht_. Dies bedeutet, dass es als schreibgeschützte Abfrage Quelle behandelt wird und nicht das Ziel von Aktualisierungs-, Einfüge-oder Lösch Vorgängen sein kann. Dies bedeutet jedoch nicht, dass das Datenbankobjekt tatsächlich eine Daten Bank Sicht sein muss. Alternativ kann es sich um eine Datenbanktabelle handeln, die als schreibgeschützt behandelt wird. Im Gegensatz dazu geht EF Core bei regulären Entitäts Typen davon aus, dass ein in der `ToTable`-Methode festgelegtes Datenbankobjekt als _Tabelle_behandelt werden kann. Dies bedeutet, dass es als Abfrage Quelle verwendet werden kann, aber auch für Update-, DELETE-und INSERT-Vorgänge vorgesehen ist. In der Tat können Sie den Namen einer Daten Bank Sicht in `ToTable` angeben. alles sollte einwandfrei funktionieren, solange die Sicht so konfiguriert ist, dass Sie für die Datenbank aktualisierbar ist.
+Das Zuordnen eines schlüssellosen Entitätstyps `ToTable` zu `ToView` einem Datenbankobjekt wird mithilfe der oder fließenden API erreicht. Aus der Sicht von EF Core ist das in dieser Methode angegebene Datenbankobjekt eine _Ansicht_, was bedeutet, dass es als schreibgeschützte Abfragequelle behandelt wird und nicht das Ziel von Aktualisierungs-, Einfüge- oder Löschvorgängen sein kann. Dies bedeutet jedoch nicht, dass das Datenbankobjekt tatsächlich als Datenbankansicht erforderlich ist. Alternativ kann es sich um eine Datenbanktabelle handelt, die als schreibgeschützt behandelt wird. Umgekehrt geht EF Core bei regulären Entitätstypen davon `ToTable` aus, dass ein in der Methode angegebenes Datenbankobjekt als _Tabelle_behandelt werden kann, was bedeutet, dass es als Abfragequelle verwendet werden kann, aber auch durch Aktualisierungs-, Lösch- und Einfügevorgänge ausgerichtet werden kann. In der Tat können Sie den Namen `ToTable` einer Datenbankansicht in angeben, und alles sollte einwandfrei funktionieren, solange die Ansicht so konfiguriert ist, dass sie in der Datenbank aufrüstbar ist.
 
 > [!NOTE]
-> `ToView` geht davon aus, dass das Objekt bereits in der Datenbank vorhanden ist, und wird nicht durch Migrationen erstellt.
+> `ToView`geht davon aus, dass das Objekt bereits in der Datenbank vorhanden ist und nicht durch Migrationen erstellt wird.
 
 ## <a name="example"></a>Beispiel
 
-Das folgende Beispiel zeigt, wie Sie schlüssellose Entitäts Typen verwenden, um eine Daten Bank Sicht abzufragen.
+Das folgende Beispiel zeigt, wie schlüssellose Entitätstypen zum Abfragen einer Datenbankansicht verwendet werden.
 
 > [!TIP]
-> Das in diesem Artikel verwendete [Beispiel](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/KeylessEntityTypes) finden Sie auf GitHub.
+> Sie können das [Beispiel](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/KeylessEntityTypes) dieses Artikels auf GitHub anzeigen.
 
-Zuerst definieren wir ein einfaches Blog und Post-Modell:
+Zuerst definieren wir ein einfaches Blog- und Post-Modell:
 
 [!code-csharp[Main](../../../samples/core/KeylessEntityTypes/Program.cs#Entities)]
 
-Als Nächstes definieren wir eine einfache Datenbank-Ansicht, die wir Abfragen die Anzahl an Beiträgen, die jeden Blog zugeordnet werden kann:
+Als Nächstes definieren wir eine einfache Datenbankansicht, die es uns ermöglicht, die Anzahl der Beiträge abzufragen, die jedem Blog zugeordnet sind:
 
 [!code-csharp[Main](../../../samples/core/KeylessEntityTypes/Program.cs#View)]
 
-Als Nächstes definieren wir eine Klasse, um das Ergebnis aus der Datenbankansicht enthalten soll:
+Als Nächstes definieren wir eine Klasse, die das Ergebnis aus der Datenbankansicht enthält:
 
 [!code-csharp[Main](../../../samples/core/KeylessEntityTypes/Program.cs#KeylessEntityType)]
 
-Als Nächstes konfigurieren wir den Entitätstyp "Schlüssel" in " _onmodelcreating_ " mithilfe der `HasNoKey`-API.
-Wir verwenden die fließende Konfigurations-API, um die Zuordnung für den Entitätstyp "Schlüssel" zu konfigurieren:
+Als Nächstes konfigurieren wir den schlüssellosen Entitätstyp in _OnModelCreating_ mithilfe der `HasNoKey` API.
+Wir verwenden eine fließende Konfigurations-API, um die Zuordnung für den schlüssellosen Entitätstyp zu konfigurieren:
 
 [!code-csharp[Main](../../../samples/core/KeylessEntityTypes/Program.cs#Configuration)]
 
-Als Nächstes konfigurieren wir die `DbContext`, um die `DbSet<T>`einzuschließen:
+Als Nächstes konfigurieren `DbContext` wir `DbSet<T>`die, um Folgendes einzuschließen:
 
 [!code-csharp[Main](../../../samples/core/KeylessEntityTypes/Program.cs#DbSet)]
 
-Schließlich können wir die Datenbanksicht auf die übliche Weise Abfragen:
+Schließlich können wir die Datenbankansicht standardmäßig abfragen:
 
 [!code-csharp[Main](../../../samples/core/KeylessEntityTypes/Program.cs#Query)]
 
 > [!TIP]
-> Beachten Sie, dass wir auch eine Kontext Stufen-Abfrage Eigenschaft (dbset) definiert haben, die als Stamm für Abfragen dieses Typs fungiert.
+> Beachten Sie, dass wir auch eine Abfrageeigenschaft auf Kontextebene (DbSet) definiert haben, die als Stamm für Abfragen für diesen Typ fungiert.
