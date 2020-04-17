@@ -1,5 +1,5 @@
 - name: Entity Framework
-  href: index.md
+  href: index.yml
   items:
     - name: EF Core & EF6
       items:
@@ -35,7 +35,7 @@
               items:
                 - name: Neue Funktionen
                   href: core/what-is-new/ef-core-3.0/index.md
-                - name: Aktuelle Änderungen
+                - name: Breaking Changes
                   href: core/what-is-new/ef-core-3.0/breaking-changes.md
             - name: EF Core 2.2
               href: core/what-is-new/ef-core-2.2.md
@@ -69,9 +69,9 @@
               href: core/miscellaneous/connection-strings.md
             - name: Protokollierung
               href: core/miscellaneous/logging.md
-            - name: Verbindungsstabilität
+            - name: Verbindungsresilienz
               href: core/miscellaneous/connection-resiliency.md
-            - name: Testen
+            - name: Test
               items:
                 - name: Übersicht
                   href: core/miscellaneous/testing/index.md
@@ -91,7 +91,7 @@
               href: core/modeling/entity-types.md
             - name: Entitätseigenschaften
               href: core/modeling/entity-properties.md
-            - name: Schlüssel
+            - name: Tasten
               href: core/modeling/keys.md
             - name: Generierte Werte
               href: core/modeling/generated-properties.md
@@ -232,7 +232,7 @@
               href: core/miscellaneous/cli/index.md
             - name: Paket-Manager-Konsole (Visual Studio)
               href: core/miscellaneous/cli/powershell.md
-            - name: .NET Core CLI
+            - name: .NET Core-CLI
               href: core/miscellaneous/cli/dotnet.md
             - name: DbContext-Instanzerstellung zur Entwurfszeit
               href: core/miscellaneous/cli/dbcontext-creation.md
@@ -244,7 +244,7 @@
       items:
         - name: Übersicht
           href: ef6/index.md
-        - name: Neues
+        - name: Neuigkeiten
           items:
             - name: Übersicht
               href: ef6/what-is-new/index.md
@@ -278,7 +278,7 @@
                   href: ef6/fundamentals/configuring/dependency-resolution.md
             - name: Verbindungsverwaltung
               href: ef6/fundamentals/connection-management.md
-            - name: Verbindungsstabilität
+            - name: Verbindungsresilienz
               items:
                 - name: Wiederholungslogik
                   href: ef6/fundamentals/connection-resiliency/retry-logic.md
@@ -348,7 +348,7 @@
                   items:
                     - name: Enumerationen
                       href: ef6/modeling/code-first/data-types/enums.md
-                    - name: Spatial
+                    - name: Räumlich
                       href: ef6/modeling/code-first/data-types/spatial.md
                 - name: Konventionen
                   items:
@@ -396,7 +396,7 @@
                       href: ef6/modeling/designer/data-types/complex-types.md
                     - name: Enumerationen
                       href: ef6/modeling/designer/data-types/enums.md
-                    - name: Spatial
+                    - name: Räumlich
                       href: ef6/modeling/designer/data-types/spatial.md
                 - name: Aufteilen von Zuordnungen
                   items:
@@ -414,7 +414,7 @@
                   items:
                     - name: Abfrage
                       href: ef6/modeling/designer/stored-procedures/query.md
-                    - name: Aktualisieren
+                    - name: Update
                       href: ef6/modeling/designer/stored-procedures/cud.md
                 - name: Zuordnen von Beziehungen
                   href: ef6/modeling/designer/relationships.md
@@ -422,7 +422,7 @@
                   href: ef6/modeling/designer/multiple-diagrams.md
                 - name: Auswahl der Runtimeversion
                   href: ef6/modeling/designer/select-runtime-version.md
-                - name: Codegenerierung
+                - name: Codeerzeugung
                   items:
                     - name: Übersicht
                       href: ef6/modeling/designer/codegen/index.md
@@ -476,7 +476,7 @@
               href: ef6/saving/concurrency.md
             - name: Einsatz von Transaktionen
               href: ef6/saving/transactions.md
-            - name: Datenüberprüfung
+            - name: Datenvalidierung
               href: ef6/saving/validation.md
         - name: Zusätzliche Ressourcen
           items:
