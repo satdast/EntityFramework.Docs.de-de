@@ -12,24 +12,18 @@ Sie sollten besser einen Pull Request senden, anstatt ein Issue zu erstellen. Di
 
 * Suchen Sie die Datei, die in diesem Repository aktualisiert werden soll, und öffnen Sie sie mit einem Klick.
 
-![image](https://user-images.githubusercontent.com/1430078/64454137-10199400-d09f-11e9-9d1a-b7fdca2c518e.png)
+![Bild](https://user-images.githubusercontent.com/1430078/64454137-10199400-d09f-11e9-9d1a-b7fdca2c518e.png)
 
 * Klicken Sie auf die Schaltfläche zum Bearbeiten (✏️), um die Datei in Ihrem Webbrowser zu bearbeiten.
 
-![image](https://user-images.githubusercontent.com/1430078/64454321-85856480-d09f-11e9-85a6-1c93bc6611e2.png)
+![Bild](https://user-images.githubusercontent.com/1430078/64454321-85856480-d09f-11e9-85a6-1c93bc6611e2.png)
 
-* Fügen Sie anschließend einen Titel und eine Beschreibung hinzu, und verwenden Sie dann die Option „Create a new branch and start a pull request“ Option.
+* Fügen Sie anschließend einen Titel und eine Beschreibung hinzu, und verwenden Sie dann die Option „Create a new branch and start a pull request“ (Neuen Branch erstellen und Pull Request starten).
 
-![image](https://user-images.githubusercontent.com/1430078/64454455-dac17600-d09f-11e9-922b-0346117011f5.png)
+![Bild](https://user-images.githubusercontent.com/1430078/64454455-dac17600-d09f-11e9-922b-0346117011f5.png)
 
 Hinweis: Sie können dieses Repository auch klonen und wie gewohnt einen Pull Request für GitHub erstellen.
 
 ## <a name="making-more-substantial-changes"></a>Vornehmen von größeren Änderungen
 
 Auch für größere Änderungen werden Pull Requests empfohlen. Bevor Sie einen Pull Request übermitteln, lesen Sie bitte die[Richtlinien für Beiträge](CONTRIBUTING.md). Diese enthalten Anleitungen zum Erstellen von Dokumentationen sowie Stil- und Strukturvorgaben.
-
-## <a name="microsoft-open-source-code-of-conduct"></a>Microsoft Open-Source-Verhaltenskodex
-
-Für dieses Projekt gelten die Microsoft-Verhaltensregeln für Open Source ([Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/)).
-Weitere Informationen finden Sie unter [Code of Conduct FAQ (FAQ zum Verhaltenskodex)](https://opensource.microsoft.com/codeofconduct/faq/). Alternativ können Sie sich mit weiteren Fragen und Kommentaren an [opencode@microsoft.com](mailto:opencode@microsoft.com) wenden.
-
