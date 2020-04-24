@@ -1,15 +1,15 @@
 ---
 title: Tools und Erweiterungen – EF Core
 author: ErikEJ
-ms.date: 12/17/2019
+ms.date: 04/11/2020
 ms.assetid: 14fffb6c-a687-4881-a094-af4a1359a296
 uid: core/extensions/index
-ms.openlocfilehash: e3806f7161fecfe66450d3e08f97caf3d2c84cf3
-ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
+ms.openlocfilehash: 3fa407ca36d32a33a6bc889cd54ff88537510e9c
+ms.sourcegitcommit: 387cbd8109c0fc5ce6bdc85d0dec1aed72ad4c33
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "80634237"
+ms.lasthandoff: 04/23/2020
+ms.locfileid: "82103112"
 ---
 # <a name="ef-core-tools--extensions"></a>EF Core Tools und -Erweiterungen
 
@@ -22,7 +22,7 @@ Diese Tools und Erweiterungen bieten zusätzliche Funktionen für Entity Framewo
 
 ### <a name="llblgen-pro"></a>LLBLGen Pro
 
-LLBLGen Pro ist eine Entitätsmodelllösung, die Entity Framework und Entity Framework Core unterstützt. Sie können problemlos ihr Entitätsmodell definieren und es Ihrer Datenbank zuordnen, indem Sie Database First oder Model First verwenden, sodass Sie sofort mit dem Schreiben von Abfragen beginnen können. Für EF Core: 2.
+LLBLGen Pro ist eine Entitätsmodelllösung, die Entity Framework und Entity Framework Core unterstützt. Sie können problemlos ihr Entitätsmodell definieren und es Ihrer Datenbank zuordnen, indem Sie Database First oder Model First verwenden, sodass Sie sofort mit dem Schreiben von Abfragen beginnen können. Für EF Core: 2, 3
 
 [Website](https://www.llblgen.com/)
 
@@ -71,11 +71,11 @@ Eine Plug-in-Bibliothek, mit deren Hilfe automatisch von EF Core durchgeführte 
 
 [GitHub-Repository](https://github.com/Arch/AutoHistory/)
 
-### <a name="efsecondlevelcachecore"></a>EFSecondLevelCache.Core
+### <a name="efcoresecondlevelcacheinterceptor"></a>EFCoreSecondLevelCacheInterceptor
 
-Eine Erweiterung, die es ermöglicht, die Ergebnisse von EF Core-Abfragen in einem Cache zweiter Ebene zu speichern, sodass nachfolgende Ausführungen der gleichen Abfragen nicht auf die Datenbank zugreifen müssen, sondern die Daten direkt aus dem Cache abrufen können. Für EF Core: 2.
+Das Zwischenspeichern zweiter Ebene ist ein Abfragecache. Die Ergebnisse von EF-Befehlen werden im Cache gespeichert, sodass die gleichen EF-Befehle ihre Daten eher aus dem Cache abrufen, als die Datenbank erneut zu durchsuchen. Für EF Core: 3.
 
-[GitHub-Repository](https://github.com/VahidN/EFSecondLevelCache.Core/)
+[GitHub-Repository](https://github.com/VahidN/EFCoreSecondLevelCacheInterceptor)
 
 ### <a name="geco"></a>Geco
 
@@ -172,13 +172,13 @@ Erweitert Ihren DbContext mit hochleistungsfähigen Massenvorgängen: BulkSaveCh
 
 ### <a name="expressionify"></a>Expressionify
 
-Hinzufügen von Unterstützung für das Aufrufen von Erweiterungsmethoden in LINQ-Lambdas. Für EF Core: 3.1
+Fügt Unterstützung für das Aufrufen von Erweiterungsmethoden in LINQ-Lambdas hinzu. Für EF Core: 3.
 
 [GitHub-Repository](https://github.com/ClaveConsulting/Expressionify)
 
 ### <a name="xlinq"></a>XLinq
 
-LINQ-Technologie (Language Integrated Query) für relationale Datenbanken. Sie ermöglicht Ihnen, mit C# stark typisierte Abfragen zu schreiben. Für EF Core: 3.1
+LINQ-Technologie (Language Integrated Query) für relationale Datenbanken. Sie ermöglicht Ihnen, mit C# stark typisierte Abfragen zu schreiben. Für EF Core: 3.
 
 - Volle Unterstützung von C# für das Erstellen von Abfragen: mehrere Anweisungen innerhalb von Lambdaausdrücken, Variablen, Funktionen usw.
 - Keine semantische Lücke zu SQL. XLinq deklariert SQL-Anweisungen (wie `SELECT`, `FROM`, `WHERE`) als erstklassige C#-Methoden, wobei die vertraute Syntax mit Intellisense, Typsicherheit und Refactoring kombiniert wird.
@@ -186,3 +186,27 @@ LINQ-Technologie (Language Integrated Query) für relationale Datenbanken. Sie e
 Infolgedessen wird SQL einfach zu einer „weiteren“ Klassenbibliothek, die ihre API lokal verfügbar macht, wörtlich *Sprachintegrierte SQL*.
 
 [Website](http://xlinq.live/)
+
+### <a name="ramses"></a>Ramses
+
+Lebenszyklushooks (für SaveChanges). Für EF Core: 2, 3.
+
+[GitHub-Repository](https://github.com/JValck/Ramses)
+
+### <a name="efcorenamingconventions"></a>EFCore.NamingConventions
+
+Hiermit wird automatisch snake_case-Schreibung, reine Großschreibung oder reine Kleinschreibung auf alle Tabellen- und Spaltennamen angewendet. Für EF Core: 3.
+
+[GitHub-Repository](https://github.com/efcore/EFCore.NamingConventions)
+
+### <a name="simplersoftwareentityframeworkcoresqlservernodatime"></a>SimplerSoftware.EntityFrameworkCore.SqlServer.NodaTime
+
+Fügt EntityFrameworkCore für SQL Server native Unterstützung für die NodaTime-Typen hinzu. Für EF Core: 3.
+
+[GitHub-Repository](https://github.com/StevenRasmussen/EFCore.SqlServer.NodaTime)
+
+### <a name="dabbleentityframeworkcoretemporalquery"></a>Dabble.EntityFrameworkCore.Temporal.Query
+
+LINQ-Erweiterungen für Entity Framework Core 3.1 zur Unterstützung von Abfragen temporaler Tabellen in Microsoft SQL Server. Für EF Core: 3.
+
+[GitHub-Repository](https://github.com/Adam-Langley/efcore-temporal-query)
