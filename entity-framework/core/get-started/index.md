@@ -4,12 +4,12 @@ author: rick-anderson
 ms.date: 09/17/2019
 ms.assetid: 3c88427c-20c6-42ec-a736-22d3eccd5071
 uid: core/get-started/index
-ms.openlocfilehash: 0e7a1ee159cdf5b72448fe6d73c972975b1ab95b
-ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
+ms.openlocfilehash: 7ace80bf326395d3b68f3e745100cd45356d7973
+ms.sourcegitcommit: 144edccf9b29a7ffad119c235ac9808ec1a46193
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "78412865"
+ms.lasthandoff: 04/16/2020
+ms.locfileid: "81434096"
 ---
 # <a name="getting-started-with-ef-core"></a>Erste Schritte mit EF Core
 
@@ -95,7 +95,7 @@ Definieren Sie eine Kontextklasse und Entitätsklassen für das Modell.
 
 EF Core kann auch [Reverse Engineering](../managing-schemas/scaffolding.md) eines Modells aus einer vorhandenen Datenbank ausführen.
 
-Tipp: In einer echten App platzieren Sie jede Anwendung in einer separaten Datei und fügen die [Verbindungszeichenfolge](../miscellaneous/connection-strings.md) in eine Konfigurationsdatei oder Umgebungsvariable ein. Der Einfachheit halber sind in diesem Tutorial alle Elemente in einer Datei enthalten.
+Tipp: Bei dieser Anwendung wurden einige Vorgänge absichtlich vereinfacht, um mehr Klarheit zu bieten. [Verbindungszeichenfolgen](../miscellaneous/connection-strings.md) sollten bei Produktionsanwendungen niemals im Code gespeichert werden. Es empfiehlt sich auch, die C#-Klassen in eigene Dateien aufzuteilen.
 
 ## <a name="create-the-database"></a>Erstellen der Datenbank
 
