@@ -4,12 +4,12 @@ description: Übersicht über neue Features in EF Core 5.0
 author: ajcvickers
 ms.date: 03/30/2020
 uid: core/what-is-new/ef-core-5.0/whatsnew.md
-ms.openlocfilehash: c047a308cadf44eea577dcab29b68b36942a50df
-ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
+ms.openlocfilehash: c902988920e3b1a6039808fe0658fc19dee2728a
+ms.sourcegitcommit: 387cbd8109c0fc5ce6bdc85d0dec1aed72ad4c33
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "80634283"
+ms.lasthandoff: 04/23/2020
+ms.locfileid: "82103073"
 ---
 # <a name="whats-new-in-ef-core-50"></a>Neuerungen in EF Core 5.0
 
@@ -20,6 +20,106 @@ Auf dieser Seite wird der [Plan für EF Core 5.0](plan.md) nicht erneut aufgef
 Der Plan beschreibt die allgemeinen Themen für EF Core 5.0 einschließlich sämtlicher Features, die wir vor Auslieferung des finalen Releases integrieren möchten.
 
 Wir werden an dieser Stelle Links zur offiziellen Dokumentation einfügen, sobald diese veröffentlicht ist.
+
+## <a name="preview-3"></a>Preview 3
+
+### <a name="filtered-include"></a>Gefilterte Include-Funktion
+
+Die Include-Methode unterstützt jetzt das Filtern der enthaltenen Entitäten.
+Zum Beispiel:
+
+```CSharp
+var blogs = context.Blogs
+    .Include(e => e.Posts.Where(p => p.Title.Contains("Cheese")))
+    .ToList();
+```
+
+Mit dieser Abfrage werden Blogs zusammen mit den jeweiligen Beiträgen zurückgegeben, jedoch nur, wenn der Titel „Cheese“ enthält.
+
+Skip und Take können auch verwendet werden, um die Anzahl der enthaltenen Entitäten zu verringern.
+Zum Beispiel:
+ 
+```CSharp
+var blogs = context.Blogs
+    .Include(e => e.Posts.OrderByDescending(post => post.Title).Take(5)))
+    .ToList();
+```
+Mit dieser Abfrage werden Blogs mit höchstens fünf Beiträgen zurückgegeben.
+
+Ausführliche Informationen finden Sie in der [Dokumentation zu Include](xref:core/querying/related-data#filtered-include).
+
+### <a name="new-modelbuilder-api-for-navigation-properties"></a>Neue ModelBuilder-API für Navigationseigenschaften
+
+Navigationseigenschaften werden in erster Linie beim [Definieren von Beziehungen](xref:core/modeling/relationships) konfiguriert.
+Die neue `Navigation`-Methode kann jedoch in den Fällen verwendet werden, in denen Navigationseigenschaften eine zusätzliche Konfiguration erfordern.
+So können Sie z. B. ein Unterstützungsfeld für die Navigation festlegen, wenn das Feld nach Konvention nicht gefunden wird:
+
+```CSharp
+modelBuilder.Entity<Blog>().Navigation(e => e.Posts).HasField("_myposts");
+```
+
+Beachten Sie, dass die `Navigation`-API die Beziehungskonfiguration nicht ersetzt.
+Stattdessen ermöglicht sie eine zusätzliche Konfiguration der Navigationseigenschaften in bereits ermittelten oder definierten Beziehungen.
+
+Die Dokumentation finden Sie im Issue [2302](https://github.com/dotnet/EntityFramework.Docs/issues/2302).
+
+### <a name="new-command-line-parameters-for-namespaces-and-connection-strings"></a>Neue Befehlszeilenparameter für Namespaces und Verbindungszeichenfolgen 
+
+Bei Migrationen und Gerüstbau können Namespaces jetzt in der Befehlszeile angegeben werden.
+So können Sie beispielsweise ein Reverse Engineering für eine Datenbank durchführen, um die Kontext- und Modellklassen in verschiedenen Namespaces zu platzieren: 
+
+```
+dotnet ef dbcontext scaffold "connection string" Microsoft.EntityFrameworkCore.SqlServer --context-namespace "My.Context" --namespace "My.Model"
+```
+
+Eine Verbindungszeichenfolge kann nun auch an den `database-update`-Befehl übermittelt werden:
+
+```
+dotnet ef database update --connection "connection string"
+```
+
+Gleichwertige Parameter wurden den PowerShell-Befehlen hinzugefügt, die in der Paket-Manager-Konsole in Visual Studio verwendet werden.
+
+Die Dokumentation finden Sie im Issue [2303](https://github.com/dotnet/EntityFramework.Docs/issues/2303).
+
+### <a name="enabledetailederrors-has-returned"></a>EnableDetailedErrors wieder verfügbar
+
+Aus Leistungsgründen führt EF keine zusätzlichen NULL-Überprüfungen durch, wenn Werte aus der Datenbank gelesen werden.
+Dadurch können Ausnahmen ausgelöst werden, deren Ursache schwer zu ermitteln ist, wenn ein unerwarteter NULL-Wert auftritt.
+
+Durch die Verwendung von `EnableDetailedErrors` wird eine zusätzliche NULL-Überprüfung auf Abfragen hinzugefügt, sodass diese Fehler mit geringem Leistungsaufwand einfacher auf ihre Ursache zurückzuführen sind.  
+
+Zum Beispiel:
+```CSharp
+protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    => optionsBuilder
+        .EnableDetailedErrors()
+        .EnableSensitiveDataLogging() // Often also useful with EnableDetailedErrors 
+        .UseSqlServer(Your.SqlServerConnectionString);
+```
+
+Die Dokumentation finden Sie im Issue [955](https://github.com/dotnet/EntityFramework.Docs/issues/955).
+
+### <a name="cosmos-partition-keys"></a>Cosmos-Partitionsschlüssel
+
+Der Partitionsschlüssel, der für eine bestimmte Abfrage verwendet werden soll, kann jetzt in der Abfrage angegeben werden.
+Zum Beispiel:
+
+```CSharp
+await context.Set<Customer>()
+             .WithPartitionKey(myPartitionKey)
+             .FirstAsync();
+```
+
+Die Dokumentation finden Sie im Issue [2199](https://github.com/dotnet/EntityFramework.Docs/issues/2199).
+
+### <a name="support-for-the-sql-server-datalength-function"></a>Unterstützung für die DATALENGTH-Funktion von SQL Server
+
+Auf diese kann mit der neuen `EF.Functions.DataLength`-Methode zugegriffen werden.
+Zum Beispiel:
+```CSharp
+var count = context.Orders.Count(c => 100 < EF.Functions.DataLength(c.OrderDate));
+``` 
 
 ## <a name="preview-2"></a>Vorschau 2
 

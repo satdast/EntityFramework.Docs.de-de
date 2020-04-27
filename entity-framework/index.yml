@@ -1,0 +1,173 @@
+### YamlMime:Hub
+title: Entity Framework-Dokumentation
+summary: Entity Framework Core ist ein moderner Objekt-Datenbank-Mapper für .NET. Er unterstützt LINQ-Abfragen, Änderungsnachverfolgung, Updates und Schemamigrationen. EF Core funktioniert mit vielen Datenbanken, einschließlich SQL-Datenbank (lokal und Azure), SQLite, MySQL, PostgreSQL und Azure Cosmos DB.
+brand: dotnet
+metadata:
+  title: Entity Framework-Dokumentation
+  description: Erfahren Sie, wie Sie Entity Framework Core verwenden, eine moderne Objekt-Datenbank-Zuordnung für.NET, die LINQ-Abfragen, Änderungsnachverfolgung, Updates und Schemamigrationen unterstützt. Durchsuchen Sie Tutorials, Codebeispiele, Grundlagen, API-Referenz und mehr.
+  ms.product: entity-framework
+  ms.topic: hub-page
+  author: WadePickett
+  ms.author: wpickett
+  ms.date: 04/15/2020
+  ms.openlocfilehash: bfb96b06a2832b489e194fede0c04efebcc7496d
+  ms.sourcegitcommit: 387cbd8109c0fc5ce6bdc85d0dec1aed72ad4c33
+  ms.translationtype: HT
+  ms.contentlocale: de-DE
+  ms.lasthandoff: 04/23/2020
+  ms.locfileid: "82103099"
+highlightedContent:
+  items:
+  - title: Entity Framework Core
+    itemType: get-started
+    url: core/get-started/index.md
+  - title: Beibehalten und Abrufen von relationalen Daten mit Entity Framework Core
+    itemType: learn
+    url: /learn/modules/persist-data-ef-core/
+  - title: Releases und Plattformen
+    itemType: whats-new
+    url: core/what-is-new/index.md
+  - title: Unterstützte Datenbanken
+    itemType: overview
+    url: core/providers/index.md
+  - title: Auswählen der geeigneten Version
+    itemType: overview
+    url: efcore-and-ef6/index.md
+  - title: API-Referenzbrowser
+    itemType: reference
+    url: https://docs.microsoft.com/dotnet/api/?view=efcore-3.1
+additionalContent:
+  sections:
+  - title: Entwickeln mit Entity Framework Core
+    items:
+    - title: Entwickeln Ihrer ersten App
+      links:
+      - url: core/get-started/index.md
+        text: Zugriff auf SQLite über .NET Core-Konsolen-App mit EF Core
+      - url: /aspnet/core/data/ef-rp/
+        text: Zugriff auf SQL Server LocalDB oder SQLite über ASP.NET Core Razor Pages-Web-App mit EF Core
+      - url: /aspnet/core/data/ef-mvc/
+        text: Zugriff auf SQL Server über ASP.NET Core-MVC-App mit EF Core
+    - title: Grundlagen
+      links:
+      - url: core/miscellaneous/connection-strings.md
+        text: Verbindungszeichenfolgen
+      - url: core/miscellaneous/logging.md
+        text: Protokollierung
+      - url: core/miscellaneous/connection-resiliency.md
+        text: Verbindungsresilienz
+      - url: core/miscellaneous/testing/index.md
+        text: Test
+      - url: core/miscellaneous/configuring-dbcontext.md
+        text: Konfigurieren einer DbContext-Instanz
+      - url: core/miscellaneous/nullable-reference-types.md
+        text: Nullwerte zulassende Verweistypen
+    - title: Erstellen eines Modells
+      links:
+      - url: core/modeling/index.md
+        text: Übersicht
+      - url: core/modeling/entity-types.md
+        text: Entitätstypen
+      - url: core/modeling/entity-properties.md
+        text: Entitätseigenschaften
+      - url: core/modeling/keys.md
+        text: Tasten
+      - url: core/modeling/generated-properties.md
+        text: Generierte Werte
+      - url: core/modeling/relationships.md
+        text: Beziehungen
+      - url: core/modeling/data-seeding.md
+        text: Datenseeding
+      - url: core/modeling/owned-entities.md
+        text: Nicht eigenständige Entitätstypen
+      - url: core/modeling/keyless-entity-types.md
+        text: Schlüssellose Entitätstypen
+    - title: Abfrage
+      links:
+      - url: core/querying/index.md
+        text: Übersicht
+      - url: core/querying/client-eval.md
+        text: Client- und Serverauswertung im Vergleich
+      - url: core/querying/tracking.md
+        text: Nachverfolgung und keine Nachverfolgung im Vergleich
+      - url: core/querying/complex-query-operators.md
+        text: Komplexe Abfrageoperatoren
+      - url: core/querying/related-data.md
+        text: Laden relevanter Daten
+      - url: core/querying/async.md
+        text: Asynchrone Abfragen
+      - url: core/querying/raw-sql.md
+        text: Unformatierte SQL-Abfragen
+      - url: core/querying/filters.md
+        text: Globale Abfragefilter
+    - title: Verwalten von Datenbankschemas
+      links:
+      - url: core/managing-schemas/index.md
+        text: Übersicht
+      - url: core/managing-schemas/migrations/index.md
+        text: Übersicht zur Migration
+      - url: core/managing-schemas/migrations/teams.md
+        text: Migrationen von Teamumgebungen
+      - url: core/managing-schemas/migrations/operations.md
+        text: 'Migration: benutzerdefinierte Vorgänge'
+      - url: core/managing-schemas/migrations/projects.md
+        text: 'Migration: Verwenden eines separaten Projekts'
+      - url: core/managing-schemas/migrations/providers.md
+        text: 'Migration: mehrere Anbieter'
+      - url: core/managing-schemas/migrations/history-table.md
+        text: 'Migration: benutzerdefinierte Verlaufstabelle'
+      - url: core/managing-schemas/ensure-created.md
+        text: Erstellen und Löschen von APIs
+      - url: core/managing-schemas/scaffolding.md
+        text: Reverse Engineering (Gerüstbau)
+    - title: Speichern von Daten
+      links:
+      - url: core/saving/index.md
+        text: Übersicht
+      - url: core/saving/basic.md
+        text: Grundlegender Speichervorgang
+      - url: core/saving/related-data.md
+        text: Verwandte Daten
+      - url: core/saving/cascade-delete.md
+        text: Kaskadierendes Delete
+      - url: core/saving/concurrency.md
+        text: Nebenläufigkeitskonflikte
+      - url: core/saving/transactions.md
+        text: Transaktionen
+      - url: core/saving/async.md
+        text: Asynchroner Speichervorgang
+      - url: core/saving/disconnected-entities.md
+        text: Getrennte Entitäten
+    - title: Unterstützte Datenbanken
+      links:
+      - url: core/providers/sql-server/index.md
+        text: SQL Server
+      - url: core/providers/sqlite/index.md
+        text: SQLite
+      - url: http://www.npgsql.org/efcore/index.html
+        text: PostgreSQL
+      - url: https://github.com/PomeloFoundation/Pomelo.EntityFrameworkCore.MySql
+        text: MySQL und MariaDB
+      - url: core/providers/cosmos/index.md
+        text: Cosmos DB-SQL-API
+      - url: core/providers/in-memory/index.md
+        text: In-Memory (Tests)
+      - url: core/providers/index.md
+        text: Alle aktuellen Datenbankanbieter
+    - title: Befehlszeilenreferenz
+      links:
+      - url: core/miscellaneous/cli/index.md
+        text: Übersicht
+      - url: core/miscellaneous/cli/powershell.md
+        text: Paket-Manager-Konsole (Visual Studio)
+      - url: core/miscellaneous/cli/dotnet.md
+        text: .NET Core-CLI
+      - url: core/miscellaneous/cli/dbcontext-creation.md
+        text: DbContext-Instanzerstellung zur Entwurfszeit
+      - url: core/miscellaneous/cli/services.md
+        text: Entwurfszeitdienste
+    - title: Frühere Versionen
+      links:
+      - url: ef6/get-started.md
+        text: Entity Framework 6
+  footer: Tragen Sie zur Entity Framework-Dokumentation bei. Lesen Sie den [Leitfaden für Mitwirkende](https://github.com/dotnet/EntityFramework.Docs/blob/master/CONTRIBUTING.md).
