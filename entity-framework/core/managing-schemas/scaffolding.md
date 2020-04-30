@@ -5,16 +5,16 @@ ms.author: bricelam
 ms.date: 11/13/2018
 ms.assetid: 6263EF7D-4989-42E6-BDEE-45DA770342FB
 uid: core/managing-schemas/scaffolding
-ms.openlocfilehash: 1ba9352d261f1c131b0d70f8cdad2128d9afaefe
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.openlocfilehash: 41204de8cd8c4f292afa16b209eb5302eaf74905
+ms.sourcegitcommit: 79e460f76b6664e1da5886d102bd97f651d2ffff
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78414236"
+ms.lasthandoff: 04/29/2020
+ms.locfileid: "82538440"
 ---
-# <a name="reverse-engineering"></a>Reverse Engineering
+# <a name="reverse-engineering"></a> Reverse Engineering
 
-Reverse Engineering ist der Prozess der Gerüstbau von Entitäts Typen Klassen und einer dbcontext-Klasse auf Grundlage eines Datenbankschemas. Dies kann mit dem Befehl `Scaffold-DbContext` der EF Core Package Manager Console (PMC)-Tools oder mit dem Befehl `dotnet ef dbcontext scaffold` der .net-Befehlszeilenschnittstelle (CLI) ausgeführt werden.
+Reverse Engineering ist der Prozess der Gerüstbau von Entitäts Typen Klassen und einer dbcontext-Klasse auf Grundlage eines Datenbankschemas. Dies kann mit dem `Scaffold-DbContext` Befehl der EF Core Package Manager Console-Konsole (PMC) oder dem `dotnet ef dbcontext scaffold` Befehl der .net-Befehlszeilenschnittstelle (CLI) ausgeführt werden.
 
 ## <a name="installing"></a>Installation
 
@@ -26,7 +26,7 @@ Außerdem müssen Sie einen geeigneten [Datenbankanbieter](xref:core/providers/i
 
 Das erste Argument für den Befehl ist eine Verbindungs Zeichenfolge für die Datenbank. Diese Verbindungs Zeichenfolge wird von den-Tools zum Lesen des Datenbankschemas verwendet.
 
-Wie Sie die Verbindungs Zeichenfolge zitieren und mit Escapezeichen versehen, hängt davon ab, welche Shell Sie zum Ausführen des Befehls verwenden. Einzelheiten finden Sie in der Dokumentation Ihrer Shell. PowerShell erfordert beispielsweise, dass Sie das `$` Zeichen mit Escapezeichen versehen, aber nicht `\`.
+Wie Sie die Verbindungs Zeichenfolge zitieren und mit Escapezeichen versehen, hängt davon ab, welche Shell Sie zum Ausführen des Befehls verwenden. Einzelheiten finden Sie in der Dokumentation Ihrer Shell. Beispielsweise erfordert PowerShell, dass Sie das `$` Zeichen mit Escapezeichen `\`versehen.
 
 ``` powershell
 Scaffold-DbContext 'Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Chinook' Microsoft.EntityFrameworkCore.SqlServer
@@ -38,7 +38,7 @@ dotnet ef dbcontext scaffold "Data Source=(localdb)\MSSQLLocalDB;Initial Catalog
 
 ### <a name="configuration-and-user-secrets"></a>Konfiguration und Benutzer Geheimnisse
 
-Wenn Sie ein ASP.net Core-Projekt haben, können Sie die `Name=<connection-string>`-Syntax verwenden, um die Verbindungs Zeichenfolge aus der Konfiguration zu lesen.
+Wenn Sie ein ASP.net Core-Projekt haben, können Sie die `Name=<connection-string>` -Syntax verwenden, um die Verbindungs Zeichenfolge aus der Konfiguration zu lesen.
 
 Dies funktioniert gut mit dem [Geheimnis-Manager-Tool](https://docs.microsoft.com/aspnet/core/security/app-secrets#secret-manager) , um das Daten Bank Kennwort von ihrer CodeBase getrennt zu halten.
 
@@ -55,9 +55,9 @@ Das zweite Argument ist der Anbieter Name. Der Anbieter Name ist in der Regel mi
 
 Alle Tabellen im Datenbankschema werden standardmäßig in Entitäts Typen entwickelt. Sie können einschränken, welche Tabellen in umgekehrter Reihenfolge entwickelt werden, indem Sie Schemas und Tabellen angeben.
 
-Der `-Schemas`-Parameter in der PMC und die `--schema`-Option in der CLI können verwendet werden, um jede Tabelle innerhalb eines Schemas einzubeziehen.
+Der `-Schemas` -Parameter in der PMC `--schema` und die-Option in der CLI können verwendet werden, um jede Tabelle innerhalb eines Schemas einzubeziehen.
 
-`-Tables` (PMC) und `--table` (CLI) können verwendet werden, um bestimmte Tabellen einzubeziehen.
+`-Tables`(PMC) und `--table` (CLI) können verwendet werden, um bestimmte Tabellen einzuschließen.
 
 Wenn Sie mehrere Tabellen in die PMC einschließen möchten, verwenden Sie ein Array.
 
@@ -73,11 +73,11 @@ dotnet ef dbcontext scaffold ... --table Artist --table Album
 
 ## <a name="preserving-names"></a>Beibehalten von Namen
 
-Tabellen-und Spaltennamen werden korrigiert, um die .net-Benennungs Konventionen für Typen und Eigenschaften standardmäßig besser abzugleichen. Wenn Sie den `-UseDatabaseNames` Switch in der PMC-oder `--use-database-names`-Option in der CLI angeben, wird dieses Verhalten deaktiviert, sodass die ursprünglichen Datenbanknamen so weit wie möglich beibehalten werden. Ungültige .net-Bezeichner sind immer noch korrigiert, und synthetisierte Namen wie Navigations Eigenschaften entsprechen weiterhin den .net-Benennungs Konventionen.
+Tabellen-und Spaltennamen werden korrigiert, um die .net-Benennungs Konventionen für Typen und Eigenschaften standardmäßig besser abzugleichen. Wenn Sie `-UseDatabaseNames` den Switch in der PMC `--use-database-names` oder die Option in der CLI angeben, wird dieses Verhalten deaktiviert, sodass die ursprünglichen Datenbanknamen so weit wie möglich beibehalten werden. Ungültige .net-Bezeichner sind immer noch korrigiert, und synthetisierte Namen wie Navigations Eigenschaften entsprechen weiterhin den .net-Benennungs Konventionen.
 
 ## <a name="fluent-api-or-data-annotations"></a>Fließende API oder Daten Anmerkungen
 
-Entitäts Typen werden standardmäßig mit der flüssigen API konfiguriert. Geben Sie `-DataAnnotations` (PMC) oder `--data-annotations` (CLI) an, um stattdessen Daten Anmerkungen zu verwenden, sofern möglich.
+Entitäts Typen werden standardmäßig mit der flüssigen API konfiguriert. Geben `-DataAnnotations` Sie (PMC) `--data-annotations` oder (CLI) an, um Daten Anmerkungen zu verwenden, sofern möglich.
 
 Beispielsweise wird das Gerüst mithilfe der fließenden API erstellt:
 
@@ -97,13 +97,13 @@ public string Title { get; set; }
 
 ## <a name="dbcontext-name"></a>Dbcontext-Name
 
-Der Name der dbcontext-Klasse mit dem Gerüst ist der Name der Datenbank, der standardmäßig mit dem *Kontext* versehen wird. Um einen anderen anzugeben, verwenden Sie `-Context` in der PMC und `--context` in der CLI.
+Der Name der dbcontext-Klasse mit dem Gerüst ist der Name der Datenbank, der standardmäßig mit dem *Kontext* versehen wird. Verwenden `-Context` Sie in der PMC und `--context` in der CLI, um eine andere anzugeben.
 
 ## <a name="directories-and-namespaces"></a>Verzeichnisse und Namespaces
 
-Die Entitäts Klassen und eine dbcontext-Klasse werden im Stammverzeichnis des Projekts erstellt und verwenden den Standard Namespace des Projekts. Sie können das Verzeichnis angeben, in dem Klassen mithilfe von `-OutputDir` (PMC) oder `--output-dir` (CLI) erstellt werden. Der Namespace ist der Stamm Namespace und die Namen aller Unterverzeichnisse im Stammverzeichnis des Projekts.
+Die Entitäts Klassen und eine dbcontext-Klasse werden im Stammverzeichnis des Projekts erstellt und verwenden den Standard Namespace des Projekts. Sie können das Verzeichnis angeben, in dem Klassen mit einem Gerüst `-OutputDir` mithilfe von (PMC `--output-dir` ) oder (CLI) erstellt werden.
 
-Sie können auch `-ContextDir` (PMC) und `--context-dir` (CLI) verwenden, um die dbcontext-Klasse in ein separates Verzeichnis aus den Entitätstyp Klassen zu Gerüstbau.
+Sie können auch ( `-ContextDir` PMC) und ( `--context-dir` CLI) verwenden, um die dbcontext-Klasse in ein separates Verzeichnis der Entitätstyp Klassen zu setzen.
 
 ``` powershell
 Scaffold-DbContext ... -ContextDir Data -OutputDir Models
@@ -111,6 +111,16 @@ Scaffold-DbContext ... -ContextDir Data -OutputDir Models
 
 ```dotnetcli
 dotnet ef dbcontext scaffold ... --context-dir Data --output-dir Models
+```
+
+ Standardmäßig ist der Namespace der Stamm Namespace und die Namen aller Unterverzeichnisse im Stammverzeichnis des Projekts. Allerdings können Sie den Namespace für alle Ausgabe Klassen mithilfe `-Namespace` von (PMC) oder `--namespace` (CLI) überschreiben. Sie können auch den Namespace nur für die dbcontext-Klasse mithilfe `-ContextNamespace` von (PMC) `--context-namespace` oder (CLI) überschreiben.
+
+``` powershell
+Scaffold-DbContext ... -Namespace Your.Namespace -ContextNamespace Your.DbContext.Namespace
+```
+
+```dotnetcli
+dotnet ef dbcontext scaffold ... --namespace Your.Namespace --context-namespace Your.DbContext.Namespace
 ```
 
 ## <a name="how-it-works"></a>Funktionsweise
@@ -126,7 +136,7 @@ Schließlich wird das Modell verwendet, um Code zu generieren. Die entsprechende
 * Nicht alles über ein Modell kann mithilfe eines Datenbankschemas dargestellt werden. Beispielsweise sind Informationen zu [**Vererbungs Hierarchien**](../modeling/inheritance.md), [**eigenen Typen**](../modeling/owned-entities.md)und [**Tabellen Aufteilung**](../modeling/table-splitting.md) im Datenbankschema nicht vorhanden. Aus diesem Grund werden diese Konstrukte nie in umgekehrter Reihenfolge entwickelt.
 * Außerdem werden **einige Spaltentypen** möglicherweise vom EF Core Anbieter nicht unterstützt. Diese Spalten werden nicht in das Modell eingeschlossen.
 * Sie können Parallelitäts [**Token**](../modeling/concurrency.md)in einem EF Core Modell definieren, um zu verhindern, dass zwei Benutzer gleichzeitig dieselbe Entität aktualisieren. Einige Datenbanken verfügen über einen besonderen Typ, der diese Art von Spalte darstellt (z. b. rowversion in SQL Server). in diesem Fall können wir diese Informationen umkehren. andere Parallelitäts Token werden jedoch nicht in umgekehrter Reihenfolge entwickelt.
-* [Das C# Feature 8, das NULL-Werte](/dotnet/csharp/tutorials/nullable-reference-types) zulässt, wird derzeit in Reverse Engineering nicht unterstützt C# : EF Core generiert immer Code, der davon ausgeht, dass das Feature deaktiviert ist. So werden z. b. Textspalten, die NULL-Werte zulassen, als Eigenschaft mit dem Typ `string` erstellt, nicht `string?`, wobei entweder die fließende API oder Daten Anmerkungen verwendet werden, um zu konfigurieren, ob eine Eigenschaft erforderlich ist. Sie können den Gerüst Code bearbeiten und diese durch C# NULL-Zulässigkeit-Anmerkungen ersetzen. Die Gerüstbau Unterstützung für Verweis Typen, die NULL-Werte zulassen, wird von Issue [#15520](https://github.com/aspnet/EntityFrameworkCore/issues/15520)
+* [Der Referenztyp c# 8, der NULL-Werte](/dotnet/csharp/tutorials/nullable-reference-types) zulässt, wird derzeit in Reverse Engineering nicht unterstützt: EF Core generiert immer c#-Code, der annimmt, dass das Feature deaktiviert ist. Beispielsweise werden Textspalten, die NULL-Werte zulassen, als Eigenschaft mit dem Typ `string` erstellt, `string?`nicht mit der fließenden API oder den Daten Anmerkungen, mit denen konfiguriert wird, ob eine Eigenschaft erforderlich ist. Sie können den Gerüst Code bearbeiten und durch c#-Anmerkungen zur NULL-Zulässigkeit ersetzen. Die Gerüstbau Unterstützung für Verweis Typen, die NULL-Werte zulassen, wird von Issue [#15520](https://github.com/aspnet/EntityFrameworkCore/issues/15520)
 
 ## <a name="customizing-the-model"></a>Anpassen des Modells
 
@@ -140,7 +150,7 @@ Sie können auch zusätzliche Konstruktoren, Methoden, Eigenschaften usw. hinzuf
 
 Nachdem Sie Änderungen an der Datenbank vorgenommen haben, müssen Sie möglicherweise das EF Core Modell aktualisieren, um diese Änderungen widerzuspiegeln. Wenn die Daten Bank Änderungen einfach sind, ist es möglicherweise am einfachsten, die Änderungen am EF Core Modell manuell vorzunehmen. Beispielsweise sind das Umbenennen einer Tabelle oder Spalte, das Entfernen einer Spalte oder das Aktualisieren eines Spalten Typs triviale Änderungen, die im Code vorgenommen werden müssen.
 
-Bedeutendere Änderungen sind jedoch nicht so einfach wie die manuelle Ausführung. Ein häufiger Workflow besteht darin, das Modell mit `-Force` (PMC) oder `--force` (CLI) erneut aus der Datenbank zu entwickeln, um das vorhandene Modell mit einem aktualisierten zu überschreiben.
+Bedeutendere Änderungen sind jedoch nicht so einfach wie die manuelle Ausführung. Ein allgemeiner Workflow besteht darin, das Modell mithilfe `-Force` von (PMC) oder `--force` (CLI) erneut aus der Datenbank zu entwickeln, um das vorhandene Modell mit einem aktualisierten zu überschreiben.
 
 Ein weiteres häufig angefordertes Feature ist die Möglichkeit, das Modell aus der Datenbank zu aktualisieren und gleichzeitig Anpassungen wie Umbenennungen, Typhierarchien usw. beizubehalten. Verwenden Sie das Problem [#831](https://github.com/aspnet/EntityFrameworkCore/issues/831) , um den Fortschritt dieses Features zu verfolgen.
 

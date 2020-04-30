@@ -1,54 +1,46 @@
 ---
 title: Testen mit SQLite-EF Core
-author: rowanmiller
-ms.date: 10/27/2016
-ms.assetid: 7a2b75e2-1875-4487-9877-feff0651b5a6
+description: Verwenden von SQLite zum Testen einer EF Core Anwendung
+author: ajcvickers
+ms.date: 04/24/2020
 uid: core/miscellaneous/testing/sqlite
-ms.openlocfilehash: f7f847d8c766c0d4d7577ea6760ee72a17f84933
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.openlocfilehash: 327fdc230df2a3b4094accf93fffa81f92e0a931
+ms.sourcegitcommit: 79e460f76b6664e1da5886d102bd97f651d2ffff
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78414632"
+ms.lasthandoff: 04/29/2020
+ms.locfileid: "82538287"
 ---
-# <a name="testing-with-sqlite"></a>Testen mit SQLite
+# <a name="using-sqlite-to-test-an-ef-core-application"></a>Verwenden von SQLite zum Testen einer EF Core Anwendung
 
-SQLite verfügt über einen in-Memory-Modus, der Ihnen die Verwendung von SQLite zum Schreiben von Tests für eine relationale Datenbank ohne den Aufwand tatsächlicher Daten Bank Vorgänge ermöglicht.
+> [!WARNING]
+> Die Verwendung von SQLite kann eine effektive Möglichkeit zum Testen einer EF Core Anwendung sein.
+> Es können jedoch Probleme auftreten, wenn SQLite anders als andere Datenbanksysteme verhält. Eine Erläuterung der Probleme und Kompromisse finden Sie unter [Testen von Code, der EF Core verwendet](xref:core/miscellaneous/testing/index) .  
 
-> [!TIP]  
-> Sie können das [Beispiel](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/Testing) dieses Artikels auf GitHub anzeigen.
+In diesem Dokument werden die im Beispiel eingeführten Konzepte verwendet, die veranschaulichen, [wie Sie Anwendungen testen, die EF Core verwenden](xref:core/miscellaneous/testing/testing-sample).
+Die hier gezeigten Codebeispiele stammen aus diesem Beispiel.
 
-## <a name="example-testing-scenario"></a>Beispiel für ein Testszenario
+## <a name="using-sqlite-in-memory-databases"></a>Verwenden von sqlite-in-Memory-Datenbanken
 
-Beachten Sie den folgenden Dienst, der es Anwendungscode ermöglicht, einige mit Blogs verbundene Vorgänge auszuführen. Intern wird eine `DbContext` verwendet, die eine Verbindung mit einer SQL Server Datenbank herstellt. Es wäre hilfreich, diesen Kontext auszutauschen, um eine Verbindung mit einer in-Memory-SQLite-Datenbank herzustellen, damit wir effiziente Tests für diesen Dienst schreiben können, ohne den Code ändern zu müssen, oder viel Arbeit erledigen, um einen doppelten Test des Kontexts zu erstellen.
+Normalerweise erstellt SQLite Datenbanken als einfache Dateien und greift mit Ihrer Anwendung Prozess bedingt auf die Datei zu.
+Dies ist sehr schnell, insbesondere bei Verwendung einer schnellen [SSD](https://en.wikipedia.org/wiki/Solid-state_drive). 
 
-[!code-csharp[Main](../../../../samples/core/Miscellaneous/Testing/BusinessLogic/BlogService.cs)]
+SQLite kann auch Datenbanken verwenden, die ausschließlich im Arbeitsspeicher erstellt wurden.
+Dies ist mit EF Core leicht zu verwenden, solange Sie die in-Memory Database Lebensdauer verstehen:
+* Die Datenbank wird erstellt, wenn die Verbindung mit ihr geöffnet wird.
+* Die Datenbank wird gelöscht, wenn die Verbindung mit der Datenbank geschlossen wird.
 
-## <a name="get-your-context-ready"></a>Vorbereiten Ihres Kontexts
+EF Core wird eine bereits geöffnete Verbindung verwendet, wenn eine vorhanden ist, und versucht nie, Sie zu schließen.
+Der Schlüssel für die Verwendung von EF Core mit einer in-Memory SQLite-Datenbank besteht also darin, die Verbindung zu öffnen, bevor Sie Sie an EF übergibt.  
 
-### <a name="avoid-configuring-two-database-providers"></a>Vermeiden der Konfiguration von zwei Datenbankanbietern
+Das [Beispiel](xref:core/miscellaneous/testing/testing-sample) erreicht dies mit folgendem Code:
 
-In den Tests werden Sie den Kontext extern so konfigurieren, dass der inMemory-Anbieter verwendet wird. Wenn Sie einen Datenbankanbieter konfigurieren, indem Sie `OnConfiguring` in ihrem Kontext überschreiben, müssen Sie einigen bedingten Code hinzufügen, um sicherzustellen, dass Sie den Datenbankanbieter nur dann konfigurieren, wenn noch keiner konfiguriert wurde.
+[!code-csharp[SqliteInMemory](../../../../samples/core/Miscellaneous/Testing/ItemsWebApi/Tests/SqliteInMemoryItemsControllerTest.cs?name=SqliteInMemory)]
 
-> [!TIP]  
-> Wenn Sie ASP.net Core verwenden, sollte dieser Code nicht benötigt werden, da der Datenbankanbieter außerhalb des Kontexts konfiguriert ist (in Startup.cs).
+Beachten Sie Folgendes:
+* Die `CreateInMemoryDatabase` -Methode erstellt eine sqlite-in-Memory Database und öffnet die Verbindung mit der-Methode.
+* Der erstellte `DbConnection` wird aus der `ContextOptions` extrahiert und gespeichert.
+* Die Verbindung wird verworfen, wenn der Test verworfen wird, damit Ressourcen nicht verloren gehen. 
 
-[!code-csharp[Main](../../../../samples/core/Miscellaneous/Testing/BusinessLogic/BloggingContext.cs#OnConfiguring)]
-
-### <a name="add-a-constructor-for-testing"></a>Hinzufügen eines Konstruktors zum Testen
-
-Die einfachste Möglichkeit, Tests für eine andere Datenbank zu aktivieren, besteht darin, den Kontext so zu ändern, dass er einen Konstruktor verfügbar macht, der eine `DbContextOptions<TContext>`akzeptiert.
-
-[!code-csharp[Main](../../../../samples/core/Miscellaneous/Testing/BusinessLogic/BloggingContext.cs#Constructors)]
-
-> [!TIP]  
-> `DbContextOptions<TContext>` weist den Kontext alle seine Einstellungen zu, z. b. die Datenbank, mit der eine Verbindung hergestellt werden soll. Dabei handelt es sich um das gleiche Objekt, das erstellt wird, indem die on-Konfigurations Methode in ihrem Kontext ausgeführt wird.
-
-## <a name="writing-tests"></a>Schreiben von Tests
-
-Der Schlüssel zum Testen mit diesem Anbieter ist die Möglichkeit, den Kontext anzuweisen, SQLite zu verwenden, und den Bereich des in-Memory Database zu steuern. Der Bereich der Datenbank wird gesteuert, indem die Verbindung geöffnet und geschlossen wird. Die Datenbank bezieht sich auf die Dauer, in der die Verbindung geöffnet ist. In der Regel benötigen Sie eine saubere Datenbank für jede Testmethode.
-
->[!TIP]
-> Wenn Sie `SqliteConnection()` und die `.UseSqlite()`-Erweiterungsmethode verwenden möchten, verweisen Sie auf das nuget-Paket [Microsoft. entityframeworkcore. sqlite](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Sqlite/).
-
-[!code-csharp[Main](../../../../samples/core/Miscellaneous/Testing/TestProject/SQLite/BlogServiceTests.cs)]
+> [!NOTE]
+> [Problem #16103](https://github.com/dotnet/efcore/issues/16103) ist das Nachverfolgen von Möglichkeiten, diese Verbindungs Verwaltung zu vereinfachen. 
