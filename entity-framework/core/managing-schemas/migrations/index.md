@@ -4,12 +4,12 @@ author: bricelam
 ms.author: bricelam
 ms.date: 10/05/2018
 uid: core/managing-schemas/migrations/index
-ms.openlocfilehash: 190057daed61c58c1f89ee8d775913458e413a50
-ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
+ms.openlocfilehash: 99bb420d95cb86443b63ba05ce9e6b4ab838eff9
+ms.sourcegitcommit: 79e460f76b6664e1da5886d102bd97f651d2ffff
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "80136202"
+ms.lasthandoff: 04/29/2020
+ms.locfileid: "82538458"
 ---
 # <a name="migrations"></a>Migrationen
 
@@ -62,7 +62,20 @@ Drei Dateien werden Ihrem Projekt im Verzeichnis **Migrationen** hinzugefügt:
 Mit dem Zeitstempel im Dateinamen können Migrationen chronologisch angeordnet werden, sodass Sie den Fortschritt der Änderungen mitverfolgen können.
 
 > [!TIP]
-> Es steht Ihnen frei, Migrationsdateien zu verschieben und ihren Namespace zu ändern. Neue Migrationen werden als gleichgeordnete Elemente der letzten Migration erstellt.
+> Es steht Ihnen frei, Migrationsdateien zu verschieben und ihren Namespace manuell zu ändern. Neue Migrationen werden als gleichgeordnete Elemente der letzten Migration erstellt.
+> 
+> Alternativ können Sie `-Namespace` (Paket-Manager-Konsole) oder `--namespace` (.NET Core-CLI) verwenden, um den Namespace zum Zeitpunkt der Generierung anzugeben.
+> ### <a name="net-core-cli"></a>[.NET Core-CLI](#tab/dotnet-core-cli)
+> 
+> ```dotnetcli
+> dotnet ef migrations add InitialCreate --namespace Your.Namespace
+> ```
+> 
+> ### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
+> 
+> ``` powershell
+> Add-Migration InitialCreate -Namespace Your.Namespace
+> ```
 
 ## <a name="update-the-database"></a>Aktualisieren der Datenbank
 

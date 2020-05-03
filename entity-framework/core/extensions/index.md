@@ -4,12 +4,12 @@ author: ErikEJ
 ms.date: 04/11/2020
 ms.assetid: 14fffb6c-a687-4881-a094-af4a1359a296
 uid: core/extensions/index
-ms.openlocfilehash: 3fa407ca36d32a33a6bc889cd54ff88537510e9c
-ms.sourcegitcommit: 387cbd8109c0fc5ce6bdc85d0dec1aed72ad4c33
+ms.openlocfilehash: 246cf687f2a087e9a9a569c875b27712ebe80c5c
+ms.sourcegitcommit: 79e460f76b6664e1da5886d102bd97f651d2ffff
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/23/2020
-ms.locfileid: "82103112"
+ms.lasthandoff: 04/29/2020
+ms.locfileid: "82538336"
 ---
 # <a name="ef-core-tools--extensions"></a>EF Core Tools und -Erweiterungen
 
@@ -210,3 +210,9 @@ Fügt EntityFrameworkCore für SQL Server native Unterstützung für die NodaTim
 LINQ-Erweiterungen für Entity Framework Core 3.1 zur Unterstützung von Abfragen temporaler Tabellen in Microsoft SQL Server. Für EF Core: 3.
 
 [GitHub-Repository](https://github.com/Adam-Langley/efcore-temporal-query)
+
+### <a name="entityframeworkcoresqlserverhierarchyid"></a>EntityFrameworkCore.SqlServer.HierarchyId
+
+Fügt dem SQL Server EF Core-Anbieter hierarchyid-Unterstützung hinzu. Für EF Core: 3.
+
+[GitHub-Repository](https://github.com/efcore/EFCore.SqlServer.HierarchyId)
