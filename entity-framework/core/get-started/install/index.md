@@ -41,7 +41,7 @@ Verwenden Sie die .NET Core-CLI (Command Line Interface, Befehlszeilenschnittste
   dotnet add package Microsoft.EntityFrameworkCore.SqlServer
   ```
 
-* Mit dem Modifizierer `dotnet add package` können Sie eine bestimmte Version im Befehl `-v` angeben. Wenn Sie beispielsweise EF Core 2.2.0-Pakete installieren möchten, fügen Sie `-v 2.2.0` an den Befehl an.
+* Mit dem Modifizierer `-v` können Sie eine bestimmte Version im Befehl `dotnet add package` angeben. Wenn Sie beispielsweise EF Core 2.2.0-Pakete installieren möchten, fügen Sie `-v 2.2.0` an den Befehl an.
 
 Weitere Informationen finden Sie unter [Tools für die .NET Core-Befehlszeilenschnittstelle](/dotnet/core/tools/).
 

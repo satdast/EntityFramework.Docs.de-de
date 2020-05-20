@@ -41,7 +41,7 @@ Im folgenden Beispiel wird ein einzelner Parameter an eine gespeicherte Prozedur
 
 [!code-csharp[Main](../../../samples/core/Querying/RawSQL/Sample.cs#FromSqlRawStoredProcedureParameter)]
 
-`FromSqlInterpolated` ähnelt `FromSqlRaw`, lässt jedoch die Verwendung der Zeichenfolgeninterpolationsyntax zu. `FromSqlRaw` kann wie `FromSqlInterpolated` nur für Abfragestämme verwendet werden. Wie im vorherigen Beispiel wird der Wert in eine `DbParameter`-Klasse konvertiert und ist nicht anfällig für die Einschleusung von SQL-Befehlen.
+`FromSqlInterpolated` ähnelt `FromSqlRaw`, lässt jedoch die Verwendung der Zeichenfolgeninterpolationsyntax zu. `FromSqlInterpolated` kann wie `FromSqlRaw` nur für Abfragestämme verwendet werden. Wie im vorherigen Beispiel wird der Wert in eine `DbParameter`-Klasse konvertiert und ist nicht anfällig für die Einschleusung von SQL-Befehlen.
 
 > [!NOTE]
 > Vor Version 3.0 waren `FromSqlRaw` und `FromSqlInterpolated` zwei Überladungen namens `FromSql`. Weitere Informationen finden Sie im [Abschnitt zu vorherigen Versionen](#previous-versions).
