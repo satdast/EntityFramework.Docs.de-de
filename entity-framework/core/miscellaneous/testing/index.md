@@ -4,12 +4,12 @@ description: Unterschiedliche Ansätze zum Testen von Anwendungen, die EF Core v
 author: ajcvickers
 ms.date: 04/22/2020
 uid: core/miscellaneous/testing/index
-ms.openlocfilehash: 308128b0d51b9e0d1fc1ebb0ed00e803100efb52
-ms.sourcegitcommit: 79e460f76b6664e1da5886d102bd97f651d2ffff
+ms.openlocfilehash: 415769e9c3c664ce49c9308740d39a65a10807ba
+ms.sourcegitcommit: 59e3d5ce7dfb284457cf1c991091683b2d1afe9d
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82538367"
+ms.lasthandoff: 05/20/2020
+ms.locfileid: "83672889"
 ---
 # <a name="testing-code-that-uses-ef-core"></a>Testen von Code, der EF Core verwendet
 
