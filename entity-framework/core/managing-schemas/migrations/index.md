@@ -4,12 +4,12 @@ author: bricelam
 ms.author: bricelam
 ms.date: 10/05/2018
 uid: core/managing-schemas/migrations/index
-ms.openlocfilehash: 99bb420d95cb86443b63ba05ce9e6b4ab838eff9
-ms.sourcegitcommit: 79e460f76b6664e1da5886d102bd97f651d2ffff
+ms.openlocfilehash: c87864b3430d3cd42729c13ddde33c0cd9de9308
+ms.sourcegitcommit: 59e3d5ce7dfb284457cf1c991091683b2d1afe9d
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82538458"
+ms.lasthandoff: 05/20/2020
+ms.locfileid: "83672991"
 ---
 # <a name="migrations"></a>Migrationen
 
@@ -61,21 +61,25 @@ Drei Dateien werden Ihrem Projekt im Verzeichnis **Migrationen** hinzugefügt:
 
 Mit dem Zeitstempel im Dateinamen können Migrationen chronologisch angeordnet werden, sodass Sie den Fortschritt der Änderungen mitverfolgen können.
 
-> [!TIP]
-> Es steht Ihnen frei, Migrationsdateien zu verschieben und ihren Namespace manuell zu ändern. Neue Migrationen werden als gleichgeordnete Elemente der letzten Migration erstellt.
-> 
-> Alternativ können Sie `-Namespace` (Paket-Manager-Konsole) oder `--namespace` (.NET Core-CLI) verwenden, um den Namespace zum Zeitpunkt der Generierung anzugeben.
-> ### <a name="net-core-cli"></a>[.NET Core-CLI](#tab/dotnet-core-cli)
-> 
-> ```dotnetcli
-> dotnet ef migrations add InitialCreate --namespace Your.Namespace
-> ```
-> 
-> ### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
-> 
-> ``` powershell
-> Add-Migration InitialCreate -Namespace Your.Namespace
-> ```
+### <a name="namespaces"></a>Namespaces
+
+Es steht Ihnen frei, Migrationsdateien zu verschieben und ihren Namespace manuell zu ändern. Neue Migrationen werden als gleichgeordnete Elemente der letzten Migration erstellt.
+
+Alternativ können Sie `-Namespace` (Paket-Manager-Konsole) oder `--namespace` (.NET Core-CLI) verwenden, um den Namespace zum Zeitpunkt der Generierung anzugeben.
+
+### <a name="net-core-cli"></a>[.NET Core-CLI](#tab/dotnet-core-cli)
+
+```dotnetcli
+dotnet ef migrations add InitialCreate --namespace Your.Namespace
+```
+
+### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
+
+``` powershell
+Add-Migration InitialCreate -Namespace Your.Namespace
+```
+
+***
 
 ## <a name="update-the-database"></a>Aktualisieren der Datenbank
 
