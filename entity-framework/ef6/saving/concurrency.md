@@ -3,12 +3,12 @@ title: Behandeln von Parallelitäts Konflikten EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 2318e4d3-f561-4720-bbc3-921556806476
-ms.openlocfilehash: 81ae186201fdfac331b1d4e7836b222545fe78b5
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.openlocfilehash: a99f824fe256a10b84f539a5339a09624315efa4
+ms.sourcegitcommit: 59e3d5ce7dfb284457cf1c991091683b2d1afe9d
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78416246"
+ms.lasthandoff: 05/20/2020
+ms.locfileid: "83672713"
 ---
 # <a name="handling-concurrency-conflicts"></a>Behandlung von Parallelitätskonflikten
 Die optimistische Parallelität erfordert den optimistischen Versuch, ihre Entität in der Datenbank zu speichern, in der Hoffnung, dass sich die Daten seit dem Laden der Entität nicht geändert haben. Wenn sich herausstellt, dass sich die Daten geändert haben, wird eine Ausnahme ausgelöst, und Sie müssen den Konflikt beheben, bevor Sie versuchen, die Daten erneut zu speichern. In diesem Thema wird erläutert, wie solche Ausnahmen in Entity Framework behandelt werden. Die in diesem Thema dargestellten Techniken gelten jeweils für Modelle, die mit Code First und dem EF-Designer erstellt wurden.  
@@ -52,7 +52,7 @@ using (var context = new BloggingContext())
 }
 ```  
 
-Eine gute Möglichkeit, eine Parallelitäts Ausnahme zu simulieren, besteht darin, einen Haltepunkt für den SaveChanges-Befehl festzulegen und anschließend eine Entität, die in der Datenbank gespeichert wird, mithilfe eines anderen Tools wie z. b. SQL Management Studio zu ändern. Sie können auch eine Zeile vor "SaveChanges" einfügen, um die Datenbank direkt mithilfe von "SqlCommand" zu aktualisieren. Beispiel:  
+Eine gute Möglichkeit, eine Parallelitäts Ausnahme zu simulieren, besteht darin, einen Haltepunkt für den SaveChanges-Befehl festzulegen und anschließend eine Entität zu ändern, die in der Datenbank mit einem anderen Tool wie SQL Server Management Studio gespeichert wird. Sie können auch eine Zeile vor "SaveChanges" einfügen, um die Datenbank direkt mithilfe von "SqlCommand" zu aktualisieren. Beispiel:  
 
 ``` csharp
 context.Database.SqlCommand(

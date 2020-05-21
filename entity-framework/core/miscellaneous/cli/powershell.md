@@ -4,12 +4,12 @@ author: bricelam
 ms.author: bricelam
 ms.date: 09/18/2018
 uid: core/miscellaneous/cli/powershell
-ms.openlocfilehash: 0676475d46a8d21dee7bd10e25dd273a11e96ac3
-ms.sourcegitcommit: 79e460f76b6664e1da5886d102bd97f651d2ffff
+ms.openlocfilehash: 698a2cadadb1389f2e659e3ecab2fb21d020322e
+ms.sourcegitcommit: 59e3d5ce7dfb284457cf1c991091683b2d1afe9d
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82538403"
+ms.lasthandoff: 05/20/2020
+ms.locfileid: "83672934"
 ---
 # <a name="entity-framework-core-tools-reference---package-manager-console-in-visual-studio"></a>Referenz zur Entity Framework Core Tools-Paket-Manager-Konsole in Visual Studio
 
@@ -23,7 +23,7 @@ Die Verfahren zum Installieren und Aktualisieren der Tools unterscheiden sich zw
 
 ### <a name="aspnet-core-version-21-and-later"></a>ASP.net Core Version 2,1 und höher
 
-Die Tools werden automatisch in ein ASP.net Core 2.1 +-Projekt eingeschlossen, `Microsoft.EntityFrameworkCore.Tools` da das Paket im [Metapaket Microsoft. aspnetcore. app](/aspnet/core/fundamentals/metapackage-app)enthalten ist.
+Die Tools werden automatisch in ein ASP.net Core 2.1 +-Projekt eingeschlossen, da das `Microsoft.EntityFrameworkCore.Tools` Paket im [Metapaket Microsoft. aspnetcore. app](/aspnet/core/fundamentals/metapackage-app)enthalten ist.
 
 Daher müssen Sie keine weiteren Schritte ausführen, um die Tools zu installieren, aber Sie müssen folgende Schritte ausführen:
 
@@ -32,13 +32,13 @@ Daher müssen Sie keine weiteren Schritte ausführen, um die Tools zu installier
 
 Um sicherzustellen, dass Sie die neueste Version der Tools erhalten, empfiehlt es sich, auch den folgenden Schritt durchzuführen:
 
-* Bearbeiten Sie die *csproj* -Datei, und fügen Sie eine Zeile hinzu, die die neueste Version des [Microsoft. entityframeworkcore. Tools](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Tools/) -Pakets angibt. Die *csproj* -Datei kann beispielsweise einen `ItemGroup` enthalten, der wie folgt aussieht:
+* Bearbeiten Sie die *csproj* -Datei, und fügen Sie eine Zeile hinzu, die die neueste Version des [Microsoft. entityframeworkcore. Tools](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Tools/) -Pakets angibt. Die *csproj* -Datei kann beispielsweise einen enthalten, der `ItemGroup` wie folgt aussieht:
 
   ```xml
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.1.3" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.3" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.2" />
   </ItemGroup>
   ```
 
@@ -106,9 +106,9 @@ Vor der Verwendung der Tools:
 
 Die Befehle verweisen auf ein *Projekt* und ein *Startprojekt*.
 
-* Das *Projekt* wird auch als *Ziel Projekt* bezeichnet, weil die Befehle Dateien hinzufügen oder entfernen. Standardmäßig ist das **Standard Projekt** , das in der **Paket-Manager-Konsole** ausgewählt ist, das Ziel Projekt. Sie können ein anderes Projekt als Ziel Projekt angeben, indem Sie <nobr>`--project`</nobr> die Option verwenden.
+* Das *Projekt* wird auch als *Ziel Projekt* bezeichnet, weil die Befehle Dateien hinzufügen oder entfernen. Standardmäßig ist das **Standard Projekt** , das in der **Paket-Manager-Konsole** ausgewählt ist, das Ziel Projekt. Sie können ein anderes Projekt als Ziel Projekt angeben, indem Sie die <nobr>`--project`</nobr> Option verwenden.
 
-* Das *Startprojekt ist das Startprojekt* , das von den Tools erstellt und ausgeführt wird. Die Tools müssen Anwendungscode zur Entwurfszeit ausführen, um Informationen zum Projekt zu erhalten, z. b. die Daten bankverbindungs Zeichenfolge und die Konfiguration des Modells. Standardmäßig ist das **Startprojekt** in **Projektmappen-Explorer** das Startprojekt. Sie können ein anderes Projekt als Startprojekt angeben, indem Sie <nobr>`--startup-project`</nobr> die Option verwenden.
+* Das *Startprojekt ist das Startprojekt* , das von den Tools erstellt und ausgeführt wird. Die Tools müssen Anwendungscode zur Entwurfszeit ausführen, um Informationen zum Projekt zu erhalten, z. b. die Daten bankverbindungs Zeichenfolge und die Konfiguration des Modells. Standardmäßig ist das **Startprojekt** in **Projektmappen-Explorer** das Startprojekt. Sie können ein anderes Projekt als Startprojekt angeben, indem Sie die <nobr>`--startup-project`</nobr> Option verwenden.
 
 Das Startprojekt und das Ziel Projekt sind häufig das gleiche Projekt. Ein typisches Szenario, bei dem es sich um separate Projekte handelt, sind folgende:
 
@@ -119,7 +119,7 @@ Es ist auch möglich, [Migrations Code in einer Klassenbibliothek zu platzieren,
 
 ### <a name="other-target-frameworks"></a>Andere Ziel-Frameworks
 
-Die Paket-Manager-Konsolen Tools können mit .net Core-oder .NET Framework-Projekten verwendet werden. Apps, die über das EF Core Modell in einer .NET Standard-Klassenbibliothek verfügen, verfügen möglicherweise nicht über ein .net Core-oder .NET Framework-Projekt. Dies gilt z. b. für xamarin-und universelle Windows-Plattform-apps. In solchen Fällen können Sie ein .net Core-oder .NET Framework Konsolen-App-Projekt erstellen, dessen einziger Zweck darin besteht, als Startprojekt für die Tools zu fungieren. Das Projekt kann ein Dummyprojekt ohne echten Code &mdash; sein. es ist nur erforderlich, um ein Ziel für die Tools bereitzustellen.
+Die Paket-Manager-Konsolen Tools können mit .net Core-oder .NET Framework-Projekten verwendet werden. Apps, die über das EF Core Modell in einer .NET Standard-Klassenbibliothek verfügen, verfügen möglicherweise nicht über ein .net Core-oder .NET Framework-Projekt. Dies gilt z. b. für xamarin-und universelle Windows-Plattform-apps. In solchen Fällen können Sie ein .net Core-oder .NET Framework Konsolen-App-Projekt erstellen, dessen einziger Zweck darin besteht, als Startprojekt für die Tools zu fungieren. Das Projekt kann ein Dummyprojekt ohne echten Code sein &mdash; . es ist nur erforderlich, um ein Ziel für die Tools bereitzustellen.
 
 Warum ist ein Dummyprojekt erforderlich? Wie bereits erwähnt, müssen die Tools Anwendungscode zur Entwurfszeit ausführen. Hierzu müssen Sie die .net Core-oder .NET Framework-Laufzeit verwenden. Wenn sich das EF Core Modell in einem Projekt befindet, das .net Core oder .NET Framework als Ziel hat, wird die Laufzeit von den EF Core Tools aus dem Projekt ausgeliehen. Dies ist nicht möglich, wenn sich das EF Core Modell in einer .NET Standard Klassenbibliothek befindet. Der .NET Standard ist keine tatsächliche .NET-Implementierung. Es handelt sich um eine Spezifikation für eine Reihe von APIs, die von .net-Implementierungen unterstützt werden müssen. Daher ist .NET Standard für die EF Core Tools nicht ausreichend, um Anwendungscode auszuführen. Das Dummyprojekt, das Sie als Startprojekt verwenden, stellt eine konkrete Zielplattform bereit, in die die Tools die .NET Standard Klassenbibliothek laden können.
 
@@ -131,14 +131,14 @@ Wenn Sie die Umgebung für ASP.net Core Projekte angeben möchten, legen Sie **E
 
 In der folgenden Tabelle sind die Parameter aufgeführt, die für alle EF Core-Befehle gelten:
 
-| Parameter                 | BESCHREIBUNG                                                                                                                                                                                                          |
+| Parameter                 | Beschreibung                                                                                                                                                                                                          |
 |:--------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| -Kontext \<Zeichenfolge>        | Die `DbContext`-Klasse, die verwendet werden soll. Der Klassenname oder voll qualifiziert mit Namespaces.  Wenn dieser Parameter ausgelassen wird, wird EF Core die Kontext Klasse findet. Wenn mehrere Kontext Klassen vorhanden sind, ist dieser Parameter erforderlich. |
-| -Projekt \<Zeichenfolge>        | Das Ziel Projekt. Wenn dieser Parameter ausgelassen wird, wird das **Standard Projekt** für die **Paket-Manager-Konsole** als Ziel Projekt verwendet.                                                                             |
-| <nobr>-StartupProject</nobr> \<Zeichenfolge> | Das Startprojekt. Wenn dieser Parameter ausgelassen wird, wird das **Startprojekt** in Projektmappeneigenschaften als Ziel Projekt verwendet. **Solution properties**                                                                                 |
+| -Kontext \< Zeichenfolge>        | Die `DbContext`-Klasse, die verwendet werden soll. Der Klassenname oder voll qualifiziert mit Namespaces.  Wenn dieser Parameter ausgelassen wird, wird EF Core die Kontext Klasse findet. Wenn mehrere Kontext Klassen vorhanden sind, ist dieser Parameter erforderlich. |
+| -Projekt \< Zeichenfolge>        | Das Ziel Projekt. Wenn dieser Parameter ausgelassen wird, wird das **Standard Projekt** für die **Paket-Manager-Konsole** als Ziel Projekt verwendet.                                                                             |
+| <nobr>-StartupProject</nobr> \< Zeichen folgen> | Das Startprojekt. Wenn dieser Parameter ausgelassen wird, wird das **Startprojekt** in Projektmappeneigenschaften als Ziel Projekt verwendet. **Solution properties**                                                                                 |
 | -Verbose                  | Zeigt eine ausführliche Ausgabe an.                                                                                                                                                                                                 |
 
-Verwenden Sie den PowerShell- `Get-Help` Befehl, um Hilfe Informationen zu einem Befehl anzuzeigen.
+Verwenden Sie den PowerShell-Befehl, um Hilfe Informationen zu einem Befehl anzuzeigen `Get-Help` .
 
 > [!TIP]
 > Die Parameter "Context", "Project" und "StartupProject" unterstützen die Tab-Erweiterung.
@@ -149,11 +149,11 @@ Fügt eine neue Migration hinzu.
 
 Parameter:
 
-| Parameter                         | BESCHREIBUNG                                                                                                             |
+| Parameter                         | Beschreibung                                                                                                             |
 |:----------------------------------|:------------------------------------------------------------------------------------------------------------------------|
-| <nobr>-Name \<Zeichenfolge><nobr>       | Der Name der Migration. Dies ist ein Positions Parameter, der erforderlich ist.                                              |
-| <nobr>-OutputDir \<Zeichenfolge></nobr> | Das Verzeichnis, mit dem die Dateien ausgegeben werden. Pfade sind relativ zum Ziel Projektverzeichnis. Der Standardwert ist "Migrationen". |
-| <nobr>-Namespace \<Zeichenfolge></nobr> | Der Namespace, der für die generierten Klassen verwendet werden soll. Wird standardmäßig aus dem Ausgabeverzeichnis generiert. |
+| <nobr>-Name \< Zeichenfolge><nobr>       | Der Name der Migration. Dies ist ein Positions Parameter, der erforderlich ist.                                              |
+| <nobr>-OutputDir \< Zeichenfolge></nobr> | Das Verzeichnis, mit dem die Dateien ausgegeben werden. Pfade sind relativ zum Ziel Projektverzeichnis. Der Standardwert ist "Migrationen". |
+| <nobr>-Namespace \< Zeichenfolge></nobr> | Der Namespace, der für die generierten Klassen verwendet werden soll. Wird standardmäßig aus dem Ausgabeverzeichnis generiert. |
 
 ## <a name="drop-database"></a>Drop-Database
 
@@ -161,7 +161,7 @@ Löscht die Datenbank.
 
 Parameter:
 
-| Parameter | BESCHREIBUNG                                              |
+| Parameter | Beschreibung                                              |
 |:----------|:---------------------------------------------------------|
 | -WhatIf   | Zeigen Sie an, welche Datenbank gelöscht werden soll, aber löschen Sie Sie nicht. |
 
@@ -175,27 +175,27 @@ Entfernt die letzte Migration (führt einen Rollback für die Codeänderungen au
 
 Parameter:
 
-| Parameter | BESCHREIBUNG                                                                     |
+| Parameter | Beschreibung                                                                     |
 |:----------|:--------------------------------------------------------------------------------|
 | -Force    | Setzen Sie die Migration zurück (führen Sie ein Rollback der Änderungen aus, die auf die Datenbank angewendet wurden). |
 
 ## <a name="scaffold-dbcontext"></a>Gerüst-dbcontext
 
-Generiert Code für einen `DbContext` und Entitäts Typen für eine Datenbank. `Scaffold-DbContext` Damit ein Entitätstyp generiert werden kann, muss die Datenbanktabelle über einen Primärschlüssel verfügen.
+Generiert Code für einen `DbContext` und Entitäts Typen für eine Datenbank. Damit `Scaffold-DbContext` ein Entitätstyp generiert werden kann, muss die Datenbanktabelle über einen Primärschlüssel verfügen.
 
 Parameter:
 
-| Parameter                          | BESCHREIBUNG                                                                                                                                                                                                                                                             |
+| Parameter                          | Beschreibung                                                                                                                                                                                                                                                             |
 |:-----------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| <nobr>-Verbindungs \<Zeichenfolge></nobr> | Die Verbindungszeichenfolge für die Datenbank. Bei ASP.net Core 2. x-Projekten kann der Wert *\<Name = Name der Verbindungs Zeichenfolge>* sein. In diesem Fall stammt der Name aus den Konfigurations Quellen, die für das Projekt eingerichtet sind. Dies ist ein Positions Parameter, der erforderlich ist. |
-| <nobr>-Anbieter \<Zeichenfolge></nobr>   | Der zu verwendende Anbieter. In der Regel ist dies der Name des nuget-Pakets, z `Microsoft.EntityFrameworkCore.SqlServer`. b.:. Dies ist ein Positions Parameter, der erforderlich ist.                                                                                           |
-| -OutputDir \<Zeichenfolge>               | Das Verzeichnis, in dem Dateien abgelegt werden sollen. Pfade sind relativ zum Projektverzeichnis.                                                                                                                                                                                             |
-| -Contextdir \<String>              | Das Verzeichnis, in das `DbContext` die Datei eingefügt werden soll. Pfade sind relativ zum Projektverzeichnis.                                                                                                                                                               |
-| -Namespace \<Zeichenfolge>               | Der Namespace, der für alle generierten Klassen verwendet werden soll. Wird standardmäßig aus dem Stamm Namespace und dem Ausgabeverzeichnis generiert.                                                                                                                                                                                             |
-| -Contextnamespace \<-Zeichenfolge>        | Der Namespace, der für die generierte `DbContext` Klasse verwendet werden soll. Hinweis: überschreibt `-Namespace`.                                                                                                                                                                              |
-| -Kontext \<Zeichenfolge>                 | Der Name der zu `DbContext` generierenden Klasse.                                                                                                                                                                                                                          |
-| -Schema \<Zeichenfolge [] >               | Die Schemas von Tabellen, für die Entitäts Typen generiert werden sollen. Wenn dieser Parameter ausgelassen wird, werden alle Schemas eingeschlossen.                                                                                                                                                             |
-| -Tabellen \<Zeichenfolge [] >                | Die Tabellen, für die Entitäts Typen generiert werden sollen. Wenn dieser Parameter ausgelassen wird, werden alle Tabellen eingeschlossen.                                                                                                                                                                         |
+| <nobr>-Verbindungs \< Zeichenfolge></nobr> | Die Verbindungszeichenfolge für die Datenbank. Bei ASP.net Core 2. x-Projekten kann der Wert *Name = \< Name der Verbindungs Zeichenfolge>* sein. In diesem Fall stammt der Name aus den Konfigurations Quellen, die für das Projekt eingerichtet sind. Dies ist ein Positions Parameter, der erforderlich ist. |
+| <nobr>-Anbieter \< Zeichenfolge></nobr>   | Der zu verwendende Anbieter. In der Regel ist dies der Name des nuget-Pakets, z `Microsoft.EntityFrameworkCore.SqlServer` . b.:. Dies ist ein Positions Parameter, der erforderlich ist.                                                                                           |
+| -OutputDir \< Zeichenfolge>               | Das Verzeichnis, in dem Dateien abgelegt werden sollen. Pfade sind relativ zum Projektverzeichnis.                                                                                                                                                                                             |
+| -Contextdir \< String>              | Das Verzeichnis, in das die Datei eingefügt werden soll `DbContext` . Pfade sind relativ zum Projektverzeichnis.                                                                                                                                                               |
+| -Namespace \< Zeichenfolge>               | Der Namespace, der für alle generierten Klassen verwendet werden soll. Wird standardmäßig aus dem Stamm Namespace und dem Ausgabeverzeichnis generiert.                                                                                                                                                                                             |
+| -Contextnamespace- \< Zeichenfolge>        | Der Namespace, der für die generierte Klasse verwendet werden soll `DbContext` . Hinweis: überschreibt `-Namespace` .                                                                                                                                                                              |
+| -Kontext \< Zeichenfolge>                 | Der Name der `DbContext` zu generierenden Klasse.                                                                                                                                                                                                                          |
+| -Schema \< Zeichenfolge [] >               | Die Schemas von Tabellen, für die Entitäts Typen generiert werden sollen. Wenn dieser Parameter ausgelassen wird, werden alle Schemas eingeschlossen.                                                                                                                                                             |
+| -Tabellen \< Zeichenfolge [] >                | Die Tabellen, für die Entitäts Typen generiert werden sollen. Wenn dieser Parameter ausgelassen wird, werden alle Tabellen eingeschlossen.                                                                                                                                                                         |
 | -DataAnnotations                   | Verwenden Sie Attribute, um das Modell zu konfigurieren (sofern möglich). Wenn dieser Parameter ausgelassen wird, wird nur die fließende API verwendet.                                                                                                                                                      |
 | -Usedatabasenames                  | Verwenden Sie Tabellen-und Spaltennamen genau so, wie Sie in der Datenbank angezeigt werden. Wenn dieser Parameter ausgelassen wird, werden Datenbanknamen geändert, sodass Sie den c#-namens Stil Konventionen genauer entsprechen.                                                                                       |
 | -Force                             | Überschreibt vorhandene Dateien.                                                                                                                                                                                                                                               |
@@ -218,12 +218,12 @@ Generiert ein SQL-Skript, mit dem alle Änderungen von einer ausgewählten Migra
 
 Parameter:
 
-| Parameter                | BESCHREIBUNG                                                                                                                                                                                                                |
+| Parameter                | Beschreibung                                                                                                                                                                                                                |
 |:-------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| *-From* \<String>        | Die Migration wird gestartet. Migrationen können anhand des Namens oder der ID identifiziert werden. Die Zahl 0 (null) ist ein Sonderfall, der *vor der ersten Migration*liegt. Der Standardwert ist 0.                                                              |
-| *-Zu* \<Zeichenfolge>          | Die Beendigung der Migration. Standardmäßig wird die letzte Migration verwendet.                                                                                                                                                                      |
+| *-Von* \< Zeichen folgen>        | Die Migration wird gestartet. Migrationen können anhand des Namens oder der ID identifiziert werden. Die Zahl 0 (null) ist ein Sonderfall, der *vor der ersten Migration*liegt. Der Standardwert ist 0.                                                              |
+| *Bis* \< Zeichen folgen>          | Die Beendigung der Migration. Standardmäßig wird die letzte Migration verwendet.                                                                                                                                                                      |
 | <nobr>-Idempotent</nobr> | Generieren Sie ein Skript, das bei jeder Migration in einer Datenbank verwendet werden kann.                                                                                                                                                         |
-| -Ausgabe \<Zeichenfolge>        | Die Datei, in die das Ergebnis geschrieben werden soll. Wenn dieser Parameter ausgelassen wird, wird die Datei mit einem generierten Namen im selben Ordner erstellt, in dem die Laufzeitdateien der App erstellt werden, z. b.: */obj/Debug/netcoreapp2.1/ghbkztfz.SQL/*. |
+| -Ausgabe \< Zeichenfolge>        | Die Datei, in die das Ergebnis geschrieben werden soll. Wenn dieser Parameter ausgelassen wird, wird die Datei mit einem generierten Namen im selben Ordner erstellt, in dem die Laufzeitdateien der App erstellt werden, z. b.: */obj/Debug/netcoreapp2.1/ghbkztfz.SQL/*. |
 
 > [!TIP]
 > Die Parameter to, from und Output unterstützen die Tab-Erweiterung.
@@ -244,10 +244,10 @@ Script-Migration -From 20180904195021_InitialCreate
 
 Aktualisiert die Datenbank auf die letzte Migration oder eine angegebene Migration.
 
-| Parameter                           | BESCHREIBUNG                                                                                                                                                                                                                                                     |
+| Parameter                           | Beschreibung                                                                                                                                                                                                                                                     |
 |:------------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| <nobr>*-Migrations* \<Zeichenfolge></nobr> | Die Ziel Migration. Migrationen können anhand des Namens oder der ID identifiziert werden. Die Zahl 0 (null) ist ein Sonderfall, der *vor der ersten Migration* steht und bewirkt, dass alle Migrationen rückgängig gemacht werden. Wenn keine Migration angegeben ist, wird für den Befehl standardmäßig die letzte Migration verwendet. |
-| <nobr>-Verbindungs \<Zeichenfolge></nobr>  | Die Verbindungszeichenfolge für die Datenbank. Der Standardwert ist der in `AddDbContext` oder `OnConfiguring`angegebene. |
+| <nobr>*-Migration* \< Zeichen folgen></nobr> | Die Ziel Migration. Migrationen können anhand des Namens oder der ID identifiziert werden. Die Zahl 0 (null) ist ein Sonderfall, der *vor der ersten Migration* steht und bewirkt, dass alle Migrationen rückgängig gemacht werden. Wenn keine Migration angegeben ist, wird für den Befehl standardmäßig die letzte Migration verwendet. |
+| <nobr>-Verbindungs \< Zeichenfolge></nobr>  | Die Verbindungszeichenfolge für die Datenbank. Der Standardwert ist der in `AddDbContext` oder angegebene `OnConfiguring` . |
 
 > [!TIP]
 > Der Migrations Parameter unterstützt die Erweiterung der Registerkarte.
