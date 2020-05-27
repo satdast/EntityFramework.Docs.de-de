@@ -4,12 +4,12 @@ author: divega
 ms.date: 02/20/2018
 ms.assetid: 2CB5809E-0EFB-44F6-AF14-9D5BFFFBFF9D
 uid: core/what-is-new/ef-core-2.0
-ms.openlocfilehash: 83f6b819409d502dba17a678d44a0746a4a77f4b
-ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
+ms.openlocfilehash: a3e066056fc67031060920f5f7763007bdc1d2d3
+ms.sourcegitcommit: 59e3d5ce7dfb284457cf1c991091683b2d1afe9d
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "78413576"
+ms.lasthandoff: 05/20/2020
+ms.locfileid: "83672886"
 ---
 # <a name="new-features-in-ef-core-20"></a>Neue Features in EF Core 2.0
 
@@ -133,7 +133,7 @@ var query =
     select p;
 ```
 
-Im Folgenden einige Hinweise, die Sie beachten sollten:
+Im Folgenden sollten Sie einige Aspekte berücksichtigen:
 
 - Der Name der Methode wird gemäß den Konventionen als Name einer Funktion (in diesem Fall einer benutzerdefinierten Funktion) bei der SQL-Generierung verwendet, Sie können den Namen und das Schema bei der Methodenregistrierung jedoch überschreiben.
 - Derzeit werden nur Skalarfunktionen unterstützt.
@@ -158,7 +158,7 @@ class CustomerConfiguration : IEntityTypeConfiguration<Customer>
 builder.ApplyConfiguration(new CustomerConfiguration());
 ```
 
-## <a name="high-performance"></a>Leistung
+## <a name="high-performance"></a>Hohe Leistung
 
 ### <a name="dbcontext-pooling"></a>DbContext-Pooling
 
@@ -205,7 +205,7 @@ using (var db = new CustomerContext())
 }
 ```
 
-## <a name="change-tracking"></a>Change Tracking
+## <a name="change-tracking"></a>Änderungsnachverfolgung
 
 ### <a name="attach-can-track-a-graph-of-new-and-existing-entities"></a>Nachverfolgen eines Graphen von neuen und vorhandenen Entitäten durch Anfügen
 
@@ -225,7 +225,7 @@ Durch diese Änderungen wird das SQL-Skript verbessert, das für Gruppenverknüp
 
 Mit C# 6 wurde Zeichenfolgeninterpolation eingeführt, ein Feature, mit dem C#-Ausdrücke direkt in Zeichenfolgenliterale eingebettet werden können, was eine komfortable Möglichkeit zum Erstellen von Zeichenfolgen zur Runtime bietet. In EF Core 2.0 haben wir eine spezielle Unterstützung für interpolierte Zeichenfolgen zu unseren zwei primären APIs hinzugefügt, die SQL-Rohzeichenfolgen akzeptieren: `FromSql` und `ExecuteSqlCommand`. Diese neue Unterstützung ermöglicht die „sichere“ Verwendung von C#-Zeichenfolgeninterpolation. Das heißt, sie wird vor häufigen Fehlern durch Angriffe durch Einschleusung von SQL-Befehlen geschützt, die auftreten können, wenn SQL dynamisch zur Laufzeit erstellt wird.
 
-Beispiel:
+Im Folgenden ein Beispiel:
 
 ``` csharp
 var city = "London";
@@ -299,7 +299,7 @@ public class MyPluralizer : IPluralizer
 }
 ```
 
-## <a name="others"></a>Andere
+## <a name="others"></a>Sonstige
 
 ### <a name="move-adonet-sqlite-provider-to-sqlitepclraw"></a>Migrieren des ADO.NET SQLite-Anbieters nach SQLitePCL.raw
 

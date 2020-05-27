@@ -2,14 +2,14 @@
 title: Neuerungen in EF Core 5.0
 description: Übersicht über neue Features in EF Core 5.0
 author: ajcvickers
-ms.date: 03/30/2020
+ms.date: 05/11/2020
 uid: core/what-is-new/ef-core-5.0/whatsnew.md
-ms.openlocfilehash: c902988920e3b1a6039808fe0658fc19dee2728a
-ms.sourcegitcommit: 387cbd8109c0fc5ce6bdc85d0dec1aed72ad4c33
+ms.openlocfilehash: fcb2eb8df99a06eaf3459835347a4027a363b86b
+ms.sourcegitcommit: 59e3d5ce7dfb284457cf1c991091683b2d1afe9d
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/23/2020
-ms.locfileid: "82103073"
+ms.lasthandoff: 05/20/2020
+ms.locfileid: "83672853"
 ---
 # <a name="whats-new-in-ef-core-50"></a>Neuerungen in EF Core 5.0
 
@@ -20,6 +20,38 @@ Auf dieser Seite wird der [Plan für EF Core 5.0](plan.md) nicht erneut aufgef
 Der Plan beschreibt die allgemeinen Themen für EF Core 5.0 einschließlich sämtlicher Features, die wir vor Auslieferung des finalen Releases integrieren möchten.
 
 Wir werden an dieser Stelle Links zur offiziellen Dokumentation einfügen, sobald diese veröffentlicht ist.
+
+## <a name="preview-4"></a>Preview 4
+
+### <a name="configure-database-precisionscale-in-model"></a>Konfigurieren von Datenbankgenauigkeit/Skalierung im Modell
+
+Genauigkeit und Skalierung einer Eigenschaft können jetzt mit dem Modellgenerator angegeben werden.
+Zum Beispiel:
+
+```CSharp
+modelBuilder
+    .Entity<Blog>()
+    .Property(b => b.Numeric)
+    .HasPrecision(16, 4);
+```
+
+Genauigkeit und Skalierung können weiterhin über den vollständigen Datenbanktyp festgelegt werden, z. B. „decimal(16,4)“. 
+
+Die Dokumentation finden Sie im Issue [527](https://github.com/dotnet/EntityFramework.Docs/issues/527).
+
+### <a name="specify-sql-server-index-fill-factor"></a>Angeben des Standardfüllfaktors für SQL Server-Indizes
+
+Der Füllfaktor kann nun beim Erstellen eines Indexes auf SQL Server angegeben werden.
+Zum Beispiel:
+
+```CSharp
+modelBuilder
+    .Entity<Customer>()
+    .HasIndex(e => e.Name)
+    .HasFillFactor(90);
+```
+
+Die Dokumentation finden Sie im Issue [2378](https://github.com/dotnet/EntityFramework.Docs/issues/2378).
 
 ## <a name="preview-3"></a>Preview 3
 
@@ -61,7 +93,7 @@ modelBuilder.Entity<Blog>().Navigation(e => e.Posts).HasField("_myposts");
 Beachten Sie, dass die `Navigation`-API die Beziehungskonfiguration nicht ersetzt.
 Stattdessen ermöglicht sie eine zusätzliche Konfiguration der Navigationseigenschaften in bereits ermittelten oder definierten Beziehungen.
 
-Die Dokumentation finden Sie im Issue [2302](https://github.com/dotnet/EntityFramework.Docs/issues/2302).
+Weitere Informationen finden Sie unter [Konfigurieren von Navigationseigenschaften](xref:core/modeling/relationships#configuring-navigation-properties).
 
 ### <a name="new-command-line-parameters-for-namespaces-and-connection-strings"></a>Neue Befehlszeilenparameter für Namespaces und Verbindungszeichenfolgen 
 
@@ -72,15 +104,18 @@ So können Sie beispielsweise ein Reverse Engineering für eine Datenbank durchf
 dotnet ef dbcontext scaffold "connection string" Microsoft.EntityFrameworkCore.SqlServer --context-namespace "My.Context" --namespace "My.Model"
 ```
 
+Ausführliche Informationen finden Sie in den Dokumentationen zu [Migrationen](xref:core/managing-schemas/migrations/index#namespaces) und [Reverse Engineering](xref:core/managing-schemas/scaffolding#directories-and-namespaces).
+
+---
 Eine Verbindungszeichenfolge kann nun auch an den `database-update`-Befehl übermittelt werden:
 
 ```
 dotnet ef database update --connection "connection string"
 ```
 
-Gleichwertige Parameter wurden den PowerShell-Befehlen hinzugefügt, die in der Paket-Manager-Konsole in Visual Studio verwendet werden.
+Ausführliche Informationen finden Sie in der [Entity Framework Core Tools-Referenz – .NET-CLI](xref:core/miscellaneous/cli/dotnet#dotnet-ef-database-update).
 
-Die Dokumentation finden Sie im Issue [2303](https://github.com/dotnet/EntityFramework.Docs/issues/2303).
+Gleichwertige Parameter wurden den PowerShell-Befehlen hinzugefügt, die in der Paket-Manager-Konsole in Visual Studio verwendet werden.
 
 ### <a name="enabledetailederrors-has-returned"></a>EnableDetailedErrors wieder verfügbar
 
