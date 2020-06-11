@@ -4,12 +4,12 @@ description: Verwenden von Wert vergleichen zum Steuern der Art EF Core Vergleic
 author: ajcvickers
 ms.date: 03/20/2020
 uid: core/modeling/value-comparers
-ms.openlocfilehash: 9dfed7b7ef8163f4f5c94a0c81c510807c53c13d
-ms.sourcegitcommit: c3b8386071d64953ee68788ef9d951144881a6ab
+ms.openlocfilehash: 9e33bfb840606b746626daa1da7331904b495ab4
+ms.sourcegitcommit: 92d54fe3702e0c92e198334da22bacb42e9842b1
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "80148256"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84664116"
 ---
 # <a name="value-comparers"></a>Wert Vergleiche
 
@@ -94,7 +94,7 @@ Beispiel: Zuordnung einer Eigenschaft, die eine Liste mit Zahlen enthält:
 
 [!code-csharp[ListProperty](../../../samples/core/Modeling/ValueConversions/MappingListProperty.cs?name=ListProperty)]
 
-Die [`List<T>`-Klasse](/dotnet/api/system.collections.generic.list-1?view=netstandard-2.1):
+Die- [ `List<T>` Klasse](/dotnet/api/system.collections.generic.list-1?view=netstandard-2.1):
 * Hat Verweis Gleichheit. zwei Listen, die dieselben Werte enthalten, werden als verschieden behandelt.
 * Ist änderbar; Werte in der Liste können hinzugefügt und entfernt werden.
 
@@ -102,7 +102,7 @@ Eine typische Wert Konvertierung für eine Listen Eigenschaft kann die Liste in 
 
 [!code-csharp[ConfigureListProperty](../../../samples/core/Modeling/ValueConversions/MappingListProperty.cs?name=ConfigureListProperty)]
 
-Dies erfordert dann das Festlegen eines `ValueComparer<T>` für die-Eigenschaft, um die Verwendung korrekter Vergleiche mit dieser Konvertierung zu erzwingen EF Core:
+Dies erfordert dann das Festlegen einer `ValueComparer<T>` für die-Eigenschaft, um das Erzwingen EF Core verwenden korrekter Vergleiche mit dieser Konvertierung zu erzwingen:
 
 [!code-csharp[ConfigureListPropertyComparer](../../../samples/core/Modeling/ValueConversions/MappingListProperty.cs?name=ConfigureListPropertyComparer)]
 
@@ -110,8 +110,8 @@ Dies erfordert dann das Festlegen eines `ValueComparer<T>` für die-Eigenschaft,
 > Die Modell-Generator-API ("fließend"), mit der ein Wert Vergleich festgelegt wurde, wurde noch nicht implementiert.
 > Stattdessen ruft der obige Code setvaluecomparer auf der untergeordneten imutableproperty auf, die vom Generator als "Metadata" verfügbar gemacht wird.
 
-Der `ValueComparer<T>`-Konstruktor akzeptiert drei Ausdrücke:
-* Ein Ausdruck zum Überprüfen der Qualität.
+Der `ValueComparer<T>` Konstruktor akzeptiert drei Ausdrücke:
+* Ein Ausdruck zum Überprüfen der Gleichheit.
 * Ein Ausdruck zum Erzeugen eines Hashcodes.
 * Ein Ausdruck zum Erstellen einer Momentaufnahme eines Werts.  
 

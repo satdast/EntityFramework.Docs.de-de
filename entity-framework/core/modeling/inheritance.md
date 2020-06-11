@@ -5,12 +5,12 @@ author: AndriySvyryd
 ms.author: ansvyryd
 ms.date: 10/27/2016
 uid: core/modeling/inheritance
-ms.openlocfilehash: 507854e3acc0347adee612e516b3e2e0b10f55cf
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.openlocfilehash: 0e94013a0b894b162f4bb3ca8e7acb1aca349011
+ms.sourcegitcommit: 92d54fe3702e0c92e198334da22bacb42e9842b1
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78414626"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84664051"
 ---
 # <a name="inheritance"></a>Vererbung
 
@@ -23,13 +23,13 @@ Zurzeit unterstützt EF Core nur das TPH-Muster (Table-per Hierarchy). TPH verwe
 
 ## <a name="entity-type-hierarchy-mapping"></a>Entitätstyp-Hierarchie Zuordnung
 
-Gemäß der Konvention wird von EF nur die Vererbung eingerichtet, wenn mindestens zwei geerbte Typen explizit im Modell enthalten sind. EF scannt nicht automatisch nach Basis Typen oder abgeleiteten Typen, die ansonsten nicht im Modell enthalten sind.
+Gemäß der Konvention scannt EF nicht automatisch nach Basis-oder abgeleiteten Typen. Dies bedeutet, dass Sie den Typ für das Modell explizit angeben müssen, wenn Sie möchten, dass ein CLR-Typ in der Hierarchie zugeordnet wird. Wenn Sie z. b. nur den Basistyp einer Hierarchie angeben, bewirkt dies nicht, dass EF Core implizit alle seine Untertypen einschließt.
 
-Sie können Typen in das Modell einschließen, indem Sie ein dbset für jeden Typ in der Vererbungs Hierarchie verfügbar machen:
+Im folgenden Beispiel wird ein dbset für `Blog` und seine Unterklasse verfügbar gemacht `RssBlog` . Wenn `Blog` eine andere Unterklasse aufweist, wird Sie nicht in das Modell eingeschlossen.
 
 [!code-csharp[Main](../../../samples/core/Modeling/Conventions/InheritanceDbSets.cs?name=InheritanceDbSets&highlight=3-4)]
 
-Dieses Modell wird dem folgenden Datenbankschema zugeordnet (Beachten Sie die implizit erstellte *diskriminatorspalte* , die identifiziert, welche Art von *Blog* in den einzelnen Zeilen gespeichert ist):
+Dieses Modell wird dem folgenden Datenbankschema zugeordnet (Beachten Sie die implizit erstellte *diskriminatorspalte* , die angibt, welcher Typ von *Blog* in den einzelnen Zeilen gespeichert wird):
 
 ![image](_static/inheritance-tph-data.png)
 
@@ -39,7 +39,7 @@ Dieses Modell wird dem folgenden Datenbankschema zugeordnet (Beachten Sie die im
 Wenn Sie kein dbset für eine oder mehrere Entitäten in der Hierarchie verfügbar machen möchten, können Sie auch die fließende API verwenden, um sicherzustellen, dass Sie im Modell enthalten sind.
 
 > [!TIP]
-> Wenn Sie sich nicht auf Konventionen verlassen, können Sie den Basistyp explizit mithilfe `HasBaseType`angeben. Sie können auch `.HasBaseType((Type)null)` verwenden, um einen Entitätstyp aus der Hierarchie zu entfernen.
+> Wenn Sie sich nicht auf Konventionen verlassen, können Sie den Basistyp explizit mithilfe von angeben `HasBaseType` . Sie können auch verwenden `.HasBaseType((Type)null)` , um einen Entitätstyp aus der Hierarchie zu entfernen.
 
 ## <a name="discriminator-configuration"></a>Diskriminatorkonfiguration
 

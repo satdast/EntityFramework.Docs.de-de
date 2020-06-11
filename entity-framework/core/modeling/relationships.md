@@ -4,12 +4,12 @@ description: Konfigurieren von Beziehungen zwischen Entitäts Typen bei Verwendu
 author: AndriySvyryd
 ms.date: 11/21/2019
 uid: core/modeling/relationships
-ms.openlocfilehash: 8d3df109f34c2a77305db1e2be2eea1694d7ad6b
-ms.sourcegitcommit: 59e3d5ce7dfb284457cf1c991091683b2d1afe9d
+ms.openlocfilehash: 3ed25b752970cf0f55d38f1ce5b8383f1c90edc3
+ms.sourcegitcommit: 92d54fe3702e0c92e198334da22bacb42e9842b1
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/20/2020
-ms.locfileid: "83672764"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84664142"
 ---
 # <a name="relationships"></a>Beziehungen
 
@@ -152,7 +152,8 @@ Nachdem die Navigations Eigenschaft erstellt wurde, müssen Sie Sie möglicherwe
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/NavigationConfiguration.cs?name=NavigationConfiguration&highlight=7-9)]
 
-[!NOTE] Dieser Befehl kann nicht zum Erstellen einer Navigations Eigenschaft verwendet werden. Sie wird nur verwendet, um eine Navigations Eigenschaft zu konfigurieren, die zuvor durch Definieren einer Beziehung oder einer Konvention erstellt wurde.
+> [!NOTE]
+> Dieser Befehl kann nicht zum Erstellen einer Navigations Eigenschaft verwendet werden. Sie wird nur verwendet, um eine Navigations Eigenschaft zu konfigurieren, die zuvor durch Definieren einer Beziehung oder einer Konvention erstellt wurde.
 
 ### <a name="foreign-key"></a>Fremdschlüssel
 
@@ -178,7 +179,7 @@ Mit den Daten Anmerkungen können Sie konfigurieren, welche Eigenschaft als Frem
 > Die-Anmerkung `[ForeignKey]` kann für jede Navigations Eigenschaft in der Beziehung platziert werden. Die Navigations Eigenschaft in der abhängigen Entitäts Klasse muss nicht verwendet werden.
 
 > [!NOTE]
-> Die Eigenschaft, die mithilfe `[ForeignKey]` von für eine Navigations Eigenschaft angegeben wurde, muss nicht den abhängigen Typ enthalten. In diesem Fall wird der angegebene Name verwendet, um einen Schatten Fremdschlüssel zu erstellen.
+> Die mit `[ForeignKey]` einer Navigations Eigenschaft angegebene Eigenschaft muss nicht im abhängigen Typ vorhanden sein. In diesem Fall wird der angegebene Name verwendet, um einen Schatten Fremdschlüssel zu erstellen.
 
 ---
 

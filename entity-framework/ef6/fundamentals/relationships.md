@@ -1,42 +1,42 @@
 ---
-title: Beziehungen, Navigationseigenschaften und Fremdschlüssel - EF6
+title: Beziehungen, Navigations Eigenschaften und Fremdschlüssel-EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 8a21ae73-6d9b-4b50-838a-ec1fddffcf37
-ms.openlocfilehash: 76169f25d01bed81ad0748c9e85a67bd112a6e65
-ms.sourcegitcommit: 144edccf9b29a7ffad119c235ac9808ec1a46193
+ms.openlocfilehash: 5807f7aeeb68328821cf45ac4f8c28efa17ed399
+ms.sourcegitcommit: 92d54fe3702e0c92e198334da22bacb42e9842b1
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81434325"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84664194"
 ---
-# <a name="relationships-navigation-properties-and-foreign-keys"></a>Beziehungen, Navigationseigenschaften und Fremdschlüssel
+# <a name="relationships-navigation-properties-and-foreign-keys"></a>Beziehungen, Navigations Eigenschaften und Fremdschlüssel
 
-Dieser Artikel gibt einen Überblick darüber, wie Entity Framework Beziehungen zwischen Entitäten verwaltet. Es gibt auch einige Anleitungen, wie Beziehungen zugeordnet und manipuliert werden können.
+Dieser Artikel bietet einen Überblick darüber, wie Entity Framework Beziehungen zwischen Entitäten verwaltet. Außerdem erhalten Sie eine Anleitung zum Zuordnen und Bearbeiten von Beziehungen.
 
 ## <a name="relationships-in-ef"></a>Beziehungen in EF
 
-In relationalen Datenbanken werden Beziehungen (auch Als Zuordnungen bezeichnet) zwischen Tabellen durch Fremdschlüssel definiert. Ein Fremdschlüssel (FS) ist eine Spalte oder eine Kombination von Spalten, mit deren Hilfe ein Link zwischen den Daten in zwei Tabellen eingerichtet und erzwungen wird. Es gibt in der Regel drei Arten von Beziehungen: Eins-zu-eins, Eins-zu-viele und viele.-zu-viele. In einer 1:n-Beziehung wird der Fremdschlüssel in der Tabelle definiert, der das viele Ende der Beziehung darstellt. Die n:n-Beziehung umfasst das Definieren einer dritten Tabelle (eine so genannte Verknüpfungs- oder Join-Tabelle), deren Primärschlüssel aus den Fremdschlüsseln aus beiden verknüpften Tabellen besteht. In einer 1:1-Beziehung fungiert der Primärschlüssel zusätzlich als Fremdschlüssel, und es gibt keine separate Fremdschlüsselspalte für eine der beiden Tabellen.
+In relationalen Datenbanken werden Beziehungen (auch als Zuordnungen bezeichnet) zwischen Tabellen durch Fremdschlüssel definiert. Ein Fremdschlüssel (FS) ist eine Spalte oder eine Kombination von Spalten, mit deren Hilfe ein Link zwischen den Daten in zwei Tabellen eingerichtet und erzwungen wird. Im Allgemeinen gibt es drei Typen von Beziehungen: eins-zu-eins, 1: n und m:n-. In einer 1: n-Beziehung wird der Fremdschlüssel für die Tabelle definiert, die das viele Ende der Beziehung darstellt. Die m:n-Beziehung umfasst das Definieren einer dritten Tabelle (als Verknüpfung oder jointabelle bezeichnet), deren Primärschlüssel aus den Fremdschlüsseln aus beiden verknüpften Tabellen besteht. In einer eins-zu-eins-Beziehung agiert der Primärschlüssel zusätzlich als Fremdschlüssel, und für beide Tabellen gibt es keine separate Fremdschlüssel Spalte.
 
-Die folgende Abbildung zeigt zwei Tabellen, die an einer 1:n-Beziehung teilnehmen. Die **Tabelle "Kurs"** ist die abhängige Tabelle, da sie die **Spalte DepartmentID** enthält, die sie mit der Tabelle **"Abteilung"** verknüpft.
+Die folgende Abbildung zeigt zwei Tabellen, die an einer 1: n-Beziehung beteiligt sind. Die **Kurs** Tabelle ist die abhängige Tabelle, da Sie die **DepartmentID** -Spalte enthält, die Sie mit der **Abteilungs** Tabelle verknüpft.
 
-![Abteilungs- und Kurstabellen](~/ef6/media/database2.png)
+![Abteilungs-und Kurs Tabellen](~/ef6/media/database2.png)
 
-In Entity Framework kann eine Entität über eine Zuordnung oder Beziehung mit anderen Entitäten verknüpft werden. Jede Beziehung enthält zwei Enden, die den Entitätstyp und die Multiplizität des Typs (eins, null oder eins oder viele) für die beiden Entitäten in dieser Beziehung beschreiben. Die Beziehung wird möglicherweise von einer referenziellen Einschränkung geregelt, die beschreibt, welches Ende der Beziehung die Prinzipalrolle und welches die abhängige Rolle ist.
+In Entity Framework kann eine Entität über eine Zuordnung oder Beziehung mit anderen Entitäten verknüpft werden. Jede Beziehung enthält zwei Enden, die den Entitätstyp und die Multiplizität des Typs (1, 0 oder 1 oder viele) für die beiden Entitäten in dieser Beziehung beschreiben. Die Beziehung wird möglicherweise von einer referenziellen Einschränkung geregelt, die beschreibt, welches Ende der Beziehung die Prinzipalrolle und welches die abhängige Rolle ist.
 
-Navigationseigenschaften bieten eine Möglichkeit, eine Zuordnung zwischen zwei Entitätstypen zu navigieren. Jedes Objekt kann für jede Beziehung, an der es beteiligt ist, über eine Navigationseigenschaft verfügen. Navigationseigenschaften ermöglichen es Ihnen, Beziehungen in beide Richtungen zu navigieren und zu verwalten, indem Sie entweder ein Referenzobjekt (wenn die Multiplizität entweder eins oder null oder eins ist) oder eine Auflistung (wenn die Multiplizität viele ist) zurückgeben. Sie können auch eine einseitige Navigation wählen, in diesem Fall definieren Sie die Navigationseigenschaft nur für einen der Typen, die an der Beziehung beteiligt sind, und nicht für beide.
+Navigations Eigenschaften bieten eine Möglichkeit, eine Zuordnung zwischen zwei Entitäts Typen zu navigieren. Jedes Objekt kann für jede Beziehung, an der es beteiligt ist, über eine Navigationseigenschaft verfügen. Mithilfe von Navigations Eigenschaften können Sie Beziehungen in beiden Richtungen navigieren und verwalten, wobei entweder ein Verweis Objekt (wenn die Multiplizität entweder 1 oder 0 ist) oder eine Auflistung (wenn die Multiplizität viele ist) zurückgegeben werden. Sie haben auch die Möglichkeit, eine unidirektionale Navigation zu wählen. in diesem Fall definieren Sie die Navigations Eigenschaft nur für einen Typ, der an der Beziehung teilnimmt, nicht für beides.
 
-Es wird empfohlen, Eigenschaften in das Modell einzuschließen, die Fremdschlüsseln in der Datenbank zugeordnet werden. Wenn Fremdschlüsseleigenschaften einbezogen wurden, können Sie durch das Ändern des Fremdschlüsselwerts für ein abhängiges Objekt eine Beziehung erstellen oder ändern. Diese Art von Zuordnung wird Fremdschlüsselzuordnung genannt. Die Verwendung von Fremdschlüsseln ist bei der Arbeit mit getrennten Entitäten noch wichtiger. Beachten Sie, dass bei der Arbeit mit 1-zu-1 oder 1-zu-0.. 1 Beziehungen gibt es keine separate Fremdschlüsselspalte, die Primärschlüsseleigenschaft fungiert als Fremdschlüssel und ist immer im Modell enthalten.
+Es wird empfohlen, Eigenschaften in das Modell einzuschließen, die Fremdschlüsseln in der Datenbank zugeordnet werden. Wenn Fremdschlüsseleigenschaften einbezogen wurden, können Sie durch das Ändern des Fremdschlüsselwerts für ein abhängiges Objekt eine Beziehung erstellen oder ändern. Diese Art von Zuordnung wird Fremdschlüsselzuordnung genannt. Die Verwendung von Fremdschlüsseln ist noch wichtiger, wenn Sie mit getrennten Entitäten arbeiten. Beachten Sie, dass bei der Arbeit mit 1-zu-1 oder 1-zu-0. 1 Beziehungen, es gibt keine separate Fremdschlüssel Spalte, die Primärschlüssel Eigenschaft fungiert als Fremdschlüssel und ist immer im Modell enthalten.
 
-Wenn Fremdschlüsselspalten nicht im Modell enthalten sind, werden die Zuordnungsinformationen als unabhängiges Objekt verwaltet. Beziehungen werden über Objektverweise anstelle von Fremdschlüsseleigenschaften nachverfolgt. Diese Art von Zuordnung wird als *unabhängige Zuordnung*bezeichnet. Die häufigste Möglichkeit zum Ändern einer *unabhängigen Zuordnung* besteht darin, die Navigationseigenschaften zu ändern, die für jede Entität generiert werden, die an der Zuordnung teilnimmt.
+Wenn Fremdschlüssel Spalten nicht im Modell enthalten sind, werden die Zuordnungs Informationen als unabhängiges Objekt verwaltet. Beziehungen werden über Objekt Verweise anstelle von Fremdschlüssel Eigenschaften nachverfolgt. Diese Art von Zuordnung wird als *unabhängige*Zuordnung bezeichnet. Die gängigste Methode zum Ändern einer *unabhängigen* Zuordnung besteht darin, die Navigations Eigenschaften zu ändern, die für jede Entität generiert werden, die an der Zuordnung teilnimmt.
 
-Sie können wahlweise einen oder beide Zuordnungstypen im Modell verwenden. Wenn Sie jedoch über eine reine N:n-Beziehung verfügen, die durch eine Join-Tabelle verbunden ist, die nur Fremdschlüssel enthält, verwendet der EF eine unabhängige Zuordnung, um eine solche n:n-Beziehung zu verwalten.   
+Sie können wahlweise einen oder beide Zuordnungstypen im Modell verwenden. Wenn Sie jedoch über eine reine m:n-Beziehung verfügen, die durch eine Verknüpfungs Tabelle verbunden ist, die nur Fremdschlüssel enthält, verwendet das EF eine unabhängige Zuordnung, um eine m:n-Beziehung zu verwalten.   
 
-Die folgende Abbildung zeigt ein konzeptionelles Modell, das mit dem Entity Framework Designer erstellt wurde. Das Modell enthält zwei Entitäten, die an einer 1:n-Beziehung beteiligt sind. Beide Entitäten verfügen über Navigationseigenschaften. **Kurs** ist die abhängige Entität und hat die **DepartmentID** Fremdschlüsseleigenschaft definiert.
+Die folgende Abbildung zeigt ein konzeptionelles Modell, das mit dem Entity Framework Designer erstellt wurde. Das Modell enthält zwei Entitäten, die an einer 1: n-Beziehung beteiligt sind. Beide Entitäten verfügen über Navigations Eigenschaften. **Course** ist die abhängige Entität, und die Eigenschaft " **DepartmentID** Foreign Key" ist definiert.
 
-![Abteilungs- und Kurstabellen mit Navigationseigenschaften](~/ef6/media/relationshipefdesigner.png)
+![Abteilungs-und Kurs Tabellen mit Navigations Eigenschaften](~/ef6/media/relationshipefdesigner.png)
 
-Der folgende Codeausschnitt zeigt dasselbe Modell, das mit Code First erstellt wurde.
+Der folgende Code Ausschnitt zeigt das gleiche Modell, das mit Code First erstellt wurde.
 
 ``` csharp
 public class Course
@@ -63,55 +63,55 @@ public class Department
 }
 ```
 
-## <a name="configuring-or-mapping-relationships"></a>Konfigurieren oder Zuordnen von Beziehungen
+## <a name="configuring-or-mapping-relationships"></a>Konfigurieren oder Mapping von Beziehungen
 
-Der Rest dieser Seite behandelt den Zugriff auf und die Bearbeitung von Daten mithilfe von Beziehungen. Informationen zum Einrichten von Beziehungen in Ihrem Modell finden Sie auf den folgenden Seiten.
+Im restlichen Abschnitt wird erläutert, wie Sie mithilfe von Beziehungen auf Daten zugreifen und diese bearbeiten. Informationen zum Einrichten von Beziehungen in Ihrem Modell finden Sie auf den folgenden Seiten.
 
--   Informationen zum Konfigurieren von Beziehungen in Code First finden Sie unter [Datenanmerkungen](~/ef6/modeling/code-first/data-annotations.md) und [Fluent API – Beziehungen](~/ef6/modeling/code-first/fluent/relationships.md).
+-   Informationen zum Konfigurieren von Beziehungen in Code First finden Sie unter [Daten Anmerkungen](~/ef6/modeling/code-first/data-annotations.md) und [fließende API-–-Beziehungen](~/ef6/modeling/code-first/fluent/relationships.md).
 -   Informationen zum Konfigurieren von Beziehungen mit dem Entity Framework Designer finden Sie unter [Beziehungen mit dem EF-Designer](~/ef6/modeling/designer/relationships.md).
 
 ## <a name="creating-and-modifying-relationships"></a>Erstellen und Ändern von Beziehungen
 
-In einer *Fremdschlüsselzuordnung*ändert sich beim Ändern der Beziehung `EntityState.Unchanged` der Status `EntityState.Modified`eines abhängigen Objekts mit einem Zustand in . In einer unabhängigen Beziehung wird durch Ändern der Beziehung der Status des abhängigen Objekts nicht aktualisiert.
+Wenn Sie in einer *Fremdschlüssel*Zuordnung die Beziehung ändern, wird der Status eines abhängigen Objekts mit einem- `EntityState.Unchanged` Zustand in geändert `EntityState.Modified` . In einer unabhängigen Beziehung wird durch das Ändern der Beziehung der Zustand des abhängigen Objekts nicht aktualisiert.
 
-Die folgenden Beispiele zeigen, wie Sie die Fremdschlüsseleigenschaften und Navigationseigenschaften verwenden, um die zugehörigen Objekte zuzuordnen. Bei Fremdschlüsselzuordnungen können Sie entweder eine Methode zum Ändern, Erstellen oder Ändern von Beziehungen verwenden. Bei unabhängigen Zuordnungen können Sie die Fremdschlüsseleigenschaft nicht verwenden.
+In den folgenden Beispielen wird gezeigt, wie die Fremdschlüssel Eigenschaften und Navigations Eigenschaften verwendet werden, um die zugehörigen Objekte zuzuordnen. Mit Fremdschlüssel Zuordnungen können Sie eine der beiden Methoden verwenden, um Beziehungen zu ändern, zu erstellen oder zu ändern. Bei unabhängigen Zuordnungen können Sie die Fremdschlüsseleigenschaft nicht verwenden.
 
-- Durch Zuweisen eines neuen Werts zu einer Fremdschlüsseleigenschaft, wie im folgenden Beispiel.  
+- Durch Zuweisen eines neuen Werts zu einer Fremdschlüssel Eigenschaft, wie im folgenden Beispiel gezeigt.  
   ``` csharp
   course.DepartmentID = newCourse.DepartmentID;
   ```
 
-- Der folgende Code entfernt eine Beziehung, indem der Fremdschlüssel auf **null**gesetzt wird. Beachten Sie, dass die Fremdschlüsseleigenschaft nullierbar sein muss.  
+- Mit dem folgenden Code wird eine Beziehung entfernt, indem der Fremdschlüssel auf **null**festgelegt wird. Beachten Sie, dass die Fremdschlüssel Eigenschaft NULL-Werte zulassen muss.  
   ``` csharp
   course.DepartmentID = null;
   ```
 
   >[!NOTE]
-  > Wenn sich der Verweis im hinzugefügten Zustand befindet (in diesem Beispiel das Kursobjekt), wird die Referenznavigationseigenschaft erst dann mit den Schlüsselwerten eines neuen Objekts synchronisiert, wenn SaveChanges aufgerufen wird. Es findet keine Synchronisierung statt, da der Objektkontext erst dann permanente Schlüssel für hinzugefügte Objekte enthält, wenn diese gespeichert werden. Wenn neue Objekte vollständig synchronisiert werden müssen, sobald Sie die Beziehung festlegen, verwenden Sie eine der folgenden Methoden.*
+  > Wenn sich der Verweis im hinzugefügten Zustand befindet (in diesem Beispiel das Kurs Objekt), wird die Verweis Navigations Eigenschaft nicht mit den Schlüsselwerten eines neuen Objekts synchronisiert, bis SaveChanges aufgerufen wird. Es findet keine Synchronisierung statt, da der Objektkontext erst dann permanente Schlüssel für hinzugefügte Objekte enthält, wenn diese gespeichert werden. Wenn neue Objekte vollständig synchronisiert werden müssen, sobald Sie die Beziehung festgelegt haben, verwenden Sie eine der folgenden Methoden. *
 
-- Durch das Zuweisen einer Navigationseigenschaft zu einem neuen Objekt. Der folgende Code erstellt eine Beziehung `department`zwischen einem Kurs und einer . Wenn die Objekte dem Kontext `course` zugeordnet sind, `department.Courses` wird die auch der Auflistung `course` hinzugefügt, und die entsprechende Fremdschlüsseleigenschaft für das Objekt wird auf den Schlüsseleigenschaftswert der Abteilung festgelegt.  
+- Durch das Zuweisen einer Navigationseigenschaft zu einem neuen Objekt. Mit dem folgenden Code wird eine Beziehung zwischen einem Kurs und einem erstellt `department` . Wenn die Objekte an den Kontext angefügt werden, `course` wird auch der-Auflistung hinzugefügt `department.Courses` , und die entsprechende Fremdschlüssel Eigenschaft für das- `course` Objekt wird auf den Schlüssel Eigenschafts Wert der Abteilung festgelegt.  
   ``` csharp
   course.Department = department;
   ```
 
-- Um die Beziehung zu löschen, `null`legen Sie die Navigationseigenschaft auf . Wenn Sie mit Entity Framework arbeiten, das auf .NET 4.0 basiert, muss das zugehörige Ende geladen werden, bevor Sie es auf null setzen. Beispiel:   
+- Legen Sie die-Navigations Eigenschaft auf fest, um die Beziehung zu löschen `null` . Wenn Sie mit Entity Framework arbeiten, die auf .NET 4,0 basiert, muss das verknüpfte Ende geladen werden, bevor Sie es auf NULL festlegen. Beispiel:   
   ``` csharp
   context.Entry(course).Reference(c => c.Department).Load();
   course.Department = null;
   ```
 
-  Beginnend mit Entity Framework 5.0, das auf .NET 4.5 basiert, können Sie die Beziehung auf null festlegen, ohne das zugehörige Ende zu laden. Sie können den aktuellen Wert auch mit der folgenden Methode auf NULL festlegen.   
+  Beginnend mit Entity Framework 5,0, das auf .NET 4,5 basiert, können Sie die Beziehung auf NULL festlegen, ohne das verknüpfte Ende zu laden. Sie können den aktuellen Wert auch mit der folgenden Methode auf NULL festlegen.   
   ``` csharp
   context.Entry(course).Reference(c => c.Department).CurrentValue = null;
   ```
 
-- Durch das Löschen eines Objekts aus einer Entitätsauflistung oder das Hinzufügen eines Objekts zu einer Entitätsauflistung. Sie können der `Course` `department.Courses` Auflistung z. B. ein Objekt vom Typ hinzufügen. Dieser Vorgang erstellt eine **course** Beziehung zwischen `department`einem bestimmten Kurs und einem bestimmten . Wenn die Objekte dem Kontext zugeordnet sind, werden der Abteilungsverweis und die `department`Fremdschlüsseleigenschaft im **Kursobjekt** auf das entsprechende festgelegt.  
+- Durch das Löschen eines Objekts aus einer Entitätsauflistung oder das Hinzufügen eines Objekts zu einer Entitätsauflistung. Beispielsweise können Sie der Auflistung ein Objekt vom Typ hinzufügen `Course` `department.Courses` . Mit diesem Vorgang wird eine Beziehung zwischen einem bestimmten **Kurs** und einem bestimmten erstellt `department` . Wenn die Objekte an den Kontext angefügt werden, werden der Abteilungs Verweis und die Fremdschlüssel Eigenschaft des **Kurs** Objekts auf den entsprechenden festgelegt `department` .  
   ``` csharp
   department.Courses.Add(newCourse);
   ```
 
-- Mithilfe der `ChangeRelationshipState` Methode wird der Status der angegebenen Beziehung zwischen zwei Entitätsobjekten geändert. Diese Methode wird am häufigsten bei der Arbeit mit N-Tier-Anwendungen und einer *unabhängigen Zuordnung* verwendet (sie kann nicht mit einer Fremdschlüsselzuordnung verwendet werden). Um diese Methode verwenden zu können, müssen Sie auch auf `ObjectContext`, wie im folgenden Beispiel gezeigt, herunterdrop.  
-Im folgenden Beispiel besteht eine n:n-Beziehung zwischen Kursleitern und Kursen. Wenn `ChangeRelationshipState` Sie die `EntityState.Added` Methode aufrufen `SchoolContext` und den Parameter übergeben, wird die seither darüber informiert, dass eine Beziehung zwischen den beiden Objekten hinzugefügt wurde:
+- Mithilfe der- `ChangeRelationshipState` Methode können Sie den Zustand der angegebenen Beziehung zwischen zwei Entitäts Objekten ändern. Diese Methode wird am häufigsten bei der Arbeit mit N-Tier-Anwendungen und einer *unabhängigen* Zuordnung verwendet (Sie kann nicht mit einer Fremdschlüssel Zuordnung verwendet werden). Um diese Methode verwenden zu können, müssen Sie auch auf festlegen `ObjectContext` , wie im folgenden Beispiel gezeigt.  
+Im folgenden Beispiel gibt es eine m:n-Beziehung zwischen Dozenten und Kursen. Durch Aufrufen der `ChangeRelationshipState` -Methode und übergeben des- `EntityState.Added` Parameters weiß das, `SchoolContext` dass eine Beziehung zwischen den beiden-Objekten hinzugefügt wurde:
   ``` csharp
 
   ((IObjectContextAdapter)context).ObjectContext.
@@ -119,7 +119,7 @@ Im folgenden Beispiel besteht eine n:n-Beziehung zwischen Kursleitern und Kursen
     ChangeRelationshipState(course, instructor, c => c.Instructor, EntityState.Added);
   ```
 
-  Beachten Sie, dass Sie beim Aktualisieren (nicht nur Hinzufügen) einer Beziehung die alte Beziehung löschen müssen, nachdem Sie die neue Beziehung hinzugefügt haben:
+  Beachten Sie Folgendes: Wenn Sie eine Beziehung aktualisieren (nicht nur hinzufügen), müssen Sie die alte Beziehung löschen, nachdem Sie die neue Beziehung hinzugefügt haben:
 
   ``` csharp
   ((IObjectContextAdapter)context).ObjectContext.
@@ -127,11 +127,11 @@ Im folgenden Beispiel besteht eine n:n-Beziehung zwischen Kursleitern und Kursen
     ChangeRelationshipState(course, oldInstructor, c => c.Instructor, EntityState.Deleted);
   ```
 
-## <a name="synchronizing-the-changes-between-the-foreign-keys-and-navigation-properties"></a>Synchronisieren der Änderungen zwischen fremdschlüsseln und Navigationseigenschaften
+## <a name="synchronizing-the-changes-between-the-foreign-keys-and-navigation-properties"></a>Synchronisieren der Änderungen zwischen den Fremdschlüsseln und den Navigations Eigenschaften
 
-Wenn Sie die Beziehung der dem Kontext zugeordneten Objekte mithilfe einer der oben beschriebenen Methoden ändern, muss Entity Framework Fremdschlüssel, Verweise und Auflistungen synchron halten. Entity Framework verwaltet diese Synchronisierung (auch als Beziehungsfixierung bezeichnet) für die POCO-Entitäten mit Proxys automatisch. Weitere Informationen finden Sie unter [Arbeiten mit Proxys](~/ef6/fundamentals/proxies.md).
+Wenn Sie die Beziehung der Objekte ändern, die mit einer der oben beschriebenen Methoden an den Kontext angefügt sind, müssen Entity Framework Fremdschlüssel, Verweise und Auflistungen synchron halten. Entity Framework diese Synchronisierung (auch als Beziehungs Korrektur bezeichnet) für die poco-Entitäten mit Proxys automatisch verwaltet. Weitere Informationen finden Sie unter [Arbeiten mit](~/ef6/fundamentals/proxies.md)Proxys.
 
-Wenn Sie POCO-Entitäten ohne Proxys verwenden, müssen Sie sicherstellen, dass die **DetectChanges-Methode** aufgerufen wird, um die zugehörigen Objekte im Kontext zu synchronisieren. Beachten Sie, dass die folgenden APIs automatisch einen **DetectChanges-Aufruf** auslösen.
+Wenn Sie poco-Entitäten ohne Proxys verwenden, müssen Sie sicherstellen, dass die **DetectChanges** -Methode aufgerufen wird, um die zugehörigen Objekte im Kontext zu synchronisieren. Beachten Sie, dass die folgenden APIs automatisch einen **DetectChanges** -Befehl auslöst.
 
 -   `DbSet.Add`
 -   `DbSet.AddRange`
@@ -146,34 +146,34 @@ Wenn Sie POCO-Entitäten ohne Proxys verwenden, müssen Sie sicherstellen, dass 
 -   `DbChangeTracker.Entries`
 -   Ausführen einer LINQ-Abfrage für eine`DbSet`
 
-## <a name="loading-related-objects"></a>Laden verwandter Objekte
+## <a name="loading-related-objects"></a>Zugehörige Objekte werden geladen
 
-In Entity Framework verwenden Sie häufig Navigationseigenschaften, um Entitäten zu laden, die mit der zurückgegebenen Entität durch die definierte Zuordnung verknüpft sind. Weitere Informationen finden Sie unter [Laden verwandter Objekte](~/ef6/querying/related-data.md).
+In Entity Framework Sie häufig Navigations Eigenschaften verwenden, um Entitäten zu laden, die mit der zurückgegebenen Entität von der definierten Zuordnung verknüpft sind. Weitere Informationen finden Sie unter [Laden verwandter Objekte](~/ef6/querying/related-data.md).
 
 > [!NOTE]
 > Wenn Sie in einer Fremdschlüsselzuordnung ein verknüpftes Ende eines abhängigen Objekts laden, wird das verknüpfte Objekt auf der Grundlage des Fremdschlüsselwerts des abhängigen Elements geladen, der sich gerade im Arbeitsspeicher befindet:
 
 ``` csharp
     // Get the course where currently DepartmentID = 2.
-    Course course2 = context.Courses.First(c => c.DepartmentID == 2);
+    Course course = context.Courses.First(c => c.DepartmentID == 2);
 
     // Use DepartmentID foreign key property
     // to change the association.
-    course2.DepartmentID = 3;
+    course.DepartmentID = 3;
 
     // Load the related Department where DepartmentID = 3
     context.Entry(course).Reference(c => c.Department).Load();
 ```
 
-In einer unabhängigen Zuordnung wird das verknüpfte Ende eines abhängigen Objekts auf der Grundlage des Fremdschlüsselwerts abgefragt, der sich gerade in der Datenbank befindet. Wenn die Beziehung jedoch geändert wurde und die Referenzeigenschaft für das abhängige Objekt auf ein anderes Prinzipalobjekt verweist, das im Objektkontext geladen wird, versucht Entity Framework, eine Beziehung zu erstellen, wie sie auf dem Client definiert ist.
+In einer unabhängigen Zuordnung wird das verknüpfte Ende eines abhängigen Objekts auf der Grundlage des Fremdschlüsselwerts abgefragt, der sich gerade in der Datenbank befindet. Wenn jedoch die Beziehung geändert wurde und die Verweis Eigenschaft des abhängigen Objekts auf ein anderes Prinzipal Objekt verweist, das in den Objekt Kontext geladen wird, wird Entity Framework versucht, eine Beziehung zu erstellen, die auf dem Client definiert ist.
 
 ## <a name="managing-concurrency"></a>Verwalten von Nebenläufigkeit
 
-In Fremdschlüssel- und unabhängigen Zuordnungen basieren Parallelitätsprüfungen auf den Entitätsschlüsseln und anderen Entitätseigenschaften, die im Modell definiert sind. Wenn Sie den EF-Designer zum `ConcurrencyMode` Erstellen eines Modells verwenden, legen Sie das Attribut auf **"Fix"** fest, um anzugeben, dass die Eigenschaft auf Parallelität überprüft werden soll. Wenn Sie Code First zum Definieren `ConcurrencyCheck` eines Modells verwenden, verwenden Sie die Anmerkung für Eigenschaften, die auf Parallelität überprüft werden sollen. Wenn Sie mit Code First `TimeStamp` arbeiten, können Sie auch die Anmerkung verwenden, um anzugeben, dass die Eigenschaft auf Parallelität überprüft werden soll. Sie können nur eine Timestamp-Eigenschaft in einer bestimmten Klasse haben. Code First ordnet diese Eigenschaft einem nicht NULL-fähigen Feld in der Datenbank zu.
+Sowohl in Fremdschlüssel-als auch in unabhängigen Zuordnungen basieren Parallelitäts Überprüfungen auf den Entitäts Schlüsseln und anderen Entitäts Eigenschaften, die im Modell definiert sind. Wenn Sie den EF-Designer verwenden, um ein Modell zu erstellen, legen Sie das- `ConcurrencyMode` Attribut auf **fest** , um anzugeben, dass die-Eigenschaft auf Parallelität geprüft werden soll. Wenn Sie Code First verwenden, um ein Modell zu definieren, verwenden Sie die-Anmerkung für Eigenschaften, die auf Parallelität `ConcurrencyCheck` geprüft werden sollen. Wenn Sie mit Code First arbeiten, können Sie auch die-Anmerkung verwenden `TimeStamp` , um anzugeben, dass die-Eigenschaft auf Parallelität geprüft werden soll. In einer bestimmten Klasse kann nur eine Zeitstempel-Eigenschaft vorhanden sein. Code First ordnet diese Eigenschaft einem Feld, das keine NULL-Werte zulässt, in der Datenbank zu.
 
-Es wird empfohlen, die Fremdschlüsselzuordnung immer zu verwenden, wenn Sie mit Entitäten arbeiten, die an der Parallelitätsprüfung und -abwicklung beteiligt sind.
+Es wird empfohlen, bei der Arbeit mit Entitäten, die an der Parallelitäts Überprüfung und-Auflösung beteiligt sind, stets die Fremdschlüssel Zuordnung zu verwenden.
 
-Weitere Informationen finden Sie [unter Behandeln von Parallelitätskonflikten](~/ef6/saving/concurrency.md).
+Weitere Informationen finden Sie unter [behandeln](~/ef6/saving/concurrency.md)von Parallelitäts Konflikten.
 
 ## <a name="working-with-overlapping-keys"></a>Arbeiten mit überlappenden Schlüsseln
 
