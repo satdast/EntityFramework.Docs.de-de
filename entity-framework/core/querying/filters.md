@@ -3,12 +3,12 @@ title: 'Globale Abfragefilter: EF Core'
 author: anpete
 ms.date: 11/03/2017
 uid: core/querying/filters
-ms.openlocfilehash: 9262ff7970b0502945480c673315071cbc3f44b9
-ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
+ms.openlocfilehash: f6c59bcbab31edcbed22079a1320c060ce08c6f7
+ms.sourcegitcommit: 92d54fe3702e0c92e198334da22bacb42e9842b1
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "78413762"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84664129"
 ---
 # <a name="global-query-filters"></a>Globale Abfragefilter
 
@@ -25,7 +25,7 @@ Globale Abfragefilter sind LINQ-Abfrageprädikate (ein boolescher Ausdruck, der 
 Im folgenden Beispiel wird in einem einfachen Blogmodell dargestellt, wie globale Abfragefilter zum Implementieren des Abfrageverhaltens für das vorläufige Löschen und die Mehrinstanzenfähigkeit verwendet werden.
 
 > [!TIP]
-> Das in diesem Artikel verwendete [Beispiel](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/QueryFilters) finden Sie auf GitHub.
+> Sie können sich auf GitHub ein [Beispiel mit mehreren Mandanten](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/QueryFilters) und [Beispiele mit Navigationselementen](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/QueryFiltersNavigations) ansehen. 
 
 Definieren Sie zunächst die Entitäten:
 
@@ -44,6 +44,74 @@ Die Prädikatausdrücke, die an _HasQueryFilter_ weitergegeben werden, werden nu
 
 > [!NOTE]
 > Es ist derzeit nicht möglich, mehrere Abfragefilter für dieselbe Entität zu definieren, nur der letzte wird angewendet. Mithilfe des logischen _AND_-Operators ([`&&` in C#](https://docs.microsoft.com/dotnet/csharp/language-reference/operators/boolean-logical-operators#conditional-logical-and-operator-)) können jedoch einen einzelnen Filter mit mehreren Bedingungen definieren.
+
+## <a name="use-of-navigations"></a>Verwenden von Navigationselementen
+
+Navigationselemente können beim Definieren lokaler Abfragefilter verwendet werden. Diese werden rekursiv angewendet: Wenn Navigationselemente in Abfragefiltern übersetzt werden, werden die in referenzierten Entitäten definierten Abfragefilter ebenfalls angewendet, wodurch möglicherweise weitere Navigationselemente hinzugefügt werden.
+
+> [!NOTE]
+> Derzeit ermittelt EF Core keine Zyklen in globalen Abfragefilterdefinitionen. Daher sollten Sie bei der Definition vorsichtig vorgehen. Wenn diese fehlerhaft angegeben wird, können Endlosschleifen bei der Abfrageübersetzung auftreten.
+
+## <a name="accessing-entity-with-query-filter-using-reqiured-navigation"></a>Zugreifen auf Entitäten mit Abfragefilter mithilfe erforderlicher Navigationselemente
+
+> [!CAUTION]
+> Die Verwendung erforderlicher Navigationselemente für den Zugriff auf eine Entität mit einem definierten globalen Abfragefilter kann zu unerwarteten Ergebnissen führen. 
+
+Die erforderlichen Navigationselemente erwarten, dass die zugehörige Entität immer vorhanden ist. Wenn erforderliche verwandte Entitäten vom Abfragefilter herausgefiltert werden, könnte die übergeordnete Entität einen unerwarteten Status aufweisen. Dies kann dazu führen, dass weniger Elemente als erwartet zurückgegeben werden. 
+
+Zur Veranschaulichung dieses Problems können die oben angegebenen Entitäten `Blog` und `Post` mit der _OnModelCreating_-Methode verwendet werden:
+
+```csharp
+protected override void OnModelCreating(ModelBuilder modelBuilder)
+{
+    modelBuilder.Entity<Blog>().HasMany(b => b.Posts).WithOne(p => p.Blog).IsRequired();
+    modelBuilder.Entity<Blog>().HasQueryFilter(b => b.Url.Contains("fish"));
+}
+```
+
+Das Modell kann mit den folgenden Daten eingerichtet werden:
+
+[!code-csharp[Main](../../../samples/core/QueryFiltersNavigations/Program.cs#SeedData)]
+
+Das Problem tritt auf, wenn zwei Abfragen ausgeführt werden:
+
+[!code-csharp[Main](../../../samples/core/QueryFiltersNavigations/Program.cs#Queries)]
+
+Bei diesem Setup gibt die erste Abfrage alle sechs `Post`-Anfragen zurück. Die zweite Abfrage gibt jedoch nur drei zurück. Das liegt daran, dass die _Include_-Methode in der zweiten Abfrage die zugehörigen `Blog`-Entitäten lädt. Das die Navigation zwischen `Blog` und `Post` erforderlich ist, nutzt EF Core `INNER JOIN` beim Erstellen der Abfrage:
+
+```SQL
+SELECT [p].[PostId], [p].[BlogId], [p].[Content], [p].[IsDeleted], [p].[Title], [t].[BlogId], [t].[Name], [t].[Url]
+FROM [Post] AS [p]
+INNER JOIN (
+    SELECT [b].[BlogId], [b].[Name], [b].[Url]
+    FROM [Blogs] AS [b]
+    WHERE CHARINDEX(N'fish', [b].[Url]) > 0
+) AS [t] ON [p].[BlogId] = [t].[BlogId]
+```
+
+Bei Verwendung von `INNER JOIN` werden alle `Post`-Vorgänge herausgefiltert, deren zugehörigen `Blog`-Entitäten von einem globalen Abfragefilter entfernt wurden. 
+
+Dieses Problem können Sie mithilfe optionaler Navigationselemente anstelle erforderlicher umgehen. Auf diese Weise bleibt die erste Abfrage unverändert, die zweite Abfrage generiert nun jedoch `LEFT JOIN` und gibt sechs Ergebnisse zurück.
+
+```csharp
+protected override void OnModelCreating(ModelBuilder modelBuilder)
+{
+    modelBuilder.Entity<Blog>().HasMany(b => b.Posts).WithOne(p => p.Blog).IsRequired(false);
+    modelBuilder.Entity<Blog>().HasQueryFilter(b => b.Url.Contains("fish"));
+}
+```
+
+Der alternative Ansatz besteht darin, konsistente Filter für die beiden Entitäten `Blog` und `Post` festzulegen.
+Auf diese Weise werden entsprechende Filter auf `Blog` und `Post` angewendet. `Post`-Entitäten, die einen unerwarteten Status aufweisen könnten, werden entfernt und beide Abfragen geben drei Ergebnisse zurück. 
+
+```csharp
+protected override void OnModelCreating(ModelBuilder modelBuilder)
+{
+    modelBuilder.Entity<Blog>().HasMany(b => b.Posts).WithOne(p => p.Blog).IsRequired();
+    modelBuilder.Entity<Blog>().HasQueryFilter(b => b.Url.Contains("fish"));
+    modelBuilder.Entity<Post>().HasQueryFilter(p => p.Blog.Url.Contains("fish"));
+}
+```
 
 ## <a name="disabling-filters"></a>Deaktivieren von Filtern
 

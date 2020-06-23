@@ -2,14 +2,14 @@
 title: Neuerungen in EF Core 5.0
 description: Übersicht über neue Features in EF Core 5.0
 author: ajcvickers
-ms.date: 05/11/2020
+ms.date: 06/02/2020
 uid: core/what-is-new/ef-core-5.0/whatsnew.md
-ms.openlocfilehash: fcb2eb8df99a06eaf3459835347a4027a363b86b
-ms.sourcegitcommit: 59e3d5ce7dfb284457cf1c991091683b2d1afe9d
+ms.openlocfilehash: 45d851a4b08a26dda0c24e20c79f42964fa4fae4
+ms.sourcegitcommit: 1f0f93c66b2b50e03fcbed90260e94faa0279c46
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/20/2020
-ms.locfileid: "83672853"
+ms.lasthandoff: 06/04/2020
+ms.locfileid: "84418939"
 ---
 # <a name="whats-new-in-ef-core-50"></a>Neuerungen in EF Core 5.0
 
@@ -20,6 +20,117 @@ Auf dieser Seite wird der [Plan für EF Core 5.0](plan.md) nicht erneut aufgef
 Der Plan beschreibt die allgemeinen Themen für EF Core 5.0 einschließlich sämtlicher Features, die wir vor Auslieferung des finalen Releases integrieren möchten.
 
 Wir werden an dieser Stelle Links zur offiziellen Dokumentation einfügen, sobald diese veröffentlicht ist.
+
+## <a name="preview-5"></a>Preview 5
+
+### <a name="database-collations"></a>Datenbanksortierungen
+
+Die Standardsortierung einer Datenbank kann nun im EF-Modell angegeben werden.
+Diese durchläuft generierte Migrationen, um die Sortierung beim Erstellen der Datenbank festzulegen.
+Zum Beispiel:
+
+```CSharp
+modelBuilder.UseCollation("German_PhoneBook_CI_AS");
+```
+
+Die Migrationen generieren dann Folgendes, um die Datenbank in SQL Server zu erstellen:
+
+```sql
+CREATE DATABASE [Test]
+COLLATE German_PhoneBook_CI_AS;
+```
+
+Die Sortierung für spezifische Datenbankspalten kann ebenfalls angegeben werden.
+Zum Beispiel:
+
+```CSharp
+ modelBuilder
+     .Entity<User>()
+     .Property(e => e.Name)
+     .UseCollation("German_PhoneBook_CI_AS");
+```
+
+Für diejenigen, die keine Migrationen verwenden, wird für Sortierungen nun ein Reverse Engineering von der Datenbank aus durchgeführt, wenn der Gerüstbau für eine DbContext-Instanz durchgeführt wird.
+
+Schließlich lässt `EF.Functions.Collate()` Ad-hoc-Abfragen mit verschiedenen Sortierungen zu.
+Zum Beispiel:
+
+```CSharp
+context.Users.Single(e => EF.Functions.Collate(e.Name, "French_CI_AS") == "Jean-Michel Jarre");
+```
+
+Dadurch wird die folgende Abfrage für SQL Server generiert:
+
+```sql
+SELECT TOP(2) [u].[Id], [u].[Name]
+FROM [Users] AS [u]
+WHERE [u].[Name] COLLATE French_CI_AS = N'Jean-Michel Jarre'
+```
+
+Beachten Sie, dass Ad-Hoc-Sortierungen mit Bedacht verwendet werden sollten, da sie sich negativ auf die Datenbankleistung auswirken können.
+
+Die Dokumentation finden Sie im [Issue 2273](https://github.com/dotnet/EntityFramework.Docs/issues/2273).
+
+### <a name="flow-arguments-into-idesigntimedbcontextfactory"></a>Übergeben von Argumenten in IDesignTimeDbContextFactory
+
+Argumente können nun über die Befehlszeile in die `CreateDbContext`-Methode von [IDesignTimeDbContextFactory](https://docs.microsoft.com/dotnet/api/microsoft.entityframeworkcore.design.idesigntimedbcontextfactory-1?view=efcore-3.1) übertragen werden. Sie können beispielsweise angeben, dass es sich um ein Entwicklungsbuild handelt, indem Sie ein benutzerdefiniertes Argument (z. B. `dev`) über die Befehlszeile übergeben:
+
+```
+dotnet ef migrations add two --verbose --dev
+``` 
+
+Dieses Argument wird dann an die Factory weitergeleitet, wo es zum Steuern der Erstellung und Initialisierung des Kontexts verwendet werden kann.
+Zum Beispiel:
+
+```CSharp
+public class MyDbContextFactory : IDesignTimeDbContextFactory<SomeDbContext>
+{
+    public SomeDbContext CreateDbContext(string[] args) 
+        => new SomeDbContext(args.Contains("--dev"));
+}
+```
+
+Die Dokumentation finden Sie im [Issue 2419](https://github.com/dotnet/EntityFramework.Docs/issues/2419).
+
+### <a name="no-tracking-queries-with-identity-resolution"></a>Abfragen ohne Nachverfolgung mit Identitätsauflösung
+
+Abfragen ohne Nachverfolgung können nun zum Durchführen von Identitätsauflösungen konfiguriert werden.
+Die folgende Abfrage erstellt beispielsweise eine neue Blog-Instanz für alle Post-Entitäten, selbst wenn alle Blog-Instanzen über denselben Primärschlüssel verfügen. 
+
+```CSharp
+context.Posts.AsNoTracking().Include(e => e.Blog).ToList();
+```
+
+Diese Abfrage kann angepasst werden, um sicherzustellen, dass nur eine einzige Blog-Instanz erstellt wird. Dies ist jedoch in der Regel ein wenig langsamer und nutzt mehr Arbeitsspeicher:
+
+```CSharp
+context.Posts.AsNoTracking().PerformIdentityResolution().Include(e => e.Blog).ToList();
+```
+
+Beachten Sie, dass dies nur für Abfragen ohne Nachverfolgung nützlich ist, weil alle Abfragen mit Nachverfolgung dieses Verhalten bereits aufweisen. Nach einer Überprüfung der API wird auch die `PerformIdentityResolution`-Syntax geändert.
+Weitere Informationen dazu finden Sie im [Issue 19877](https://github.com/dotnet/efcore/issues/19877#issuecomment-637371073).
+
+Die Dokumentation finden Sie im [Issue 1895](https://github.com/dotnet/EntityFramework.Docs/issues/1895).
+
+### <a name="stored-persisted-computed-columns"></a>Gespeicherte (persistente) berechnete Spalten
+
+Die meisten Datenbanken lassen zu, dass berechnete Spaltenwerte nach der Berechnung gespeichert werden.
+Zwar wird dadurch Speicherplatz belegt, jedoch wird die berechnete Spalte nur einmal pro Update berechnet, anstatt jedes Mal, wenn der Wert abgerufen wird.
+Dies ermöglicht auch die Indizierung der Spalte für einige Datenbanken.
+
+EF Core 5.0 ermöglicht die Konfiguration von berechneten Spalten als gespeichert.
+Zum Beispiel:
+ 
+```CSharp
+modelBuilder
+    .Entity<User>()
+    .Property(e => e.SomethingComputed)
+    .HasComputedColumnSql("my sql", stored: true);
+```
+
+### <a name="sqlite-computed-columns"></a>Berechnete Spalten in SQLite
+
+EF Core unterstützt nun berechnete Spalten in SQLite-Datenbanken.
 
 ## <a name="preview-4"></a>Preview 4
 
@@ -50,8 +161,6 @@ modelBuilder
     .HasIndex(e => e.Name)
     .HasFillFactor(90);
 ```
-
-Die Dokumentation finden Sie im Issue [2378](https://github.com/dotnet/EntityFramework.Docs/issues/2378).
 
 ## <a name="preview-3"></a>Preview 3
 
