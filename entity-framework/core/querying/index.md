@@ -4,12 +4,12 @@ author: smitpatel
 ms.date: 10/03/2019
 ms.assetid: 7c65ec3e-46c8-48f8-8232-9e31f96c277b
 uid: core/querying/index
-ms.openlocfilehash: 0e1e50d1a3f647d65301552d0a447f9fcae81438
-ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
+ms.openlocfilehash: 82f8a2e8e78e9d82f46f2fc6ced6dd9141329a22
+ms.sourcegitcommit: ebfd3382fc583bc90f0da58e63d6e3382b30aa22
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "78413115"
+ms.lasthandoff: 06/25/2020
+ms.locfileid: "85370338"
 ---
 # <a name="querying-data"></a>Abfrage von Daten
 
@@ -28,11 +28,11 @@ Auf den folgenden Ausschnitten werden einige Beispiele für das Ausführen gäng
 
 [!code-csharp[Main](../../../samples/core/Querying/Basics/Sample.cs#LoadingSingleEntity)]
 
-## <a name="filtering"></a>Filterung
+## <a name="filtering"></a>Filtern
 
 [!code-csharp[Main](../../../samples/core/Querying/Basics/Sample.cs#Filtering)]
 
 ## <a name="further-readings"></a>Weiterführende Themen
 
 - Weitere Informationen zu [LINQ-Abfrageausdrücken](/dotnet/csharp/programming-guide/concepts/linq/basic-linq-query-operations)
-- Ausführlichere Informationen zur Verarbeitung einer Abfrage finden Sie unter [Funktionsweise von Abfragen](xref:core/querying/how-query-works).
+- Ausführlichere Informationen zur Verarbeitung einer Abfrage in EF Core finden Sie unter [Funktionsweise von Abfragen](xref:core/querying/how-query-works).

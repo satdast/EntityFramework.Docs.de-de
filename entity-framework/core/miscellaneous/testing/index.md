@@ -4,12 +4,12 @@ description: Unterschiedliche Ansätze zum Testen von Anwendungen, die EF Core v
 author: ajcvickers
 ms.date: 04/22/2020
 uid: core/miscellaneous/testing/index
-ms.openlocfilehash: a5ff85a60af1f56a0924d6fa0646195146a6827e
-ms.sourcegitcommit: 1f0f93c66b2b50e03fcbed90260e94faa0279c46
+ms.openlocfilehash: 71222f17ac4cc1b71052a2e7e916ebcedd2ae0f4
+ms.sourcegitcommit: ebfd3382fc583bc90f0da58e63d6e3382b30aa22
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/04/2020
-ms.locfileid: "84418909"
+ms.lasthandoff: 06/25/2020
+ms.locfileid: "85370538"
 ---
 # <a name="testing-code-that-uses-ef-core"></a>Testen von Code, der EF Core verwendet
 
@@ -92,7 +92,7 @@ Unter [Testen mit SQLite](xref:core/miscellaneous/testing/sqlite) finden Sie ein
 ## <a name="approach-3-the-ef-core-in-memory-database"></a>Ansatz 3: Die InMemory-Datenbank von EF Core
 
 EF Core bietet eine InMemory-Datenbank, die wir für interne Tests von EF Core selbst verwenden.
-Diese Datenbank ist im Allgemeinen **nicht als Ersatz für das Testen von Anwendungen geeignet, die EF Core verwenden**. Dies gilt insbesondere in folgenden Fällen:
+Diese Datenbank ist im Allgemeinen **nicht für das Testen von Anwendungen geeignet, die EF Core verwenden**. Dies gilt insbesondere in folgenden Fällen:
 
 * Es handelt sich nicht um eine relationale Datenbank.
 * Transaktionen werden nicht unterstützt.
