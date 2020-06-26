@@ -4,12 +4,12 @@ author: bricelam
 ms.author: bricelam
 ms.date: 11/08/2017
 uid: core/managing-schemas/migrations/providers
-ms.openlocfilehash: efe95893f7dbfc8e5c4775e86d58abb32eee3c83
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.openlocfilehash: 388829992687e626648889a47130cc61df1c0d1f
+ms.sourcegitcommit: ebfd3382fc583bc90f0da58e63d6e3382b30aa22
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78414254"
+ms.lasthandoff: 06/25/2020
+ms.locfileid: "85370617"
 ---
 # <a name="migrations-with-multiple-providers"></a>Migrationen mit mehreren Anbietern
 
@@ -68,7 +68,7 @@ Id = table.Column<int>(nullable: false)
     .Annotation("Sqlite:Autoincrement", true),
 ```
 
-Wenn Vorgänge nur auf einen Anbieter angewendet werden können (oder zwischen den Anbietern unterschiedlich sind), verwenden Sie die `ActiveProvider`-Eigenschaft, um festzustellen, welcher Anbieter aktiv ist.
+Verwenden Sie die- `ActiveProvider` Eigenschaft, um zu bestimmen, welcher Anbieter aktiv ist, wenn Vorgänge nur für einen Anbieter angewendet werden können oder sich zwischen den Anbietern unterscheiden:
 
 ``` csharp
 if (migrationBuilder.ActiveProvider == "Microsoft.EntityFrameworkCore.SqlServer")

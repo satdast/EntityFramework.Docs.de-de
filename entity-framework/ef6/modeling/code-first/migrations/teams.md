@@ -3,12 +3,12 @@ title: Code First-Migrationen in Team Umgebungen-EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 4c2d9a95-de6f-4e97-9738-c1f8043eff69
-ms.openlocfilehash: 46c22c997b8db53bb381d0b528c65733f1766849
-ms.sourcegitcommit: 387cbd8109c0fc5ce6bdc85d0dec1aed72ad4c33
+ms.openlocfilehash: 7ab66a8ec29b60bb2e0102fbca5745d352b07325
+ms.sourcegitcommit: ebfd3382fc583bc90f0da58e63d6e3382b30aa22
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/23/2020
-ms.locfileid: "82103164"
+ms.lasthandoff: 06/25/2020
+ms.locfileid: "85370408"
 ---
 # <a name="code-first-migrations-in-team-environments"></a>Code First Migrations in Team Environments (Code First-Migrationen in Teamumgebungen)
 > [!NOTE]
@@ -24,7 +24,7 @@ Bevor wir uns mit der Verwaltung von Zusammenführungs Migrationen befassen, die
 
 ### <a name="each-team-member-should-have-a-local-development-database"></a>Jedes Teammitglied sollte über eine lokale Entwicklungs Datenbank verfügen.
 
-Migrationen verwenden die ** \_ \_migrationshistory** -Tabelle, um zu speichern, welche Migrationen auf die Datenbank angewendet wurden. Wenn Sie über mehrere Entwickler verfügen, die unterschiedliche Migrationen erzeugen, während Sie versuchen, auf dieselbe Datenbank zu Zielen (und somit eine ** \_ \_migrationshistory** -Tabelle freigeben), wird die Migration sehr verwirrend.
+Migrationen verwenden die ** \_ \_ migrationshistory** -Tabelle, um zu speichern, welche Migrationen auf die Datenbank angewendet wurden. Wenn Sie über mehrere Entwickler verfügen, die unterschiedliche Migrationen erzeugen, während Sie versuchen, auf dieselbe Datenbank zu Zielen (und somit eine ** \_ \_ migrationshistory** -Tabelle freigeben), wird die Migration sehr verwirrend.
 
 Wenn Sie Teammitglieder haben, die keine Migrationen erzeugen, besteht natürlich kein Problem, dass Sie eine zentrale Entwicklungs Datenbank gemeinsam nutzen.
 
@@ -98,22 +98,22 @@ Wir verfolgen das EF-Modell und die Migrationen durch eine Reihe von Änderungen
 
 ![Startpunkt](~/ef6/media/startingpoint.png)
 
-Developer \#1 und Developer \#2 nimmt nun einige Änderungen am EF-Modell in der lokalen Codebasis vor. Entwickler \#1 fügt dem **Blog** – eine **Bewertungs** Eigenschaft hinzu und generiert eine **addrating** -Migration, um die Änderungen auf die Datenbank anzuwenden. Developer \#2 fügt dem **Blog** – eine **Readers** -Eigenschaft hinzu und generiert die entsprechende Migration von **adressadern** . Beide Entwickler führen **Update-Database**aus, um die Änderungen auf Ihre lokalen Datenbanken anzuwenden und dann die Entwicklung der Anwendung fortzusetzen.
+Developer \# 1 und Developer \# 2 nimmt nun einige Änderungen am EF-Modell in der lokalen Codebasis vor. Entwickler \# 1 fügt dem **Blog** – eine **Bewertungs** Eigenschaft hinzu und generiert eine **addrating** -Migration, um die Änderungen auf die Datenbank anzuwenden. Developer \# 2 fügt dem **Blog** – eine **Readers** -Eigenschaft hinzu und generiert die entsprechende Migration von **adressadern** . Beide Entwickler führen **Update-Database**aus, um die Änderungen auf Ihre lokalen Datenbanken anzuwenden und dann die Entwicklung der Anwendung fortzusetzen.
 
 > [!NOTE]
-> Migrationen wird ein Zeitstempel vorangestellt. Daher stellt unsere Grafik dar, dass die Migration der adressader von Developer \#2 nach der Migration von Developer \#1 erfolgt. Ob Entwickler \#1 oder \#2 die Migration zuerst generiert haben, ist kein Unterschied zu den Problemen bei der Arbeit in einem Team oder dem Verfahren zum Zusammenführen der Daten, die wir im nächsten Abschnitt betrachten werden.
+> Migrationen wird ein Zeitstempel vorangestellt. Daher stellt unsere Grafik dar, dass die Migration der adressader von Developer \# 2 nach der Migration von Developer \# 1 erfolgt. Ob Entwickler \# 1 oder \# 2 die Migration zuerst generiert haben, ist kein Unterschied zu den Problemen bei der Arbeit in einem Team oder dem Verfahren zum Zusammenführen der Daten, die wir im nächsten Abschnitt betrachten werden.
 
 ![Lokale Änderungen](~/ef6/media/localchanges.png)
 
-Es ist ein glücklicher Tag für Developer \#1, da Sie Ihre Änderungen zuerst übermitteln. Da keine andere Person eingehakt hat, weil Sie Ihr Repository synchronisiert haben, können Sie Ihre Änderungen nur übermitteln, ohne eine Zusammenführung auszuführen.
+Es ist ein glücklicher Tag für Developer \# 1, da Sie Ihre Änderungen zuerst übermitteln. Da keine andere Person eingehakt hat, weil Sie Ihr Repository synchronisiert haben, können Sie Ihre Änderungen nur übermitteln, ohne eine Zusammenführung auszuführen.
 
-![Submit (Senden)](~/ef6/media/submit.png)
+![Übermitteln](~/ef6/media/submit.png)
 
-Jetzt ist es an der Zeit \#, Entwickler 2 zu übermitteln. Sie sind nicht so glücklich. Da eine andere Person Änderungen gesendet hat, seit Sie synchronisiert wurden, müssen Sie die Änderungen abrufen und zusammenführen. Das Quell Code Verwaltungssystem kann die Änderungen wahrscheinlich auf Codeebene automatisch zusammenführen, da Sie sehr einfach sind. Der Status des lokalen \#Repository von Developer 2 nach der Synchronisierung wird in der folgenden Abbildung dargestellt. 
+Jetzt ist es an der Zeit \# , Entwickler 2 zu übermitteln. Sie sind nicht so glücklich. Da eine andere Person Änderungen gesendet hat, seit Sie synchronisiert wurden, müssen Sie die Änderungen abrufen und zusammenführen. Das Quell Code Verwaltungssystem kann die Änderungen wahrscheinlich auf Codeebene automatisch zusammenführen, da Sie sehr einfach sind. Der Status des \# lokalen Repository von Developer 2 nach der Synchronisierung wird in der folgenden Abbildung dargestellt. 
 
 ![Pull](~/ef6/media/pull.png)
 
-Auf dieser Stufe kann \#Developer 2 **Update-Database** ausführen, wodurch **die neue Migrations** Migration (die noch nicht auf die Datenbank von Developer \#2 angewendet wurde) erkannt und angewendet wird. Nun wird die Spalte **Bewertung** der Tabelle **Blogs** hinzugefügt, und die Datenbank ist mit dem Modell synchron.
+Auf dieser Stufe \# kann Developer 2 **Update-Database** ausführen, wodurch die neue Migrations **AddRating** Migration (die noch nicht auf \# die Datenbank von Developer 2 angewendet wurde) erkannt und angewendet wird. Nun wird die Spalte **Bewertung** der Tabelle **Blogs** hinzugefügt, und die Datenbank ist mit dem Modell synchron.
 
 Es gibt jedoch einige Probleme:
 
@@ -133,7 +133,7 @@ Es gibt zwei Möglichkeiten: am einfachsten ist es, eine leere Migration zu gene
 
 Bei dieser Option generieren wir lediglich eine leere Migration, um sicherzustellen, dass die aktuelle Migration die richtige Modell Momentaufnahme enthält.
 
-Diese Option kann unabhängig von der Person verwendet werden, die die letzte Migration generiert hat. In dem Beispiel, das dem Entwickler \#2 folgt, wird die Zusammenführung übernommen und die letzte Migration generiert. Diese Schritte können jedoch auch verwendet werden, wenn \#Developer 1 die letzte Migration generiert hat. Diese Schritte gelten auch, wenn mehrere Migrationen beteiligt sind – wir haben gerade zwei untersucht, um Sie einfach zu halten.
+Diese Option kann unabhängig von der Person verwendet werden, die die letzte Migration generiert hat. In dem Beispiel, das dem Entwickler \# 2 folgt, wird die Zusammenführung übernommen und die letzte Migration generiert. Diese Schritte können jedoch auch verwendet werden, wenn Developer \# 1 die letzte Migration generiert hat. Diese Schritte gelten auch, wenn mehrere Migrationen beteiligt sind – wir haben gerade zwei untersucht, um Sie einfach zu halten.
 
 Der folgende Prozess kann für diese Vorgehensweise verwendet werden, beginnend ab dem Zeitpunkt, an dem Sie wissen, dass Sie über Änderungen verfügen, die über die Quell Code Verwaltung synchronisiert werden müssen.
 
@@ -141,11 +141,11 @@ Der folgende Prozess kann für diese Vorgehensweise verwendet werden, beginnend 
 2.  Mit Quell Code Verwaltung synchronisieren.
 3.  Führen Sie **Update-Database** aus, um alle neuen Migrationen anzuwenden, die andere Entwickler eingecheckten.
     **_Hinweis:_** *Wenn Sie keine Warnungen vom Update-Database-Befehl erhalten, gab es keine neuen Migrationen von anderen Entwicklern, und es besteht keine Notwendigkeit, eine weitere Zusammenführung auszuführen.*
-4.  Ausführen von **Add- &lt;Migration\_Pick\_a&gt; Name – ignorechanges** (z. b. **Add-Migration Merge – ignorechanges**). Dadurch wird eine Migration mit allen Metadaten (einschließlich einer Momentaufnahme des aktuellen Modells) generiert, aber alle Änderungen, die erkannt werden, beim Vergleich des aktuellen Modells mit der Momentaufnahme in den letzten Migrationen werden ignoriert (was bedeutet, dass Sie eine leere **up** -und **down** -Methode erhalten).
+4.  Ausführen von **Add-Migration &lt; Pick \_ a \_ Name &gt; – ignorechanges** (z. b. **Add-Migration Merge – ignorechanges**). Dadurch wird eine Migration mit allen Metadaten (einschließlich einer Momentaufnahme des aktuellen Modells) generiert, aber alle Änderungen, die erkannt werden, beim Vergleich des aktuellen Modells mit der Momentaufnahme in den letzten Migrationen werden ignoriert (was bedeutet, dass Sie eine leere **up** -und **down** -Methode erhalten).
 5.  Führen Sie **Update-Database** aus, um die neueste Migration mit den aktualisierten Metadaten erneut anzuwenden.
 6.  Setzen Sie die Entwicklung fort, oder übermitteln Sie die Quell Code Verwaltung (nachdem Sie die Komponententests natürlich ausgeführt haben).
 
-Nach diesem Ansatz wird der lokale \#Codebasis von Developer 2 angezeigt.
+\#Nach diesem Ansatz wird der lokale Codebasis von Developer 2 angezeigt.
 
 ![Zusammenführen der Migration](~/ef6/media/mergemigration.png)
 
@@ -163,15 +163,15 @@ Der folgende Prozess kann für diese Vorgehensweise verwendet werden, beginnend 
 2.  Synchronisierung mit der Quell Code Verwaltung.
 3.  Führen Sie **Update-Database** aus, um alle neuen Migrationen anzuwenden, die andere Entwickler eingecheckten.
     **_Hinweis:_** *Wenn Sie keine Warnungen vom Update-Database-Befehl erhalten, gab es keine neuen Migrationen von anderen Entwicklern, und es besteht keine Notwendigkeit, eine weitere Zusammenführung auszuführen.*
-4.  Führen **Sie Update &lt;-Database – targetmigration\_zweite\_letzte&gt; Migration** aus (in dem Beispiel, das folgt, wäre " **Update-Database" – targetmigration addrating**). Dadurch wird die Datenbank wieder in den Zustand der zweiten letzten Migration versetzt – die die letzte Migration von der Datenbank wird tatsächlich aufgehoben.
-    **_Hinweis:_** *dieser Schritt ist erforderlich, damit die Metadaten der Migration sicher bearbeitet werden können, da die Metadaten auch in der \_ \_migrationshistorytable der Datenbank gespeichert werden. Aus diesem Grund sollten Sie diese Option nur verwenden, wenn die letzte Migration nur in der lokalen Codebasis erfolgt. Wenn die letzte Migration für andere Datenbanken angewendet wurde, müssten Sie auch ein Rollback durchführen und die letzte Migration erneut anwenden, um die Metadaten zu aktualisieren.* 
-5.  Führen **Sie den voll &lt;ständigen\_Namen\_der\_Add-\_Migration\_einschließlich\_Zeitstempel der letzten Migration** &gt; aus (in dem Beispiel, das folgt, wie etwa **Add-\_Migration 201311062215252-adressader**).
+4.  Führen Sie **Update-Database – targetmigration &lt; zweite \_ Letzte \_ Migration &gt; ** aus (in dem Beispiel, das folgt, wäre " **Update-Database" – targetmigration addrating**). Dadurch wird die Datenbank wieder in den Zustand der zweiten letzten Migration versetzt – wodurch die letzte Migration von der Datenbank deaktiviert wird.
+    **_Hinweis:_** *dieser Schritt ist erforderlich, damit die Metadaten der Migration sicher bearbeitet werden können, da die Metadaten auch in der \_ \_ migrationshistorytable der Datenbank gespeichert werden. Aus diesem Grund sollten Sie diese Option nur verwenden, wenn die letzte Migration nur in der lokalen Codebasis erfolgt. Wenn die letzte Migration für andere Datenbanken angewendet wurde, müssten Sie auch ein Rollback durchführen und die letzte Migration erneut anwenden, um die Metadaten zu aktualisieren.* 
+5.  Führen **Sie den vollständigen Namen der Add-Migration &lt; \_ \_ einschließlich \_ Zeitstempel \_ der \_ letzten \_ Migration aus** &gt; (in dem Beispiel, das folgt, wie etwa **Add-Migration 201311062215252- \_ adressader**).
     **_Hinweis:_** *Sie müssen den Zeitstempel einschließen, damit Migrationen wissen, dass Sie die vorhandene Migration bearbeiten möchten, anstatt eine neue zu Gerüstbau.*
-    Dadurch werden die Metadaten für die letzte Migration entsprechend dem aktuellen Modell aktualisiert. Wenn der Befehl abgeschlossen ist, erhalten Sie die folgende Warnung, aber genau das ist das, was Sie möchten. "*Nur der Designer Code für die Migration der\_201311062215252-adressader wurde neu gerüsteht. Verwenden Sie den Parameter "-Force", um die gesamte Migration neu zu erstellen.*
+    Dadurch werden die Metadaten für die letzte Migration entsprechend dem aktuellen Modell aktualisiert. Wenn der Befehl abgeschlossen ist, erhalten Sie die folgende Warnung, aber genau das ist das, was Sie möchten. "*Nur der Designer Code für die Migration der 201311062215252 \_ -adressader wurde neu gerüsteht. Verwenden Sie den Parameter "-Force", um die gesamte Migration neu zu erstellen.*
 6.  Führen Sie **Update-Database** aus, um die neueste Migration mit den aktualisierten Metadaten erneut anzuwenden.
 7.  Setzen Sie die Entwicklung fort, oder übermitteln Sie die Quell Code Verwaltung (nachdem Sie die Komponententests natürlich ausgeführt haben).
 
-Nach diesem Ansatz wird der lokale \#Codebasis von Developer 2 angezeigt.
+\#Nach diesem Ansatz wird der lokale Codebasis von Developer 2 angezeigt.
 
 ![Aktualisierte Metadaten](~/ef6/media/updatedmetadata.png)
 

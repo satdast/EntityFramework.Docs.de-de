@@ -5,12 +5,12 @@ ms.author: bricelam
 ms.date: 11/13/2018
 ms.assetid: 6263EF7D-4989-42E6-BDEE-45DA770342FB
 uid: core/managing-schemas/scaffolding
-ms.openlocfilehash: cb20120154101a9b92b4bf2bc06d20b1dafe88c1
-ms.sourcegitcommit: 59e3d5ce7dfb284457cf1c991091683b2d1afe9d
+ms.openlocfilehash: 2422e7455dc4ef52f0a9d3bdaebfa02f62e6d50f
+ms.sourcegitcommit: ebfd3382fc583bc90f0da58e63d6e3382b30aa22
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/20/2020
-ms.locfileid: "83672972"
+ms.lasthandoff: 06/25/2020
+ms.locfileid: "85370595"
 ---
 # <a name="reverse-engineering"></a> Reverse Engineering
 
@@ -85,11 +85,11 @@ Scaffold-DbContext ... -Tables Artist, Album
 
 ## <a name="preserving-names"></a>Beibehalten von Namen
 
-Tabellen-und Spaltennamen werden korrigiert, um die .net-Benennungs Konventionen für Typen und Eigenschaften standardmäßig besser abzugleichen. Wenn Sie den `-UseDatabaseNames` Switch in der PMC oder die `--use-database-names` Option in der CLI angeben, wird dieses Verhalten deaktiviert, sodass die ursprünglichen Datenbanknamen so weit wie möglich beibehalten werden. Ungültige .net-Bezeichner sind immer noch korrigiert, und synthetisierte Namen wie Navigations Eigenschaften entsprechen weiterhin den .net-Benennungs Konventionen.
+Tabellen-und Spaltennamen werden korrigiert, um die .net-Benennungs Konventionen für Typen und Eigenschaften standardmäßig besser abzugleichen. Wenn Sie den `-UseDatabaseNames` Switch in der PMC oder die `--use-database-names` Option in der .net Core-CLI angeben, wird dieses Verhalten deaktiviert, sodass die ursprünglichen Datenbanknamen so weit wie möglich beibehalten werden. Ungültige .net-Bezeichner sind immer noch korrigiert, und synthetisierte Namen wie Navigations Eigenschaften entsprechen weiterhin den .net-Benennungs Konventionen.
 
 ## <a name="fluent-api-or-data-annotations"></a>Fließende API oder Daten Anmerkungen
 
-Entitäts Typen werden standardmäßig mit der flüssigen API konfiguriert. Geben `-DataAnnotations` Sie (PMC) oder `--data-annotations` (CLI) an, um Daten Anmerkungen zu verwenden, sofern möglich.
+Entitäts Typen werden standardmäßig mit der flüssigen API konfiguriert. Geben `-DataAnnotations` Sie (PMC) oder `--data-annotations` (.net Core-CLI) an, um Daten Anmerkungen zu verwenden, sofern möglich.
 
 Beispielsweise wird das Gerüst mithilfe der fließenden API erstellt:
 
@@ -109,7 +109,7 @@ public string Title { get; set; }
 
 ## <a name="dbcontext-name"></a>Dbcontext-Name
 
-Der Name der dbcontext-Klasse mit dem Gerüst ist der Name der Datenbank, der standardmäßig mit dem *Kontext* versehen wird. Verwenden Sie `-Context` in der PMC und in der CLI, um eine andere anzugeben `--context` .
+Der Name der dbcontext-Klasse mit dem Gerüst ist der Name der Datenbank, der standardmäßig mit dem *Kontext* versehen wird. Um einen anderen anzugeben, verwenden Sie `-Context` in der PMC und `--context` in der .net Core-CLI.
 
 ## <a name="directories-and-namespaces"></a>Verzeichnisse und Namespaces
 
