@@ -3,12 +3,11 @@ title: 'Globale Abfragefilter: EF Core'
 author: anpete
 ms.date: 11/03/2017
 uid: core/querying/filters
-ms.openlocfilehash: f6c59bcbab31edcbed22079a1320c060ce08c6f7
-ms.sourcegitcommit: 92d54fe3702e0c92e198334da22bacb42e9842b1
-ms.translationtype: HT
+ms.openlocfilehash: 233289b0c50e15f4555b342bc654211ce04c24d3
+ms.sourcegitcommit: ebfd3382fc583bc90f0da58e63d6e3382b30aa22
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/10/2020
-ms.locfileid: "84664129"
+ms.lasthandoff: 06/25/2020
+ms.locfileid: "85370460"
 ---
 # <a name="global-query-filters"></a>Globale Abfragefilter
 
@@ -52,7 +51,7 @@ Navigationselemente können beim Definieren lokaler Abfragefilter verwendet werd
 > [!NOTE]
 > Derzeit ermittelt EF Core keine Zyklen in globalen Abfragefilterdefinitionen. Daher sollten Sie bei der Definition vorsichtig vorgehen. Wenn diese fehlerhaft angegeben wird, können Endlosschleifen bei der Abfrageübersetzung auftreten.
 
-## <a name="accessing-entity-with-query-filter-using-reqiured-navigation"></a>Zugreifen auf Entitäten mit Abfragefilter mithilfe erforderlicher Navigationselemente
+## <a name="accessing-entity-with-query-filter-using-required-navigation"></a>Zugreifen auf Entitäten mit Abfragefilter mithilfe erforderlicher Navigationselemente
 
 > [!CAUTION]
 > Die Verwendung erforderlicher Navigationselemente für den Zugriff auf eine Entität mit einem definierten globalen Abfragefilter kann zu unerwarteten Ergebnissen führen. 

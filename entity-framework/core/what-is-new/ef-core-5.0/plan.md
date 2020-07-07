@@ -1,18 +1,17 @@
 ---
 title: Plan für Entity Framework Core 5.0
 author: ajcvickers
-ms.date: 01/14/2020
-uid: core/what-is-new/ef-core-5.0/plan.md
-ms.openlocfilehash: 8b4ca32524869019c04d5a4d4d55967f68181cd7
-ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
-ms.translationtype: HT
+ms.date: 06/11/2020
+uid: core/what-is-new/ef-core-5.0/plan
+ms.openlocfilehash: 249560bc14f72fd524be91bb1670dbaf78ae6b60
+ms.sourcegitcommit: ebfd3382fc583bc90f0da58e63d6e3382b30aa22
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "80136214"
+ms.lasthandoff: 06/25/2020
+ms.locfileid: "85370577"
 ---
 # <a name="plan-for-entity-framework-core-50"></a>Plan für Entity Framework Core 5.0
 
-Wie im [Artikel zum Planungsprozess](../release-planning.md) beschrieben, haben wir aus dem Feedback der Stakeholder diesen vorläufigen Plan für EF Core 5.0 erstellt.
+Wie im [Artikel zum Planungsprozess](xref:core/what-is-new/release_planning) beschrieben, haben wir aus dem Feedback der Stakeholder diesen vorläufigen Plan für EF Core 5.0 erstellt.
 
 > [!IMPORTANT] 
 > Er befindet sich aktuell in der Entwicklung. Sein Inhalt ist nicht verbindlich. Er dient als Ausgangspunkt und wird durch neues Feedback weiterentwickelt. Es kann also sein, dass die Version 5.0 Funktionen enthalten wird, die bisher nicht geplant waren. Im Gegenzug kann es jedoch auch passieren, dass Funktionen gestrichen werden, die bisher für die Version 5.0 geplant waren.
@@ -29,13 +28,33 @@ EF Core 5.0 kann nicht auf .NET Framework ausgeführt werden.
 
 ### <a name="breaking-changes"></a>Breaking Changes
 
-EF Core 5.0 wird einige Breaking Changes enthalten. Diese werden jedoch weniger gravierende Auswirkungen haben als bei EF Core 3.0. Unser Ziel ist es, die Mehrzahl der Anwendungen zu aktualisieren, ohne dass Breaking Changes auftreten.
+EF Core 5.0 wird einige [Breaking Changes](xref:core/what-is-new/ef-core-5.0/breaking-changes) enthalten. Diese werden jedoch weniger gravierende Auswirkungen als bei EF Core 3.0 haben. Unser Ziel ist es, die Mehrzahl der Anwendungen zu aktualisieren, ohne dass Breaking Changes auftreten.
 
 Dennoch gehen wir davon, dass Datenbankanbieter auf einige Breaking Changes stoßen werden, besonders im Bereich TPT-Unterstützung. Wir gehen jedoch davon aus, dass der Arbeitsaufwand für das Aktualisieren eines Providers auf 5.0 geringer ausfällt als bei 3.0.
 
 ## <a name="themes"></a>Designs
 
 Wir haben einige wichtige Bereiche/Themen bestimmt, die die Grundlage für die großen Änderungen in EF Core 5.0 bilden.
+
+## <a name="fully-transparent-many-to-many-mapping-by-convention"></a>Vollständig transparente m:n-Zuordnung nach Konvention
+
+Leitende Entwickler: @smitpatel, @AndriySvyryd und @lajones
+
+Nachverfolgbar über [Issue 10508](https://github.com/aspnet/EntityFrameworkCore/issues/10508)
+
+T-Shirt-Größe: L
+
+Status: In Bearbeitung
+
+„m:n“ ist das am [meisten geforderte Feature](https://github.com/aspnet/EntityFrameworkCore/issues/1368) (ca. 506 Stimmen) im GitHub-Backlog.
+
+Die Unterstützung für m:n-Beziehungen kann in drei Hauptbereiche aufgeteilt werden:
+
+* Das Überspringen von Navigationseigenschaften wird im nächsten Artikel behandelt.
+* Entitätstypen für Eigenschaftenbehälter. Dank dieser Entitätstypen kann für Entitätsinstanzen ein Standard-CLR-Typ wie `Dictionary` verwendet werden. So ist für einen Entitätstyp kein expliziter CLR-Typ mehr notwendig. Nachverfolgbar über [Issue 9914](https://github.com/aspnet/EntityFrameworkCore/issues/9914)
+* Sugar für die einfache Konfiguration von m:n-Beziehungen.
+
+Nicht nur das Überspringen von Navigationseigenschaften wird unterstützt, sondern auch folgende weitere Bereiche von m:n werden in EF Core 5.0 integriert, damit Sie diese Option vollständig nutzen können.
 
 ## <a name="many-to-many-navigation-properties-aka-skip-navigations"></a>M:n-Navigationseigenschaften (auch bekannt als „Navigationseigenschaften überspringen“)
 
@@ -47,17 +66,10 @@ T-Shirt-Größe: L
 
 Status: In Bearbeitung
 
-„m:n“ ist die am [meisten geforderte Funktion](https://github.com/aspnet/EntityFrameworkCore/issues/1368) (~407 Stimmen) im GitHub-Backlog.
-
-Die Unterstützung für m:n-Beziehungen in ihrer Gesamtheit wird als [#10508](https://github.com/aspnet/EntityFrameworkCore/issues/10508) nachverfolgt. Dies kann in drei Hauptbereiche aufgeteilt werden:
-
-* Navigationseigenschaften überspringen. Dank dieser Eigenschaften kann ein Modell für Abfragen usw. verwendet werden, ohne dass ein Verweis auf die zugrunde liegende Entität „Jointabelle“ benötigt wird. ([#19003](https://github.com/aspnet/EntityFrameworkCore/issues/19003))
-* Entitätstypen für Eigenschaftenbehälter. Dank dieser Entitätstypen kann für Entitätsinstanzen ein Standard-CLR-Typ wie `Dictionary` verwendet werden. So ist für einen Entitätstyp kein expliziter CLR-Typ mehr notwendig. (Stretch für 5.0: [#9914](https://github.com/aspnet/EntityFrameworkCore/issues/9914).)
-* Sugar für die einfache Konfiguration von m:n-Beziehungen. (Stretch für 5.0.)
-
-Unserer Meinung nach liegt der Wunsch nach m:n-Unterstützung hauptsächlich daran, dass bei Geschäftslogik wie Queries bisher keine Möglichkeit besteht, die „natürlichen“ Beziehungen zu verwenden, ohne auf die Jointabelle verweisen zu müssen. Der Entitätstyp „Jointabelle“ existiert zwar noch, sollte in Geschäftslogik aber nicht mehr verwendet werden. Deshalb haben wir uns entschieden, in der Version 5.0 das Thema „Navigationseigenschaften überspringen“ anzugehen.
-
-Darüber hinausgehende m:n-Funktionen sind für EF Core 5.0 als „Stretch Goal“ definiert. Das bedeutet, sie sind aktuell nicht für die Version 5.0 vorgesehen, sollen aber bei gutem Projektfortschritt noch integriert werden.
+Wie im ersten Artikel beschrieben wurde, hat die m:n-Unterstützung mehrere Aspekte.
+In diesem Artikel wird insbesondere die Verwendung des Features zum Überspringen von Navigationseigenschaften nachverfolgt.
+Unserer Meinung nach liegt der Wunsch nach m:n-Unterstützung hauptsächlich daran, dass bei Geschäftslogik wie Queries bisher keine Möglichkeit besteht, die „natürlichen“ Beziehungen zu verwenden, ohne auf die Jointabelle verweisen zu müssen.
+Der Entitätstyp „Jointabelle“ existiert zwar noch, sollte in Geschäftslogik aber nicht mehr verwendet werden.
 
 ## <a name="table-per-type-tpt-inheritance-mapping"></a>Tabelle-pro-Typ-Vererbungszuordnung (TPT)
 
@@ -69,7 +81,7 @@ T-Shirt-Größe: XL
 
 Status: In Bearbeitung
 
-Wir arbeiten an der TPT-Unterstützung, weil diese Funktion sehr stark nachgefragt wurde (~254 Stimmen, 3. Platz insgesamt) und weil dafür nur wenige spezifische Änderungen erforderlich sind, die den allgemeinen Grundlagen des .NET 5-Plans entsprechen. Datenbankanbieter werden deshalb höchstwahrscheinlich Breaking Changes bemerken. Diese erfordern jedoch viel weniger Arbeit als bei der Umstellung auf Version 3.0.
+Wir arbeiten an der TPT-Unterstützung, weil dieses Feature sehr stark nachgefragt wurde (ca. 289 Stimmen, 3. Platz insgesamt) und dafür nur wenige spezifische Änderungen erforderlich sind, die den allgemeinen Grundlagen des .NET 5-Plans entsprechen. Datenbankanbieter werden deshalb höchstwahrscheinlich Breaking Changes bemerken. Diese erfordern jedoch viel weniger Arbeit als bei der Umstellung auf Version 3.0.
 
 ## <a name="filtered-include"></a>Gefilterte Include-Funktion
 
@@ -81,7 +93,23 @@ T-Shirt-Größe: M
 
 Status: In Bearbeitung
 
-Die gefilterte Include-Funktion wurde sehr oft gewünscht (~317 Stimmen, 2. Platz insgesamt). Sie bedarf nicht viel Arbeit und ermöglicht bzw. vereinfacht viele Szenarios, für die bisher Filter auf Modellebene oder komplexere Anforderungen nötig sind.
+Gefilterte Include-Abfragen wurden sehr oft gewünscht (ca. 376 Stimmen, 2. Platz insgesamt). Sie bedürfen nicht viel Arbeit und ermöglichen bzw. vereinfachen viele Szenarios, für die bisher Filter auf Modellebene oder komplexere Abfragen nötig sind.
+
+## <a name="split-include"></a>Aufgeteilte Include-Abfragen
+
+Leitender Entwickler: @smitpatel
+
+Nachverfolgbar über [Issue 20892](https://github.com/dotnet/efcore/issues/20892)
+
+T-Shirt-Größe: L
+
+Status: In Bearbeitung
+
+In EF Core 3.0 wurde das Standardverhalten für das Erstellen einer einzelnen SQL-Abfrage für eine bestimmte LINQ-Abfrage geändert.
+Dadurch kam es zu enormen Leistungsregressionen für Abfragen, die Include für mehrere Sammlungen verwenden.
+
+In EF Core 5.0 wird das neue Standardverhalten beibehalten.
+EF Core 5.0 lässt jedoch die Generierung mehrerer Include-Abfragen für Sammlungen zu, bei denen eine einzelne Abfrage zu Leistungsproblemen führen würde. 
 
 ## <a name="rationalize-totable-toquery-toview-fromsql-etc"></a>Rationalisieren von „ToTable“, „ToQuery“, „ToView“, „FromSQL“, usw.
 
@@ -184,13 +212,16 @@ Nachverfolgbar über [#1920](https://github.com/dotnet/EntityFramework.Docs/issu
 
 T-Shirt-Größe: L
 
-Status: In Bearbeitung
+Status: Ausschneiden
 
 Ziel ist es, verständlicher zu machen, was in EF Core passiert. Dies kann für alle Personen nützlich sein, die EF Core verwenden. Das Hauptziel ist jedoch, externen Personen Folgendes zu erleichtern:
 
 * Mitarbeit am EFF Core-Code
 * Erstellen von Datenbankanbietern
 * Erstellen anderer Erweiterungen
+
+Update: Leider war dieser Plan zu ambitioniert.
+Wir halten das Feature weiterhin für wichtig, dennoch kann es nicht in EF Core 5.0 aufgenommen werden.
 
 ## <a name="microsoftdatasqlite-documentation"></a>Dokumentation zu Microsoft.Data.Sqlite
 
@@ -256,4 +287,4 @@ Zusätzlich werden bei der Planung auch immer die [Probleme mit den meisten Stim
 
 ## <a name="feedback"></a>Feedback
 
-Ihr Feedback zur Planung ist wichtig. Sie können für ein Problem auf GitHub abstimmen (Daumen hoch) und so angeben, dass dieses Problem wichtig ist. Diese Daten werden dann in den [Planungsprozess](../release-planning.md) für das nächste Release aufgenommen.
+Ihr Feedback zur Planung ist wichtig. Sie können für ein Problem auf GitHub abstimmen (Daumen hoch) und so angeben, dass dieses Problem wichtig ist. Diese Daten werden dann in den [Planungsprozess](xref:core/what-is-new/release_planning) für das nächste Release aufgenommen.

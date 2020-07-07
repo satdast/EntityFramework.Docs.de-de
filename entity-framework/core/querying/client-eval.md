@@ -4,16 +4,15 @@ author: smitpatel
 ms.date: 10/03/2019
 ms.assetid: 8b6697cc-7067-4dc2-8007-85d80503d123
 uid: core/querying/client-eval
-ms.openlocfilehash: e01bd146c4dfe7a8d36b641cb52ae366fddd8239
-ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
-ms.translationtype: HT
+ms.openlocfilehash: 429fec2d2da6eb8910ac20531455ec8183096ec6
+ms.sourcegitcommit: ebfd3382fc583bc90f0da58e63d6e3382b30aa22
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "78413786"
+ms.lasthandoff: 06/25/2020
+ms.locfileid: "85370421"
 ---
 # <a name="client-vs-server-evaluation"></a>Clientauswertung im Vergleich zur Serverauswertung
 
-Im Allgemeinen versucht Entity Framework Core, eine Abfrage auf dem Server möglichst weitgehend auszuwerten. EF Core konvertiert Teile der Abfrage in Parameter, die auf dem Client ausgewertet werden können. Der Rest der Abfrage wird (mitsamt den generierten Parametern) an die Datenbankanbieter übermittelt, um die entsprechende auszuwertende Datenbankabfrage auf dem Server zu ermitteln. EF Core unterstützt die teilweise Clientauswertung der Projektion auf oberster Ebene (den letzten Aufruf von `Select()`). Wenn die Projektion auf oberster Ebene in der Abfrage nicht auf den Server übersetzt werden kann, ruft EF Core alle erforderlichen Daten vom Server an und wertet die übrigen Teile der Abfrage auf dem Client aus. Wenn EF Core einen Ausdruck ermittelt, der sich außerhalb der Projektion auf oberster Ebene befindet und nicht auf den Server übersetzt werden kann, wird eine Laufzeitausnahme ausgelöst. Informationen dazu, wie EF Core ermittelt, was nicht auf Server übersetzt werden kann, finden Sie unter [Funktionsweise von Abfragen](xref:core/querying/how-query-works).
+Im Allgemeinen versucht Entity Framework Core, eine Abfrage auf dem Server möglichst weitgehend auszuwerten. EF Core konvertiert Teile der Abfrage in Parameter, die auf dem Client ausgewertet werden können. Der Rest der Abfrage wird (mitsamt den generierten Parametern) an die Datenbankanbieter übermittelt, um die entsprechende auszuwertende Datenbankabfrage auf dem Server zu ermitteln. EF Core unterstützt die teilweise Clientauswertung der Projektion auf oberster Ebene (den letzten Aufruf von `Select()`). Wenn die Projektion auf oberster Ebene in der Abfrage nicht auf den Server übersetzt werden kann, ruft EF Core alle erforderlichen Daten vom Server an und wertet die übrigen Teile der Abfrage auf dem Client aus. Wenn EF Core einen Ausdruck ermittelt, der sich außerhalb der Projektion auf oberster Ebene befindet und nicht auf den Server übersetzt werden kann, wird eine Laufzeitausnahme ausgelöst. Informationen dazu, wie EF Core ermittelt, was nicht für den Server übersetzt werden kann, finden Sie unter [Funktionsweise von Abfragen](xref:core/querying/how-query-works).
 
 > [!NOTE]
 > Vor Version 3.0 hat Entity Framework Core die Clientauswertung überall in der Abfrage unterstützt. Weitere Informationen finden Sie im [Abschnitt zu vorherigen Versionen](#previous-versions).

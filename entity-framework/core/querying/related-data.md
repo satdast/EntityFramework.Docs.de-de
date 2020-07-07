@@ -4,12 +4,11 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: f9fb64e2-6699-4d70-a773-592918c04c19
 uid: core/querying/related-data
-ms.openlocfilehash: bfd6e161ed7f7bf96e61946f94c8eeadd24a72f5
-ms.sourcegitcommit: 144edccf9b29a7ffad119c235ac9808ec1a46193
-ms.translationtype: HT
+ms.openlocfilehash: 86b9d08377ea8295b746e5f0217a408edcfe1517
+ms.sourcegitcommit: ebfd3382fc583bc90f0da58e63d6e3382b30aa22
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81434187"
+ms.lasthandoff: 06/25/2020
+ms.locfileid: "85370472"
 ---
 # <a name="loading-related-data"></a>Laden zugehöriger Daten
 
@@ -76,6 +75,18 @@ Jede per „Include“ eingeschlossene Navigation ermöglicht nur einen eindeuti
 Alternativ können identische Vorgänge für jede Navigation angewendet werden, die mehrmals per „Include“ eingeschlossen ist:
 
 [!code-csharp[Main](../../../samples/core/Querying/RelatedData/Sample.cs#MultipleLeafIncludesFiltered2)]
+
+> [!CAUTION]
+> Bei der Nachverfolgung von Abfragen können aufgrund einer [Navigationskorrektur](tracking.md) unerwartete Ergebnisse für gefilterte Include-Abfragen auftreten. Alle relevanten Entitäten, die zuvor abgefragt und in der Änderungsnachverfolgung gespeichert wurden, werden in den Ergebnissen der gefilterten Include-Abfrage angezeigt, auch wenn sie die Anforderungen des Filters nicht erfüllen. Verwenden Sie `NoTracking`-Abfragen, oder erstellen Sie DbContext neu, wenn Sie gefilterte Include-Abfragen in diesen Situationen nutzen.
+
+Beispiel:
+
+```csharp
+var orders = context.Orders.Where(o => o.Id > 1000).ToList();
+
+// customer entities will have references to all orders where Id > 1000, rathat than > 5000
+var filtered = context.Customers.Include(c => c.Orders.Where(o => o.Id > 5000)).ToList();
+```
 
 ### <a name="include-on-derived-types"></a>Einschließen in abgeleiteten Typen
 
