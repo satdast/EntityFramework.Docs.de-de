@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: aeb0f5f8-b212-4f89-ae83-c642a5190ba0
 uid: core/miscellaneous/connection-strings
-ms.openlocfilehash: 062a7f292d16deb3840fd116f270edb11c6e0687
-ms.sourcegitcommit: 59e3d5ce7dfb284457cf1c991091683b2d1afe9d
+ms.openlocfilehash: e955e93723fc371170641b0b3209cca014ef1c26
+ms.sourcegitcommit: 31536e52b838a84680d2e93e5bb52fb16df72a97
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/20/2020
-ms.locfileid: "83672923"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86238150"
 ---
 # <a name="connection-strings"></a>Verbindungszeichenfolgen
 
@@ -17,7 +17,7 @@ Die meisten Datenbankanbieter benötigen eine bestimmte Verbindungs Zeichenfolge
 
 ## <a name="winforms--wpf-applications"></a>WinForms-& WPF-Anwendungen
 
-WinForms-, WPF-und ASP.NET 4-Anwendungen haben ein bewährtes und getestetes Verbindungs Zeichen folgen Muster. Die Verbindungs Zeichenfolge sollte der app. config-Datei Ihrer Anwendung hinzugefügt werden (Web. config, wenn Sie ASP.NET verwenden). Wenn Ihre Verbindungs Zeichenfolge vertrauliche Informationen (z. b. Benutzername und Kennwort) enthält, können Sie den Inhalt der Konfigurationsdatei mit dem [Geheimnis-Manager-Tool](/aspnet/core/security/app-secrets#secret-manager)schützen.
+WinForms-, WPF-und ASP.NET 4-Anwendungen haben ein bewährtes und getestetes Verbindungs Zeichen folgen Muster. Die Verbindungs Zeichenfolge sollte der App.config Datei Ihrer Anwendung hinzugefügt werden (Web.config, wenn Sie ASP.NET verwenden). Wenn Ihre Verbindungs Zeichenfolge vertrauliche Informationen (z. b. Benutzername und Kennwort) enthält, können Sie den Inhalt der Konfigurationsdatei mit dem [Geheimnis-Manager-Tool](/aspnet/core/security/app-secrets#secret-manager)schützen.
 
 ``` xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -31,7 +31,7 @@ WinForms-, WPF-und ASP.NET 4-Anwendungen haben ein bewährtes und getestetes Ver
 ```
 
 > [!TIP]  
-> Die `providerName` Einstellung ist für EF Core Verbindungs Zeichenfolgen, die in app. config gespeichert sind, nicht erforderlich, da der Datenbankanbieter über Code konfiguriert ist.
+> Die `providerName` Einstellung ist für EF Core Verbindungs Zeichenfolgen, die in App.config gespeichert sind, nicht erforderlich, da der Datenbankanbieter über Code konfiguriert ist.
 
 Anschließend können Sie die Verbindungs `ConfigurationManager` Zeichenfolge mithilfe der-API in der-Methode Ihres Kontexts lesen `OnConfiguring` . Möglicherweise müssen Sie einen Verweis auf die FrameworkAssembly hinzufügen `System.Configuration` , damit diese API verwendet werden kann.
 
@@ -73,7 +73,7 @@ Beispielsweise können Sie das Geheimnis- [Manager-Tool](/aspnet/core/security/a
 
 ```dotnetcli
 dotnet user-secrets set ConnectionStrings.YourDatabaseAlias "Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=YourDatabase"
-dotnet ef dbcontext scaffold Name=YourDatabaseAlias Microsoft.EntityFrameworkCore.SqlServer
+dotnet ef dbcontext scaffold Name=ConnectionStrings.YourDatabaseAlias Microsoft.EntityFrameworkCore.SqlServer
 ```
 
 Das folgende Beispiel zeigt die Verbindungs Zeichenfolge, die in gespeichert ist `appsettings.json` .
@@ -86,7 +86,7 @@ Das folgende Beispiel zeigt die Verbindungs Zeichenfolge, die in gespeichert ist
 }
 ```
 
-Anschließend wird der Kontext in der Regel in konfiguriert `Startup.cs` , wobei die Verbindungs Zeichenfolge aus der Konfiguration gelesen wird. Beachten Sie, dass die- `GetConnectionString()` Methode nach einem Konfigurations Wert sucht, dessen Schlüssel ist `ConnectionStrings:<connection string name>` . Sie müssen den [Microsoft. Extensions. Configuration](/dotnet/api/microsoft.extensions.configuration) -Namespace importieren, um diese Erweiterungsmethode zu verwenden.
+Anschließend wird der Kontext in der Regel in konfiguriert `Startup.cs` , wobei die Verbindungs Zeichenfolge aus der Konfiguration gelesen wird. Beachten Sie, dass die- `GetConnectionString()` Methode nach einem Konfigurations Wert sucht, dessen Schlüssel ist `ConnectionStrings:<connection string name>` . Sie müssen den [Microsoft.Extensions.Configurations](/dotnet/api/microsoft.extensions.configuration) -Namespace importieren, um diese Erweiterungsmethode zu verwenden.
 
 ``` csharp
 public void ConfigureServices(IServiceCollection services)

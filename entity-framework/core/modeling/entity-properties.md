@@ -5,12 +5,12 @@ author: lajones
 ms.date: 05/27/2020
 ms.assetid: e9dff604-3469-4a05-8f9e-18ac281d82a9
 uid: core/modeling/entity-properties
-ms.openlocfilehash: fcf3b0f8480fde2f3ba6b5fd601db115f1d246b8
-ms.sourcegitcommit: ebfd3382fc583bc90f0da58e63d6e3382b30aa22
+ms.openlocfilehash: d4e4c50d8c7febf5e42e9aa39352c0bb6a6bd409
+ms.sourcegitcommit: 31536e52b838a84680d2e93e5bb52fb16df72a97
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/25/2020
-ms.locfileid: "85370512"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86238215"
 ---
 # <a name="entity-properties"></a>Entitätseigenschaften
 
@@ -36,7 +36,7 @@ Bestimmte Eigenschaften können wie folgt ausgeschlossen werden:
 
 Gemäß der Konvention werden bei Verwendung einer relationalen Datenbank Entitäts Eigenschaften Tabellen Spalten mit dem gleichen Namen wie die Eigenschaft zugeordnet.
 
-Wenn Sie Ihre Spalten lieber mit unterschiedlichen Namen konfigurieren möchten, können Sie dies wie folgt tun:
+Wenn Sie Ihre Spalten lieber mit unterschiedlichen Namen konfigurieren möchten, können Sie dies wie folgt ausführen:
 
 ### <a name="data-annotations"></a>[Daten Anmerkungen](#tab/data-annotations)
 
@@ -87,7 +87,7 @@ Im folgenden Beispiel bewirkt das Konfigurieren einer maximalen Länge von 500, 
 
 ### <a name="precision-and-scale"></a>Genauigkeit und Skalierung
 
-Ab efcore 5,0 können Sie die überflüssige API verwenden, um Genauigkeit und Skalierung zu konfigurieren. Er teilt dem Datenbankanbieter mit, wie viel Speicherplatz für eine bestimmte Spalte benötigt wird. Dies gilt nur für Datentypen, bei denen der Anbieter die Genauigkeit und die Skalierung unterscheiden kann, in der Regel nur `decimal` und `DateTime` .
+Ab efcore 5,0 können Sie die überflüssige API verwenden, um Genauigkeit und Skalierung zu konfigurieren. Er teilt dem Datenbankanbieter mit, wie viel Speicherplatz für eine bestimmte Spalte benötigt wird. Dies gilt nur für Datentypen, bei denen der Anbieter die Genauigkeit und die Skalierung unterscheiden kann, in der Regel `decimal` und `DateTime` .
 
 Bei `decimal` Eigenschaften definiert Genauigkeit die maximale Anzahl von Ziffern, die erforderlich sind, um einen Wert auszudrücken, den die Spalte enthalten wird, und die Dezimalstellen definieren die maximale Anzahl erforderlicher Dezimalstellen. Bei `DateTime` Eigenschaften definiert Genauigkeit die maximale Anzahl von Ziffern, die zum Ausdrücken von Sekundenbruchteilen benötigt werden, und die Skalierung wird nicht verwendet.
 
@@ -95,6 +95,10 @@ Bei `decimal` Eigenschaften definiert Genauigkeit die maximale Anzahl von Ziffer
 > Entity Framework führt keine Validierung der Genauigkeit oder der Skalierung durch, bevor Daten an den Anbieter übergeben werden. Es ist für den Anbieter oder den Datenspeicher erforderlich, nach Bedarf zu validieren. Wenn Sie z. b. auf SQL Server abzielen, lässt eine Spalte des-Datentyps `datetime` nicht zu, dass die Genauigkeit festgelegt wird, wohingegen eine eine `datetime2` Genauigkeit zwischen 0 und 7 einschließlich aufweisen kann.
 
 Im folgenden Beispiel führt die Konfiguration der `Score` -Eigenschaft für die Genauigkeit 14 und die Skala 2 dazu, dass eine Spalte vom Typ `decimal(14,2)` auf SQL Server erstellt wird, und die Konfiguration der- `LastUpdated` Eigenschaft mit der Genauigkeit 3 bewirkt eine Spalte vom Typ `datetime2(3)` :
+
+#### <a name="data-annotations"></a>[Daten Anmerkungen](#tab/data-annotations)
+
+Derzeit ist es nicht möglich, Daten Anmerkungen zum Konfigurieren von zu verwenden.
 
 #### <a name="fluent-api"></a>[Fluent-API](#tab/fluent-api)
 
@@ -115,8 +119,8 @@ Gemäß der Konvention wird eine Eigenschaft, deren .NET-Typ NULL enthalten kann
 
 In c# 8 wurde ein neues Feature namens " [Werte zulässt Reference Types](/dotnet/csharp/tutorials/nullable-reference-types)" eingeführt, mit dem Verweis Typen mit Anmerkungen versehen werden können. Dies gibt an, ob es zulässig ist, dass NULL-Werte enthalten sind. Diese Funktion ist standardmäßig deaktiviert. Wenn Sie aktiviert ist, ändert Sie das Verhalten der EF Core auf folgende Weise:
 
-* Wenn NULL-Werte zulässig sind (Standardeinstellung), werden alle Eigenschaften mit .net-Verweis Typen gemäß Konvention (z. b.) als optional konfiguriert `string` .
-* Wenn Verweis Typen, die NULL-Werte zulassen, aktiviert sind, werden die Eigenschaften basierend auf der c#-NULL-Zulässigkeit ihres .net-Typs konfiguriert: `string?` wird als optional konfiguriert, während `string` als erforderlich konfiguriert wird.
+* Wenn NULL-Werte zulassen (Standardeinstellung), werden alle Eigenschaften mit .net-Verweis Typen gemäß der Konvention (z. b.) als optional konfiguriert `string` .
+* Wenn Verweis Typen, die NULL-Werte zulassen, aktiviert sind, werden die Eigenschaften basierend auf der c#-NULL-Zulässigkeit ihres .net-Typs konfiguriert: `string?` wird als optional konfiguriert, `string` wird jedoch als erforderlich konfiguriert.
 
 Das folgende Beispiel zeigt einen Entitätstyp mit erforderlichen und optionalen Eigenschaften, wobei die Verweis Funktion NULL-Werte ist deaktiviert (Standard) und aktiviert ist:
 
@@ -156,7 +160,7 @@ Eine Eigenschaft, die gemäß der Konvention optional ist, kann so konfiguriert 
 > [!NOTE]
 > Diese Funktion wird in EF Core 5.0 eingeführt.
 
-Eine Sortierung kann für Textspalten definiert werden, um zu bestimmen, wie Sie verglichen und sortiert werden. Im folgenden Beispiel wird eine SQL Server Spalte so konfiguriert, dass die Groß-/Kleinschreibung nicht beachtet wird:
+Eine Sortierung kann für Textspalten definiert werden, um zu bestimmen, wie Sie verglichen und sortiert werden. Der folgende Code Ausschnitt konfiguriert z. b. eine SQL Server Spalte so, dass die Groß-/Kleinschreibung nicht beachtet wird:
 
 [!code-csharp[Main](../../../samples/core/Miscellaneous/Collations/Program.cs?range=42-43)]
 
