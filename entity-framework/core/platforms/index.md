@@ -1,14 +1,14 @@
 ---
 title: Unterstützte .NET-Implementierungen – EF Core
 author: bricelam
-ms.date: 03/03/2020
+ms.date: 06/26/2020
 uid: core/platforms/index
-ms.openlocfilehash: 2738645596a325a1a43fd5b2164e370dd8c5893e
-ms.sourcegitcommit: 144edccf9b29a7ffad119c235ac9808ec1a46193
+ms.openlocfilehash: f7e7a4f7993061aa46c1f9c648169158f7a35193
+ms.sourcegitcommit: 31536e52b838a84680d2e93e5bb52fb16df72a97
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81434122"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86238046"
 ---
 # <a name="net-implementations-supported-by-ef-core"></a>Von EF Core unterstützte .NET-Implementierungen
 
@@ -18,16 +18,17 @@ Wir möchten, dass EF Core für Entwickler auf allen modernen.NET-Implementierun
 
 Die folgende Tabelle enthält Anweisungen zu den einzelnen .NET-Implementierungen:
 
-| EF Core                       | 2.1 und 3.1 |
-|:------------------------------|:------------|
-| .NET-Standard                 | 2.0         |
-| .NET Core                     | 2.0         |
-| .NET Framework<sup>(1)</sup>  | 4.7.2       |
-| Mono                          | 5.4         |
-| Xamarin.iOS<sup>(2)</sup>     | 10.14       |
-| Xamarin.Android<sup>(2)</sup> | 8.0         |
-| UWP<sup>(3)</sup>             | 10.0.16299  |
-| Unity<sup>(4)</sup>           | 2018.1      |
+| EF Core                       | 2.1 und 3.1 | 5.0             |
+|:------------------------------|:------------|:----------------|
+| .NET-Standard                 | 2.0         | 2.1             |
+| .NET Core                     | 2.0         | 3.0             |
+| .NET Framework<sup>(1)</sup>  | 4.7.2       | (Nicht unterstützt) |
+| Mono                          | 5.4         | 6.4             |
+| Xamarin.iOS<sup>(2)</sup>     | 10.14       | 12.16           |
+| Xamarin.Mac<sup>(2)</sup>     | 3.8         | 5.16            |
+| Xamarin.Android<sup>(2)</sup> | 8.0         | 10.0            |
+| UWP<sup>(3)</sup>             | 10.0.16299  | Wird nachgeliefert.             |
+| Unity<sup>(4)</sup>           | 2018.1      | Wird nachgeliefert.             |
 
 <sup>1</sup> Weitere Informationen finden Sie unten im Abschnitt [.NET Framework](#net-framework).
 

@@ -144,6 +144,10 @@
               items:
                 - name: Übersicht
                   href: core/managing-schemas/migrations/index.md
+                - name: Verwalten von Migrationen
+                  href: core/managing-schemas/migrations/managing.md
+                - name: Anwenden von Migrationen
+                  href: core/managing-schemas/migrations/applying.md
                 - name: Teamumgebungen
                   href: core/managing-schemas/migrations/teams.md
                 - name: Benutzerdefinierte Vorgänge

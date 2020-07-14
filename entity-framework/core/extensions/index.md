@@ -4,12 +4,12 @@ author: ErikEJ
 ms.date: 04/11/2020
 ms.assetid: 14fffb6c-a687-4881-a094-af4a1359a296
 uid: core/extensions/index
-ms.openlocfilehash: 47a5601e996afab9c0aa0538a2a2b47f204f7753
-ms.sourcegitcommit: ebfd3382fc583bc90f0da58e63d6e3382b30aa22
+ms.openlocfilehash: 5b7945bd24ac19a82b08f4d5709555cf53485f4c
+ms.sourcegitcommit: 31536e52b838a84680d2e93e5bb52fb16df72a97
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/25/2020
-ms.locfileid: "85370355"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86238254"
 ---
 # <a name="ef-core-tools--extensions"></a>EF Core Tools und -Erweiterungen
 
@@ -157,6 +157,12 @@ Ein Abfragecache auf zweiter Ebene mit hoher Leistung. Für EF Core: 2.
 
 [GitHub-Repository](https://github.com/SteffenMangold/EntityFrameworkCore.Cacheable)
 
+### <a name="entityframeworkcorencache"></a>EntityFrameworkCore.NCache
+
+Der NCache-Anbieter von Entity Framework Core ist ein verteilter Cacheanbieter der zweiten Ebene zum Zwischenspeichern von Abfrageergebnissen. Die verteilte Architektur von NCache macht den Anbieter skalierbarer und hochverfügbar. Für EF Core 2.
+
+[Website](https://www.alachisoft.com/ncache/ef-core-cache.html)
+
 ### <a name="entity-framework-plus"></a>Entity Framework Plus
 
 Erweitert Ihren DbContext mit Features wie den folgenden: Include Filter, Auditing, Caching, Query Future, Batch Delete, Batch Update und vielen weiteren. Für EF Core: 2, 3.
@@ -224,3 +230,9 @@ Alternativer Übersetzer von LINQ-Abfragen an SQL-Ausdrücke Für EF Core: 3.
 Bietet Unterstützung für erweiterte SQL-Features wie CTEs, Massenkopiervorgänge, Tabellenhinweise, Fensterfunktionen, temporäre Tabellen und Erstell-, Update, und Löschvorgänge auf Datenbankseite
 
 [GitHub-Repository](https://github.com/linq2db/linq2db.EntityFrameworkCore)
+
+### <a name="efcoresoftdelete"></a>EFCore.SoftDelete
+
+Eine-Implementierung für das vorläufige Löschen von Entitäten. Für EF Core: 3.
+
+[NuGet](https://www.nuget.org/packages/EFCore.SoftDelete)
