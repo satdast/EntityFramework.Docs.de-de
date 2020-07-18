@@ -1,15 +1,15 @@
 ---
 title: SQLite-Datenbankanbieter-Einschränkungen-EF Core
-author: rowanmiller
-ms.date: 04/09/2017
+author: bricelam
+ms.date: 07/16/2020
 ms.assetid: 94ab4800-c460-4caa-a5e8-acdfee6e6ce2
 uid: core/providers/sqlite/limitations
-ms.openlocfilehash: 17e97da9dfffefeb507fde744b710e6936bff69b
-ms.sourcegitcommit: 59e3d5ce7dfb284457cf1c991091683b2d1afe9d
+ms.openlocfilehash: 393f5e80ce2e11dcb11c2048e06effa27e48dc13
+ms.sourcegitcommit: d85263b5d5d665dbaf94de8832e2917bce048b34
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/20/2020
-ms.locfileid: "83672771"
+ms.lasthandoff: 07/17/2020
+ms.locfileid: "86451228"
 ---
 # <a name="sqlite-ef-core-database-provider-limitations"></a>SQLite EF Core-Datenbank-Anbieter-Einschränkungen
 
@@ -45,34 +45,36 @@ modelBuilder.Entity<MyEntity>()
 
 Die SQLite-Datenbank-Engine unterstützt keine Reihe von Schema Vorgängen, die von den meisten anderen relationalen Datenbanken unterstützt werden. Wenn Sie versuchen, einen der nicht unterstützten Vorgänge auf eine SQLite-Datenbank anzuwenden, `NotSupportedException` wird eine ausgelöst.
 
-| Vorgang            | Unterstützt? | Erfordert Version |
-|:---------------------|:-----------|:-----------------|
-| AddColumn            | ✔          | 1.0              |
-| Addfremdnkey        | ✗          |                  |
-| Addprimarykey        | ✗          |                  |
-| AddUniqueConstraint  | ✗          |                  |
-| AlterColumn          | ✗          |                  |
-| CreateIndex          | ✔          | 1.0              |
-| CreateTable          | ✔          | 1.0              |
-| DropColumn           | ✗          |                  |
-| Dropfremdnkey       | ✗          |                  |
-| DropIndex            | ✔          | 1.0              |
-| Dropprimarykey       | ✗          |                  |
-| DropTable            | ✔          | 1.0              |
-| Dropuniqueconstraint | ✗          |                  |
-| Renamecolumn         | ✔          | 2.2.2            |
-| Renameingedex          | ✔          | 2.1              |
-| RenameTable          | ✔          | 1.0              |
-| Ensureschema         | ✔ (No-OP)  | 2.0              |
-| DropSchema           | ✔ (No-OP)  | 2.0              |
-| Einfügen               | ✔          | 2.0              |
-| Aktualisieren               | ✔          | 2.0              |
-| Löschen               | ✔          | 2.0              |
+Es wird versucht, eine Neuerstellung auszuführen, um bestimmte Vorgänge auszuführen. Neubuilds sind nur für Daten Bank Artefakte möglich, die Teil Ihres EF Core Modells sind. Wenn ein Daten Bank Element nicht Teil des Modells ist (z. b., wenn es in einer Migration manuell erstellt wurde), `NotSupportedException` wird immer noch eine ausgelöst.
+
+| Vorgang            | Unterstützt?  | Erfordert Version |
+|:---------------------|:------------|:-----------------|
+| Addcheckeinschränkung   | ✔ (neu erstellen) | 5.0              |
+| AddColumn            | ✔           | 1.0              |
+| Addfremdnkey        | ✔ (neu erstellen) | 5.0              |
+| Addprimarykey        | ✔ (neu erstellen) | 5.0              |
+| AddUniqueConstraint  | ✔ (neu erstellen) | 5.0              |
+| AlterColumn          | ✔ (neu erstellen) | 5.0              |
+| CreateIndex          | ✔           | 1.0              |
+| CreateTable          | ✔           | 1.0              |
+| Dropcheck-Einschränkung  | ✔ (neu erstellen) | 5.0              |
+| DropColumn           | ✔ (neu erstellen) | 5.0              |
+| Dropfremdnkey       | ✔ (neu erstellen) | 5.0              |
+| DropIndex            | ✔           | 1.0              |
+| Dropprimarykey       | ✔ (neu erstellen) | 5.0              |
+| DropTable            | ✔           | 1.0              |
+| Dropuniqueconstraint | ✔ (neu erstellen) | 5.0              |
+| Renamecolumn         | ✔           | 2.2.2            |
+| Renameingedex          | ✔ (neu erstellen) | 2.1              |
+| RenameTable          | ✔           | 1.0              |
+| Ensureschema         | ✔ (No-OP)   | 2.0              |
+| DropSchema           | ✔ (No-OP)   | 2.0              |
+| Einfügen               | ✔           | 2.0              |
+| Aktualisieren               | ✔           | 2.0              |
+| Löschen               | ✔           | 2.0              |
 
 ## <a name="migrations-limitations-workaround"></a>Problem Umgehung der Migrations Einschränkungen
 
-Sie können einige dieser Einschränkungen umgehen, indem Sie Code in ihren Migrationen manuell schreiben, um eine Tabellen Neuerstellung durchzuführen. Eine Tabellenneuerstellung umfasst Umbenennen der vorhandenen Tabelle, Erstellen einer neuen Tabelle, Kopieren von Daten in die neue Tabelle und Löschen der alten Tabelle. Sie müssen die-Methode verwenden `Sql(string)` , um einige dieser Schritte auszuführen.
+Sie können einige dieser Einschränkungen umgehen, indem Sie Code in ihren Migrationen manuell schreiben, um eine Neuerstellung durchzuführen. Tabellen neubuilds umfassen das Erstellen einer neuen Tabelle, das Kopieren von Daten in die neue Tabelle, das Löschen der alten Tabelle und das Umbenennen der neuen Tabelle. Sie müssen die-Methode verwenden `Sql(string)` , um einige dieser Schritte auszuführen.
 
 Weitere Informationen finden Sie unter [vornehmen anderer Arten von Tabellen Schema Änderungen](https://sqlite.org/lang_altertable.html#otheralter) in der SQLite-Dokumentation.
-
-In Zukunft kann EF einige dieser Vorgänge unterstützen, indem er den Ansatz für die Tabellen Neuerstellung unter den Decken verwendet. Sie können [Diese Funktion in unserem GitHub-Projekt nachverfolgen](https://github.com/aspnet/EntityFrameworkCore/issues/329).
