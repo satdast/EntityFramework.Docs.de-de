@@ -65,6 +65,8 @@
               href: core/get-started/install/index.md
             - name: ASP.NET Core-Tutorial >>
               href: /aspnet/core/data/ef-rp/intro
+            - name: Xamarin-Tutorial
+              href: core/get-started/xamarin.md
         - name: Grundlagen
           items:
             - name: Verbindungszeichenfolgen
