@@ -4,11 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: f9fb64e2-6699-4d70-a773-592918c04c19
 uid: core/querying/related-data
-ms.openlocfilehash: 86b9d08377ea8295b746e5f0217a408edcfe1517
-ms.sourcegitcommit: ebfd3382fc583bc90f0da58e63d6e3382b30aa22
+ms.openlocfilehash: d3a1810599771befb451715d93454fff63949771
+ms.sourcegitcommit: 31536e52b838a84680d2e93e5bb52fb16df72a97
+ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/25/2020
-ms.locfileid: "85370472"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86238306"
 ---
 # <a name="loading-related-data"></a>Laden zugehöriger Daten
 
@@ -52,8 +53,53 @@ Für eine der Entitäten, die eingeschlossen wird, sollten Sie mehrere zugehöri
 
 [!code-csharp[Main](../../../samples/core/Querying/RelatedData/Sample.cs#MultipleLeafIncludes)]
 
-> [!CAUTION]
-> Seit Version 3.0.0 bewirkt jede `Include`, dass eine zusätzliche Verknüpfung zu von relationalen Anbietern erzeugten SQL-Abfragen hinzugefügt wird, während in früheren Versionen zusätzliche SQL-Abfragen generiert wurden. Dies kann die Leistung Ihrer Abfragen entweder verbessern oder verschlechtern. Insbesondere müssen LINQ-Abfragen mit einer überaus hohen Anzahl an `Include`-Operatoren in mehrere einzelne LINQ-Abfragen aufgeteilt werden, um das Problem der kartesischen Explosion zu vermeiden.
+### <a name="single-and-split-queries"></a>Einzelne und geteilte Abfragen
+
+> [!NOTE]
+> Diese Funktion wird in EF Core 5.0 eingeführt.
+
+In relationalen Datenbanken werden alle zugehörigen Entitäten standardmäßig durch Einführung von JOINs geladen:
+
+```sql
+SELECT [b].[BlogId], [b].[OwnerId], [b].[Rating], [b].[Url], [p].[PostId], [p].[AuthorId], [p].[BlogId], [p].[Content], [p].[Rating], [p].[Title]
+FROM [Blogs] AS [b]
+LEFT JOIN [Post] AS [p] ON [b].[BlogId] = [p].[BlogId]
+ORDER BY [b].[BlogId], [p].[PostId]
+```
+
+Wenn ein typischer Blog mehrere zugehörige Beiträge enthält, duplizieren die Zeilen für diese Beiträge die Informationen des Blogs, was zum so genannten „Problem der kartesischen Explosion“ führt. Wenn weitere 1:n-Beziehungen geladen werden, wächst die Menge an duplizierten Daten weiter und beeinträchtigt die Leistung Ihrer Anwendung.
+
+In EF können Sie angeben, dass eine bestimmte LINQ-Abfrage in auf mehrere SQL-Abfragen *aufgeteilt* werden soll. Anstelle von JOINs führen aufgeteilte Abfragen eine zusätzliche SQL-Abfrage für jede enthaltene 1:n-Navigation durch:
+
+[!code-csharp[Main](../../../samples/core/Querying/RelatedData/Sample.cs?name=AsSplitQuery&highlight=5)]
+
+Dadurch wird der folgende SQL-Code erzeugt:
+
+```sql
+SELECT [b].[BlogId], [b].[OwnerId], [b].[Rating], [b].[Url]
+FROM [Blogs] AS [b]
+ORDER BY [b].[BlogId]
+
+SELECT [p].[PostId], [p].[AuthorId], [p].[BlogId], [p].[Content], [p].[Rating], [p].[Title], [b].[BlogId]
+FROM [Blogs] AS [b]
+INNER JOIN [Post] AS [p] ON [b].[BlogId] = [p].[BlogId]
+ORDER BY [b].[BlogId]
+```
+
+Während bei diesem Vorgehen die Leistungsprobleme vermieden werden, die durch JOINs und die kartesische Explosion entstehen, weist es auch einige Nachteile auf:
+
+* Die meisten Datenbanken garantieren Datenkonsistenz bei einzelnen Abfragen. Bei mehreren Abfragen gibt es eine solche Garantie nicht. Das bedeutet Folgendes: Wenn die Datenbank gleichzeitig mit der Ausführung Ihrer Abfragen aktualisiert wird, sind die resultierenden Daten möglicherweise nicht konsistent. Dieses Problem lässt sich minimieren, indem die Abfragen mit einer serialisierbaren oder Momentaufnahmentransaktion umschlossen werden, wobei auch dieses Vorgehen Leistungsprobleme nach sich ziehen kann. Nähere Informationen dazu finden Sie in der Dokumentation zu Ihrer Datenbank.
+* Zurzeit impliziert jede Abfrage einen zusätzlichen Netzwerkroundtrip zu Ihrer Datenbank. Dies kann die Leistung beeinträchtigen, insbesondere dann, wenn die Latenz zur Datenbank hoch ist (z. B. bei Clouddiensten). EF Core wird dies zukünftig verbessern, indem die Abfragen in Batches für einen einzigen Roundtrip zusammengefasst werden.
+* Zwar erlauben einige Datenbanken die gleichzeitige Nutzung der Ergebnisse mehrerer Abfragen (SQL Server mit MARS, Sqlite), aber in den meisten darf zu jedem Zeitpunkt immer nur eine Abfrage aktiv sein. Das bedeutet, dass alle Ergebnisse früherer Abfragen im Arbeitsspeicher der Anwendung gepuffert werden müssen, bevor spätere Abfragen ausgeführt werden. Dadurch steigen die Arbeitsspeicheranforderungen möglicherweise deutlich.
+
+Leider gibt es nicht die eine perfekte Strategie zum Laden von zugehörigen Entitäten, die in allen Szenarien passt. Erwägen Sie sehr sorgfältig die Vor- und Nachteile von einzelnen und geteilten Abfragen, und wählen Sie die Variante aus, die sich für Ihre Anforderungen besser eignet.
+
+> [!NOTE]
+> Zugehörige Entitäten mit 1:1-Beziehung werden immer über JOINs geladen, da dies keine Auswirkungen auf die Leistung hat.
+>
+> Zurzeit erfordert die Verwendung der Abfrageaufteilung in SQL Server die Einstellung `MultipleActiveResultSets=true` in der Verbindungszeichenfolge. Diese Anforderung entfällt in einer zukünftigen Vorschauversion.
+>
+> Zukünftige Vorschauversionen von EF Core 5.0 ermöglichen die Angabe der Abfrageaufteilung als Standardwert für Ihren Kontext.
 
 ### <a name="filtered-include"></a>Gefilterte Include-Funktion
 

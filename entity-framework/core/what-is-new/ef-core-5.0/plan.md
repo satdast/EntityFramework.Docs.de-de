@@ -3,18 +3,21 @@ title: Plan für Entity Framework Core 5.0
 author: ajcvickers
 ms.date: 06/11/2020
 uid: core/what-is-new/ef-core-5.0/plan
-ms.openlocfilehash: 249560bc14f72fd524be91bb1670dbaf78ae6b60
-ms.sourcegitcommit: ebfd3382fc583bc90f0da58e63d6e3382b30aa22
+ms.openlocfilehash: a107f901b215e7abaa5905852f81c2d9ab094b98
+ms.sourcegitcommit: 31536e52b838a84680d2e93e5bb52fb16df72a97
+ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/25/2020
-ms.locfileid: "85370577"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86238319"
 ---
 # <a name="plan-for-entity-framework-core-50"></a>Plan für Entity Framework Core 5.0
 
 Wie im [Artikel zum Planungsprozess](xref:core/what-is-new/release_planning) beschrieben, haben wir aus dem Feedback der Stakeholder diesen vorläufigen Plan für EF Core 5.0 erstellt.
 
-> [!IMPORTANT] 
+> [!IMPORTANT]
 > Er befindet sich aktuell in der Entwicklung. Sein Inhalt ist nicht verbindlich. Er dient als Ausgangspunkt und wird durch neues Feedback weiterentwickelt. Es kann also sein, dass die Version 5.0 Funktionen enthalten wird, die bisher nicht geplant waren. Im Gegenzug kann es jedoch auch passieren, dass Funktionen gestrichen werden, die bisher für die Version 5.0 geplant waren.
+
+## <a name="general-information"></a>Allgemeine Informationen
 
 ### <a name="version-number-and-release-date"></a>Versionsnummer und Veröffentlichungsdatum
 
@@ -109,7 +112,7 @@ In EF Core 3.0 wurde das Standardverhalten für das Erstellen einer einzelnen S
 Dadurch kam es zu enormen Leistungsregressionen für Abfragen, die Include für mehrere Sammlungen verwenden.
 
 In EF Core 5.0 wird das neue Standardverhalten beibehalten.
-EF Core 5.0 lässt jedoch die Generierung mehrerer Include-Abfragen für Sammlungen zu, bei denen eine einzelne Abfrage zu Leistungsproblemen führen würde. 
+EF Core 5.0 lässt jedoch jetzt die Generierung mehrerer Include-Abfragen für Sammlungen zu, bei denen eine einzelne Abfrage zu Leistungsproblemen führen würde.
 
 ## <a name="rationalize-totable-toquery-toview-fromsql-etc"></a>Rationalisieren von „ToTable“, „ToQuery“, „ToView“, „FromSQL“, usw.
 
@@ -164,7 +167,7 @@ Wir möchten dafür sorgen, dass es einfach ist, die Datenbank zum Zeitpunkt der
 
 Daraus werden sich wahrscheinlich viele kleine Verbesserungen bei EF Core ergeben, z. B. bessere Migrationen bei SQLite. Kombiniert mit Leitfäden und einer langfristigen Zusammenarbeit mit anderen Teams entstehen ganzheitliche Verbesserungen, nicht nur bei EF.
 
-## <a name="ef-core-platforms-experience"></a>EF Core-Plattformen 
+## <a name="ef-core-platforms-experience"></a>EF Core-Plattformen
 
 Leitende Entwickler: @roji und @bricelam
 
@@ -246,10 +249,11 @@ T-Shirt-Größe: L
 Status: In Bearbeitung
 
 Die Aktualisierung der bestehenden Dokumentation für die Releases 3.0 und 3.1 läuft bereits. Zusätzlich arbeiten wir an Folgendem:
-  * Überarbeitung der Einsteigerdokumentation, um sie ansprechender und leichter verständlich zu machen
-  * Neuanordnung von Dokumenten, um sie leichter auffindbar zu machen und um Querverweise hinzufügen zu können
-  * Hinzufügen von ausführlicheren Details und Erläuterungen zu vorhandenen Dokumenten
-  * Aktualisieren bestehender Beispiele und Hinzufügen zusätzlicher Beispiele
+
+* Überarbeitung der Einsteigerdokumentation, um sie ansprechender und leichter verständlich zu machen
+* Neuanordnung von Dokumenten, um sie leichter auffindbar zu machen und um Querverweise hinzufügen zu können
+* Hinzufügen von ausführlicheren Details und Erläuterungen zu vorhandenen Dokumenten
+* Aktualisieren bestehender Beispiele und Hinzufügen zusätzlicher Beispiele
 
 ## <a name="fixing-bugs"></a>Beheben von Fehlern
 
@@ -285,6 +289,6 @@ Dabei handelt es sich um Fehlerbehebungen und Verbesserungen, die aktuell **nich
 
 Zusätzlich werden bei der Planung auch immer die [Probleme mit den meisten Stimmen](https://github.com/dotnet/efcore/issues?q=is%3Aissue+is%3Aopen+sort%3Areactions-%2B1-desc) berücksichtigt. Bekannte Probleme erst in einem späteren Release zu beheben ist nicht schön, aber nötig, um die Auslastung der vorhandenen Ressourcen auf ein realistisches Maß zu beschränken.
 
-## <a name="feedback"></a>Feedback
+## <a name="suggestions"></a>Vorschläge
 
 Ihr Feedback zur Planung ist wichtig. Sie können für ein Problem auf GitHub abstimmen (Daumen hoch) und so angeben, dass dieses Problem wichtig ist. Diese Daten werden dann in den [Planungsprozess](xref:core/what-is-new/release_planning) für das nächste Release aufgenommen.

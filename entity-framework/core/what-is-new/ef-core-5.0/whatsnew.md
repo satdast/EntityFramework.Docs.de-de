@@ -4,11 +4,12 @@ description: Übersicht über neue Features in EF Core 5.0
 author: ajcvickers
 ms.date: 06/02/2020
 uid: core/what-is-new/ef-core-5.0/whatsnew
-ms.openlocfilehash: 0a2ba5b804cc6636b321edcc48feeb76ad60560b
-ms.sourcegitcommit: ebfd3382fc583bc90f0da58e63d6e3382b30aa22
+ms.openlocfilehash: 304ed74fe344b43177525113c70b7be7bb0ac5ed
+ms.sourcegitcommit: 31536e52b838a84680d2e93e5bb52fb16df72a97
+ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/25/2020
-ms.locfileid: "85370369"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86238332"
 ---
 # <a name="whats-new-in-ef-core-50"></a>Neuerungen in EF Core 5.0
 
@@ -360,7 +361,7 @@ Die Dokumentation finden Sie im [Issue 2273](https://github.com/dotnet/EntityFr
 
 ### <a name="flow-arguments-into-idesigntimedbcontextfactory"></a>Übergeben von Argumenten in IDesignTimeDbContextFactory
 
-Argumente können nun über die Befehlszeile in die `CreateDbContext`-Methode von [IDesignTimeDbContextFactory](https://docs.microsoft.com/dotnet/api/microsoft.entityframeworkcore.design.idesigntimedbcontextfactory-1?view=efcore-3.1) übertragen werden. Sie können beispielsweise angeben, dass es sich um ein Entwicklungsbuild handelt, indem Sie ein benutzerdefiniertes Argument (z. B. `dev`) über die Befehlszeile übergeben:
+Argumente können nun über die Befehlszeile in die `CreateDbContext`-Methode von [IDesignTimeDbContextFactory](https://docs.microsoft.com/dotnet/api/microsoft.entityframeworkcore.design.idesigntimedbcontextfactory-1?view=efcore-3.1) übertragen werden. Sie können beispielsweise angeben, dass es sich um einen Entwicklungsbuild handelt, indem Sie in der Befehlszeile ein benutzerdefiniertes Argument (z. B. `dev`) übergeben:
 
 ```
 dotnet ef migrations add two --verbose --dev
