@@ -4,16 +4,16 @@ author: roji
 ms.date: 09/09/2019
 ms.assetid: bde4e0ee-fba3-4813-a849-27049323d301
 uid: core/miscellaneous/nullable-reference-types
-ms.openlocfilehash: c16a475c363320cd18804a4efe78ccae1ae22f0d
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.openlocfilehash: 3acd446d64a94ffecb12c181e3910528d2293448
+ms.sourcegitcommit: 51148929e3889c48227d96c95c4e310d53a3d2c9
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78414146"
+ms.lasthandoff: 07/21/2020
+ms.locfileid: "86873356"
 ---
 # <a name="working-with-nullable-reference-types"></a>Arbeiten mit Verweis Typen, die NULL-Werte zulassen
 
-C#in 8 wurde ein neues Feature namens " [Werte zulässt Reference Types](/dotnet/csharp/tutorials/nullable-reference-types)" eingeführt, sodass Verweis Typen mit Anmerkungen versehen werden können. Dies deutet darauf hin, ob es zulässig ist, dass NULL-Werte enthalten sind. Wenn Sie mit dieser Funktion noch nicht vertraut sind, wird empfohlen, dass Sie sich mit der Dokumentation vertraut C# machen, indem Sie die Dokumentation lesen.
+In c# 8 wurde ein neues Feature namens " [Werte zulässt Reference Types](/dotnet/csharp/tutorials/nullable-reference-types)" eingeführt, sodass Verweis Typen mit Anmerkungen versehen werden können. Dies gibt an, ob es zulässig ist, dass Sie NULL enthalten. Wenn Sie mit dieser Funktion noch nicht vertraut sind, sollten Sie sich mit der Dokumentation vertraut machen, indem Sie die c#-Dokumentation lesen.
 
 Auf dieser Seite wird EF Core Unterstützung für Verweis Typen eingeführt, die NULL-Werte zulassen, und es werden bewährte Methoden zum Arbeiten mit diesen beschrieben.
 
@@ -26,7 +26,7 @@ Die Haupt Dokumentation zu den erforderlichen und optionalen Eigenschaften sowie
 
 ## <a name="dbcontext-and-dbset"></a>Dbcontext und dbset
 
-Wenn Verweis Typen, die NULL-Werte zulassen C# , aktiviert sind, gibt der Compiler Warnungen für jede nicht initialisierte Eigenschaft aus, die keine NULL-Werte zulässt, da diese NULL-Werte enthalten. Folglich generiert die gängige Vorgehensweise, eine nicht auf NULL festleg Bare `DbSet` in einem Kontext zu definieren, jetzt eine Warnung. Allerdings initialisiert EF Core immer alle `DbSet` Eigenschaften von dbcontext-abgeleiteten Typen, sodass Sie sicher sind, dass Sie nie NULL sind, auch wenn der Compiler das nicht kennt. Daher empfiehlt es sich, die `DbSet` Eigenschaften nicht auf NULL festlegbar zu halten, sodass Sie ohne Null-Überprüfungen darauf zugreifen können. Außerdem wird empfohlen, die Compilerwarnungen durch explizites Festlegen auf NULL mit der Hilfe des NULL-Operator (!) zu übernehmen:
+Wenn Verweis Typen, die NULL-Werte zulassen, aktiviert sind, gibt der c#-Compiler Warnungen für jede nicht initialisierte Eigenschaft aus, die keine NULL-Werte zulässt, da diese NULL enthalten würden. Demzufolge wird bei der Verwendung von nicht initialisierten dbset-Eigenschaften für einen Kontexttyp eine Warnung generiert. Um dieses Problem zu beheben, legen Sie die dbset-Eigenschaften als schreibgeschützt fest, und initialisieren Sie Sie wie folgt:
 
 [!code-csharp[Main](../../../samples/core/Miscellaneous/NullableReferenceTypes/NullableReferenceTypesContext.cs?name=Context&highlight=3-4)]
 
@@ -40,7 +40,7 @@ Eine Möglichkeit zum Umgang mit diesen Szenarien besteht darin, eine Eigenschaf
 
 [!code-csharp[Main](../../../samples/core/Miscellaneous/NullableReferenceTypes/Order.cs?range=10-17)]
 
-Da die Navigations Eigenschaft keine NULL-Werte zulässt, wird eine erforderliche Navigation konfiguriert. solange die Navigation ordnungsgemäß geladen ist, kann auf den abhängigen über die-Eigenschaft zugegriffen werden. Wenn jedoch auf die Eigenschaft zugegriffen wird, ohne dass die zugehörige Entität zuvor ordnungsgemäß geladen wurde, wird eine InvalidOperationException ausgelöst, da der API-Vertrag falsch verwendet wurde. Beachten Sie, dass EF so konfiguriert werden muss, dass immer auf das dahinter liegende Feld und nicht auf die-Eigenschaft zugegriffen wird, da es darauf basiert, dass der Wert auch dann gelesen werden kann, wenn er nicht Lesen Sie die Dokumentation zu den entsprechenden [Feldern](xref:core/modeling/backing-field) , und geben Sie `PropertyAccessMode.Field` an, um sicherzustellen, dass die Konfiguration korrekt ist.
+Da die Navigations Eigenschaft keine NULL-Werte zulässt, wird eine erforderliche Navigation konfiguriert. solange die Navigation ordnungsgemäß geladen ist, kann auf den abhängigen über die-Eigenschaft zugegriffen werden. Wenn jedoch auf die Eigenschaft zugegriffen wird, ohne dass die zugehörige Entität zuvor ordnungsgemäß geladen wurde, wird eine InvalidOperationException ausgelöst, da der API-Vertrag falsch verwendet wurde. Beachten Sie, dass EF so konfiguriert werden muss, dass immer auf das dahinter liegende Feld und nicht auf die-Eigenschaft zugegriffen wird, da es darauf basiert, dass der Wert auch dann gelesen werden kann, wenn er nicht Lesen Sie die Dokumentation zu den entsprechenden [Feldern](xref:core/modeling/backing-field) , und `PropertyAccessMode.Field` Geben Sie ggf. an, um sicherzustellen, dass die Konfiguration korrekt ist.
 
 Als terser Alternative ist es möglich, die-Eigenschaft mit der Hilfe des NULL-Operator (!) einfach mit NULL zu initialisieren:
 
@@ -65,5 +65,5 @@ Wenn Sie dies sehr viel tun und die fraglichen Entitäts Typen vorwiegend (oder 
 
 ## <a name="limitations"></a>Einschränkungen
 
-* Reverse Engineering unterstützt C# [ C# derzeit keine Verweis Typen (nrts)](/dotnet/csharp/tutorials/nullable-reference-types), die NULL-Werte zulassen: EF Core generiert immer Code, der davon ausgeht, dass das Feature deaktiviert ist. So werden z. b. Textspalten, die NULL-Werte zulassen, als Eigenschaft mit dem Typ `string` erstellt, nicht `string?`, wobei entweder die fließende API oder Daten Anmerkungen verwendet werden, um zu konfigurieren, ob eine Eigenschaft erforderlich ist. Sie können den Gerüst Code bearbeiten und diese durch C# NULL-Zulässigkeit-Anmerkungen ersetzen. Die Gerüstbau Unterstützung für Verweis Typen, die NULL-Werte zulassen, wird von Issue [#15520](https://github.com/aspnet/EntityFrameworkCore/issues/15520)
+* Reverse Engineering unterstützt zurzeit keine [c# 8-Verweis Typen (NULL-Werte zulassen)](/dotnet/csharp/tutorials/nullable-reference-types): EF Core generiert immer c#-Code, der voraussetzt, dass das Feature deaktiviert ist. Beispielsweise werden Textspalten, die NULL-Werte zulassen, als Eigenschaft mit dem Typ `string` erstellt, nicht `string?` mit der fließenden API oder den Daten Anmerkungen, mit denen konfiguriert wird, ob eine Eigenschaft erforderlich ist. Sie können den Gerüst Code bearbeiten und durch c#-Anmerkungen zur NULL-Zulässigkeit ersetzen. Die Gerüstbau Unterstützung für Verweis Typen, die NULL-Werte zulassen, wird von Issue [#15520](https://github.com/aspnet/EntityFrameworkCore/issues/15520)
 * Die öffentliche API-Oberfläche von EF Core wurde noch nicht für NULL-Zulässigkeit mit Anmerkungen versehen (die öffentliche API ist "Null-schräg"), was manchmal umständlich ist, wenn die NRT-Funktion aktiviert ist. Dies umfasst insbesondere die asynchronen LINQ-Operatoren, die von EF Core verfügbar gemacht werden, z. b. [firstordefaultasync](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.firstordefaultasync#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_FirstOrDefaultAsync__1_System_Linq_IQueryable___0__System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_Threading_CancellationToken_). Wir planen, dies für die Version 5,0 zu beheben.
