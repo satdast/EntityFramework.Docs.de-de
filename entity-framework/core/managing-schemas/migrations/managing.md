@@ -4,12 +4,12 @@ author: bricelam
 ms.author: bricelam
 ms.date: 05/06/2020
 uid: core/managing-schemas/migrations/managing
-ms.openlocfilehash: e52d3680360a1e83e05f04650c735c5a67680094
-ms.sourcegitcommit: 31536e52b838a84680d2e93e5bb52fb16df72a97
+ms.openlocfilehash: 2097d3cc9232d448191dbebbe3d14d86e80b91fe
+ms.sourcegitcommit: 949faaba02e07e44359e77d7935f540af5c32093
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86238724"
+ms.lasthandoff: 08/03/2020
+ms.locfileid: "87526432"
 ---
 # <a name="managing-migrations"></a>Verwalten von Migrationen
 
@@ -97,7 +97,7 @@ migrationBuilder.RenameColumn(
 
 ### <a name="adding-raw-sql"></a>Hinzufügen von RAW SQL
 
-Das Umbenennen einer Spalte kann über eine integrierte API erreicht werden, in vielen Fällen ist dies jedoch nicht möglich. Beispielsweise möchten wir eventuell vorhandene `FirstName` -und- `LastColumn` Eigenschaften durch eine einzelne neue Eigenschaft ersetzen `FullName` . Die von EF Core generierte Migration sieht wie folgt aus:
+Das Umbenennen einer Spalte kann über eine integrierte API erreicht werden, in vielen Fällen ist dies jedoch nicht möglich. Beispielsweise möchten wir eventuell vorhandene `FirstName` -und- `LastName` Eigenschaften durch eine einzelne neue Eigenschaft ersetzen `FullName` . Die von EF Core generierte Migration sieht wie folgt aus:
 
 ``` csharp
 migrationBuilder.DropColumn(
@@ -109,7 +109,7 @@ migrationBuilder.DropColumn(
     table: "Customer");
 
 migrationBuilder.AddColumn<string>(
-    name: "Name",
+    name: "FullName",
     table: "Customer",
     nullable: true);
 ```
@@ -118,14 +118,14 @@ Wie zuvor würde dies zu unerwünschten Datenverlusten führen. Um die Daten aus
 
 ``` csharp
 migrationBuilder.AddColumn<string>(
-    name: "Name",
+    name: "FullName",
     table: "Customer",
     nullable: true);
 
 migrationBuilder.Sql(
 @"
     UPDATE Customer
-    SET Name = FirstName + ' ' + LastName;
+    SET FullName = FirstName + ' ' + LastName;
 ");
 
 migrationBuilder.DropColumn(
@@ -158,7 +158,7 @@ Dies kann verwendet werden, um einen beliebigen Aspekt der Datenbank zu verwalte
 * Gespeicherte Prozeduren
 * Volltextsuche
 * Funktionen
-* Trigger
+* Auslöser
 * Ansichten
 
 In den meisten Fällen wird jede Migration beim Anwenden von Migrationen von EF Core automatisch in der eigenen Transaktion umschlossen. Leider können einige Migrations Vorgänge nicht innerhalb einer Transaktion in einigen Datenbanken ausgeführt werden. in diesen Fällen können Sie die Transaktion ablehnen, indem Sie an übergeben `suppressTransaction: true` `migrationBuilder.Sql` .

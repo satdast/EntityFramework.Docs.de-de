@@ -5,12 +5,12 @@ author: AndriySvyryd
 ms.author: ansvyryd
 ms.date: 01/03/2020
 uid: core/modeling/table-splitting
-ms.openlocfilehash: de24f8903af79ebd7f68e6b74288257883c1fa8d
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.openlocfilehash: e7428bc516a69310b6a6f521acc49aee0ba9f802
+ms.sourcegitcommit: 949faaba02e07e44359e77d7935f540af5c32093
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78414698"
+ms.lasthandoff: 08/03/2020
+ms.locfileid: "87526498"
 ---
 # <a name="table-splitting"></a>Tabellenaufteilung
 
@@ -22,20 +22,20 @@ Zur Verwendung der Tabellen Aufteilung müssen die Entitäts Typen derselben Tab
 
 Ein häufiges Szenario für die Tabellen Aufteilung ist die Verwendung einer Teilmenge der Spalten in der Tabelle, um eine höhere Leistung oder Kapselung zu erzielen.
 
-In diesem Beispiel `Order` eine Teilmenge `DetailedOrder`darstellt.
+In diesem Beispiel `Order` stellt eine Teilmenge von dar `DetailedOrder` .
 
 [!code-csharp[Order](../../../samples/core/Modeling/TableSplitting/Order.cs?name=Order)]
 
 [!code-csharp[DetailedOrder](../../../samples/core/Modeling/TableSplitting/DetailedOrder.cs?name=DetailedOrder)]
 
-Zusätzlich zur erforderlichen Konfiguration werden `Property(o => o.Status).HasColumnName("Status")` aufgerufen, um `DetailedOrder.Status` derselben Spalte wie `Order.Status`zuzuordnen.
+Zusätzlich zur erforderlichen Konfiguration wird aufgerufen `Property(o => o.Status).HasColumnName("Status")` , um `DetailedOrder.Status` derselben Spalte wie zuzuordnen `Order.Status` .
 
 [!code-csharp[TableSplittingConfiguration](../../../samples/core/Modeling/TableSplitting/TableSplittingContext.cs?name=TableSplitting)]
 
 > [!TIP]
 > Weitere Informationen finden Sie im [vollständigen Beispiel Projekt](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Modeling/TableSplitting) .
 
-## <a name="usage"></a>Verwendung
+## <a name="usage"></a>Verbrauch
 
 Das Speichern und Abfragen von Entitäten mithilfe von Tabellen Aufteilung erfolgt auf dieselbe Weise wie andere Entitäten:
 
@@ -46,9 +46,9 @@ Das Speichern und Abfragen von Entitäten mithilfe von Tabellen Aufteilung erfol
 > [!NOTE]
 > Diese Funktion wurde in EF Core 3,0 eingeführt.
 
-Wenn alle Spalten, die von einer abhängigen Entität verwendet werden, in der Datenbank `NULL` werden, wird keine Instanz für Sie erstellt, wenn Sie abgefragt wird. Dadurch kann eine optionale abhängige Entität modelliert werden, bei der die Beziehungs Eigenschaft für den Prinzipal NULL ist. Beachten Sie, dass auch alle Eigenschaften der abhängigen Eigenschaften optional sind und auf `null`festgelegt werden, was nicht erwartet wird.
+Wenn sich alle Spalten, die von einer abhängigen Entität verwendet werden `NULL` , in der Datenbank befinden, wird beim Abfragen keine Instanz für Sie erstellt. Dadurch kann eine optionale abhängige Entität modelliert werden, bei der die Beziehungs Eigenschaft für den Prinzipal NULL ist. Beachten Sie, dass dies auch dann der Fall wäre, wenn alle Eigenschaften der abhängigen Eigenschaft optional sind und auf festgelegt sind `null` , was nicht erwartet wird.
 
-## <a name="concurrency-tokens"></a>Parallelitäts Token
+## <a name="concurrency-tokens"></a>Parallelitätstoken
 
 Wenn einer der Entitäts Typen, die eine Tabelle gemeinsam nutzen, über ein Parallelitäts Token verfügt, muss dieser auch in allen anderen Entitäts Typen enthalten sein. Dies ist erforderlich, um einen veralteten Parallelitäts Token-Wert zu vermeiden, wenn nur eine Entität aktualisiert wird, die derselben Tabelle zugeordnet ist.
 

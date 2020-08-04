@@ -4,12 +4,12 @@ description: Verwenden von Wert vergleichen zum Steuern der Art EF Core Vergleic
 author: ajcvickers
 ms.date: 03/20/2020
 uid: core/modeling/value-comparers
-ms.openlocfilehash: 9e33bfb840606b746626daa1da7331904b495ab4
-ms.sourcegitcommit: 92d54fe3702e0c92e198334da22bacb42e9842b1
+ms.openlocfilehash: fa5352129977d858d54d4aede746b320c91b0ad3
+ms.sourcegitcommit: 949faaba02e07e44359e77d7935f540af5c32093
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/10/2020
-ms.locfileid: "84664116"
+ms.lasthandoff: 08/03/2020
+ms.locfileid: "87526783"
 ---
 # <a name="value-comparers"></a>Wert Vergleiche
 
@@ -59,7 +59,7 @@ Dies ist oft richtig, kann jedoch beim Mapping komplexer Typen überschrieben we
 
 ### <a name="simple-immutable-classes"></a>Einfache unveränderliche Klassen
 
-Eine Eigenschaft, die einen Wert Konverter verwendet, um eine einfache, unveränderliche Klasse zuzuordnen.
+Stellen Sie sich eine Eigenschaft vor, die einen Wert Konverter verwendet, um eine einfache, unveränderliche Klasse zuzuordnen.
 
 [!code-csharp[SimpleImmutableClass](../../../samples/core/Modeling/ValueConversions/MappingImmutableClassProperty.cs?name=SimpleImmutableClass)]
 

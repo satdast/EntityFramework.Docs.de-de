@@ -5,12 +5,12 @@ author: roji
 ms.date: 04/27/2020
 ms.assetid: bde4e0ee-fba3-4813-a849-27049323d301
 uid: core/miscellaneous/collations-and-case-sensitivity
-ms.openlocfilehash: b3874847922cb39aa57d50813e6e50ff7db72eb9
-ms.sourcegitcommit: ebfd3382fc583bc90f0da58e63d6e3382b30aa22
+ms.openlocfilehash: 46a13d341c1b721bb243ee2b205bdc2f4d7e7aee
+ms.sourcegitcommit: 949faaba02e07e44359e77d7935f540af5c32093
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/25/2020
-ms.locfileid: "85370564"
+ms.lasthandoff: 08/03/2020
+ms.locfileid: "87526445"
 ---
 # <a name="collations-and-case-sensitivity"></a>Sortierungen und Groß-/Kleinschreibung
 
@@ -68,11 +68,11 @@ Beachten Sie, dass bei einigen Datenbanken die Sortierung beim Erstellen eines I
 
 In .net wird bei der Zeichen folgen Gleichheit standardmäßig die Groß-/Kleinschreibung beachtet: `s1 == s2` führt einen Ordinalvergleich durch, bei dem die Zeichen folgen identisch sein müssen. Da die Standardsortierung der Datenbanken variiert und die einfache Gleichheit bei der Verwendung von Indizes wünschenswert ist, versucht EF Core nicht, einfache Gleichheit in einen Daten Bank Vorgang zu übersetzen, bei dem die Groß-/Kleinschreibung beachtet wird: c#-Gleichheit wird direkt in SQL-Gleichheit übersetzt, bei der die Groß-/Kleinschreibung beachtet wird, je nach verwendeter und Sortierungs Konfiguration.
 
-Außerdem bietet .net über Ladungen [`string.Equals`](https://docs.microsoft.com/dotnet/api/system.string.equals#System_String_Equals_System_String_System_StringComparison_) [`StringComparison`](https://docs.microsoft.com/dotnet/api/system.stringcomparison) , die eine-Enum akzeptieren, die die Berücksichtigung der Groß-/Kleinschreibung und der Kultur für den Vergleich ermöglicht. EF Core können diese über Ladungen nicht in SQL übersetzen, und der Versuch, Sie zu verwenden, führt zu einer Ausnahme. EF Core weiß nicht, welche Sortierung mit Beachtung der Groß-/Kleinschreibung oder ohne Beachtung der Groß-/Kleinschreibung verwendet werden sollte. Noch wichtiger ist, dass das Anwenden einer Sortierung in den meisten Fällen die Index Verwendung verhindert, wodurch sich die Leistung für ein sehr einfaches und häufig verwendetes .net-Konstrukt erheblich beeinträchtigt. Wenn Sie erzwingen möchten, dass eine Abfrage die Groß-/Kleinschreibung beachtet oder den Vergleich ohne Berücksichtigung der Groß-/Kleinschreibung verwendet, geben Sie eine Sortierung explizit über `EF.Functions.Collate` [detailed above](#explicit-collations-and-indexes)
+Außerdem bietet .net über Ladungen [`string.Equals`](/dotnet/api/system.string.equals#System_String_Equals_System_String_System_StringComparison_) [`StringComparison`](/dotnet/api/system.stringcomparison) , die eine-Enum akzeptieren, die die Berücksichtigung der Groß-/Kleinschreibung und der Kultur für den Vergleich ermöglicht. EF Core können diese über Ladungen nicht in SQL übersetzen, und der Versuch, Sie zu verwenden, führt zu einer Ausnahme. EF Core weiß nicht, welche Sortierung mit Beachtung der Groß-/Kleinschreibung oder ohne Beachtung der Groß-/Kleinschreibung verwendet werden sollte. Noch wichtiger ist, dass das Anwenden einer Sortierung in den meisten Fällen die Index Verwendung verhindert, wodurch sich die Leistung für ein sehr einfaches und häufig verwendetes .net-Konstrukt erheblich beeinträchtigt. Wenn Sie erzwingen möchten, dass eine Abfrage die Groß-/Kleinschreibung beachtet oder den Vergleich ohne Berücksichtigung der Groß-/Kleinschreibung verwendet, geben Sie eine Sortierung explizit über `EF.Functions.Collate` [detailed above](#explicit-collations-and-indexes)
 
 ## <a name="database-specific-information"></a>Datenbankspezifische Informationen
 
-* [SQL Server Dokumentation zu Sortierungen](https://docs.microsoft.com/sql/relational-databases/collations/collation-and-unicode-support).
-* [Microsoft. Data. sqlite-Dokumentation zu Sortierungen](https://docs.microsoft.com/dotnet/standard/data/sqlite/collation).
+* [SQL Server Dokumentation zu Sortierungen](/sql/relational-databases/collations/collation-and-unicode-support).
+* [Microsoft. Data. sqlite-Dokumentation zu Sortierungen](/dotnet/standard/data/sqlite/collation).
 * [PostgreSQL-Dokumentation zu Sortierungen](https://www.postgresql.org/docs/current/collation.html).
 * [MySQL-Dokumentation zu Sortierungen](https://dev.mysql.com/doc/refman/en/charset-general.html).

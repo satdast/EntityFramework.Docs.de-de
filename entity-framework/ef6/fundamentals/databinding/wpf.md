@@ -3,19 +3,19 @@ title: Datenbindung mit WPF-EF6
 author: divega
 ms.date: 05/19/2020
 ms.assetid: e90d48e6-bea7785-47ef-b756-7b89cce4daf0
-ms.openlocfilehash: c8e9e9a0810d8192e5184abbc7df2e74e4ee7edb
-ms.sourcegitcommit: 59e3d5ce7dfb284457cf1c991091683b2d1afe9d
+ms.openlocfilehash: baeb75b1ee386ca58013048bcc31ea4074604673
+ms.sourcegitcommit: 949faaba02e07e44359e77d7935f540af5c32093
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 05/20/2020
-ms.locfileid: "83672909"
+ms.lasthandoff: 08/03/2020
+ms.locfileid: "87526848"
 ---
 # <a name="databinding-with-wpf"></a>Datenbindung mit WPF
 
 > [!IMPORTANT]
 > **Dieses Dokument gilt nur für WPF auf dem .NET Framework**
 >
-> In diesem Dokument wird das Datenbindung für WPF auf dem .NET Framework beschrieben. Für neue .net Core-Projekte empfiehlt es sich, anstelle von Entity Framework 6 [EF Core](/ef/core) zu verwenden. Die Dokumentation für Datenbindung in EF Core wird in der [Problem #778](https://github.com/dotnet/EntityFramework.Docs/issues/778)nachverfolgt.
+> In diesem Dokument wird das Datenbindung für WPF auf dem .NET Framework beschrieben. Für neue .net Core-Projekte empfiehlt es sich, anstelle von Entity Framework 6 [EF Core](/ef/core) zu verwenden. Die Dokumentation für Datenbindung in EF Core finden Sie hier: " [Getting Started with WPF](/ef/core/get-started/wpf)".
 
 In dieser schrittweisen exemplarischen Vorgehensweise wird gezeigt, wie poco-Typen an WPF-Steuerelemente in einem Master-Detail-Formular gebunden werden. Die Anwendung verwendet die Entity Framework-APIs zum Auffüllen von Objekten mit Daten aus der Datenbank, zum Nachverfolgen von Änderungen und zum Beibehalten von Daten in der Datenbank.
 
@@ -202,7 +202,7 @@ Wir verwenden Entity Framework Designer, die als Teil von Visual Studio enthalte
 
     ![Objekte auswählen](~/ef6/media/chooseyourobjects.png)
 
-Sobald der Reverse-Engineering-Prozess abgeschlossen ist, wird das neue Modell dem Projekt hinzugefügt und geöffnet, damit Sie es im Entity Framework Designer anzeigen können. Eine APP. config-Datei wurde dem Projekt auch mit den Verbindungsdetails für die Datenbank hinzugefügt.
+Sobald der Reverse-Engineering-Prozess abgeschlossen ist, wird das neue Modell dem Projekt hinzugefügt und geöffnet, damit Sie es im Entity Framework Designer anzeigen können. Außerdem wurde dem Projekt eine App.config Datei mit den Verbindungsdetails für die Datenbank hinzugefügt.
 
 #### <a name="additional-steps-in-visual-studio-2010"></a>Weitere Schritte in Visual Studio 2010
 

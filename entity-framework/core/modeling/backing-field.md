@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: a628795e-64df-4f24-a5e8-76bc261e7ed8
 uid: core/modeling/backing-field
-ms.openlocfilehash: 5c1b2e8036a8556d69cac2ec22722fc72d6da4aa
-ms.sourcegitcommit: 387cbd8109c0fc5ce6bdc85d0dec1aed72ad4c33
+ms.openlocfilehash: e015c4f3fca767d25bee179c027813bd9fcf4c07
+ms.sourcegitcommit: 949faaba02e07e44359e77d7935f540af5c32093
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/23/2020
-ms.locfileid: "82103151"
+ms.lasthandoff: 08/03/2020
+ms.locfileid: "87526757"
 ---
 # <a name="backing-fields"></a>Unterstützungsfelder
 
@@ -24,7 +24,7 @@ Gemäß der Konvention werden die folgenden Felder als Sicherungs Felder für ei
 * `m_<camel-cased property name>`
 * `m_<property name>`
 
-Im folgenden Beispiel wird die `Url` -Eigenschaft so konfiguriert, dass `_url` Sie als dahinter liegendes Feld hat:
+Im folgenden Beispiel wird die- `Url` Eigenschaft so konfiguriert, dass Sie als dahinter liegendes `_url` Feld hat:
 
 [!code-csharp[Main](../../../samples/core/Modeling/Conventions/BackingField.cs#Sample)]
 
@@ -46,22 +46,22 @@ Standardmäßig liest EF immer das dahinter liegende Feld, wobei angenommen wird
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/BackingFieldAccessMode.cs?name=BackingFieldAccessMode&highlight=6)]
 
-Alle unterstützten Optionen finden Sie in der [propertyaccessmode-Enumeration](https://docs.microsoft.com/dotnet/api/microsoft.entityframeworkcore.propertyaccessmode) .
+Alle unterstützten Optionen finden Sie in der [propertyaccessmode-Enumeration](/dotnet/api/microsoft.entityframeworkcore.propertyaccessmode) .
 
 > [!NOTE]
-> Bei EF Core 3,0 wurde der standardmäßige Eigenschaften Zugriffsmodus von `PreferFieldDuringConstruction` in `PreferField`geändert.
+> Bei EF Core 3,0 wurde der standardmäßige Eigenschaften Zugriffsmodus von `PreferFieldDuringConstruction` in geändert `PreferField` .
 
 ## <a name="field-only-properties"></a>Feld-only-Eigenschaften
 
 Sie können auch eine konzeptionelle Eigenschaft in Ihrem Modell erstellen, die nicht über eine entsprechende CLR-Eigenschaft in der Entitäts Klasse verfügt, sondern stattdessen ein Feld zum Speichern der Daten in der Entität verwendet. Dies unterscheidet sich von den [Schatten Eigenschaften](shadow-properties.md), bei denen die Daten in der Änderungs Protokollierung und nicht im CLR-Typ der Entität gespeichert werden. Feld-only-Eigenschaften werden häufig verwendet, wenn die Entitäts Klasse Methoden anstelle von Eigenschaften verwendet, um Werte zu erhalten/festzulegen, oder in Fällen, in denen Felder überhaupt nicht im Domänen Modell (z. b. Primärschlüssel) verfügbar gemacht werden sollen.
 
-Sie können eine nur-Feld-Eigenschaft konfigurieren, indem Sie in der `Property(...)` -API einen Namen angeben:
+Sie können eine nur-Feld-Eigenschaft konfigurieren, indem Sie in der-API einen Namen angeben `Property(...)` :
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/BackingFieldNoProperty.cs#Sample)]
 
 EF versucht, eine CLR-Eigenschaft mit dem angegebenen Namen oder einem Feld zu finden, wenn eine Eigenschaft nicht gefunden wird. Wenn weder eine Eigenschaft noch ein Feld gefunden wird, wird stattdessen eine Schatten Eigenschaft eingerichtet.
 
-Möglicherweise müssen Sie in LINQ-Abfragen auf eine Eigenschaft vom Typ "Feld" verweisen, diese Felder sind jedoch in der Regel privat. Sie können die `EF.Property(...)` -Methode in einer LINQ-Abfrage verwenden, um auf das-Feld zu verweisen:
+Möglicherweise müssen Sie in LINQ-Abfragen auf eine Eigenschaft vom Typ "Feld" verweisen, diese Felder sind jedoch in der Regel privat. Sie können die- `EF.Property(...)` Methode in einer LINQ-Abfrage verwenden, um auf das-Feld zu verweisen:
 
 ``` csharp
 var blogs = db.blogs.OrderBy(b => EF.Property<string>(b, "_validatedUrl"));

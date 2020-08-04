@@ -4,12 +4,12 @@ author: roji
 ms.date: 12/16/2019
 ms.assetid: 85b92003-b692-417d-ac1d-76d40dce664b
 uid: core/modeling/indexes
-ms.openlocfilehash: 810fccc0c6b035f515107601b245811f7b4118a6
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.openlocfilehash: 9565b499ababace3595153e7159e017d2df1cc5a
+ms.sourcegitcommit: 949faaba02e07e44359e77d7935f540af5c32093
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78413936"
+ms.lasthandoff: 08/03/2020
+ms.locfileid: "87526744"
 ---
 # <a name="indexes"></a>Indizes
 
@@ -38,7 +38,7 @@ Wenn Sie versuchen, mehr als eine Entität mit denselben Werten für den Spalten
 
 ## <a name="index-name"></a>Indexname
 
-Gemäß der Konvention werden Indizes, die in einer relationalen Datenbank erstellt werden, `IX_<type name>_<property name>`benannt. Bei zusammengesetzten Indizes wird `<property name>` zu einer durch Trennzeichen getrennten Liste mit Eigenschaftsnamen.
+Gemäß der Konvention werden Indizes, die in einer relationalen Datenbank erstellt werden, benannt `IX_<type name>_<property name>` . Wird bei zusammengesetzten Indizes `<property name>` zu einer durch Trennzeichen getrennten Liste von Eigenschaftsnamen.
 
 Mit der flüssigen API können Sie den Namen des Indexes festlegen, der in der Datenbank erstellt wurde:
 
@@ -46,7 +46,7 @@ Mit der flüssigen API können Sie den Namen des Indexes festlegen, der in der D
 
 ## <a name="index-filter"></a>Index Filter
 
-Einige relationale Datenbanken ermöglichen es Ihnen, einen gefilterten oder partiellen Index anzugeben. Auf diese Weise können Sie nur eine Teilmenge der Spaltenwerte indizieren, die Größe des Indexes verringern und sowohl die Leistung als auch die Speicherplatz Auslastung verbessern. Weitere Informationen zu SQL Server gefilterten Indizes finden Sie in [der Dokumentation](https://docs.microsoft.com/sql/relational-databases/indexes/create-filtered-indexes)zu.
+Einige relationale Datenbanken ermöglichen es Ihnen, einen gefilterten oder partiellen Index anzugeben. Auf diese Weise können Sie nur eine Teilmenge der Spaltenwerte indizieren, die Größe des Indexes verringern und sowohl die Leistung als auch die Speicherplatz Auslastung verbessern. Weitere Informationen zu SQL Server gefilterten Indizes finden Sie in [der Dokumentation](/sql/relational-databases/indexes/create-filtered-indexes)zu.
 
 Sie können die fließende API verwenden, um einen Filter für einen Index anzugeben, der als SQL-Ausdruck bereitgestellt wird:
 
@@ -58,8 +58,8 @@ Bei Verwendung des SQL Server Anbieters fügt EF einen `'IS NOT NULL'` Filter f�
 
 ## <a name="included-columns"></a>Eingeschlossene Spalten
 
-Mit einigen relationalen Datenbanken können Sie eine Gruppe von Spalten konfigurieren, die in den Index aufgenommen werden, aber nicht Teil Ihres "Schlüssels" sind. Dies kann die Abfrageleistung erheblich verbessern, wenn alle Spalten in der Abfrage in den Index als Schlüssel-oder nicht Schlüssel Spalten eingeschlossen werden, da auf die Tabelle selbst nicht zugegriffen werden muss. Weitere Informationen zu SQL Server enthaltenen Spalten finden Sie in [der Dokumentation](https://docs.microsoft.com/sql/relational-databases/indexes/create-indexes-with-included-columns)zu.
+Mit einigen relationalen Datenbanken können Sie eine Gruppe von Spalten konfigurieren, die in den Index aufgenommen werden, aber nicht Teil Ihres "Schlüssels" sind. Dies kann die Abfrageleistung erheblich verbessern, wenn alle Spalten in der Abfrage in den Index als Schlüssel-oder nicht Schlüssel Spalten eingeschlossen werden, da auf die Tabelle selbst nicht zugegriffen werden muss. Weitere Informationen zu SQL Server enthaltenen Spalten finden Sie in [der Dokumentation](/sql/relational-databases/indexes/create-indexes-with-included-columns)zu.
 
-Im folgenden Beispiel ist die Spalte `Url` Teil des Index Schlüssels, sodass jede Abfrage Filterung für diese Spalte den Index verwenden kann. Außerdem müssen Abfragen, die nur auf die `Title`-und `PublishedOn` Spalten zugreifen, nicht auf die Tabelle zugreifen und effizienter ausgeführt werden:
+Im folgenden Beispiel `Url` ist die Spalte Teil des Index Schlüssels, sodass jede Abfrage Filterung für diese Spalte den Index verwenden kann. Außerdem müssen Abfragen, die nur auf die `Title` Spalten und zugreifen, `PublishedOn` nicht auf die Tabelle zugreifen und effizienter ausgeführt werden:
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/IndexInclude.cs?name=IndexInclude&highlight=5-9)]
