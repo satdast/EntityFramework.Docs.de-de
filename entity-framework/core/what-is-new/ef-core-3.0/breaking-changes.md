@@ -3,12 +3,12 @@ title: Breaking Changes in EF Core 3.0
 author: ajcvickers
 ms.date: 12/03/2019
 uid: core/what-is-new/ef-core-3.0/breaking-changes
-ms.openlocfilehash: 6e0c17a22b56b206f18e47f678e3e237d5c42375
-ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
+ms.openlocfilehash: a5e8b46fae63e45282342964a631ca2f830e601b
+ms.sourcegitcommit: 949faaba02e07e44359e77d7935f540af5c32093
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "78413558"
+ms.lasthandoff: 08/03/2020
+ms.locfileid: "87526861"
 ---
 # <a name="breaking-changes-included-in-ef-core-30"></a>Breaking Changes in EF Core 3.0
 
@@ -17,16 +17,16 @@ Die folgenden API-Änderungen und Behavior Changes können dazu führen, dass vo
 
 ## <a name="summary"></a>Zusammenfassung
 
-| **Wichtige Änderung**                                                                                               | **Auswirkung** |
+| **Wichtige Änderung**                                                                                               | **Auswirkungen** |
 |:------------------------------------------------------------------------------------------------------------------|------------|
-| [LINQ-Abfragen werden nicht mehr auf dem Client ausgewertet](#linq-queries-are-no-longer-evaluated-on-the-client)         | High       |
-| [EF Core 3.0 zielt auf .NET Standard 2.1 und nicht auf .NET Standard 2.0 ab](#netstandard21) | High      |
-| [Das EF Core-Befehlszeilentool (dotnet ef) ist nicht mehr Bestandteil des .NET Core SDK](#dotnet-ef) | High      |
-| [DetectChanges berücksichtigt vom Speicher generierte Schlüsselwerte](#dc) | High      |
-| [FromSql, ExecuteSql und ExecuteSqlAsync wurden umbenannt](#fromsql) | High      |
-| [Abfragetypen werden mit Entitätstypen zusammengeführt](#qt) | High      |
-| [Entity Framework Core ist nicht mehr Bestandteil des gemeinsam verwendeten ASP.NET Core-Frameworks](#no-longer) | Medium      |
-| [Kaskadierende DELETE-Anweisungen werden standardmäßig sofort ausgeführt](#cascade) | Medium      |
+| [LINQ-Abfragen werden nicht mehr auf dem Client ausgewertet](#linq-queries-are-no-longer-evaluated-on-the-client)         | Hoch       |
+| [EF Core 3.0 zielt auf .NET Standard 2.1 und nicht auf .NET Standard 2.0 ab](#netstandard21) | Hoch      |
+| [Das EF Core-Befehlszeilentool (dotnet ef) ist nicht mehr Bestandteil des .NET Core SDK](#dotnet-ef) | Hoch      |
+| [DetectChanges berücksichtigt vom Speicher generierte Schlüsselwerte](#dc) | Hoch      |
+| [FromSql, ExecuteSql und ExecuteSqlAsync wurden umbenannt](#fromsql) | Hoch      |
+| [Abfragetypen werden mit Entitätstypen zusammengeführt](#qt) | Hoch      |
+| [Entity Framework Core ist nicht mehr Teil des gemeinsam verwendeten ASP.NET Core-Frameworks](#no-longer) | Medium      |
+| [Kaskadierende Deletes werden standardmäßig sofort ausgeführt](#cascade) | Medium      |
 | [Eager Loading von verwandten Entitäten erfolgt nun in einer einzelnen Abfrage](#eager-loading-single-query) | Medium      |
 | [DeleteBehavior.Restrict verfügt über eine übersichtlichere Semantik](#deletebehavior) | Medium      |
 | [Die Konfigurations-API für Beziehungen abhängiger (owned) Typen wurde geändert](#config) | Medium      |
@@ -34,7 +34,7 @@ Die folgenden API-Änderungen und Behavior Changes können dazu führen, dass vo
 | [Abfragen ohne Nachverfolgung führen keine Identitätsauflösung mehr durch](#notrackingresolution) | Medium      |
 | [Metadaten-API-Änderungen](#metadata-api-changes) | Medium      |
 | [Anbieterspezifische Metadaten-API-Änderungen](#provider) | Medium      |
-| [UseRowNumberForPaging wurde entfernt](#urn) | Medium      |
+| [UseRowNumberForPaging wurde entfernt.](#urn) | Medium      |
 | [FromSql-Methode kann nicht zusammengesetzt werden, wenn sie mit einer gespeicherten Prozedur verwendet wird](#fromsqlsproc) | Medium      |
 | [FromSql-Methoden können nur für die Stammelemente der Abfrage angegeben werden](#fromsql) | Niedrig      |
 | [~~Die Abfrageausführung wird auf Debugebene protokolliert~~ – zurückgesetzt](#qe) | Niedrig      |
@@ -44,11 +44,11 @@ Die folgenden API-Änderungen und Behavior Changes können dazu führen, dass vo
 | [Benutzereigene Entitäten können nicht abgefragt werden, ohne dass der Besitzer eine Nachverfolgungsabfrage verwendet](#owned-query) | Niedrig      |
 | [Geerbte Eigenschaften von nicht zugeordneten Typen sind nun einer einzelnen Spalte für alle abgeleiteten Typen zugeordnet](#ip) | Niedrig      |
 | [Die Konvention zur Fremdschlüsseleigenschaft entspricht nicht mehr dem Namen der Prinzipaleigenschaft](#fkp) | Niedrig      |
-| [Die Datenbankverbindung wird jetzt getrennt, wenn sie nicht mehr verwendet wird, bevor TransactionScope abgeschlossen wurde](#dbc) | Niedrig      |
+| [Die Datenbankverbindung wird jetzt geschlossen, wenn sie nicht mehr verwendet wird, bevor TransactionScope abgeschlossen wurde](#dbc) | Niedrig      |
 | [Unterstützungsfelder werden standardmäßig verwendet](#backing-fields-are-used-by-default) | Niedrig      |
 | [Eine Ausnahme wird ausgelöst, wenn mehrere kompatible Unterstützungsfelder gefunden werden](#throw-if-multiple-compatible-backing-fields-are-found) | Niedrig      |
-| [„Nur-Feld“-Eigenschaftennamen sollten dem Feldnamen entsprechen](#field-only-property-names-should-match-the-field-name) | Niedrig      |
-| [AddLogging und AddMemoryCache werden nicht mehr von AddDbContext/AddDbContextPool aufgerufen](#adddbc) | Niedrig      |
+| [„Nur-Feld“-Eigenschaftsnamen sollten dem Feldnamen entsprechen](#field-only-property-names-should-match-the-field-name) | Niedrig      |
+| [Von AddDbContext/AddDbContextPool werden AddLogging und AddMemoryCache nicht mehr aufgerufen.](#adddbc) | Niedrig      |
 | [AddEntityFramework* fügt IMemoryCache mit einer Größenbeschränkung hinzu](#addentityframework-adds-imemorycache-with-a-size-limit) | Niedrig      |
 | [DbContext.Entry erkennt nun mit DetectChanges lokale Änderungen](#dbe) | Niedrig      |
 | [Schlüssel aus Zeichenfolgen und Bytearrays werden standardmäßig nicht vom Client generiert](#string-and-byte-array-keys-are-not-client-generated-by-default) | Niedrig      |
@@ -64,13 +64,13 @@ Die folgenden API-Änderungen und Behavior Changes können dazu führen, dass vo
 | [GUID-Werte werden jetzt als TEXT in SQLite gespeichert](#guid) | Niedrig      |
 | [Char-Werte werden jetzt als TEXT in SQLite gespeichert](#char) | Niedrig      |
 | [Migrations-IDs werden jetzt mit dem Kalender der invarianten Kultur generiert](#migid) | Niedrig      |
-| [Erweiterungsinformationen und -metadaten wurden aus IDbContextOptionsExtension entfernt](#xinfo) | Niedrig      |
+| [Erweiterungsinformationen und Metadaten aus IDbContextOptionsExtension entfernt](#xinfo) | Niedrig      |
 | [LogQueryPossibleExceptionWithAggregateOperator wurde umbenannt](#lqpe) | Niedrig      |
-| [Übersichtlichere API für Namen von Fremdschlüsselconstraints](#clarify) | Niedrig      |
-| [IRelationalDatabaseCreator.HasTables/HasTablesAsync ist jetzt öffentlich](#irdc2) | Niedrig      |
+| [Verdeutlichen der API für Einschränkungsnamen von Fremdschlüsseln](#clarify) | Niedrig      |
+| [„IRelationalDatabaseCreator.HasTables/HasTablesAsync“ ist jetzt öffentlich](#irdc2) | Niedrig      |
 | [Microsoft.EntityFrameworkCore.Design ist jetzt ein DevelopmentDependency-Paket](#dip) | Niedrig      |
-| [SQLitePCL.raw wurde auf Version 2.0.0 aktualisiert](#SQLitePCL) | Niedrig      |
-| [NetTopologySuite wurde auf Version 2.0.0 aktualisiert](#NetTopologySuite) | Niedrig      |
+| [SQLitePCL.raw zu Version 2.0.0 aktualisiert](#SQLitePCL) | Niedrig      |
+| [NetTopologySuite auf Version 2.0.0 aktualisiert](#NetTopologySuite) | Niedrig      |
 | [Microsoft.Data.SqlClient wird statt System.Data.SqlClient verwendet](#SqlClient) | Niedrig      |
 | [Beziehungen mit mehreren mehrdeutigen Selbstverweisen müssen nun konfiguriert werden](#mersa) | Niedrig      |
 | [DbFunction.Schema ist NULL oder eine leere Zeichenfolge und ist deshalb so konfiguriert, dass es im Standardschema des Modells ist](#udf-empty-string) | Niedrig      |
@@ -100,7 +100,7 @@ Wie die Erfahrung in der Entwicklungsphase gezeigt hat, können auch Warnungen, 
 
 Die automatische Auswertung auf Clients kann darüber hinaus zu Problemen führen, bei denen die Verbesserung der Abfrageübersetzung für bestimmte Ausdrücke zu unbeabsichtigten Breaking Changes zwischen Releases führt.
 
-**Gegenmaßnahmen**
+**Vorbeugende Maßnahmen**
 
 Wenn sich eine Abfrage nicht vollständig übersetzen lässt, habe Sie zwei Möglichkeiten: Schreiben Sie sie entweder um, oder setzen Sie alternativ `AsEnumerable()`, `ToList()` oder ähnliche Methoden ein, um Daten wieder zurück an den Client zu übertragen, wo sie mit LINQ to Objects weiterverarbeitet werden können.
 
@@ -124,7 +124,7 @@ Ab 3.0 zielt EF Core auf .NET Standard 2.1 ab und wird auf allen Plattformen aus
 
 Dies ist ein Teil der strategischen Entscheidung bezüglich .NET-Technologien, um den Fokus auf .NET Core und andere moderne .NET-Plattformen (z. B. Xamarin) zu legen.
 
-**Gegenmaßnahmen**
+**Vorbeugende Maßnahmen**
 
 Verwenden von EF Core 3.1
 
@@ -148,7 +148,7 @@ Vor dieser Änderung konnte EF Core auf unterschiedliche Arten bezogen werden. D
 Durch die eingeführte Änderung wird EF Core unter allen Anbietern, unterstützten .NET-Implementierungen und Anwendungstypen auf dieselbe Weise bezogen.
 Entwickler können nun außerdem genau festlegen, wann für EF Core und zugehörige Datenanbieter ein Upgrade durchgeführt werden soll.
 
-**Gegenmaßnahmen**
+**Vorbeugende Maßnahmen**
 
 Wenn Sie EF Core in einer Anwendung unter ASP.NET Core 3.0 oder in einer anderen unterstützten Anwendung verwenden möchten, müssen Sie dem EF Core-Datenbankanbieter, der für die Anwendung genutzt werden soll, explizit einen Paketverweis hinzufügen.
 
@@ -169,7 +169,7 @@ Ab Version 3.0 ist das `dotnet ef`-Tool nicht mehr im .NET SDK enthalten und mus
 
 Durch diese Änderung kann `dotnet ef` als reguläres .NET-CLI-Tool für NuGet verteilt und aktualisiert werden und entspricht damit dem üblichen Verfahren, dass EF Core 3.0 ebenfalls immer als NuGet-Paket verteilt wird.
 
-**Gegenmaßnahmen**
+**Vorbeugende Maßnahmen**
 
 Um Migrationen zu verwalten oder ein Gerüst für `DbContext` zu erstellen, installieren Sie `dotnet-ef` als globales Tool:
 
@@ -214,7 +214,7 @@ Beachten Sie, dass die beiden oben genannten Abfragen dieselbe parametrisierte S
 Bei Methodenüberladungen wie dieser wird sehr leicht versehentlich die Methode für unformatierte Zeichenfolgen aufgerufen, wenn eigentlich beabsichtigt war, die Methode für interpolierte Zeichenfolgen aufzurufen (und umgekehrt).
 Dadurch werden Abfragen möglicherweise nicht parametrisiert, obwohl dies der Fall sein sollte.
 
-**Gegenmaßnahmen**
+**Vorbeugende Maßnahmen**
 
 Verwenden Sie ab sofort die neuen Methodennamen.
 
@@ -265,7 +265,7 @@ Ab EF Core 3.0 können die neuen Methoden `FromSqlRaw` und `FromSqlInterpolated`
 
 Die Angabe von `FromSql` an einer anderen Stelle als für ein `DbSet` erbrachte keine zusätzliche Bedeutung und keinen Mehrwert, sondern konnte in bestimmten Szenarien zu Mehrdeutigkeiten führen.
 
-**Gegenmaßnahmen**
+**Vorbeugende Maßnahmen**
 
 `FromSql` Aufrufe sollten so verschoben, dass sie direkt für das zugehörige `DbSet` gelten.
 
@@ -276,7 +276,7 @@ Die Angabe von `FromSql` an einer anderen Stelle als für ein `DbSet` erbrachte 
 
 **Altes Verhalten**
 
-Vor EF Core 3.0 wurde dieselbe Entitätsinstanz für jedes Vorkommen einer Entität mit einem bestimmten Typ und einer bestimmten ID verwendet. Dies entspricht dem Verhalten von Abfragen zu Nachverfolgungen. Die folgende Abfrage:
+Vor EF Core 3.0 wurde dieselbe Entitätsinstanz für jedes Vorkommen einer Entität mit einem bestimmten Typ und einer bestimmten ID verwendet. Dies entspricht dem Verhalten von Abfragen zu Nachverfolgungen. Diese Abfrage zum Beispiel:
 
 ```csharp
 var results = context.Products.Include(e => e.Category).AsNoTracking().ToList();
@@ -291,7 +291,7 @@ Ab EF Core 3.0 werden unterschiedliche Entitätsinstanzen erstellt, wenn eine En
 
 Die Identitätsauflösung (d. h. Feststellen, dass eine Entität über denselben Typ und die dieselbe ID wie die zuvor aufgetretene Entität verfügt) fügt zusätzlichen Aufwand für Leistung und Arbeitsspeicher hinzu. Dies widerspricht normalerweise dem Grund, warum in erster Linie Abfragen ohne Nachverfolgung verwendet werden. Obwohl die Identitätsauflösung manchmal nützlich sein kann, wird sie nicht benötigt, wenn die Entitäten serialisiert und an den Client gesendet werden, was manchmal für Abfragen ohne Nachverfolgung der Fall ist.
 
-**Gegenmaßnahmen**
+**Vorbeugende Maßnahmen**
 
 Verwenden Sie eine Nachverfolgungsabfrage, falls die Auflösung erforderlich ist.
 
@@ -328,7 +328,7 @@ Ab Version 3.0 wird in EF Core der temporäre Wert als Teil der Überwachungsinf
 
 Diese Änderung wurde vorgenommen, damit temporäre Schlüsselwerte nicht fälschlicherweise dauerhaft gespeichert werden, wenn eine Entität, die vorher von einer `DbContext`-Instanz überwacht wurde, in eine andere `DbContext`-Instanz verschoben wird. 
 
-**Gegenmaßnahmen**
+**Vorbeugende Maßnahmen**
 
 Anwendungen, die Primärschlüsselwerte Fremdschlüsseln zuweisen, um Zuordnungen zwischen Entitäten zu erstellen, können vom alten Verhalten abhängig sein, wenn Primärschlüssel vom Speicher generiert werden und zu Entitäten im `Added`-Zustand gehören.
 Sie können dies wie folgt vermeiden:
@@ -357,7 +357,7 @@ Falls kein Schlüsselwert festgelegt ist oder der Entitätstyp keine generierten
 
 Diese Änderung wurde vorgenommen, um bei der Verwendung von speichergenerierten Schlüsseln die Arbeit mit nicht verbundenen Entitätsgraphen einfacher und konsistenter zu gestalten.
 
-**Gegenmaßnahmen**
+**Vorbeugende Maßnahmen**
 
 Diese Änderung kann dazu führen, dass eine Anwendung nicht mehr funktioniert. Dieser Fall tritt ein, wenn für Entitätstypen generierte Schlüssel vorgesehen sind, dann jedoch explizit Schlüsselwerte für neue Instanzen festgelegt werden.
 Sie können dieses Problem vermeiden, indem Sie explizit festlegen, dass für Schlüsseleigenschaften keine generierten Werte verwendet werden sollen.
@@ -392,9 +392,9 @@ Wenn beispielsweise `context.Remove()` zum Löschen einer Prinzipalentität aufg
 
 **Hintergründe**
 
-Diese Änderung wurde vorgenommen, um die Arbeit mit Datenbindungen und Überwachungsszenarios zu vereinfachen, in denen bekannt sein muss, welche Entitäten _vor_ dem Aufruf von `SaveChanges` gelöscht werden.
+Diese Änderung wurde vorgenommen, um die Arbeit mit Datenbindungen und Überwachungsszenarios zu vereinfachen, in denen bekannt sein muss, welche Entitäten _vor dem Aufruf von_  `SaveChanges` gelöscht werden.
 
-**Gegenmaßnahmen**
+**Vorbeugende Maßnahmen**
 
 Sie können das vorherige Verhalten wiederherstellen, indem Sie für `context.ChangeTracker` die entsprechenden Einstellungen vornehmen.
 Beispiel:
@@ -420,7 +420,7 @@ Ab Version 3.0 generiert EF Core eine einzelne Abfrage mit JOINs für relationa
 
 Das Ausgeben mehrerer Abfragen zum Implementieren einer einzelnen LINQ-Abfrage führte zu einer Vielzahl von Problemen, darunter Leistungsbeeinträchtigungen, da mehrere Datenbankroundtrips erforderlich waren, und Datenkohärenzprobleme, da jede Abfrage einen anderen Zustand der Datenbank beobachten könnte.
 
-**Gegenmaßnahmen**
+**Vorbeugende Maßnahmen**
 
 Zwar ist dies technisch gesehen kein Breaking Change, jedoch könnte es erhebliche Auswirkungen auf die Leistung der Anwendung haben, wenn eine einzelne Abfrage eine große Anzahl von `Include`-Operatoren für Sammlungsnavigationen enthält. Weitere Informationen sowie Informationen zum Umschreiben von Abfragen auf eine effizientere Weise finden Sie [in diesem Kommentar](https://github.com/aspnet/EntityFrameworkCore/issues/18022#issuecomment-542397085).
 
@@ -443,7 +443,7 @@ Ab Version 3.0 wird mit `DeleteBehavior.Restrict` sichergestellt, dass Fremdschl
 
 Diese Änderung wurde vorgenommen, um die Benutzerfreundlichkeit bei intuitiver Verwendung von `DeleteBehavior` ohne unerwartete Nebeneffekte zu verbessern.
 
-**Gegenmaßnahmen**
+**Vorbeugende Maßnahmen**
 
 Sie können das vorherige Verhalten wiederherstellen, indem Sie `DeleteBehavior.ClientNoAction` verwenden.
 
@@ -468,7 +468,7 @@ Diese Änderung wurde vorgenommen, um Unklarheiten bei der Verwendung von Abfrag
 Abfragetypen sind schlüssellose Entitätstypen, die grundsätzlich schreibgeschützt sind. Sie sollten allerdings nicht allein wegen des Schreibschutzes verwendet werden.
 Des Weiteren werden sie oft Sichten zugeordnet, was aber nur daran liegt, dass für Letztere häufig keine Schlüssel definiert werden.
 
-**Gegenmaßnahmen**
+**Vorbeugende Maßnahmen**
 
 Die folgenden Teile der API sind durch die Änderungen veraltet:
 * **`ModelBuilder.Query<>()`** : Rufen Sie stattdessen `ModelBuilder.Entity<>().HasNoKey()` auf, um einen schlüssellosen Entitätstyp festzulegen.
@@ -529,7 +529,7 @@ Wenn Sie zusätzlich `Entity()`, `HasOne()`, oder `Set()` für das Ziel eines ab
 Diese Änderung wurde vorgenommen, um eine deutlichere Trennung zwischen der Konfiguration des abhängigen Typs und der _Beziehung zum abhängigen Typ_ zu ermöglichen.
 Dadurch werden für Methoden wie `HasForeignKey` Mehrdeutigkeiten und Unklarheiten beseitigt.
 
-**Gegenmaßnahmen**
+**Vorbeugende Maßnahmen**
 
 Passen Sie für die Beziehungen von abhängigen Typen die Konfiguration so an, dass die neue Fluent-API wie im obigen Beispiel verwendet wird.
 
@@ -564,7 +564,7 @@ Wenn `OrderDetails` im Besitz von `Order` ist oder explizit derselben Tabelle zu
 Ab Version 3.0 bietet EF Core die Möglichkeit, `Order` ohne `OrderDetails` hinzuzufügen, und alle `OrderDetails`-Eigenschaften, mit Ausnahme des primären Schlüssels, werden Spalten zugeordnet, die NULL-Werte zulassen.
 Bei Abfragen von EF Core wird `OrderDetails` auf `null` festgelegt, wenn eine der erforderlichen Eigenschaften keinen Wert aufweist oder keine erforderlichen Eigenschaften außer dem primären Schlüssel vorhanden und alle Eigenschaften `null` sind.
 
-**Gegenmaßnahmen**
+**Vorbeugende Maßnahmen**
 
 Wenn Ihr Modell von der gemeinsamen Nutzung einer Tabelle mit allen optionalen Spalten abhängig ist, aber die Navigation, die darauf zeigt, wahrscheinlich nicht `null` ist, sollte die Anwendung für die Handhabung von Fällen geändert werden, in denen die Navigation `null` ist. Wenn das nicht möglich ist, sollte dem Entitätstyp eine erforderliche Eigenschaft hinzugefügt werden oder mindestens einer Eigenschaft sollte ein Wert ungleich `null` zugewiesen sein.
 
@@ -609,7 +609,7 @@ Ab Version 3.0 gibt EF Core den neuen `Version`-Wert an `Order` weiter, wenn die
 
 Diese Änderung wurde vorgenommen, um einen veralteten Wert für ein Parallelitätstoken zu vermeiden, wenn nur eine der Entitäten, die derselben Tabelle zugeordnet sind, aktualisiert wird.
 
-**Gegenmaßnahmen**
+**Vorbeugende Maßnahmen**
 
 Alle Entitäten, die die Tabelle gemeinsam nutzen, müssen eine Eigenschaft enthalten, die der Spalte für das Parallelitätstoken zugeordnet ist. Es ist möglich, eine solche im Schattenzustand zu erstellen:
 ```csharp
@@ -642,7 +642,7 @@ Ab EF Core 3.0 wird eine Ausnahme ausgelöst, wenn eine Nachverfolgungsabfrage 
 
 Benutzereigene Entitäten können ohne den Besitzer nicht bearbeitet werden, daher handelt es sich in den meisten Fällen um einen Fehler, wenn sie auf diese Weise abgefragt werden.
 
-**Gegenmaßnahmen**
+**Vorbeugende Maßnahmen**
 
 Wenn die benutzereigene Entität nachverfolgt werden soll, damit sie später Änderungen an ihr vorgenommen werden können, sollte der Besitzer in der Abfrage enthalten sein.
 
@@ -699,7 +699,7 @@ Ab Version 3.0 erstellt EF Core nur eine Spalte für `ShippingAddress`.
 
 Der alte Verhalten war unerwartet.
 
-**Gegenmaßnahmen**
+**Vorbeugende Maßnahmen**
 
 Die Eigenschaft kann noch immer explizit einer separaten Spalte für die abgeleiteten Typen zugeordnet werden:
 
@@ -779,7 +779,7 @@ public class Order
 
 Diese Änderung wurde vorgenommen, um zu vermeiden, dass versehentlich eine Primärschlüsseleigenschaft für den abhängigen Typ definiert wird.
 
-**Gegenmaßnahmen**
+**Vorbeugende Maßnahmen**
 
 Wenn die Eigenschaft als Fremdschlüssel und daher Teil des Primärschlüssels vorgesehen war, müssen Sie diese explizit als solche festlegen.
 
@@ -816,7 +816,7 @@ Ab Version 3.0 schließt EF Core die Verbindung, sobald sie nicht mehr verwendet
 
 Diese Änderung ermöglicht die Verwendung mehrerer Kontexte in demselben `TransactionScope`. Das neue Verhalten entspricht außerdem EF6.
 
-**Gegenmaßnahmen**
+**Vorbeugende Maßnahmen**
 
 Wenn die Verbindung geöffnet bleiben muss, wird durch einen expliziten Aufruf von `OpenConnection()` sichergestellt, dass EF Core diese nicht vorzeitig schließt:
 
@@ -854,7 +854,7 @@ Wenn die Datenbank gelöscht wird, wird die Schlüsselgenerierung für alle Tabe
 
 Diese Änderung wurde vorgenommen, um die speicherinterne Schlüsselgenerierung enger mit der Schlüsselgenerierung für echte Datenbanken abzustimmen. Außerdem sollen bei Verwendung der In-Memory Database Tests leichter voneinander isoliert werden können.
 
-**Gegenmaßnahmen**
+**Vorbeugende Maßnahmen**
 
 Wenn Anwendungen von bestimmten speicherinternen Schlüsselwerten abhängig sind, funktionieren Erstere durch die eingeführte Änderung möglicherweise nicht mehr.
 Versuchen Sie, Abhängigkeiten von bestimmten Schlüsselwerten zu vermeiden, oder passen Sie die Anwendung an das neue Verhalten an.
@@ -877,7 +877,7 @@ Dies kann dazu führen, dass eine Anwendung nicht mehr funktioniert, wenn sie au
 
 Diese Änderung wurde vorgenommen, um zu verhindern, dass in EF Core fälschlicherweise immer dann Geschäftslogik ausgelöst wird, wenn Datenbankvorgänge für Entitäten durchgeführt werden.
 
-**Gegenmaßnahmen**
+**Vorbeugende Maßnahmen**
 
 Sie können das Verhalten von vor Version 3.0 wiederherstellen, indem Sie in `ModelBuilder` den Zugriffsmodus für die Eigenschaft konfigurieren.
 Beispiel:
@@ -903,7 +903,7 @@ Ab Version 3.0 wird in EF Core eine Ausnahme ausgelöst, wenn sich mehrere Felde
 
 Diese Änderung wurde vorgenommen, um zu vermeiden, dass automatisch ein falsches Feld verwendet wird.
 
-**Gegenmaßnahmen**
+**Vorbeugende Maßnahmen**
 
 Für Eigenschaften mit mehrdeutigen Unterstützungsfeldern muss das zu verwendende Feld explizit festgelegt werden.
 Mit der Fluent-API ist dies beispielsweise wie folgt möglich:
@@ -949,7 +949,7 @@ modelBuilder
 
 Diese Änderung wurde vorgenommen, um zu vermeiden, dass das gleiche Feld für zwei Eigenschaften mit ähnlichem Namen verwendet wird. Durch die Änderung entsprechen nun auch die Übereinstimmungsregeln für „Nur-Feld“-Eigenschaften den Regeln für Eigenschaften, die CLR-Eigenschaften zugeordnet sind.
 
-**Gegenmaßnahmen**
+**Vorbeugende Maßnahmen**
 
 „Nur-Feld“-Eigenschaften müssen so benannt werden wie das Feld, dem sie zugeordnet sind.
 In einer kommenden Version von EF Core nach 3.0 soll das explizite Konfigurieren eines Feldnamens, der sich vom Eigenschaftsnamen unterscheidet, erneut aktiviert werden (siehe Problem [#15307](https://github.com/aspnet/EntityFrameworkCore/issues/15307)):
@@ -969,7 +969,7 @@ modelBuilder
 
 **Altes Verhalten**
 
-Vor EF Core 3.0 wurden beim Aufruf von `AddDbContext` oder `AddDbContextPool` durch Aufrufe von [AddLogging](https://docs.microsoft.com/dotnet/api/microsoft.extensions.dependencyinjection.loggingservicecollectionextensions.addlogging) und [AddMemoryCache](https://docs.microsoft.com/dotnet/api/microsoft.extensions.dependencyinjection.memorycacheservicecollectionextensions.addmemorycache) auch Protokollierungs- und Arbeitsspeichercachingdienste bei DI registriert.
+Vor EF Core 3.0 wurden beim Aufruf von `AddDbContext` oder `AddDbContextPool` durch Aufrufe von [AddLogging](/dotnet/api/microsoft.extensions.dependencyinjection.loggingservicecollectionextensions.addlogging) und [AddMemoryCache](/dotnet/api/microsoft.extensions.dependencyinjection.memorycacheservicecollectionextensions.addmemorycache) auch Protokollierungs- und Arbeitsspeichercachingdienste bei DI registriert.
 
 **Neues Verhalten**
 
@@ -979,9 +979,9 @@ Ab EF Core 3.0 werden diese Dienste durch `AddDbContext` und `AddDbContextPool` 
 
 Für EF Core 3.0 ist es nicht erforderlich, dass diese Dienste im DI-Container der Anwendung enthalten sind. Wenn `ILoggerFactory` jedoch im DI-Container der Anwendung registriert ist, wird sie nach wie vor von EF Core verwendet.
 
-**Gegenmaßnahmen**
+**Vorbeugende Maßnahmen**
 
-Wenn Ihre Anwendung diese Dienste benötigt, registrieren Sie sie explizit mit [AddLogging](https://docs.microsoft.com/dotnet/api/microsoft.extensions.dependencyinjection.loggingservicecollectionextensions.addlogging) oder [AddMemoryCache](https://docs.microsoft.com/dotnet/api/microsoft.extensions.dependencyinjection.memorycacheservicecollectionextensions.addmemorycache) beim DI-Container.
+Wenn Ihre Anwendung diese Dienste benötigt, registrieren Sie sie explizit mit [AddLogging](/dotnet/api/microsoft.extensions.dependencyinjection.loggingservicecollectionextensions.addlogging) oder [AddMemoryCache](/dotnet/api/microsoft.extensions.dependencyinjection.memorycacheservicecollectionextensions.addmemorycache) beim DI-Container.
 
 ### <a name="addentityframework-adds-imemorycache-with-a-size-limit"></a>AddEntityFramework* fügt IMemoryCache mit einer Größenbeschränkung hinzu
 
@@ -999,11 +999,11 @@ Ab EF Core 3.0 registriert `AddEntityFramework*` einen IMemoryCache-Dienst mit 
 
 Die Verwendung von IMemoryCache ohne Einschränkung kann zu unkontrollierter Arbeitsspeicherauslastung führen, wenn ein Fehler in die Abfragecachelogik auftritt oder wenn die Abfragen dynamisch generiert werden. Durch eine Standardeinschränkung können potenzielle DoS-Angriffe verhindert werden.
 
-**Gegenmaßnahmen**
+**Vorbeugende Maßnahmen**
 
 In den meisten Fällen ist das Aufrufen von `AddEntityFramework*` nicht erforderlich, wenn `AddDbContext` oder `AddDbContextPool` ebenfalls aufgerufen werden. Daher besteht die beste Entschärfung darin, den `AddEntityFramework*`-Aufruf zu entfernen.
 
-Wenn Ihre Anwendung diese Dienste erfordert, registrieren Sie im Voraus eine IMemoryCache-Implementierung explizit mit dem DI-Container mithilfe von [AddMemoryCache](https://docs.microsoft.com/dotnet/api/microsoft.extensions.dependencyinjection.memorycacheservicecollectionextensions.addmemorycache).
+Wenn Ihre Anwendung diese Dienste erfordert, registrieren Sie im Voraus eine IMemoryCache-Implementierung explizit mit dem DI-Container mithilfe von [AddMemoryCache](/dotnet/api/microsoft.extensions.dependencyinjection.memorycacheservicecollectionextensions.addmemorycache).
 
 <a name="dbe"></a>
 
@@ -1029,7 +1029,7 @@ Andere Methoden wie `ChangeTracker.Entries` und `SaveChanges`, die eine Änderun
 
 Diese Änderung wurde vorgenommen, um die Leistung bei der standardmäßigen Verwendung von `context.Entry` zu verbessern.
 
-**Gegenmaßnahmen**
+**Vorbeugende Maßnahmen**
 
 Rufen Sie `ChangeTracker.DetectChanges()` explizit vor dem Aufruf von `Entry` auf, wenn das Verhalten vor Version 3.0 beibehalten werden soll.
 
@@ -1050,7 +1050,7 @@ Ab Version 3.0 wird in EF Core eine Ausnahme ausgelöst, wenn kein Schlüsselwer
 
 Diese Änderung wurde vorgenommen, da vom Client generierte `string`/`byte[]`-Werte in der Regel nicht sinnvoll sind. Das Standardverhalten führte außerdem zu kaum nachvollziehbaren generierten Schlüsselwerten.
 
-**Gegenmaßnahmen**
+**Vorbeugende Maßnahmen**
 
 Wenn Sie das Verhalten vor Version 3.0 nutzen möchten, müssen Sie explizit festlegen, dass für die Schlüsseleigenschaften generierte Werte verwendet sollen, wenn kein anderer Nicht-NULL-Wert festgelegt wird.
 Dies ist beispielsweise mit der Fluent-API möglich:
@@ -1087,10 +1087,10 @@ Ab Version 3.0 wird in EF Core `ILoggerFactory` als bereichsbezogener Dienst reg
 
 Diese Änderung wurde vorgenommen, um einer `DbContext`-Instanz eine Protokollierung zuordnen zu können. Dadurch werden weitere Funktionen bereitgestellt. In einigen Fällen wird außerdem schädliches Verhalten wie etwa die schnelle Zunahme von internen Dienstanbietern beseitigt.
 
-**Gegenmaßnahmen**
+**Vorbeugende Maßnahmen**
 
 Diese Änderung wirkt sich nur dann auf den Anwendungscode aus, wenn benutzerdefinierte Dienste auf dem internen Dienstanbieter von EF Core registriert und verwendet werden.
-Ein solches Szenario ist aber unüblich.
+Dies ist nicht üblich.
 In einem derartigen Fall funktioniert fast alles wie vorher. Singletondienste, die von `ILoggerFactory` abhängig sind, müssen jedoch so angepasst werden, dass `ILoggerFactory` auf andere Weise abgerufen wird.
 
 Erstellen Sie in diesen Situationen bitte im [GitHub-Issuetracker für EF Core](https://github.com/aspnet/EntityFrameworkCore/issues) ein Issue, in dem Sie beschreiben, wie Sie `ILoggerFactory` verwenden. So können wir in Zukunft erneute Breaking Changes vermeiden.
@@ -1116,7 +1116,7 @@ In dieser Situation wird also vom Anwendungscode versucht, zu einem ungültigen 
 
 Diese Änderung wurde vorgenommen, um das Verhalten beim Lazy Loading einer freigegebenen `DbContext`-Instanz konsistent und korrekt zu gestalten.
 
-**Gegenmaßnahmen**
+**Vorbeugende Maßnahmen**
 
 Aktualisieren Sie den Anwendungscode so, dass kein Lazy Loading durchgeführt wird, nachdem der Kontext freigegeben wurde. Alternativ können Sie auch, wie in der Ausnahmemeldung beschrieben wird, eine No-Op-Operation festlegen.
 
@@ -1136,7 +1136,7 @@ Ab Version 3.0 wird diese Warnung in EF Core als Fehler betrachtet, und eine Aus
 
 Diese Änderung wurde vorgenommen, damit auf den oben beschriebenen Fall explizit hingewiesen wird. So soll die Entwicklung von besserem Anwendungscode erleichtert werden.
 
-**Gegenmaßnahmen**
+**Vorbeugende Maßnahmen**
 
 Wenn dieser Fehler auftritt, müssen Sie die Grundursache ermitteln und die Erstellung vieler interner Dienstanbieter unterbinden.
 Sie können den Fehler allerdings auch wieder in eine Warnung konvertierten (oder ihn ignorieren), indem Sie `DbContextOptionsBuilder` konfigurieren.
@@ -1176,7 +1176,7 @@ Ab EF Core 3.0 führt der obige Code jetzt die erwartete Aktion durch.
 
 Das alte Verhalten war sehr verwirrend, vor allem beim Lesen des Konfigurationscodes und bei der Suche nach Fehlern.
 
-**Gegenmaßnahmen**
+**Vorbeugende Maßnahmen**
 
 Dies führt nur zu Fehlern in Anwendungen, die Beziehungen explizit unter Verwendung von Zeichenfolgen für Typnamen und ohne explizite Angabe der Navigationseigenschaft konfigurieren.
 Dies ist nicht üblich.
@@ -1211,7 +1211,7 @@ Die oben genannten Methoden geben nun `ValueTask<T>` über dieselbe `T` wie zuvo
 
 Durch diese Änderung verringert sich die Anzahl der Heapzuordnungen, die beim Aufrufen dieser Methoden entstehen, und dies führt zu einer Verbesserung der allgemeinen Leistung.
 
-**Gegenmaßnahmen**
+**Vorbeugende Maßnahmen**
 
 Anwendungen, die einfach die oben genannten APIs erwarten, müssen nur neu kompiliert werden – Quelländerungen sind nicht erforderlich.
 Eine komplexere Verwendung (z.B. Übergeben der zurückgegebenen `Task` an `Task.WhenAny()`) erfordern in der Regel, dass die zurückgegebene `ValueTask<T>` durch einen Aufruf von `AsTask()` in `Task<T>` konvertiert wird.
@@ -1235,7 +1235,7 @@ Der Anmerkungsname für Typzuordnungsanmerkungen lautet nun TypeMapping.
 
 Typzuordnungen werden nicht mehr ausschließlich für Anbieter relationaler Datenbanken verwendet.
 
-**Gegenmaßnahmen**
+**Vorbeugende Maßnahmen**
 
 Diese Änderung ist nur dann ein Breaking Change, wenn Anwendungen direkt über eine Anmerkung auf die Typzuordnung zugreifen. Dieses Szenario ist jedoch unüblich.
 Verzichten Sie daher darauf, die Anmerkung direkt zu verwenden, und greifen Sie stattdessen über die Fluent-API auf Typzuordnungen zu, um das Problem zu beheben.
@@ -1257,7 +1257,7 @@ Ab Version 3.0 wird in EF Core eine Ausnahme ausgelöst, um später eine unerwar
 Derzeit ist es nicht zulässig, einen abgeleiteten Typ einer anderen Tabelle zuzuordnen.
 Durch diese Änderung werden Breaking Changes vermieden, wenn der beschriebene Vorgang in Zukunft zulässig wird.
 
-**Gegenmaßnahmen**
+**Vorbeugende Maßnahmen**
 
 Entfernen Sie alle Zuordnungen von abgeleiteten Typen zu anderen Tabellen.
 
@@ -1278,7 +1278,7 @@ Verwenden Sie `HasIndex().ForSqlServerInclude()`.
 
 Diese Änderung wurde vorgenommen, um die API für Indizes mit `Include` an einer zentralen Stelle für alle Datenbankanbieter zusammenzuführen.
 
-**Gegenmaßnahmen**
+**Vorbeugende Maßnahmen**
 
 Verwenden Sie wie oben beschrieben die neue API.
 
@@ -1300,7 +1300,7 @@ Die folgenden Eigenschaften wurden in Erweiterungsmethoden konvertiert:
 
 Mit dieser Änderung wird die Implementierung der oben genannten Schnittstellen vereinfacht.
 
-**Gegenmaßnahmen**
+**Vorbeugende Maßnahmen**
 
 Verwenden Sie die neuen Erweiterungsmethoden.
 
@@ -1322,7 +1322,7 @@ Die anbieterspezifischen Erweiterungsmethoden werden vereinfacht:
 
 Mit dieser Änderung wird die Implementierung der oben genannten Erweiterungsmethoden vereinfacht.
 
-**Gegenmaßnahmen**
+**Vorbeugende Maßnahmen**
 
 Verwenden Sie die neuen Erweiterungsmethoden.
 
@@ -1344,7 +1344,7 @@ Ab Version 3.0 werden in EF Core keine `PRAGMA foreign_keys = 1`-Anweisungen meh
 
 Diese Änderung wurde vorgenommen, da von EF Core standardmäßig `SQLitePCLRaw.bundle_e_sqlite3` verwendet wird. Dadurch ist die Erzwingung von Fremdschlüsseln standardmäßig aktiviert und muss nicht jedes Mal explizit aktiviert werden, wenn eine Verbindung hergestellt wird.
 
-**Gegenmaßnahmen**
+**Vorbeugende Maßnahmen**
 
 Fremdschlüssel sind in SQLitePCLRaw.bundle_e_sqlite3 standardmäßig aktiviert. Dieses Bundle wird standardmäßig von EF Core verwendet.
 In anderen Fällen können Fremdschlüssel durch die Angabe `Foreign Keys=True` in der Verbindungszeichenfolge aktiviert werden.
@@ -1365,7 +1365,7 @@ Ab Version 3.0 wird von EF Core `SQLitePCLRaw.bundle_e_sqlite3` verwendet.
 
 Diese Änderung wurde vorgenommen, damit die unter iOS verwendete Version von SQLite sich konsistent zu Versionen auf anderen Plattformen verhält.
 
-**Gegenmaßnahmen**
+**Vorbeugende Maßnahmen**
 
 Konfigurieren Sie `Microsoft.Data.Sqlite` so, dass ein anderes `SQLitePCLRaw`-Bundle verwendet wird, um die native SQLite-Version unter iOS zu nutzen.
 
@@ -1387,7 +1387,7 @@ GUID-Werte werden jetzt als TEXT gespeichert.
 
 Das Binärformat der GUIDs ist nicht standardisiert. Das Speichern der Werte als TEXT führt dazu, dass die Datenbank mit anderen Technologien eher kompatibel ist.
 
-**Gegenmaßnahmen**
+**Vorbeugende Maßnahmen**
 
 Sie können vorhandene Datenbanken zum neuen Format migrieren, indem Sie SQL-Code wie den folgenden ausführen:
 
@@ -1437,7 +1437,7 @@ Char-Werte werden jetzt als TEXT gespeichert.
 
 Das Speichern der Werte als TEXT ist naheliegender und führt dazu, dass die Datenbank mit anderen Technologien eher kompatibel ist.
 
-**Gegenmaßnahmen**
+**Vorbeugende Maßnahmen**
 
 Sie können vorhandene Datenbanken zum neuen Format migrieren, indem Sie SQL-Code wie den folgenden ausführen:
 
@@ -1478,7 +1478,7 @@ Migrations-IDs werden jetzt immer mit dem Kalender der invarianten Kultur generi
 
 Die Reihenfolge der Migrationen ist beim Aktualisieren einer Datenbank oder Auflösen von Mergekonflikten wesentlich. Wenn der invariante Kalender verwendet wird, werden Probleme bei der Reihenfolge vermieden, die entstehen, wenn Teammitglieder unterschiedliche Systemkalender verwenden.
 
-**Gegenmaßnahmen**
+**Vorbeugende Maßnahmen**
 
 Diese Änderung betrifft jeden Benutzer, der einen Kalender verwendet, der nicht gregorianisch ist und bei dem die Jahreszahl höher als die des gregorianischen Kalenders ist (wie z.B. in der buddhistischen Zeitrechnung). Vorhandene Migrations-IDs müssen aktualisiert werden, damit neue Migrationen in der Reihenfolge hinter vorhandenen Migrationen eingeordnet werden.
 
@@ -1517,7 +1517,7 @@ Ab EF Core 3.0 generiert EF nur noch SQL-Code für die Paginierung, die mit höh
 
 Wir führen diese Änderung ein, weil [SQL Server 2008 kein unterstütztes Produkt mehr ist](https://blogs.msdn.microsoft.com/sqlreleaseservices/end-of-mainstream-support-for-sql-server-2008-and-sql-server-2008-r2/) und weil die Aktualisierung dieses Features auf die in EF Core 3.0 vorgenommenen Änderungen an Abfragen ein wichtiger Schritt ist.
 
-**Gegenmaßnahmen**
+**Vorbeugende Maßnahmen**
 
 Es empfiehlt sich, eine Update auf eine neuere Version von SQL Server durchzuführen oder einen höheren Kompatibilitätsgrad zu verwenden, damit der generierte SQL-Code unterstützt wird. Wenn dies bei Ihnen nicht möglich ist, fügen Sie einen [Kommentar zum Issue](https://github.com/aspnet/EntityFrameworkCore/issues/16400) ein, und geben Sie alle relevanten Informationen an. Je nach Feedback der Benutzer wird diese Entscheidung möglicherweise noch einmal überprüft.
 
@@ -1540,7 +1540,7 @@ Diese Methoden wurden in eine neue abstrakte `DbContextOptionsExtensionInfo`-Bas
 In den Releases zwischen 2.0 und 3.0 mussten wir diese Methoden mehrmals ergänzen oder ändern.
 Durch die Bereitstellung dieser Methoden in einer neuen abstrakten Basisklasse lassen sich solche Änderungen einfacher einführen, ohne dass es zu Konflikten mit vorhandenen Erweiterungen kommt.
 
-**Gegenmaßnahmen**
+**Vorbeugende Maßnahmen**
 
 Erweiterungen wurden aktualisiert und verwenden das neue Muster.
 Beispiele finden sich in den vielen Implementierungen von `IDbContextOptionsExtension` für verschiedene Arten von Erweiterungen im EF Core-Quellcode.
@@ -1559,7 +1559,7 @@ Beispiele finden sich in den vielen Implementierungen von `IDbContextOptionsExte
 
 Die Benennung dieses Warnereignisses wurde an allen anderen Warnereignissen ausgerichtet.
 
-**Gegenmaßnahmen**
+**Vorbeugende Maßnahmen**
 
 Verwenden Sie den neuen Namen. (Beachten Sie, dass sich die Ereignis-ID-Nummer nicht geändert hat.)
 
@@ -1589,7 +1589,7 @@ var constraintName = myForeignKey.ConstraintName;
 
 Durch diese Änderung wird Konsistenz für Benennungen in diesem Bereich gewährleistet, und es wird verdeutlicht, dass es sich dabei um den Namen der Fremdschlüsseleinschränkung handelt und nicht um den Spalten- oder Eigenschaftennamen, auf deren Grundlage der Fremdschlüssel definiert ist.
 
-**Gegenmaßnahmen**
+**Vorbeugende Maßnahmen**
 
 Verwenden Sie den neuen Namen.
 
@@ -1611,7 +1611,7 @@ Ab EF Core 3.0 sind diese Methoden öffentlich.
 
 Diese Methoden werden von EF verwendet, um zu ermitteln, ob eine Datenbank erstellt wurde, aber leer ist. Dies kann auch außerhalb von EF nützlich sein, um zu ermitteln, ob Migrationen angewendet werden sollen oder nicht.
 
-**Gegenmaßnahmen**
+**Vorbeugende Maßnahmen**
 
 Der Zugriff auf Überschreibungen wurde geändert.
 
@@ -1633,7 +1633,7 @@ Ab EF Core 3.0 ist es ein DevelopmentDependency-Paket. Das bedeutet, dass die Ab
 
 Dieses Paket ist nur für die Verwendung zur Entwurfszeit konzipiert. Bereitgestellte Anwendungen sollten nicht darauf verweisen. Die Kennzeichnung des Pakets als DevelopmentDependency unterstreicht diese Empfehlung.
 
-**Gegenmaßnahmen**
+**Vorbeugende Maßnahmen**
 
 Wenn Sie auf dieses Paket verweisen müssen, um das Verhalten von EF Core zur Entwurfszeit zu überschreiben, können Sie die Metadaten des PackageReference-Elements in Ihrem Projekt aktualisieren.
 
@@ -1665,7 +1665,7 @@ Wir haben unser Paket aktualisiert, so dass es jetzt von Version 2.0.0 abhängig
 
 Version 2.0.0 von SQLitePCL.raw zielt auf .NET Standard 2.0 ab. Zuvor war .NET Standard 1.1 das Ziel, hierfür war für ein umfassender Funktionsabschluss von transitiven Paketen erforderlich.
 
-**Gegenmaßnahmen**
+**Vorbeugende Maßnahmen**
 
 SQLitePCL.raw, Version 2.0.0, enthält einige Breaking Changes. Weitere Informationen finden Sie in den [Versionshinweisen](https://github.com/ericsink/SQLitePCL.raw/blob/v2/v2.md).
 
@@ -1687,7 +1687,7 @@ Wir haben unser Paket aktualisiert, so dass es jetzt von Version 2.0.0 abhängig
 
 Version 2.0.0 der NetTopologySuite behebt verschiedene Verwendungsprobleme, die von EF Core-Benutzern gemeldet wurden.
 
-**Gegenmaßnahmen**
+**Vorbeugende Maßnahmen**
 
 NetTopologySuite 2.0.0 umfasst einige Breaking Changes. Weitere Informationen finden Sie in den [Versionshinweisen](https://www.nuget.org/packages/NetTopologySuite/2.0.0-pre001).
 
@@ -1710,7 +1710,7 @@ Das Paket wurde so aktualisiert, dass es jetzt von Microsoft.Data.SqlClient abh�
 Microsoft SQL Server ist zukünftig der Haupttreiber für den Datenzugriff für SQL Server, und System.Data.SqlClient wird nicht länger der Fokus bei der Entwicklung sein.
 Einige wichtige Features wie Always Encrypted sind nur in Microsoft.Data.SqlClient verfügbar.
 
-**Gegenmaßnahmen**
+**Vorbeugende Maßnahmen**
 
 Wenn Ihr Code eine direkte Abhängigkeit von System.Data.SqlClient hat, müssen Sie diesen ändern, damit er stattdessen auf Microsoft.Data.SqlClient verweist. Da die beiden Pakete einen hohen Grad an API-Kompatibilität vorweisen, sollte dafür nur eine einfache Paket- und Namespaceänderung erforderlich sein.
 
@@ -1743,7 +1743,7 @@ Dieses Szenario wird nun beim Erstellen von Modellen erkannt. Außerdem wird ein
 
 Das resultierende Modell war mehrdeutig und führte in diesem Fall üblicherweise zu falschen Ergebnissen.
 
-**Gegenmaßnahmen**
+**Vorbeugende Maßnahmen**
 
 Konfigurieren Sie die Beziehung vollständig. Beispiel:
 
@@ -1782,7 +1782,7 @@ Alle DbFunction-Zuordnungen werden als einer benutzerdefinierten Funktion zugeor
 
 Weil das Schema vorher leer war, konnte man erreichen, dass die Funktion integriert, aber die Logik nur für SqlServer anwendbar war, wo integrierte Funktionen nicht zu einem Schema gehören.
 
-**Gegenmaßnahmen**
+**Vorbeugende Maßnahmen**
 
 Konfigurieren Sie die Übersetzung von DbFunction manuell, um Sie einer integrierten Funktion zuzuordnen.
 
