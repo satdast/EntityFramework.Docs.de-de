@@ -3,11 +3,12 @@ title: 'Globale Abfragefilter: EF Core'
 author: anpete
 ms.date: 11/03/2017
 uid: core/querying/filters
-ms.openlocfilehash: 233289b0c50e15f4555b342bc654211ce04c24d3
-ms.sourcegitcommit: ebfd3382fc583bc90f0da58e63d6e3382b30aa22
+ms.openlocfilehash: 57d81919dedb853d2a41066f76ec20685ae41d6b
+ms.sourcegitcommit: 949faaba02e07e44359e77d7935f540af5c32093
+ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/25/2020
-ms.locfileid: "85370460"
+ms.lasthandoff: 08/03/2020
+ms.locfileid: "87526900"
 ---
 # <a name="global-query-filters"></a>Globale Abfragefilter
 
@@ -42,7 +43,7 @@ Die Prädikatausdrücke, die an _HasQueryFilter_ weitergegeben werden, werden nu
 > Beachten Sie die Verwendung eines DbContext-Instanzfelds: `_tenantId` wird zum Festlegen des aktuellen Mandanten verwendet. Filter auf Modellebene verwenden den Wert der korrekten Kontextinstanz, d.h. der Instanz, die die Abfrage ausführt.
 
 > [!NOTE]
-> Es ist derzeit nicht möglich, mehrere Abfragefilter für dieselbe Entität zu definieren, nur der letzte wird angewendet. Mithilfe des logischen _AND_-Operators ([`&&` in C#](https://docs.microsoft.com/dotnet/csharp/language-reference/operators/boolean-logical-operators#conditional-logical-and-operator-)) können jedoch einen einzelnen Filter mit mehreren Bedingungen definieren.
+> Es ist derzeit nicht möglich, mehrere Abfragefilter für dieselbe Entität zu definieren, nur der letzte wird angewendet. Mithilfe des logischen _AND_-Operators ([`&&` in C#](/dotnet/csharp/language-reference/operators/boolean-logical-operators#conditional-logical-and-operator-)) können jedoch einen einzelnen Filter mit mehreren Bedingungen definieren.
 
 ## <a name="use-of-navigations"></a>Verwenden von Navigationselementen
 

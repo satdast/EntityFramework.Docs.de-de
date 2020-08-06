@@ -4,12 +4,12 @@ description: Übersicht über neue Features in EF Core 5.0
 author: ajcvickers
 ms.date: 07/20/2020
 uid: core/what-is-new/ef-core-5.0/whatsnew
-ms.openlocfilehash: d42b2811d07516e9febedbc51fcb206000d38371
-ms.sourcegitcommit: 51148929e3889c48227d96c95c4e310d53a3d2c9
+ms.openlocfilehash: d7f5863e657e243ce733eda5dc8b40c1b92818ce
+ms.sourcegitcommit: 949faaba02e07e44359e77d7935f540af5c32093
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/21/2020
-ms.locfileid: "86873382"
+ms.lasthandoff: 08/03/2020
+ms.locfileid: "87526874"
 ---
 # <a name="whats-new-in-ef-core-50"></a>Neuerungen in EF Core 5.0
 
@@ -47,7 +47,7 @@ public class MyController
 DbContext-Instanzen können dann nach Bedarf erstellt und verwendet werden. Zum Beispiel:
 
 ```csharp
-public void DoSomehing()
+public void DoSomeThing()
 {
     using (var context = _contextFactory.CreateDbContext())
     {
@@ -503,7 +503,7 @@ Die Dokumentation finden Sie im [Issue 2273](https://github.com/dotnet/EntityFr
 
 ### <a name="flow-arguments-into-idesigntimedbcontextfactory"></a>Übergeben von Argumenten in IDesignTimeDbContextFactory
 
-Argumente können nun über die Befehlszeile in die `CreateDbContext`-Methode von [IDesignTimeDbContextFactory](https://docs.microsoft.com/dotnet/api/microsoft.entityframeworkcore.design.idesigntimedbcontextfactory-1?view=efcore-3.1) übertragen werden. Sie können beispielsweise angeben, dass es sich um einen Entwicklungsbuild handelt, indem Sie in der Befehlszeile ein benutzerdefiniertes Argument (z. B. `dev`) übergeben:
+Argumente können nun über die Befehlszeile in die `CreateDbContext`-Methode von [IDesignTimeDbContextFactory](/dotnet/api/microsoft.entityframeworkcore.design.idesigntimedbcontextfactory-1?view=efcore-3.1) übertragen werden. Sie können beispielsweise angeben, dass es sich um einen Entwicklungsbuild handelt, indem Sie in der Befehlszeile ein benutzerdefiniertes Argument (z. B. `dev`) übergeben:
 
 ```
 dotnet ef migrations add two --verbose --dev
@@ -774,7 +774,7 @@ Die Dokumentation finden Sie im Issue [#2075](https://github.com/dotnet/EntityFr
 
 ### <a name="change-tracking-proxies"></a>Proxys zur Änderungsnachverfolgung
 
-EF Core kann jetzt Runtimeproxys generieren, die automatisch [INotifyPropertyChanging](https://docs.microsoft.com/dotnet/api/system.componentmodel.inotifypropertychanging?view=netcore-3.1) und [INotifyPropertyChanged](https://docs.microsoft.com/dotnet/api/system.componentmodel.inotifypropertychanged?view=netcore-3.1) implementieren. Diese melden dann Wertänderungen bei Entitätseigenschaften direkt an EF Core, sodass die Notwendigkeit einer Überprüfung auf Änderungen entfällt. Für Proxys gelten jedoch bestimmte Einschränkungen, daher eignen sie sich nicht in jedem Fall.
+EF Core kann jetzt Runtimeproxys generieren, die automatisch [INotifyPropertyChanging](/dotnet/api/system.componentmodel.inotifypropertychanging?view=netcore-3.1) und [INotifyPropertyChanged](/dotnet/api/system.componentmodel.inotifypropertychanged?view=netcore-3.1) implementieren. Diese melden dann Wertänderungen bei Entitätseigenschaften direkt an EF Core, sodass die Notwendigkeit einer Überprüfung auf Änderungen entfällt. Für Proxys gelten jedoch bestimmte Einschränkungen, daher eignen sie sich nicht in jedem Fall.
 
 Die Dokumentation finden Sie im Issue [#2076](https://github.com/dotnet/EntityFramework.Docs/issues/2076).
 
@@ -832,7 +832,7 @@ Der Azure Cosmos DB-Datenbankanbieter unterstützt nun optimistische Nebenläufi
 builder.Entity<Customer>().Property(c => c.ETag).IsEtagConcurrency();
 ```
 
-SaveChanges löst dann eine `DbUpdateConcurrencyException`-Ausnahme für einen Nebenläufigkeitskonflikt aus, die [verarbeitet werden kann](https://docs.microsoft.com/ef/core/saving/concurrency), z. B. um Wiederholungsversuche zu implementieren.
+SaveChanges löst dann eine `DbUpdateConcurrencyException`-Ausnahme für einen Nebenläufigkeitskonflikt aus, die [verarbeitet werden kann](/ef/core/saving/concurrency), z. B. um Wiederholungsversuche zu implementieren.
 
 Die Dokumentation finden Sie im Issue [#2099](https://github.com/dotnet/EntityFramework.Docs/issues/2099).
 

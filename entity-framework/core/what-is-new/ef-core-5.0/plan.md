@@ -3,12 +3,12 @@ title: Plan für Entity Framework Core 5.0
 author: ajcvickers
 ms.date: 06/11/2020
 uid: core/what-is-new/ef-core-5.0/plan
-ms.openlocfilehash: a107f901b215e7abaa5905852f81c2d9ab094b98
-ms.sourcegitcommit: 31536e52b838a84680d2e93e5bb52fb16df72a97
+ms.openlocfilehash: 4abb6f500dce320dd0c32f8f3bf5c529b59fb28b
+ms.sourcegitcommit: 949faaba02e07e44359e77d7935f540af5c32093
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86238319"
+ms.lasthandoff: 08/03/2020
+ms.locfileid: "87526887"
 ---
 # <a name="plan-for-entity-framework-core-50"></a>Plan für Entity Framework Core 5.0
 
@@ -234,7 +234,7 @@ Nachverfolgbar über [#1675](https://github.com/dotnet/EntityFramework.Docs/issu
 
 T-Shirt-Größe: M
 
-Status: Abgeschlossen. Die neue Dokumentation finden Sie [hier](https://docs.microsoft.com/dotnet/standard/data/sqlite/?tabs=netcore-cli).
+Status: Abgeschlossen. Die neue Dokumentation finden Sie [hier](/dotnet/standard/data/sqlite/?tabs=netcore-cli).
 
 Das EF-Team ist auch Eigentümer des Microsoft.Data.Sqlite ADO.NET-Anbieters. Wir planen, als Teil der Veröffentlichungen für EF Core 5.0, eine vollständige Dokumentation zu diesem Anbieter bereitzustellen.
 
