@@ -4,12 +4,12 @@ author: roji
 ms.date: 09/09/2019
 ms.assetid: bde4e0ee-fba3-4813-a849-27049323d301
 uid: core/miscellaneous/nullable-reference-types
-ms.openlocfilehash: 3acd446d64a94ffecb12c181e3910528d2293448
-ms.sourcegitcommit: 51148929e3889c48227d96c95c4e310d53a3d2c9
+ms.openlocfilehash: 7d262ab9fb45535b626ce8d503b31a5e9a4630d3
+ms.sourcegitcommit: 6f7af3f138bf7c724cbdda261f97e5cf7035e8d7
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/21/2020
-ms.locfileid: "86873356"
+ms.lasthandoff: 08/25/2020
+ms.locfileid: "88847565"
 ---
 # <a name="working-with-nullable-reference-types"></a>Arbeiten mit Verweis Typen, die NULL-Werte zulassen
 
@@ -26,9 +26,11 @@ Die Haupt Dokumentation zu den erforderlichen und optionalen Eigenschaften sowie
 
 ## <a name="dbcontext-and-dbset"></a>Dbcontext und dbset
 
-Wenn Verweis Typen, die NULL-Werte zulassen, aktiviert sind, gibt der c#-Compiler Warnungen für jede nicht initialisierte Eigenschaft aus, die keine NULL-Werte zulässt, da diese NULL enthalten würden. Demzufolge wird bei der Verwendung von nicht initialisierten dbset-Eigenschaften für einen Kontexttyp eine Warnung generiert. Um dieses Problem zu beheben, legen Sie die dbset-Eigenschaften als schreibgeschützt fest, und initialisieren Sie Sie wie folgt:
+Wenn Verweis Typen, die NULL-Werte zulassen, aktiviert sind, gibt der c#-Compiler Warnungen für jede nicht initialisierte Eigenschaft aus, die keine NULL-Werte zulässt, da diese NULL enthalten würden. Demzufolge wird bei der Verwendung von nicht initialisierten dbset-Eigenschaften für einen Kontexttyp eine Warnung generiert. Dies kann wie folgt korrigiert werden:
 
 [!code-csharp[Main](../../../samples/core/Miscellaneous/NullableReferenceTypes/NullableReferenceTypesContext.cs?name=Context&highlight=3-4)]
+
+Eine andere Strategie besteht darin, nicht auf NULL festleg Bare Auto-Eigenschaften zu verwenden, diese jedoch mit NULL zu initialisieren, indem der NULL-verzweigende Operator (!) verwendet wird, um die Compilerwarnung zu stillen. Der dbcontext-Konstruktor stellt sicher, dass alle dbset-Eigenschaften initialisiert werden, und NULL wird niemals für Sie beachtet.
 
 ## <a name="non-nullable-properties-and-initialization"></a>Eigenschaften und Initialisierung, die keine NULL-Werte zulassen
 
