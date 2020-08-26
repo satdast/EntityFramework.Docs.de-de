@@ -65,6 +65,8 @@
               href: core/get-started/install/index.md
             - name: ASP.NET Core-Tutorial >>
               href: /aspnet/core/data/ef-rp/intro
+            - name: Anleitungen zu Blazor Server mit EF Core >>
+              href: /aspnet/core/blazor/blazor-server-ef-core
             - name: WPF .NET Core-Tutorial
               href: core/get-started/wpf.md
             - name: Xamarin-Tutorial
@@ -260,7 +262,7 @@
           href: /dotnet/api/?view=efcore-3.1
     - name: Entity Framework 6
       items:
-        - name: Überblick
+        - name: Übersicht
           href: ef6/index.md
         - name: Neuigkeiten
           items:
