@@ -1,14 +1,16 @@
 ---
 title: Code First Daten Anmerkungen-EF6
+description: Code First von Daten Anmerkungen in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 80abefbd-23c9-4fce-9cd3-520e5df9856e
-ms.openlocfilehash: 17370b83aee9974161b1771e8a1dc99c2de27f0f
-ms.sourcegitcommit: 6f7af3f138bf7c724cbdda261f97e5cf7035e8d7
+uid: ef6/modeling/code-first/data-annotations
+ms.openlocfilehash: 37b2872b5fb40cf0dc346554b2cbb9e3fffd6bdc
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/25/2020
-ms.locfileid: "88847617"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89617353"
 ---
 # <a name="code-first-data-annotations"></a>Code First Data Annotations
 > [!NOTE]
@@ -391,7 +393,7 @@ Indizes, die sich über mehrere Spalten erstrecken, werden mit dem gleichen Name
 ## <a name="relationship-attributes-inverseproperty-and-foreignkey"></a>Beziehungs Attribute: invergenproperty und Fremdschlüssel
 
 > [!NOTE]
-> Diese Seite enthält Informationen zum Einrichten von Beziehungen in Ihrem Code First-Modell mithilfe von Daten Anmerkungen. Allgemeine Informationen zu Beziehungen in EF und zum Zugreifen auf und Bearbeiten von Daten mithilfe von Beziehungen finden Sie unter [Beziehungen & Navigations Eigenschaften](~/ef6/fundamentals/relationships.md). *
+> Diese Seite enthält Informationen zum Einrichten von Beziehungen in Ihrem Code First-Modell mithilfe von Daten Anmerkungen. Allgemeine Informationen zu Beziehungen in EF und zum Zugreifen auf und Bearbeiten von Daten mithilfe von Beziehungen finden Sie unter [Beziehungen & Navigations Eigenschaften](xref:ef6/fundamentals/relationships). *
 
 Die Code First-Konvention kümmert sich um die gängigsten Beziehungen in Ihrem Modell. es gibt jedoch einige Fälle, in denen Sie Hilfe benötigen.
 

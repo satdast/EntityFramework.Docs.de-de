@@ -1,15 +1,15 @@
 ---
 title: Testen mit SQLite-EF Core
-description: Verwenden von SQLite zum Testen einer EF Core Anwendung
+description: Verwenden von SQLite zum Testen einer Entity Framework Core Anwendung
 author: ajcvickers
 ms.date: 04/24/2020
 uid: core/miscellaneous/testing/sqlite
-ms.openlocfilehash: 327fdc230df2a3b4094accf93fffa81f92e0a931
-ms.sourcegitcommit: 79e460f76b6664e1da5886d102bd97f651d2ffff
+ms.openlocfilehash: b580ed58cb9466c8eac32f71951734f4bd565733
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82538287"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89617697"
 ---
 # <a name="using-sqlite-to-test-an-ef-core-application"></a>Verwenden von SQLite zum Testen einer EF Core Anwendung
 
@@ -39,7 +39,7 @@ Das [Beispiel](xref:core/miscellaneous/testing/testing-sample) erreicht dies mit
 
 Beachten Sie Folgendes:
 * Die `CreateInMemoryDatabase` -Methode erstellt eine sqlite-in-Memory Database und öffnet die Verbindung mit der-Methode.
-* Der erstellte `DbConnection` wird aus der `ContextOptions` extrahiert und gespeichert.
+* Der erstellte `DbConnection` wird aus der extrahiert `ContextOptions` und gespeichert.
 * Die Verbindung wird verworfen, wenn der Test verworfen wird, damit Ressourcen nicht verloren gehen. 
 
 > [!NOTE]

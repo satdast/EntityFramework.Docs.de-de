@@ -1,19 +1,21 @@
 ---
 title: Code First Konventionen-EF6
+description: Code First Konventionen in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: bc644573-c2b2-4ed7-8745-3c37c41058ad
-ms.openlocfilehash: 4d03a32db5d84eb37c22617a95005b272172a65d
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/modeling/code-first/conventions/built-in
+ms.openlocfilehash: 78471a1d4925e57146b8e9f2f43e57b626d164b6
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78415946"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89617192"
 ---
 # <a name="code-first-conventions"></a>Code First Konventionen
-Code First ermöglicht es Ihnen, ein Modell mithilfe C# von oder Visual Basic .NET-Klassen zu beschreiben. Die grundlegende Form des Modells wird mithilfe von Konventionen erkannt. Konventionen sind Sätze von Regeln, die verwendet werden, um ein konzeptionelles Modell, das auf Klassendefinitionen basiert, bei der Arbeit mit Code First automatisch zu konfigurieren. Die Konventionen werden im Namespace System. Data. Entity. modelconfiguration. Conventions definiert.  
+Code First ermöglicht es Ihnen, ein Modell mithilfe von c#-oder Visual Basic .NET-Klassen zu beschreiben. Die grundlegende Form des Modells wird mithilfe von Konventionen erkannt. Konventionen sind Sätze von Regeln, die verwendet werden, um ein konzeptionelles Modell, das auf Klassendefinitionen basiert, bei der Arbeit mit Code First automatisch zu konfigurieren. Die Konventionen werden im Namespace System. Data. Entity. modelconfiguration. Conventions definiert.  
 
-Sie können Ihr Modell mithilfe von Daten Anmerkungen oder der fließenden API weiter konfigurieren. Die-Konfiguration wird durch die fließende API, gefolgt von Daten Anmerkungen und then-Konventionen, Vorrang eingeräumt. Weitere Informationen finden Sie unter [Daten Anmerkungen](~/ef6/modeling/code-first/data-annotations.md), [fließende API-Beziehungen](~/ef6/modeling/code-first/fluent/relationships.md), [fließende API-Typen & Eigenschaften](~/ef6/modeling/code-first/fluent/types-and-properties.md) und eine [fließende API mit VB.net](~/ef6/modeling/code-first/fluent/vb.md).  
+Sie können Ihr Modell mithilfe von Daten Anmerkungen oder der fließenden API weiter konfigurieren. Die-Konfiguration wird durch die fließende API, gefolgt von Daten Anmerkungen und then-Konventionen, Vorrang eingeräumt. Weitere Informationen finden Sie unter [Daten Anmerkungen](xref:ef6/modeling/code-first/data-annotations), [fließende API-Beziehungen](xref:ef6/modeling/code-first/fluent/relationships), [fließende API-Typen & Eigenschaften](xref:ef6/modeling/code-first/fluent/types-and-properties) und eine [fließende API mit VB.net](xref:ef6/modeling/code-first/fluent/vb).  
 
 Eine ausführliche Liste der Code First Konventionen finden Sie in der [API-Dokumentation](https://msdn.microsoft.com/library/system.data.entity.modelconfiguration.conventions.aspx). Dieses Thema enthält eine Übersicht über die Konventionen, die von Code First verwendet werden.  
 
@@ -92,9 +94,9 @@ public class Department
 
 ## <a name="relationship-convention"></a>Beziehungs Konvention  
 
-In Entity Framework bieten Navigations Eigenschaften eine Möglichkeit, eine Beziehung zwischen zwei Entitäts Typen zu navigieren. Jedes Objekt kann für jede Beziehung, an der es beteiligt ist, über eine Navigationseigenschaft verfügen. Mithilfe von Navigations Eigenschaften können Sie Beziehungen in beiden Richtungen navigieren und verwalten, wobei entweder ein Verweis Objekt (wenn die Multiplizität entweder 1 oder 0 ist) oder eine Auflistung (wenn die Multiplizität viele ist) zurückgegeben werden. Code First leitet Beziehungen auf der Grundlage der Navigations Eigenschaften ab, die für Ihre Typen definiert sind.  
+Im Entity Framework bieten Navigationseigenschaften eine Möglichkeit, in einer Beziehung zwischen zwei Entitätstypen zu navigieren. Jedes Objekt kann für jede Beziehung, an der es beteiligt ist, über eine Navigationseigenschaft verfügen. Mithilfe von Navigations Eigenschaften können Sie Beziehungen in beiden Richtungen navigieren und verwalten, wobei entweder ein Verweis Objekt (wenn die Multiplizität entweder 1 oder 0 ist) oder eine Auflistung (wenn die Multiplizität viele ist) zurückgegeben werden. Code First leitet Beziehungen auf der Grundlage der Navigations Eigenschaften ab, die für Ihre Typen definiert sind.  
 
-Zusätzlich zu den Navigations Eigenschaften empfiehlt es sich, Fremdschlüssel Eigenschaften für die Typen einzuschließen, die abhängige Objekte darstellen. Jede Eigenschaft mit demselben Datentyp wie die Prinzipal-Primärschlüssel Eigenschaft und mit einem Namen, der einem der folgenden Formate folgt, stellt einen Fremdschlüssel für die Beziehung dar: "\<Navigations Eigenschaftsname\>\<Prinzipal Name der Primärschlüssel Eigenschaft\>", "\<Prinzipal Klassenname\>\<Name der Primärschlüssel Eigenschaft\>" oder "\<Prinzipal Name der Primärschlüssel Eigenschaft\> Wenn mehrere Übereinstimmungen gefunden werden, wird in der oben aufgeführten Reihenfolge Vorrang eingeräumt. Bei der Fremdschlüssel Erkennung wird die Groß-/Kleinschreibung Wenn eine Fremdschlüssel Eigenschaft erkannt wird, leitet Code First die Multiplizität der Beziehung basierend auf der NULL-Zulässigkeit des fremd Schlüssels ab. Wenn die Eigenschaft NULL-Werte zulässt, wird die Beziehung als optional registriert. Andernfalls wird die Beziehung nach Bedarf registriert.  
+Zusätzlich zu den Navigations Eigenschaften empfiehlt es sich, Fremdschlüssel Eigenschaften für die Typen einzuschließen, die abhängige Objekte darstellen. Jede Eigenschaft mit demselben Datentyp wie die Prinzipal-Primärschlüssel Eigenschaft und mit einem Namen, der einem der folgenden Formate folgt, stellt einen Fremdschlüssel für die Beziehung dar: " \<navigation property name\> \<principal primary key property name\> ", " \<principal class name\> \<primary key property name\> " oder " \<principal primary key property name\> ". Wenn mehrere Übereinstimmungen gefunden werden, wird in der oben aufgeführten Reihenfolge Vorrang eingeräumt. Bei der Fremdschlüssel Erkennung wird die Groß-/Kleinschreibung Wenn eine Fremdschlüssel Eigenschaft erkannt wird, leitet Code First die Multiplizität der Beziehung basierend auf der NULL-Zulässigkeit des fremd Schlüssels ab. Wenn die Eigenschaft NULL-Werte zulässt, wird die Beziehung als optional registriert. Andernfalls wird die Beziehung nach Bedarf registriert.  
 
 Wenn ein Fremdschlüssel für die abhängige Entität keine NULL-Werte zulässt, legt Code First den Löschvorgang für die Beziehung fest. Wenn ein Fremdschlüssel für die abhängige Entität NULL-Werte zulässt, legt Code First für die Beziehung keine Lösch Weitergabe fest, und wenn der Prinzipal gelöscht wird, wird der Fremdschlüssel auf NULL festgelegt. Das von der Konvention erkannte Multiplizität und Lösch Verhalten können überschrieben werden, indem die fließende API verwendet wird.  
 
@@ -128,7 +130,7 @@ public class Course
 ```  
 
 > [!NOTE]
-> Wenn Sie über mehrere Beziehungen zwischen denselben Typen verfügen (z. b. angenommen, Sie definieren die **Personen** -und **Buch** Klassen, in denen die **Person** -Klasse die Navigations Eigenschaften **reviewedbooks** und **authoredbooks** enthält und die **Book** -Klasse die Navigations Eigenschaften **Author** und **Reviewer** enthält), müssen Sie die Beziehungen mithilfe von Daten Anmerkungen oder der fließenden API manuell konfigurieren. Weitere Informationen finden Sie unter [Daten Anmerkungen-Beziehungen](~/ef6/modeling/code-first/data-annotations.md) und [fließende API-Beziehungen](~/ef6/modeling/code-first/fluent/relationships.md).  
+> Wenn Sie über mehrere Beziehungen zwischen denselben Typen verfügen (z. b. angenommen, Sie definieren die **Personen** -und **Buch** Klassen, in denen die **Person** -Klasse die Navigations Eigenschaften **reviewedbooks** und **authoredbooks** enthält und die **Book** -Klasse die Navigations Eigenschaften **Author** und **Reviewer** enthält), müssen Sie die Beziehungen mithilfe von Daten Anmerkungen oder der fließenden API manuell konfigurieren. Weitere Informationen finden Sie unter [Daten Anmerkungen-Beziehungen](xref:ef6/modeling/code-first/data-annotations) und [fließende API-Beziehungen](xref:ef6/modeling/code-first/fluent/relationships).  
 
 ## <a name="complex-types-convention"></a>Komplexe Typen Konvention  
 
@@ -155,7 +157,7 @@ public class Details
 
 ## <a name="connection-string-convention"></a>Verbindungs Zeichen folgen Konvention  
 
-Informationen zu den Konventionen, die dbcontext zum Ermitteln der zu verwendenden Verbindung verwendet, finden Sie unter [Verbindungen und Modelle](~/ef6/fundamentals/configuring/connection-strings.md).  
+Informationen zu den Konventionen, die dbcontext zum Ermitteln der zu verwendenden Verbindung verwendet, finden Sie unter [Verbindungen und Modelle](xref:ef6/fundamentals/configuring/connection-strings).  
 
 ## <a name="removing-conventions"></a>Entfernen von Konventionen  
 
@@ -178,4 +180,4 @@ public class SchoolEntities : DbContext
 
 ## <a name="custom-conventions"></a>Benutzerdefinierte Konventionen  
 
-Benutzerdefinierte Konventionen werden ab EF6 unterstützt. Weitere Informationen finden Sie unter [benutzerdefinierte Code First Konventionen](~/ef6/modeling/code-first/conventions/custom.md).
+Benutzerdefinierte Konventionen werden ab EF6 unterstützt. Weitere Informationen finden Sie unter [benutzerdefinierte Code First Konventionen](xref:ef6/modeling/code-first/conventions/custom).

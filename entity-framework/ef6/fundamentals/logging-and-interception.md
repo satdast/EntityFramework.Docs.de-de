@@ -1,14 +1,16 @@
 ---
 title: Protokollieren und Abfangen von Daten Bank Vorgängen EF6
+description: Protokollieren und Abfangen von Daten Bank Vorgängen in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: b5ee7eb1-88cc-456e-b53c-c67e24c3f8ca
-ms.openlocfilehash: 35b0284a5ad8b2b732f074589bd458d243312575
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/fundamentals/logging-and-interception
+ms.openlocfilehash: bb5c3392b4f2e1f291d7ac373d07724f56d0eb30
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78416102"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89616193"
 ---
 # <a name="logging-and-intercepting-database-operations"></a>Protokollieren und Abfangen von Daten Bank Vorgängen
 > [!NOTE]
@@ -126,7 +128,7 @@ Wenn Sie sich die obige Beispielausgabe ansehen, werden alle vier Befehle protok
 
 Wie oben gezeigt, ist die Protokollierung auf der Konsole sehr einfach. Es ist auch einfach, sich mit verschiedenen Arten von [TextWriter](https://msdn.microsoft.com/library/system.io.textwriter.aspx)in Arbeitsspeicher, Datei usw. zu protokollieren.  
 
-Wenn Sie mit LINQ to SQL vertraut sind, können Sie feststellen, dass in LINQ to SQL die Log-Eigenschaft auf das eigentliche TextWriter-Objekt festgelegt ist (z. b. Console. out), während in EF die Log-Eigenschaft auf eine Methode festgelegt ist, die eine Zeichenfolge akzeptiert (z. b , Console. Write oder Console. out. Write). Der Grund hierfür ist, EF von TextWriter zu entkoppeln, indem ein beliebiger Delegat akzeptiert wird, der als Senke für Zeichen folgen fungieren kann. Stellen Sie sich beispielsweise vor, dass Sie bereits über ein Protokollierungs Framework verfügen und eine Protokollierungs Methode wie folgt definiert:  
+Wenn Sie mit LINQ to SQL vertraut sind, werden Sie möglicherweise bemerken, dass in LINQ to SQL die Log-Eigenschaft auf das eigentliche TextWriter-Objekt festgelegt ist (z. b. Console. out), während in EF die Log-Eigenschaft auf eine Methode festgelegt ist, die eine Zeichenfolge akzeptiert (z. b. Console. Write oder Console. out. Write). Der Grund hierfür ist, EF von TextWriter zu entkoppeln, indem ein beliebiger Delegat akzeptiert wird, der als Senke für Zeichen folgen fungieren kann. Stellen Sie sich beispielsweise vor, dass Sie bereits über ein Protokollierungs Framework verfügen und eine Protokollierungs Methode wie folgt definiert:  
 
 ``` csharp
 public class MyLogger
@@ -194,7 +196,7 @@ Angenommen, es soll nur eine einzelne Zeile protokolliert werden, bevor jeder Be
 - Überschreiben von logcommand zum Formatieren und Schreiben der einzelnen Zeile von SQL  
 - Überschreiben Sie logresult, um nichts zu tun.  
 
-Der Code sieht in etwa wie folgt aus:
+Der Code sähe in etwa so aus:
 
 ``` csharp
 public class OneLineFormatter : DatabaseLogFormatter
@@ -261,11 +263,11 @@ Der Abfang Code basiert auf dem Konzept der Abfang Schnittstellen. Diese Schnitt
 
 ### <a name="the-interception-context"></a>Der Abfang Kontext  
 
-Wenn Sie sich die Methoden ansehen, die für eine der Interceptor Schnittstellen definiert sind, ist es offensichtlich, dass jedem-Befehl ein Objekt vom Typ "dbinterceptioncontext" oder ein von diesem abgeleiteter Typ, wie z. b. dbcommandinterceptioncontext\<\> Dieses Objekt enthält Kontextinformationen zu der Aktion, die EF durch nimmt. Wenn die Aktion z. b. im Namen eines dbcontext ausgeführt wird, ist dbcontext im dbinterceptioncontext enthalten. Analog dazu wird für Befehle, die asynchron ausgeführt werden, das IsAsync-Flag für dbcommandinterceptioncontext festgelegt.  
+Wenn Sie die Methoden betrachten, die für eine der Interceptor Schnittstellen definiert sind, ist es offensichtlich, dass jedem-Befehl ein Objekt vom Typ "dbinterceptioncontext" oder ein von diesem abgeleiteter Typ, wie z. b. dbcommandinterceptioncontext \<\> Dieses Objekt enthält Kontextinformationen zu der Aktion, die EF durch nimmt. Wenn die Aktion z. b. im Namen eines dbcontext ausgeführt wird, ist dbcontext im dbinterceptioncontext enthalten. Analog dazu wird für Befehle, die asynchron ausgeführt werden, das IsAsync-Flag für dbcommandinterceptioncontext festgelegt.  
 
-### <a name="result-handling"></a>Ergebnis Behandlung  
+### <a name="result-handling"></a>Ergebnisverarbeitung  
 
-Die dbcommandinterceptioncontext-\<\>-Klasse enthält die Eigenschaften "result", "originalresult", "Exception" und "originalexception". Diese Eigenschaften werden für Aufrufe der Abfang Methoden, die vor der Ausführung des Vorgangs aufgerufen werden, auf Null/0 (null) festgelegt – d. h. für die... Ausführen von Methoden. Wenn der Vorgang ausgeführt wird und erfolgreich ist, werden result und originalresult auf das Ergebnis des Vorgangs festgelegt. Diese Werte können dann in den Abfang Methoden beobachtet werden, die nach der Ausführung des Vorgangs aufgerufen werden – d. h. auf dem... Ausgeführte Methoden. Ebenso werden, wenn der Vorgang ausgelöst wird, die Eigenschaften Exception und originalexception festgelegt.  
+Die dbcommandinterceptioncontext \<\> -Klasse enthält die Eigenschaften "result", "originalresult", "Exception" und "originalexception". Diese Eigenschaften werden für Aufrufe der Abfang Methoden, die vor der Ausführung des Vorgangs aufgerufen werden, auf Null/0 (null) festgelegt – d. h. für die... Ausführen von Methoden. Wenn der Vorgang ausgeführt wird und erfolgreich ist, werden result und originalresult auf das Ergebnis des Vorgangs festgelegt. Diese Werte können dann in den Abfang Methoden beobachtet werden, die nach der Ausführung des Vorgangs aufgerufen werden – d. h. auf dem... Ausgeführte Methoden. Ebenso werden, wenn der Vorgang ausgelöst wird, die Eigenschaften Exception und originalexception festgelegt.  
 
 #### <a name="suppressing-execution"></a>Unterdrücken der Ausführung  
 

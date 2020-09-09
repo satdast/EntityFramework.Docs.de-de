@@ -1,15 +1,16 @@
 ---
 title: Protokollierung-EF Core
+description: Konfigurieren der Protokollierung mit Entity Framework Core
 author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: f6e35c6d-45b7-4258-be1d-87c1bb67438d
 uid: core/miscellaneous/logging
-ms.openlocfilehash: 4f39e0ad1f061970aae7f7eb7abdc72e4bb0d691
-ms.sourcegitcommit: 949faaba02e07e44359e77d7935f540af5c32093
+ms.openlocfilehash: 56d0e3f8c5ecf56ee6bd6ddf0c9668bb8e3ac12f
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/03/2020
-ms.locfileid: "87526458"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89617743"
 ---
 # <a name="logging"></a>Protokollierung
 
@@ -49,7 +50,7 @@ public static readonly LoggerFactory MyLoggerFactory
 
 ***
 
-Diese Singleton-/globale Instanz sollte dann bei EF Core auf dem registriert werden `DbContextOptionsBuilder` . Zum Beispiel:
+Diese Singleton-/globale Instanz sollte dann bei EF Core auf dem registriert werden `DbContextOptionsBuilder` . Beispiel:
 
 [!code-csharp[Main](../../../samples/core/Miscellaneous/Logging/Logging/BloggingContext.cs#RegisterLoggerFactory)]
 
@@ -58,7 +59,7 @@ Diese Singleton-/globale Instanz sollte dann bei EF Core auf dem registriert wer
 
 ## <a name="filtering-what-is-logged"></a>Filtern der protokollierten Elemente
 
-Die Anwendung kann steuern, was protokolliert wird, indem ein Filter für den iloggerprovider konfiguriert wird. Zum Beispiel:
+Die Anwendung kann steuern, was protokolliert wird, indem ein Filter für den iloggerprovider konfiguriert wird. Beispiel:
 
 ### <a name="version-3x"></a>[Version 3.x](#tab/v3)
 

@@ -1,15 +1,16 @@
 ---
 title: Unterstützungs Felder-EF Core
+description: Konfigurieren von Unterstützungs Feldern für Eigenschaften in einem Entity Framework Core Modell
 author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: a628795e-64df-4f24-a5e8-76bc261e7ed8
 uid: core/modeling/backing-field
-ms.openlocfilehash: e015c4f3fca767d25bee179c027813bd9fcf4c07
-ms.sourcegitcommit: 949faaba02e07e44359e77d7935f540af5c32093
+ms.openlocfilehash: 36fc64efa08f2cdeb7005e3fc6335298f2426bde
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/03/2020
-ms.locfileid: "87526757"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89617573"
 ---
 # <a name="backing-fields"></a>Unterstützungsfelder
 
@@ -28,7 +29,7 @@ Im folgenden Beispiel wird die- `Url` Eigenschaft so konfiguriert, dass Sie als 
 
 [!code-csharp[Main](../../../samples/core/Modeling/Conventions/BackingField.cs#Sample)]
 
-Beachten Sie, dass Unterstützungs Felder nur für Eigenschaften erkannt werden, die im Modell enthalten sind. Weitere Informationen zu den Eigenschaften, die im Modell enthalten sind, finden Sie unter [einschließen & Ausschließen von Eigenschaften](included-properties.md).
+Beachten Sie, dass Unterstützungs Felder nur für Eigenschaften erkannt werden, die im Modell enthalten sind. Weitere Informationen zu den Eigenschaften, die im Modell enthalten sind, finden Sie unter [einschließen & Ausschließen von Eigenschaften](xref:core/modeling/entity-properties).
 
 Sie können auch Unterstützungs Felder konfigurieren, indem Sie eine Daten Anmerkung (verfügbar in efcore 5,0) oder die fließende API verwenden, z. b. wenn der Feldname nicht den obigen Konventionen entspricht:
 
@@ -53,7 +54,7 @@ Alle unterstützten Optionen finden Sie in der [propertyaccessmode-Enumeration](
 
 ## <a name="field-only-properties"></a>Feld-only-Eigenschaften
 
-Sie können auch eine konzeptionelle Eigenschaft in Ihrem Modell erstellen, die nicht über eine entsprechende CLR-Eigenschaft in der Entitäts Klasse verfügt, sondern stattdessen ein Feld zum Speichern der Daten in der Entität verwendet. Dies unterscheidet sich von den [Schatten Eigenschaften](shadow-properties.md), bei denen die Daten in der Änderungs Protokollierung und nicht im CLR-Typ der Entität gespeichert werden. Feld-only-Eigenschaften werden häufig verwendet, wenn die Entitäts Klasse Methoden anstelle von Eigenschaften verwendet, um Werte zu erhalten/festzulegen, oder in Fällen, in denen Felder überhaupt nicht im Domänen Modell (z. b. Primärschlüssel) verfügbar gemacht werden sollen.
+Sie können auch eine konzeptionelle Eigenschaft in Ihrem Modell erstellen, die nicht über eine entsprechende CLR-Eigenschaft in der Entitäts Klasse verfügt, sondern stattdessen ein Feld zum Speichern der Daten in der Entität verwendet. Dies unterscheidet sich von den [Schatten Eigenschaften](xref:core/modeling/shadow-properties), bei denen die Daten in der Änderungs Protokollierung und nicht im CLR-Typ der Entität gespeichert werden. Feld-only-Eigenschaften werden häufig verwendet, wenn die Entitäts Klasse Methoden anstelle von Eigenschaften verwendet, um Werte zu erhalten/festzulegen, oder in Fällen, in denen Felder überhaupt nicht im Domänen Modell (z. b. Primärschlüssel) verfügbar gemacht werden sollen.
 
 Sie können eine nur-Feld-Eigenschaft konfigurieren, indem Sie in der-API einen Namen angeben `Property(...)` :
 

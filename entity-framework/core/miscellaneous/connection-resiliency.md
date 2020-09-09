@@ -1,15 +1,16 @@
 ---
 title: Verbindungsresilienz-EF Core
+description: Verwenden der verbindungsresilienz zum automatischen erneuten Versuch fehlgeschlagener Befehle mit Entity Framework Core
 author: rowanmiller
 ms.date: 11/15/2016
 ms.assetid: e079d4af-c455-4a14-8e15-a8471516d748
 uid: core/miscellaneous/connection-resiliency
-ms.openlocfilehash: 07646e6ead845c38537945a03367ac7f50784236
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.openlocfilehash: 6dd3d3eadb218ab32f373e44e2013d017e2966d8
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78414134"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89617763"
 ---
 # <a name="connection-resiliency"></a>Verbindungsstabilität
 
@@ -17,7 +18,7 @@ Die verbindungsresilienz wiederholt fehlerhafte Daten Bank Befehle automatisch. 
 
 Beispielsweise enthält der SQL Server Anbieter eine Ausführungs Strategie, die speziell auf SQL Server (einschließlich SQL Azure) zugeschnitten ist. Es kennt die Ausnahme Typen, die wiederholt werden können und sinnvolle Standardwerte für maximale Wiederholungs Versuche, Verzögerung zwischen Wiederholungen usw. aufweisen.
 
-Beim Konfigurieren der Optionen für den Kontext wird eine Ausführungs Strategie angegeben. Dies erfolgt in der Regel in der `OnConfiguring`-Methode Ihres abgeleiteten Kontexts:
+Beim Konfigurieren der Optionen für den Kontext wird eine Ausführungs Strategie angegeben. Dies erfolgt in der Regel in der- `OnConfiguring` Methode Ihres abgeleiteten Kontexts:
 
 [!code-csharp[Main](../../../samples/core/Miscellaneous/ConnectionResiliency/Program.cs#OnConfiguring)]
 
@@ -49,9 +50,9 @@ protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 
 ## <a name="execution-strategies-and-transactions"></a>Ausführungs Strategien und Transaktionen
 
-Eine Ausführungs Strategie, die automatisch Wiederholungs Versuche für Fehler durchführt, muss jeden Vorgang in einem Wiederholungs Block wiedergeben können, der fehlschlägt. Wenn Wiederholungen aktiviert sind, wird jeder Vorgang, den Sie über EF Core ausführen, zu einem eigenen Abruf Vorgang. Das heißt, jede Abfrage und jeder `SaveChanges()` Aufrufe werden als Einheit wiederholt, wenn ein vorübergehender Fehler auftritt.
+Eine Ausführungs Strategie, die automatisch Wiederholungs Versuche für Fehler durchführt, muss jeden Vorgang in einem Wiederholungs Block wiedergeben können, der fehlschlägt. Wenn Wiederholungen aktiviert sind, wird jeder Vorgang, den Sie über EF Core ausführen, zu einem eigenen Abruf Vorgang. Das heißt, jede Abfrage und jeder Rückruf von werden `SaveChanges()` als Einheit wiederholt, wenn ein vorübergehender Fehler auftritt.
 
-Wenn Ihr Code jedoch eine Transaktion mithilfe von initiiert, `BeginTransaction()` Sie eine eigene Gruppe von Vorgängen definieren, die als Einheit behandelt werden müssen, und alles innerhalb der Transaktion muss wiedergegeben werden, wenn ein Fehler auftritt. Eine Ausnahme wie die folgende wird angezeigt, wenn Sie versuchen, dies zu tun, wenn eine Ausführungs Strategie verwendet wird:
+Wenn Ihr Code jedoch mithilfe von eine Transaktion initiiert, `BeginTransaction()` definieren Sie eine eigene Gruppe von Vorgängen, die als Einheit behandelt werden müssen, und alles innerhalb der Transaktion muss wiedergegeben werden, wenn ein Fehler auftritt. Eine Ausnahme wie die folgende wird angezeigt, wenn Sie versuchen, dies zu tun, wenn eine Ausführungs Strategie verwendet wird:
 
 > InvalidOperationException: die konfigurierte Ausführungs Strategie "sqlserverretryingexecutionstrategy" unterstützt keine vom Benutzer initiierten Transaktionen. Verwenden Sie die Ausführungsstrategie, die von „DbContext.Database.CreateExecutionStrategy()“ zurückgegeben wird, um alle Vorgänge in der Transaktion als wiederholbare Einheit auszuführen.
 
@@ -79,20 +80,20 @@ Sie müssen jedoch die Verwendung von Speicher generierten Schlüsseln vermeiden
 
 ### <a name="option-2---rebuild-application-state"></a>Option 2: Erneutes Erstellen des Anwendungs Zustands
 
-1. Verwerfen der aktuellen `DbContext`.
-2. Erstellen Sie einen neuen `DbContext`, und stellen Sie den Status der Anwendung aus der Datenbank wieder her.
+1. Verwerfen der aktuellen `DbContext` .
+2. Erstellen Sie einen neuen, `DbContext` und stellen Sie den Status der Anwendung aus der Datenbank wieder her.
 3. Informieren Sie den Benutzer darüber, dass der letzte Vorgang möglicherweise nicht erfolgreich abgeschlossen wurde.
 
 ### <a name="option-3---add-state-verification"></a>Option 3: Hinzufügen der Zustands Überprüfung
 
-Für die meisten Vorgänge, die den Daten Bank Status ändern, ist es möglich, Code hinzuzufügen, der überprüft, ob er erfolgreich war. EF bietet eine Erweiterungsmethode, um dies zu `IExecutionStrategy.ExecuteInTransaction`vereinfachen.
+Für die meisten Vorgänge, die den Daten Bank Status ändern, ist es möglich, Code hinzuzufügen, der überprüft, ob er erfolgreich war. EF bietet eine Erweiterungsmethode, um dies zu vereinfachen `IExecutionStrategy.ExecuteInTransaction` .
 
-Diese Methode beginnt und führt einen Commit für eine Transaktion aus und akzeptiert auch eine Funktion im `verifySucceeded`-Parameter, die aufgerufen wird, wenn während des Transaktions Commits ein vorübergehender Fehler auftritt.
+Diese Methode beginnt und führt einen Commit für eine Transaktion aus und akzeptiert auch eine Funktion in dem- `verifySucceeded` Parameter, die aufgerufen wird, wenn während des Transaktions Commits ein vorübergehender Fehler auftritt.
 
 [!code-csharp[Main](../../../samples/core/Miscellaneous/ConnectionResiliency/Program.cs#Verification)]
 
 > [!NOTE]
-> Hier wird `SaveChanges` mit `acceptAllChangesOnSuccess` auf `false` aufgerufen, um zu vermeiden, dass der Zustand der `Blog` Entität in `Unchanged` geändert wird, wenn `SaveChanges` erfolgreich ist. Dadurch kann derselbe Vorgang wiederholt werden, wenn ein Commit fehlschlägt und für die Transaktion ein Rollback ausgeführt wird.
+> Hier `SaveChanges` wird aufgerufen, wobei `acceptAllChangesOnSuccess` auf festgelegt wird `false` , um zu verhindern, dass der Zustand der `Blog` Entität in geändert wird `Unchanged` `SaveChanges` . Dadurch kann derselbe Vorgang wiederholt werden, wenn ein Commit fehlschlägt und für die Transaktion ein Rollback ausgeführt wird.
 
 ### <a name="option-4---manually-track-the-transaction"></a>Option 4: Manuelles Nachverfolgen der Transaktion
 

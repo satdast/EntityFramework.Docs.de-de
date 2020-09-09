@@ -1,15 +1,16 @@
 ---
 title: Wert Konvertierungen-EF Core
+description: Konfigurieren von Wert Konvertern in einem Entity Framework Core Modell
 author: ajcvickers
 ms.date: 02/19/2018
 ms.assetid: 3154BF3C-1749-4C60-8D51-AE86773AA116
 uid: core/modeling/value-conversions
-ms.openlocfilehash: 93774bc1bc3887f982faeac151825a6643c1107c
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.openlocfilehash: 79e54392bf5503b4b651f25ce6e5fc63d418df90
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78414554"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89616659"
 ---
 # <a name="value-conversions"></a>Wertkonvertierungen
 
@@ -20,13 +21,13 @@ Mithilfe von Wert Konvertern können Eigenschaftswerte beim Lesen aus der Datenb
 
 ## <a name="fundamentals"></a>Grundlagen
 
-Wert Konverter werden im Hinblick auf eine `ModelClrType` und eine `ProviderClrType`angegeben. Der Modelltyp ist der .NET-Typ der-Eigenschaft im-Entitätstyp. Der Anbietertyp ist der .NET-Typ, der vom Datenbankanbieter verstanden wird. Um z. b. Enumerationen als Zeichen folgen in der Datenbank zu speichern, ist der Modelltyp der Typ der Enumeration, und der Anbietertyp ist `String`. Diese beiden Typen können identisch sein.
+Wert Konverter werden in Bezug auf einen `ModelClrType` und einen angegeben `ProviderClrType` . Der Modelltyp ist der .NET-Typ der-Eigenschaft im-Entitätstyp. Der Anbietertyp ist der .NET-Typ, der vom Datenbankanbieter verstanden wird. Um z. b. Enumerationen als Zeichen folgen in der Datenbank zu speichern, ist der Modelltyp der Typ der Enumeration, und der Anbietertyp ist `String` . Diese beiden Typen können identisch sein.
 
-Konvertierungen werden mithilfe von zwei `Func` Ausdrucks Baumstrukturen definiert: einer von `ModelClrType` bis `ProviderClrType` und der andere von `ProviderClrType` bis `ModelClrType`. Ausdrucks Baumstrukturen werden verwendet, damit Sie für effiziente Konvertierungen in den Datenbankzugriffs Code kompiliert werden können. Bei komplexen Konvertierungen kann die Ausdrucks Baumstruktur ein einfacher aufrufungs Vorgang für eine Methode sein, die die Konvertierung ausführt.
+Konvertierungen werden mithilfe `Func` von zwei Ausdrucks Baumstrukturen definiert: einer von `ModelClrType` `ProviderClrType` und der andere von `ProviderClrType` bis `ModelClrType` . Ausdrucks Baumstrukturen werden verwendet, damit Sie für effiziente Konvertierungen in den Datenbankzugriffs Code kompiliert werden können. Bei komplexen Konvertierungen kann die Ausdrucks Baumstruktur ein einfacher aufrufungs Vorgang für eine Methode sein, die die Konvertierung ausführt.
 
 ## <a name="configuring-a-value-converter"></a>Konfigurieren eines Wert Konverters
 
-Wert Konvertierungen werden in den Eigenschaften des `OnModelCreating` der `DbContext`definiert. Stellen Sie sich z. b. eine Aufzählung und einen Entitätstyp vor
+Wert Konvertierungen werden für Eigenschaften in der definiert `OnModelCreating` `DbContext` . Stellen Sie sich z. b. eine Aufzählung und einen Entitätstyp vor
 
 ``` csharp
 public class Rider
@@ -44,7 +45,7 @@ public enum EquineBeast
 }
 ```
 
-Anschließend können Konvertierungen in `OnModelCreating` definiert werden, um die Enumerationswerte als Zeichen folgen (z. b. "Esel", "maulzeichen",...) in der Datenbank zu speichern:
+Anschließend können Konvertierungen in definiert werden `OnModelCreating` , um die Enumerationswerte als Zeichen folgen (z. b. "Esel", "maulzeichen",...) in der Datenbank zu speichern:
 
 ``` csharp
 protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -63,7 +64,7 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 
 ## <a name="the-valueconverter-class"></a>Die ValueConverter-Klasse
 
-Wenn Sie `HasConversion` wie oben gezeigt aufrufen, wird eine `ValueConverter` Instanz erstellt und für die-Eigenschaft festgelegt. Der `ValueConverter` kann stattdessen explizit erstellt werden. Beispiel:
+`HasConversion`Wenn Sie wie oben gezeigt aufrufen, wird eine `ValueConverter` -Instanz erstellt und für die-Eigenschaft festgelegt. `ValueConverter`Stattdessen kann explizit erstellt werden. Beispiel:
 
 ``` csharp
 var converter = new ValueConverter<EquineBeast, string>(
@@ -83,29 +84,29 @@ Dies kann hilfreich sein, wenn mehrere Eigenschaften dieselbe Konvertierung verw
 
 ## <a name="built-in-converters"></a>Integrierte Konverter
 
-EF Core wird mit einer Reihe vordefinierter `ValueConverter` Klassen ausgeliefert, die sich im `Microsoft.EntityFrameworkCore.Storage.ValueConversion`-Namespace befinden. Dies sind:
+EF Core enthält eine Reihe vordefinierter `ValueConverter` Klassen, die im- `Microsoft.EntityFrameworkCore.Storage.ValueConversion` Namespace enthalten sind. Dies sind:
 
-* `BoolToZeroOneConverter`-bool auf NULL und eins
-* `BoolToStringConverter`-bool in Zeichen folgen wie "Y" und "N".
-* `BoolToTwoValuesConverter`-bool auf zwei beliebige Werte
-* `BytesToStringConverter`-Byte-Array in Base64-codierte Zeichenfolge
-* `CastingConverter` Konvertierungen, die nur eine Typumwandlung erfordern
-* Zeichenfolge "`CharToStringConverter`-Char to Single Character"
-* `DateTimeOffsetToBinaryConverter`-DateTimeOffset in binary-codierter 64-Bit-Wert
-* `DateTimeOffsetToBytesConverter`-DateTimeOffset in Bytearray
-* `DateTimeOffsetToStringConverter`-DateTimeOffset in Zeichenfolge
-* `DateTimeToBinaryConverter`-DateTime-to-64-Bit-Wert einschließlich DateTimeKind
-* `DateTimeToStringConverter`-DateTime zu String
-* `DateTimeToTicksConverter`-DateTime-Wert für Ticks
-* `EnumToNumberConverter`-Enumeration zur zugrunde liegenden Zahl
-* `EnumToStringConverter`-Enum in Zeichenfolge
-* `GuidToBytesConverter`-GUID zu Bytearray
-* `GuidToStringConverter`-GUID in Zeichenfolge
-* `NumberToBytesConverter`-beliebiger numerischer Wert zum Bytearray
-* `NumberToStringConverter`-beliebiger numerischer Wert zur Zeichenfolge
-* `StringToBytesConverter` Zeichenfolge in UTF8-bytes
-* `TimeSpanToStringConverter`-TimeSpan in Zeichenfolge
-* `TimeSpanToTicksConverter` Zeitspanne in Ticks
+* `BoolToZeroOneConverter` -Bool in NULL und eins
+* `BoolToStringConverter` -Bool in Zeichen folgen wie "Y" und "N"
+* `BoolToTwoValuesConverter` -Bool auf zwei beliebige Werte
+* `BytesToStringConverter` -Bytearray in Base64-codierte Zeichenfolge
+* `CastingConverter` -Konvertierungen, die nur eine Typumwandlung erfordern
+* `CharToStringConverter` -Char in eine Zeichenfolge mit einem Zeichen
+* `DateTimeOffsetToBinaryConverter` -DateTimeOffset in binary-codierter 64-Bit-Wert
+* `DateTimeOffsetToBytesConverter` -DateTimeOffset in Bytearray
+* `DateTimeOffsetToStringConverter` -DateTimeOffset in Zeichenfolge
+* `DateTimeToBinaryConverter` -DateTime-to-64-Bit-Wert, einschließlich DateTimeKind
+* `DateTimeToStringConverter` -DateTime zu String
+* `DateTimeToTicksConverter` -DateTime zu Ticks
+* `EnumToNumberConverter` -Enumeration zur zugrunde liegenden Zahl
+* `EnumToStringConverter` -Enum in Zeichenfolge
+* `GuidToBytesConverter` -GUID zu Bytearray
+* `GuidToStringConverter` -GUID zu Zeichenfolge
+* `NumberToBytesConverter` -Beliebiger numerischer Wert zum Bytearray
+* `NumberToStringConverter` -Beliebiger numerischer Wert zu Zeichenfolge
+* `StringToBytesConverter` -Zeichenfolge in UTF8-bytes
+* `TimeSpanToStringConverter` -TimeSpan zu Zeichenfolge
+* `TimeSpanToTicksConverter` -TimeSpan in Ticks
 
 Beachten Sie, dass `EnumToStringConverter` in dieser Liste enthalten ist. Dies bedeutet, dass die Konvertierung nicht explizit angegeben werden muss, wie oben gezeigt. Verwenden Sie stattdessen einfach den integrierten Konverter:
 
@@ -143,13 +144,13 @@ public class Rider
 }
 ```
 
-Anschließend werden die Enumerationswerte als Zeichen folgen in der Datenbank gespeichert, ohne dass eine weitere Konfiguration in `OnModelCreating`.
+Die Enumerationswerte werden dann in der Datenbank ohne weitere Konfiguration in als Zeichen folgen gespeichert `OnModelCreating` .
 
 ## <a name="limitations"></a>Einschränkungen
 
 Es gibt einige bekannte aktuelle Einschränkungen des Value-Konvertierungs Systems:
 
-* Wie bereits erwähnt, können `null` nicht konvertiert werden.
+* Wie bereits erwähnt, `null` kann nicht konvertiert werden.
 * Zurzeit gibt es keine Möglichkeit, eine Konvertierung einer Eigenschaft in mehrere Spalten zu verteilen (oder umgekehrt).
 * Die Verwendung von Wert Konvertierungen kann sich auf die Fähigkeit von EF Core auswirken, Ausdrücke in SQL zu übersetzen. In solchen Fällen wird eine Warnung protokolliert.
 Das Entfernen dieser Einschränkungen wird für eine zukünftige Version in Erwägung gezogen.

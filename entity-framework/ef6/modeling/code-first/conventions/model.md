@@ -1,20 +1,22 @@
 ---
 title: Modellbasierte Konventionen EF6
+description: Modellbasierte Konventionen in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 0fc4eef8-29b8-4192-9c77-08fd33d3db3a
-ms.openlocfilehash: c873e9a216bd9bd1934f2149ae6af602072f3608
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/modeling/code-first/conventions/model
+ms.openlocfilehash: 30a79f505939220b3d4040778397eab972e6a712
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78415844"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89617179"
 ---
 # <a name="model-based-conventions"></a>Modellbasierte Konventionen
 > [!NOTE]
 > **Nur EF6 und höher:** Die Features, APIs usw., die auf dieser Seite erläutert werden, wurden in Entity Framework 6 eingeführt. Wenn Sie eine frühere Version verwenden, gelten manche Informationen nicht.  
 
-Modellbasierte Konventionen sind eine erweiterte Methode der Modell Konfiguration, die auf der Konvention basiert. In den meisten Szenarien sollte die API für die [benutzerdefinierte Code First Konvention in dbmodelbuilder](~/ef6/modeling/code-first/conventions/custom.md) verwendet werden. Vor der Verwendung von modellbasierten Konventionen wird ein Verständnis der dbmodelbuilder-API für Konventionen empfohlen.  
+Modellbasierte Konventionen sind eine erweiterte Methode der Modell Konfiguration, die auf der Konvention basiert. In den meisten Szenarien sollte die API für die [benutzerdefinierte Code First Konvention in dbmodelbuilder](xref:ef6/modeling/code-first/conventions/custom) verwendet werden. Vor der Verwendung von modellbasierten Konventionen wird ein Verständnis der dbmodelbuilder-API für Konventionen empfohlen.  
 
 Modellbasierte Konventionen ermöglichen die Erstellung von Konventionen, die sich auf Eigenschaften und Tabellen auswirken, die nicht über Standard Konventionen konfiguriert werden können. Beispiele hierfür sind diskriminatorspalten in Tabelle pro Hierarchie Modellen und unabhängigen Assoziations Spalten.  
 
@@ -46,7 +48,7 @@ public class BlogContext : DbContext
 }
 ```  
 
-Eine Konvention kann auch in Relation zu einer anderen Konvention hinzugefügt werden, indem die Konventionen. AddBefore-\<\> oder Conventions. AddAfter\<\> Methoden verwendet werden. Weitere Informationen zu den Konventionen, die Entity Framework angewendet wird, finden Sie im Abschnitt "Hinweise".  
+Eine Konvention kann auch mit der Konventionen. AddBefore- \<\> Methode oder der Conventions. AddAfter-Methode in Relation zu einer anderen Konvention hinzugefügt werden \<\> . Weitere Informationen zu den Konventionen, die Entity Framework angewendet wird, finden Sie im Abschnitt "Hinweise".  
 
 ``` csharp
 protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -83,7 +85,7 @@ class DiscriminatorRenamingConvention : IStoreModelConvention<EdmProperty>
 
 Ein weiteres komplizierteres Beispiel für modellbasierte Konventionen in Aktion besteht darin, die Art und Weise zu konfigurieren, in der unabhängige Zuordnungen (IAS) benannt werden.  Dies ist eine Situation, in der Modell Konventionen zutreffen, da IAS von EF generiert wird und nicht im Modell vorhanden ist, auf das die dbmodelbuilder-API zugreifen kann.  
 
-Wenn EF eine IA generiert, erstellt es eine Spalte mit dem Namen EntityType_KeyName. Beispielsweise würde für eine Zuordnung mit dem Namen Customer und einer Schlüssel Spalte mit dem Namen CustomerID eine Spalte mit dem Namen Customer_CustomerId generiert werden. In der folgenden Konvention wird das Zeichen "\_" aus dem für die IA generierten Spaltennamen entfernt.  
+Wenn EF eine IA generiert, erstellt es eine Spalte mit dem Namen EntityType_KeyName. Beispielsweise würde für eine Zuordnung mit dem Namen Customer und einer Schlüssel Spalte mit dem Namen CustomerID eine Spalte mit dem Namen Customer_CustomerId generiert werden. In der folgenden Konvention wird das \_ Zeichen "" aus dem für die IA generierten Spaltennamen entfernt.  
 
 ``` csharp
 using System.Data.Entity;
@@ -146,7 +148,7 @@ public class ForeignKeyNamingConvention : IStoreModelConvention<AssociationType>
 
 ## <a name="extending-existing-conventions"></a>Erweitern vorhandener Konventionen   
 
-Wenn Sie eine Konvention schreiben müssen, die einer der Konventionen ähnelt, die Entity Framework bereits auf Ihr Modell angewendet haben, können Sie diese Konvention immer erweitern, um zu vermeiden, dass Sie von Grund auf neu geschrieben werden muss.  Ein Beispiel hierfür besteht darin, die vorhandene ID-abgleichskonvention durch eine benutzerdefinierte zu ersetzen.   Ein zusätzlicher Vorteil beim Überschreiben der Schlüssel Konvention besteht darin, dass die überschriebene Methode nur aufgerufen wird, wenn kein Schlüssel bereits erkannt oder explizit konfiguriert wurde. Eine Liste der Konventionen, die von Entity Framework verwendet werden, finden Sie hier: [http://msdn.microsoft.com/library/system.data.entity.modelconfiguration.conventions.aspx](https://msdn.microsoft.com/library/system.data.entity.modelconfiguration.conventions.aspx).  
+Wenn Sie eine Konvention schreiben müssen, die einer der Konventionen ähnelt, die Entity Framework bereits auf Ihr Modell angewendet haben, können Sie diese Konvention immer erweitern, um zu vermeiden, dass Sie von Grund auf neu geschrieben werden muss.  Ein Beispiel hierfür besteht darin, die vorhandene ID-abgleichskonvention durch eine benutzerdefinierte zu ersetzen.   Ein zusätzlicher Vorteil beim Überschreiben der Schlüssel Konvention besteht darin, dass die überschriebene Methode nur aufgerufen wird, wenn kein Schlüssel bereits erkannt oder explizit konfiguriert wurde. Eine Liste der Konventionen, die von Entity Framework verwendet werden, finden Sie hier: [http://msdn.microsoft.com/library/system.data.entity.modelconfiguration.conventions.aspx](https://msdn.microsoft.com/library/system.data.entity.modelconfiguration.conventions.aspx) .  
 
 ``` csharp
 using System.Data.Entity;
@@ -191,7 +193,7 @@ public class CustomKeyDiscoveryConvention : KeyDiscoveryConvention
 }
 ```  
 
-Anschließend müssen wir unsere neue Konvention vor der vorhandenen Schlüssel Konvention hinzufügen. Nachdem wir customkeydiscoveryconvention hinzugefügt haben, können wir idkeydiscoveryconvention entfernen.  Wenn wir die vorhandene idkeydiscoveryconvention nicht entfernt haben, hat diese Konvention weiterhin Vorrang vor der ID-Ermittlungs Konvention, da Sie zuerst ausgeführt wird. Wenn jedoch keine "Key"-Eigenschaft gefunden wird, wird die "ID"-Konvention ausgeführt.  Dieses Verhalten wird angezeigt, weil bei jeder Konvention das Modell von der vorherigen Konvention aktualisiert wird (anstatt sie unabhängig voneinander zu betreiben und alle zusammen zu kombinieren), sodass eine vorherige Konvention beispielsweise einen Spaltennamen so aktualisiert hat, dass er etwas von das Interesse an Ihrer benutzerdefinierten Konvention (wenn der Name nicht von Interesse war) gilt für diese Spalte.  
+Anschließend müssen wir unsere neue Konvention vor der vorhandenen Schlüssel Konvention hinzufügen. Nachdem wir customkeydiscoveryconvention hinzugefügt haben, können wir idkeydiscoveryconvention entfernen.  Wenn wir die vorhandene idkeydiscoveryconvention nicht entfernt haben, hat diese Konvention weiterhin Vorrang vor der ID-Ermittlungs Konvention, da Sie zuerst ausgeführt wird. Wenn jedoch keine "Key"-Eigenschaft gefunden wird, wird die "ID"-Konvention ausgeführt.  Dieses Verhalten wird angezeigt, weil bei jeder Konvention das Modell wie in der vorherigen Konvention aktualisiert angezeigt wird (anstatt sie unabhängig voneinander zu betreiben), sodass eine vorherige Konvention z. b. einen Spaltennamen so aktualisiert hat, dass Sie etwas, das für Ihre benutzerdefinierte Konvention relevant ist (wenn der Name nicht von Interesse war), auf diese Spalte angewendet wird.  
 
 ``` csharp
 public class BlogContext : DbContext
@@ -209,4 +211,4 @@ public class BlogContext : DbContext
 
 ## <a name="notes"></a>Notizen  
 
-Eine Liste der Konventionen, die zurzeit von Entity Framework angewendet werden, finden Sie in der MSDN-Dokumentation unter: [http://msdn.microsoft.com/library/system.data.entity.modelconfiguration.conventions.aspx](https://msdn.microsoft.com/library/system.data.entity.modelconfiguration.conventions.aspx).  Diese Liste wird direkt aus dem Quellcode abgerufen.  Der Quellcode für Entity Framework 6 ist auf [GitHub](https://github.com/aspnet/entityframework6/) verfügbar, und viele der von Entity Framework verwendeten Konventionen sind gute Ausgangspunkte für benutzerdefinierte modellbasierte Konventionen.  
+Eine Liste der Konventionen, die zurzeit von Entity Framework angewendet werden, finden Sie in der MSDN-Dokumentation unter: [http://msdn.microsoft.com/library/system.data.entity.modelconfiguration.conventions.aspx](https://msdn.microsoft.com/library/system.data.entity.modelconfiguration.conventions.aspx) .  Diese Liste wird direkt aus dem Quellcode abgerufen.  Der Quellcode für Entity Framework 6 ist auf [GitHub](https://github.com/aspnet/entityframework6/) verfügbar, und viele der von Entity Framework verwendeten Konventionen sind gute Ausgangspunkte für benutzerdefinierte modellbasierte Konventionen.  

@@ -1,14 +1,16 @@
 ---
 title: Verbindungs Verwaltung-EF6
+description: Verbindungs Verwaltung in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: ecaa5a27-b19e-4bf9-8142-a3fb00642270
-ms.openlocfilehash: a6352bbbc38c38bd5f30536736ec969056df2c7d
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/fundamentals/connection-management
+ms.openlocfilehash: c352e761a9891b5c275f32752f10de13222bf48e
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78414866"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89617219"
 ---
 # <a name="connection-management"></a>Verbindungsverwaltung
 Auf dieser Seite wird das Verhalten von Entity Framework in Bezug auf das Übergeben von Verbindungen mit dem Kontext und die Funktionalität der **Database. Connection. Open ()** -API beschrieben.  
@@ -27,7 +29,7 @@ public DbContext(DbConnection existingConnection, DbCompiledModel model, bool co
 Es ist möglich, diese zu verwenden, aber Sie müssen einige Einschränkungen umgehen:  
 
 1. Wenn Sie eine offene Verbindung an eine dieser Optionen übergeben, wird das erste Mal, wenn das Framework versucht, es zu verwenden, eine InvalidOperationException ausgelöst, die besagt, dass eine bereits geöffnete Verbindung nicht erneut geöffnet werden kann.  
-2. Das contextownsconnection-Flag gibt an, ob die zugrunde liegende Speicher Verbindung verworfen werden soll, wenn der Kontext verworfen wird. Unabhängig von dieser Einstellung wird die Speicher Verbindung jedoch immer geschlossen, wenn der Kontext verworfen wird. Wenn Sie also über mehr als einen dbcontext mit derselben Verbindung verfügen, wenn der Kontext zuerst verworfen wird, wird die Verbindung geschlossen (ähnlich, wenn Sie eine vorhandene ADO.NET-Verbindung mit einem dbcontext gemischt haben, schließt dbcontext die Verbindung immer, wenn Sie verworfen wird). .  
+2. Das contextownsconnection-Flag gibt an, ob die zugrunde liegende Speicher Verbindung verworfen werden soll, wenn der Kontext verworfen wird. Unabhängig von dieser Einstellung wird die Speicher Verbindung jedoch immer geschlossen, wenn der Kontext verworfen wird. Wenn Sie also über mehr als einen dbcontext mit derselben Verbindung verfügen, wenn der Kontext zuerst verworfen wird, wird die Verbindung geschlossen (ähnlich, wenn Sie eine vorhandene ADO.NET-Verbindung mit einem dbcontext gemischt haben, schließt dbcontext die Verbindung immer, wenn Sie verworfen wird).  
 
 Es ist möglich, die oben beschriebene Einschränkung zu umgehen, indem Sie eine geschlossene Verbindung übergibt und nur Code ausführt, der Sie nach der Erstellung aller Kontexte öffnet:  
 
@@ -128,7 +130,7 @@ Außerdem steuert das contextownsconnection-Flag nun, ob die Verbindung geschlos
 Natürlich kann dbcontext weiterhin die Kontrolle über die Verbindung übernehmen (legen Sie einfach "contextownsconnection" auf "true" fest, oder verwenden Sie einen der anderen Konstruktoren), wenn Sie dies wünschen.  
 
 > [!NOTE]
-> Bei der Verwendung von Transaktionen mit diesem neuen Modell sind einige weitere Überlegungen zu beachten. Weitere Informationen finden Sie [unter Arbeiten mit Transaktionen](~/ef6/saving/transactions.md).  
+> Bei der Verwendung von Transaktionen mit diesem neuen Modell sind einige weitere Überlegungen zu beachten. Weitere Informationen finden Sie [unter Arbeiten mit Transaktionen](xref:ef6/saving/transactions).  
 
 ## <a name="databaseconnectionopen"></a>Database. Connection. Open ()  
 
@@ -140,7 +142,7 @@ In EF5 und früheren Versionen ist ein Fehler aufgetreten, so dass **ObjectConte
 ((IObjectContextAdapter)context).ObjectContext.Connection.State
 ```  
 
-Wenn Sie die Datenbankverbindung öffnen, indem Sie Database. Connection. Open () aufrufen, wird Sie separat geöffnet, bis Sie das nächste Mal eine Abfrage ausführen oder etwas aufrufen, das eine Datenbankverbindung erfordert (z. b. SaveChanges ()), aber danach den zugrunde liegenden Speicher. die Verbindung wird geschlossen. Der Kontext wird dann erneut geöffnet, und die Verbindung wird immer wieder geschlossen, wenn ein anderer Daten Bank Vorgang erforderlich ist:  
+Wenn Sie die Datenbankverbindung öffnen, indem Sie Database. Connection. Open () aufrufen, wird Sie separat geöffnet, bis Sie das nächste Mal eine Abfrage ausführen oder etwas aufrufen, das eine Datenbankverbindung erfordert (z. b. SaveChanges ()), aber danach wird die zugrunde liegende Speicher Verbindung geschlossen. Der Kontext wird dann erneut geöffnet, und die Verbindung wird immer wieder geschlossen, wenn ein anderer Daten Bank Vorgang erforderlich ist:  
 
 ``` csharp
 using System;

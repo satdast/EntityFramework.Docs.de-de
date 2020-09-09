@@ -1,30 +1,31 @@
 ---
 title: Parallelitäts Token-EF Core
+description: Konfigurieren von Parallelitäts Token für die Steuerung optimistischer Parallelität in einem Entity Framework Core Modell
 author: AndriySvyryd
 ms.date: 01/03/2020
 ms.assetid: bc8b1cb0-befe-4b67-8004-26e6c5f69385
 uid: core/modeling/concurrency
-ms.openlocfilehash: bfeb611f222f7195fe22d920b452b40cc4addf90
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.openlocfilehash: 57718a1b0146f437bb4126524889c81ae0dfd895
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78414620"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89617543"
 ---
 # <a name="concurrency-tokens"></a>Parallelitätstoken
 
 > [!NOTE]
-> Auf dieser Seite wird das Konfigurieren von Parallelitäts Token dokumentiert. Eine ausführliche Erläuterung der Funktionsweise der Parallelitäts Steuerung in EF Core und Beispielen zur Behandlung von Parallelitäts Konflikten in der Anwendung finden Sie unter Behandeln von Parallelitäts [Konflikten](../saving/concurrency.md) .
+> Auf dieser Seite wird das Konfigurieren von Parallelitäts Token dokumentiert. Eine ausführliche Erläuterung der Funktionsweise der Parallelitäts Steuerung in EF Core und Beispielen zur Behandlung von Parallelitäts Konflikten in der Anwendung finden Sie unter Behandeln von Parallelitäts [Konflikten](xref:core/saving/concurrency) .
 
 Als Parallelitäts Token konfigurierte Eigenschaften werden verwendet, um die Steuerung der vollständigen Parallelität zu implementieren.
 
 ## <a name="configuration"></a>Konfiguration
 
-### <a name="data-annotations"></a>[Datenanmerkungen](#tab/data-annotations)
+### <a name="data-annotations"></a>[Daten Anmerkungen](#tab/data-annotations)
 
 [!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Concurrency.cs?name=Concurrency&highlight=5)]
 
-### <a name="fluent-api"></a>[Fließende API](#tab/fluent-api)
+### <a name="fluent-api"></a>[Fluent-API](#tab/fluent-api)
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Concurrency.cs?name=Concurrency&highlight=5)]
 
@@ -36,11 +37,11 @@ Ein Timestamp/rowversion-Objekt ist eine Eigenschaft, für die ein neuer Wert au
 
 Sie können eine Eigenschaft wie folgt als timestamp/rowversion konfigurieren:
 
-### <a name="data-annotations"></a>[Datenanmerkungen](#tab/data-annotations)
+### <a name="data-annotations"></a>[Daten Anmerkungen](#tab/data-annotations)
 
 [!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Timestamp.cs?name=Timestamp&highlight=7)]
 
-### <a name="fluent-api"></a>[Fließende API](#tab/fluent-api)
+### <a name="fluent-api"></a>[Fluent-API](#tab/fluent-api)
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Timestamp.cs?name=Timestamp&highlight=9,17)]
 

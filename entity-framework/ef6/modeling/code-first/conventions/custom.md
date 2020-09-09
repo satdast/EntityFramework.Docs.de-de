@@ -1,27 +1,29 @@
 ---
 title: Benutzerdefinierte Code First Konventionen-EF6
+description: Benutzerdefinierte Code First Konventionen in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: dd2bdbd9-ae9e-470a-aeb8-d0ba160499b7
-ms.openlocfilehash: cfd7f7cad532dca5227793c04d7d91e977ea5e4e
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/modeling/code-first/conventions/custom
+ms.openlocfilehash: 69e4b0111394e83195f5c0a81624c7b9e45bda52
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78415892"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89617264"
 ---
 # <a name="custom-code-first-conventions"></a>Benutzerdefinierte Code First Konventionen
 > [!NOTE]
 > **Nur EF6 und höher:** Die Features, APIs usw., die auf dieser Seite erläutert werden, wurden in Entity Framework 6 eingeführt. Wenn Sie eine frühere Version verwenden, gelten manche Informationen nicht.
 
-Wenn Sie Code First verwenden, wird das Modell aus ihren Klassen mithilfe eines Satzes von Konventionen berechnet. Die standardmäßigen [Code First Konventionen](~/ef6/modeling/code-first/conventions/built-in.md) bestimmen Dinge, wie z. b. welche Eigenschaft zum Primärschlüssel einer Entität wird, den Namen der Tabelle, der eine Entität zugeordnet ist, und welche Genauigkeit und Dezimalstellen eine Dezimal Spalte Standardmäßig besitzt.
+Wenn Sie Code First verwenden, wird das Modell aus ihren Klassen mithilfe eines Satzes von Konventionen berechnet. Die standardmäßigen [Code First Konventionen](xref:ef6/modeling/code-first/conventions/built-in) bestimmen Dinge, wie z. b. welche Eigenschaft zum Primärschlüssel einer Entität wird, den Namen der Tabelle, der eine Entität zugeordnet ist, und welche Genauigkeit und Dezimalstellen eine Dezimal Spalte Standardmäßig besitzt.
 
 Manchmal sind diese Standard Konventionen nicht ideal für Ihr Modell, und Sie müssen Sie umgehen, indem Sie viele einzelne Entitäten mithilfe von Daten Anmerkungen oder der flüssigen API konfigurieren. Mit benutzerdefinierten Code First Konventionen können Sie eigene Konventionen definieren, die Konfigurations Standardwerte für das Modell bereitstellen. In dieser exemplarischen Vorgehensweise werden die unterschiedlichen Typen von benutzerdefinierten Konventionen erläutert und erläutert, wie diese erstellt werden.
 
 
 ## <a name="model-based-conventions"></a>Modellbasierte Konventionen
 
-Auf dieser Seite wird die dbmodelbuilder-API für benutzerdefinierte Konventionen behandelt. Diese API sollte für die Erstellung der meisten benutzerdefinierten Konventionen ausreichen. Es gibt jedoch auch die Möglichkeit, modellbasierte Konventionen zu verfassen, die das endgültige Modell nach der Erstellung verändern, um erweiterte Szenarien zu verarbeiten. Weitere Informationen finden Sie unter [modellbasierte Konventionen](~/ef6/modeling/code-first/conventions/model.md).
+Auf dieser Seite wird die dbmodelbuilder-API für benutzerdefinierte Konventionen behandelt. Diese API sollte für die Erstellung der meisten benutzerdefinierten Konventionen ausreichen. Es gibt jedoch auch die Möglichkeit, modellbasierte Konventionen zu verfassen, die das endgültige Modell nach der Erstellung verändern, um erweiterte Szenarien zu verarbeiten. Weitere Informationen finden Sie unter [modellbasierte Konventionen](xref:ef6/modeling/code-first/conventions/model).
 
  
 
@@ -208,7 +210,7 @@ Nachdem dies geschehen ist, können wir einen booleschen Wert für unser Attribu
                 .Configure(c => c.IsUnicode(c.ClrPropertyInfo.GetCustomAttribute<IsUnicode>().Unicode));
 ```
 
-Dies ist leicht genug, aber es gibt eine kompaktere Möglichkeit, dies mit der-Methode der Conventions-API zu erreichen. Die "has"-Methode hat einen Parameter vom Typ "Func&lt;PropertyInfo, t&gt; der die PropertyInfo akzeptiert, identisch mit der Where-Methode, erwartet jedoch, dass ein Objekt zurückgegeben wird. Wenn das zurückgegebene Objekt NULL ist, wird die Eigenschaft nicht konfiguriert, d. h., Sie können Eigenschaften wie in der Where-Methode filtern, aber Sie unterscheiden sich darin, dass auch das zurückgegebene Objekt erfasst und an die Configure-Methode übergeben wird. Dies funktioniert wie folgt:
+Dies ist leicht genug, aber es gibt eine kompaktere Möglichkeit, dies mit der-Methode der Conventions-API zu erreichen. Die "has"-Methode hat einen Parameter vom Typ "Func &lt; PropertyInfo", "T", der &gt; PropertyInfo akzeptiert, identisch mit der Where-Methode, erwartet jedoch, dass ein-Objekt zurückgegeben wird. Wenn das zurückgegebene Objekt NULL ist, wird die Eigenschaft nicht konfiguriert, d. h., Sie können Eigenschaften wie in der Where-Methode filtern, aber Sie unterscheiden sich darin, dass auch das zurückgegebene Objekt erfasst und an die Configure-Methode übergeben wird. Dies funktioniert wie folgt:
 
 ``` csharp
     modelBuilder.Properties()
@@ -235,7 +237,7 @@ Eine der Dinge, mit denen typebenenkonventionen sehr nützlich sein können, ist
     }
 ```
 
-Diese Methode nimmt einen-Typ an und gibt eine Zeichenfolge zurück, die Kleinbuchstaben mit unterstrichen anstelle von "CamelCase" verwendet. In unserem Modell bedeutet dies, dass die ProductCategory-Klasse einer Tabelle namens Product\_Category anstelle von productcategories zugeordnet wird.
+Diese Methode nimmt einen-Typ an und gibt eine Zeichenfolge zurück, die Kleinbuchstaben mit unterstrichen anstelle von "CamelCase" verwendet. In unserem Modell bedeutet dies, dass die ProductCategory-Klasse der Tabelle Product \_ Category anstelle von productcategories zugeordnet wird.
 
 Sobald wir diese Methode haben, können wir Sie in einer Konvention wie der folgenden nennen:
 
@@ -246,9 +248,9 @@ Sobald wir diese Methode haben, können wir Sie in einer Konvention wie der folg
 
 Diese Konvention konfiguriert jeden Typ in unserem Modell so, dass er dem Tabellennamen zugeordnet wird, der von der GetTableName-Methode zurückgegeben wird. Diese Konvention entspricht dem Aufrufen der ToTable-Methode für jede Entität im Modell mithilfe der flüssigen API.
 
-Beachten Sie hierbei Folgendes: Wenn Sie "ToTable" verwenden, wird die Zeichenfolge, die Sie als exakten Tabellennamen angeben, ohne die Pluralisierung übernommen, die normalerweise beim Bestimmen von Tabellennamen verwendet wird. Aus diesem Grund ist der Tabellenname aus unserer Konvention Produkt\_Kategorie anstelle von Product\_Kategorien. Wir können dies in unserer Konvention auflösen, indem wir den pluralisierungs Dienst selbst anrufen.
+Beachten Sie hierbei Folgendes: Wenn Sie "ToTable" verwenden, wird die Zeichenfolge, die Sie als exakten Tabellennamen angeben, ohne die Pluralisierung übernommen, die normalerweise beim Bestimmen von Tabellennamen verwendet wird. Aus diesem Grund ist der Tabellenname aus unserer Konvention die Produkt \_ Kategorie anstelle von Produkt \_ Kategorien. Wir können dies in unserer Konvention auflösen, indem wir den pluralisierungs Dienst selbst anrufen.
 
-Im folgenden Code verwenden wir die Funktion zur [Abhängigkeitsauflösung](~/ef6/fundamentals/configuring/dependency-resolution.md) , die in EF6 hinzugefügt wird, um den pluralisierungs Dienst abzurufen, den EF verwendet hätte, und den Tabellennamen zu pluralisieren.
+Im folgenden Code verwenden wir die Funktion zur [Abhängigkeitsauflösung](xref:ef6/fundamentals/configuring/dependency-resolution) , die in EF6 hinzugefügt wird, um den pluralisierungs Dienst abzurufen, den EF verwendet hätte, und den Tabellennamen zu pluralisieren.
 
 ``` csharp
     private string GetTableName(Type type)

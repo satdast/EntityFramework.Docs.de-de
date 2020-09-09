@@ -1,15 +1,16 @@
 ---
 title: Entitäts Typen mit Konstruktoren-EF Core
+description: Verwenden von Konstruktoren zum Binden von Daten mit Entity Framework Core Modell
 author: ajcvickers
 ms.date: 02/23/2018
 ms.assetid: 420AFFE7-B709-4A68-9149-F06F8746FB33
 uid: core/modeling/constructors
-ms.openlocfilehash: ddfaa8eebde388a9d3309f21b8891de593077956
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.openlocfilehash: 58529a3a68e69a31249460d402027274404dce45
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78414650"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89617539"
 ---
 # <a name="entity-types-with-constructors"></a>Entitäts Typen mit Konstruktoren
 
@@ -204,7 +205,7 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 
 Hinweise:
 
-* Der Schlüssel "Property" ist jetzt ein Feld. Es handelt sich nicht um ein `readonly` Feld, sodass vom Speicher generierte Schlüssel verwendet werden können.
+* Der Schlüssel "Property" ist jetzt ein Feld. Es handelt sich hierbei nicht `readonly` um ein Feld, sodass vom Speicher generierte Schlüssel verwendet werden können.
 * Die anderen Eigenschaften sind schreibgeschützte Eigenschaften, die nur im Konstruktor festgelegt sind.
 * Wenn der Primärschlüssel Wert nur von EF festgelegt oder aus der Datenbank gelesen wird, muss er nicht in den Konstruktor eingeschlossen werden. Dadurch bleibt der Schlüssel "Property" als einfaches Feld, und es wird klar, dass er beim Erstellen neuer Blogs oder Beiträge nicht explizit festgelegt werden sollte.
 
@@ -215,10 +216,10 @@ Hinweise:
 
 EF Core können auch "Dienste" in den Konstruktor eines Entitäts Typs einfügen. Beispielsweise kann Folgendes eingefügt werden:
 
-* `DbContext`-die aktuelle Kontext Instanz, die auch als abgeleiteter dbcontext-Typ typisiert werden kann.
-* `ILazyLoader`-der Dienst für verzögertes Laden: Weitere Informationen finden Sie in der [Dokumentation zum Lazy Load](../querying/related-data.md) .
-* `Action<object, string>`-einen Delegaten mit verzögerter Auslastung: Weitere Informationen finden Sie in der [Dokumentation zum Lazy Load](../querying/related-data.md) .
-* `IEntityType`-die EF Core Metadaten, die diesem Entitätstyp zugeordnet sind.
+* `DbContext` -die aktuelle Kontext Instanz, die auch als abgeleiteter dbcontext-Typ typisiert werden kann.
+* `ILazyLoader` -der Dienst für verzögertes Laden: Weitere Informationen finden Sie in der Dokumentation zum verzögerten [Laden](xref:core/querying/related-data) .
+* `Action<object, string>` -einen Delegaten verzögert laden: Weitere Informationen finden Sie in der [Dokumentation Lazy Load](xref:core/querying/related-data) .
+* `IEntityType` -Die EF Core Metadaten, die diesem Entitätstyp zugeordnet sind.
 
 > [!NOTE]  
 > Ab EF Core 2,1 können nur von EF Core bekannte Dienste eingefügt werden. Die Unterstützung für das Einfügen von Anwendungsdiensten wird für eine zukünftige Version berücksichtigt.
@@ -265,7 +266,7 @@ public class Post
 Hier sind einige Punkte zu beachten:
 
 * Der Konstruktor ist privat, da er nur von EF Core aufgerufen wird und es einen anderen öffentlichen Konstruktor für die allgemeine Verwendung gibt.
-* Der Code, der den eingefügten Dienst (d. h. den Kontext) verwendet, ist gegen die `null`, um Fälle zu behandeln, in denen EF Core die Instanz nicht erstellt.
+* Der Code, der den injizierten Dienst (d. h. den Kontext) verwendet, ist für die Behandlung `null` von Fällen zuständig, in denen EF Core die Instanz nicht erstellt.
 * Da der Dienst in einer Lese-/Schreibeigenschaft gespeichert wird, wird er zurückgesetzt, wenn die Entität an eine neue Kontext Instanz angefügt wird.
 
 > [!WARNING]  

@@ -1,14 +1,16 @@
 ---
 title: Verbindungsresilienz und Wiederholungs Logik EF6
+description: Verbindungsresilienz und Wiederholungs Logik in Entity Framework 6
 author: AndriySvyryd
 ms.date: 11/20/2019
 ms.assetid: 47d68ac1-927e-4842-ab8c-ed8c8698dff2
-ms.openlocfilehash: 50e65bed32d0cfcf42746da0d632f9e990424b97
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/fundamentals/connection-resiliency/retry-logic
+ms.openlocfilehash: 7d05c924f309e410bc457b7e46b0618d38c95569
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/15/2020
-ms.locfileid: "79402108"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89616112"
 ---
 # <a name="connection-resiliency-and-retry-logic"></a>Verbindungsresilienz und Wiederholungs Logik
 > [!NOTE]
@@ -32,7 +34,7 @@ Die Verbindungs Wiederholung erfolgt durch eine Implementierung der idbexecution
 
 ## <a name="enabling-an-execution-strategy"></a>Aktivieren einer Ausführungs Strategie  
 
-Die einfachste Möglichkeit, EF die Verwendung einer Ausführungs Strategie mitzuteilen, ist die Methode "" der Methode "" der Klasse " [dbconfiguration](~/ef6/fundamentals/configuring/code-based.md) ":  
+Die einfachste Möglichkeit, EF die Verwendung einer Ausführungs Strategie mitzuteilen, ist die Methode "" der Methode "" der Klasse " [dbconfiguration](xref:ef6/fundamentals/configuring/code-based) ":  
 
 ``` csharp
 public class MyConfiguration : DbConfiguration
@@ -66,7 +68,7 @@ public class MyConfiguration : DbConfiguration
 
 Sqlazureexecutionstrategy wird beim ersten Auftreten eines vorübergehenden Fehlers sofort wiederholt, verzögert sich jedoch zwischen den einzelnen Wiederholungen, bis entweder die maximale Wiederholungs Grenze überschritten wird oder die Gesamtzeit die maximale Verzögerung erreicht.  
 
-Bei den Ausführungs Strategien wird nur eine begrenzte Anzahl von Ausnahmen wiederholt, die normalerweise vorübergehend sind. Sie müssen weiterhin andere Fehler behandeln und die Ausnahme "retrylimitexceging" abfangen, wenn ein Fehler nicht vorübergehend ist oder zu lange für die Auflösung benötigt wird. etabliert.  
+Bei den Ausführungs Strategien wird nur eine begrenzte Anzahl von Ausnahmen wiederholt, die normalerweise vorübergehend sind. Sie müssen weiterhin andere Fehler behandeln und die Ausnahme "retrylimitexcegetretenen" abfangen, wenn ein Fehler nicht vorübergehend ist oder zu lang ist, um sich selbst aufzulösen.  
 
 Bei der Verwendung einer Wiederholungs Ausführungs Strategie gibt es einige bekannte Einschränkungen:  
 
@@ -84,7 +86,7 @@ using (var db = new BloggingContext())
 }
 ```  
 
-Streaming wird nicht unterstützt, wenn eine Wiederholungs Ausführungs Strategie registriert wird. Diese Einschränkung ist vorhanden, da die Verbindung die Ergebnisse, die zurückgegeben werden, auf dem Weg ablegen könnte. In diesem Fall muss EF die gesamte Abfrage erneut ausführen, kann jedoch nicht zuverlässig festzustellen, welche Ergebnisse bereits zurückgegeben wurden (die Daten haben sich möglicherweise seit dem Senden der ersten Abfrage geändert, Ergebnisse können in einer anderen Reihenfolge zurückgegeben werden, und die Ergebnisse haben möglicherweise keinen eindeutigen Bezeichner. , usw.).  
+Streaming wird nicht unterstützt, wenn eine Wiederholungs Ausführungs Strategie registriert wird. Diese Einschränkung ist vorhanden, da die Verbindung die Ergebnisse, die zurückgegeben werden, auf dem Weg ablegen könnte. In diesem Fall muss EF die gesamte Abfrage erneut ausführen, kann jedoch nicht zuverlässig festzustellen, welche Ergebnisse bereits zurückgegeben wurden (die Daten haben sich möglicherweise seit dem Senden der ersten Abfrage geändert, Ergebnisse können in einer anderen Reihenfolge zurückgegeben werden, die Ergebnisse haben möglicherweise keinen eindeutigen Bezeichner usw.).  
 
 ## <a name="user-initiated-transactions-are-not-supported"></a>Vom Benutzer initiierte Transaktionen werden nicht unterstützt.  
 

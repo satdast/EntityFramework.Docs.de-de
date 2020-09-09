@@ -1,25 +1,27 @@
 ---
 title: Datenbindung mit WPF-EF6
+description: Datenbindung mit WPF in Entity Framework 6
 author: divega
 ms.date: 05/19/2020
 ms.assetid: e90d48e6-bea7785-47ef-b756-7b89cce4daf0
-ms.openlocfilehash: baeb75b1ee386ca58013048bcc31ea4074604673
-ms.sourcegitcommit: 949faaba02e07e44359e77d7935f540af5c32093
+uid: ef6/fundamentals/databinding/wpf
+ms.openlocfilehash: d6f9695215c57a288dbd1c7b8f653416dc270760
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/03/2020
-ms.locfileid: "87526848"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89616280"
 ---
 # <a name="databinding-with-wpf"></a>Datenbindung mit WPF
 
 > [!IMPORTANT]
 > **Dieses Dokument gilt nur für WPF auf dem .NET Framework**
 >
-> In diesem Dokument wird das Datenbindung für WPF auf dem .NET Framework beschrieben. Für neue .net Core-Projekte empfiehlt es sich, anstelle von Entity Framework 6 [EF Core](/ef/core) zu verwenden. Die Dokumentation für Datenbindung in EF Core finden Sie hier: " [Getting Started with WPF](/ef/core/get-started/wpf)".
+> In diesem Dokument wird das Datenbindung für WPF auf dem .NET Framework beschrieben. Für neue .net Core-Projekte empfiehlt es sich, anstelle von Entity Framework 6 [EF Core](xref:core/index) zu verwenden. Die Dokumentation für Datenbindung in EF Core finden Sie hier: " [Getting Started with WPF](xref:core/get-started/wpf)".
 
-In dieser schrittweisen exemplarischen Vorgehensweise wird gezeigt, wie poco-Typen an WPF-Steuerelemente in einem Master-Detail-Formular gebunden werden. Die Anwendung verwendet die Entity Framework-APIs zum Auffüllen von Objekten mit Daten aus der Datenbank, zum Nachverfolgen von Änderungen und zum Beibehalten von Daten in der Datenbank.
+In dieser schrittweisen exemplarischen Vorgehensweise wird gezeigt, wie poco-Typen an WPF-Steuerelemente in einem Master-Detail-Formular gebunden werden. Die Anwendung verwendet die Entity Framework-APIs zum Auffüllen von Objekten mit Daten aus der Datenbank, zum Nachverfolgen von Änderungen und zum persistenten Speichern von Daten in der Datenbank.
 
-Das Modell definiert zwei Typen, die an einer 1: n-Beziehung beteiligt sind: **Kategorie** (Prinzipal \\ Master) und **Produkt** (abhängige \\ Details). Anschließend werden die Visual Studio-Tools verwendet, um die im Modell definierten Typen an die WPF-Steuerelemente zu binden. Das WPF-Daten Bindungs Framework ermöglicht die Navigation zwischen verbundenen Objekten: durch Auswählen von Zeilen in der Master Ansicht wird die Detailansicht mit den entsprechenden untergeordneten Daten aktualisiert.
+Das Modell definiert zwei Typen, die an einer 1: n-Beziehung beteiligt sind: **Kategorie** (Prinzipal \\ Master) und **Produkt** (abhängige \\ Details). Anschließend werden die Visual Studio-Tools verwendet, um die im Modell definierten Typen an die WPF-Steuerelemente zu binden. Das WPF-Datenbindungsframework ermöglicht die Navigation zwischen verbundenen Objekten: durch Auswählen von Zeilen in der Masteransicht wird die Detailansicht mit den entsprechenden untergeordneten Daten aktualisiert.
 
 Die Screenshots und Code Auflistungen in dieser exemplarischen Vorgehensweise werden aus Visual Studio 2013 erstellt, aber Sie können diese exemplarische Vorgehensweise mit Visual Studio 2012 oder Visual Studio 2010 durcharbeiten.
 
@@ -31,28 +33,28 @@ Die EF-Designer für Visual Studio 2012 und Visual Studio 2013 generieren einen 
 
 Wenn Sie die dbcontext-API-Oberfläche verwenden, sollten Sie beim Erstellen einer neuen Datenquelle die- **Objekt** Option verwenden, wie in dieser exemplarischen Vorgehensweise dargestellt.
 
-Bei Bedarf können Sie die [auf ObjectContext basierende Codegenerierung](~/ef6/modeling/designer/codegen/legacy-objectcontext.md) für Modelle zurücksetzen, die mit dem EF-Designer erstellt wurden.
+Bei Bedarf können Sie die [auf ObjectContext basierende Codegenerierung](xref:ef6/modeling/designer/codegen/legacy-objectcontext) für Modelle zurücksetzen, die mit dem EF-Designer erstellt wurden.
 
 ## <a name="pre-requisites"></a>Voraussetzungen
 
 Zum Durchführen dieser exemplarischen Vorgehensweise muss Visual Studio 2013, Visual Studio 2012 oder Visual Studio 2010 installiert sein.
 
-Wenn Sie Visual Studio 2010 verwenden, müssen Sie auch nuget installieren. Weitere Informationen finden Sie unter [Installieren von nuget](https://docs.microsoft.com/nuget/install-nuget-client-tools).  
+Wenn Sie Visual Studio 2010 verwenden, müssen Sie auch nuget installieren. Weitere Informationen finden Sie unter [Installieren von nuget](/nuget/install-nuget-client-tools).  
 
 ## <a name="create-the-application"></a>Erstellen der Anwendung
 
--   Öffnen Sie Visual Studio.
--   **Datei- &gt; New- &gt; Project...**
--   Klicken **Windows**Sie   im linken Bereich auf Fenster und im rechten Bereich auf **wpfapplikation** .
--   Geben Sie **wpfwiamsample**   als Name ein.
--    **OK** auswählen
+- Öffnen Sie Visual Studio.
+- **Datei- &gt; New- &gt; Project...**
+- Klicken **Windows**Sie   im linken Bereich auf Fenster und im rechten Bereich auf **wpfapplikation** .
+- Geben Sie **wpfwiamsample**   als Name ein.
+-  **OK** auswählen
 
 ## <a name="install-the-entity-framework-nuget-package"></a>Installieren des Entity Framework nuget-Pakets
 
--   Klicken Sie in Projektmappen-Explorer mit der rechten Maustaste auf das **winformswideratsample** -Projekt.
--   Wählen Sie **nuget-Pakete verwalten... aus.**
--   Wählen Sie im Dialogfeld nuget-Pakete verwalten die Registerkarte **Online** aus, und wählen Sie das Paket **EntityFramework** aus.
--   Klicken Sie auf **Install** (Installieren).  
+- Klicken Sie in Projektmappen-Explorer mit der rechten Maustaste auf das **winformswideratsample** -Projekt.
+- Wählen Sie **nuget-Pakete verwalten... aus.**
+- Wählen Sie im Dialogfeld nuget-Pakete verwalten die Registerkarte **Online** aus, und wählen Sie das Paket **EntityFramework** aus.
+- Klicken Sie auf **Install** (Installieren).  
     >[!NOTE]
     > Zusätzlich zur EntityFramework-Assembly wird auch ein Verweis auf "System. ComponentModel. DataAnnotations" hinzugefügt. Wenn das Projekt einen Verweis auf System. Data. Entity enthält, wird es entfernt, wenn das EntityFramework-Paket installiert wird. Die System. Data. Entity-Assembly wird für Entity Framework 6-Anwendungen nicht mehr verwendet.
 
@@ -66,11 +68,11 @@ In diesem Abschnitt wird gezeigt, wie ein Modell und die zugehörige Datenbank m
 
 Wenn Sie Code First Entwicklung verwenden, schreiben Sie in der Regel .NET Framework Klassen, die ihr konzeptionelles (Domänen-) Modell definieren.
 
--   Fügen Sie der **wpfwiderfsample** -Klasse eine neue Klasse hinzu:
-    -   Klicken Sie mit der rechten Maustaste auf den Projektnamen.
-    -   Wählen Sie **Hinzufügen**und dann **Neues Element** aus.
-    -   Wählen Sie **Klasse** aus, und geben Sie **Product**als   Klassennamen ein.
--   Ersetzen Sie die **Product**   Class-Definition durch den folgenden Code:
+- Fügen Sie der **wpfwiderfsample** -Klasse eine neue Klasse hinzu:
+  - Klicken Sie mit der rechten Maustaste auf den Projektnamen.
+  - Wählen Sie **Hinzufügen**und dann **Neues Element** aus.
+  - Wählen Sie **Klasse** aus, und geben Sie **Product**als   Klassennamen ein.
+- Ersetzen Sie die **Product**   Class-Definition durch den folgenden Code:
 
 ``` csharp
     namespace WPFwithEFSample
@@ -85,7 +87,7 @@ Wenn Sie Code First Entwicklung verwenden, schreiben Sie in der Regel .NET Frame
         }
     }
 
--   Add a **Category** class with the following definition:
+- Add a **Category** class with the following definition:
 
     using System.Collections.ObjectModel;
 
@@ -106,13 +108,13 @@ Wenn Sie Code First Entwicklung verwenden, schreiben Sie in der Regel .NET Frame
     }
 ```
 
-Die **Products** -Eigenschaft der **Category** -Klasse und der **Category** -Eigenschaft in der **Product** -Klasse sind Navigations Eigenschaften. In Entity Framework bieten Navigations Eigenschaften eine Möglichkeit, eine Beziehung zwischen zwei Entitäts Typen zu navigieren.
+Die **Products**-Eigenschaft für die **Category**-Klasse und die **Category**-Eigenschaft für die **Product**-Klasse sind Navigationseigenschaften. Im Entity Framework bieten Navigationseigenschaften eine Möglichkeit, in einer Beziehung zwischen zwei Entitätstypen zu navigieren.
 
-Zusätzlich zum Definieren von Entitäten müssen Sie eine Klasse definieren, die von dbcontext abgeleitet ist und dbset &lt; TEntity-Eigenschaften verfügbar macht &gt; . Die dbset &lt; TEntity- &gt; Eigenschaften lassen den Kontext wissen, welche Typen Sie in das Modell einschließen möchten.
+Zusätzlich zur Definition von Entitäten müssen Sie eine Klasse definieren, die von DbContext abgeleitet ist und DbSet&lt;TEntity&gt;-Eigenschaften bereitstellt. Die DbSet&lt;TEntity&gt;-Eigenschaften informieren den Kontext darüber, welche Typen Sie in das Modell einbeziehen möchten.
 
-Eine Instanz des abgeleiteten dbcontext-Typs verwaltet die Entitäts Objekte zur Laufzeit. dazu gehören das Auffüllen von Objekten mit Daten aus einer Datenbank, die Änderungs Nachverfolgung und das Beibehalten von Daten in der Datenbank.
+Eine Instanz des von DbContext abgeleiteten Typs verwaltet die Entitätsobjekte während der Laufzeit, was das Auffüllen der Objekte mit Daten aus einer Datenbank, die Änderungsnachverfolgung und das persistente Speichern von Daten in der Datenbank umfasst.
 
--   Fügen Sie dem Projekt eine neue **productcontext** -Klasse mit der folgenden Definition hinzu:
+- Fügen Sie dem Projekt eine neue **productcontext** -Klasse mit der folgenden Definition hinzu:
 
 ``` csharp
     using System.Data.Entity;
@@ -139,29 +141,29 @@ Wenn Sie eine vorhandene Datenbank als Ziel haben, wird Sie in der Regel bereits
 
 Der Datenbankserver, der mit Visual Studio installiert wird, unterscheidet sich abhängig von der installierten Version von Visual Studio:
 
--   Wenn Sie Visual Studio 2010 verwenden, erstellen Sie eine SQL Express-Datenbank.
--   Wenn Sie Visual Studio 2012 verwenden, erstellen Sie eine [localdb](https://msdn.microsoft.com/library/hh510202.aspx) -Datenbank.
+- Wenn Sie Visual Studio 2010 verwenden, erstellen Sie eine SQL Express-Datenbank.
+- Wenn Sie Visual Studio 2012 verwenden, erstellen Sie eine [localdb](https://msdn.microsoft.com/library/hh510202.aspx) -Datenbank.
 
 Nun generieren wir die Datenbank.
 
--   **Ansicht- &gt; Server-Explorer**
--   Klicken Sie mit der rechten Maustaste auf **Datenverbindungen- &gt; Verbindung hinzufügen...**
--   Wenn Sie über Server-Explorer keine Verbindung mit einer Datenbank hergestellt haben, müssen Sie Microsoft SQL Server als Datenquelle auswählen.
+- **Ansicht- &gt; Server-Explorer**
+- Klicken Sie mit der rechten Maustaste auf **Datenverbindungen- &gt; Verbindung hinzufügen...**
+- Wenn Sie über Server-Explorer keine Verbindung mit einer Datenbank hergestellt haben, müssen Sie Microsoft SQL Server als Datenquelle auswählen.
 
     ![Datenquelle ändern](~/ef6/media/changedatasource.png)
 
--   Stellen Sie abhängig von der installierten Verbindung entweder localdb oder SQL Express her, und geben Sie **Produkte** als Datenbanknamen ein.
+- Stellen Sie abhängig von der installierten Verbindung entweder localdb oder SQL Express her, und geben Sie **Produkte** als Datenbanknamen ein.
 
     ![Verbindung localdb hinzufügen](~/ef6/media/addconnectionlocaldb.png)
 
     ![Verbindung hinzufügen Express](~/ef6/media/addconnectionexpress.png)
 
--   Wählen Sie **OK** aus, und Sie werden gefragt, ob Sie eine neue Datenbank erstellen möchten, und wählen Sie **Ja** aus.
+- Wählen Sie **OK** aus, und Sie werden gefragt, ob Sie eine neue Datenbank erstellen möchten, und wählen Sie **Ja** aus.
 
     ![Erstellen einer Datenbank](~/ef6/media/createdatabase.png)
 
--   Die neue Datenbank wird nun in Server-Explorer angezeigt, klicken Sie mit der rechten Maustaste darauf, und wählen Sie **neue Abfrage** aus.
--   Kopieren Sie den folgenden SQL-Befehl in die neue Abfrage, klicken Sie mit der rechten Maustaste auf die Abfrage, und wählen Sie **Ausführen** .
+- Die neue Datenbank wird nun in Server-Explorer angezeigt, klicken Sie mit der rechten Maustaste darauf, und wählen Sie **neue Abfrage** aus.
+- Kopieren Sie den folgenden SQL-Befehl in die neue Abfrage, klicken Sie mit der rechten Maustaste auf die Abfrage, und wählen Sie **Ausführen** .
 
 ``` SQL
     CREATE TABLE [dbo].[Categories] (
@@ -186,19 +188,19 @@ Nun generieren wir die Datenbank.
 
 Wir verwenden Entity Framework Designer, die als Teil von Visual Studio enthalten ist, um das Modell zu erstellen.
 
--   **Project- &gt; Neues Element hinzufügen...**
--   Wählen Sie im linken Menü **Daten** aus, und klicken Sie dann auf **ADO.NET Entity Data Model**
--   Geben Sie **ProductModel** als Name ein, und klicken Sie auf **OK** .
--   Dadurch wird der **Entity Data Model-Assistent** gestartet.
--   Wählen Sie **aus Datenbank generieren aus** , und klicken Sie auf **weiter**
+- **Project- &gt; Neues Element hinzufügen...**
+- Wählen Sie im linken Menü **Daten** aus, und klicken Sie dann auf **ADO.NET Entity Data Model**
+- Geben Sie **ProductModel** als Name ein, und klicken Sie auf **OK** .
+- Dadurch wird der **Entity Data Model-Assistent** gestartet.
+- Wählen Sie **aus Datenbank generieren aus** , und klicken Sie auf **weiter**
 
     ![Auswählen von Modellinhalten](~/ef6/media/choosemodelcontents.png)
 
--   Wählen Sie die Verbindung mit der Datenbank, die Sie im ersten Abschnitt erstellt haben, geben Sie **productcontext** als Namen der Verbindungs Zeichenfolge ein, und klicken Sie auf **weiter** .
+- Wählen Sie die Verbindung mit der Datenbank, die Sie im ersten Abschnitt erstellt haben, geben Sie **productcontext** als Namen der Verbindungs Zeichenfolge ein, und klicken Sie auf **weiter** .
 
     ![Verbindung auswählen](~/ef6/media/chooseyourconnection.png)
 
--   Aktivieren Sie das Kontrollkästchen neben "Tables", um alle Tabellen zu importieren, und klicken Sie auf "Fertigstellen"
+- Aktivieren Sie das Kontrollkästchen neben "Tables", um alle Tabellen zu importieren, und klicken Sie auf "Fertigstellen"
 
     ![Objekte auswählen](~/ef6/media/chooseyourobjects.png)
 
@@ -208,24 +210,24 @@ Sobald der Reverse-Engineering-Prozess abgeschlossen ist, wird das neue Modell d
 
 Wenn Sie in Visual Studio 2010 arbeiten, müssen Sie den EF-Designer aktualisieren, damit die EF6-Codegenerierung verwendet werden kann.
 
--   Klicken Sie mit der rechten Maustaste auf eine leere Stelle des Modells im EF-Designer, und wählen Sie **Code Generierungs Element hinzufügen... aus.**
--   Wählen Sie im linken Menü **Online Vorlagen** aus, und suchen Sie nach **dbcontext** .
--   Wählen Sie den **EF 6. x dbcontext Generator für C aus \# ,** geben Sie **ProductModel** als Name ein, und klicken Sie auf hinzufügen.
+- Klicken Sie mit der rechten Maustaste auf eine leere Stelle des Modells im EF-Designer, und wählen Sie **Code Generierungs Element hinzufügen... aus.**
+- Wählen Sie im linken Menü **Online Vorlagen** aus, und suchen Sie nach **dbcontext** .
+- Wählen Sie den **EF 6. x dbcontext Generator für C aus \# ,** geben Sie **ProductModel** als Name ein, und klicken Sie auf hinzufügen.
 
 #### <a name="updating-code-generation-for-data-binding"></a>Aktualisieren der Codegenerierung für die Datenbindung
 
 EF generiert Code aus dem Modell mithilfe von T4-Vorlagen. Die Vorlagen, die in Visual Studio enthalten sind oder aus der Visual Studio Gallery heruntergeladen wurden, sind für die allgemeine Verwendung vorgesehen. Dies bedeutet, dass die von diesen Vorlagen generierten Entitäten einfache ICollection &lt; T- &gt; Eigenschaften haben. Wenn Sie jedoch die Datenbindung mithilfe von WPF durchführen, ist es wünschenswert, **ObservableCollection** für Auflistungs Eigenschaften zu verwenden, damit WPF Änderungen an den Auflistungen nachverfolgen kann. Zu diesem Zweck werden die Vorlagen für die Verwendung von ObservableCollection geändert.
 
--   Öffnen Sie die **Projektmappen-Explorer** , und suchen Sie nach der Datei **ProductModel. edmx.**
--   Suchen Sie die **ProductModel.tt** -Datei, die unter der Datei "ProductModel. edmx" eingefügt wird.
+- Öffnen Sie die **Projektmappen-Explorer** , und suchen Sie nach der Datei **ProductModel. edmx.**
+- Suchen Sie die **ProductModel.tt** -Datei, die unter der Datei "ProductModel. edmx" eingefügt wird.
 
     ![WPF-Produktmodell Vorlage](~/ef6/media/wpfproductmodeltemplate.png)
 
--   Doppelklicken Sie auf die Datei ProductModel.tt, um Sie im Visual Studio-Editor zu öffnen.
--   Suchen und ersetzen Sie die beiden Vorkommen von "**ICollection**" durch "**ObservableCollection**". Diese befinden sich ungefähr in den Zeilen 296 und 484.
--   Suchen und ersetzen Sie das erste Vorkommen von "**HashSet**" durch "**ObservableCollection**". Dieses Vorkommen befindet sich ungefähr in Zeile 50. Ersetzen **Sie nicht** das zweite Vorkommen des Hashsets, das später im Code gefunden wurde.
--   Suchen und ersetzen Sie das einzige Vorkommen von "**System. Collections. Generic**" durch "**System. Collections. ObjectModel**". Dies befindet sich ungefähr in Zeile 424.
--   Speichern Sie die Datei ProductModel.tt. Dies sollte bewirken, dass der Code für Entitäten erneut generiert wird. Wenn der Code nicht automatisch neu generiert wird, klicken Sie mit der rechten Maustaste auf ProductModel.tt, und wählen Sie "benutzerdefiniertes Tool ausführen".
+- Doppelklicken Sie auf die Datei ProductModel.tt, um Sie im Visual Studio-Editor zu öffnen.
+- Suchen und ersetzen Sie die beiden Vorkommen von "**ICollection**" durch "**ObservableCollection**". Diese befinden sich ungefähr in den Zeilen 296 und 484.
+- Suchen und ersetzen Sie das erste Vorkommen von "**HashSet**" durch "**ObservableCollection**". Dieses Vorkommen befindet sich ungefähr in Zeile 50. Ersetzen **Sie nicht** das zweite Vorkommen des Hashsets, das später im Code gefunden wurde.
+- Suchen und ersetzen Sie das einzige Vorkommen von "**System. Collections. Generic**" durch "**System. Collections. ObjectModel**". Dies befindet sich ungefähr in Zeile 424.
+- Speichern Sie die Datei ProductModel.tt. Dies sollte bewirken, dass der Code für Entitäten erneut generiert wird. Wenn der Code nicht automatisch neu generiert wird, klicken Sie mit der rechten Maustaste auf ProductModel.tt, und wählen Sie "benutzerdefiniertes Tool ausführen".
 
 Wenn Sie nun die Category.cs-Datei öffnen (die unter ProductModel.tt geschachtelte ist), sollten Sie sehen, dass die Products-Sammlung den Typ **ObservableCollection- &lt; Produkt &gt; **aufweist.
 
@@ -233,9 +235,9 @@ Kompilieren Sie das Projekt.
 
 ## <a name="lazy-loading"></a>Lazy Loading
 
-Die **Products** -Eigenschaft der **Category** -Klasse und der **Category** -Eigenschaft in der **Product** -Klasse sind Navigations Eigenschaften. In Entity Framework bieten Navigations Eigenschaften eine Möglichkeit, eine Beziehung zwischen zwei Entitäts Typen zu navigieren.
+Die **Products**-Eigenschaft für die **Category**-Klasse und die **Category**-Eigenschaft für die **Product**-Klasse sind Navigationseigenschaften. Im Entity Framework bieten Navigationseigenschaften eine Möglichkeit, in einer Beziehung zwischen zwei Entitätstypen zu navigieren.
 
-EF bietet Ihnen die Möglichkeit, Verwandte Entitäten aus der Datenbank automatisch zu laden, wenn Sie zum ersten Mal auf die Navigations Eigenschaft zugreifen. Beachten Sie bei dieser Art von laden (Lazy Loading), dass beim ersten Zugriff auf jede Navigations Eigenschaft eine separate Abfrage für die Datenbank ausgeführt wird, wenn der Inhalt nicht bereits im Kontext vorhanden ist.
+EF bietet Ihnen die Möglichkeit, Verwandte Entitäten aus der Datenbank automatisch zu laden, wenn Sie zum ersten Mal auf die Navigations Eigenschaft zugreifen. Beachten Sie bei dieser Art von Laden (das als „Lazy Loading“ bezeichnet wird), dass beim ersten Zugriff auf jede Navigationseigenschaft eine separate Abfrage für die Datenbank ausgeführt wird, wenn sich die Inhalte nicht bereits im Kontext befinden.
 
 Wenn poco-Entitäts Typen verwendet werden, erreicht EF Lazy Loading durch Erstellen von Instanzen abgeleiteter Proxy Typen während der Laufzeit und das anschließende Überschreiben virtueller Eigenschaften in den Klassen, um den Lade Hook hinzuzufügen. Wenn Sie Lazy Loading verknüpfter Objekte abrufen möchten, müssen Sie die Navigations Eigenschaften Getter als **Public** und **Virtual** (**Overridable** in Visual Basic) deklarieren, und die Klasse darf nicht **versiegelt** sein (**nodeverridable** in Visual Basic). Bei Verwendung Database First Navigations Eigenschaften automatisch als virtuell fest, um Lazy Loading zu aktivieren. Im Code First Abschnitt haben wir entschieden, die Navigations Eigenschaften aus demselben Grund virtuell zu machen.
 
@@ -243,27 +245,27 @@ Wenn poco-Entitäts Typen verwendet werden, erreicht EF Lazy Loading durch Erste
 
 Fügen Sie die Klassen, die im Modell definiert sind, als Datenquellen für diese WPF-Anwendung hinzu.
 
--   Doppelklicken Sie in Projektmappen-Explorer auf die Datei **MainWindow. XAML** , um das Hauptformular zu öffnen.
--   Wählen Sie im Hauptmenü **Projekt- &gt; neue Datenquelle hinzufügen... aus.**
+- Doppelklicken Sie im Projektmappen-Explorer auf **MainWindow.xaml**, um das Hauptformular zu öffnen.
+- Wählen Sie im Hauptmenü **Projekt- &gt; neue Datenquelle hinzufügen... aus.**
     (in Visual Studio 2010 müssen Sie **Daten- &gt; neue Datenquelle hinzufügen...**)
--   Wählen Sie im Fenster Datenquelle auswählen die Option **Objekt** aus, und klicken Sie auf **weiter** .
--   Erweitern Sie im Dialogfeld Wählen Sie die Datenobjekte aus das **wpfwiderf-Beispiel**   zweimal, und wählen Sie **Category** aus.  
+- Wählen Sie im Fenster Datenquelle auswählen die Option **Objekt** aus, und klicken Sie auf **weiter** .
+- Erweitern Sie im Dialogfeld Wählen Sie die Datenobjekte aus das **wpfwiderf-Beispiel**   zweimal, und wählen Sie **Category** aus.  
     *Die **Produkt** Datenquelle muss nicht ausgewählt werden, da wir Sie über die **Produkt**Eigenschaft der **Kategorie** Datenquelle erhalten.*  
 
     ![Datenobjekte auswählen](~/ef6/media/selectdataobjects.png)
 
--   Klicken Sie auf **Fertig stellen**.
--   Das Fenster Datenquellen wird neben dem Fenster MainWindow. XAML geöffnet *, wenn das Fenster Datenquellen nicht angezeigt wird, wählen Sie **Ansicht- &gt; Weitere Windows- &gt; Datenquellen** * aus.
--   Klicken Sie auf das anheft Symbol, damit das Fenster Datenquellen nicht automatisch ausgeblendet wird. Sie müssen möglicherweise auf die Schaltfläche "Aktualisieren" klicken, wenn das Fenster bereits sichtbar war.
+- Klicken Sie auf **Fertig stellen**.
+- Das Fenster Datenquellen wird neben dem Fenster MainWindow. XAML geöffnet *, wenn das Fenster Datenquellen nicht angezeigt wird, wählen Sie **Ansicht- &gt; Weitere Windows- &gt; Datenquellen** * aus.
+- Klicken Sie auf das anheft Symbol, damit das Fenster Datenquellen nicht automatisch ausgeblendet wird. Sie müssen möglicherweise auf die Schaltfläche "Aktualisieren" klicken, wenn das Fenster bereits sichtbar war.
 
-    ![Datenquellen](~/ef6/media/datasources.png)
+    ![Projektmappen-Explorer](~/ef6/media/datasources.png)
 
--   Wählen Sie die **kategoriedatenquelle** aus, und ziehen Sie Sie auf das Formular.
+- Wählen Sie die **kategoriedatenquelle** aus, und ziehen Sie Sie auf das Formular.
 
 Folgendes ist aufgetreten, als wir diese Quelle gezogen haben:
 
--   Die **categoryviewsource** -Ressource und das **categorydatagrid-** Steuerelement wurden zu XAML hinzugefügt. 
--   Die DataContext-Eigenschaft des übergeordneten Grid-Elements wurde auf "{statikresource **categoryviewsource** }" festgelegt.Die **categoryviewsource** -Ressource dient als Bindungs Quelle für das äußere über \\ geordnete Raster Element. Die inneren Raster Elemente erben dann den DataContext-Wert vom übergeordneten Raster (die ItemsSource-Eigenschaft von categorydatagrid ist auf "{Binding}" festgelegt).
+- Die **categoryviewsource** -Ressource und das **categorydatagrid-** Steuerelement wurden zu XAML hinzugefügt.
+- Die DataContext-Eigenschaft des übergeordneten Grid-Elements wurde auf "{statikresource **categoryviewsource** }" festgelegt.Die **categoryviewsource** -Ressource dient als Bindungs Quelle für das äußere über \\ geordnete Raster Element. Die inneren Raster Elemente erben dann den DataContext-Wert vom übergeordneten Raster (die ItemsSource-Eigenschaft von categorydatagrid ist auf "{Binding}" festgelegt).
 
 ``` xml
     <Window.Resources>
@@ -284,30 +286,30 @@ Folgendes ist aufgetreten, als wir diese Quelle gezogen haben:
     </Grid>
 ```
 
-## <a name="adding-a-details-grid"></a>Hinzufügen eines Detail Rasters
+## <a name="adding-a-details-grid"></a>Hinzufügen eines Detailrasters
 
 Nachdem wir nun über ein Raster zum Anzeigen von Kategorien verfügen, können wir ein Detail Raster hinzufügen, um die zugeordneten Produkte anzuzeigen.
 
--   Wählen Sie unter der **Kategorie** Datenquelle die Eigenschaft **Produkte** aus, und ziehen Sie Sie auf das Formular.
-    -   Die **categoryproductviewsource** -Ressource und das **productdatagrid-** Raster werden XAML hinzugefügt.
-    -   Der Bindungs Pfad für diese Ressource ist auf Products festgelegt.
-    -   WPF-Daten Bindungs Framework stellt sicher, dass nur Produkte im Zusammenhang mit der ausgewählten Kategorie in **productdatagrid** angezeigt werden.
--   Ziehen Sie die **Schaltfläche** aus der Toolbox auf das Formular. Legen Sie die **Name** -Eigenschaft auf **ButtonSave** und die **Content** -Eigenschaft auf **Save**fest.
+- Wählen Sie unter der **Kategorie** Datenquelle die Eigenschaft **Produkte** aus, und ziehen Sie Sie auf das Formular.
+  - Die **categoryproductviewsource** -Ressource und das **productdatagrid-** Raster werden XAML hinzugefügt.
+  - Der Bindungs Pfad für diese Ressource ist auf Products festgelegt.
+  - WPF-Daten Bindungs Framework stellt sicher, dass nur Produkte im Zusammenhang mit der ausgewählten Kategorie in **productdatagrid** angezeigt werden.
+- Ziehen Sie die **Schaltfläche** aus der Toolbox auf das Formular. Legen Sie die **Name** -Eigenschaft auf **ButtonSave** und die **Content** -Eigenschaft auf **Save**fest.
 
 Das Formular sollte in etwa wie folgt aussehen:
 
-![Designer](~/ef6/media/designer.png) 
+![Designer Formular](~/ef6/media/designer.png)
 
-## <a name="add-code-that-handles-data-interaction"></a>Hinzufügen von Code, der die Daten Interaktion verarbeitet
+## <a name="add-code-that-handles-data-interaction"></a>Hinzufügen von Code, der die Dateninteraktion verarbeitet
 
 Es ist an der Zeit, dem Hauptfenster einige Ereignishandler hinzuzufügen.
 
--   Klicken Sie im XAML-Fenster auf das ** &lt; Fenster** Element, sodass das Hauptfenster ausgewählt wird.
--   Wählen Sie im **Eigenschaften** Fenster oben rechts **Ereignisse** aus, und doppelklicken Sie dann auf das Textfeld rechts neben der **geladenen** Bezeichnung.
+- Klicken Sie im XAML-Fenster auf das ** &lt; Fenster** Element, sodass das Hauptfenster ausgewählt wird.
+- Wählen Sie im **Eigenschaften** Fenster oben rechts **Ereignisse** aus, und doppelklicken Sie dann auf das Textfeld rechts neben der **geladenen** Bezeichnung.
 
-    ![Hauptfenster Eigenschaften](~/ef6/media/mainwindowproperties.png)
+    ![Eigenschaften des Hauptfensters](~/ef6/media/mainwindowproperties.png)
 
--   Fügen Sie auch das Click-Ereignis für die Schaltfläche **Speichern** hinzu, indem **Sie** im Designer auf die Schaltfläche Speichern doppelklicken. 
+- Fügen Sie auch das Click-Ereignis für die Schaltfläche **Speichern** hinzu, indem **Sie** im Designer auf die Schaltfläche Speichern doppelklicken.
 
 Dadurch gelangen Sie zum Code Behind für das Formular. nun bearbeiten wir den Code so, dass der productcontext zum Ausführen von Datenzugriff verwendet wird. Aktualisieren Sie den Code für das MainWindow, wie unten gezeigt.
 
@@ -388,12 +390,12 @@ Der Code deklariert eine Instanz von **productcontext**mit langer Laufzeit. Das 
 
 ## <a name="test-the-wpf-application"></a>Testen der WPF-Anwendung
 
--   Kompilieren Sie die Anwendung, und führen Sie sie aus. Wenn Sie Code First verwendet haben, werden Sie feststellen, dass eine **wpfwitef Sample. productcontext** -Datenbank für Sie erstellt wird.
--   Geben Sie einen Kategorienamen im oberen Raster ein, und die Produktnamen im unteren Raster *geben in den ID-Spalten nichts ein, da der Primärschlüssel von der Datenbank generiert wird* .
+- Kompilieren Sie die Anwendung, und führen Sie sie aus. Wenn Sie Code First verwendet haben, werden Sie feststellen, dass eine **wpfwitef Sample. productcontext** -Datenbank für Sie erstellt wird.
+- Geben Sie einen Kategorienamen im oberen Raster ein, und die Produktnamen im unteren Raster *geben in den ID-Spalten nichts ein, da der Primärschlüssel von der Datenbank generiert wird* .
 
     ![Hauptfenster mit neuen Kategorien und Produkten](~/ef6/media/screen1.png)
 
--   Klicken Sie auf die Schaltfläche **Speichern** , um die Daten in der Datenbank zu speichern
+- Klicken Sie auf die Schaltfläche **Speichern** , um die Daten in der Datenbank zu speichern
 
 Nach dem Aufrufe von " **SaveChanges ()**" von dbcontext werden die IDs mit den von der Datenbank generierten Werten aufgefüllt. Da wir " **Refresh ()** " nach " **SaveChanges ()** " aufgerufen haben, werden die **DataGrid-** Steuerelemente ebenfalls mit den neuen Werten aktualisiert.
 
@@ -401,4 +403,4 @@ Nach dem Aufrufe von " **SaveChanges ()**" von dbcontext werden die IDs mit den 
 
 ## <a name="additional-resources"></a>Weitere Ressourcen
 
-Weitere Informationen zur Datenbindung an Auflistungen mithilfe von WPF finden Sie in [diesem Thema](https://docs.microsoft.com/dotnet/framework/wpf/data/data-binding-overview#binding-to-collections) in der WPF-Dokumentation.  
+Weitere Informationen zur Datenbindung an Auflistungen mithilfe von WPF finden Sie in [diesem Thema](/dotnet/framework/wpf/data/data-binding-overview#binding-to-collections) in der WPF-Dokumentation.  

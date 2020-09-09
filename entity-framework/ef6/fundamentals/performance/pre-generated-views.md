@@ -1,17 +1,19 @@
 ---
 title: Vorab generierte Mapping-Sichten-EF6
+description: Vorab generierte Mapping-Sichten in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 917ba9c8-6ddf-4631-ab8c-c4fb378c2fcd
-ms.openlocfilehash: 1fda9fe9638adce9b24a6b81aa081effeb0def81
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/fundamentals/performance/pre-generated-views
+ms.openlocfilehash: 8318030603339c45c5c8459db580b7a8de5febda
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78416030"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89615864"
 ---
 # <a name="pre-generated-mapping-views"></a>Vorab generierte Mapping-Sichten
-Bevor die Entity Framework eine Abfrage ausführen oder Änderungen an der Datenquelle speichern kann, muss Sie einen Satz von zuordnungssichten generieren, um auf die Datenbank zuzugreifen. Diese Zuweisungs Sichten sind eine Reihe von Entity SQL-Anweisungen, die die Datenbank auf abstrakte Weise darstellen. Sie sind Teil der Metadaten, die pro Anwendungsdomäne zwischengespeichert werden. Wenn Sie mehrere Instanzen desselben Kontexts in derselben Anwendungsdomäne erstellen, werden die Zuordnung von Sichten aus den zwischengespeicherten Metadaten wieder verwendet, anstatt Sie neu zu generieren. Da die Generierung der Ansichts Generierung ein wesentlicher Bestandteil der Gesamtkosten für die Ausführung der ersten Abfrage ist, ermöglicht Ihnen die Entity Framework, die Zuordnung von Sichten vorab zu generieren und Sie in das kompilierte Projekt einzubeziehen. Weitere Informationen finden Sie unter  [Überlegungen zur Leistung (Entity Framework)](~/ef6/fundamentals/performance/perf-whitepaper.md).
+Bevor die Entity Framework eine Abfrage ausführen oder Änderungen an der Datenquelle speichern kann, muss Sie einen Satz von zuordnungssichten generieren, um auf die Datenbank zuzugreifen. Diese Zuweisungs Sichten sind eine Reihe von Entity SQL-Anweisungen, die die Datenbank auf abstrakte Weise darstellen. Sie sind Teil der Metadaten, die pro Anwendungsdomäne zwischengespeichert werden. Wenn Sie mehrere Instanzen desselben Kontexts in derselben Anwendungsdomäne erstellen, werden die Zuordnung von Sichten aus den zwischengespeicherten Metadaten wieder verwendet, anstatt Sie neu zu generieren. Da die Generierung der Ansichts Generierung ein wesentlicher Bestandteil der Gesamtkosten für die Ausführung der ersten Abfrage ist, ermöglicht Ihnen die Entity Framework, die Zuordnung von Sichten vorab zu generieren und Sie in das kompilierte Projekt einzubeziehen.Weitere Informationen finden Sie unter  [Überlegungen zur Leistung (Entity Framework)](xref:ef6/fundamentals/performance/perf-whitepaper).
 
 ## <a name="generating-mapping-views-with-the-ef-power-tools-community-edition"></a>Erstellen von zuordnungssichten mit der Entity Edition von EF Power Tools
 
