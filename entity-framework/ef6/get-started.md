@@ -1,15 +1,16 @@
 ---
 title: Erste Schritte mit Entity Framework 6 – EF6
+description: Erste Schritte mit Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 66ce9113-81d2-480f-8c16-d00ec405b2f7
 uid: ef6/get-started
-ms.openlocfilehash: 729dea2c474c35f638ccaf6673550f76e88e2667
-ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
+ms.openlocfilehash: a03fa403bedc260def3f8110a028e972824cb756
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "80136266"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89618203"
 ---
 # <a name="get-started-with-entity-framework-6"></a>Erste Schritte mit Entity Framework 6
 
@@ -17,22 +18,22 @@ Dieser Leitfaden enthält Links zu ausgewählten Dokumentationsartikeln, exempla
 
 ## <a name="fundamentals"></a>Grundlagen
 
-* [Verwenden von Entity Framework](~/ef6/fundamentals/install.md)
+* [Abrufen von Entity Framework](xref:ef6/fundamentals/install)
 
   Hier erfahren Sie, wie Sie Entity Framework zu Ihren Anwendungen hinzufügen können. Wenn Sie den EF-Designer verwenden möchten, dann installieren Sie ihn in Visual Studio.
 
-* [Erstellen eines Modells: Code First, der EF-Designer und die EF-Workflows](~/ef6/modeling/index.md)
+* [Erstellen eines Modells: Code First, der EF-Designer und die EF-Workflows](xref:ef6/modeling/index)
 
   Möchten Sie Ihr EF-Modell lieber durch Schreiben von Code oder Zeichnen von Feldern und Linien entwerfen?
 Werden Sie EF verwenden, um Ihre Objekte einer vorhandenen Datenbank zuzuweisen oder soll EF eine Datenbank erstellen, die perfekt auf Ihre Objekte abgestimmt ist?
 Hier erfahren Sie mehr zu den zwei Ansätzen zur Verwendung von EF6: EF-Designer und Code First.
 Verfolgen Sie die Diskussion, und sehen Sie sich das Video zu den Unterschieden an.
 
-* [Arbeiten mit DbContext](~/ef6/fundamentals/working-with-dbcontext.md)
+* [Arbeiten mit DbContext](xref:ef6/fundamentals/working-with-dbcontext)
 
   DBContext ist der erste und auch wichtigste EF-Typ, dessen Verwendung Sie kennen müssen. Er dient als Launchpad für Datenbankabfragen und verfolgt Änderungen, die Sie an Objekten vornehmen, damit sie in die Datenbank zurückgespeichert werden können.
 
-* [Frage stellen](~/ef6/resources/get-help.md)
+* [Frage stellen](xref:ef6/resources/get-help)
 
   Finden Sie heraus, wie Sie Hilfe von Experten erhalten und mit Ihren eigenen Antworten zur Community beitragen können.
 
@@ -42,32 +43,32 @@ Verfolgen Sie die Diskussion, und sehen Sie sich das Video zu den Unterschieden 
 
 ## <a name="code-first-resources"></a>Code First-Ressourcen
 
-  - [Code First mit einer vorhandenen Datenbank](~/ef6/modeling/code-first/workflows/existing-database.md)
-  - [Code First für eine neue Datenbank](~/ef6/modeling/code-first/workflows/new-database.md)
-  - [Unterstützung von Enumerationen – Code First](~/ef6/modeling/code-first/data-types/enums.md)
-  - [Mapping Spatial Types Using Code First (Zuordnen von räumlichen Typen mit Code First)](~/ef6/modeling/code-first/data-types/spatial.md)
-  - [Benutzerdefinierte Code First-Konventionen](~/ef6/modeling/code-first/conventions/custom.md)
-  - [Using Code First Fluent Configuration with Visual Basic (Verwenden der Fluent-Konfiguration von Code First für Visual Basic)](~/ef6/modeling/code-first/fluent/vb.md)
-  - [Code First-Migrationen](~/ef6/modeling/code-first/migrations/index.md)
-  - [Code First Migrations in Team Environments (Code First-Migrationen in Teamumgebungen)](~/ef6/modeling/code-first/migrations/teams.md)
-  - [Automatische Code First-Migrationen](~/ef6/modeling/code-first/migrations/automatic.md) (wird nicht länger empfohlen)
+  - [Code First mit einer vorhandenen Datenbank](xref:ef6/modeling/code-first/workflows/existing-database)
+  - [Code First für eine neue Datenbank](xref:ef6/modeling/code-first/workflows/new-database)
+  - [Unterstützung von Enumerationen – Code First](xref:ef6/modeling/code-first/data-types/enums)
+  - [Mapping Spatial Types Using Code First (Zuordnen von räumlichen Typen mit Code First)](xref:ef6/modeling/code-first/data-types/spatial)
+  - [Benutzerdefinierte Code First-Konventionen](xref:ef6/modeling/code-first/conventions/custom)
+  - [Using Code First Fluent Configuration with Visual Basic (Verwenden der Fluent-Konfiguration von Code First für Visual Basic)](xref:ef6/modeling/code-first/fluent/vb)
+  - [Code First-Migrationen](xref:ef6/modeling/code-first/migrations/index)
+  - [Code First Migrations in Team Environments (Code First-Migrationen in Teamumgebungen)](xref:ef6/modeling/code-first/migrations/teams)
+  - [Automatische Code First-Migrationen](xref:ef6/modeling/code-first/migrations/automatic) (wird nicht länger empfohlen)
 
 ## <a name="ef-designer-resources"></a>EF Designer-Ressourcen
-  - [Database First-Workflow](~/ef6/modeling/designer/workflows/database-first.md)
-  - [Model First-Workflow](~/ef6/modeling/designer/workflows/model-first.md)
-  - [Mapping Enums (Zuordnen von Enumerationen)](~/ef6/modeling/designer/data-types/enums.md)
-  - [Mapping Spatial Types (Zuordnen von räumlichen Typen)](~/ef6/modeling/designer/data-types/spatial.md)
-  - [Table-Per Hierarchy Inheritance Mapping (Vererbungszuordnung einer Tabelle pro Hierarchie)](~/ef6/modeling/designer/inheritance/tph.md)
-  - [Table-Per Type Inheritance Mapping („Tabelle pro Typ“-Vererbungszuordnung)](~/ef6/modeling/designer/inheritance/tpt.md)
-  - [Stored Procedure Mapping for Updates (Zuordnung einer gespeicherten Prozedur für Updates)](~/ef6/modeling/designer/stored-procedures/cud.md)
-  - [Stored Procedure Mapping for Query (Zuordnung einer gespeicherten Prozedur für die Abfrage)](~/ef6/modeling/designer/stored-procedures/query.md)
-  - [Entitätsaufteilung](~/ef6/modeling/designer/entity-splitting.md)
-  - [Tabellenaufteilung](~/ef6/modeling/designer/table-splitting.md)
-  - [Definieren der Abfrage](~/ef6/modeling/designer/advanced/defining-query.md) (erweitert)
-  - [Tabellenwertfunktionen](~/ef6/modeling/designer/advanced/tvfs.md) (erweitert)
+  - [Database First-Workflow](xref:ef6/modeling/designer/workflows/database-first)
+  - [Model First-Workflow](xref:ef6/modeling/designer/workflows/model-first)
+  - [Mapping Enums (Zuordnen von Enumerationen)](xref:ef6/modeling/designer/data-types/enums)
+  - [Mapping Spatial Types (Zuordnen von räumlichen Typen)](xref:ef6/modeling/designer/data-types/spatial)
+  - [Table-Per Hierarchy Inheritance Mapping (Vererbungszuordnung einer Tabelle pro Hierarchie)](xref:ef6/modeling/designer/inheritance/tph)
+  - [Table-Per Type Inheritance Mapping („Tabelle pro Typ“-Vererbungszuordnung)](xref:ef6/modeling/designer/inheritance/tpt)
+  - [Stored Procedure Mapping for Updates (Zuordnung einer gespeicherten Prozedur für Updates)](xref:ef6/modeling/designer/stored-procedures/cud)
+  - [Stored Procedure Mapping for Query (Zuordnung einer gespeicherten Prozedur für die Abfrage)](xref:ef6/modeling/designer/stored-procedures/query)
+  - [Entitätsaufteilung](xref:ef6/modeling/designer/entity-splitting)
+  - [Tabellenaufteilung](xref:ef6/modeling/designer/table-splitting)
+  - [Definieren der Abfrage](xref:ef6/modeling/designer/advanced/defining-query) (erweitert)
+  - [Tabellenwertfunktionen](xref:ef6/modeling/designer/advanced/tvfs) (erweitert)
 
 ## <a name="other-resources"></a>Weitere Ressourcen
-  - [Asynchrone Abfragen und Speichern](~/ef6/fundamentals/async.md)
-  - [Datenbindung mit Windows Forms](~/ef6/fundamentals/databinding/winforms.md)
-  - [Datenbindung mit WPF](~/ef6/fundamentals/databinding/wpf.md)
-  - [Disconnected scenarios with Self-Tracking Entities (Szenarios mit getrennten Verbindungen mit Entitäten mit Selbstnachverfolgung)](~/ef6/fundamentals/disconnected-entities/self-tracking-entities/walkthrough.md) (wird nicht länger empfohlen)
+  - [Asynchrone Abfragen und Speichern](xref:ef6/fundamentals/async)
+  - [Datenbindung mit Windows Forms](xref:ef6/fundamentals/databinding/winforms)
+  - [Datenbindung mit WPF](xref:ef6/fundamentals/databinding/wpf)
+  - [Disconnected scenarios with Self-Tracking Entities (Szenarios mit getrennten Verbindungen mit Entitäten mit Selbstnachverfolgung)](xref:ef6/fundamentals/disconnected-entities/self-tracking-entities/walkthrough) (wird nicht länger empfohlen)
