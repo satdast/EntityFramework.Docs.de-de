@@ -4,12 +4,12 @@ description: Aktuelle EF Core-Releases und Zeitplan/Planungsdetails für künfti
 author: ajcvickers
 ms.date: 06/11/2020
 uid: core/what-is-new/index
-ms.openlocfilehash: 7d4f37c227feec0fad9f828999680f834ddd2d4e
-ms.sourcegitcommit: ebfd3382fc583bc90f0da58e63d6e3382b30aa22
+ms.openlocfilehash: 4424f9233016edbc8d98e8df840091f2adaf1ee9
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/25/2020
-ms.locfileid: "85370239"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89618595"
 ---
 # <a name="ef-core-releases-and-planning"></a>EF Core-Releases und Planung
 
@@ -18,14 +18,14 @@ ms.locfileid: "85370239"
 | Freigabe | Zielframework | Support bis zum | Links
 |:--------|------------------|-----------------|------
 | [EF Core 3.1](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore) | .NET-Standard 2.0 | 3\. Dezember 2022 (LTS) | [Ankündigung](https://devblogs.microsoft.com/dotnet/announcing-entity-framework-core-3-1-and-entity-framework-6-4/)
-| ~~[EF Core 3.0](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore/3.0.3)~~ | .NET Standard 2.1 | Abgelaufen: 3. März 2020 | [Ankündigung](https://devblogs.microsoft.com/dotnet/announcing-ef-core-3-0-and-ef-6-3-general-availability/) / [Wichtige Änderungen](ef-core-3.0/breaking-changes.md)
+| ~~[EF Core 3.0](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore/3.0.3)~~ | .NET Standard 2.1 | Abgelaufen: 3. März 2020 | [Ankündigung](https://devblogs.microsoft.com/dotnet/announcing-ef-core-3-0-and-ef-6-3-general-availability/) / [Wichtige Änderungen](xref:core/what-is-new/ef-core-3.x/breaking-changes)
 | ~~[EF Core 2.2](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore/2.2.6)~~ | .NET-Standard 2.0 | Am 23. Dezember 2019 abgelaufen | [Ankündigung](https://devblogs.microsoft.com/dotnet/announcing-entity-framework-core-2-2/)
 | [EF Core 2.1](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore/2.1.14) | .NET-Standard 2.0 | 21. August 2021 (LTS) | [Ankündigung](https://devblogs.microsoft.com/dotnet/announcing-entity-framework-core-2-1/)
 | ~~[EF Core 2.0](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore/2.0.3)~~ | .NET-Standard 2.0 | Am 1. Oktober 2018 abgelaufen | [Ankündigung](https://devblogs.microsoft.com/dotnet/announcing-entity-framework-core-2-0/)
 | ~~[EF Core 1.1](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore/1.1.6)~~ | .NET Standard 1.3 | Am 27. Juni 2019 abgelaufen | [Ankündigung](https://devblogs.microsoft.com/dotnet/announcing-entity-framework-core-1-1/)
 | ~~[EF Core 1.0](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore/1.0.6)~~ | .NET Standard 1.3 | Am 27. Juni 2019 abgelaufen | [Ankündigung](https://devblogs.microsoft.com/dotnet/entity-framework-core-1-0-0-available/)
 
-Weitere Informationen über die speziellen Plattformen, die von den jeweiligen EF Core-Releases unterstützt werden, finden Sie unter [Unterstützte Plattformen](../platforms/index.md).
+Weitere Informationen über die speziellen Plattformen, die von den jeweiligen EF Core-Releases unterstützt werden, finden Sie unter [Unterstützte Plattformen](xref:core/platforms/index).
 
 Weitere Informationen zum Ablaufdatum des Supports und zu Releases mit langfristigem Support (long-term support, LTS) finden Sie unter [Supportrichtlinie für .NET](https://dotnet.microsoft.com/platform/support/policy/dotnet-core).
 
@@ -42,14 +42,14 @@ Die EF Core-Releases werden mit dem [Veröffentlichungsplan von .NET Core](https
 Patchreleases werden normalerweise monatlich ausgeliefert, haben jedoch eine lange Vorlaufzeit.
 Wir arbeiten daran, dies zu verbessern.
 
-Weitere Informationen zur Entscheidung, was in den einzelnen Releases ausgeliefert werden soll, finden Sie unter [Die Releaseplanung](release-planning.md).
+Weitere Informationen zur Entscheidung, was in den einzelnen Releases ausgeliefert werden soll, finden Sie unter [Die Releaseplanung](xref:core/what-is-new/release-planning).
 Unsere detaillierte Planung geht in der Regel nicht über die nächste Haupt- oder Nebenversion hinaus.
 
 ## <a name="ef-core-50"></a>EF Core 5.0
 
 Der nächste stabile Release auf **EF Core 5.0** ist für November 2020 geplant.
 
-Mithilfe der dokumentierten [Releaseplanung](release-planning.md) wurde ein [allgemeiner Plan für EF Core 5.0](xref:core/what-is-new/ef-core-5.0/plan) erstellt.
+Mithilfe der dokumentierten [Releaseplanung](xref:core/what-is-new/release-planning) wurde ein [allgemeiner Plan für EF Core 5.0](xref:core/what-is-new/ef-core-5.0/plan) erstellt.
 
 Ihr Feedback zur Planung ist wichtig.
 Sie können für ein Problem auf GitHub abstimmen (Daumen hoch 👍) und so angeben, dass dieses Problem wichtig ist.
