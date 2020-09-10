@@ -1,14 +1,16 @@
 ---
 title: Tabellenwert Funktionen (TVFs)-EF6
+description: Tabellenwert Funktionen (TVFs) in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: f019c97b-87b0-4e93-98f4-2c539f77b2dc
-ms.openlocfilehash: 35684196dcd7b708a8feeb1eca3096e8d4e555ec
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/modeling/designer/advanced/tvfs
+ms.openlocfilehash: 1575526fb46f9ddd3ad43c7c4ac0304aefa1d5d3
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78415448"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89620546"
 ---
 # <a name="table-valued-functions-tvfs"></a>Tabellenwert Funktionen (TVFs)
 > [!NOTE]
@@ -26,13 +28,13 @@ TVFs ähneln gespeicherten Prozeduren mit einem wichtigen Unterschied: das Ergeb
 
 **Präsentiert von**: Julia kornich
 
-[WMV](https://download.microsoft.com/download/6/0/A/60A6E474-5EF3-4E1E-B9EA-F51D2DDB446A/HDI-ITPro-MSDN-winvideo-tvf.wmv) | [MP4](https://download.microsoft.com/download/6/0/A/60A6E474-5EF3-4E1E-B9EA-F51D2DDB446A/HDI-ITPro-MSDN-mp4video-tvf.m4v) | [WMV (zip)](https://download.microsoft.com/download/6/0/A/60A6E474-5EF3-4E1E-B9EA-F51D2DDB446A/HDI-ITPro-MSDN-winvideo-tvf.zip)
+[WMV](https://download.microsoft.com/download/6/0/A/60A6E474-5EF3-4E1E-B9EA-F51D2DDB446A/HDI-ITPro-MSDN-winvideo-tvf.wmv)  |  [MP4](https://download.microsoft.com/download/6/0/A/60A6E474-5EF3-4E1E-B9EA-F51D2DDB446A/HDI-ITPro-MSDN-mp4video-tvf.m4v)  |  [WMV (zip)](https://download.microsoft.com/download/6/0/A/60A6E474-5EF3-4E1E-B9EA-F51D2DDB446A/HDI-ITPro-MSDN-winvideo-tvf.zip)
 
 ## <a name="pre-requisites"></a>Voraussetzungen
 
 Um diese exemplarische Vorgehensweise durchführen zu können, benötigen Sie Folgendes:
 
-- Installieren Sie die [Datenbank "School](~/ef6/resources/school-database.md)".
+- Installieren Sie die [Datenbank "School](xref:ef6/resources/school-database)".
 
 - Aktuelle Version von Visual Studio
 
@@ -40,12 +42,12 @@ Um diese exemplarische Vorgehensweise durchführen zu können, benötigen Sie Fo
 
 1.  Öffnen Sie Visual Studio.
 2.  Zeigen Sie im Menü **Datei** auf **neu**, und klicken Sie dann auf **Projekt** .
-3.  Klicken Sie im linken Bereich auf **Visual C-\#** , und wählen Sie dann die **Konsolen** Vorlage aus.
+3.  Klicken Sie im linken Bereich auf **Visual C \# **, und wählen Sie dann die **Konsolen** Vorlage aus.
 4.  Geben Sie **TVF** als Namen für das Projekt ein, und klicken Sie auf **OK** .
 
 ## <a name="add-a-tvf-to-the-database"></a>Hinzufügen einer TVF zur Datenbank
 
--   Wählen Sie **Ansicht-&gt; SQL Server-Objekt-Explorer** aus.
+-   Wählen Sie **Ansicht- &gt; SQL Server-Objekt-Explorer**
 -   Wenn localdb nicht in der Liste der Server enthalten ist, klicken Sie mit der rechten Maustaste auf **SQL Server** , und wählen Sie **hinzu SQL Server fügen** aus, um die Verbindung zum localdb-Server mithilfe der Windows-Standard **Authentifizierung** herzustellen
 -   Erweitern Sie den Knoten localdb.
 -   Klicken Sie unter dem Knoten Datenbanken mit der rechten Maustaste auf den Datenbankknoten School, und wählen Sie **neue Abfrage aus.**
@@ -78,12 +80,12 @@ RETURN
 2.  Wählen Sie im linken Menü **Daten** aus, und wählen Sie dann im Bereich **Vorlagen** die Option **ADO.NET Entity Data Model** aus.
 3.  Geben Sie als Dateiname **tvfmodel. edmx** ein, und klicken Sie dann auf **Hinzufügen** .
 4.  Wählen Sie im Dialogfeld Modell Inhalte auswählen die Option **aus Datenbank generieren aus**, und klicken Sie dann auf **weiter** .
-5.  Klicken Sie auf **neue Verbindung** eingeben **(localdb)\\mssqllocaldb** im Textfeld Server Name geben Sie für den Datenbanknamen **School** ein klicken Sie auf **OK** .
-6.  Wählen Sie im Dialogfeld Datenbankobjekte auswählen unter dem Knoten **Tabellen** die Tabellen **Person**, **StudentGrade**und **Course** aus.
-7.  Wählen Sie die Funktion **getstudentgradesforcourse** aus, die sich unter dem Knoten **gespeicherte Prozeduren und Funktionen** Knoten befindet, der mit der Entity Designer ab Visual Studio 2012 den Batch Import gespeicherter Prozeduren und Funktionen ermöglicht.
+5.  Klicken Sie auf **neue Verbindung** eingeben **(localdb) \\ mssqllocaldb** im Textfeld Server Name geben Sie **School**   für den Datenbanknamen ein, klicken Sie auf **OK** .
+6.  Wählen Sie im Dialogfeld Datenbankobjekte auswählen unter dem Knoten **Tabellen**   die Tabellen **Person**, **StudentGrade**und **Course**aus.  
+7.  Wählen Sie im Knoten " **gespeicherte Prozeduren und Funktionen**" die Funktion " **getstudentgradesforcourse** " aus   , die mit der Entity Designer ab Visual Studio 2012 das Batch importieren gespeicherter Prozeduren und Funktionen ermöglicht.
 8.  Klicken auf **Fertig** stellen
-9.  Die Entity Designer, die eine Entwurfs Oberfläche zum Bearbeiten des Modells bereitstellt, wird angezeigt. Alle Objekte, die Sie im Dialogfeld **Wählen Sie Ihre Datenbankobjekte** ausgewählt haben, werden dem Modell hinzugefügt.
-10. Standardmäßig wird die Ergebnis Form der einzelnen importierten gespeicherten Prozeduren oder Funktionen automatisch zu einem neuen komplexen Typ im Entitäts Modell. Wir möchten jedoch die Ergebnisse der getstudentgradesforcourse-Funktion der Entität "StudentGrade" zuordnen: Klicken Sie mit der rechten Maustaste auf die Entwurfs Oberfläche, **und wählen Sie** " **Modell Browser** " im Modell Browser aus, wählen Sie " **Funktions Importe**" aus, und Doppel **Klicken Sie dann im Dialog Feld** Funktions Import bearbeiten auf die Funktion " **getstudentgradesforcourse** ".
+9.  Die Entity Designer, die eine Entwurfs Oberfläche zum Bearbeiten des Modells bereitstellt, wird angezeigt. Alle Objekte, die Sie im Dialogfeld **Wählen Sie Ihre Datenbankobjekte**ausgewählt   haben, werden dem Modell hinzugefügt.
+10. Standardmäßig wird die Ergebnis Form der einzelnen importierten gespeicherten Prozeduren oder Funktionen automatisch zu einem neuen komplexen Typ im Entitäts Modell. Wir möchten jedoch die Ergebnisse der Funktion "getstudentgradesforcourse" der Entität "StudentGrade" zuordnen: Klicken Sie mit der rechten Maustaste auf die Entwurfs Oberfläche, und wählen Sie " **Modell Browser** " im Modell Browser aus. Wählen Sie " **Funktions Importe**" aus **, und Doppel**klicken Sie dann im Dialogfeld Funktions Import bearbeiten auf die Funktion " **getstudentgradesforcourse** ".    **StudentGrade**
 
 ## <a name="persist-and-retrieve-data"></a>Persistenz und Abrufen von Daten
 

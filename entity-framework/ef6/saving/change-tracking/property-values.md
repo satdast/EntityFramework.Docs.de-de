@@ -1,14 +1,16 @@
 ---
 title: Arbeiten mit Eigenschafts Werten EF6
+description: Arbeiten mit Eigenschafts Werten in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: e3278b4b-9378-4fdb-923d-f64d80aaae70
-ms.openlocfilehash: d8a18182754980d79b71df3f227b30c4ce40366f
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/saving/change-tracking/property-values
+ms.openlocfilehash: 53c0829920c77768eae26d23c3da7d0553f44b62
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78414374"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89619969"
 ---
 # <a name="working-with-property-values"></a>Arbeiten mit Eigenschafts Werten
 In den meisten Fällen übernimmt Entity Framework die Nachverfolgung des Zustands, der ursprünglichen Werte und der aktuellen Werte der Eigenschaften der Entitäts Instanzen. Es gibt jedoch einige Fälle, z. b. getrennte Szenarios, in denen Sie die Informationen anzeigen oder bearbeiten möchten, die EF über die Eigenschaften verfügt. Die in diesem Thema dargestellten Techniken gelten jeweils für Modelle, die mit Code First und dem EF-Designer erstellt wurden.  
@@ -287,7 +289,7 @@ Das geklonte Objekt kann nützlich sein, um Probleme im Zusammenhang mit gleichz
 
 ## <a name="getting-and-setting-the-current-or-original-values-of-complex-properties"></a>Erhalten und Festlegen der aktuellen oder ursprünglichen Werte komplexer Eigenschaften  
 
-Der Wert eines gesamten komplexen Objekts kann mithilfe der-Eigenschaften Methode gelesen und festgelegt werden, so wie es für eine primitive Eigenschaft möglich ist. Außerdem können Sie einen Drilldown in das komplexe Objekt durchführen und die Eigenschaften des Objekts oder sogar ein geschieetes Objekt lesen oder festlegen. Im Folgenden finden Sie einige Beispiele:  
+Der Wert eines gesamten komplexen Objekts kann mithilfe der-Eigenschaften Methode gelesen und festgelegt werden, so wie es für eine primitive Eigenschaft möglich ist. Außerdem können Sie einen Drilldown in das komplexe Objekt durchführen und die Eigenschaften des Objekts oder sogar ein geschieetes Objekt lesen oder festlegen. Hier sind einige Beispiele:  
 
 ``` csharp
 using (var context = new BloggingContext())

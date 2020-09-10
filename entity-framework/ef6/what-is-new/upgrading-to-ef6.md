@@ -1,18 +1,20 @@
 ---
 title: Upgrade auf Entity Framework 6 EF6
+description: Upgrade auf Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 29958ae5-85d3-4585-9ba6-550b8ec9393a
-ms.openlocfilehash: 4395a9c117a6cf38e7fc08f11ee689d6fffa6fed
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/what-is-new/upgrading-to-ef6
+ms.openlocfilehash: b27504e3b18c668a1c41142b9cd5e697944cb5fa
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78416228"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89619701"
 ---
 # <a name="upgrading-to-entity-framework-6"></a>Upgrade auf Entity Framework 6
 
-In früheren Versionen von EF wurde der Code zwischen den Kernbibliotheken (primär "System. Data. Entity. dll") aufgeteilt, die als Teil des .NET Framework und Out-of-Band-Bibliotheken (OOB) ausgeliefert wurden (primär "EntityFramework. dll"), die in einem nuget-Paket enthalten sind. EF6 übernimmt den Code aus den Kernbibliotheken und bindet ihn in die OOB-Bibliotheken ein. Dies war notwendig, damit EF als Open Source-fähig gemacht werden kann, damit es in der Lage ist, sich von .NET Framework in einem anderen Tempo zu entwickeln. Dies hat zur Folge, dass Anwendungen für die verschoten Typen neu erstellt werden müssen.
+In früheren Versionen von EF wurde der Code zwischen Kernbibliotheken (Primär System.Data.Entity.dll) aufgeteilt, die als Teil der .NET Framework und Out-of-Band-Bibliotheken (OOB) ausgeliefert wurden (primär EntityFramework.dll), die in einem nuget-Paket ausgeliefert wurden. EF6 übernimmt den Code aus den Kernbibliotheken und bindet ihn in die OOB-Bibliotheken ein. Dies war notwendig, damit EF als Open Source-fähig gemacht werden kann, damit es in der Lage ist, sich von .NET Framework in einem anderen Tempo zu entwickeln. Dies hat zur Folge, dass Anwendungen für die verschoten Typen neu erstellt werden müssen.
 
 Dies sollte für Anwendungen, die dbcontext verwenden, als in EF 4,1 und höher ausgeliefert werden, einfach sein. Ein wenig mehr Arbeit ist für Anwendungen erforderlich, die ObjectContext verwenden, aber es ist immer noch nicht schwierig.
 
@@ -33,7 +35,7 @@ Alternativ können Sie den folgenden Befehl über die Paket-Manager-Konsole ausf
 Install-Package EntityFramework
 ```
 
-## <a name="2-ensure-that-assembly-references-to-systemdataentitydll-are-removed"></a>2. Stellen Sie sicher, dass Assemblyverweise auf System. Data. Entity. dll entfernt werden.
+## <a name="2-ensure-that-assembly-references-to-systemdataentitydll-are-removed"></a>2. Stellen Sie sicher, dass Assemblyverweise auf System.Data.Entity.dll entfernt werden
 
 Wenn Sie das nuget-Paket "EF6" installieren, werden automatisch alle Verweise auf "System. Data. Entity" aus dem Projekt entfernt.
 
@@ -44,7 +46,7 @@ Wenn Sie Modelle mit dem EF-Designer erstellt haben, müssen Sie die Code Generi
 > [!NOTE]
 > Zurzeit sind nur EF 6. x dbcontext Generator-Vorlagen für Visual Studio 2012 und 2013 verfügbar.
 
-1. Löschen vorhandener Code Generierungs Vorlagen. Diese Dateien werden in der Regel **\<edmx_file_name\>. tt** benannt und **\<edmx_file_name\>. Context.tt** und werden unter der EDMX-Datei in Projektmappen-Explorer. Sie können die Vorlagen in Projektmappen-Explorer auswählen und die ENTF **-Taste drücken** , um Sie zu löschen.  
+1. Löschen vorhandener Code Generierungs Vorlagen. Diese Dateien heißen in der Regel ** \<edmx_file_name\> . tt** und ** \<edmx_file_name\> . Context.tt** und werden unter der EDMX-Datei in Projektmappen-Explorer. Sie können die Vorlagen in Projektmappen-Explorer auswählen und die ENTF **-Taste drücken** , um Sie zu löschen.  
    > [!NOTE]
    > In Website Projekten werden die Vorlagen nicht in der EDMX-Datei, sondern in Projektmappen-Explorer aufgeführt.  
 
@@ -53,7 +55,7 @@ Wenn Sie Modelle mit dem EF-Designer erstellt haben, müssen Sie die Code Generi
 2. Fügen Sie die entsprechende EF 6. x-Code Generierungs Vorlage hinzu. Öffnen Sie das Modell im EF-Designer, klicken Sie mit der rechten Maustaste auf die Entwurfs Oberfläche, und wählen Sie **Code Generierungs Element hinzufügen aus.**
     - Wenn Sie die dbcontext-API verwenden (empfohlen), ist der **dbcontext-Generator von EF 6. x** auf der Registerkarte " **Daten** " verfügbar.  
       > [!NOTE]
-      > Wenn Sie Visual Studio 2012 verwenden, müssen Sie die EF 6-Tools installieren, um diese Vorlage zu verwenden. Weitere Informationen finden [Sie unter Get Entity Framework](~/ef6/fundamentals/install.md) .  
+      > Wenn Sie Visual Studio 2012 verwenden, müssen Sie die EF 6-Tools installieren, um diese Vorlage zu verwenden. Weitere Informationen finden [Sie unter Get Entity Framework](xref:ef6/fundamentals/install) .  
 
     - Wenn Sie die ObjectContext-API verwenden, müssen Sie die Registerkarte **Online** auswählen und nach **EF 6. x EntityObject Generator**suchen.  
 3. Wenn Sie Anpassungen auf die Code Generierungs Vorlagen angewendet haben, müssen Sie Sie erneut auf die aktualisierten Vorlagen anwenden.
@@ -62,24 +64,24 @@ Wenn Sie Modelle mit dem EF-Designer erstellt haben, müssen Sie die Code Generi
 
 Die Namespaces für dbcontext und Code First Typen wurden nicht geändert. Dies bedeutet, dass für viele Anwendungen, die EF 4,1 oder höher verwenden, nichts geändert werden muss.
 
-Typen wie "ObjectContext", die zuvor in "System. Data. Entity. dll" enthalten waren, wurden in neue Namespaces verschoben. Dies bedeutet, dass Sie ggf. Ihre *using* -oder *Import* -Direktiven aktualisieren müssen, um für EF6 zu erstellen
+Typen wie ObjectContext, die zuvor in System.Data.Entity.dll waren, wurden in neue Namespaces verschoben. Dies bedeutet, dass Sie ggf. Ihre *using* -oder *Import* -Direktiven aktualisieren müssen, um für EF6 zu erstellen
 
 Die allgemeine Regel für Änderungen am Namespace besteht darin, dass alle Typen in System. Data. * in System. Data. Entity. Core. * verschoben werden. Mit anderen Worten: Fügen Sie einfach **Entity. Core ein.** nach "System. Data". Beispiel:
 
-- System. Data. EntityException = > System. Data. **Entity. Core**. EntityException  
-- System. Data. Objects. ObjectContext = > System. Data. **Entity. Core**. Objects. ObjectContext  
-- System. Data. Objects. DataClasses. RelationshipManager = > System. Data. **Entity. Core**. Objects. DataClasses. RelationshipManager  
+- System. Data. EntityException => System. Data. **Entity. Core**. EntityException  
+- System. Data. Objects. ObjectContext => System. Data. **Entity. Core**. Objects. ObjectContext  
+- System. Data. Objects. DataClasses. RelationshipManager => System. Data. **Entity. Core**. Objects. DataClasses. RelationshipManager  
 
-Diese Typen befinden sich in den Kernnamespaces, da Sie für die meisten dbcontext-basierten Anwendungen nicht direkt verwendet werden. Einige Typen, die Teil von System. Data. Entity. dll waren, werden weiterhin häufig und direkt für dbcontext-basierte Anwendungen verwendet und daher nicht in die *Kernnamespaces* verschoben. Dies sind:
+Diese Typen befinden sich in *Core* den Kernnamespaces, da Sie für die meisten dbcontext-basierten Anwendungen nicht direkt verwendet werden. Einige Typen, die Teil System.Data.Entity.dll waren, werden weiterhin häufig und direkt für dbcontext-basierte Anwendungen verwendet und daher nicht in die *Kernnamespaces* verschoben. Dies sind:
 
-- System. Data. EntityState = > System. Data. **Entität**. EntityState  
-- System. Data. Objects. DataClasses. EdmFunctionAttribute = > System. Data. **Entity. dbfunctionattribute**  
+- System. Data. EntityState => System. Data. **Entität**. EntityState  
+- System. Data. Objects. DataClasses. EdmFunctionAttribute => System. Data. **Entity. dbfunctionattribute**  
   > [!NOTE]
   > Diese Klasse wurde umbenannt. eine Klasse mit dem alten Namen ist noch vorhanden und funktioniert, ist aber jetzt als veraltet markiert.  
-- System. Data. Objects. EntityFunctions = > System. Data. **Entity. dbfunctions**  
+- System. Data. Objects. EntityFunctions => System. Data. **Entity. dbfunctions**  
   > [!NOTE]
   > Diese Klasse wurde umbenannt. eine Klasse mit dem alten Namen ist noch vorhanden und funktioniert, ist aber jetzt als veraltet markiert.)  
-- Räumliche Klassen (z. b. dbgeography, dbgeometry) wurden aus System. Data. Spatial = > System. Data verschoben. **Entität**. Räumliche
+- Räumliche Klassen (z. b. dbgeography, dbgeometry) wurden aus System. Data. Spatial => System. Data verschoben. **Entität**. Räumliche
 
 > [!NOTE]
-> Einige Typen im System. Data-Namespace befinden sich in "System. Data. dll", bei dem es sich nicht um eine EF-Assembly handelt. Diese Typen wurden nicht verschoben, sodass Ihre Namespaces unverändert bleiben.
+> Einige Typen im System. Data-Namespace befinden sich in System.Data.dll, bei dem es sich nicht um eine EF-Assembly handelt. Diese Typen wurden nicht verschoben, sodass Ihre Namespaces unverändert bleiben.

@@ -1,15 +1,16 @@
 ---
 title: Entity Framework Glossar-EF6
+description: Entity Framework 6-Glossar
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 3f05ffdd-49bc-499c-9732-4a368bf5d2d7
 uid: ef6/resources/glossary
-ms.openlocfilehash: df0da4a68b3d2c882d9673417ee5fe335eccae2b
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.openlocfilehash: 19d5e9e3a480337c2bcb93be5f989cc622b67dad
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/15/2020
-ms.locfileid: "79402144"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89620199"
 ---
 # <a name="entity-framework-glossary"></a>Entity Framework Glossar
 ## <a name="code-first"></a>Code First

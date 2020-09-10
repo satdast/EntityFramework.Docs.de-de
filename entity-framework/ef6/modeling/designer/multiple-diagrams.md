@@ -1,14 +1,16 @@
 ---
 title: Mehrere Diagramme pro Modell EF6
+description: Mehrere Diagramme pro Modell in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: b95db5c8-de8d-43bd-9ccc-5df6a5e25e1b
-ms.openlocfilehash: e78b927a147143629ac5b73e23edf439ba6d0264
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/modeling/designer/multiple-diagrams
+ms.openlocfilehash: 5ecda72af6430222864c62aea24cf85893436f56
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78415118"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89620433"
 ---
 # <a name="multiple-diagrams-per-model"></a>Mehrere Diagramme pro Modell
 > [!NOTE]
@@ -23,7 +25,7 @@ In diesem Video wird gezeigt, wie Sie ein Modell mit dem Entity Framework Design
 
 **Präsentiert von**: Julia kornich
 
-**Video**: [WMV](https://download.microsoft.com/download/5/C/2/5C2B52AB-5532-426F-B078-1E253341B5FA/HDI-ITPro-MSDN-winvideo-multiplediagrams.wmv) | [MP4](https://download.microsoft.com/download/5/C/2/5C2B52AB-5532-426F-B078-1E253341B5FA/HDI-ITPro-MSDN-mp4video-multiplediagrams.m4v) | [WMV (zip)](https://download.microsoft.com/download/5/C/2/5C2B52AB-5532-426F-B078-1E253341B5FA/HDI-ITPro-MSDN-winvideo-multiplediagrams.zip)
+**Video**: [WMV](https://download.microsoft.com/download/5/C/2/5C2B52AB-5532-426F-B078-1E253341B5FA/HDI-ITPro-MSDN-winvideo-multiplediagrams.wmv)  |  [MP4](https://download.microsoft.com/download/5/C/2/5C2B52AB-5532-426F-B078-1E253341B5FA/HDI-ITPro-MSDN-mp4video-multiplediagrams.m4v)  |  [WMV (zip)](https://download.microsoft.com/download/5/C/2/5C2B52AB-5532-426F-B078-1E253341B5FA/HDI-ITPro-MSDN-winvideo-multiplediagrams.zip)
 
 ## <a name="ef-designer-overview"></a>Übersicht über EF-Designer
 
@@ -32,12 +34,12 @@ Wenn Sie ein Modell mithilfe des Entity Data Model-Assistenten des EF-Designers 
 Der EF-Designer besteht aus den folgenden Komponenten:
 
 -   Eine visuelle Entwurfs Oberfläche zum Bearbeiten des Modells. Entitäten und Zuordnungen können erstellt, geändert oder gelöscht werden.
--   Ein **Modell Browser** Fenster, das Struktur Ansichten des Modells bereitstellt.  Die Entitäten und ihre Zuordnungen befinden sich unter dem Ordner *\[modelname\]* . Die Datenbanktabellen und-Einschränkungen befinden sich unter dem *\[modelname\]* . Speicherordner.
+-   Ein **Modell Browser**   Fenster, das Struktur Ansichten des Modells bereitstellt.Die Entitäten und ihre Zuordnungen befinden sich im Ordner " * \[ modelname \] * ". Die Datenbanktabellen und-Einschränkungen befinden sich unter dem * \[ modelname \] *. Speicherordner.
 -   Ein Fenster **Mappingdetails** zum Anzeigen und Bearbeiten von Zuordnungen. Entitätstypen oder Zuordnungen können Datenbanktabellen, Spalten und gespeicherten Prozeduren zugeordnet werden. 
 
 Das Fenster visuelle Entwurfs Oberfläche wird automatisch geöffnet, wenn der Entity Data Model-Assistent abgeschlossen ist. Wenn der Modell Browser nicht angezeigt wird, klicken Sie mit der rechten Maustaste auf die Haupt Entwurfs Oberfläche, und wählen Sie **Modell Browser**aus.
 
-Der folgende Screenshot zeigt eine EDMX-Datei, die im EF-Designer geöffnet ist. Der Screenshot zeigt die visuelle Entwurfs Oberfläche (auf der linken Seite) und das Fenster **Modell Browser** (auf der rechten Seite).
+Der folgende Screenshot zeigt eine EDMX-Datei, die im EF-Designer geöffnet ist. Der Screenshot zeigt die visuelle Entwurfs Oberfläche (auf der linken Seite) und das Fenster " **Modell Browser**"   (auf der rechten Seite).
 
 ![EF-Designer 2](~/ef6/media/efdesigner2.png)
 
@@ -47,15 +49,15 @@ Um einen im EF-Designer ausgeführten Vorgang rückgängig zu machen, klicken Si
 
 Standardmäßig erstellt der EF-Designer ein Diagramm mit dem Namen Diagramm1. Wenn Sie über ein Diagramm mit einer großen Anzahl von Entitäten und Zuordnungen verfügen, sollten Sie diese logisch aufteilen. Ab Visual Studio 2012 können Sie das konzeptionelle Modell in mehreren Diagrammen anzeigen.   
 
-Wenn Sie neue Diagramme hinzufügen, werden diese im Fenster "Modell Browser" unter dem Ordner "Diagramme" angezeigt. So benennen Sie ein Diagramm um: Wählen Sie das Diagramm im Fenstermodell Browser aus, klicken Sie auf einmal für den Namen, und geben Sie den neuen Namen ein.  Sie können auch mit der rechten Maustaste auf den Diagramm Namen klicken und **Umbenennen**auswählen.
+Wenn Sie neue Diagramme hinzufügen, werden diese im Fenster "Modell Browser" unter dem Ordner "Diagramme" angezeigt. So benennen Sie ein Diagramm um: Wählen Sie das Diagramm im Fenstermodell Browser aus, klicken Sie auf einmal für den Namen, und geben Sie den neuen Namen ein. Sie können auch mit der rechten Maustaste auf den Diagramm Namen klicken und **Umbenennen**auswählen.
 
-Der Diagramm Name wird neben dem Namen der EDMX-Datei im Visual Studio-Editor angezeigt. Beispiel: Model1. edmx\[Diagramm1\].
+Der Diagramm Name wird neben dem Namen der EDMX-Datei im Visual Studio-Editor angezeigt. Beispielsweise Model1. edmx \[ Diagramm1 \] .
 
-![Diagram Name](~/ef6/media/diagramname.png)
+![Diagramm Name](~/ef6/media/diagramname.png)
 
 Der Inhalt der Diagramme (Form und Farbe von Entitäten und Zuordnungen) wird in der edmx. Diagram-Datei gespeichert. Um diese Datei anzuzeigen, wählen Sie Projektmappen-Explorer aus, und erweitern Sie die EDMX-Datei. 
 
-![Diagramfiles](~/ef6/media/diagramfiles.png)
+![Diagramm Dateien](~/ef6/media/diagramfiles.png)
 
 Sie sollten die EDMX. Diagram-Datei nicht manuell bearbeiten. der Inhalt dieser Datei wird möglicherweise vom EF-Designer überschrieben.
  
@@ -65,7 +67,7 @@ Sie können Entitäten im vorhandenen Diagramm auswählen (halten Sie die UMSCHA
 
 Alternativ dazu können Sie im Modell Browser mit der rechten Maustaste auf den Ordner Diagramme klicken und **Neues Diagramm hinzufügen auswählen.** Anschließend können Sie Entitäten aus dem Ordner Entitäts Typen im Modell Browser auf die Entwurfs Oberfläche ziehen und ablegen.
 
-Sie können Entitäten auch Ausschneiden oder kopieren (mit STRG + X oder STRG + C) aus einem Diagramm und Einfügen (mit STRG + V-Taste) in der anderen. Wenn das Diagramm, in das Sie eine Entität einfügen, bereits eine Entität mit demselben Namen enthält, wird eine neue Entität erstellt und dem Modell hinzugefügt.  Beispiel: diagram2 enthält die Abteilungs Entität. Anschließend fügen Sie eine weitere Abteilung in diagram2 ein. Die Department1-Entität wird erstellt und dem konzeptionellen Modell hinzugefügt.   
+Sie können Entitäten auch Ausschneiden oder kopieren (mit STRG + X oder STRG + C) aus einem Diagramm und Einfügen (mit STRG + V-Taste) in der anderen. Wenn das Diagramm, in das Sie eine Entität einfügen, bereits eine Entität mit demselben Namen enthält, wird eine neue Entität erstellt und dem Modell hinzugefügt.Beispiel: diagram2 enthält die Abteilungs Entität. Anschließend fügen Sie eine weitere Abteilung in diagram2 ein. Die Department1-Entität wird erstellt und dem konzeptionellen Modell hinzugefügt.   
 
 Wenn Sie Verwandte Entitäten in ein Diagramm einschließen möchten, klicken Sie auf die Entität, und wählen Sie **Verwandte einschließen**aus. Dadurch wird eine Kopie der verknüpften Entitäten und Zuordnungen im angegebenen Diagramm erstellt.
 
@@ -75,7 +77,7 @@ Zusätzlich zum Aufteilen eines Modells in mehrere Diagramme können Sie auch di
 
 Um die Farbe zu ändern, wählen Sie eine Entität (oder mehrere Entitäten) auf der Entwurfs Oberfläche aus. Klicken Sie dann auf die Rechte Maustaste, und wählen Sie **Eigenschaften**aus. Wählen Sie im Eigenschaftenfenster die Eigenschaft **Füllfarbe** aus. Geben Sie die Farbe entweder mithilfe eines gültigen Farbnamens (z. b. rot) oder eines gültigen RGB (z. b. 255, 128, 128) an. 
 
-![Color](~/ef6/media/color.png)
+![Farbe ändern](~/ef6/media/color.png)
 
 ## <a name="summary"></a>Zusammenfassung
 

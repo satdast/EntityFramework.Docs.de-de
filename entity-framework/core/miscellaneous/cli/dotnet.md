@@ -1,21 +1,22 @@
 ---
 title: Referenz zu EF Core Tools (.net CLI)-EF Core
+description: Referenzhandbuch für die Entity Framework Core .net Core-CLI Tools
 author: bricelam
 ms.author: bricelam
 ms.date: 07/11/2019
 uid: core/miscellaneous/cli/dotnet
-ms.openlocfilehash: 8ff2f3481c7f0c255def3272ca53370faba33e95
-ms.sourcegitcommit: 31536e52b838a84680d2e93e5bb52fb16df72a97
+ms.openlocfilehash: b5f4941b1a1cf5674d9cc998dd0aed0c0469ff27
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86238176"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89619429"
 ---
 # <a name="entity-framework-core-tools-reference---net-core-cli"></a>Referenz zu Entity Framework Core Tools .net Core-CLI
 
-Die CLI-Tools (Command-Line Interface, Befehlszeilenschnittstelle) für Entity Framework Core die Entwicklungsaufgaben zur Entwurfszeit ausführen. Beispielsweise erstellen Sie [Migrationen](/aspnet/core/data/ef-mvc/migrations?view=aspnetcore-2.0), wenden Migrationen an und generieren Code für ein Modell, das auf einer vorhandenen Datenbank basiert. Die Befehle sind eine Erweiterung des plattformübergreifenden [dotnet](/dotnet/core/tools) -Befehls, der Teil der [.net Core SDK](https://www.microsoft.com/net/core)ist. Diese Tools funktionieren mit .net Core-Projekten.
+Die CLI-Tools (Command-Line Interface, Befehlszeilenschnittstelle) für Entity Framework Core die Entwicklungsaufgaben zur Entwurfszeit ausführen. Beispielsweise erstellen Sie [Migrationen](/aspnet/core/data/ef-mvc/migrations), wenden Migrationen an und generieren Code für ein Modell, das auf einer vorhandenen Datenbank basiert. Die Befehle sind eine Erweiterung des plattformübergreifenden [dotnet](/dotnet/core/tools) -Befehls, der Teil der [.net Core SDK](https://www.microsoft.com/net/core)ist. Diese Tools funktionieren mit .net Core-Projekten.
 
-Wenn Sie Visual Studio verwenden, empfehlen wir stattdessen die [Tools der Paket-Manager-Konsole](powershell.md) :
+Wenn Sie Visual Studio verwenden, empfehlen wir stattdessen die [Tools der Paket-Manager-Konsole](xref:core/miscellaneous/cli/powershell) :
 
 * Sie arbeiten automatisch mit dem aktuellen Projekt, das in der **Paket-Manager-Konsole** ausgewählt ist, ohne dass Sie manuell Verzeichnisse wechseln müssten.
 * Dateien, die von einem Befehl generiert werden, werden automatisch geöffnet, nachdem der Befehl abgeschlossen wurde.
@@ -31,7 +32,7 @@ Das Installationsverfahren hängt vom Projekttyp und der Version ab:
 
 ### <a name="ef-core-3x"></a>EF Core 3. x
 
-* `dotnet ef`muss als globales oder lokales Tool installiert werden. Die meisten Entwickler werden `dotnet ef` mit dem folgenden Befehl als globales Tool installiert:
+* `dotnet ef` muss als globales oder lokales Tool installiert werden. Die meisten Entwickler werden `dotnet ef` mit dem folgenden Befehl als globales Tool installiert:
 
   ```dotnetcli
   dotnet tool install --global dotnet-ef
@@ -161,7 +162,7 @@ Legen Sie die Umgebungsvariable **ASPNETCORE_ENVIRONMENT** vor dem Ausführen vo
 
 ## <a name="common-options"></a>Allgemeine Optionen
 
-| Option                                         | Short             | Beschreibung                                                                                                                                                                                                                                                   |
+| Option                                         | Short             | BESCHREIBUNG                                                                                                                                                                                                                                                   |
 |:-----------------------------------------------|:------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `--json`                                       |                   | JSON-Ausgabe anzeigen.                                                                                                                                                                                                                                             |
 | `--context <DBCONTEXT>`                        | <nobr>`-c`</nobr> | Die `DbContext`-Klasse, die verwendet werden soll. Der Klassenname oder voll qualifiziert mit Namespaces.  Wenn diese Option weggelassen wird, wird EF Core die Kontext Klasse finden. Wenn mehrere Kontext Klassen vorhanden sind, ist diese Option erforderlich.                                            |
@@ -181,7 +182,7 @@ Löscht die Datenbank.
 
 Optionen:
 
-| Option                   | Short             | Beschreibung                                              |
+| Option                   | Short             | BESCHREIBUNG                                              |
 |:-------------------------|:------------------|:---------------------------------------------------------|
 | `--force`                | <nobr>`-f`</nobr> | Nicht bestätigen.                                           |
 | <nobr>`--dry-run`</nobr> |                   | Zeigen Sie an, welche Datenbank gelöscht werden soll, aber löschen Sie Sie nicht. |
@@ -192,7 +193,7 @@ Aktualisiert die Datenbank auf die letzte Migration oder eine angegebene Migrati
 
 Argumente:
 
-| Argument                   | Beschreibung                                                                                                                                                                                                                                                     |
+| Argument                   | BESCHREIBUNG                                                                                                                                                                                                                                                     |
 |:---------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | <nobr>`<MIGRATION>`</nobr> | Die Ziel Migration. Migrationen können anhand des Namens oder der ID identifiziert werden. Die Zahl 0 (null) ist ein Sonderfall, der *vor der ersten Migration* steht und bewirkt, dass alle Migrationen rückgängig gemacht werden. Wenn keine Migration angegeben ist, wird für den Befehl standardmäßig die letzte Migration verwendet. |
 
@@ -223,14 +224,14 @@ Generiert Code für einen `DbContext` und Entitäts Typen für eine Datenbank. D
 
 Argumente:
 
-| Argument                    | Beschreibung                                                                                                                                                                                                             |
+| Argument                    | BESCHREIBUNG                                                                                                                                                                                                             |
 |:----------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | <nobr>`<CONNECTION>`</nobr> | Die Verbindungszeichenfolge für die Datenbank. Bei ASP.net Core 2. x-Projekten kann der Wert " *Name = \<name of connection string> *" lauten. In diesem Fall stammt der Name aus den Konfigurations Quellen, die für das Projekt eingerichtet sind. |
 | `<PROVIDER>`                | Der zu verwendende Anbieter. In der Regel ist dies der Name des nuget-Pakets, z `Microsoft.EntityFrameworkCore.SqlServer` . b.:.                                                                                           |
 
 Optionen:
 
-| Option                                   | Short             | Beschreibung                                                                                                                                                                    |
+| Option                                   | Short             | BESCHREIBUNG                                                                                                                                                                    |
 |:-----------------------------------------|:------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `--data-annotations`                     | <nobr>`-d`</nobr> | Verwenden Sie Attribute, um das Modell zu konfigurieren (sofern möglich). Wenn diese Option weggelassen wird, wird nur die fließende API verwendet.                                                                |
 | `--context <NAME>`                       | `-c`              | Der Name der `DbContext` zu generierenden Klasse.                                                                                                                                 |
@@ -262,13 +263,13 @@ Fügt eine neue Migration hinzu.
 
 Argumente:
 
-| Argument              | Beschreibung                |
+| Argument              | BESCHREIBUNG                |
 |:----------------------|:---------------------------|
 | <nobr>`<NAME>`</nobr> | Der Name der Migration. |
 
 Optionen:
 
-| Option                                 | Short             | Beschreibung                                                                                                                             |
+| Option                                 | Short             | BESCHREIBUNG                                                                                                                             |
 |:---------------------------------------|:------------------|:----------------------------------------------------------------------------------------------------------------------------------------|
 | `--output-dir <PATH>`                  | <nobr>`-o`</nobr> | Das Verzeichnis, mit dem die Dateien ausgegeben werden. Pfade sind relativ zum Ziel Projektverzeichnis. Der Standardwert ist "Migrationen".                    |
 | <nobr>`--namespace <NAMESPACE>`</nobr> | `-n`              | Der Namespace, der für die generierten Klassen verwendet werden soll. Wird standardmäßig aus dem Ausgabeverzeichnis generiert. (Ab efcore 5.0.0 verfügbar.) |
@@ -283,7 +284,7 @@ Entfernt die letzte Migration (führt einen Rollback für die Codeänderungen au
 
 Optionen:
 
-| Option                 | Short             | Beschreibung                                                                     |
+| Option                 | Short             | BESCHREIBUNG                                                                     |
 |:-----------------------|:------------------|:--------------------------------------------------------------------------------|
 | <nobr>`--force`</nobr> | <nobr>`-f`</nobr> | Setzen Sie die Migration zurück (führen Sie ein Rollback der Änderungen aus, die auf die Datenbank angewendet wurden). |
 
@@ -293,14 +294,14 @@ Generiert ein SQL-Skript aus Migrationen.
 
 Argumente:
 
-| Argument              | Beschreibung                                                                                                                                                   |
+| Argument              | BESCHREIBUNG                                                                                                                                                   |
 |:----------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | <nobr>`<FROM>`</nobr> | Die Migration wird gestartet. Migrationen können anhand des Namens oder der ID identifiziert werden. Die Zahl 0 (null) ist ein Sonderfall, der *vor der ersten Migration*liegt. Der Standardwert ist 0. |
 | `<TO>`                | Die Beendigung der Migration. Standardmäßig wird die letzte Migration verwendet.                                                                                                         |
 
 Optionen:
 
-| Option                         | Short             | Beschreibung                                                        |
+| Option                         | Short             | BESCHREIBUNG                                                        |
 |:-------------------------------|:------------------|:-------------------------------------------------------------------|
 | <nobr>`--output <FILE>`</nobr> | <nobr>`-o`</nobr> | Die Datei, in die das Skript geschrieben werden soll.                                   |
 | `--idempotent`                 | `-i`              | Generieren Sie ein Skript, das bei jeder Migration in einer Datenbank verwendet werden kann. |

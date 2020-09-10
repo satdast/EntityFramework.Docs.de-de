@@ -1,14 +1,16 @@
 ---
 title: Behandeln von Parallelitäts Konflikten EF6
+description: Behandeln von Parallelitäts Konflikten in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 2318e4d3-f561-4720-bbc3-921556806476
-ms.openlocfilehash: 4d29fd7a4d9b6003f71bc8411cea2d863a4c5429
-ms.sourcegitcommit: d85263b5d5d665dbaf94de8832e2917bce048b34
+uid: ef6/saving/concurrency
+ms.openlocfilehash: 1cec47ce346e8a6c86338747c01fba4d030e7388
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/17/2020
-ms.locfileid: "86451241"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89619877"
 ---
 # <a name="handling-concurrency-conflicts-ef6"></a>Behandeln von Parallelitäts Konflikten (EF6)
 
@@ -16,7 +18,7 @@ Die optimistische Parallelität erfordert den optimistischen Versuch, ihre Entit
 
 Dieser Beitrag ist nicht der richtige Ort, um eine vollständige Erläuterung der vollständigen Parallelität zu erörtern. In den folgenden Abschnitten wird davon ausgegangen, dass Sie die Parallelitäts Auflösung kennen und Muster für häufige Aufgaben anzeigen.  
 
-Viele dieser Muster nutzen die Themen, die unter [Arbeiten mit Eigenschafts Werten](~/ef6/saving/change-tracking/property-values.md)erläutert werden.  
+Viele dieser Muster nutzen die Themen, die unter [Arbeiten mit Eigenschafts Werten](xref:ef6/saving/change-tracking/property-values)erläutert werden.  
 
 Das Beheben von Parallelitäts Problemen bei der Verwendung unabhängiger Zuordnungen (wobei der Fremdschlüssel nicht einer Eigenschaft in der Entität zugeordnet ist) ist weitaus schwieriger als bei der Verwendung von Fremdschlüssel Zuordnungen. Wenn Sie in Ihrer Anwendung Parallelitäts Auflösung durchführen möchten, wird empfohlen, dass Sie den Entitäten immer Fremdschlüssel zuordnen. Bei allen folgenden Beispielen wird davon ausgegangen, dass Sie Fremdschlüssel Zuordnungen verwenden.  
 
@@ -64,7 +66,7 @@ Die Entries-Methode für dbupdateconaccesscyexception gibt die dbentityentry-Ins
 
 ## <a name="resolving-optimistic-concurrency-exceptions-as-client-wins"></a>Auflösen von Ausnahmen der vollständigen Parallelität als Client gewinnt  
 
-Das obige Beispiel, das das erneute Laden verwendet, wird manchmal als Database WINS oder Store WINS bezeichnet, da die Werte in der Entität durch Werte aus der Datenbank überschrieben werden. Manchmal möchten Sie möglicherweise das Gegenteil durchführen und die Werte in der Datenbank mit den Werten überschreiben, die sich derzeit in der Entität befinden. Dies wird auch als Client WINS bezeichnet und kann durch das erhalten der aktuellen Daten Bank Werte und durch Festlegen der ursprünglichen Werte für die Entität erreicht werden. (Weitere Informationen zu aktuellen und ursprünglichen Werten finden Sie [unter Arbeiten mit Eigenschafts Werten](~/ef6/saving/change-tracking/property-values.md) .) Zum Beispiel:  
+Das obige Beispiel, das das erneute Laden verwendet, wird manchmal als Database WINS oder Store WINS bezeichnet, da die Werte in der Entität durch Werte aus der Datenbank überschrieben werden. Manchmal möchten Sie möglicherweise das Gegenteil durchführen und die Werte in der Datenbank mit den Werten überschreiben, die sich derzeit in der Entität befinden. Dies wird auch als Client WINS bezeichnet und kann durch das erhalten der aktuellen Daten Bank Werte und durch Festlegen der ursprünglichen Werte für die Entität erreicht werden. (Weitere Informationen zu aktuellen und ursprünglichen Werten finden Sie [unter Arbeiten mit Eigenschafts Werten](xref:ef6/saving/change-tracking/property-values) .) Zum Beispiel:  
 
 ``` csharp
 using (var context = new BloggingContext())

@@ -1,14 +1,16 @@
 ---
 title: MSL-Spezifikation-EF6
+description: MSL-Spezifikation in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 13ae7bc1-74b4-4ee4-8d73-c337be841467
-ms.openlocfilehash: 8990d1373ea2121ce11337a43dbcdf3b9e1532bd
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/modeling/designer/advanced/edmx/msl-spec
+ms.openlocfilehash: 4ec43f48f82b83bd85b47fe234be143d0e4d2560
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78415478"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89620621"
 ---
 # <a name="msl-specification"></a>MSL-Spezifikation
 Bei der Mapping-Spezifikationssprache (MSL) handelt es sich um eine XML-basierte Sprache, die die Zuordnung zwischen dem konzeptionellen Modell und dem Speichermodell einer Entity Framework Anwendung beschreibt.
@@ -17,7 +19,7 @@ In einer Entity Framework Anwendung werden die Mapping-Metadaten zur Buildzeit a
 
 Der Entity Framework Designer (EF-Designer) speichert Zuordnungsinformationen in einer EDMX-Datei zur Entwurfszeit. Zur Buildzeit verwendet die Entity Designer Informationen in einer EDMX-Datei, um die MSL-Datei zu erstellen, die zur Laufzeit von Entity Framework benötigt wird.
 
-Namen aller konzeptionellen oder Speichermodelltypen, auf denen in MSL verwiesen wird, müssen mit dem jeweiligen Namespacenamen qualifiziert werden. Weitere Informationen zum Namespace Namen des konzeptionellen Modells finden Sie unter [CSDL-Spezifikation](~/ef6/modeling/designer/advanced/edmx/csdl-spec.md). Weitere Informationen zum Namespace Namen des Speicher Modells finden Sie unter [SSDL-Spezifikation](~/ef6/modeling/designer/advanced/edmx/ssdl-spec.md).
+Namen aller konzeptionellen oder Speichermodelltypen, auf denen in MSL verwiesen wird, müssen mit dem jeweiligen Namespacenamen qualifiziert werden. Weitere Informationen zum Namespace Namen des konzeptionellen Modells finden Sie unter [CSDL-Spezifikation](xref:ef6/modeling/designer/advanced/edmx/csdl-spec). Weitere Informationen zum Namespace Namen des Speicher Modells finden Sie unter [SSDL-Spezifikation](xref:ef6/modeling/designer/advanced/edmx/ssdl-spec).
 
 MSL-Versionen unterscheiden sich von XML-Namespaces.
 
@@ -37,14 +39,14 @@ Das **Alias** -Element darf keine untergeordneten Elemente aufweisen.
 
 In der folgenden Tabelle werden die Attribute beschrieben, die auf das **Alias** -Element angewendet werden können.
 
-| Attributname | Ist erforderlich | value                                                                     |
+| Attributname | Ist erforderlich | Wert                                                                     |
 |:---------------|:------------|:--------------------------------------------------------------------------|
 | **Schlüssel**        | Ja         | Der Alias für den Namespace, der durch das **value** -Attribut angegeben wird. |
 | **Wert**      | Ja         | Der Namespace, für den der Wert des **Schlüssel** Elements ein Alias ist.     |
 
 ### <a name="example"></a>Beispiel
 
-Das folgende Beispiel zeigt ein **Alias** -Element, das einen Alias definiert, `c`für Typen, die im konzeptionellen Modell definiert sind.
+Das folgende Beispiel zeigt ein **Alias** Element, das einen Alias für Typen definiert, die `c` im konzeptionellen Modell definiert sind.
 
 ``` xml
  <Mapping Space="C-S"
@@ -91,7 +93,7 @@ Das **AssociationEnd** -Element kann die folgenden untergeordneten Elemente aufw
 
 In der folgenden Tabelle werden die Attribute beschrieben, die für das **AssociationEnd** -Element anwendbar sind.
 
-| Attributname     | Ist erforderlich | value                                                                                                                                                                             |
+| Attributname     | Ist erforderlich | Wert                                                                                                                                                                             |
 |:-------------------|:------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **AssociationSet** | Ja         | Der Name der Zuordnung, die zugeordnet wird.                                                                                                                                 |
 | **From**           | Ja         | Der Wert des **FromRole** -Attributs der Navigations Eigenschaft, die der zugeordneten Zuordnung entspricht. Weitere Informationen finden Sie unter NavigationProperty-Element (CSDL). |
@@ -146,7 +148,7 @@ Um die Aktualisierungs Funktion der `Course` Entität dieser gespeicherten Proze
  </AssociationSetMapping>
 ```
 
-Der folgende Code zeigt das **AssociationEnd** -Element, das verwendet wird, um die **DepartmentID** -Eigenschaft der **FK-\_Kurs\_Abteilungs** Zuordnung der gespeicherten Prozedur **updatecourse** zuzuordnen (in der die Update-Funktion des **Course** -Entitäts Typs zugeordnet ist):
+Der folgende Code zeigt das **AssociationEnd** -Element, das verwendet wird, um die **DepartmentID** -Eigenschaft der **FK- \_ Kurs \_ Abteilungs** Zuordnung der gespeicherten Prozedur **updatecourse** zuzuordnen (in der die Update-Funktion des **Course** -Entitäts Typs zugeordnet ist):
 
 ``` xml
  <EntitySetMapping Name="Courses">
@@ -189,16 +191,16 @@ Zuordnungen im konzeptionellen Modell sind Typen, deren Eigenschaften Primär- u
 
 Das **AssociationSetMapping** -Element kann die folgenden untergeordneten Elemente aufweisen.
 
--   QueryView (null oder eins)
+-   QueryView (kein (null) oder ein Element)
 -   EndProperty (kein (null) oder zwei Elemente)
--   Bedingung (0 (null) oder mehr)
--   ModificationFunctionMapping (0 (null) oder 1)
+-   Condition (0 (null) oder mehr Elemente)
+-   ModificationFunctionMapping (kein (null) oder ein Element)
 
 ### <a name="applicable-attributes"></a>Anwendbare Attribute
 
 In der folgenden Tabelle werden die Attribute beschrieben, die auf das **AssociationSetMapping** -Element angewendet werden können.
 
-| Attributname     | Ist erforderlich | value                                                                                       |
+| Attributname     | Ist erforderlich | Wert                                                                                       |
 |:-------------------|:------------|:--------------------------------------------------------------------------------------------|
 | **Name**           | Ja         | Der Name des konzeptionellen Modell-Zuordnungssatzes, der zugeordnet wird.                      |
 | **TypeName**       | Nein          | Der mit einem Namespace qualifizierte Name des konzeptionellen Modell-Zuordnungstyps, der zugeordnet wird. |
@@ -206,7 +208,7 @@ In der folgenden Tabelle werden die Attribute beschrieben, die auf das **Associa
 
 ### <a name="example"></a>Beispiel
 
-Das folgende Beispiel zeigt ein **AssociationSetMapping** -Element, in dem der **FK-\_Kurs\_Abteilungs** Zuordnungs Satz im konzeptionellen Modell der **Course** -Tabelle in der-Datenbank zugeordnet ist. Zuordnungen zwischen Zuordnungstyp Eigenschaften und Tabellen Spalten werden in untergeordneten **EndProperty** -Elementen angegeben.
+Das folgende Beispiel zeigt ein **AssociationSetMapping** -Element, in dem der im konzeptionellen Modell festgelegte **FK- \_ Kurs \_ Abteilungs** Verbund der **Course** -Tabelle in der-Datenbank zugeordnet wird. Zuordnungen zwischen Zuordnungstyp Eigenschaften und Tabellen Spalten werden in untergeordneten **EndProperty** -Elementen angegeben.
 
 ``` xml
  <AssociationSetMapping Name="FK_Course_Department"
@@ -229,14 +231,14 @@ Das **complexType** -Eigenschafts Element kann die folgenden untergeordneten Ele
 
 -   ScalarProperty (0 (null) oder mehr)
 -   **ComplexProperty** (0 (null) oder mehr)
--   Complexttypeer Mapping (0 (null) oder mehr)
--   Bedingung (0 (null) oder mehr)
+-   ComplextTypeMapping (kein (null) oder mehrere Elemente)
+-   Condition (0 (null) oder mehr Elemente)
 
 ### <a name="applicable-attributes"></a>Anwendbare Attribute
 
 In der folgenden Tabelle werden die Attribute beschrieben, die auf das **ComplexProperty** -Element anwendbar sind:
 
-| Attributname | Ist erforderlich | value                                                                                            |
+| Attributname | Ist erforderlich | Wert                                                                                            |
 |:---------------|:------------|:-------------------------------------------------------------------------------------------------|
 | **Name**       | Ja         | Der Name der komplexen Eigenschaft eines Entitätstyps im konzeptionellen Modell, die zugeordnet wird. |
 | **TypeName**   | Nein          | Der mit einem Namespace qualifizierte Name des Eigenschaftentyps im konzeptionellen Modell.                              |
@@ -306,7 +308,7 @@ Das **complextypemapping** -Element kann die folgenden untergeordneten Elemente 
 
 In der folgenden Tabelle werden die Attribute beschrieben, die auf das **complextypemapping** -Element anwendbar sind.
 
-| Attributname | Ist erforderlich | value                                                                  |
+| Attributname | Ist erforderlich | Wert                                                                  |
 |:---------------|:------------|:-----------------------------------------------------------------------|
 | **TypeName**   | Ja         | Der namespacequalifizierte Name des komplexen Typs, der zugeordnet wird. |
 
@@ -377,7 +379,7 @@ Das **Condition** -Element kann keine untergeordneten Elemente aufweisen.
 
 In der folgenden Tabelle werden die Attribute beschrieben, die für das **Condition** -Element anwendbar sind:
 
-| Attributname | Ist erforderlich | value                                                                                                                                                                                                                                                                                         |
+| Attributname | Ist erforderlich | Wert                                                                                                                                                                                                                                                                                         |
 |:---------------|:------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **ColumnName** | Nein          | Der Name der Tabellenspalte, deren Wert zur Auswertung der Bedingung verwendet wird.                                                                                                                                                                                                                   |
 | **IsNull**     | Nein          | **True** und **False**. Wenn der Wert **true** und der Spaltenwert **null**ist, oder wenn der Wert **false** ist und der Spaltenwert nicht **null**ist, ist die Bedingung true. Andernfalls ist die Bedingung nicht erfüllt (false). <br/> Die Attribute " **IsNull** " und " **value** " können nicht gleichzeitig verwendet werden. |
@@ -430,15 +432,15 @@ Wenn das **DeleteFunction** -Element auf das EntityTypeMapping-Element angewende
 
 Das **DeleteFunction** -Element kann die folgenden untergeordneten Elemente aufweisen, wenn es auf ein **EntityTypeMapping** -Element angewendet wird:
 
--   AssociationEnd (0 (null) oder mehr)
+-   AssociationEnd (null (0) oder mehr)
 -   ComplexProperty (0 (null) oder mehr)
--   Scarlarproperty (0 (null) oder mehr)
+-   ScalarProperty (null (0) oder mehr)
 
 #### <a name="applicable-attributes"></a>Anwendbare Attribute
 
 In der folgenden Tabelle werden die Attribute beschrieben, die auf das **DeleteFunction** -Element angewendet werden können, wenn es auf ein **EntityTypeMapping** -Element angewendet wird.
 
-| Attributname            | Ist erforderlich | value                                                                                                                                                    |
+| Attributname            | Ist erforderlich | Wert                                                                                                                                                    |
 |:--------------------------|:------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **FunctionName**          | Ja         | Der mit einem Namespace qualifizierte Name der gespeicherten Prozedur, der die Löschfunktion zugeordnet wird. Die gespeicherte Prozedur muss im Speichermodell deklariert werden. |
 | **Rowsaffectedparameter** | Nein          | Der Name des Ausgabeparameters, der die Anzahl der betroffenen Zeilen zurückgibt.                                                                               |
@@ -502,7 +504,7 @@ Das **DeleteFunction** -Element kann die folgenden untergeordneten Elemente aufw
 
 In der folgenden Tabelle werden die Attribute beschrieben, die auf das **DeleteFunction** -Element angewendet werden können, wenn es auf das **AssociationSetMapping** -Element angewendet wird.
 
-| Attributname            | Ist erforderlich | value                                                                                                                                                    |
+| Attributname            | Ist erforderlich | Wert                                                                                                                                                    |
 |:--------------------------|:------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **FunctionName**          | Ja         | Der mit einem Namespace qualifizierte Name der gespeicherten Prozedur, der die Löschfunktion zugeordnet wird. Die gespeicherte Prozedur muss im Speichermodell deklariert werden. |
 | **Rowsaffectedparameter** | Nein          | Der Name des Ausgabeparameters, der die Anzahl der betroffenen Zeilen zurückgibt.                                                                               |
@@ -556,13 +558,13 @@ Das **EndProperty** -Element kann die folgenden untergeordneten Elemente aufweis
 
 In der folgenden Tabelle werden die Attribute beschrieben, die für das **EndProperty** -Element anwendbar sind:
 
-| Attributname | Ist erforderlich | value                                                 |
+| Attributname | Ist erforderlich | Wert                                                 |
 |:---------------|:------------|:------------------------------------------------------|
 | Name           | Ja         | Der Name des Zuordnungsendes, das zugeordnet wird. |
 
 ### <a name="example"></a>Beispiel
 
-Das folgende Beispiel zeigt ein **AssociationSetMapping** -Element, in dem der **FK-\_Kurs\_Abteilungs** Zuordnung im konzeptionellen Modell der **Course** -Tabelle in der-Datenbank zugeordnet ist. Zuordnungen zwischen Zuordnungstyp Eigenschaften und Tabellen Spalten werden in untergeordneten **EndProperty** -Elementen angegeben.
+Das folgende Beispiel zeigt ein **AssociationSetMapping** -Element, in dem die Zuordnung der **FK- \_ Kurs \_ Abteilung** im konzeptionellen Modell der **Course** -Tabelle in der-Datenbank zugeordnet ist. Zuordnungen zwischen Zuordnungstyp Eigenschaften und Tabellen Spalten werden in untergeordneten **EndProperty** -Elementen angegeben.
 
 ``` xml
  <AssociationSetMapping Name="FK_Course_Department"
@@ -626,11 +628,11 @@ Das **EntityContainerMapping** -Element kann die folgenden untergeordneten Eleme
 
 In der folgenden Tabelle werden die Attribute beschrieben, die auf das **EntityContainerMapping** -Element angewendet werden können.
 
-| Attributname            | Ist erforderlich | value                                                                                                                                                                                                                                                    |
+| Attributname            | Ist erforderlich | Wert                                                                                                                                                                                                                                                    |
 |:--------------------------|:------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Storagemodelcontainer** | Ja         | Der Name des Entitätscontainers im Speichermodell, der zugeordnet wird.                                                                                                                                                                                     |
 | **CdmEntityContainer**    | Ja         | Der Name des Entitätscontainers im konzeptionellen Modell, der zugeordnet wird.                                                                                                                                                                                  |
-| **Generateupdateviews**   | Nein          | **True** und **False**. **False**gibt an, dass keine Update Sichten generiert werden. Dieses Attribut sollte auf **false** festgelegt werden, wenn Sie eine schreibgeschützte Zuordnung haben, die ungültig wäre, da die Daten möglicherweise nicht erfolgreich abgerundet werden. <br/> Der Standardwert lautet **True**. |
+| **Generateupdateviews**   | Nein          | **True** und **False**. **False**gibt an, dass keine Update Sichten generiert werden. Dieses Attribut sollte auf **false** festgelegt werden, wenn Sie eine schreibgeschützte Zuordnung haben, die ungültig wäre, da die Daten möglicherweise nicht erfolgreich abgerundet werden. <br/> Der Standardwert ist **True**. |
 
 ### <a name="example"></a>Beispiel
 
@@ -670,14 +672,14 @@ Das **EntitySetMapping** -Element in der Mapping-Spezifikationssprache (MSL) ord
 Das **EntitySetMapping** -Element kann die folgenden untergeordneten Elemente aufweisen:
 
 -   EntityTypeMapping (0 (null) oder mehr)
--   QueryView (null oder eins)
--   MappingFragment (0 (null) oder mehr)
+-   QueryView (kein (null) oder ein Element)
+-   MappingFragment (null oder mehr)
 
 ### <a name="applicable-attributes"></a>Anwendbare Attribute
 
 In der folgenden Tabelle werden die Attribute beschrieben, die auf das **EntitySetMapping** -Element angewendet werden können.
 
-| Attributname           | Ist erforderlich | value                                                                                                                                                                                                                         |
+| Attributname           | Ist erforderlich | Wert                                                                                                                                                                                                                         |
 |:-------------------------|:------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Name**                 | Ja         | Der Name der Entitätenmenge im konzeptionellen Modell, die zugeordnet wird.                                                                                                                                                             |
 | **Typname** **1**       | Nein          | Der Name des Entitätstyp im konzeptionellen Modell, der zugeordnet wird.                                                                                                                                                            |
@@ -727,8 +729,8 @@ Das untergeordnete ModificationFunctionMapping-Element kann verwendet werden, um
 
 Das **EntityTypeMapping** -Element kann die folgenden untergeordneten Elemente aufweisen:
 
--   MappingFragment (0 (null) oder mehr)
--   ModificationFunctionMapping (0 (null) oder 1)
+-   MappingFragment (null oder mehr)
+-   ModificationFunctionMapping (kein (null) oder ein Element)
 -   ScalarProperty
 -   Bedingung
 
@@ -743,7 +745,7 @@ Das **EntityTypeMapping** -Element kann die folgenden untergeordneten Elemente a
 
 In der folgenden Tabelle werden die Attribute beschrieben, die auf das **EntityTypeMapping** -Element angewendet werden können.
 
-| Attributname | Ist erforderlich | value                                                                                                                                                                                                |
+| Attributname | Ist erforderlich | Wert                                                                                                                                                                                                |
 |:---------------|:------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **TypeName**   | Ja         | Der mit einem Namespace qualifizierte Name des Entitätstyps des konzeptionellen Modells, der zugeordnet wird. <br/> Wenn der Typ abstrakt oder ein abgeleiteter Typ ist, muss der Wert `IsOfType(Namespace-qualified_type_name)` lauten. |
 
@@ -783,7 +785,7 @@ Das folgende Beispiel zeigt ein EntitySetMapping-Element mit zwei untergeordnete
 
 ### <a name="example"></a>Beispiel
 
-Im nächsten Beispiel wird die Zuordnung einer Typhierarchie, in der der Stammtyp abstrakt ist, veranschaulicht. Beachten Sie die Verwendung der `IsOfType`-Syntax für die **tykename** -Attribute.
+Im nächsten Beispiel wird die Zuordnung einer Typhierarchie, in der der Stammtyp abstrakt ist, veranschaulicht. Beachten Sie die Verwendung der `IsOfType` Syntax für die **tygtame** -Attribute.
 
 ``` xml
  <EntitySetMapping Name="People">
@@ -829,7 +831,7 @@ Das **FunctionImportMapping** -Element kann die folgenden untergeordneten Elemen
 
 In der folgenden Tabelle werden die Attribute beschrieben, die für das **FunctionImportMapping** -Element anwendbar sind:
 
-| Attributname         | Ist erforderlich | value                                                                                   |
+| Attributname         | Ist erforderlich | Wert                                                                                   |
 |:-----------------------|:------------|:----------------------------------------------------------------------------------------|
 | **FunctionImportName** | Ja         | Der Name des Funktionsimports im konzeptionellen Modell, der zugeordnet wird.           |
 | **FunctionName**       | Ja         | Der mit einem Namespace qualifizierte Name der Funktion im Speichermodell, die zugeordnet wird. |
@@ -878,16 +880,16 @@ Wenn das **InsertFunction** -Element auf das EntityTypeMapping-Element angewende
 
 Das **InsertFunction** -Element kann die folgenden untergeordneten Elemente aufweisen, wenn es auf ein **EntityTypeMapping** -Element angewendet wird:
 
--   AssociationEnd (0 (null) oder mehr)
+-   AssociationEnd (null (0) oder mehr)
 -   ComplexProperty (0 (null) oder mehr)
--   ResultBinding (null oder 1)
--   Scarlarproperty (0 (null) oder mehr)
+-   ResultBinding (0 (null) oder einer)
+-   ScalarProperty (null (0) oder mehr)
 
 #### <a name="applicable-attributes"></a>Anwendbare Attribute
 
 In der folgenden Tabelle werden die Attribute beschrieben, die auf das **InsertFunction** -Element angewendet werden können, wenn es auf ein **EntityTypeMapping** -Element angewendet wird.
 
-| Attributname            | Ist erforderlich | value                                                                                                                                                    |
+| Attributname            | Ist erforderlich | Wert                                                                                                                                                    |
 |:--------------------------|:------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **FunctionName**          | Ja         | Der mit einem Namespace qualifizierte Name der gespeicherten Prozedur, der die Einfügefunktion zugeordnet wird. Die gespeicherte Prozedur muss im Speichermodell deklariert werden. |
 | **Rowsaffectedparameter** | Nein          | Der Name des Ausgabeparameters, der die Anzahl der betroffenen Zeilen zurückgibt.                                                                               |
@@ -938,7 +940,7 @@ Das **InsertFunction** -Element kann die folgenden untergeordneten Elemente aufw
 
 In der folgenden Tabelle werden die Attribute beschrieben, die auf das **InsertFunction** -Element angewendet werden können, wenn es auf das **AssociationSetMapping** -Element angewendet wird.
 
-| Attributname            | Ist erforderlich | value                                                                                                                                                    |
+| Attributname            | Ist erforderlich | Wert                                                                                                                                                    |
 |:--------------------------|:------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **FunctionName**          | Ja         | Der mit einem Namespace qualifizierte Name der gespeicherten Prozedur, der die Einfügefunktion zugeordnet wird. Die gespeicherte Prozedur muss im Speichermodell deklariert werden. |
 | **Rowsaffectedparameter** | Nein          | Der Name des Ausgabeparameters, der die Anzahl der betroffenen Zeilen zurückgibt.                                                                               |
@@ -982,12 +984,12 @@ Das folgende Beispiel basiert auf dem Modell "School" und zeigt das **InsertFunc
 
 Das **Mapping** -Element in der Mapping-Spezifikationssprache (Mapping Specification Language, MSL) enthält Informationen zum Mapping von Objekten, die in einem konzeptionellen Modell definiert sind, zu einer Datenbank (wie in einem Speichermodell beschrieben). Weitere Informationen finden Sie unter CSDL-Spezifikation und SSDL-Spezifikation.
 
-Das **Mapping** -Element ist das Stamm Element für eine Mappingspezifikation. Der XML-Namespace für Mappingspezifikationen ist https://schemas.microsoft.com/ado/2009/11/mapping/cs.
+Das **Mapping** -Element ist das Stamm Element für eine Mappingspezifikation. Der XML-Namespace für Mappingspezifikationen ist https://schemas.microsoft.com/ado/2009/11/mapping/cs .
 
 Das Mapping-Element kann die folgenden untergeordneten Elemente aufweisen (der vorliegenden Reihenfolge entsprechend):
 
--   Alias (0 (null) oder mehr)
--   EntityContainerMapping (genau 1)
+-   Alias (null (0) oder mehr)
+-   EntityContainerMapping (genau ein Element)
 
 Die Namen aller Typen des konzeptionellen Modells und Typen des Speichermodells, auf die in MSL verwiesen wird, müssen mit dem jeweiligen Namespacenamen qualifiziert werden. Weitere Informationen zum Namespace Namen des konzeptionellen Modells finden Sie unter Schema-Element (CSDL). Weitere Informationen zum Namespace Namen des Speicher Modells finden Sie unter Schema-Element (SSDL). Aliasnamen für Namespaces, die in MSL verwendet werden, können mit dem Alias-Element definiert werden.
 
@@ -995,9 +997,9 @@ Die Namen aller Typen des konzeptionellen Modells und Typen des Speichermodells,
 
 In der folgenden Tabelle werden die Attribute beschrieben, die auf das **Mapping** -Element angewendet werden können.
 
-| Attributname | Ist erforderlich | value                                                 |
+| Attributname | Ist erforderlich | Wert                                                 |
 |:---------------|:------------|:------------------------------------------------------|
-| **LEERTASTE**      | Ja         | **C-S**. Dies ist ein fester Wert, der nicht geändert werden kann. |
+| **BRaum**      | Ja         | **C-S**. Dies ist ein fester Wert, der nicht geändert werden kann. |
 
 ### <a name="example"></a>Beispiel
 
@@ -1040,15 +1042,15 @@ Das **MappingFragment** -Element in der Mapping-Spezifikationssprache (Mapping S
 
 Das **MappingFragment** -Element kann die folgenden untergeordneten Elemente aufweisen:
 
--   ComplexType (0 (null) oder mehr)
+-   ComplexType (null oder mehrere Elemente)
 -   ScalarProperty (0 (null) oder mehr)
--   Bedingung (0 (null) oder mehr)
+-   Condition (0 (null) oder mehr Elemente)
 
 ### <a name="applicable-attributes"></a>Anwendbare Attribute
 
 In der folgenden Tabelle werden die Attribute beschrieben, die auf das **MappingFragment** -Element angewendet werden können.
 
-| Attributname          | Ist erforderlich | value                                                                                                                                                                                                                         |
+| Attributname          | Ist erforderlich | Wert                                                                                                                                                                                                                         |
 |:------------------------|:------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **StoreEntitySet**      | Ja         | Der Name der Tabelle oder Ansicht, die zugeordnet wird.                                                                                                                                                                           |
 | **MakeColumnsDistinct** | Nein          | **True** oder **false** , abhängig davon, ob nur unterschiedliche Zeilen zurückgegeben werden. <br/> Wenn dieses Attribut auf **true**festgelegt ist, muss das **generateupdateviews** -Attribut des EntityContainerMapping-Elements auf **false**festgelegt werden. |
@@ -1100,9 +1102,9 @@ Das **ModificationFunctionMapping** -Element kann ein untergeordnetes Element de
 
 Das **ModificationFunctionMapping** -Element kann die folgenden untergeordneten Elemente aufweisen:
 
--   DeleteFunction (null oder 1)
--   InsertFunction (0 (null) oder 1)
--   UpdateFunction (null oder 1)
+-   DeleteFunction (kein (null) oder ein Element)
+-   InsertFunction (kein (null) oder ein Element)
+-   UpdateFunction (kein (null) oder ein Element)
 
 Für das **ModificationFunctionMapping** -Element sind keine Attribute anwendbar.
 
@@ -1211,7 +1213,7 @@ Das **QueryView** -Element darf keine untergeordneten Elemente aufweisen.
 
 In der folgenden Tabelle werden die Attribute beschrieben, die auf das **QueryView** -Element angewendet werden können.
 
-| Attributname | Ist erforderlich | value                                                                         |
+| Attributname | Ist erforderlich | Wert                                                                         |
 |:---------------|:------------|:------------------------------------------------------------------------------|
 | **TypeName**   | Nein          | Der Name des konzeptionellen Modelltyps, der durch die Abfrageansicht zugeordnet wird. |
 
@@ -1253,7 +1255,7 @@ Da die Abfrage nur eine Teilmenge der Member des **Abteilungs** Typs im Speicher
 
 ### <a name="example"></a>Beispiel
 
-Das nächste Beispiel zeigt das **QueryView** -Element als untergeordnetes Element eines **AssociationSetMapping** -Elements und definiert eine schreibgeschützte Zuordnung für die `FK_Course_Department`-Zuordnung im Modell "School".
+Das nächste Beispiel zeigt das **QueryView** -Element als untergeordnetes Element eines **AssociationSetMapping** -Elements und definiert eine schreibgeschützte Zuordnung für die Zuordnung `FK_Course_Department` im Modell "School".
 
 ``` xml
  <EntityContainerMapping StorageEntityContainer="SchoolModelStoreContainer"
@@ -1325,7 +1327,7 @@ Das **ResultBinding** -Element darf keine untergeordneten Elemente aufweisen.
 
 In der folgenden Tabelle werden die Attribute beschrieben, die für das **ResultBinding** -Element anwendbar sind:
 
-| Attributname | Ist erforderlich | value                                                                         |
+| Attributname | Ist erforderlich | Wert                                                                         |
 |:---------------|:------------|:------------------------------------------------------------------------------|
 | **Name**       | Ja         | Der Name der Entitätseigenschaft im konzeptionellen Modell, die zugeordnet wird. |
 | **ColumnName** | Ja         | Der Name der Spalte, die zugeordnet wird.                                          |
@@ -1477,14 +1479,14 @@ Die Attribute, die auf das **ScalarProperty** -Element angewendet werden, unters
 
 In der folgenden Tabelle werden die Attribute beschrieben, die anwendbar sind, wenn das **ScalarProperty** -Element verwendet wird, um einer Spalte in der Datenbank eine Eigenschaft eines konzeptionellen Modells zuzuordnen:
 
-| Attributname | Ist erforderlich | value                                                           |
+| Attributname | Ist erforderlich | Wert                                                           |
 |:---------------|:------------|:----------------------------------------------------------------|
 | **Name**       | Ja         | Der Name der Eigenschaft im konzeptionellen Modell, die zugeordnet wird. |
 | **ColumnName** | Ja         | Der Name der Tabellenspalte, die zugeordnet wird.              |
 
 In der folgenden Tabelle werden die Attribute beschrieben, die für das **ScalarProperty** -Element gelten, wenn es verwendet wird, um eine Eigenschaft des konzeptionellen Modells einem Parameter für gespeicherte Prozeduren zuzuordnen:
 
-| Attributname    | Ist erforderlich | value                                                                                                                                           |
+| Attributname    | Ist erforderlich | Wert                                                                                                                                           |
 |:------------------|:------------|:------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Name**          | Ja         | Der Name der Eigenschaft im konzeptionellen Modell, die zugeordnet wird.                                                                                 |
 | **Parameter Name** | Ja         | Der Name des Parameters, der zugeordnet wird.                                                                                                 |
@@ -1586,16 +1588,16 @@ Das **UpdateFunction** -Element kann ein untergeordnetes Element des Modificatio
 
 Das **UpdateFunction** -Element kann die folgenden untergeordneten Elemente aufweisen:
 
--   AssociationEnd (0 (null) oder mehr)
+-   AssociationEnd (null (0) oder mehr)
 -   ComplexProperty (0 (null) oder mehr)
--   ResultBinding (null oder 1)
--   Scarlarproperty (0 (null) oder mehr)
+-   ResultBinding (0 (null) oder einer)
+-   ScalarProperty (null (0) oder mehr)
 
 ### <a name="applicable-attributes"></a>Anwendbare Attribute
 
 In der folgenden Tabelle werden die Attribute beschrieben, die auf das **UpdateFunction** -Element angewendet werden können.
 
-| Attributname            | Ist erforderlich | value                                                                                                                                                    |
+| Attributname            | Ist erforderlich | Wert                                                                                                                                                    |
 |:--------------------------|:------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **FunctionName**          | Ja         | Der mit einem Namespace qualifizierte Name der gespeicherten Prozedur, der die Aktualisierungsfunktion zugeordnet wird. Die gespeicherte Prozedur muss im Speichermodell deklariert werden. |
 | **Rowsaffectedparameter** | Nein          | Der Name des Ausgabeparameters, der die Anzahl der betroffenen Zeilen zurückgibt.                                                                               |

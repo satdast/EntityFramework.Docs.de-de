@@ -1,14 +1,16 @@
 ---
 title: Arbeiten mit Entitäts Zuständen EF6
+description: Arbeiten mit Entitäts Zuständen in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: acb27f46-3f3a-4179-874a-d6bea5d7120c
-ms.openlocfilehash: ef0e8d5a5a9d66adab7046088c49d8cd472edc8a
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/saving/change-tracking/entity-state
+ms.openlocfilehash: 981bdbca982403338f3f65a41f601641d59d74d8
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78416252"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89619980"
 ---
 # <a name="working-with-entity-states"></a>Arbeiten mit Entitäts Zuständen
 In diesem Thema wird das Hinzufügen und Anfügen von Entitäten zu einem Kontext und die Art und Weise beschrieben, wie Entity Framework diese während SaveChanges verarbeitet.

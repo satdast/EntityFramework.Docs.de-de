@@ -1,14 +1,16 @@
 ---
 title: Automatisches Erkennen von Änderungen EF6
+description: Automatisches Erkennen von Änderungen in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: a8d1488d-9a54-4623-a76b-e81329ff2756
-ms.openlocfilehash: 9af85fd7ca48a14432a1f33c59079fc438ef8810
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/saving/change-tracking/auto-detect-changes
+ms.openlocfilehash: 938af809ac89d3490da9885497fc5601453e1c34
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78414380"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89619988"
 ---
 # <a name="automatic-detect-changes"></a>Automatisches Erkennen von Änderungen
 Bei der Verwendung der meisten poco-Entitäten wird die Bestimmung, wie sich eine Entität geändert hat (und somit, welche Updates an die Datenbank gesendet werden müssen) vom Algorithmus zum Erkennen von Änderungen behandelt. Erkennen von Änderungen funktioniert, indem die Unterschiede zwischen den aktuellen Eigenschafts Werten der Entität und den ursprünglichen Eigenschafts Werten erkannt werden, die in einer Momentaufnahme gespeichert werden, wenn die Entität abgefragt oder angefügt wurde. Die in diesem Thema dargestellten Techniken gelten jeweils für Modelle, die mit Code First und dem EF-Designer erstellt wurden.  

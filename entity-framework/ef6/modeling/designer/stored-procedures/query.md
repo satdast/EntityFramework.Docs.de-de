@@ -1,14 +1,16 @@
 ---
 title: Gespeicherte Prozeduren für Designer Abfragen EF6
+description: Gespeicherte Prozeduren für Designer Abfragen in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 9554ed25-c5c1-43be-acad-5da37739697f
-ms.openlocfilehash: 2e0092b526278597e8477d47eeb642598647bb91
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/modeling/designer/stored-procedures/query
+ms.openlocfilehash: c647516e1c6ea010c791df6857782b2304ceed1c
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78415202"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89620363"
 ---
 # <a name="designer-query-stored-procedures"></a>Gespeicherte Prozeduren für Designer Abfragen
 In dieser schrittweisen exemplarischen Vorgehensweise wird veranschaulicht, wie Sie mit dem Entity Framework Designer (EF-Designer) gespeicherte Prozeduren in ein Modell importieren und dann die importierten gespeicherten Prozeduren aufrufen, um Ergebnisse abzurufen. 
@@ -23,29 +25,29 @@ var query = context.Products.SqlQuery("EXECUTE [dbo].[GetAllProducts]")`;
 Um die exemplarische Vorgehensweise nachzuvollziehen, benötigen Sie Folgendes:
 
 - Eine aktuelle Version von Visual Studio.
-- Die [Beispieldatenbank "School](~/ef6/resources/school-database.md)".
+- Die [Beispieldatenbank "School](xref:ef6/resources/school-database)".
 
 ## <a name="set-up-the-project"></a>Einrichten des Projekts
 
 -   Öffnen Sie Visual Studio 2012.
--   **Datei&gt; neues&gt; Projekt** auswählen
--   Klicken Sie im linken Bereich auf **Visual C-\#** , und wählen Sie dann die **Konsolen** Vorlage aus.
--   Geben Sie als Name **efwithsprocssample** ein.
+-   Wählen Sie **Datei- &gt; neu- &gt; Projekt** aus.
+-   Klicken Sie im linken Bereich auf **Visual C \# **, und wählen Sie dann die **Konsolen** Vorlage aus.
+-   Geben Sie **efwithsprocssample**   als Name ein.
 -   Wählen Sie **OK** aus.
 
 ## <a name="create-a-model"></a>Modellerstellung
 
--   Klicken Sie in Projektmappen-Explorer mit der rechten Maustaste auf das Projekt, und wählen Sie **Add-&gt; neues Element**aus.
+-   Klicken Sie in Projektmappen-Explorer mit der rechten Maustaste auf das Projekt, und wählen Sie **Add- &gt; New Item**.
 -   Wählen Sie im linken Menü **Daten** aus, und wählen Sie dann im Bereich Vorlagen die Option **ADO.NET Entity Data Model** aus.
 -   Geben Sie als Dateiname **efwithsprocsmodel. edmx** ein, und klicken Sie dann auf **Hinzufügen**.
 -   Wählen Sie im Dialogfeld Modell Inhalte auswählen die Option **aus Datenbank generieren aus**, und klicken Sie dann auf **weiter**.
 -   Klicken Sie auf **neue Verbindung**.  
-    Geben Sie im Dialogfeld Verbindungs Eigenschaften den Servernamen ein (z. b. **(localdb)\\mssqllocaldb**), wählen Sie die Authentifizierungsmethode aus, geben Sie **School** als Datenbanknamen ein, und klicken Sie dann auf **OK**.  
+    Geben Sie im Dialogfeld Verbindungs Eigenschaften den Servernamen ein (z. b. **(localdb) \\ mssqllocaldb**), wählen Sie die Authentifizierungsmethode aus, geben Sie **School**   als Datenbanknamen School ein, und klicken Sie dann auf **OK**.  
     Das Dialogfeld Wählen Sie Ihre Datenverbindung aus wird mit Ihrer Daten bankverbindungs Einstellung aktualisiert.
--   Aktivieren Sie im Dialogfeld Wählen Sie Ihre Datenbankobjekte aus das Kontrollkästchen **Tabellen** , um alle Tabellen auszuwählen.  
+-   Aktivieren Sie im Dialogfeld Wählen Sie Ihre Datenbankobjekte aus das Kontrollkästchen **Tabellen**,   um alle Tabellen auszuwählen.  
     Wählen Sie außerdem die folgenden gespeicherten Prozeduren unter dem Knoten **gespeicherte Prozeduren und Funktionen** aus: **GetStudentGrades** und **GetDepartmentName**. 
 
-    ![Importieren](~/ef6/media/import.jpg)
+    ![Gespeicherte Prozeduren importieren](~/ef6/media/import.jpg)
 
     *Ab Visual Studio 2012 unterstützt der EF-Designer den Massen Import gespeicherter Prozeduren. Die **ausgewählten gespeicherten Prozeduren und Funktionen in das Entity Model importieren** werden standardmäßig aktiviert.*
 -   Klicken Sie auf **Finish**.
@@ -56,7 +58,7 @@ Damit ein Funktions Import einen Entitätstyp zurückgibt, müssen die von der e
 
 -   Klicken Sie mit der rechten Maustaste auf die Entwurfs Oberfläche, und wählen Sie **Modell Browser**
 -   Wählen Sie im **Modell Browser** **Funktions Importe**aus, und doppelklicken Sie dann auf die Funktion **GetStudentGrades** .
--   Wählen Sie im Dialogfeld Funktions Import bearbeiten die Option **Entitäten** aus, und wählen Sie **StudentGrade**aus.  
+-   Wählen Sie im Dialogfeld Funktions Import bearbeiten die Option **Entitäten**aus,   und wählen Sie **StudentGrade**aus.  
     *Das Kontrollkästchen **Funktions Import ist zusammensetzbar** am oberen Rand des Dialog Felds **Funktions Importe** ermöglicht es Ihnen, Zusammensetz Bare Funktionen zuzuordnen. Wenn Sie dieses Kontrollkästchen aktivieren, werden nur Zusammensetz Bare Funktionen (Tabellenwert Funktionen) in der Dropdown Liste **Name der gespeicherten Prozedur/Funktion** angezeigt. Wenn Sie dieses Kontrollkästchen nicht aktivieren, werden nur nicht Zusammensetz Bare Funktionen in der Liste angezeigt.*
 
 ## <a name="use-the-model"></a>Verwenden des Modells

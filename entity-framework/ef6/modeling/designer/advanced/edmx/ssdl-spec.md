@@ -1,19 +1,21 @@
 ---
 title: SSDL-Spezifikation-EF6
+description: SSDL-Spezifikation in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: a4af4b1a-40f4-48cc-b2e0-fa8f5d9d5419
-ms.openlocfilehash: b20d1f99f1da9c53a8a164fccc461e07d19c879d
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/modeling/designer/advanced/edmx/ssdl-spec
+ms.openlocfilehash: ab50579649c2e1b19d113cd127e52be995516e27
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78415472"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89620595"
 ---
 # <a name="ssdl-specification"></a>SSDL-Spezifikation
 Die Datenspeicherschema-Definitionssprache (Store Schema Definition Language, SSDL) ist eine XML-basierte Sprache, die das Speichermodell einer Entity Framework-Anwendung beschreibt.
 
-In einer Entity Framework Anwendung werden die Metadaten des Speicher Modells aus einer SSDL-Datei (geschrieben in SSDL) in eine Instanz der System. Data. Metadata. Edm. StoreItemCollection geladen und können mithilfe von Methoden im System. Data. Metadata. Edm. MetadataWorkspace-Klasse. Entity Framework verwendet Metadaten des Speicher Modells, um Abfragen für das konzeptionelle Modell in Speicher spezifische Befehle zu übersetzen.
+In einer Entity Framework Anwendung werden die Metadaten des Speicher Modells aus einer SSDL-Datei (geschrieben in SSDL) in eine Instanz der System. Data. Metadata. Edm. StoreItemCollection geladen und können mithilfe von Methoden in der System. Data. Metadata. Edm. MetadataWorkspace-Klasse aufgerufen werden. Entity Framework verwendet Metadaten des Speicher Modells, um Abfragen für das konzeptionelle Modell in Speicher spezifische Befehle zu übersetzen.
 
 Der Entity Framework Designer (EF-Designer) speichert Speichermodell Informationen in einer EDMX-Datei zur Entwurfszeit. Zum Zeitpunkt der Erstellung verwendet der Entity Designer Informationen in einer EDMX-Datei, um die SSDL-Datei zu erstellen, die zur Laufzeit von Entity Framework benötigt wird.
 
@@ -31,16 +33,16 @@ Ein **Association** -Element in der Datenspeicher Schema-Definitions Sprache (SS
 
 Das **Association** -Element kann die folgenden untergeordneten Elemente aufweisen (in der angegebenen Reihenfolge):
 
--   Dokumentation (0 (null) oder 1)
--   Ende (genau zwei)
--   Referenentialeinschränkung (null oder 1)
+-   Dokumentation (kein (null) oder ein Element)
+-   End (genau zwei Elemente)
+-   ReferentialConstraint (kein (null) oder ein Element)
 -   Anmerkungselemente (kein (null) oder mehrere Elemente)
 
 ### <a name="applicable-attributes"></a>Anwendbare Attribute
 
 In der folgenden Tabelle werden die Attribute beschrieben, die auf das **Association** -Element angewendet werden können.
 
-| Attributname | Ist erforderlich | value                                                                            |
+| Attributname | Ist erforderlich | Wert                                                                            |
 |:---------------|:------------|:---------------------------------------------------------------------------------|
 | **Name**       | Ja         | Der Name der entsprechenden Fremdschlüsseleinschränkung in der zugrunde liegenden Datenbank. |
 
@@ -49,7 +51,7 @@ In der folgenden Tabelle werden die Attribute beschrieben, die auf das **Associa
 
 ### <a name="example"></a>Beispiel
 
-Das folgende Beispiel zeigt ein **Association** -Element, das ein **referentialeinschränkung** -Element verwendet, um die Spalten anzugeben, die an der **FK-\_CustomerOrders** -Foreign Key-Einschränkung beteiligt sind:
+Das folgende Beispiel zeigt ein **Association** -Element, das ein **referentialeinschränkungs** -Element verwendet, um die Spalten anzugeben, die an der FOREIGN KEY-Einschränkung von **FK \_ CustomerOrders** beteiligt sind:
 
 ``` xml
  <Association Name="FK_CustomerOrders">
@@ -78,7 +80,7 @@ SSDL-Zuordnungssätze werden CSDL-Zuordnungssätzen durch ein AssociationSetMapp
 
 Das **AssociationSet** -Element kann über die folgenden untergeordneten Elemente verfügen (in der angegebenen Reihenfolge):
 
--   Dokumentation (0 (null) oder 1)
+-   Dokumentation (kein (null) oder ein Element)
 -   End (kein (null) oder zwei Elemente)
 -   Anmerkungselemente (kein (null) oder mehrere Elemente)
 
@@ -86,10 +88,10 @@ Das **AssociationSet** -Element kann über die folgenden untergeordneten Element
 
 In der folgenden Tabelle werden die Attribute beschrieben, die auf das **AssociationSet** -Element angewendet werden können.
 
-| Attributname  | Ist erforderlich | value                                                                                                |
+| Attributname  | Ist erforderlich | Wert                                                                                                |
 |:----------------|:------------|:-----------------------------------------------------------------------------------------------------|
 | **Name**        | Ja         | Der Name der Fremdschlüsseleinschränkung, die der Zuordnungssatz darstellt.                          |
-| **Anwalt** | Ja         | Der Name der Zuordnung, die die Spalten definiert, die an der Fremdschlüsseleinschränkung teilnehmen. |
+| **Zuordnung** | Ja         | Der Name der Zuordnung, die die Spalten definiert, die an der Fremdschlüsseleinschränkung teilnehmen. |
 
 > [!NOTE]
 > Eine beliebige Anzahl von Anmerkung-Attributen (benutzerdefinierte XML-Attribute) kann auf das **AssociationSet** -Element angewendet werden. Benutzerdefinierte Attribute dürfen jedoch zu keinem XML-Namespace gehören, der für SSDL reserviert ist. Die vollqualifizierten Namen für zwei benutzerdefinierte Attribute dürfen nicht übereinstimmen.
@@ -180,7 +182,7 @@ Die folgende SSDL-Syntax zeigt die Deklaration eines **EntitySet** , gefolgt vom
  </Schema>
 ```
 
-Sie können gespeicherte Prozeduren in der Entity Framework verwenden, um Szenarien mit Lese-/Schreibzugriff zu ermöglichen. Sie können entweder eine Datenquellen Sicht oder eine Entity SQL Sicht als Basistabelle zum Abrufen von Daten und zur Änderungs Verarbeitung durch gespeicherte Prozeduren verwenden.
+Sie können gespeicherte Prozeduren in der Entity Framework verwenden, um Szenarien mit Lese-/Schreibzugriff zu ermöglichen.Sie können entweder eine Datenquellen Sicht oder eine Entity SQL Sicht als Basistabelle zum Abrufen von Daten und zur Änderungs Verarbeitung durch gespeicherte Prozeduren verwenden.
 
 Sie können das **DefiningQuery** -Element verwenden, um Microsoft SQL Server Compact 3,5-Ziel zu verwenden. Obwohl SQL Server Compact 3,5 keine gespeicherten Prozeduren unterstützt, können Sie eine ähnliche Funktionalität mit dem **DefiningQuery** -Element implementieren. Es kann auch beim Erstellen gespeicherter Prozeduren nützlich sein, um einen Konflikt zwischen den in der Programmiersprache und den in der Datenquelle verwendeten Datentypen zu lösen. Sie könnten eine **DefiningQuery** schreiben, die einen bestimmten Satz von Parametern annimmt, und dann eine gespeicherte Prozedur mit einem anderen Satz von Parametern aufrufen, z. b. eine gespeicherte Prozedur, die Daten löscht.
 
@@ -197,7 +199,7 @@ Das **abhängige** Element kann die folgenden untergeordneten Elemente aufweisen
 
 In der folgenden Tabelle werden die Attribute beschrieben, die auf das **abhängige** Element angewendet werden können.
 
-| Attributname | Ist erforderlich | value                                                                                                                                                       |
+| Attributname | Ist erforderlich | Wert                                                                                                                                                       |
 |:---------------|:------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Rolle**       | Ja         | Der gleiche Wert wie das **Role** -Attribut (sofern verwendet) des entsprechenden End-Elements. andernfalls der Name der Tabelle, die die verweisende Spalte enthält. |
 
@@ -206,7 +208,7 @@ In der folgenden Tabelle werden die Attribute beschrieben, die auf das **abhäng
 
 ### <a name="example"></a>Beispiel
 
-Das folgende Beispiel zeigt ein Association-Element, das ein **referentialeinschränkung** -Element verwendet, um die Spalten anzugeben, die an der **FK-\_CustomerOrders** -Fremdschlüssel Einschränkung teilnehmen. Das **abhängige** Element gibt die **CustomerID-** Spalte der **Order** -Tabelle als abhängiges Ende der Einschränkung an.
+Das folgende Beispiel zeigt ein Association-Element, das ein **referentialeinschränkungs** -Element verwendet, um die Spalten anzugeben, die an der FOREIGN KEY-Einschränkung von **FK \_ CustomerOrders** beteiligt sind. Das **abhängige** Element gibt die **CustomerID-** Spalte der **Order** -Tabelle als abhängiges Ende der Einschränkung an.
 
 ``` xml
  <Association Name="FK_CustomerOrders">
@@ -270,24 +272,24 @@ Ein **Endelement** kann die folgenden untergeordneten Elemente aufweisen (in der
 
 -   Dokumentation (kein (null) oder ein Element)
 -   OnDelete (kein (null) oder ein Element)
--   Annotation-Elemente (0 (null) oder mehr Elemente)
+-   Anmerkungselemente (kein Element (null) oder mehrere Elemente)
 
 #### <a name="applicable-attributes"></a>Anwendbare Attribute
 
 In der folgenden Tabelle werden die Attribute beschrieben, die auf das **End** -Element angewendet werden können, wenn es sich um das untergeordnete Element eines **Association** -Elements handelt.
 
-| Attributname   | Ist erforderlich | value                                                                                                                                                                                                                                                                                                                                                                                      |
+| Attributname   | Ist erforderlich | Wert                                                                                                                                                                                                                                                                                                                                                                                      |
 |:-----------------|:------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Typ**         | Ja         | Der vollqualifizierte Name der SSDL-Entitätenmenge, die sich am Ende der Fremdschlüsseleinschränkung befindet.                                                                                                                                                                                                                                                                                          |
 | **Rolle**         | Nein          | Der Wert des **Role** -Attributs im Prinzipal-oder abhängigen Element des entsprechenden referentialeinschränkung-Elements (sofern verwendet).                                                                                                                                                                                                                                             |
-| **Multiplizität** | Ja         | **1**, **0.. 1**oder **\*** , abhängig von der Anzahl der Zeilen, die am Ende der FOREIGN KEY-Einschränkung liegen können. <br/> der Wert **1** gibt an, dass genau eine Zeile am Ende der Fremdschlüssel Einschränkung vorhanden ist. <br/> **0.. 1** gibt an, dass keine oder eine Zeile am Ende der Fremdschlüssel Einschränkung vorhanden ist. <br/> **\*** gibt an, dass keine, eine oder mehrere Zeilen am Ende der FOREIGN KEY-Einschränkung vorhanden sind. |
+| **Multiplizität** | Ja         | **1**, **0.. 1**oder, **\*** abhängig von der Anzahl der Zeilen, die am Ende der FOREIGN KEY-Einschränkung liegen können. <br/> der Wert **1** gibt an, dass genau eine Zeile am Ende der Fremdschlüssel Einschränkung vorhanden ist. <br/> **0.. 1** gibt an, dass keine oder eine Zeile am Ende der Fremdschlüssel Einschränkung vorhanden ist. <br/> **\*** Gibt an, dass keine, eine oder mehrere Zeilen am Ende der FOREIGN KEY-Einschränkung vorhanden sind. |
 
 > [!NOTE]
 > Eine beliebige Anzahl von Anmerkung-Attributen (benutzerdefinierte XML-Attribute) kann auf das **End** -Element angewendet werden. Benutzerdefinierte Attribute dürfen jedoch zu keinem XML-Namespace gehören, der für CSDL reserviert ist. Die vollqualifizierten Namen für zwei benutzerdefinierte Attribute dürfen nicht übereinstimmen.
 
 #### <a name="example"></a>Beispiel
 
-Das folgende Beispiel zeigt ein **Association** -Element, das die FOREIGN KEY-Einschränkung " **FK\_CustomerOrders** " definiert. Die **für** jedes **Endelement** angegebenen multiplizitätswerte geben an, dass viele Zeilen in der **Orders** -Tabelle einer Zeile in der **Customers** -Tabelle zugeordnet werden können, aber nur eine Zeile in der **Customers** -Tabelle kann einer Zeile in der **Orders** -Tabelle zugeordnet werden. Außerdem gibt das **OnDelete** -Element an, dass alle Zeilen in der **Orders** -Tabelle, die auf eine bestimmte Zeile in der **Customers** -Tabelle verweisen, gelöscht werden, wenn die Zeile in der **Customers** -Tabelle gelöscht wird.
+Das folgende Beispiel zeigt ein **Association** -Element, das die FOREIGN KEY-Einschränkung " **FK \_ CustomerOrders** " definiert. Die **für** jedes **Endelement** angegebenen multiplizitätswerte geben an, dass viele Zeilen in der **Orders** -Tabelle einer Zeile in der **Customers** -Tabelle zugeordnet werden können, aber nur eine Zeile in der **Customers** -Tabelle kann einer Zeile in der **Orders** -Tabelle zugeordnet werden. Außerdem gibt das **OnDelete** -Element an, dass alle Zeilen in der **Orders** -Tabelle, die auf eine bestimmte Zeile in der **Customers** -Tabelle verweisen, gelöscht werden, wenn die Zeile in der **Customers** -Tabelle gelöscht wird.
 
 ``` xml
  <Association Name="FK_CustomerOrders">
@@ -314,14 +316,14 @@ Das **End** -Element (als untergeordnetes Element des **AssociationSet** -Elemen
 
 Ein **Endelement** kann die folgenden untergeordneten Elemente aufweisen (in der angegebenen Reihenfolge):
 
--   Dokumentation (0 (null) oder 1)
+-   Dokumentation (kein (null) oder ein Element)
 -   Anmerkungselemente (kein (null) oder mehrere Elemente)
 
 #### <a name="applicable-attributes"></a>Anwendbare Attribute
 
 In der folgenden Tabelle werden die Attribute beschrieben, die auf das **End** -Element angewendet werden können, wenn es sich um das untergeordnete Element eines **AssociationSet** -Elements handelt.
 
-| Attributname | Ist erforderlich | value                                                                                                                  |
+| Attributname | Ist erforderlich | Wert                                                                                                                  |
 |:---------------|:------------|:-----------------------------------------------------------------------------------------------------------------------|
 | **EntitySet**  | Ja         | Der Name der SSDL-Entitätenmenge, die sich am Ende der Fremdschlüsseleinschränkung befindet.                                      |
 | **Rolle**       | Nein          | Der Wert eines der **Rollen** Attribute, der in einem **Endelement** des entsprechenden Association-Elements angegeben ist. |
@@ -365,7 +367,7 @@ Ein **EntityContainer** -Element kann über 0 (null) oder mehrere der folgenden 
 
 In der folgenden Tabelle werden die Attribute beschrieben, die auf das **EntityContainer** -Element angewendet werden können.
 
-| Attributname | Ist erforderlich | value                                                                   |
+| Attributname | Ist erforderlich | Wert                                                                   |
 |:---------------|:------------|:------------------------------------------------------------------------|
 | **Name**       | Ja         | Der Name des Entitätscontainers. Dieser Name darf keine Punkte (.) enthalten. |
 
@@ -409,9 +411,9 @@ In der folgenden Tabelle werden die Attribute beschrieben, die auf das **EntityS
 > [!NOTE]
 > Einige (hier nicht aufgelistete) Attribute können mit dem **Store** -Alias qualifiziert werden. Diese Attribute werden vom Modellaktualisierungs-Assistenten beim Aktualisieren eines Modells verwendet.
 
-| Attributname | Ist erforderlich | value                                                                                    |
+| Attributname | Ist erforderlich | Wert                                                                                    |
 |:---------------|:------------|:-----------------------------------------------------------------------------------------|
-| **Name**       | Ja         | Der Name der Entitätssammlung.                                                              |
+| **Name**       | Ja         | Der Name des Entitätssatzes.                                                              |
 | **EntityType** | Ja         | Der vollqualifizierte Name des Entitätstyps, für den der Entitätssatz Instanzen enthält. |
 | **Schema**     | Nein          | Das Datenbankschema.                                                                     |
 | **Table**      | Nein          | Die Datenbanktabelle.                                                                      |
@@ -453,7 +455,7 @@ Das **EntityType** -Element kann die folgenden untergeordneten Elemente aufweise
 
 In der folgenden Tabelle werden die Attribute beschrieben, die auf das **EntityType** -Element angewendet werden können.
 
-| Attributname | Ist erforderlich | value                                                                                                                                                                  |
+| Attributname | Ist erforderlich | Wert                                                                                                                                                                  |
 |:---------------|:------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Name**       | Ja         | Der Name des Entitätstyps. Dieser Wert ist normalerweise der gleiche wie der Name der Tabelle, in der der Entitätstyp eine Zeile darstellt. Dieser Wert darf keine Punkte (.) enthalten. |
 
@@ -484,7 +486,7 @@ Das **Function** -Element in der Datenspeicher Schema-Definitions Sprache (SSDL)
 
 Das **Function** -Element kann die folgenden untergeordneten Elemente aufweisen (in der angegebenen Reihenfolge):
 
--   Dokumentation (0 (null) oder 1)
+-   Dokumentation (kein (null) oder ein Element)
 -   Parameter (0 (null) oder mehr)
 -   CommandText (0 (null) oder 1)
 -   ReturnType (0 (null) oder mehr)
@@ -492,7 +494,7 @@ Das **Function** -Element kann die folgenden untergeordneten Elemente aufweisen 
 
 Ein Rückgabetyp für eine Funktion muss entweder mit dem **returnType** -Element oder dem **returnType** -Attribut angegeben werden (siehe unten), aber nicht mit beiden.
 
-Gespeicherte Prozeduren, die im Speichermodell angegeben sind, können in das konzeptionelle Modell einer Anwendung importiert werden. Weitere Informationen finden Sie unter [Abfragen mit gespeicherten Prozeduren](~/ef6/modeling/designer/stored-procedures/query.md). Das **Function** -Element kann auch verwendet werden, um benutzerdefinierte Funktionen im Speichermodell zu definieren.  
+Gespeicherte Prozeduren, die im Speichermodell angegeben sind, können in das konzeptionelle Modell einer Anwendung importiert werden. Weitere Informationen finden Sie unter [Abfragen mit gespeicherten Prozeduren](xref:ef6/modeling/designer/stored-procedures/query). Das **Function** -Element kann auch verwendet werden, um benutzerdefinierte Funktionen im Speichermodell zu definieren.  
 
 ### <a name="applicable-attributes"></a>Anwendbare Attribute
 
@@ -501,13 +503,13 @@ In der folgenden Tabelle werden die Attribute beschrieben, die auf das **Functio
 > [!NOTE]
 > Einige (hier nicht aufgelistete) Attribute können mit dem **Store** -Alias qualifiziert werden. Diese Attribute werden vom Modellaktualisierungs-Assistenten beim Aktualisieren eines Modells verwendet.
 
-| Attributname             | Ist erforderlich | value                                                                                                                                                                                                              |
+| Attributname             | Ist erforderlich | Wert                                                                                                                                                                                                              |
 |:---------------------------|:------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Name**                   | Ja         | Name der gespeicherten Prozedur                                                                                                                                                                                  |
 | **ReturnType**             | Nein          | Der Rückgabetyp der gespeicherten Prozedur.                                                                                                                                                                           |
 | **Aggregat**              | Nein          | **True** , wenn die gespeicherte Prozedur einen Aggregatwert zurückgibt. andernfalls **false**.                                                                                                                                  |
 | **Builtin**                | Nein          | **True** , wenn es sich bei der Funktion um eine integrierte<sup>1</sup> -Funktion handelt. andernfalls **false**.                                                                                                                                  |
-| **Storefunctionname**      | Nein          | Name der gespeicherten Prozedur                                                                                                                                                                                  |
+| **StoreFunctionName**      | Nein          | Name der gespeicherten Prozedur                                                                                                                                                                                  |
 | **NiladicFunction**        | Nein          | **True** , wenn es sich bei der Funktion um eine NILADIC<sup>2</sup> -Funktion handelt. Andernfalls **false** .                                                                                                                                   |
 | **IsComposable**           | Nein          | **True** , wenn die Funktion eine Zusammensetz Bare<sup>3</sup> -Funktion ist. Andernfalls **false** .                                                                                                                                |
 | **Das** | Nein          | Die Enumeration, die die Typsemantik definiert, die zum Auflösen von Funktionsüberladungen verwendet wird. Die Enumeration ist im Anbietermanifest für jede Funktionsdefinition definiert. Der Standardwert ist " **zuzubemplicitconversion**". |
@@ -574,14 +576,14 @@ Das **OnDelete** -Element in der Datenspeicher Schema-Definitions Sprache (Store
 
 Ein **OnDelete** -Element kann die folgenden untergeordneten Elemente aufweisen (in der angegebenen Reihenfolge):
 
--   Dokumentation (0 (null) oder 1)
+-   Dokumentation (kein (null) oder ein Element)
 -   Anmerkungselemente (kein (null) oder mehrere Elemente)
 
 ### <a name="applicable-attributes"></a>Anwendbare Attribute
 
 In der folgenden Tabelle werden die Attribute beschrieben, die auf das **OnDelete** -Element angewendet werden können.
 
-| Attributname | Ist erforderlich | value                                                                                               |
+| Attributname | Ist erforderlich | Wert                                                                                               |
 |:---------------|:------------|:----------------------------------------------------------------------------------------------------|
 | **Aktion**     | Ja         | **Cascade** oder **None**. (Der Wert " **restricted** " ist gültig, hat jedoch das gleiche Verhalten wie " **None**".) |
 
@@ -590,7 +592,7 @@ In der folgenden Tabelle werden die Attribute beschrieben, die auf das **OnDelet
 
 ### <a name="example"></a>Beispiel
 
-Das folgende Beispiel zeigt ein **Association** -Element, das die FOREIGN KEY-Einschränkung " **FK\_CustomerOrders** " definiert. Das **OnDelete** -Element gibt an, dass alle Zeilen in der **Orders** -Tabelle, die auf eine bestimmte Zeile in der **Customers** -Tabelle verweisen, gelöscht werden, wenn die Zeile in der **Customers** -Tabelle gelöscht wird.
+Das folgende Beispiel zeigt ein **Association** -Element, das die FOREIGN KEY-Einschränkung " **FK \_ CustomerOrders** " definiert. Das **OnDelete** -Element gibt an, dass alle Zeilen in der **Orders** -Tabelle, die auf eine bestimmte Zeile in der **Customers** -Tabelle verweisen, gelöscht werden, wenn die Zeile in der **Customers** -Tabelle gelöscht wird.
 
 ``` xml
  <Association Name="FK_CustomerOrders">
@@ -617,14 +619,14 @@ Das **Parameter** -Element in der Datenspeicher Schema-Definitions Sprache (SSDL
 
 Das **Parameter** -Element kann die folgenden untergeordneten Elemente aufweisen (in der angegebenen Reihenfolge):
 
--   Dokumentation (0 (null) oder 1)
+-   Dokumentation (kein (null) oder ein Element)
 -   Anmerkungselemente (kein (null) oder mehrere Elemente)
 
 ### <a name="applicable-attributes"></a>Anwendbare Attribute
 
 In der folgenden Tabelle werden die Attribute beschrieben, die auf das **Parameter** -Element angewendet werden können.
 
-| Attributname | Ist erforderlich | value                                                                                                                                                                                                                           |
+| Attributname | Ist erforderlich | Wert                                                                                                                                                                                                                           |
 |:---------------|:------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Name**       | Ja         | Der Name des Parameters.                                                                                                                                                                                                      |
 | **Typ**       | Ja         | Der Parametertyp.                                                                                                                                                                                                             |
@@ -667,7 +669,7 @@ Das **Principal** -Element kann über die folgenden untergeordneten Elemente ver
 
 In der folgenden Tabelle werden die Attribute beschrieben, die auf das **Principal** -Element angewendet werden können.
 
-| Attributname | Ist erforderlich | value                                                                                                                                                      |
+| Attributname | Ist erforderlich | Wert                                                                                                                                                      |
 |:---------------|:------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Rolle**       | Ja         | Der gleiche Wert wie das **Role** -Attribut (sofern verwendet) des entsprechenden End-Elements. andernfalls der Name der Tabelle, die die Spalte enthält, auf die verwiesen wird. |
 
@@ -676,7 +678,7 @@ In der folgenden Tabelle werden die Attribute beschrieben, die auf das **Princip
 
 ### <a name="example"></a>Beispiel
 
-Das folgende Beispiel zeigt ein Association-Element, das ein **referentialeinschränkung** -Element verwendet, um die Spalten anzugeben, die an der **FK-\_CustomerOrders** -Fremdschlüssel Einschränkung teilnehmen. Das **Principal** -Element gibt die **CustomerID-** Spalte der **Customer** -Tabelle als Prinzipal Ende der Einschränkung an.
+Das folgende Beispiel zeigt ein Association-Element, das ein **referentialeinschränkungs** -Element verwendet, um die Spalten anzugeben, die an der FOREIGN KEY-Einschränkung von **FK \_ CustomerOrders** beteiligt sind. Das **Principal** -Element gibt die **CustomerID-** Spalte der **Customer** -Tabelle als Prinzipal Ende der Einschränkung an.
 
 ``` xml
  <Association Name="FK_CustomerOrders">
@@ -707,7 +709,7 @@ Ein **Property** -Element kann keine untergeordneten Elemente aufweisen.
 
 In der folgenden Tabelle werden die Attribute beschrieben, die auf das **Property** -Element angewendet werden können.
 
-| Attributname            | Ist erforderlich | value                                                                                                                                                                                                                           |
+| Attributname            | Ist erforderlich | Wert                                                                                                                                                                                                                           |
 |:--------------------------|:------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Name**                  | Ja         | Der Name der zugehörigen Spalte.                                                                                                                                                                                           |
 | **Typ**                  | Ja         | Der Typ der zugehörigen Spalte.                                                                                                                                                                                           |
@@ -752,14 +754,14 @@ Das **PropertyRef** -Element in der Speicher Schema-Definitions Sprache (Store S
 
 Das **PropertyRef** -Element kann nur die folgenden untergeordneten Elemente aufweisen:
 
--   Dokumentation (0 (null) oder 1)
+-   Dokumentation (kein (null) oder ein Element)
 -   Anmerkungselemente
 
 ### <a name="applicable-attributes"></a>Anwendbare Attribute
 
 In der folgenden Tabelle werden die Attribute beschrieben, die auf das **PropertyRef** -Element angewendet werden können.
 
-| Attributname | Ist erforderlich | value                                |
+| Attributname | Ist erforderlich | Wert                                |
 |:---------------|:------------|:-------------------------------------|
 | **Name**       | Ja         | Der Name der referenzierten Eigenschaft. |
 
@@ -792,9 +794,9 @@ Das **referentialeinschränkung** -Element ist ein optionales untergeordnetes El
 
 Das **referentialeinschränkung** -Element kann die folgenden untergeordneten Elemente aufweisen:
 
--   Dokumentation (0 (null) oder 1)
+-   Dokumentation (kein (null) oder ein Element)
 -   Principal (genau ein Element)
--   Abhängig (genau 1)
+-   Dependent (genau ein Element)
 -   Anmerkungselemente (kein (null) oder mehrere Elemente)
 
 ### <a name="applicable-attributes"></a>Anwendbare Attribute
@@ -803,7 +805,7 @@ Eine beliebige Anzahl von Anmerkung-Attributen (benutzerdefinierte XML-Attribute
 
 ### <a name="example"></a>Beispiel
 
-Das folgende Beispiel zeigt ein **Association** -Element, das ein **referentialeinschränkung** -Element verwendet, um die Spalten anzugeben, die an der **FK-\_CustomerOrders** -Foreign Key-Einschränkung beteiligt sind:
+Das folgende Beispiel zeigt ein **Association** -Element, das ein **referentialeinschränkungs** -Element verwendet, um die Spalten anzugeben, die an der FOREIGN KEY-Einschränkung von **FK \_ CustomerOrders** beteiligt sind:
 
 ``` xml
  <Association Name="FK_CustomerOrders">
@@ -902,13 +904,13 @@ Das **Schema** Element kann NULL oder mehr der folgenden untergeordneten Element
 
 Das **Schema** -Element verwendet das **Namespace** -Attribut, um den Namespace für den Entitätstyp und die Zuordnungs Objekte in einem Speichermodell zu definieren. Innerhalb eines Namespace müssen alle Objekte eine eindeutige Bezeichnung aufweisen.
 
-Ein Speichermodell-Namespace unterscheidet sich vom XML-Namespace des **Schema** -Elements. Ein Speichermodell-Namespace (wie durch das **Namespace** -Attribut definiert) ist ein logischer Container für Entitäts Typen und Zuordnungs Typen. Der XML-Namespace (angegeben durch das **xmlns** -Attribut) eines **Schema** -Elements ist der Standard Namespace für untergeordnete Elemente und Attribute des **Schema** -Elements. XML-Namespaces der Form https://schemas.microsoft.com/ado/YYYY/MM/edm/ssdl (wobei yyyy und mm jeweils ein Jahr und einen Monat darstellen) sind für SSDL reserviert. Benutzerdefinierte Elemente und Attribute können nicht in Namespaces mit diesem Format vorhanden sein.
+Ein Speichermodell-Namespace unterscheidet sich vom XML-Namespace des **Schema** -Elements. Ein Speichermodell-Namespace (wie durch das **Namespace** -Attribut definiert) ist ein logischer Container für Entitäts Typen und Zuordnungs Typen. Der XML-Namespace (angegeben durch das **xmlns** -Attribut) eines **Schema** -Elements ist der Standard Namespace für untergeordnete Elemente und Attribute des **Schema** -Elements. XML-Namespaces im Formular https://schemas.microsoft.com/ado/YYYY/MM/edm/ssdl (wobei yyyy und mm jeweils ein Jahr und einen Monat darstellen) sind für SSDL reserviert. Benutzerdefinierte Elemente und Attribute können nicht in Namespaces mit diesem Format vorhanden sein.
 
 ### <a name="applicable-attributes"></a>Anwendbare Attribute
 
 In der folgenden Tabelle werden die Attribute beschrieben, die auf das **Schema** Element angewendet werden können.
 
-| Attributname            | Ist erforderlich | value                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| Attributname            | Ist erforderlich | Wert                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 |:--------------------------|:------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Namespace**             | Ja         | Der Namespace für das Speichermodell. Der Wert des **Namespace** -Attributs wird verwendet, um den voll qualifizierten Namen eines Typs zu bilden. Wenn sich beispielsweise ein **EntityType** mit dem Namen *Customer* im examplemodel. Store-Namespace befindet, ist der voll qualifizierte Name von **EntityType** examplemodel. Store. Customer. <br/> Die folgenden Zeichen folgen können nicht als Wert für das **Namespace** -Attribut verwendet werden: **System**, **transient**oder **EDM**. Der Wert für das **Namespace** -Attribut darf nicht mit dem Wert für das **Namespace** -Attribut im CSDL-Schema Element identisch sein. |
 | **Alias**                 | Nein          | Ein anstelle der Namespacebezeichnung verwendeter Bezeichner. Wenn sich z. b. ein **EntityType** mit dem Namen *Customer* im examplemodel. Store-Namespace und der Wert des **Alias** -Attributs *storagemodel*befindet, können Sie storagemodel. Customer als voll qualifizierten Namen des **EntityType verwenden.**                                                                                                                                                                                                                                                                                    |

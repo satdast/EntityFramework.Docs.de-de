@@ -1,14 +1,15 @@
 ---
 title: Fallstudien für Entity Framework-EF6
+description: Fallstudien für Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: cd5d3ae3-717d-4095-a2ef-0e8fd72b1a2f
-ms.openlocfilehash: d7982a3f89ac1e57b48039d828f287adf6dc5068
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.openlocfilehash: f6cabe34cfbdc5f15758678f458b2c0898198137
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78414458"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89620235"
 ---
 # <a name="microsoft-case-studies-for-entity-framework"></a>Microsoft-Fallstudien für Entity Framework
 In den Fallstudien auf dieser Seite werden einige reale Produktionsprojekte hervorgehoben, die Entity Framework eingesetzt haben.
@@ -38,18 +39,18 @@ NEC wollte den Markt für digitale, auf dem Markt basierende Werbung mit einer L
 Um dies zu erreichen, wurde ein paar Webanwendungen gestartet, die die manuellen Prozesse automatisieren, die in einer herkömmlichen Werbekampagne erforderlich sind.
 Die Websites wurden mit ASP.net, Silverlight 3, AJAX und WCF erstellt, zusammen mit den Entity Framework in der Datenzugriffs Ebene, um mit SQL Server 2008 zu kommunizieren.
 
-> "Mit SQL Server haben wir gespürt, dass wir den Durchsatz, den wir für die Bereitstellung von Werbeangeboten und Netzwerken benötigten, mit Informationen in Echtzeit erhalten konnten, und die Zuverlässigkeit, um sicherzustellen, dass die Informationen in unseren unternehmenskritischen Anwendungen immer verfügbar sind"-Mike Corcoran, Director of IT
+> "Mit SQL Server haben wir gespürt, dass wir den Durchsatz, den wir für die Bereitstellung von Werbung und Netzwerken benötigten, mit Informationen in Echtzeit erhalten konnten, und die Zuverlässigkeit, um sicherzustellen, dass die Informationen in unseren unternehmenskritischen Anwendungen immer verfügbar wären"-Mike Corcoran, Director of IT
 
 ## <a name="darwin-dimensions"></a>Darwin-Dimensionen
 Mit einer Vielzahl von Microsoft-Technologien hat das Team von Darwin die Entwicklung von evolver-einem Online-avatarportal festgelegt, mit dem Consumer beeindruckende, sehr große Avatare zur Verwendung in spielen, Animationen und sozialen Netzwerkseiten erstellen können.
-Mit den Produktivitätsvorteilen der Entity Framework und dem Abrufen von Komponenten wie Windows Workflow Foundation (WF) und Windows Server AppFabric (einem hochgradig skalierbaren in-Memory-Anwendungscache) war das Team in der Lage, ein fantastisches Produkt in 35% weniger bereitzustellen. Entwicklungszeit.
+Mit den Produktivitätsvorteilen der Entity Framework und dem Abrufen von Komponenten wie Windows Workflow Foundation (WF) und Windows Server AppFabric (einem hochgradig skalierbaren in-Memory-Anwendungscache) war das Team in der Lage, ein fantastisches Produkt in 35% weniger Entwicklungszeit bereitzustellen.
 Obwohl Teammitglieder in mehrere Länder aufgeteilt werden, folgt das Team einem flexiblen Entwicklungsprozess mit wöchentlichen Releases.
 
  > "Wir versuchen nicht, Technologien für die Technologie zu entwickeln. Als Start ist es wichtig, dass wir Technologien nutzen, die Zeit und Geld sparen.
  .Net war die Wahl für eine schnelle, kostengünstige Entwicklung. " – Zachary Olsen, Architekt  
 
 ## <a name="silverware"></a>Silverware
-Mit mehr als 15 Jahren Erfahrung bei der Entwicklung von POS-Lösungen (Point of Sale) für kleine und mittelständische Restaurant Gruppen hat das Entwicklungsteam von Silverware festgelegt, dass es das Produkt mit weiteren Features auf Unternehmensebene verbessern kann, um größere Restaurantketten.
+Mit mehr als 15 Jahren Erfahrung bei der Entwicklung von POS-Lösungen (Point of Sale) für kleine und mittelständische Restaurant Gruppen hat das Entwicklungsteam von Silverware festgelegt, dass das Produkt mit weiteren Features auf Unternehmensebene erweitert werden muss, um größere Restaurantketten zu gewinnen.
 Mit der neuesten Version der Entwicklungs Tools von Microsoft konnten Sie die neue Lösung viermal schneller als zuvor erstellen.
 Wichtige neue Features, wie z. b. Linq und die Entity Framework, erleichtern das Wechseln von Crystal Reports zu SQL Server 2008 und SQL Server Reporting Services (SSRS), um Ihre Anforderungen an die Datenspeicherung und-Berichterstellung zu erfüllen.
 

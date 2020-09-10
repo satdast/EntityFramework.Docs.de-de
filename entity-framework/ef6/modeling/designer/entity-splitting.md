@@ -1,17 +1,19 @@
 ---
 title: Aufteilung von Designer Entitäten-EF6
+description: Aufteilung von Designer Entitäten in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: aa2dd48a-1f0e-49dd-863d-d6b4f5834832
-ms.openlocfilehash: ba1895ae491cec909ff88a8784eea82f1876f595
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/modeling/designer/entity-splitting
+ms.openlocfilehash: d3be4e54d4bcd3ca253d8970c612acddf48dbaf4
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78415262"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89620532"
 ---
 # <a name="designer-entity-splitting"></a>Aufteilung von Designer Entitäten
-In dieser exemplarischen Vorgehensweise wird gezeigt, wie ein Entitätstyp zwei Tabellen zugeordnet wird, indem ein Modell mit dem Entity Framework Designer (EF-Designer) geändert wird. Sie können eine Entität mehreren Tabellen zuordnen, sofern für die Tabellen ein gemeinsamer Schlüssel vorhanden ist. Die Konzepte, die für die Zuordnung eines Entitäts Typs zu zwei Tabellen gelten, können leicht erweitert werden, um einen Entitätstyp mehr als zwei Tabellen zu ordnen.
+In dieser exemplarischen Vorgehensweise wird gezeigt, wie ein Entitätstyp zwei Tabellen zugeordnet wird, indem ein Modell mit dem Entity Framework Designer (EF-Designer) geändert wird. Sie können eine Entität mehreren Tabellen zuordnen, sofern für die Tabellen ein gemeinsamer Schlüssel vorhanden ist. Die Prinzipien, nach denen ein Entitätstyp zwei Tabellen zugeordnet wird, lassen sich leicht auf das Mapping zu mehr als zwei Tabellen erweitern.
 
 Die folgende Abbildung zeigt die Hauptfenster, die bei der Arbeit mit dem EF-Designer verwendet werden.
 
@@ -31,19 +33,19 @@ Der Datenbankserver, der mit Visual Studio installiert wird, unterscheidet sich 
 Zuerst erstellen wir eine Datenbank mit zwei Tabellen, die in einer einzelnen Entität kombiniert werden.
 
 -   Öffnen Sie Visual Studio.
--   **&gt; Server-Explorer anzeigen**
--   Klicken Sie mit der rechten Maustaste auf **Datenverbindungen,&gt; Verbindung hinzufügen...**
+-   **Ansicht- &gt; Server-Explorer**
+-   Klicken Sie mit der rechten Maustaste auf **Datenverbindungen- &gt; Verbindung hinzufügen...**
 -   Wenn Sie über Server-Explorer keine Verbindung mit einer Datenbank hergestellt haben, müssen Sie **Microsoft SQL Server** als Datenquelle auswählen.
 -   Stellen Sie eine Verbindung mit localdb oder SQL Express her, je nachdem, welche installiert wurde.
 -   Geben Sie **entitysplit** als Datenbanknamen ein.
 -   Wählen Sie **OK** aus, und Sie werden gefragt, ob Sie eine neue Datenbank erstellen möchten, und wählen Sie **Ja** aus.
 -   Die neue Datenbank wird nun in Server-Explorer
 -   Wenn Sie Visual Studio 2012 verwenden
-    -   Klicken Sie in Server-Explorer mit der rechten Maustaste auf die Datenbank, und wählen Sie **neue Abfrage** .
+    -   Klicken Sie im Server-Explorer mit der rechten Maustaste auf die Datenbank, und wählen Sie **Neue Abfrage** aus.
     -   Kopieren Sie den folgenden SQL-Befehl in die neue Abfrage, klicken Sie mit der rechten Maustaste auf die Abfrage, und wählen Sie **Ausführen** .
 -   Wenn Sie Visual Studio 2010 verwenden
-    -   Wählen Sie **Data-&gt; Transact SQL-Editor-&gt; neue Abfrage Verbindung...**
-    -   Geben Sie **.\\SQLExpress** als Servernamen ein, und klicken Sie auf **OK** .
+    -   Wählen Sie **Data- &gt; Transact SQL-Editor- &gt; neue Abfrage Verbindung...**
+    -   Geben Sie ein **. \\ SQLExpress** als Servername, und klicken Sie auf **OK** .
     -   Wählen Sie in der Dropdown-Datei am oberen Rand des Abfrage-Editors die **entitysplit** -Datenbank aus.
     -   Kopieren Sie das folgende SQL in die neue Abfrage, klicken Sie mit der rechten Maustaste auf die Abfrage, und wählen Sie **SQL ausführen** aus.
 
@@ -67,7 +69,7 @@ CONSTRAINT [FK_Person_PersonInfo] FOREIGN KEY ([PersonId]) REFERENCES [dbo].[Per
 ## <a name="create-the-project"></a>Erstellen des Projekts
 
 -   Zeigen Sie im Menü **Datei** auf **Neu**, und klicken Sie dann auf **Projekt**.
--   Klicken Sie im linken Bereich auf **Visual C-\#** , und wählen Sie dann die Vorlage **Konsolenanwendung** aus.
+-   Klicken Sie im linken Bereich auf **Visual C \# **, und wählen Sie dann die Vorlage **Konsolenanwendung** aus.
 -   Geben Sie als Name für das Projekt **matztityytablessample** ein, und klicken Sie auf **OK**.
 -   Klicken Sie auf **Nein** , wenn Sie dazu aufgefordert werden, die im ersten Abschnitt erstellte SQL-Abfrage zu speichern.
 
@@ -78,7 +80,7 @@ CONSTRAINT [FK_Person_PersonInfo] FOREIGN KEY ([PersonId]) REFERENCES [dbo].[Per
 -   Geben Sie als Dateiname **matztitydetablesmodel. edmx** ein, und klicken Sie dann auf **Hinzufügen**.
 -   Wählen Sie im Dialogfeld Modell Inhalte auswählen die Option **aus Datenbank generieren aus**, und klicken Sie dann auf **Weiter.**
 -   Wählen **Sie in**der Dropdown-Dropdown-Option die **entitysplitverbindung** aus
--   Aktivieren Sie im Dialogfeld Wählen Sie Ihre Datenbankobjekte aus das Kontrollkästchen neben dem Knoten **Tabellen** .
+-   Aktivieren Sie im Dialogfeld Wählen Sie Ihre Datenbankobjekte aus das Kontrollkästchen neben dem Knoten **Tabellen**   .
     Dadurch werden alle Tabellen aus der **entitysplit** -Datenbank dem Modell hinzugefügt.
 -   Klicken Sie auf **Finish**.
 
@@ -88,20 +90,20 @@ Die Entity Designer, die eine Entwurfs Oberfläche zum Bearbeiten des Modells be
 
 In diesem Schritt aktualisieren wir den Entitätstyp **Person** , um Daten aus den Tabellen " **Person** " und " **personinfo** " zu kombinieren.
 
--   Wählen Sie die Eigenschaften Email und **Phone** der **personinfo **-Entität aus, und drücken Sie **STRG + X**  **-** Taste.
+-   Wählen Sie die **e-Mail-**   und **Telefon** Eigenschaften der **personinfo **-Entität aus, und drücken Sie **STRG + X** -Taste.
 -   Wählen Sie die Entität **Person **aus, und drücken Sie **STRG + V** Tasten.
--   Wählen Sie auf der Entwurfs Oberfläche die **personinfo** - Entität aus, und drücken Sie auf der Tastatur die Schaltfläche **Löschen** .
+-   Wählen Sie auf der Entwurfs Oberfläche die **personinfo**   -Entität aus, und drücken Sie auf der Tastatur die Schaltfläche **Löschen** .
 -   Klicken Sie auf **Nein** , wenn Sie gefragt werden, ob Sie die **personinfo** -Tabelle aus dem Modell entfernen möchten. Wir sind im Begriff, Sie der **Person** -Entität zuzuordnen.
 
     ![Löschen von Tabellen](~/ef6/media/deletetables.png)
 
-Für die nächsten Schritte ist das Fenster **Mappingdetails** erforderlich. Wenn dieses Fenster nicht angezeigt wird, klicken Sie mit der rechten Maustaste auf die Entwurfs Oberfläche, und wählen Sie **Mappingdetails**.
+Die nächsten Schritte erfordern das Fenster " **Mappingdetails**"   . Wenn dieses Fenster nicht angezeigt wird, klicken Sie mit der rechten Maustaste auf die Entwurfs Oberfläche, und wählen Sie **Mappingdetails**.
 
--   Wählen Sie den Entitätstyp **Person** aus, und klicken Sie im Fenster **Mappingdetails** auf **&lt;Hinzufügen einer Tabelle oder Sicht&gt;**  .
--   Wählen Sie in der Dropdown Liste **personinfo ** - aus.
-    Das Fenster **Mappingdetails** wird mit Standard Spalten Zuordnungen aktualisiert. diese sind für das Szenario in Ordnung.
+-   Wählen Sie **Person**den   Entitätstyp Person aus, und klicken Sie im Fenster Mappingdetails auf ** &lt; Tabelle oder Sicht &gt; Hinzufügen**    **Mapping Details**   .
+-   Wählen **PersonInfo **Sie in   der Dropdown Liste personinfo aus.
+    Das Fenster **Mappingdetails**   wird mit Standard Spalten Zuordnungen aktualisiert. diese sind für das Szenario in Ordnung.
 
-Die **Person** Entitätstyp ist nun der **Person** und **personinfo** Tabellen zugeordnet.
+Der **Person**   Entitätstyp Person ist nun der **Person**   -Tabelle und der **personinfo**-   Tabelle zugeordnet.
 
 ![Zuordnung 2](~/ef6/media/mapping2.png)
 
@@ -141,4 +143,4 @@ Die folgenden T-SQL-Anweisungen wurden für die Datenbank ausgeführt, weil dies
     ![2 einfügen](~/ef6/media/insert2.png)
 -   Die folgende **Select** -Anweisung wurde als Ergebnis der Enumeration der Personen in der Datenbank ausgeführt. Dabei werden die Daten aus der Tabelle " **Person** " und " **personinfo** " kombiniert.
 
-    ![Select](~/ef6/media/select.png)
+    ![Kombinieren von Person-und personinfo-Daten auswählen](~/ef6/media/select.png)

@@ -1,18 +1,20 @@
 ---
 title: Beziehungen-EF-Designer-EF6
+description: 'Beziehungen: EF-Designer in Entity Framework 6'
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 402fe960-754b-470f-976b-e5de3e9986b5
-ms.openlocfilehash: d429c39dafbf183caabdc85748c188deb8dd6f66
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/modeling/designer/relationships
+ms.openlocfilehash: f7c801dd8f8ae81cfe44283b7575cfe869ce26d3
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78415076"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89620416"
 ---
 # <a name="relationships---ef-designer"></a>Beziehungen: EF-Designer
 > [!NOTE]
-> Diese Seite enthält Informationen zum Einrichten von Beziehungen in Ihrem Modell mit dem EF-Designer. Allgemeine Informationen zu Beziehungen in EF und zum Zugreifen auf und Bearbeiten von Daten mithilfe von Beziehungen finden Sie unter [Beziehungen & Navigations Eigenschaften](~/ef6/fundamentals/relationships.md).
+> Diese Seite enthält Informationen zum Einrichten von Beziehungen in Ihrem Modell mit dem EF-Designer. Allgemeine Informationen zu Beziehungen in EF und zum Zugreifen auf und Bearbeiten von Daten mithilfe von Beziehungen finden Sie unter [Beziehungen & Navigations Eigenschaften](xref:ef6/fundamentals/relationships).
 
 Zuordnungen definieren Beziehungen zwischen Entitäts Typen in einem Modell. In diesem Thema wird gezeigt, wie Zuordnungen mit dem Entity Framework Designer (EF-Designer) zugeordnet werden. Die folgende Abbildung zeigt die Hauptfenster, die bei der Arbeit mit dem EF-Designer verwendet werden.
 
@@ -23,14 +25,14 @@ Zuordnungen definieren Beziehungen zwischen Entitäts Typen in einem Modell. In 
 
 ## <a name="associations-overview"></a>Übersicht über Zuordnungen
 
-Wenn Sie das Modell mit dem EF-Designer entwerfen, stellt eine EDMX-Datei das Modell dar. In der EDMX-Datei definiert ein **Association** -Element eine Beziehung zwischen zwei Entitäts Typen. Eine Zuordnung muss die Entitätstypen, die in der Beziehung enthalten sind, und die mögliche Anzahl von Entitätstypen an den Enden der Beziehung angeben, die auch als Multiplizität bezeichnet wird. Die Multiplizität eines Zuordnungs Endes kann über einen Wert von eins (1), NULL oder eins (0.. 1) oder viele (\*) verfügen. Diese Informationen werden in zwei untergeordneten **Endelementen** angegeben.
+Wenn Sie das Modell mit dem EF-Designer entwerfen, stellt eine EDMX-Datei das Modell dar. In der EDMX-Datei definiert ein **Association** -Element eine Beziehung zwischen zwei Entitäts Typen. Eine Zuordnung muss die Entitätstypen, die in der Beziehung enthalten sind, und die mögliche Anzahl von Entitätstypen an den Enden der Beziehung angeben, die auch als Multiplizität bezeichnet wird. Die Multiplizität eines Zuordnungs Endes kann über einen Wert von eins (1), NULL oder eins (0.. 1) oder viele ( \* ) verfügen. Diese Informationen werden in zwei untergeordneten **Endelementen** angegeben.
 
 Zur Laufzeit kann auf Entitätstyp Instanzen an einem Ende einer Zuordnung über Navigations Eigenschaften oder Fremdschlüssel zugegriffen werden (wenn Sie Fremdschlüssel in ihren Entitäten verfügbar machen). Wenn Fremdschlüssel verfügbar gemacht werden, wird die Beziehung zwischen den Entitäten mit einem **referentialeinschränkung** -Element verwaltet (ein untergeordnetes Element des **Association** -Elements). Es wird empfohlen, Fremdschlüssel für Beziehungen in ihren Entitäten immer verfügbar zu machen.
 
 > [!NOTE]
-> In m:n-(\*:\*) können den Entitäten keine Fremdschlüssel hinzugefügt werden. In einer \*:\* Beziehung werden die Zuordnungs Informationen mit einem unabhängigen Objekt verwaltet.
+> In der m:n-Zahl ( \* : \* ) können den Entitäten keine Fremdschlüssel hinzugefügt werden. In einer \* :- \* Beziehung werden die Zuordnungs Informationen mit einem unabhängigen Objekt verwaltet.
 
-Weitere Informationen zu CSDL-Elementen (**referentialeinschränkung**, **Association**usw.) finden Sie in der [CSDL-Spezifikation](~/ef6/modeling/designer/advanced/edmx/csdl-spec.md).
+Weitere Informationen zu CSDL-Elementen (**referentialeinschränkung**, **Association**usw.) finden Sie in der [CSDL-Spezifikation](xref:ef6/modeling/designer/advanced/edmx/csdl-spec).
 
 ## <a name="create-and-delete-associations"></a>Erstellen und Löschen von Zuordnungen
 
@@ -47,7 +49,7 @@ Durch das Erstellen einer Verknüpfung mit dem EF-Designer wird der Modell Inhal
     ![Zuordnung hinzufügen](~/ef6/media/addassociation.png)
 
     > [!NOTE]
-    > Sie können auswählen, dass den Entitäten an den Enden der Zuordnung keine Navigations Eigenschaften oder Fremdschlüssel Eigenschaften hinzugefügt werden sollen, indem Sie die **Navigations Eigenschaft **löschen und **Fremdschlüssel Eigenschaften der &lt;Entitätstyp Name&gt; Entitäts Kontrollkästchen hinzufügen **. Wird nur eine Navigationseigenschaft hinzugefügt, kann die Zuordnung nur in einer Richtung traversiert werden. Falls Sie keine Navigationseigenschaften hinzufügen, müssen Sie Fremdschlüsseleigenschaften hinzufügen, um auf Entitäten an den Enden der Zuordnung zuzugreifen.
+    > Sie können auswählen, dass den Entitäten an den Enden der Zuordnung keine Navigations Eigenschaften oder Fremdschlüssel Eigenschaften hinzugefügt werden sollen, indem Sie die **Navigations Eigenschaft **löschen und den Entitäts- ** &lt; Typnamen &gt; Entitäts-Kontrollkästchen Fremdschlüssel Eigenschaften hinzufügen **. Wird nur eine Navigationseigenschaft hinzugefügt, kann die Zuordnung nur in einer Richtung traversiert werden. Falls Sie keine Navigationseigenschaften hinzufügen, müssen Sie Fremdschlüsseleigenschaften hinzufügen, um auf Entitäten an den Enden der Zuordnung zuzugreifen.
     
 3.  Klicken Sie auf **OK**.
 
@@ -57,7 +59,7 @@ Um eine Zuordnung zu löschen, führen Sie einen der folgenden Schritte aus:
 
 -   Klicken Sie mit der rechten Maustaste auf die Verknüpfung auf der EF-Designer Oberfläche, und wählen Sie **Löschen**
 
-- \- ODER -
+- - ODER -
 
 -   Wählen Sie eine oder mehrere Zuordnungen aus, und drücken Sie die ENTF-Taste.
 
@@ -65,16 +67,16 @@ Um eine Zuordnung zu löschen, führen Sie einen der folgenden Schritte aus:
 
 Es wird empfohlen, Fremdschlüssel für Beziehungen in ihren Entitäten immer verfügbar zu machen. Entity Framework verwendet eine referenzielle Einschränkung, um zu identifizieren, dass eine Eigenschaft als Fremdschlüssel für eine Beziehung fungiert.
 
-Wenn Sie beim Erstellen einer Beziehung das Kontrollkästchen ***Fremdschlüssel Eigenschaften zum &lt;Entitätstyp&gt; Entität hinzufügen*** aktiviert haben, wurde diese referenzielle Einschränkung für Sie hinzugefügt.
+Wenn Sie beim Erstellen einer Beziehung das Kontrollkästchen ***Fremdschlüssel Eigenschaften der &lt; &gt; Entität Entitäts Typen Name hinzufügen*** aktiviert haben, wurde diese referenzielle Einschränkung für Sie hinzugefügt.
 
-Wenn Sie den EF-Designer verwenden, um eine referenzielle Einschränkung hinzuzufügen oder zu bearbeiten, fügt der EF-Designer im CSDL-Inhalt der EDMX-Datei ein **referentialeinschränkungs** - Element hinzu oder ändert es.
+Wenn Sie den EF-Designer verwenden, um eine referenzielle Einschränkung hinzuzufügen oder zu bearbeiten, fügt der EF-Designer ein **referentialeinschränkung**-   Element im CSDL-Inhalt der EDMX-Datei hinzu oder ändert es.
 
 -   Doppelklicken Sie auf die Zuordnung, die Sie bearbeiten möchten.
-    Das Dialogfeld **referenzielle Einschränkung** wird angezeigt.
--   Wählen Sie in der Dropdown Liste **Prinzipal** die Prinzipal Entität in der referenziellen Einschränkung aus.
-    Die Schlüsseleigenschaften der Entität werden der Liste **Prinzipal Schlüssel** im Dialogfeld hinzugefügt.
--   Wählen Sie in der Dropdown Liste **abhängige** die abhängige Entität in der referenziellen Einschränkung aus.
--   Wählen Sie für jeden Prinzipal Schlüssel, der über einen abhängigen Schlüssel verfügt, einen entsprechenden abhängigen Schlüssel aus den Dropdown Listen in der Spalte **abhängige Schlüssel** aus.
+    Das Dialogfeld **referenzielle Einschränkung**wird   angezeigt.
+-    **Principal**   Wählen Sie in der Dropdown Liste Prinzipal die Prinzipal Entität in der referenziellen Einschränkung aus.
+    Die Schlüsseleigenschaften der Entität werden der Liste **Prinzipal Schlüssel**   im Dialogfeld hinzugefügt.
+-    **Dependent**   Wählen Sie in der Dropdown Liste abhängig die abhängige Entität in der referenziellen Einschränkung aus.
+-   Wählen Sie für jeden Prinzipal Schlüssel, der über einen abhängigen Schlüssel verfügt, einen entsprechenden abhängigen Schlüssel aus den Dropdown Listen in der Spalte **abhängige Schlüssel**aus   .
 
     ![Ref-Einschränkung](~/ef6/media/refconstraint.png)
 
@@ -82,7 +84,7 @@ Wenn Sie den EF-Designer verwenden, um eine referenzielle Einschränkung hinzuzu
 
 ## <a name="create-and-edit-association-mappings"></a>Zuordnungs Zuordnungen erstellen und bearbeiten
 
-Im Fenster **Mappingdetails** des EF-Designers können Sie angeben, wie eine Zuordnung der Datenbank zugeordnet werden soll.
+Im Fenster **Mappingdetails**des EF-Designers können Sie angeben, wie eine Zuordnung der Datenbank zugeordnet werden soll   .
 
 > [!NOTE]
 > Sie können nur Details für die Zuordnungen zuordnen, für die keine referenzielle Einschränkung festgelegt ist. Wenn eine referenzielle Einschränkung angegeben wird, ist eine Fremdschlüssel Eigenschaft in der Entität enthalten, und Sie können die Zuordnungs Details für die Entität verwenden, um die Spalte zu steuern, der der Fremdschlüssel zugeordnet ist.
@@ -90,24 +92,24 @@ Im Fenster **Mappingdetails** des EF-Designers können Sie angeben, wie eine Zu
 ### <a name="create-an-association-mapping"></a>Erstellen einer Zuordnungs Zuordnung
 
 -   Klicken Sie in der Entwurfs Oberfläche mit der rechten Maustaste auf eine Zuordnung, und wählen Sie **Tabellen Zuordnung**.
-    Dadurch wird die Zuordnungs Zuordnung im Fenster **Mappingdetails** angezeigt.
+    Dadurch wird die Zuordnungs Zuordnung im Fenster **Mappingdetails**angezeigt   .
 -   Klicken Sie auf **Tabelle oder Sicht hinzufügen**.
     Eine Dropdownliste wird angezeigt, die die Tabellen im Speichermodell enthält.
 -   Wählen Sie die Tabelle aus, der die Zuordnung zugeordnet wird.
-    Im Fenster **Mappingdetails** werden beide Enden der Zuordnung und die Schlüsseleigenschaften für den Entitätstyp an jedem **Ende**angezeigt.
--   Klicken Sie für jede Schlüsseleigenschaft auf das Feld **Spalte** , und wählen Sie die Spalte aus, der die Eigenschaft zugeordnet werden soll.
+    Im Fenster **Mappingdetails**werden   beide Enden der Zuordnung und die Schlüsseleigenschaften für den Entitätstyp an jedem **Ende**angezeigt.
+-   Klicken Sie für jede Schlüsseleigenschaft auf das Feld **Spalte**   , und wählen Sie die Spalte aus, der die Eigenschaft zugeordnet werden soll.
 
     ![Mappingdetails 4](~/ef6/media/mappingdetails4.png)
 
 ### <a name="edit-an-association-mapping"></a>Bearbeiten einer Zuordnungs Zuordnung
 
 -   Klicken Sie in der Entwurfs Oberfläche mit der rechten Maustaste auf eine Zuordnung, und wählen Sie **Tabellen Zuordnung**.
-    Dadurch wird die Zuordnungs Zuordnung im Fenster **Mappingdetails** angezeigt.
--   Klicken Sie **auf maps to &lt;Table Name&gt;** .
+    Dadurch wird die Zuordnungs Zuordnung im Fenster **Mappingdetails**angezeigt   .
+-   Klicken Sie **auf dem &lt; Tabellen &gt; Namen auf Maps**.
     Eine Dropdownliste wird angezeigt, die die Tabellen im Speichermodell enthält.
 -   Wählen Sie die Tabelle aus, der die Zuordnung zugeordnet wird.
-    Im Fenster **Mappingdetails** werden beide Enden der Zuordnung und die Schlüsseleigenschaften für den Entitätstyp an jedem Ende angezeigt.
--   Klicken Sie für jede Schlüsseleigenschaft auf das Feld **Spalte** , und wählen Sie die Spalte aus, der die Eigenschaft zugeordnet werden soll.
+    Im Fenster **Mappingdetails**werden   beide Enden der Zuordnung und die Schlüsseleigenschaften für den Entitätstyp an jedem Ende angezeigt.
+-   Klicken Sie für jede Schlüsseleigenschaft auf das Feld **Spalte**   , und wählen Sie die Spalte aus, der die Eigenschaft zugeordnet werden soll.
 
 ## <a name="edit-and-delete-navigation-properties"></a>Bearbeiten und Löschen von Navigations Eigenschaften
 
@@ -116,8 +118,8 @@ Navigations Eigenschaften sind Verknüpfungs Eigenschaften, die verwendet werden
 #### <a name="to-edit-navigation-properties"></a>So bearbeiten Sie Navigations Eigenschaften
 
 -   Wählen Sie auf der EF-Designer-Oberfläche eine Navigations Eigenschaft aus.
-    Informationen zur Navigations Eigenschaft werden im Fenster **Eigenschaften** von Visual Studio angezeigt.
--   Ändern Sie die Eigenschafts Einstellungen im Fenster **Eigenschaften** .
+    Informationen zur Navigations Eigenschaft werden im Visual Studio- **Eigenschaften**   Fenster angezeigt.
+-   Ändern Sie die Eigenschafts Einstellungen im **Eigenschaften**   Fenster.
 
 #### <a name="to-delete-navigation-properties"></a>So löschen Sie Navigations Eigenschaften
 

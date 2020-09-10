@@ -1,36 +1,38 @@
 ---
 title: Beispieldatenbank "School"-EF6
+description: Beispieldatenbank "School" für Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: e83a6a06-e63b-4530-8656-614bf609b12b
-ms.openlocfilehash: 1e9dc98edb8590021bbf3393e9edda1929d505e0
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/resources/school-database
+ms.openlocfilehash: c1576bdeaa3247c7c5c8fd5547c8402b4e301402
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78414392"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89620003"
 ---
 # <a name="school-sample-database"></a>Beispieldatenbank „School“
 Dieses Thema enthält das Schema und die Daten für die Datenbank "School". Die Beispieldatenbank "School" wird an verschiedenen Stellen in der Entity Framework-Dokumentation verwendet.  
 
 > [!NOTE]
-> Der Datenbankserver, der mit Visual Studio installiert wird, unterscheidet sich je nach verwendeter Version von Visual Studio. Ausführliche Informationen zu den Verwendungsmöglichkeiten finden Sie unter [Visual Studio-Versionen](~/ef6/what-is-new/visual-studio.md) .  
+> Der Datenbankserver, der mit Visual Studio installiert wird, unterscheidet sich je nach verwendeter Version von Visual Studio. Ausführliche Informationen zu den Verwendungsmöglichkeiten finden Sie unter [Visual Studio-Versionen](xref:ef6/what-is-new/visual-studio) .  
 
 Im folgenden finden Sie die Schritte zum Erstellen der Datenbank:
 
 - Öffnen Sie Visual Studio.  
--  -> anzeigen **Server-Explorer**  
-- Klicken Sie mit der rechten Maustaste auf **Datenverbindungen** -> **Verbindung hinzufügen...**  
+- **Anzeigen**  ->  **Server-Explorer**  
+- Klicken Sie mit der rechten Maustaste auf **Datenverbindungen**  ->  **Verbindung hinzufügen...**  
 - Wenn Sie über Server-Explorer keine Verbindung mit einer Datenbank hergestellt haben, müssen Sie **Microsoft SQL Server** als Datenquelle auswählen.  
 - Stellen Sie eine Verbindung mit localdb oder SQL Express her, je nachdem, welche installiert wurde.  
 - **School** als Datenbanknamen eingeben  
 - Wählen Sie **OK** aus, und Sie werden gefragt, ob Sie eine neue Datenbank erstellen möchten, und wählen Sie **Ja** aus.  
 - Die neue Datenbank wird nun in Server-Explorer  
 - Wenn Sie Visual Studio 2012 oder höher verwenden
-    - Klicken Sie in Server-Explorer mit der rechten Maustaste auf die Datenbank, und wählen Sie **neue Abfrage** .  
+    - Klicken Sie im Server-Explorer mit der rechten Maustaste auf die Datenbank, und wählen Sie **Neue Abfrage** aus.  
     - Kopieren Sie den folgenden SQL-Befehl in die neue Abfrage, klicken Sie mit der rechten Maustaste auf die Abfrage, und wählen Sie **Ausführen** .  
 - Wenn Sie Visual Studio 2010 verwenden  
-    - Wählen Sie **Daten** -> **Transact-SQL-Editor** -> **neue Abfrage Verbindung...**  
+    - Wählen Sie **Data**  ->  **Transact SQL-Editor**  ->  **neue Abfrage Verbindung...**  
     - Geben Sie **.\sqlexpress** als Servernamen ein, und klicken Sie auf **OK** .  
     - Wählen Sie in der Dropdown-Datei am oberen Rand des Abfrage-Editors die **stesample** -Datenbank aus.  
     - Kopieren Sie das folgende SQL in die neue Abfrage, klicken Sie mit der rechten Maustaste auf die Abfrage, und wählen Sie **SQL ausführen** aus.  

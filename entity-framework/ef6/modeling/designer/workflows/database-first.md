@@ -1,14 +1,16 @@
 ---
 title: Database First-EF6
+description: Database First in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: cc6ffdb3-388d-4e79-a201-01ec2577c949
-ms.openlocfilehash: d40cff4ddccf43a394ef4f244653372a5a89b05a
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/modeling/designer/workflows/database-first
+ms.openlocfilehash: 095fc6d6882df306816e65995ff314f1a0e7178a
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78415172"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89620445"
 ---
 # <a name="database-first"></a>Database First
 Dieses Video und die schrittweise exemplarische Vorgehensweise bieten eine Einführung in die Database First Entwicklung mit Entity Framework. Mit Database First können Sie ein Modell aus einer vorhandenen Datenbank umkehren. Das Modell wird in einer EDMX-Datei (edmx-Erweiterung) gespeichert und kann in der Entity Framework Designer angezeigt und bearbeitet werden. Die Klassen, mit denen Sie in Ihrer Anwendung interagieren, werden automatisch aus der EDMX-Datei generiert.
@@ -16,9 +18,9 @@ Dieses Video und die schrittweise exemplarische Vorgehensweise bieten eine Einf�
 ## <a name="watch-the-video"></a>Video ansehen
 Dieses Video bietet eine Einführung in die Database First Entwicklung mit Entity Framework. Mit Database First können Sie ein Modell aus einer vorhandenen Datenbank umkehren. Das Modell wird in einer EDMX-Datei (edmx-Erweiterung) gespeichert und kann in der Entity Framework Designer angezeigt und bearbeitet werden. Die Klassen, mit denen Sie in Ihrer Anwendung interagieren, werden automatisch aus der EDMX-Datei generiert.
 
-**Präsentation:** [Rowan Miller](https://romiller.com/)
+**Präsentation:**[Rowan Miller](https://romiller.com/)
 
-**Video**: [WMV](https://download.microsoft.com/download/8/F/0/8F0B5F63-4939-4DC8-A726-FF139B37F8D8/HDI-ITPro-MSDN-winvideo-databasefirst.wmv) | [MP4](https://download.microsoft.com/download/8/F/0/8F0B5F63-4939-4DC8-A726-FF139B37F8D8/HDI-ITPro-MSDN-mp4video-databasefirst.m4v) | [WMV (zip)](https://download.microsoft.com/download/8/F/0/8F0B5F63-4939-4DC8-A726-FF139B37F8D8/HDI-ITPro-MSDN-winvideo-databasefirst.zip)
+**Video**: [WMV](https://download.microsoft.com/download/8/F/0/8F0B5F63-4939-4DC8-A726-FF139B37F8D8/HDI-ITPro-MSDN-winvideo-databasefirst.wmv)  |  [MP4](https://download.microsoft.com/download/8/F/0/8F0B5F63-4939-4DC8-A726-FF139B37F8D8/HDI-ITPro-MSDN-mp4video-databasefirst.m4v)  |  [WMV (zip)](https://download.microsoft.com/download/8/F/0/8F0B5F63-4939-4DC8-A726-FF139B37F8D8/HDI-ITPro-MSDN-winvideo-databasefirst.zip)
 
 ## <a name="pre-requisites"></a>Voraussetzungen
 
@@ -42,8 +44,8 @@ Der Datenbankserver, der mit Visual Studio installiert wird, unterscheidet sich 
 Nun generieren wir die Datenbank.
 
 -   Öffnen Sie Visual Studio.
--   **&gt; Server-Explorer anzeigen**
--   Klicken Sie mit der rechten Maustaste auf **Datenverbindungen,&gt; Verbindung hinzufügen...**
+-   **Ansicht- &gt; Server-Explorer**
+-   Klicken Sie mit der rechten Maustaste auf **Datenverbindungen- &gt; Verbindung hinzufügen...**
 -   Wenn Sie über Server-Explorer keine Verbindung mit einer Datenbank hergestellt haben, müssen Sie Microsoft SQL Server als Datenquelle auswählen.
 
     ![Datenquelle auswählen](~/ef6/media/selectdatasource.png)
@@ -84,7 +86,7 @@ CREATE TABLE [dbo].[Posts] (
 Um dies zu gewährleisten, erstellen wir eine einfache Konsolenanwendung, die die Database First für den Datenzugriff verwendet:
 
 -   Öffnen Sie Visual Studio.
--   **Datei&gt; Projekt für neue&gt;...**
+-   **Datei- &gt; New- &gt; Project...**
 -   Wählen Sie im Menü auf der linken Seite und **Konsolenanwendung** **Windows** aus.
 -   Geben Sie **databasefirstsample** als Name ein.
 -   Klicken Sie auf **OK**.
@@ -95,7 +97,7 @@ Um dies zu gewährleisten, erstellen wir eine einfache Konsolenanwendung, die di
 
 Wir verwenden Entity Framework Designer, die als Teil von Visual Studio enthalten ist, um das Modell zu erstellen.
 
--   **Projekt&gt; neues Element hinzufügen...**
+-   **Project- &gt; Neues Element hinzufügen...**
 -   Wählen Sie im linken Menü **Daten** aus, und klicken Sie dann auf **ADO.NET Entity Data Model**
 -   Geben Sie als Name **bloggingmodel** ein, und klicken Sie auf **OK** .
 -   Dadurch wird der **Entity Data Model-Assistent** gestartet.
@@ -113,7 +115,7 @@ Wir verwenden Entity Framework Designer, die als Teil von Visual Studio enthalte
 
  
 
-Sobald der Reverse-Engineering-Prozess abgeschlossen ist, wird das neue Modell dem Projekt hinzugefügt und geöffnet, damit Sie es im Entity Framework Designer anzeigen können. Eine APP. config-Datei wurde dem Projekt auch mit den Verbindungsdetails für die Datenbank hinzugefügt.
+Sobald der Reverse-Engineering-Prozess abgeschlossen ist, wird das neue Modell dem Projekt hinzugefügt und geöffnet, damit Sie es im Entity Framework Designer anzeigen können. Außerdem wurde dem Projekt eine App.config Datei mit den Verbindungsdetails für die Datenbank hinzugefügt.
 
 ![Modell anfänglich](~/ef6/media/modelinitial.png)
 
@@ -123,23 +125,23 @@ Wenn Sie in Visual Studio 2010 arbeiten, müssen Sie einige zusätzliche Schritt
 
 Zuerst müssen wir die neueste Version von Entity Framework von nuget erhalten.
 
--   **Project –&gt; nuget-Pakete verwalten...** 
-    *Wenn Sie nicht über die Option " **nuget-Pakete verwalten..** ." verfügen, sollten Sie die [neueste Version von nuget](https://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c) installieren.*
+-   **Project – &gt; Nuget-Pakete verwalten...** 
+     *Wenn Sie nicht über die Option " **nuget-Pakete verwalten...** " verfügen, sollten Sie die [neueste Version von nuget](https://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c) installieren.*
 -   Auswählen der Registerkarte " **Online** "
 -   Auswählen des " **EntityFramework** "-Pakets
--   Klicken Sie auf **Installieren**
+-   Klicken Sie auf **Install** (Installieren).
 
 Als nächstes müssen wir das Modell austauschen, um Code zu generieren, der die dbcontext-API nutzt, die in späteren Versionen von Entity Framework eingeführt wurde.
 
 -   Klicken Sie mit der rechten Maustaste auf eine leere Stelle des Modells im EF-Designer, und wählen Sie **Code Generierungs Element hinzufügen... aus.**
 -   Wählen Sie im linken Menü **Online Vorlagen** aus, und suchen Sie nach **dbcontext** .
--   Wählen Sie den EF **5. x dbcontext Generator für C\#aus** , geben Sie **bloggingmodel** als Name ein, und klicken Sie auf **Hinzufügen** .
+-   Wählen Sie den EF **5. x dbcontext Generator für \# C aus**, geben Sie **bloggingmodel** als Name ein, und klicken Sie auf **Hinzufügen** .
 
     ![Dbcontext-Vorlage](~/ef6/media/dbcontexttemplate.png)
 
  
 
-## <a name="4-reading--writing-data"></a>4. Lesen & Schreiben von Daten
+## <a name="4-reading--writing-data"></a>4. lesen & schreiben von Daten
 
 Nachdem wir nun über ein Modell verfügen, ist es an der Zeit, es für den Zugriff auf einige Daten zu verwenden. Die Klassen, die für den Zugriff auf Daten verwendet werden, werden automatisch für Sie basierend auf der EDMX-Datei generiert.
 

@@ -1,14 +1,16 @@
 ---
 title: Aufzählungs Unterstützung-EF-Designer-EF6
+description: Aufzählungs Unterstützung-EF-Designer in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: c6ae6d8f-1ace-47db-ad47-b1718f1ba082
-ms.openlocfilehash: 92a763b84a04d3ce7ec0853ef2a4852356cf7997
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/modeling/designer/data-types/enums
+ms.openlocfilehash: 316e8160cfd69d9912d63260471eee3df0eb58f6
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78415352"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89620509"
 ---
 # <a name="enum-support---ef-designer"></a>Aufzählungs Unterstützung-EF-Designer
 > [!NOTE]
@@ -16,7 +18,7 @@ ms.locfileid: "78415352"
 
 In diesem Video und der schrittweisen exemplarischen Vorgehensweise wird die Verwendung von Enumerationstypen mit dem Entity Framework Designer erläutert. Außerdem wird veranschaulicht, wie Sie-auf--Aufstände in einer LINQ-Abfrage verwenden.
 
-In dieser exemplarischen Vorgehensweise wird Model First verwendet, um eine neue Datenbank zu erstellen, aber der EF-Designer kann auch mit dem [Database First](~/ef6/modeling/designer/workflows/database-first.md) Workflow verwendet werden, um eine Zuordnung zu einer vorhandenen Datenbank herzustellen.
+In dieser exemplarischen Vorgehensweise wird Model First verwendet, um eine neue Datenbank zu erstellen, aber der EF-Designer kann auch mit dem [Database First](xref:ef6/modeling/designer/workflows/database-first) Workflow verwendet werden, um eine Zuordnung zu einer vorhandenen Datenbank herzustellen.
 
 Die Aufzählungs Unterstützung wurde in Entity Framework 5 eingeführt. Wenn Sie die neuen Funktionen wie Enumerationstypen, räumliche Datentypen und Tabellenwert Funktionen verwenden möchten, müssen Sie .NET Framework 4,5-Zielversion verwenden. Visual Studio 2012 hat standardmäßig .NET 4,5 als Ziel.
 
@@ -27,7 +29,7 @@ In diesem Video wird gezeigt, wie Enumerationstypen mit dem Entity Framework Des
 
 **Präsentiert von**: Julia kornich
 
-**Video**: [WMV](https://download.microsoft.com/download/0/7/A/07ADECC9-7893-415D-9F20-8B97D46A37EC/HDI-ITPro-MSDN-winvideo-enumwithdesiger.wmv) | [MP4](https://download.microsoft.com/download/0/7/A/07ADECC9-7893-415D-9F20-8B97D46A37EC/HDI-ITPro-MSDN-mp4video-enumwithdesiger.m4v) | [WMV (zip)](https://download.microsoft.com/download/0/7/A/07ADECC9-7893-415D-9F20-8B97D46A37EC/HDI-ITPro-MSDN-winvideo-enumwithdesiger.zip)
+**Video**: [WMV](https://download.microsoft.com/download/0/7/A/07ADECC9-7893-415D-9F20-8B97D46A37EC/HDI-ITPro-MSDN-winvideo-enumwithdesiger.wmv)  |  [MP4](https://download.microsoft.com/download/0/7/A/07ADECC9-7893-415D-9F20-8B97D46A37EC/HDI-ITPro-MSDN-mp4video-enumwithdesiger.m4v)  |  [WMV (zip)](https://download.microsoft.com/download/0/7/A/07ADECC9-7893-415D-9F20-8B97D46A37EC/HDI-ITPro-MSDN-winvideo-enumwithdesiger.zip)
 
 ## <a name="pre-requisites"></a>Voraussetzungen
 
@@ -37,7 +39,7 @@ Sie müssen Visual Studio 2012, Ultimate, Premium, Professional oder Web Express
 
 1.  Öffnen Sie Visual Studio 2012
 2.  Zeigen Sie im Menü **Datei** auf **neu**, und klicken Sie dann auf **Projekt** .
-3.  Klicken Sie im linken Bereich auf **Visual C-\#** , und wählen Sie dann die **Konsolen** Vorlage aus.
+3.  Klicken Sie im linken Bereich auf **Visual C \# **, und wählen Sie dann die **Konsolen** Vorlage aus.
 4.  Geben Sie **enumef Designer** als Namen für das Projekt ein, und klicken Sie auf **OK** .
 
 ## <a name="create-a-new-model-using-the-ef-designer"></a>Erstellen eines neuen Modells mit dem EF-Designer
@@ -58,10 +60,10 @@ Der Assistent führt die folgenden Aktionen aus:
 
 ## <a name="add-a-new-entity-type"></a>Neuen Entitätstyp hinzufügen
 
-1.  Klicken Sie mit der rechten Maustaste auf einen leeren Bereich der Entwurfs Oberfläche, und wählen Sie **Add-&gt; Entity**, das Dialogfeld neue Entität wird angezeigt.
+1.  Klicken Sie mit der rechten Maustaste auf einen leeren Bereich der Entwurfs Oberfläche, und wählen Sie **Add- &gt; Entity**, das Dialogfeld neue Entität wird angezeigt.
 2.  Geben Sie die **Abteilung** für den Typnamen an, und geben Sie **DepartmentID** als Schlüssel Eigenschaftsnamen an, belassen Sie den Typ als **Int32** .
 3.  Klicken Sie auf **OK**
-4.  Klicken Sie mit der rechten Maustaste auf die Entität, und wählen Sie **Add New-&gt; Scalar**
+4.  Klicken Sie mit der rechten Maustaste auf die Entität, und wählen Sie **Add New- &gt; Scalar**
 5.  Benennen Sie die neue Eigenschaft in **Name** um.
 6.  Ändern Sie den Typ der neuen Eigenschaft in **Int32** (Standardmäßig ist die neue Eigenschaft vom Typ String), um den Typ zu ändern, öffnen Sie die Eigenschaftenfenster, und ändern Sie die Type-Eigenschaft in **Int32** .
 7.  Fügen Sie eine weitere skalare Eigenschaft hinzu, und benennen Sie Sie in **Budget**um. ändern Sie den Typ in **Decimal**
@@ -76,7 +78,7 @@ Der Assistent führt die folgenden Aktionen aus:
 
     ![Umerationstyp hinzufügen](~/ef6/media/addenumtype.png)
 
-3.  **OK** drücken
+3.  Klicken Sie auf **OK**.
 4.  Speichern Sie das Modell, und erstellen Sie das Projekt.
     > [!NOTE]
     > Wenn Sie erstellen, werden möglicherweise Warnungen zu nicht zugeordneten Entitäten und Zuordnungen in der Fehlerliste angezeigt. Sie können diese Warnungen ignorieren, da die Fehler nach dem Generieren der Datenbank aus dem Modell entfernt werden.
@@ -95,12 +97,12 @@ Wenn Sie zum Fenstermodell Browser wechseln, sehen Sie, dass der Typ auch dem Kn
 Nun können wir eine Datenbank generieren, die auf dem Modell basiert.
 
 1.  Klicken Sie mit der rechten Maustaste auf einen leeren Bereich auf der Entity Designer Oberfläche, und wählen Sie **Datenbank aus Modell generieren** .
-2.  Das Dialog Feld Wählen Sie Ihre Datenverbindung aus des Assistenten zum Generieren von Datenbanken wird angezeigt. Klicken Sie auf die Schaltfläche **neue Verbindung** , und **Geben Sie** **(localdb)\\mssqllocaldb** für den Servernamen und den **enumeringwert** für die Datenbank an.
+2.  Das Dialog Feld Wählen Sie Ihre Datenverbindung aus des Assistenten zum Generieren von Datenbanken wird angezeigt. Klicken Sie auf die Schaltfläche **neue Verbindung** **, und geben** Sie für den Servernamen **(localdb) \\ mssqllocaldb** an, und klicken Sie auf **OK** .
 3.  Wenn Sie in einem Dialogfeld gefragt werden, ob Sie eine neue Datenbank erstellen möchten, klicken Sie auf **Ja**.
 4.  Klicken Sie auf **weiter** , und der Assistent zum Erstellen einer Datenbank generiert die Datendefinitionssprache (DDL) zum Erstellen einer Datenbank. die generierte DDL wird im Dialog Feld Zusammenfassung und Einstellungen angezeigt. Hinweis: die DDL enthält keine Definition für eine Tabelle, die dem Enumerationstyp zugeordnet ist.
 5.  Klicken Sie auf **Fertig** stellen klicken Sie das DDL-Skript nicht aus.
-6.  Der Assistent zum Erstellen einer Datenbank führt Folgendes aus: öffnet die Datei " **enumtest. edmx. SQL** " im T-SQL-Editor, generiert die Abschnitte "Store Schema" und "Mapping" der Datei "App. config".
-7.  Klicken Sie im T-SQL-Editor auf die Rechte Maustaste, und wählen Sie das Dialogfeld Verbindung mit Server herstellen aus, und **Geben Sie** die Verbindungsinformationen aus Schritt 2 ein.
+6.  Der Assistent zum Erstellen einer Datenbank führt Folgendes aus: öffnet die Datei " **enumtest. edmx. SQL** " im T-SQL-Editor, generiert die Speicher Schema-und Zuordnungsabschnitte der EDMX-Datei und fügt der App.config
+7.  Klicken Sie im T-SQL-Editor auf die Rechte Maustaste, und wählen Sie das Dialogfeld Verbindung mit Server herstellen aus, und **Geben Sie** die **Connect** Verbindungsinformationen aus Schritt 2 ein.
 8.  Um das generierte Schema anzuzeigen, klicken Sie in SQL Server-Objekt-Explorer mit der rechten Maustaste auf den Datenbanknamen, und wählen Sie **Aktualisieren** .
 
 ## <a name="persist-and-retrieve-data"></a>Persistenz und Abrufen von Daten

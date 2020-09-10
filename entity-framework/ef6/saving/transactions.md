@@ -1,14 +1,16 @@
 ---
 title: Arbeiten mit Transaktionen EF6
+description: Arbeiten mit Transaktionen in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 0d0f1824-d781-4cb3-8fda-b7eaefced1cd
-ms.openlocfilehash: 7030dc675993339f72c935f6b430cead85fecb7f
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/saving/transactions
+ms.openlocfilehash: 65eebd82d4f9c583885af72d5b3cffd79fedf623
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78416240"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89619844"
 ---
 # <a name="working-with-transactions"></a>Arbeiten mit Transaktionen
 > [!NOTE]
@@ -20,7 +22,7 @@ Dieses Dokument beschreibt die Verwendung von Transaktionen in EF6 einschließli
 
 Wenn Sie in allen Versionen von Entity Framework **SaveChanges ()** ausführen, um die Datenbank einzufügen, zu aktualisieren oder zu löschen, packt das Framework diesen Vorgang in eine Transaktion. Diese Transaktion dauert nur lange genug, um den Vorgang auszuführen und dann abgeschlossen zu werden. Wenn Sie einen solchen Vorgang ausführen, wird eine neue Transaktion gestartet.  
 
-Beginnend mit EF6 **Database. ExecuteSqlCommand ()** wird der Befehl in einer Transaktion umschlossen, wenn noch keiner vorhanden ist. Es gibt über Ladungen dieser Methode, die es Ihnen ermöglichen, dieses Verhalten zu überschreiben, wenn Sie möchten. Außerdem wird in EF6 die Ausführung gespeicherter Prozeduren, die im Modell durch APIs wie **ObjectContext. ExecuteFunction ()** enthalten sind, dasselbe Verhalten (mit dem Unterschied, dass das Standardverhalten im Moment nicht überschrieben werden kann).  
+Beginnend mit "EF6 **Database.Executesqlcommand ()** " wird der Befehl in einer Transaktion umschlossen, wenn noch keiner vorhanden ist. Es gibt über Ladungen dieser Methode, die es Ihnen ermöglichen, dieses Verhalten zu überschreiben, wenn Sie möchten. Außerdem wird in EF6 die Ausführung gespeicherter Prozeduren, die im Modell durch APIs wie **ObjectContext.Executefunction ()** enthalten sind, identisch (mit der Ausnahme, dass das Standardverhalten im Moment nicht überschrieben werden kann).  
 
 In beiden Fällen ist die Isolationsstufe der Transaktion unabhängig von der Isolationsstufe, die der Datenbankanbieter als Standardeinstellung ansieht. Standardmäßig wird beispielsweise auf SQL Server für die ein Lese Commit ausgeführt wird.  
 
@@ -35,7 +37,7 @@ Einige Benutzer benötigen jedoch eine bessere Kontrolle über Ihre Transaktione
 Vor EF6 Entity Framework das Öffnen der Datenbankverbindung selbst bestanden (es wurde eine Ausnahme ausgelöst, wenn eine bereits geöffnete Verbindung bestanden wurde). Da eine Transaktion nur für eine geöffnete Verbindung gestartet werden kann, bedeutete dies, dass ein Benutzer nur mehrere Vorgänge in eine Transaktion einschließen konnte, indem er entweder einen [transaktionscope](https://msdn.microsoft.com/library/system.transactions.transactionscope.aspx) verwendet oder die **ObjectContext. Connection** -Eigenschaft verwendet und mit dem Aufrufen von **Open ()** und **BeginTransaction ()** direkt auf dem zurückgegebenen **EntityConnection** -Objekt beginnt. Außerdem würden API-Aufrufe, die die Datenbank kontaktiert haben, fehlschlagen, wenn Sie eine Transaktion auf der zugrunde liegenden Datenbankverbindung selbst gestartet haben.  
 
 > [!NOTE]
-> Die Einschränkung, dass nur geschlossene Verbindungen akzeptiert werden, wurde in Entity Framework 6 entfernt. Weitere Informationen finden Sie unter [Verbindungs Verwaltung](~/ef6/fundamentals/connection-management.md).  
+> Die Einschränkung, dass nur geschlossene Verbindungen akzeptiert werden, wurde in Entity Framework 6 entfernt. Weitere Informationen finden Sie unter [Verbindungs Verwaltung](xref:ef6/fundamentals/connection-management).  
 
 Ab EF6 bietet das Framework nun Folgendes:  
 
@@ -184,11 +186,11 @@ In diesem Abschnitt wird erläutert, wie die obigen Transaktionen mit interagier
 
 ### <a name="connection-resiliency"></a>Verbindungsstabilität  
 
-Das neue Feature für die Verbindungs Resilienz funktioniert nicht mit vom Benutzer initiierten Transaktionen. Weitere Informationen finden Sie unter [Wiederholungs Versuche für Ausführungs Strategien](~/ef6/fundamentals/connection-resiliency/retry-logic.md#user-initiated-transactions-are-not-supported).  
+Das neue Feature für die Verbindungs Resilienz funktioniert nicht mit vom Benutzer initiierten Transaktionen. Weitere Informationen finden Sie unter [Wiederholungs Versuche für Ausführungs Strategien](xref:ef6/fundamentals/connection-resiliency/retry-logic#user-initiated-transactions-are-not-supported).  
 
 ### <a name="asynchronous-programming"></a>Asynchrone Programmierung  
 
-Der Ansatz, der in den vorherigen Abschnitten beschrieben wird, benötigt keine weiteren Optionen oder Einstellungen für die Verwendung der [asynchronen Abfrage-und Speichermethoden](~/ef6/fundamentals/async.md
+Der Ansatz, der in den vorherigen Abschnitten beschrieben wird, benötigt keine weiteren Optionen oder Einstellungen für die Verwendung der [asynchronen Abfrage-und Speichermethoden](xref:ef6/fundamentals/async
 ). Beachten Sie jedoch, dass dies in Abhängigkeit davon, was Sie in den asynchronen Methoden tun, dazu führen kann, dass Transaktionen mit langer Ausführungszeit ausgeführt werden – was wiederum zu Deadlocks oder Blockierungen führen kann, was für die Leistung der gesamten Anwendung schlecht ist.  
 
 ### <a name="transactionscope-transactions"></a>Transaktionscope-Transaktionen  
@@ -296,7 +298,7 @@ Es gibt noch einige Einschränkungen für den transaktionscope-Ansatz:
 
 Vorteile des transaktionscope-Ansatzes:  
 
-- Eine lokale Transaktion wird automatisch auf eine verteilte Transaktion aktualisiert, wenn Sie mehr als eine Verbindung mit einer bestimmten Datenbank herstellen oder eine Verbindung mit einer Datenbank mit einer Verbindung mit einer anderen Datenbank innerhalb derselben Transaktion kombinieren (Beachten Sie Folgendes: der MSDTC-Dienst ist so konfiguriert, dass er verteilte Transaktionen ermöglicht, damit dies funktioniert.)  
+- Eine lokale Transaktion wird automatisch auf eine verteilte Transaktion aktualisiert, wenn Sie mehr als eine Verbindung mit einer bestimmten Datenbank herstellen oder eine Verbindung mit einer Datenbank mit einer Verbindung mit einer anderen Datenbank innerhalb derselben Transaktion herstellen (Hinweis: der MSDTC-Dienst muss so konfiguriert sein, dass verteilte Transaktionen damit funktionieren).  
 - Einfache Codierung. Wenn Sie möchten, dass die Transaktion Ambient ist und implizit im Hintergrund und nicht explizit unter ihrer Kontrolle behandelt wird, ist der transaktionscope-Ansatz möglicherweise besser geeignet.  
 
 Zusammengefasst mit den neuen APIs "Database. BeginTransaction ()" und "Database. UseTransaction ()", ist der transaktionscope-Ansatz für die meisten Benutzer nicht mehr erforderlich. Wenn Sie transaktionscope weiterhin verwenden, beachten Sie die oben genannten Einschränkungen. Wir empfehlen, nach Möglichkeit den in den vorherigen Abschnitten beschriebenen Ansatz zu verwenden.  

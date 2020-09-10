@@ -1,14 +1,16 @@
 ---
 title: Designer-TPH-Vererbung-EF6
+description: Designer-TPH-Vererbung in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 72d26a8e-20ab-4500-bd13-394a08e73394
-ms.openlocfilehash: 43ba34a98c3960a7a3052a00e2ed2751c2f2b121
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/modeling/designer/inheritance/tph
+ms.openlocfilehash: 117730c3f16718f309aff6a1c59697a0a03d9708
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78415232"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89620500"
 ---
 # <a name="designer-tph-inheritance"></a>Designer-TPH-Vererbung
 Diese schrittweise exemplarische Vorgehensweise veranschaulicht, wie Sie die "Tabelle pro Hierarchie"-Vererbung (TPH) im konzeptionellen Modell mit dem Entity Framework Designer (EF-Designer) implementieren. Die TPH-Vererbung verwendet eine Datenbanktabelle, um Daten für alle Entitäts Typen in einer Vererbungs Hierarchie zu verwalten.
@@ -19,7 +21,7 @@ Es ist möglich, eine TPH-Vererbung mithilfe Model First zuzuordnen, aber Sie m�
 
 ## <a name="other-inheritance-options"></a>Andere Vererbungs Optionen
 
-Tabelle pro Typ (TPT) ist eine andere Art von Vererbung, bei der separate Tabellen in der Datenbank Entitäten zugeordnet werden, die an der Vererbung teilnehmen.  Informationen zum Zuordnen der "Tabelle pro Typ"-Vererbung mit dem EF-Designer finden Sie unter [EF-Designer-TPT-Vererbung](~/ef6/modeling/designer/inheritance/tpt.md).
+Tabelle pro Typ (TPT) ist eine andere Art von Vererbung, bei der separate Tabellen in der Datenbank Entitäten zugeordnet werden, die an der Vererbung teilnehmen. Informationen zum Zuordnen der "Tabelle pro Typ"-Vererbung mit dem EF-Designer finden Sie unter [EF-Designer-TPT-Vererbung](xref:ef6/modeling/designer/inheritance/tpt).
 
 "Tabelle pro konkrete Typvererbung" (TPC) und gemischte Vererbungs Modelle werden von der Entity Framework Runtime unterstützt, jedoch nicht vom EF-Designer unterstützt. Wenn Sie TPC oder gemischte Vererbung verwenden möchten, haben Sie zwei Möglichkeiten: Verwenden Sie Code First, oder bearbeiten Sie die EDMX-Datei manuell. Wenn Sie sich für die Arbeit mit der EDMX-Datei entscheiden, wird das Fenster Mappingdetails in den "abgesicherten Modus" versetzt, und Sie können den Designer nicht verwenden, um die Zuordnungen zu ändern.
 
@@ -28,24 +30,24 @@ Tabelle pro Typ (TPT) ist eine andere Art von Vererbung, bei der separate Tabell
 Um die exemplarische Vorgehensweise nachzuvollziehen, benötigen Sie Folgendes:
 
 - Eine aktuelle Version von Visual Studio.
-- Die [Beispieldatenbank "School](~/ef6/resources/school-database.md)".
+- Die [Beispieldatenbank "School](xref:ef6/resources/school-database)".
 
 ## <a name="set-up-the-project"></a>Einrichten des Projekts
 
 -   Öffnen Sie Visual Studio 2012.
--   **Datei&gt; neues&gt; Projekt** auswählen
--   Klicken Sie im linken Bereich auf **Visual C-\#** , und wählen Sie dann die **Konsolen** Vorlage aus.
--   Geben Sie **tphdbfirstsample** als Namen ein.
+-   Wählen Sie **Datei- &gt; neu- &gt; Projekt** aus.
+-   Klicken Sie im linken Bereich auf **Visual C \# **, und wählen Sie dann die **Konsolen** Vorlage aus.
+-   Geben Sie **tphdbfirstsample**   als Name ein.
 -   Wählen Sie **OK** aus.
 
 ## <a name="create-a-model"></a>Modellerstellung
 
--   Klicken Sie in Projektmappen-Explorer mit der rechten Maustaste auf den Projektnamen, und wählen Sie **Hinzufügen-&gt; neues Element**aus.
+-   Klicken Sie in Projektmappen-Explorer mit der rechten Maustaste auf den Projektnamen, und wählen Sie **Add- &gt; New Item**aus.
 -   Wählen Sie im linken Menü **Daten** aus, und wählen Sie dann im Bereich Vorlagen die Option **ADO.NET Entity Data Model** aus.
 -   Geben Sie als Dateiname **tphmodel. edmx** ein, und klicken Sie dann auf **Hinzufügen**.
 -   Wählen Sie im Dialogfeld Modell Inhalte auswählen die Option **aus Datenbank generieren aus**, und klicken Sie dann auf **weiter**.
 -   Klicken Sie auf **neue Verbindung**.
-    Geben Sie im Dialogfeld Verbindungs Eigenschaften den Servernamen ein (z. b. **(localdb)\\mssqllocaldb**), wählen Sie die Authentifizierungsmethode aus, geben Sie **School** als Datenbanknamen ein, und klicken Sie dann auf **OK**.
+    Geben Sie im Dialogfeld Verbindungs Eigenschaften den Servernamen ein (z. b. **(localdb) \\ mssqllocaldb**), wählen Sie die Authentifizierungsmethode aus, geben Sie **School**   als Datenbanknamen School ein, und klicken Sie dann auf **OK**.
     Das Dialogfeld Wählen Sie Ihre Datenverbindung aus wird mit Ihrer Daten bankverbindungs Einstellung aktualisiert.
 -   Wählen Sie im Dialogfeld Datenbankobjekte auswählen unter dem Knoten Tabellen die **Person** -Tabelle aus.
 -   Klicken Sie auf **Finish**.
@@ -58,46 +60,46 @@ So sucht die **Person** -Tabelle in der Datenbank.
 
 ## <a name="implement-table-per-hierarchy-inheritance"></a>Implementieren der "Tabelle pro Hierarchie"-Vererbung
 
-Die **Person** -Tabelle verfügt über die **diskriminatorspalte** , die einen von zwei Werten aufweisen kann: "Student" und "Instructor". Abhängig vom Wert wird die **Person** -Tabelle der **Student** -Entität oder der **Instructor** -Entität zugeordnet. Die **Person** -Tabelle verfügt auch über zwei Spalten, **HireDate** und **registrimentdate**, die **NULL-Werte** zulassen müssen, da eine Person nicht gleichzeitig Student und Dozenten sein kann (zumindest nicht in dieser exemplarischen Vorgehensweise).
+Die **Person** -Tabelle verfügt über die **diskriminatorspalte** , die einen von zwei Werten aufweisen kann: "Student" und "Instructor". Abhängig vom Wert wird die **Person** -Tabelle der **Student** -Entität oder der **Instructor** -Entität zugeordnet. Die **Person** -Tabelle verfügt auch über zwei Spalten, **HireDate**   und **registrimentdate**, die **NULL-Werte** zulassen müssen, da eine Person nicht gleichzeitig Student und Dozenten sein kann (zumindest nicht in dieser exemplarischen Vorgehensweise).
 
 ### <a name="add-new-entities"></a>Neue Entitäten hinzufügen
 
 -   Fügen Sie eine neue Entität hinzu.
-    Klicken Sie dazu mit der rechten Maustaste auf einen leeren Bereich der Entwurfs Oberfläche der Entity Framework Designer, und wählen Sie **Add-&gt;Entity**aus.
--   Geben Sie **Instructor** als **Entitäts Name** ein, und wählen Sie in der Dropdown Liste für den **Basistyp**die Option  **Person** aus.
+    Klicken Sie dazu mit der rechten Maustaste auf einen leeren Bereich der Entwurfs Oberfläche der Entity Framework Designer, und wählen Sie **Add- &gt; Entity**aus.
+-   Geben Sie **Instructor**   als **Entitäts Name**ein,   und wählen Sie in **Person**   der Dropdown Liste für den **Basistyp**Person aus.
 -   Klicken Sie auf **OK**.
--   Fügen Sie eine neue Entität hinzu. Geben Sie **Student** als **Entitäts Name** ein, und wählen Sie in der Dropdown Liste für den **Basistyp**die Option  **Person** aus.
+-   Fügen Sie eine neue Entität hinzu. Geben Sie **Student**   als **Entitäts Name**ein,   und wählen Sie in **Person**   der Dropdown Liste für den **Basistyp**Person aus.
 
-Der Entwurfs Oberfläche wurden zwei neue Entitäts Typen hinzugefügt. Ein Pfeil zeigt von den neuen Entitäts Typen auf den Entitätstyp **Person** ; Dies gibt an, dass die **Person** der Basistyp für die neuen Entitäts Typen ist.
+Der Entwurfs Oberfläche wurden zwei neue Entitäts Typen hinzugefügt. Ein Pfeil zeigt von den neuen Entitäts Typen auf **Person**den   Entitätstyp Person. Dies deutet darauf hin, dass **Person**   der Basistyp für die neuen Entitäts Typen ist.
 
--   Klicken Sie mit der rechten Maustaste auf das **HireDate** -Eigenschaft der **Person** Entität. Wählen Sie **Ausschneiden** (oder drücken Sie STRG + X).
--   Klicken Sie mit der rechten Maustaste auf den **Dozenten** Entität, und wählen Sie **Einfügen** (oder drücken Sie STRG + V).
--   Klicken Sie mit der rechten Maustaste auf die Eigenschaft **HireDate** und wählen Sie **Eigenschaften**aus.
--   Legen Sie im Fenster **Eigenschaften** die Eigenschaft , die **NULL-Werte** zulässt, auf **false**fest.
--   Klicken Sie mit der rechten Maustaste auf die Eigenschaft **registrimentdate** der Entität **Person** . Wählen Sie **Ausschneiden** (oder drücken Sie STRG + X).
+-   Klicken Sie mit der rechten Maustaste auf die Eigenschaft **HireDate**   der **Person**-   Entität. Wählen Sie **Ausschneiden** (oder drücken Sie STRG + X).
+-   Klicken Sie mit der **Instructor**rechten Maustaste auf die   Entität Instructor, und wählen Sie **Einfügen** aus (oder drücken Sie STRG + V).
+-   Klicken Sie mit der rechten Maustaste auf die Eigenschaft **HireDate**,   und wählen Sie **Eigenschaften**.
+-    **Properties**   Legen Sie im Fenster Eigenschaften die Eigenschaft **Nullable**   auf **false**fest.
+-   Klicken Sie mit der rechten Maustaste auf die Eigenschaft **registrimentdate**   der **Person**-   Entität. Wählen Sie **Ausschneiden** (oder drücken Sie STRG + X).
 -   Klicken Sie mit der rechten Maustaste auf die Entität **Student** , und wählen Sie **Einfügen aus (oder drücken Sie STRG + V).**
--   Wählen Sie die Eigenschaft **registrimentdate** aus, und legen Sie für die Eigenschaft **Nullable** den Wert **false**fest.
--   Wählen Sie die **Person** Entitätstyp aus. Legen Sie im Fenster **Eigenschaften** die Eigenschaft **abstract** auf **true**fest.
+-   Wählen Sie die Eigenschaft **registrimentdate**aus   , und legen Sie die Eigenschaft **Nullable**   auf **false**fest.
+-   Wählen Sie **Person**den   Entitätstyp Person aus.  **Properties**   Legen Sie im Fenster Eigenschaften die **abstrakte**   Eigenschaft auf **true**fest.
 -   Löschen Sie die **diskriminatoreigenschaft** von **Person**. Der Grund für das Löschen sollte im folgenden Abschnitt erläutert werden.
 
 ### <a name="map-the-entities"></a>Zuordnen der Entitäten
 
 -   Klicken Sie mit der rechten Maustaste auf den **Dozenten** und wählen Sie **Tabellen Zuordnung.**
     Die Entität "Instructor" ist im Fenster "Mappingdetails" ausgewählt.
--   Klicken Sie im Fenster **Mappingdetails** auf **&lt;Tabelle oder Sicht&gt; hinzufügen** .
-    Das **&lt;eine Tabelle oder Sicht hinzufügen&gt;**  Feld wird zu einer Dropdown Liste mit Tabellen oder Sichten, denen die ausgewählte Entität zugeordnet werden kann.
--   Wählen Sie in der Dropdown Liste **Person** aus.
--   Das Fenster **Mappingdetails** wird mit Standard Spalten Zuordnungen und einer Option zum Hinzufügen einer Bedingung aktualisiert.
--   Klicken Sie **&lt;Hinzufügen einer Bedingung&gt;** .
-    Das **&lt;eine Bedingung&gt; Feld hinzufügen** wird zu einer Dropdown Liste von Spalten, für die Bedingungen festgelegt werden können.
--   Wählen Sie in der Dropdown Liste **Diskriminator ** aus.
--   Wählen Sie in der Spalte **Operator** des Fensters **Mappingdetails** in der Dropdown Liste die Option = aus.
+-   Klicken Sie im Fenster Mappingdetails auf ** &lt; Tabelle oder Sicht &gt; Hinzufügen**    **Mapping Details**   .
+    Das Feld ** &lt; Tabelle oder Sicht &gt; Hinzufügen**   wird zu einer Dropdown Liste von Tabellen oder Sichten, denen die ausgewählte Entität zugeordnet werden kann.
+-   Wählen **Person**Sie in   der Dropdown Liste Person aus.
+-   Das Fenster **Mappingdetails**   wird mit Standard Spalten Zuordnungen und einer Option zum Hinzufügen einer Bedingung aktualisiert.
+-   Klicken Sie auf ** &lt; Bedingung &gt; Hinzufügen**.
+    Das Feld ** &lt; Bedingung &gt; Hinzufügen**   wird zu einer Dropdown Liste von Spalten, für die Bedingungen festgelegt werden können.
+-   Wählen Sie in der Dropdown Liste die Option **Diskriminator**   aus.
+-   Wählen Sie in der Spalte **Operator**   des Fensters **Mappingdetails**in   der Dropdown Liste die Option = aus.
 -   Geben Sie in der Spalte **Wert/Eigenschaft den Wert**  **Instructor**ein. Das Endergebnis sollte wie folgt aussehen:
 
     ![Mappingdetails](~/ef6/media/mappingdetails2.png)
 
--   Wiederholen Sie diese Schritte für den Entitätstyp **Student** , aber legen Sie die Bedingung auf den Wert **Student** fest.  
-    *Der Grund, warum wir die **diskriminatoreigenschaft** entfernen wollten, liegt darin, dass Sie eine Tabellenspalte nicht mehrmals zuordnen können. Diese Spalte wird für die bedingte Zuordnung verwendet und kann daher nicht auch für die Eigenschaften Zuordnung verwendet werden. Die einzige Möglichkeit, wie Sie für beides verwendet werden kann, wenn eine Bedingung einen **is NULL** - oder **nicht NULL** - Vergleich verwendet.*
+-   Wiederholen Sie diese Schritte **Student**für den   Entitätstyp "Student", aber legen Sie den Wert für " **Student** " fest.  
+    *Der Grund, warum wir die **diskriminatoreigenschaft** entfernen wollten, liegt darin, dass Sie eine Tabellenspalte nicht mehrmals zuordnen können. Diese Spalte wird für die bedingte Zuordnung verwendet und kann daher nicht auch für die Eigenschaften Zuordnung verwendet werden. Die einzige Möglichkeit, die für beides verwendet werden kann, wenn eine Bedingung einen **is NULL**-   oder **is not NULL**-   Vergleich verwendet.*
 
 Die "Tabelle pro Hierarchie"-Vererbung ist jetzt implementiert.
 
