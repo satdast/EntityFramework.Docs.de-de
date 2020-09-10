@@ -1,18 +1,20 @@
 ---
 title: Code First-Migrationen in Team Umgebungen-EF6
+description: Code First-Migrationen in Team Umgebungen in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 4c2d9a95-de6f-4e97-9738-c1f8043eff69
-ms.openlocfilehash: 7ab66a8ec29b60bb2e0102fbca5745d352b07325
-ms.sourcegitcommit: ebfd3382fc583bc90f0da58e63d6e3382b30aa22
+uid: ef6/modeling/code-first/migrations/teams
+ms.openlocfilehash: ec382ecb0b7c99e57447ee50119fc3699fe1f324
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/25/2020
-ms.locfileid: "85370408"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89617036"
 ---
 # <a name="code-first-migrations-in-team-environments"></a>Code First Migrations in Team Environments (Code First-Migrationen in Teamumgebungen)
 > [!NOTE]
-> In diesem Artikel wird davon ausgegangen, dass Sie wissen, wie Code First-Migrationen in einfachen Szenarien verwendet wird. Andernfalls müssen Sie [Code First-Migrationen](~/ef6/modeling/code-first/migrations/index.md) lesen, bevor Sie fortfahren.
+> In diesem Artikel wird davon ausgegangen, dass Sie wissen, wie Code First-Migrationen in einfachen Szenarien verwendet wird. Andernfalls müssen Sie [Code First-Migrationen](xref:ef6/modeling/code-first/migrations/index) lesen, bevor Sie fortfahren.
 
 ## <a name="grab-a-coffee-you-need-to-read-this-whole-article"></a>Holen Sie sich einen Kaffee. Sie müssen diesen Artikel lesen.
 
@@ -107,11 +109,11 @@ Developer \# 1 und Developer \# 2 nimmt nun einige Änderungen am EF-Modell in d
 
 Es ist ein glücklicher Tag für Developer \# 1, da Sie Ihre Änderungen zuerst übermitteln. Da keine andere Person eingehakt hat, weil Sie Ihr Repository synchronisiert haben, können Sie Ihre Änderungen nur übermitteln, ohne eine Zusammenführung auszuführen.
 
-![Übermitteln](~/ef6/media/submit.png)
+![Änderungen senden](~/ef6/media/submit.png)
 
 Jetzt ist es an der Zeit \# , Entwickler 2 zu übermitteln. Sie sind nicht so glücklich. Da eine andere Person Änderungen gesendet hat, seit Sie synchronisiert wurden, müssen Sie die Änderungen abrufen und zusammenführen. Das Quell Code Verwaltungssystem kann die Änderungen wahrscheinlich auf Codeebene automatisch zusammenführen, da Sie sehr einfach sind. Der Status des \# lokalen Repository von Developer 2 nach der Synchronisierung wird in der folgenden Abbildung dargestellt. 
 
-![Pull](~/ef6/media/pull.png)
+![Aus Quell Code Verwaltung abrufen](~/ef6/media/pull.png)
 
 Auf dieser Stufe \# kann Developer 2 **Update-Database** ausführen, wodurch die neue Migrations **AddRating** Migration (die noch nicht auf \# die Datenbank von Developer 2 angewendet wurde) erkannt und angewendet wird. Nun wird die Spalte **Bewertung** der Tabelle **Blogs** hinzugefügt, und die Datenbank ist mit dem Modell synchron.
 

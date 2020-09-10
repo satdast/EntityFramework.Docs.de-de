@@ -1,14 +1,16 @@
 ---
 title: Testen mit ihren eigenen Test Doubles-EF6
+description: Testen mit ihren eigenen Test Doubles in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 16a8b7c0-2d23-47f4-9cc0-e2eb2e738ca3
-ms.openlocfilehash: 3d8933fb5e17f8c01f3971495a1fcdb5b8cfab57
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/fundamentals/testing/writing-test-doubles
+ms.openlocfilehash: 5c8e50247c0e6ed4081e2403ba60e0738051312b
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78413888"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89618233"
 ---
 # <a name="testing-with-your-own-test-doubles"></a>Testen mit ihren eigenen Test Doubles
 > [!NOTE]
@@ -23,7 +25,7 @@ Es gibt zwei verschiedene Ansätze, die verwendet werden können, um eine in-Mem
 - **Erstellen Sie eigene Test Doubles** – diese Vorgehensweise umfasst das Schreiben einer eigenen in-Memory-Implementierung Ihres Kontexts und von dbsets. Dadurch haben Sie viele Kontrolle darüber, wie sich die Klassen Verhalten, aber Sie können das Schreiben und das Besitz einer angemessenen Menge an Code einschließen.  
 - **Verwenden eines kontextbasierten Frameworks zum Erstellen von Test Doubles** – mithilfe eines kontextbasierten Frameworks (wie z. b. von muq) können Sie die in-Memory-Implementierungen Ihres Kontexts und Sätze dynamisch zur Laufzeit erstellen.  
 
-In diesem Artikel wird das Erstellen eines eigenen Test Double behandelt. Weitere Informationen zur Verwendung eines-Frameworks finden Sie unter [Testen mit einem](mocking.md)-Frameworks.  
+In diesem Artikel wird das Erstellen eines eigenen Test Double behandelt. Weitere Informationen zur Verwendung eines-Frameworks finden Sie unter [Testen mit einem](xref:ef6/fundamentals/testing/mocking)-Frameworks.  
 
 ## <a name="testing-with-pre-ef6-versions"></a>Testen mit Pre-EF6-Versionen  
 
@@ -102,7 +104,7 @@ namespace TestingDemo
 
 Beachten Sie, dass unser Kontext die ibloggingcontext-Schnittstelle implementiert.  
 
-Wenn Sie Code First verwenden, können Sie den Kontext direkt bearbeiten, um die-Schnittstelle zu implementieren. Wenn Sie den EF-Designer verwenden, müssen Sie die T4-Vorlage bearbeiten, mit der ihr Kontext generiert wird. Öffnen Sie die \<MODEL_NAME\>. Context.tt-Datei, die unter der EDMX-Datei gespeichert ist, das folgende Code Fragment suchen und wie gezeigt in der-Schnittstelle hinzufügen.  
+Wenn Sie Code First verwenden, können Sie den Kontext direkt bearbeiten, um die-Schnittstelle zu implementieren. Wenn Sie den EF-Designer verwenden, müssen Sie die T4-Vorlage bearbeiten, mit der ihr Kontext generiert wird. Öffnen Sie die \<model_name\> . Context.tt-Datei, die unter der EDMX-Datei gespeichert ist, das folgende Code Fragment suchen und wie gezeigt in der-Schnittstelle hinzufügen.  
 
 ``` csharp  
 <#=Accessibility.ForType(container)#> partial class <#=code.Escape(container)#> : DbContext, IBloggingContext

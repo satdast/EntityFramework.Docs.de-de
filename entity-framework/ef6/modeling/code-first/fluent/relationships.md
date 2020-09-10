@@ -1,18 +1,20 @@
 ---
 title: Fließende API-Beziehungen EF6
+description: Fließende API-Beziehungen in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: fd73b4f8-16d5-40f1-9640-885ceafe67a1
-ms.openlocfilehash: 05f282c02699f8bf3c71197ac5e01000f1855917
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/modeling/code-first/fluent/relationships
+ms.openlocfilehash: 8cc56f7341df6da7f60f649308ea7042ef23b537
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78415760"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89617000"
 ---
 # <a name="fluent-api---relationships"></a>Fließende API-Beziehungen
 > [!NOTE]
-> Diese Seite enthält Informationen zum Einrichten von Beziehungen in Ihrem Code First-Modell mithilfe der fließend-API. Allgemeine Informationen zu Beziehungen in EF und zum Zugreifen auf und Bearbeiten von Daten mithilfe von Beziehungen finden Sie unter [Beziehungen & Navigations Eigenschaften](~/ef6/fundamentals/relationships.md).  
+> Diese Seite enthält Informationen zum Einrichten von Beziehungen in Ihrem Code First-Modell mithilfe der fließend-API. Allgemeine Informationen zu Beziehungen in EF und zum Zugreifen auf und Bearbeiten von Daten mithilfe von Beziehungen finden Sie unter [Beziehungen & Navigations Eigenschaften](xref:ef6/fundamentals/relationships).  
 
 Beim Arbeiten mit Code First definieren Sie das Modell, indem Sie Ihre Domänen-CLR-Klassen definieren. Standardmäßig verwendet Entity Framework die Code First Konventionen, um die Klassen dem Datenbankschema zuzuordnen. Wenn Sie die Benennungs Konventionen für Code First verwenden, können Sie sich in den meisten Fällen auf Code First verlassen, um Beziehungen zwischen den Tabellen basierend auf den Fremdschlüsseln und Navigations Eigenschaften einzurichten, die Sie für die Klassen definieren. Wenn Sie den Konventionen beim Definieren der Klassen nicht folgen, oder wenn Sie die Funktionsweise der Konventionen ändern möchten, können Sie die-Klasse mit der flüssigen API oder Daten Anmerkungen so konfigurieren, dass Code First die Beziehungen zwischen den Tabellen zuordnen kann.  
 
@@ -95,8 +97,8 @@ Mithilfe der Methode "willcascadeondelete" können Sie die Lösch Weitergabe fü
 
 Sie können diese kaskadierenden Lösch Konventionen mithilfe von entfernen:  
 
-Modelbuilder. Conventions. Remove\<onetomanycaskadetten deleteconvention\>()  
-Modelbuilder. Conventions. Remove\<manytomanycaskadetten deleteconvention\>()  
+Modelbuilder. Conventions. Remove \<OneToManyCascadeDeleteConvention\> ()  
+Modelbuilder. Conventions. Remove \<ManyToManyCascadeDeleteConvention\> ()  
 
 Der folgende Code konfiguriert die Beziehung als erforderlich und deaktiviert die Lösch Weitergabe.  
 

@@ -1,14 +1,16 @@
 ---
 title: Code First gespeicherte Prozeduren INSERT, Update und DELETE-EF6
+description: Code First gespeicherte Prozeduren INSERT, Update und DELETE in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 9a7ae7f9-4072-4843-877d-506dd7eef576
-ms.openlocfilehash: bfc56671814aec1965ac054ff901297e5cdbbecb
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/modeling/code-first/fluent/cud-stored-procedures
+ms.openlocfilehash: 4db54d7199baa408017159e25ce79a9d70707c59
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78415772"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89618121"
 ---
 # <a name="code-first-insert-update-and-delete-stored-procedures"></a>Code First gespeicherte Prozeduren INSERT, Update und DELETE
 > [!NOTE]
@@ -28,7 +30,7 @@ modelBuilder
 
 Dies führt dazu, dass Code First einige Konventionen verwenden, um die erwartete Form der gespeicherten Prozeduren in der Datenbank zu erstellen.  
 
-- Drei gespeicherte Prozeduren mit dem Namen **\<TYPE_NAME\>_INSERT** **,\<TYPE_NAME\>** _Update und **\<** TYPE_NAME\>_Delete (z. b. Blog_Insert, Blog_Update und Blog_Delete).  
+- Drei gespeicherte Prozeduren namens ** \<type_name\> _INSERT**, ** \<type_name\> _Update** und ** \<type_name\> _Delete** (z. b. Blog_Insert, Blog_Update und Blog_Delete).  
 - Parameter Namen entsprechen den Eigenschaftsnamen.  
   > [!NOTE]
   > Wenn Sie hascolumnname () oder das Column-Attribut verwenden, um die Spalte für eine bestimmte Eigenschaft umzubenennen, wird dieser Name für Parameter anstelle des Eigenschafts namens verwendet.  
@@ -162,7 +164,7 @@ END
 
 ## <a name="relationships-without-a-foreign-key-in-the-class-independent-associations"></a>Beziehungen ohne Fremdschlüssel in der Klasse (unabhängige Zuordnungen)  
 
-Wenn eine Fremdschlüssel Eigenschaft in der Klassendefinition enthalten ist, kann der entsprechende Parameter auf dieselbe Weise wie jede andere Eigenschaft umbenannt werden. Wenn eine Beziehung ohne Fremdschlüssel Eigenschaft in der Klasse vorhanden ist, wird der Standardparameter Name **\<navigation_property_name\>_\<primary_key_name\>** .  
+Wenn eine Fremdschlüssel Eigenschaft in der Klassendefinition enthalten ist, kann der entsprechende Parameter auf dieselbe Weise wie jede andere Eigenschaft umbenannt werden. Wenn eine Beziehung ohne Fremdschlüssel Eigenschaft in der-Klasse vorhanden ist, lautet der Standardparameter Name ** \<navigation_property_name\> _ \<primary_key_name\> **.  
 
 Beispielsweise würden die folgenden Klassendefinitionen dazu führen, dass in den gespeicherten Prozeduren ein Blog_BlogId-Parameter erwartet wird, um Beiträge einzufügen und zu aktualisieren.  
 
@@ -214,7 +216,7 @@ Die gespeicherten Prozeduren Update und DELETE müssen möglicherweise auch die 
 
 - Wenn die Entität Parallelitäts Token enthält, kann die gespeicherte Prozedur optional über einen Output-Parameter verfügen, der die Anzahl der aktualisierten/gelöschten Zeilen (betroffene Zeilen) zurückgibt. Ein solcher Parameter muss mithilfe der rowsaffectedparameter-Methode konfiguriert werden.  
 Standardmäßig verwendet EF den Rückgabewert von ExecuteNonQuery, um zu bestimmen, wie viele Zeilen betroffen sind. Das Angeben eines betroffenen Rows-Ausgabe Parameters ist nützlich, wenn Sie eine Logik in Ihrem SPROC ausführen, die dazu führt, dass der Rückgabewert von ExecuteNonQuery beim Ende der Ausführung falsch ist (aus EF-Sicht).  
-- Für jedes Parallelitäts Token gibt es einen Parameter mit dem Namen **\<property_name\>_Original** (z. b. Timestamp_Original). Diesem wird der ursprüngliche Wert dieser Eigenschaft – der Wert, wenn er aus der Datenbank abgefragt wird.  
+- Für jedes Parallelitäts Token gibt es einen Parameter mit dem Namen ** \<property_name\> _Original** (z. b. Timestamp_Original). Diesem wird der ursprüngliche Wert dieser Eigenschaft – der Wert, wenn er aus der Datenbank abgefragt wird.  
     - Parallelitäts Token, die von der Datenbank berechnet werden – z. b. Zeitstempel – verfügen nur über einen ursprünglichen value-Parameter.  
     - Nicht berechnete Eigenschaften, die als Parallelitäts Token festgelegt werden, verfügen ebenfalls über einen Parameter für den neuen Wert in der Aktualisierungs Prozedur. Dabei werden die Benennungs Konventionen verwendet, die bereits für neue Werte erläutert wurden. Ein Beispiel für ein solches Token wäre die Verwendung einer Blog-URL als Parallelitäts Token. der neue Wert ist erforderlich, da dies durch Ihren Code auf einen neuen Wert aktualisiert werden kann (im Gegensatz zu einem Timestamp-Token, das nur von der Datenbank aktualisiert wird).  
 
@@ -295,7 +297,7 @@ modelBuilder
  .MapToStoredProcedures(s => s.Update(u => u.Parameter(b => b.Url, "blog_url", "blog_original_url")));
 ```  
 
-## <a name="many-to-many-relationships"></a>M:n-Beziehungen  
+## <a name="many-to-many-relationships"></a>m:n-Beziehungen  
 
 Wir verwenden die folgenden Klassen als Beispiel in diesem Abschnitt.  
 
@@ -330,8 +332,8 @@ modelBuilder
 
 Wenn keine andere Konfiguration bereitgestellt wird, wird standardmäßig die folgende Form der gespeicherten Prozedur verwendet.  
 
-- Es gibt zwei gespeicherte Prozeduren namens **\<type_one\>\<type_two**\>_INSERT und **\<** type_one\>\<type_two\>_Delete (z. b. PostTag_Insert und PostTag_Delete).  
-- Bei den Parametern handelt es sich um die Schlüsselwerte für jeden Typ. Der Name jedes Parameters, der **\<TYPE_NAME\>_\<property_name\>** ist (z. b. Post_PostId und Tag_TagId).
+- Zwei gespeicherte Prozeduren namens ** \<type_one\> \<type_two\> _INSERT** und ** \<type_one\> \<type_two\> _Delete** (z. b. PostTag_Insert und PostTag_Delete).  
+- Bei den Parametern handelt es sich um die Schlüsselwerte für jeden Typ. Der Name jedes Parameters, der ** \<type_name\> _ \<property_name\> ** ist (z. b. Post_PostId und Tag_TagId).
 
 Im folgenden finden Sie Beispiel gespeicherte Prozeduren zum Einfügen und aktualisieren.  
 

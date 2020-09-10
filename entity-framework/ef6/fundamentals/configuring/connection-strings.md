@@ -1,14 +1,16 @@
 ---
 title: Verbindungs Zeichenfolgen und Modelle EF6
+description: Verbindungs Zeichenfolgen und Modelle in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 294bb138-978f-4fe2-8491-fdf3cd3c60c4
-ms.openlocfilehash: 2c9f084107e4de7f5439bf0082b46a3b538496e0
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/fundamentals/configuring/connection-strings
+ms.openlocfilehash: 2203d7f2168dc9d4ae5a6b1914742c7c2b6fbf77
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78415952"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89618436"
 ---
 # <a name="connection-strings-and-models"></a>Verbindungs Zeichenfolgen und Modelle
 In diesem Thema wird erläutert, wie Entity Framework ermittelt, welche Datenbankverbindung verwendet werden soll, und wie Sie Sie ändern können. Die Modelle, die mit Code First und dem EF-Designer erstellt wurden, werden in diesem Thema behandelt.  
@@ -44,7 +46,7 @@ Visual Studio 2010 enthält standardmäßig SQL Express, und Visual Studio 2012 
 
 ## <a name="use-code-first-with-connection-by-convention-and-specified-database-name"></a>Code First mit Verbindung gemäß Konvention und angegebenem Datenbanknamen verwenden  
 
-Wenn Sie in der Anwendung keine andere Konfiguration ausgeführt haben, führt der Aufruf des zeichenfolgenkonstruktors in dbcontext mit dem Datenbanknamen, den Sie verwenden möchten, dazu, dass dbcontext in Code First Modus mit einer Datenbankverbindung ausgeführt wird, die von der Konvention für die-Datenbank erstellt wurde. Dieser Name. Beispiel:  
+Wenn Sie in der Anwendung keine andere Konfiguration ausgeführt haben, führt der Aufruf des zeichenfolgenkonstruktors in dbcontext mit dem Datenbanknamen, den Sie verwenden möchten, dazu, dass dbcontext in Code First Modus mit einer Datenbankverbindung ausgeführt wird, die in der Datenbank mit diesem Namen erstellt wurde. Beispiel:  
 
 ``` csharp  
 public class BloggingContext : DbContext
@@ -58,9 +60,9 @@ public class BloggingContext : DbContext
 
 In diesem Beispiel verwendet dbcontext "bloggingdatabase" als Datenbanknamen und erstellt eine Verbindungs Zeichenfolge für diese Datenbank entweder mithilfe von SQL Express (installiert mit Visual Studio 2010) oder localdb (installiert mit Visual Studio 2012). Wenn beides installiert ist, wird SQL Express verwendet.  
 
-## <a name="use-code-first-with-connection-string-in-appconfigwebconfig-file"></a>Verwenden Sie Code First mit der Verbindungs Zeichenfolge in der Datei app. config/Web. config.  
+## <a name="use-code-first-with-connection-string-in-appconfigwebconfig-file"></a>Verwenden von Code First mit Verbindungs Zeichenfolge in app.config/web.config-Datei  
 
-Sie können eine Verbindungs Zeichenfolge in der Datei "App. config" oder "Web. config" platzieren. Beispiel:  
+Sie können eine Verbindungs Zeichenfolge in ihrer app.config oder web.config Datei platzieren. Beispiel:  
 
 ``` xml  
 <configuration>
@@ -86,7 +88,7 @@ public class BloggingContext : DbContext
 }
 ```  
 
-Alternativ können Sie das Format "Name =\<Name der Verbindungs Zeichenfolge\>" für die Zeichenfolge verwenden, die an den dbcontext-Konstruktor übergeben wird. Beispiel:  
+Alternativ können Sie das Format "Name = \<connection string name\> " für die Zeichenfolge verwenden, die an den dbcontext-Konstruktor übergeben wird. Beispiel:  
 
 ``` csharp  
 public class BloggingContext : DbContext
@@ -100,11 +102,11 @@ public class BloggingContext : DbContext
 
 Dieses Formular macht es explizit, dass die Verbindungs Zeichenfolge in der Konfigurationsdatei zu finden ist. Eine Ausnahme wird ausgelöst, wenn keine Verbindungs Zeichenfolge mit dem angegebenen Namen gefunden wird.  
 
-## <a name="databasemodel-first-with-connection-string-in-appconfigwebconfig-file"></a>Datenbank/Model First mit Verbindungs Zeichenfolge in der Datei "App. config/Web. config"  
+## <a name="databasemodel-first-with-connection-string-in-appconfigwebconfig-file"></a>Datenbank/Model First mit Verbindungs Zeichenfolge in app.config/web.config-Datei  
 
 Modelle, die mit dem EF-Designer erstellt wurden, unterscheiden sich von Code First darin, dass das Modell bereits vorhanden ist und nicht aus Code generiert wird, wenn die Anwendung ausgeführt wird Das Modell ist in der Regel als EDMX-Datei in Ihrem Projekt vorhanden.  
 
-Der Designer fügt eine EF-Verbindungs Zeichenfolge zu Ihrer Datei "App. config" oder "Web. config" hinzu. Diese Verbindungs Zeichenfolge ist insofern speziell, als Sie Informationen darüber enthält, wie Sie die Informationen in der EDMX-Datei finden. Beispiel:  
+Der Designer fügt eine EF-Verbindungs Zeichenfolge zu ihrer app.config oder web.config Datei hinzu. Diese Verbindungs Zeichenfolge ist insofern speziell, als Sie Informationen darüber enthält, wie Sie die Informationen in der EDMX-Datei finden. Beispiel:  
 
 ``` xml  
 <configuration>  

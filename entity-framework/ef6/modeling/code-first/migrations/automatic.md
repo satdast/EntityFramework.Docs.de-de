@@ -1,20 +1,22 @@
 ---
 title: Automatisches Code First-Migrationen-EF6
+description: Automatisches Code First-Migrationen in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 0eb86787-2161-4cb4-9cb8-67c5d6e95650
-ms.openlocfilehash: 2713afaf09707b7696e90464aac9945c2d82d274
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/modeling/code-first/migrations/automatic
+ms.openlocfilehash: 541adf5aed517685b54d675730996c12ff0c824a
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78415700"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89618077"
 ---
 # <a name="automatic-code-first-migrations"></a>Automatisches Code First-Migrationen
 Automatische Migrationen ermöglichen es Ihnen, Code First-Migrationen zu verwenden, ohne dass eine Codedatei in Ihrem Projekt für jede von Ihnen vornimmt. Nicht alle Änderungen können automatisch angewendet werden, z. b. für Spalten Umbenennungen ist die Verwendung einer Code basierten Migration erforderlich.
 
 > [!NOTE]
-> In diesem Artikel wird davon ausgegangen, dass Sie wissen, wie Code First-Migrationen in einfachen Szenarien verwendet wird. Andernfalls müssen Sie [Code First-Migrationen](~/ef6/modeling/code-first/migrations/index.md) lesen, bevor Sie fortfahren.
+> In diesem Artikel wird davon ausgegangen, dass Sie wissen, wie Code First-Migrationen in einfachen Szenarien verwendet wird. Andernfalls müssen Sie [Code First-Migrationen](xref:ef6/modeling/code-first/migrations/index) lesen, bevor Sie fortfahren.
 
 ## <a name="recommendation-for-team-environments"></a>Empfehlung für Team Umgebungen
 
@@ -26,7 +28,7 @@ Bevor Sie Migrationen verwenden können, benötigen Sie ein Projekt und ein Code
 
 -   Erstellen einer neuen **migrationsautomaticdemo** -Konsolenanwendung
 -   Fügen Sie dem Projekt die neueste Version des NuGet-Pakets **EntityFramework** hinzu.
-    -   Wählen Sie **Tools > Bibliotheks-Paket-Manger > Paket-Manager-Konsole&gt; aus.
+    -   **Tools – &gt; Bibliothekspaket-Manager – &gt; Paket-Manager-Konsole**
     -   Führen Sie den Befehl **Install-Package EntityFramework** aus.
 -   Fügen Sie eine **Model.cs**-Datei mit dem unten aufgeführten Code hinzu. Mit diesem Code wird eine einzelne **Blog**-Klasse, die das Domänenmodell bildet, und eine **BlogContext**-Klasse, die den EF Code First-Kontext darstellt, definiert.
 
@@ -97,7 +99,7 @@ Im Folgenden erfahren Sie, wie Sie weitere Änderungen am Modell vornehmen.
     public string Url { get; set; }
 ```
 
-Wenn Sie die Anwendung erneut ausführen, erhalten Sie eine InvalidOperationException, die besagt, dass *das Modell, das den Kontext "blogcontext" unterstützt, seit der Erstellung der Datenbank geändert wurde. Verwenden Sie Code First-Migrationen, um die Datenbank zu aktualisieren (* [ *http://go.microsoft.com/fwlink/?LinkId=238269* ](https://go.microsoft.com/fwlink/?LinkId=238269) *).*
+Wenn Sie die Anwendung erneut ausführen, erhalten Sie eine InvalidOperationException, die besagt, dass *das Modell, das den Kontext "blogcontext" unterstützt, seit der Erstellung der Datenbank geändert wurde. Verwenden Sie Code First-Migrationen, um die Datenbank zu aktualisieren (* [*http://go.microsoft.com/fwlink/?LinkId=238269*](https://go.microsoft.com/fwlink/?LinkId=238269) *).*
 
 Beginnen Sie daher mit der Verwendung von Code First-Migrationen. Da wir automatische Migrationen verwenden möchten, geben wir den Schalter **– enableautomaticmigrationen** an.
 

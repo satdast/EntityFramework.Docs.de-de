@@ -5,12 +5,12 @@ author: AndriySvyryd
 ms.author: ansvyryd
 ms.date: 11/06/2019
 uid: core/modeling/owned-entities
-ms.openlocfilehash: 6ff98d005c0a868d420509571378756c56edc54a
-ms.sourcegitcommit: 31536e52b838a84680d2e93e5bb52fb16df72a97
+ms.openlocfilehash: f65c07c79daf38e733c76f328843c90466c657f5
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86238124"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89619326"
 ---
 # <a name="owned-entity-types"></a>Nicht eigenständige Entitätstypen
 
@@ -75,7 +75,7 @@ So konfigurieren Sie einen anderen PK-Befehl `HasKey` :
 
 ## <a name="mapping-owned-types-with-table-splitting"></a>Zuordnung eigener Typen mit Tabellen Aufteilung
 
-Bei der Verwendung von relationalen Datenbanken werden Verweis eigene Typen standardmäßig derselben Tabelle wie der Besitzer zugeordnet. Dies erfordert das Aufteilen der Tabelle in zwei: einige Spalten werden zum Speichern der Daten des Besitzers verwendet, und einige Spalten werden zum Speichern von Daten der Entität verwendet. Dies ist ein gängiges Feature, das als [Tabellen Aufteilung](table-splitting.md)bezeichnet wird.
+Bei der Verwendung von relationalen Datenbanken werden Verweis eigene Typen standardmäßig derselben Tabelle wie der Besitzer zugeordnet. Dies erfordert das Aufteilen der Tabelle in zwei: einige Spalten werden zum Speichern der Daten des Besitzers verwendet, und einige Spalten werden zum Speichern von Daten der Entität verwendet. Dies ist ein gängiges Feature, das als [Tabellen Aufteilung](xref:core/modeling/table-splitting)bezeichnet wird.
 
 Standardmäßig benennen EF Core die Daten Bank Spalten für die Eigenschaften des eigenen Entitäts Typs nach dem Muster _Navigation_OwnedEntityProperty_. Daher `StreetAddress` werden die Eigenschaften in der Tabelle "Orders" mit den Namen "ShippingAddress_Street" und "ShippingAddress_City" angezeigt.
 
@@ -122,7 +122,7 @@ Beachten Sie den-Befehl `WithOwner` , der zum Definieren der Navigations Eigensc
 
 Sie können dieses Ergebnis auch mithilfe `OwnedAttribute` von sowohl in als auch in erreichen `OrderDetails` `StreetAddress` .
 
-Beachten Sie außerdem den-Befehl `Navigation` . In efcore 5,0 können Navigations Eigenschaften zu eigenen Typen [für nicht-eigene Navigations Eigenschaften](relationships.md#configuring-navigation-properties)weiter konfiguriert werden.
+Beachten Sie außerdem den-Befehl `Navigation` . In efcore 5,0 können Navigations Eigenschaften zu eigenen Typen [für nicht-eigene Navigations Eigenschaften](xref:core/modeling/relationships#configuring-navigation-properties)weiter konfiguriert werden.
 
 ## <a name="storing-owned-types-in-separate-tables"></a>Speichern von eigenen Typen in separaten Tabellen
 
@@ -145,7 +145,7 @@ Einige dieser Einschränkungen sind grundlegend für die Funktionsweise von Enti
 ### <a name="by-design-restrictions"></a>Entwurfs Einschränkungen
 
 - Sie können keinen `DbSet<T>` für einen eigenen Typ erstellen.
-- Der-Typ kann nicht `Entity<T>()` mit einem eigenen Typ aufgerufen werden.`ModelBuilder`
+- Der-Typ kann nicht `Entity<T>()` mit einem eigenen Typ aufgerufen werden. `ModelBuilder`
 
 ### <a name="current-shortcomings"></a>Aktuelle Mängel
 

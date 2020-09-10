@@ -1,15 +1,16 @@
 ---
 title: 'Verwalten von Migrationen: EF Core'
+description: Hinzufügen, entfernen und Verwalten von Datenbankschema Migrationen mit Entity Framework Core
 author: bricelam
 ms.author: bricelam
 ms.date: 05/06/2020
 uid: core/managing-schemas/migrations/managing
-ms.openlocfilehash: 2097d3cc9232d448191dbebbe3d14d86e80b91fe
-ms.sourcegitcommit: 949faaba02e07e44359e77d7935f540af5c32093
+ms.openlocfilehash: 366824cecab57a0f1744fa58cc12e5d3f6675723
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/03/2020
-ms.locfileid: "87526432"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89617961"
 ---
 # <a name="managing-migrations"></a>Verwalten von Migrationen
 
@@ -158,7 +159,7 @@ Dies kann verwendet werden, um einen beliebigen Aspekt der Datenbank zu verwalte
 * Gespeicherte Prozeduren
 * Volltextsuche
 * Funktionen
-* Auslöser
+* Trigger
 * Ansichten
 
 In den meisten Fällen wird jede Migration beim Anwenden von Migrationen von EF Core automatisch in der eigenen Transaktion umschlossen. Leider können einige Migrations Vorgänge nicht innerhalb einer Transaktion in einigen Datenbanken ausgeführt werden. in diesen Fällen können Sie die Transaktion ablehnen, indem Sie an übergeben `suppressTransaction: true` `migrationBuilder.Sql` .

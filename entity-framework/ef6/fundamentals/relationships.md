@@ -1,14 +1,16 @@
 ---
 title: Beziehungen, Navigations Eigenschaften und Fremdschlüssel-EF6
+description: Beziehungen, Navigations Eigenschaften und Fremdschlüssel in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 8a21ae73-6d9b-4b50-838a-ec1fddffcf37
-ms.openlocfilehash: 5807f7aeeb68328821cf45ac4f8c28efa17ed399
-ms.sourcegitcommit: 92d54fe3702e0c92e198334da22bacb42e9842b1
+uid: ef6/fundamentals/relationships
+ms.openlocfilehash: 63349d9a81065ea4e15a5f97ef5298cb3dc67339
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/10/2020
-ms.locfileid: "84664194"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89618392"
 ---
 # <a name="relationships-navigation-properties-and-foreign-keys"></a>Beziehungen, Navigations Eigenschaften und Fremdschlüssel
 
@@ -67,8 +69,8 @@ public class Department
 
 Im restlichen Abschnitt wird erläutert, wie Sie mithilfe von Beziehungen auf Daten zugreifen und diese bearbeiten. Informationen zum Einrichten von Beziehungen in Ihrem Modell finden Sie auf den folgenden Seiten.
 
--   Informationen zum Konfigurieren von Beziehungen in Code First finden Sie unter [Daten Anmerkungen](~/ef6/modeling/code-first/data-annotations.md) und [fließende API-–-Beziehungen](~/ef6/modeling/code-first/fluent/relationships.md).
--   Informationen zum Konfigurieren von Beziehungen mit dem Entity Framework Designer finden Sie unter [Beziehungen mit dem EF-Designer](~/ef6/modeling/designer/relationships.md).
+-   Informationen zum Konfigurieren von Beziehungen in Code First finden Sie unter [Daten Anmerkungen](xref:ef6/modeling/code-first/data-annotations) und [fließende API-–-Beziehungen](xref:ef6/modeling/code-first/fluent/relationships).
+-   Informationen zum Konfigurieren von Beziehungen mit dem Entity Framework Designer finden Sie unter [Beziehungen mit dem EF-Designer](xref:ef6/modeling/designer/relationships).
 
 ## <a name="creating-and-modifying-relationships"></a>Erstellen und Ändern von Beziehungen
 
@@ -129,7 +131,7 @@ Im folgenden Beispiel gibt es eine m:n-Beziehung zwischen Dozenten und Kursen. D
 
 ## <a name="synchronizing-the-changes-between-the-foreign-keys-and-navigation-properties"></a>Synchronisieren der Änderungen zwischen den Fremdschlüsseln und den Navigations Eigenschaften
 
-Wenn Sie die Beziehung der Objekte ändern, die mit einer der oben beschriebenen Methoden an den Kontext angefügt sind, müssen Entity Framework Fremdschlüssel, Verweise und Auflistungen synchron halten. Entity Framework diese Synchronisierung (auch als Beziehungs Korrektur bezeichnet) für die poco-Entitäten mit Proxys automatisch verwaltet. Weitere Informationen finden Sie unter [Arbeiten mit](~/ef6/fundamentals/proxies.md)Proxys.
+Wenn Sie die Beziehung der Objekte ändern, die mit einer der oben beschriebenen Methoden an den Kontext angefügt sind, müssen Entity Framework Fremdschlüssel, Verweise und Auflistungen synchron halten. Entity Framework diese Synchronisierung (auch als Beziehungs Korrektur bezeichnet) für die poco-Entitäten mit Proxys automatisch verwaltet. Weitere Informationen finden Sie unter [Arbeiten mit](xref:ef6/fundamentals/proxies)Proxys.
 
 Wenn Sie poco-Entitäten ohne Proxys verwenden, müssen Sie sicherstellen, dass die **DetectChanges** -Methode aufgerufen wird, um die zugehörigen Objekte im Kontext zu synchronisieren. Beachten Sie, dass die folgenden APIs automatisch einen **DetectChanges** -Befehl auslöst.
 
@@ -144,11 +146,11 @@ Wenn Sie poco-Entitäten ohne Proxys verwenden, müssen Sie sicherstellen, dass 
 -   `DbContext.GetValidationErrors`
 -   `DbContext.Entry`
 -   `DbChangeTracker.Entries`
--   Ausführen einer LINQ-Abfrage für eine`DbSet`
+-   Ausführen einer LINQ-Abfrage für eine `DbSet`
 
 ## <a name="loading-related-objects"></a>Zugehörige Objekte werden geladen
 
-In Entity Framework Sie häufig Navigations Eigenschaften verwenden, um Entitäten zu laden, die mit der zurückgegebenen Entität von der definierten Zuordnung verknüpft sind. Weitere Informationen finden Sie unter [Laden verwandter Objekte](~/ef6/querying/related-data.md).
+In Entity Framework Sie häufig Navigations Eigenschaften verwenden, um Entitäten zu laden, die mit der zurückgegebenen Entität von der definierten Zuordnung verknüpft sind. Weitere Informationen finden Sie unter [Laden verwandter Objekte](xref:ef6/querying/related-data).
 
 > [!NOTE]
 > Wenn Sie in einer Fremdschlüsselzuordnung ein verknüpftes Ende eines abhängigen Objekts laden, wird das verknüpfte Objekt auf der Grundlage des Fremdschlüsselwerts des abhängigen Elements geladen, der sich gerade im Arbeitsspeicher befindet:
@@ -173,7 +175,7 @@ Sowohl in Fremdschlüssel-als auch in unabhängigen Zuordnungen basieren Paralle
 
 Es wird empfohlen, bei der Arbeit mit Entitäten, die an der Parallelitäts Überprüfung und-Auflösung beteiligt sind, stets die Fremdschlüssel Zuordnung zu verwenden.
 
-Weitere Informationen finden Sie unter [behandeln](~/ef6/saving/concurrency.md)von Parallelitäts Konflikten.
+Weitere Informationen finden Sie unter [behandeln](xref:ef6/saving/concurrency)von Parallelitäts Konflikten.
 
 ## <a name="working-with-overlapping-keys"></a>Arbeiten mit überlappenden Schlüsseln
 

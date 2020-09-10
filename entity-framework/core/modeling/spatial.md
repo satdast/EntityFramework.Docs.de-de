@@ -1,16 +1,17 @@
 ---
 title: Räumliche Daten-EF Core
+description: Verwenden räumlicher Daten in einem Entity Framework Core Modell
 author: bricelam
 ms.author: bricelam
 ms.date: 11/01/2018
 ms.assetid: 2BDE29FC-4161-41A0-841E-69F51CCD9341
 uid: core/modeling/spatial
-ms.openlocfilehash: 85124b7e252797ccd952d0d332e7309eff97ba56
-ms.sourcegitcommit: 949faaba02e07e44359e77d7935f540af5c32093
+ms.openlocfilehash: 42386fb132f135d725a2068d91dc49c7f613e277
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/03/2020
-ms.locfileid: "87526666"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89616702"
 ---
 # <a name="spatial-data"></a>Räumliche Daten
 
@@ -32,7 +33,7 @@ Npgsql.EntityFrameworkCore.PostgreSQL   | [Npgsql. entityframeworkcore. PostgreS
 
 ## <a name="reverse-engineering"></a>Reverse Engineering
 
-Die räumlichen nuget-Pakete ermöglichen auch die [Reverse Engineering](../managing-schemas/scaffolding.md) von Modellen mit räumlichen Eigenschaften. Sie müssen das Paket jedoch ***vor*** dem Ausführen von `Scaffold-DbContext` oder installieren `dotnet ef dbcontext scaffold` . Wenn Sie dies nicht tun, erhalten Sie Warnungen, wenn Sie keine Typzuordnungen für die Spalten finden und die Spalten übersprungen werden.
+Die räumlichen nuget-Pakete ermöglichen auch die [Reverse Engineering](xref:core/managing-schemas/scaffolding) von Modellen mit räumlichen Eigenschaften. Sie müssen das Paket jedoch ***vor*** dem Ausführen von `Scaffold-DbContext` oder installieren `dotnet ef dbcontext scaffold` . Wenn Sie dies nicht tun, erhalten Sie Warnungen, wenn Sie keine Typzuordnungen für die Spalten finden und die Spalten übersprungen werden.
 
 ## <a name="nettopologysuite-nts"></a>Nettopologysuite (NTS)
 

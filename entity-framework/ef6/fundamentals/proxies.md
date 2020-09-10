@@ -1,14 +1,16 @@
 ---
 title: Arbeiten mit Proxys EF6
+description: Arbeiten mit Proxys in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 869ee4dc-06f1-471d-8e0e-0a1a2bc59c30
-ms.openlocfilehash: 8f7d2e8b41ece28efe8d1df3b0679e6e4510d64a
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/fundamentals/proxies
+ms.openlocfilehash: 26493ecf1a894a1cd421f574de38678661f324a0
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78415988"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89618362"
 ---
 # <a name="working-with-proxies"></a>Arbeiten mit Proxys
 Beim Erstellen von Instanzen von poco-Entitäts Typen erstellt Entity Framework häufig Instanzen eines dynamisch generierten abgeleiteten Typs, der als Proxy für die Entität fungiert. Dieser Proxy überschreibt einige virtuelle Eigenschaften der Entität, um beim Zugriff auf die Eigenschaft automatisch Hooks zum Ausführen von Aktionen einzufügen. Dieser Mechanismus wird z. b. verwendet, um Lazy Loading von Beziehungen zu unterstützen. Die in diesem Thema dargestellten Techniken gelten jeweils für Modelle, die mit Code First und dem EF-Designer erstellt wurden.  

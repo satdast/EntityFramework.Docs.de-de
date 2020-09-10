@@ -4,12 +4,12 @@ description: Verwenden von Wert vergleichen zum Steuern der Art EF Core Vergleic
 author: ajcvickers
 ms.date: 03/20/2020
 uid: core/modeling/value-comparers
-ms.openlocfilehash: fa5352129977d858d54d4aede746b320c91b0ad3
-ms.sourcegitcommit: 949faaba02e07e44359e77d7935f540af5c32093
+ms.openlocfilehash: d07aee866a542f55c4e1074c5782e67cb4035a89
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/03/2020
-ms.locfileid: "87526783"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89616680"
 ---
 # <a name="value-comparers"></a>Wert Vergleiche
 
@@ -24,7 +24,7 @@ ms.locfileid: "87526783"
 EF Core müssen die Eigenschaftswerte in folgenden vergleichen:
 
 * Ermitteln, ob eine Eigenschaft im Rahmen der Erkennung von [Änderungen für Updates](xref:core/saving/basic) geändert wurde
-* Bestimmen, ob zwei Schlüsselwerte beim Auflösen von Beziehungen identisch sind 
+* Bestimmen, ob zwei Schlüsselwerte beim Auflösen von Beziehungen identisch sind
 
 Dies wird automatisch für allgemeine primitive Typen wie int, bool, DateTime usw. behandelt.
 
@@ -66,6 +66,7 @@ Stellen Sie sich eine Eigenschaft vor, die einen Wert Konverter verwendet, um ei
 [!code-csharp[ConfigureImmutableClassProperty](../../../samples/core/Modeling/ValueConversions/MappingImmutableClassProperty.cs?name=ConfigureImmutableClassProperty)]
 
 Eigenschaften dieses Typs benötigen keine besonderen Vergleiche oder Momentaufnahmen aus folgenden Gründen:
+
 * Gleichheit wird überschrieben, sodass verschiedene Instanzen ordnungsgemäß verglichen werden.
 * Der Typ ist unveränderlich, sodass es nicht möglich ist, einen Momentaufnahme Wert zu mutieren.
 
@@ -90,11 +91,12 @@ Es wird empfohlen, nach Möglichkeit unveränderliche Typen (Klassen oder Strukt
 Dies ist in der Regel effizienter und verfügt über eine sauberere Semantik als die Verwendung eines änderbaren Typs.
 
 Allerdings ist es üblich, die Eigenschaften von Typen zu verwenden, die von der Anwendung nicht geändert werden können.
-Beispiel: Zuordnung einer Eigenschaft, die eine Liste mit Zahlen enthält: 
+Beispiel: Zuordnung einer Eigenschaft, die eine Liste mit Zahlen enthält:
 
 [!code-csharp[ListProperty](../../../samples/core/Modeling/ValueConversions/MappingListProperty.cs?name=ListProperty)]
 
-Die- [ `List<T>` Klasse](/dotnet/api/system.collections.generic.list-1?view=netstandard-2.1):
+Die- [ `List<T>` Klasse](/dotnet/api/system.collections.generic.list-1):
+
 * Hat Verweis Gleichheit. zwei Listen, die dieselben Werte enthalten, werden als verschieden behandelt.
 * Ist änderbar; Werte in der Liste können hinzugefügt und entfernt werden.
 
@@ -111,6 +113,7 @@ Dies erfordert dann das Festlegen einer `ValueComparer<T>` für die-Eigenschaft,
 > Stattdessen ruft der obige Code setvaluecomparer auf der untergeordneten imutableproperty auf, die vom Generator als "Metadata" verfügbar gemacht wird.
 
 Der `ValueComparer<T>` Konstruktor akzeptiert drei Ausdrücke:
+
 * Ein Ausdruck zum Überprüfen der Gleichheit.
 * Ein Ausdruck zum Erzeugen eines Hashcodes.
 * Ein Ausdruck zum Erstellen einer Momentaufnahme eines Werts.  
@@ -123,20 +126,20 @@ Sie sollten stattdessen unveränderlich sein, wenn dies möglich ist.)
 
 Die Momentaufnahme wird erstellt, indem Sie die Liste mit dem Listen paar Klonen.
 Dies ist auch dann nur erforderlich, wenn die Listen mutiert werden.
-Sie sollten stattdessen unveränderlich sein, wenn dies möglich ist. 
+Sie sollten stattdessen unveränderlich sein, wenn dies möglich ist.
 
 > [!NOTE]  
 > Wert Konverter und Comparer werden mithilfe von Ausdrücken anstelle einfacher Delegaten erstellt.
 > Dies liegt daran, dass EF diese Ausdrücke in eine wesentlich komplexere Ausdrucks Baumstruktur einfügt, die dann in einen Entitäts-Shaper-Delegaten kompiliert wird.
 > Konzeptionell ähnelt dies dem Compiler-inlining.
-> Eine einfache Konvertierung kann z. b. nur eine kompilierte Umwandlung sein, anstelle eines Aufrufes einer anderen Methode, um die Konvertierung durchzuführen.    
+> Eine einfache Konvertierung kann z. b. nur eine kompilierte Umwandlung sein, anstelle eines Aufrufes einer anderen Methode, um die Konvertierung durchzuführen.
 
 ### <a name="key-comparers"></a>Schlüssel Vergleiche
 
 Der Hintergrund Abschnitt erläutert, warum Schlüssel Vergleiche möglicherweise eine besondere Semantik erfordern.
 Stellen Sie sicher, dass Sie einen Vergleich erstellen, der für Schlüssel geeignet ist, wenn Sie ihn auf eine primär-, Prinzipal-oder Fremdschlüssel Eigenschaft festlegen.
 
-Verwenden Sie [setkeyvaluecomparer](/dotnet/api/microsoft.entityframeworkcore.mutablepropertyextensions.setkeyvaluecomparer?view=efcore-3.1) in seltenen Fällen, in denen unterschiedliche Semantik für die gleiche Eigenschaft erforderlich ist.
+Verwenden Sie [setkeyvaluecomparer](/dotnet/api/microsoft.entityframeworkcore.mutablepropertyextensions.setkeyvaluecomparer) in seltenen Fällen, in denen unterschiedliche Semantik für die gleiche Eigenschaft erforderlich ist.
 
 > [!NOTE]  
 > Setstructuralcomparer ist in EF Core 5,0 veraltet.
@@ -146,7 +149,7 @@ Verwenden Sie [setkeyvaluecomparer](/dotnet/api/microsoft.entityframeworkcore.mu
 
 Manchmal ist der von EF Core verwendete Standard Vergleich möglicherweise nicht geeignet.
 Beispielsweise wird die Mutation von Byte Arrays nicht standardmäßig in EF Core erkannt.
-Dies kann überschrieben werden, indem für die-Eigenschaft ein anderer Vergleich festgelegt wird: 
+Dies kann überschrieben werden, indem für die-Eigenschaft ein anderer Vergleich festgelegt wird:
 
 [!code-csharp[OverrideComparer](../../../samples/core/Modeling/ValueConversions/OverridingByteArrayComparisons.cs?name=OverrideComparer)]
 

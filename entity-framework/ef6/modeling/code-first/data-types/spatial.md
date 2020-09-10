@@ -1,14 +1,16 @@
 ---
 title: Spatial-Code First-EF6
+description: Räumliche Code First in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: d617aed1-15f2-48a9-b187-186991c666e3
-ms.openlocfilehash: 018f480c1f0f1e74fc9f7a8950a6880e96f1facc
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/modeling/code-first/data-types/spatial
+ms.openlocfilehash: 8c2d47a66979a228fdc4902857df999a21945547
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78415784"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89618157"
 ---
 # <a name="spatial---code-first"></a>Räumliche Code First
 > [!NOTE]
@@ -16,11 +18,11 @@ ms.locfileid: "78415784"
 
 Das Video und die schrittweise exemplarische Vorgehensweise zeigen, wie räumliche Typen mit Entity Framework Code First zugeordnet werden. Außerdem wird veranschaulicht, wie eine LINQ-Abfrage verwendet wird, um einen Abstand zwischen zwei Standorten zu ermitteln.
 
-In dieser exemplarischen Vorgehensweise wird Code First verwendet, um eine neue Datenbank zu erstellen, aber Sie können [Code First auch für eine vorhandene Datenbank](~/ef6/modeling/code-first/workflows/existing-database.md)verwenden.
+In dieser exemplarischen Vorgehensweise wird Code First verwendet, um eine neue Datenbank zu erstellen, aber Sie können [Code First auch für eine vorhandene Datenbank](xref:ef6/modeling/code-first/workflows/existing-database)verwenden.
 
 Die Unterstützung räumlicher Typen wurde in Entity Framework 5 eingeführt. Beachten Sie, dass Sie für die Verwendung der neuen Funktionen, wie z. b. räumlichem Typ, aufzählen und Tabellenwert Funktionen, auf .NET Framework 4,5 abzielen müssen. Visual Studio 2012 hat standardmäßig .NET 4,5 als Ziel.
 
-Um räumliche Datentypen zu verwenden, müssen Sie auch einen Entity Framework Anbieter verwenden, der über räumliche Unterstützung verfügt. Weitere Informationen finden Sie [unter Anbieter Unterstützung für räumliche Typen](~/ef6/fundamentals/providers/spatial-support.md) .
+Um räumliche Datentypen zu verwenden, müssen Sie auch einen Entity Framework Anbieter verwenden, der über räumliche Unterstützung verfügt. Weitere Informationen finden Sie [unter Anbieter Unterstützung für räumliche Typen](xref:ef6/fundamentals/providers/spatial-support) .
 
 Es gibt zwei Haupt Datentypen für räumliche Daten: Geography und Geometry. Der geography-Datentyp speichert Ellipsen Daten (z. b. GPS-breiten-und Längenkoordinaten). Der geometry-Datentyp stellt das euklidische (flache) Koordinatensystem dar.
 
@@ -29,7 +31,7 @@ In diesem Video wird gezeigt, wie räumliche Typen mit Entity Framework Code Fir
 
 **Präsentiert von**: Julia kornich
 
-**Video**: [WMV](https://download.microsoft.com/download/9/1/3/913EA17E-6F97-41D8-A4FE-805A0D83D26A/HDI-ITPro-MSDN-winvideo-spatialwithcodefirst.wmv) | [MP4](https://download.microsoft.com/download/9/1/3/913EA17E-6F97-41D8-A4FE-805A0D83D26A/HDI-ITPro-MSDN-mp4video-spatialwithcodefirst.m4v) | [WMV (zip)](https://download.microsoft.com/download/9/1/3/913EA17E-6F97-41D8-A4FE-805A0D83D26A/HDI-ITPro-MSDN-winvideo-spatialwithcodefirst.zip)
+**Video**: [WMV](https://download.microsoft.com/download/9/1/3/913EA17E-6F97-41D8-A4FE-805A0D83D26A/HDI-ITPro-MSDN-winvideo-spatialwithcodefirst.wmv)  |  [MP4](https://download.microsoft.com/download/9/1/3/913EA17E-6F97-41D8-A4FE-805A0D83D26A/HDI-ITPro-MSDN-mp4video-spatialwithcodefirst.m4v)  |  [WMV (zip)](https://download.microsoft.com/download/9/1/3/913EA17E-6F97-41D8-A4FE-805A0D83D26A/HDI-ITPro-MSDN-winvideo-spatialwithcodefirst.zip)
 
 ## <a name="pre-requisites"></a>Voraussetzungen
 
@@ -39,7 +41,7 @@ Sie müssen Visual Studio 2012, Ultimate, Premium, Professional oder Web Express
 
 1.  Öffnen Sie Visual Studio 2012
 2.  Zeigen Sie im Menü **Datei** auf **neu**, und klicken Sie dann auf **Projekt** .
-3.  Klicken Sie im linken Bereich auf **Visual C-\#** , und wählen Sie dann die **Konsolen** Vorlage aus.
+3.  Klicken Sie im linken Bereich auf **Visual C \# **, und wählen Sie dann die **Konsolen** Vorlage aus.
 4.  Geben Sie **spatialcode First** als Namen für das Projekt ein, und klicken Sie auf **OK** .
 
 ## <a name="define-a-new-model-using-code-first"></a>Definieren eines neuen Modells mit Code First
@@ -67,16 +69,16 @@ public class University
 
 ## <a name="define-the-dbcontext-derived-type"></a>Definieren des abgeleiteten dbcontext-Typs
 
-Zusätzlich zum Definieren von Entitäten müssen Sie eine Klasse definieren, die von dbcontext abgeleitet ist und dbset&lt;TEntity&gt; Eigenschaften verfügbar macht. Mit den Eigenschaften von dbset&lt;TEntity&gt; wird der Kontext informiert, welche Typen Sie in das Modell einschließen möchten.
+Zusätzlich zur Definition von Entitäten müssen Sie eine Klasse definieren, die von DbContext abgeleitet ist und DbSet&lt;TEntity&gt;-Eigenschaften bereitstellt. Die DbSet&lt;TEntity&gt;-Eigenschaften informieren den Kontext darüber, welche Typen Sie in das Modell einbeziehen möchten.
 
-Eine Instanz des abgeleiteten dbcontext-Typs verwaltet die Entitäts Objekte zur Laufzeit. dazu gehören das Auffüllen von Objekten mit Daten aus einer Datenbank, die Änderungs Nachverfolgung und das Beibehalten von Daten in der Datenbank.
+Eine Instanz des von DbContext abgeleiteten Typs verwaltet die Entitätsobjekte während der Laufzeit, was das Auffüllen der Objekte mit Daten aus einer Datenbank, die Änderungsnachverfolgung und das persistente Speichern von Daten in der Datenbank umfasst.
 
 Die Typen "dbcontext" und "dbset" werden in der EntityFramework-Assembly definiert. Wir fügen mit dem nuget-Paket "EntityFramework" einen Verweis auf diese dll hinzu.
 
 1.  Klicken Sie in Projektmappen-Explorer mit der rechten Maustaste auf den Projektnamen.
 2.  Wählen Sie **nuget-Pakete verwalten... aus.**
 3.  Wählen Sie im Dialogfeld nuget-Pakete verwalten die Registerkarte **Online** aus, und wählen Sie das Paket **EntityFramework** aus.
-4.  Klicken Sie auf **Installieren**
+4.  Klicken Sie auf **Install** (Installieren).
 
 Beachten Sie, dass zusätzlich zur EntityFramework-Assembly auch ein Verweis auf die System. ComponentModel. DataAnnotations-Assembly hinzugefügt wird.
 
@@ -140,11 +142,11 @@ The closest University to you is: School of Fine Art.
 
 Wenn Sie die Anwendung zum ersten Mal ausführen, erstellt die Entity Framework eine Datenbank für Sie. Da Visual Studio 2012 installiert ist, wird die Datenbank auf der localdb-Instanz erstellt. Standardmäßig benennt die-Entity Framework die Datenbank nach dem voll qualifizierten Namen des abgeleiteten Kontexts (in diesem Beispiel " **spatialcodefirst. universitycontext**"). Nachfolgend wird die vorhandene Datenbank verwendet.  
 
-Beachten Sie Folgendes: Wenn Sie Änderungen am Modell vornehmen, nachdem die Datenbank erstellt wurde, sollten Sie Code First-Migrationen zum Aktualisieren des Datenbankschemas verwenden. Ein Beispiel für die Verwendung von Migrationen finden Sie [unter Code First einer neuen Datenbank](~/ef6/modeling/code-first/workflows/new-database.md) .
+Beachten Sie Folgendes: Wenn Sie Änderungen am Modell vornehmen, nachdem die Datenbank erstellt wurde, sollten Sie Code First-Migrationen zum Aktualisieren des Datenbankschemas verwenden. Ein Beispiel für die Verwendung von Migrationen finden Sie [unter Code First einer neuen Datenbank](xref:ef6/modeling/code-first/workflows/new-database) .
 
 Gehen Sie folgendermaßen vor, um die Datenbank und die Daten anzuzeigen:
 
-1.  Wählen Sie im Hauptmenü von Visual Studio 2012 -&gt; **SQL Server-Objekt-Explorer** **anzeigen** aus.
+1.  Wählen Sie im Hauptmenü von Visual Studio 2012 die Option SQL Server-Objekt-Explorer **anzeigen** aus  - &gt; **SQL Server Object Explorer**.
 2.  Wenn localdb nicht in der Liste der Server enthalten ist, klicken Sie auf **SQL Server** mit der rechten Maustaste, und wählen Sie **hinzu SQL Server fügen** aus, um die Verbindung mit der localdb-Instanz mit der standardmäßigen **Windows-Authentifizierung** herzustellen.
 3.  Erweitern Sie den Knoten localdb.
 4.  Erweitern Sie den Ordner **Datenbanken** , um die neue Datenbank anzuzeigen und zur Tabelle **Universitäten** zu navigieren.

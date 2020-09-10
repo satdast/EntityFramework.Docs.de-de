@@ -1,20 +1,22 @@
 ---
 title: Arbeiten mit dbcontext-EF6
+description: Arbeiten mit dbcontext in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: b0e6bddc-8a87-4d51-b1cb-7756df938c23
-ms.openlocfilehash: d961ffd8bed7f5b2f82dcfa30fc0241b7437be50
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/fundamentals/working-with-dbcontext
+ms.openlocfilehash: 7845d401cb0b8910cbfbba80eca2fd098c051b7d
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78413882"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89618208"
 ---
 # <a name="working-with-dbcontext"></a>Arbeiten mit DbContext
 
-Um Entity Framework zum Abfragen, einfügen, aktualisieren und Löschen von Daten mithilfe von .NET-Objekten verwenden zu können, müssen Sie zunächst [ein Modell erstellen](~/ef6/modeling/index.md) , das die im Modell definierten Entitäten und Beziehungen den Tabellen in einer Datenbank zuordnet.
+Um Entity Framework zum Abfragen, einfügen, aktualisieren und Löschen von Daten mithilfe von .NET-Objekten verwenden zu können, müssen Sie zunächst [ein Modell erstellen](xref:ef6/modeling/index) , das die im Modell definierten Entitäten und Beziehungen den Tabellen in einer Datenbank zuordnet.
 
-Sobald Sie über ein Modell verfügen, wird die primäre Klasse, mit der Ihre Anwendung interagiert, `System.Data.Entity.DbContext` (häufig als Kontext Klasse bezeichnet). Sie können einen mit einem Modell verknüpften dbcontext für Folgendes verwenden:
+Sobald Sie über ein Modell verfügen, wird die primäre Klasse, mit der Ihre Anwendung interagiert, `System.Data.Entity.DbContext` (häufig als Kontext Klasse bezeichnet) behandelt. Sie können einen mit einem Modell verknüpften dbcontext für Folgendes verwenden:
 - Schreiben und Ausführen von Abfragen   
 - Materialisieren von Abfrage Ergebnissen als Entitäts Objekte
 - An diesen Objekten vorgenommene Änderungen nachverfolgen
@@ -35,14 +37,14 @@ public class ProductContext : DbContext
 }
 ```  
 
-Wenn Sie über einen Kontext verfügen, können Sie über diese Eigenschaften Abfragen, hinzufügen (mit `Add` oder `Attach` Methoden) oder (mithilfe von `Remove`) Entitäten im Kontext entfernen. Der Zugriff auf eine `DbSet`-Eigenschaft für ein Kontext Objekt stellt eine Start Abfrage dar, die alle Entitäten des angegebenen Typs zurückgibt. Beachten Sie, dass beim Zugreifen auf eine Eigenschaft die Abfrage nicht ausgeführt wird. Eine Abfrage wird ausgeführt, wenn Folgendes gilt:  
+Wenn Sie über einen Kontext verfügen, können Sie über diese Eigenschaften Abfragen, hinzufügen (using- `Add` oder- `Attach` Methoden) oder (mithilfe von `Remove` ) Entitäten im Kontext entfernen. Der Zugriff `DbSet` auf eine Eigenschaft für ein Kontext Objekt stellt eine Start Abfrage dar, die alle Entitäten des angegebenen Typs zurückgibt. Beachten Sie, dass beim Zugreifen auf eine Eigenschaft die Abfrage nicht ausgeführt wird. Eine Abfrage wird ausgeführt, wenn Folgendes gilt:  
 
 - Sie wird durch eine `foreach` (C#)-Anweisung oder eine `For Each` (Visual Basic)-Anweisung aufgezählt.  
-- Sie wird durch einen Auflistungs Vorgang, z. b. `ToArray`, `ToDictionary`oder `ToList`, aufgezählt.  
-- LINQ-Operatoren, wie z. b. `First` oder `Any`, werden im äußersten Teil der Abfrage angegeben.  
-- Eine der folgenden Methoden wird aufgerufen: die `Load`-Erweiterungsmethode, `DbEntityEntry.Reload`, `Database.ExecuteSqlCommand`und `DbSet<T>.Find`, wenn eine Entität mit dem angegebenen Schlüssel nicht gefunden wurde, die bereits im Kontext geladen wurde.  
+- Sie wird durch einen Auflistungs Vorgang, z `ToArray` . b., oder, aufgezählt `ToDictionary` `ToList` .  
+- LINQ-Operatoren, z `First` . b. oder, `Any` werden im äußersten Teil der Abfrage angegeben.  
+- Eine der folgenden Methoden wird aufgerufen: die `Load` Erweiterungsmethode,, `DbEntityEntry.Reload`  `Database.ExecuteSqlCommand` und `DbSet<T>.Find` , wenn eine Entität mit dem angegebenen Schlüssel nicht gefunden wurde, die bereits im Kontext geladen wurde.  
 
-## <a name="lifetime"></a>Gültigkeitsdauer  
+## <a name="lifetime"></a>Lebensdauer  
 
 Die Lebensdauer des Kontexts beginnt, wenn die Instanz erstellt wird, und endet, wenn die Instanz entweder verworfen oder Garbage Collection durchgeführt wird. Verwenden Sie **die Verwendung von, wenn alle** Ressourcen, die die Kontext Steuerelemente haben, am Ende des Blocks verworfen werden sollen. Wenn Sie **mit**verwenden, erstellt der Compiler automatisch einen try/after-Block und ruft **die Freigabe im letzten Block auf** .  
 

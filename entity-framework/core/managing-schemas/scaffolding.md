@@ -1,16 +1,17 @@
 ---
 title: Reverse Engineering-EF Core
+description: Rückgängigmachen eines Modells aus einer vorhandenen Datenbank mithilfe Entity Framework Core
 author: bricelam
 ms.author: bricelam
 ms.date: 11/13/2018
 ms.assetid: 6263EF7D-4989-42E6-BDEE-45DA770342FB
 uid: core/managing-schemas/scaffolding
-ms.openlocfilehash: 423e0502a53f2d99dba6938198fffba9cf0f9ade
-ms.sourcegitcommit: 949faaba02e07e44359e77d7935f540af5c32093
+ms.openlocfilehash: e88be834aa1f2f3be41657f07bc7ace3e34c58aa
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/03/2020
-ms.locfileid: "87526471"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89619216"
 ---
 # <a name="reverse-engineering"></a> Reverse Engineering
 
@@ -155,9 +156,9 @@ Schließlich wird das Modell verwendet, um Code zu generieren. Die entsprechende
 
 ## <a name="limitations"></a>Einschränkungen
 
-* Nicht alles über ein Modell kann mithilfe eines Datenbankschemas dargestellt werden. Beispielsweise sind Informationen zu [**Vererbungs Hierarchien**](../modeling/inheritance.md), [**eigenen Typen**](../modeling/owned-entities.md)und [**Tabellen Aufteilung**](../modeling/table-splitting.md) im Datenbankschema nicht vorhanden. Aus diesem Grund werden diese Konstrukte nie in umgekehrter Reihenfolge entwickelt.
+* Nicht alles über ein Modell kann mithilfe eines Datenbankschemas dargestellt werden. Beispielsweise sind Informationen zu [**Vererbungs Hierarchien**](xref:core/modeling/inheritance), [**eigenen Typen**](xref:core/modeling/owned-entities)und [**Tabellen Aufteilung**](xref:core/modeling/table-splitting) im Datenbankschema nicht vorhanden. Aus diesem Grund werden diese Konstrukte nie in umgekehrter Reihenfolge entwickelt.
 * Außerdem werden **einige Spaltentypen** möglicherweise vom EF Core Anbieter nicht unterstützt. Diese Spalten werden nicht in das Modell eingeschlossen.
-* Sie können Parallelitäts [**Token**](../modeling/concurrency.md)in einem EF Core Modell definieren, um zu verhindern, dass zwei Benutzer gleichzeitig dieselbe Entität aktualisieren. Einige Datenbanken verfügen über einen besonderen Typ, der diese Art von Spalte darstellt (z. b. rowversion in SQL Server). in diesem Fall können wir diese Informationen umkehren. andere Parallelitäts Token werden jedoch nicht in umgekehrter Reihenfolge entwickelt.
+* Sie können Parallelitäts [**Token**](xref:core/modeling/concurrency)in einem EF Core Modell definieren, um zu verhindern, dass zwei Benutzer gleichzeitig dieselbe Entität aktualisieren. Einige Datenbanken verfügen über einen besonderen Typ, der diese Art von Spalte darstellt (z. b. rowversion in SQL Server). in diesem Fall können wir diese Informationen umkehren. andere Parallelitäts Token werden jedoch nicht in umgekehrter Reihenfolge entwickelt.
 * [Der Referenztyp c# 8, der NULL-Werte](/dotnet/csharp/tutorials/nullable-reference-types) zulässt, wird derzeit in Reverse Engineering nicht unterstützt: EF Core generiert immer c#-Code, der annimmt, dass das Feature deaktiviert ist. Beispielsweise werden Textspalten, die NULL-Werte zulassen, als Eigenschaft mit dem Typ `string` erstellt, nicht `string?` mit der fließenden API oder den Daten Anmerkungen, mit denen konfiguriert wird, ob eine Eigenschaft erforderlich ist. Sie können den Gerüst Code bearbeiten und durch c#-Anmerkungen zur NULL-Zulässigkeit ersetzen. Die Gerüstbau Unterstützung für Verweis Typen, die NULL-Werte zulassen, wird von Issue [#15520](https://github.com/aspnet/EntityFrameworkCore/issues/15520)
 
 ## <a name="customizing-the-model"></a>Anpassen des Modells

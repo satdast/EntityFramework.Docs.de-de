@@ -1,19 +1,21 @@
 ---
 title: Fließende Eigenschaften und Typen für die API-Konfiguration und-Zuordnung EF6
+description: Fließende Eigenschaften und Typen der API-Konfiguration und-Zuordnung in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 648ed274-c501-4630-88e0-d728ab5c4057
-ms.openlocfilehash: 7371cc99142ccf8fc6bea237d7d58d1e67fcecec
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/modeling/code-first/fluent/types-and-properties
+ms.openlocfilehash: d49da416b2df5828fce5618cc196e22dfbc2bd34
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78415754"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89618053"
 ---
 # <a name="fluent-api---configuring-and-mapping-properties-and-types"></a>Fließende Eigenschaften und Typen für die API-Konfiguration und-Zuordnung
 Beim Arbeiten mit Entity Framework Code First das Standardverhalten das Zuordnen Ihrer poco-Klassen zu Tabellen mithilfe eines Satzes von Konventionen, die in EF gebacken werden. Manchmal ist es jedoch nicht möglich, diese Konventionen einzuhalten, und die Entitäten müssen einem anderen als dem von den Konventionen vorgegeben werden.  
 
-Es gibt zwei Hauptmethoden zum Konfigurieren von EF, um etwas anderes als Konventionen zu verwenden, nämlich [Anmerkungen](~/ef6/modeling/code-first/data-annotations.md) oder eine EFS-fließende API. Die Anmerkungen decken nur eine Teilmenge der Funktionen der fließenden API ab, daher gibt es zuordnungsszenarien, die mithilfe von Anmerkungen nicht erreicht werden können. In diesem Artikel wird veranschaulicht, wie Sie die fließende API zum Konfigurieren von Eigenschaften verwenden.  
+Es gibt zwei Hauptmethoden zum Konfigurieren von EF, um etwas anderes als Konventionen zu verwenden, nämlich [Anmerkungen](xref:ef6/modeling/code-first/data-annotations) oder eine EFS-fließende API. Die Anmerkungen decken nur eine Teilmenge der Funktionen der fließenden API ab, daher gibt es zuordnungsszenarien, die mithilfe von Anmerkungen nicht erreicht werden können. In diesem Artikel wird veranschaulicht, wie Sie die fließende API zum Konfigurieren von Eigenschaften verwenden.  
 
 Der Zugriff auf die Code First-fließend-API wird am häufigsten durch Überschreiben der [onmodelcreating](https://msdn.microsoft.com/library/system.data.entity.dbcontext.onmodelcreating.aspx) -Methode für den abgeleiteten [dbcontext](https://msdn.microsoft.com/library/system.data.entity.dbcontext.aspx)erreicht. Die folgenden Beispiele veranschaulichen, wie verschiedene Aufgaben mit der fließend-API ausgeführt werden können und wie Sie den Code kopieren und an Ihr Modell anpassen können. Wenn Sie sehen möchten, wie das Modell, mit dem Sie arbeiten können, unverändert verwendet werden kann, wird es am Ende dieses Artikels bereitgestellt.  
 
@@ -29,7 +31,7 @@ modelBuilder.HasDefaultSchema("sales");
 
 ### <a name="custom-conventions-ef6-onwards"></a>Benutzerdefinierte Konventionen (EF6 oder höher)  
 
-Beginnend mit EF6 können Sie eigene Konventionen erstellen, um die in Code First enthaltenen Konventionen zu ergänzen. Weitere Informationen finden Sie unter [benutzerdefinierte Code First Konventionen](~/ef6/modeling/code-first/conventions/custom.md).  
+Beginnend mit EF6 können Sie eigene Konventionen erstellen, um die in Code First enthaltenen Konventionen zu ergänzen. Weitere Informationen finden Sie unter [benutzerdefinierte Code First Konventionen](xref:ef6/modeling/code-first/conventions/custom).  
 
 ## <a name="property-mapping"></a>Eigenschaftszuordnung  
 
@@ -100,7 +102,7 @@ modelBuilder
     .HasColumnAnnotation("Index", new IndexAnnotation(new IndexAttribute()));
 ```  
 
-Eine umfassende Liste der in " **Indexattribute**" verfügbaren Einstellungen finden Sie im Abschnitt " *Index* " der [Code First Daten Anmerkungen](~/ef6/modeling/code-first/data-annotations.md). Dies umfasst das Anpassen des Index namens, das Erstellen eindeutiger Indizes und das Erstellen von mehrspaltigen Indizes.  
+Eine umfassende Liste der in " **Indexattribute**" verfügbaren Einstellungen finden Sie im Abschnitt " *Index* " der [Code First Daten Anmerkungen](xref:ef6/modeling/code-first/data-annotations). Dies umfasst das Anpassen des Index namens, das Erstellen eindeutiger Indizes und das Erstellen von mehrspaltigen Indizes.  
 
 Sie können mehrere Index Anmerkungen für eine einzelne Eigenschaft angeben, indem Sie ein Array von " **Indexattribute** " an den Konstruktor von " **indexannotation**" übergeben.  
 
@@ -321,7 +323,7 @@ modelBuilder.Entity<OfficeAssignment>().ToTable("Instructor");
 
 ### <a name="mapping-an-entity-type-to-insertupdatedelete-stored-procedures-ef6-onwards"></a>Zuordnung eines Entitäts Typs zu gespeicherten Prozeduren zum Einfügen/Aktualisieren/Löschen (EF6 oder höher)  
 
-Beginnend mit EF6 können Sie eine Entität zuordnen, um gespeicherte Prozeduren für Insert Update und DELETE zu verwenden. Weitere Informationen finden Sie unter [Code First gespeicherten Prozeduren INSERT/UPDATE/DELETE](~/ef6/modeling/code-first/fluent/cud-stored-procedures.md).  
+Beginnend mit EF6 können Sie eine Entität zuordnen, um gespeicherte Prozeduren für Insert Update und DELETE zu verwenden. Weitere Informationen finden Sie unter [Code First gespeicherten Prozeduren INSERT/UPDATE/DELETE](xref:ef6/modeling/code-first/fluent/cud-stored-procedures).  
 
 ## <a name="model-used-in-samples"></a>In Beispielen verwendetes Modell  
 

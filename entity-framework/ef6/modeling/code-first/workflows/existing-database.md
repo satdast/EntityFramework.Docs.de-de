@@ -1,17 +1,19 @@
 ---
 title: Code First zu einer vorhandenen Datenbank EF6
+description: Code First in eine vorhandene Datenbank in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: a7e60b74-973d-4480-868f-500a3899932e
-ms.openlocfilehash: 0a51f826422d7e2bff33b968605eace1e754c425
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/modeling/code-first/workflows/existing-database
+ms.openlocfilehash: 7cb58495ea287c59f46e804882cdc089d0f09e7b
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78415598"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89616931"
 ---
 # <a name="code-first-to-an-existing-database"></a>Code First an eine vorhandene Datenbank
-Dieses Video und die schrittweise exemplarische Vorgehensweise bieten eine Einführung in Code First Entwicklung für eine vorhandene Datenbank. Mit Code First können Sie das Modell mithilfe von C\#-oder VB.NET-Klassen definieren. Optional kann eine zusätzliche Konfiguration mithilfe von Attributen in ihren Klassen und Eigenschaften oder mithilfe einer fließenden API ausgeführt werden.
+Dieses Video und die schrittweise exemplarische Vorgehensweise bieten eine Einführung in Code First Entwicklung für eine vorhandene Datenbank. Mit Code First können Sie das Modell mithilfe von C- \# oder VB.NET-Klassen definieren. Optional kann eine zusätzliche Konfiguration mithilfe von Attributen in ihren Klassen und Eigenschaften oder mithilfe einer fließenden API ausgeführt werden.
 
 ## <a name="watch-the-video"></a>Video ansehen
 Dieses Video ist [nun auf Channel 9 verfügbar](https://channel9.msdn.com/blogs/ef/code-first-to-existing-database-ef6-1-onwards-).
@@ -20,7 +22,7 @@ Dieses Video ist [nun auf Channel 9 verfügbar](https://channel9.msdn.com/blogs/
 
 Sie müssen **Visual Studio 2012** oder **Visual Studio 2013** installiert haben, um diese exemplarische Vorgehensweise abzuschließen.
 
-Sie benötigen auch Version **6,1** (oder höher) der **Entity Framework Tools für Visual Studio** . Weitere Informationen zum Installieren der neuesten Version des Entity Framework Tools finden [Sie unter Get Entity Framework](~/ef6/fundamentals/install.md) .
+Sie benötigen auch Version **6,1** (oder höher) der **Entity Framework Tools für Visual Studio** . Weitere Informationen zum Installieren der neuesten Version des Entity Framework Tools finden [Sie unter Get Entity Framework](xref:ef6/fundamentals/install) .
 
 ## <a name="1-create-an-existing-database"></a>1. Erstellen Sie eine vorhandene Datenbank.
 
@@ -29,8 +31,8 @@ Wenn Sie eine vorhandene Datenbank als Ziel haben, wird Sie in der Regel bereits
 Nun generieren wir die Datenbank.
 
 -   Öffnen Sie Visual Studio.
--   **&gt; Server-Explorer anzeigen**
--   Klicken Sie mit der rechten Maustaste auf **Datenverbindungen,&gt; Verbindung hinzufügen...**
+-   **Ansicht- &gt; Server-Explorer**
+-   Klicken Sie mit der rechten Maustaste auf **Datenverbindungen- &gt; Verbindung hinzufügen...**
 -   Wenn Sie über **Server-Explorer** keine Verbindung mit einer Datenbank hergestellt haben, müssen Sie **Microsoft SQL Server** als Datenquelle auswählen.
 
     ![Datenquelle auswählen](~/ef6/media/selectdatasource.png)
@@ -75,7 +77,7 @@ VALUES ('.NET Framework Blog', 'http://blogs.msdn.com/dotnet/')
 Um dies zu gewährleisten, wird eine einfache Konsolenanwendung erstellt, die Code First für den Datenzugriff verwendet:
 
 -   Öffnen Sie Visual Studio.
--   **Datei&gt; Projekt für neue&gt;...**
+-   **Datei- &gt; New- &gt; Project...**
 -   Wählen Sie im Menü auf der linken Seite und **Konsolenanwendung** **Windows** aus.
 -   Geben Sie **codefirstexistingdatabasesample** als Name ein.
 -   Klicken Sie auf **OK**.
@@ -86,7 +88,7 @@ Um dies zu gewährleisten, wird eine einfache Konsolenanwendung erstellt, die Co
 
 Wir verwenden die Entity Framework Tools für Visual Studio, um uns dabei zu unterstützen, Code zu generieren, der der Datenbank zugeordnet wird. Diese Tools erzeugen lediglich Code, den Sie bei Bedarf auch per Hand eingeben können.
 
--   **Projekt&gt; neues Element hinzufügen...**
+-   **Project- &gt; Neues Element hinzufügen...**
 -   Wählen Sie im linken Menü **Daten** aus, und klicken Sie dann auf **ADO.NET Entity Data Model**
 -   Geben Sie **bloggingcontext** als Name ein, und klicken Sie auf **OK** .
 -   Dadurch wird der **Entity Data Model-Assistent** gestartet.
@@ -106,7 +108,7 @@ Nachdem der Reverse-Engineering-Prozess abgeschlossen wurde, wird dem Projekt ei
 
 ### <a name="configuration-file"></a>Konfigurationsdatei
 
-Eine APP. config-Datei wurde dem Projekt hinzugefügt. diese Datei enthält die Verbindungs Zeichenfolge für die vorhandene Datenbank.
+Eine App.config-Datei wurde dem Projekt hinzugefügt. diese Datei enthält die Verbindungs Zeichenfolge für die vorhandene Datenbank.
 
 ``` xml
 <connectionStrings>
@@ -122,7 +124,7 @@ Eine APP. config-Datei wurde dem Projekt hinzugefügt. diese Datei enthält die 
 ### <a name="derived-context"></a>Abgeleiteter Kontext
 
 Dem Projekt wurde eine **bloggingcontext** -Klasse hinzugefügt. Der Kontext stellt eine Sitzung mit der Datenbank dar und ermöglicht das Abfragen und Speichern von Daten.
-Der Kontext macht für jeden Typ in unserem Modell einen **dbset-&lt;TEntity-&gt;** verfügbar. Sie werden auch bemerken, dass der Standardkonstruktor einen Basiskonstruktor mit der Syntax **Name =** aufruft. Dadurch wird Code First, dass die für diesen Kontext zu verwendende Verbindungs Zeichenfolge aus der Konfigurationsdatei geladen werden soll.
+Der Kontext macht eine **dbset- &lt; TEntity &gt; ** für jeden Typ in unserem Modell verfügbar. Sie werden auch bemerken, dass der Standardkonstruktor einen Basiskonstruktor mit der Syntax **Name =** aufruft. Dadurch wird Code First, dass die für diesen Kontext zu verwendende Verbindungs Zeichenfolge aus der Konfigurationsdatei geladen werden soll.
 
 ``` csharp
 public partial class BloggingContext : DbContext
@@ -167,7 +169,7 @@ public partial class Blog
 }
 ```
 
-## <a name="4-reading--writing-data"></a>4. Lesen & Schreiben von Daten
+## <a name="4-reading--writing-data"></a>4. lesen & schreiben von Daten
 
 Nachdem wir nun über ein Modell verfügen, ist es an der Zeit, es für den Zugriff auf einige Daten zu verwenden. Implementieren Sie die **Main** -Methode in **Program.cs** , wie unten gezeigt. Mit diesem Code wird eine neue Instanz des Kontexts erstellt und anschließend verwendet, um einen neuen **Blog**einzufügen. Anschließend wird eine LINQ-Abfrage verwendet, um alle **Blogs** aus der Datenbank alphabetisch nach **Titel**abzurufen.
 
@@ -221,7 +223,7 @@ Der Assistent für die Code First-Datenbank ist darauf ausgelegt, einen Ausgangs
 
 ## <a name="using-code-first-migrations-to-an-existing-database"></a>Verwenden von Code First-Migrationen für eine vorhandene Datenbank
 
-Wenn Sie Code First-Migrationen mit einer vorhandenen Datenbank verwenden möchten, lesen Sie [Code First-Migrationen zu einer vorhandenen Datenbank](~/ef6/modeling/code-first/migrations/existing-database.md).
+Wenn Sie Code First-Migrationen mit einer vorhandenen Datenbank verwenden möchten, lesen Sie [Code First-Migrationen zu einer vorhandenen Datenbank](xref:ef6/modeling/code-first/migrations/existing-database).
 
 ## <a name="summary"></a>Zusammenfassung
 

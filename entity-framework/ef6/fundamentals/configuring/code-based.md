@@ -1,26 +1,28 @@
 ---
 title: Code basierte Konfiguration-EF6
+description: Code basierte Konfiguration in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 13886d24-2c74-4a00-89eb-aa0dee328d83
-ms.openlocfilehash: 079a4ab30af74eac8b1f51ece5801ff40a867a29
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/fundamentals/configuring/code-based
+ms.openlocfilehash: 643aefff1d8a143e7df8251eff4e5051e2c6bd08
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78414800"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89618492"
 ---
 # <a name="code-based-configuration"></a>Code basierte Konfiguration
 > [!NOTE]
 > **Nur EF6 und höher:** Die Features, APIs usw., die auf dieser Seite erläutert werden, wurden in Entity Framework 6 eingeführt. Wenn Sie eine frühere Version verwenden, gelten manche Informationen nicht.  
 
-Die Konfiguration für eine Entity Framework Anwendung kann in einer Konfigurationsdatei ("App. config/Web. config") oder über Code angegeben werden. Letzteres wird als Code basierte Konfiguration bezeichnet.  
+Die Konfiguration für eine Entity Framework Anwendung kann in einer Konfigurationsdatei (app.config/web.config) oder über Code angegeben werden. Letzteres wird als Code basierte Konfiguration bezeichnet.  
 
-Die Konfiguration in einer Konfigurationsdatei wird in einem [separaten Artikel](config-file.md)beschrieben. Die Konfigurationsdatei hat Vorrang vor der Code basierten Konfiguration. Anders ausgedrückt: Wenn eine Konfigurationsoption sowohl im Code als auch in der Konfigurationsdatei festgelegt wird, wird die Einstellung in der Konfigurationsdatei verwendet.  
+Die Konfiguration in einer Konfigurationsdatei wird in einem [separaten Artikel](xref:ef6/fundamentals/configuring/config-file)beschrieben. Die Konfigurationsdatei hat Vorrang vor der Code basierten Konfiguration. Anders ausgedrückt: Wenn eine Konfigurationsoption sowohl im Code als auch in der Konfigurationsdatei festgelegt wird, wird die Einstellung in der Konfigurationsdatei verwendet.  
 
 ## <a name="using-dbconfiguration"></a>Verwenden von dbconfiguration  
 
-Die Code basierte Konfiguration in EF6 und höher wird durch Erstellen einer Unterklasse von System. Data. Entity. config. dbconfiguration erreicht. Beachten Sie die folgenden Richtlinien, wenn Sie dbconfiguration Unterklassen:  
+Die Code basierte Konfiguration in EF6 und höher wird durch Erstellen einer Unterklasse von System.Data.Entity.Config erreicht. DbConfiguration. Beachten Sie die folgenden Richtlinien, wenn Sie dbconfiguration Unterklassen:  
 
 - Erstellen Sie nur eine dbconfiguration-Klasse für Ihre Anwendung. Diese Klasse gibt App-Domänen weite Einstellungen an.  
 - Platzieren Sie die dbconfiguration-Klasse in der gleichen Assembly wie die dbcontext-Klasse. (Weitere Informationen finden Sie im Abschnitt *Verschieben von dbconfiguration* .)  

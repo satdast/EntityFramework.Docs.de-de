@@ -1,14 +1,16 @@
 ---
 title: Code First-Migrationen mit einer vorhandenen Datenbank EF6
+description: Code First-Migrationen mit einer vorhandenen Datenbank in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: f0cc4f93-67dd-4664-9753-0a9f913814db
-ms.openlocfilehash: eb7948eafb1322cabcf69b47bd5411f762fe8498
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/modeling/code-first/migrations/existing-database
+ms.openlocfilehash: f7638cac17bf9152c829ae415fc941aa0a0c6cab
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78415694"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89616939"
 ---
 # <a name="code-first-migrations-with-an-existing-database"></a>Code First-Migrationen mit einer vorhandenen Datenbank
 > [!NOTE]
@@ -17,7 +19,7 @@ ms.locfileid: "78415694"
 In diesem Artikel wird die Verwendung von Code First-Migrationen mit einer vorhandenen Datenbank behandelt, die nicht von Entity Framework erstellt wurde.
 
 > [!NOTE]
-> In diesem Artikel wird davon ausgegangen, dass Sie wissen, wie Code First-Migrationen in einfachen Szenarien verwendet wird. Andernfalls müssen Sie [Code First-Migrationen](~/ef6/modeling/code-first/migrations/index.md) lesen, bevor Sie fortfahren.
+> In diesem Artikel wird davon ausgegangen, dass Sie wissen, wie Code First-Migrationen in einfachen Szenarien verwendet wird. Andernfalls müssen Sie [Code First-Migrationen](xref:ef6/modeling/code-first/migrations/index) lesen, bevor Sie fortfahren.
 
 ## <a name="screencasts"></a>Screencasts
 
@@ -33,7 +35,7 @@ Wenn Sie auf die Konzepte aus dem vorherigen Video aufbauen, wird in [diesem Scr
 
 ## <a name="step-1-create-a-model"></a>Schritt 1: Erstellen eines Modells
 
-Der erste Schritt besteht darin, ein Code First Modell zu erstellen, das Ihre vorhandene Datenbank als Ziel verwendet. Im Thema [Code First zu einer vorhandenen Datenbank](~/ef6/modeling/code-first/workflows/existing-database.md) finden Sie eine ausführliche Anleitung zur Vorgehensweise.
+Der erste Schritt besteht darin, ein Code First Modell zu erstellen, das Ihre vorhandene Datenbank als Ziel verwendet. Im Thema [Code First zu einer vorhandenen Datenbank](xref:ef6/modeling/code-first/workflows/existing-database) finden Sie eine ausführliche Anleitung zur Vorgehensweise.
 
 >[!NOTE]
 > Es ist wichtig, die restlichen Schritte in diesem Thema auszuführen, bevor Sie Änderungen am Modell vornehmen, die Änderungen am Datenbankschema erfordern. Die folgenden Schritte erfordern, dass das Modell mit dem Datenbankschema synchron ist.
@@ -42,7 +44,7 @@ Der erste Schritt besteht darin, ein Code First Modell zu erstellen, das Ihre vo
 
 Der nächste Schritt besteht darin, Migrationen zu aktivieren. Hierzu können Sie den Befehl **enable-Migrationen** in der Paket-Manager-Konsole ausführen.
 
-Mit diesem Befehl wird ein Ordner in der Projekt Mappe mit dem Namen Migrationen erstellt und eine einzelne Klasse als Konfiguration bezeichnet. Die Konfigurations Klasse ist der Ort, an dem Sie Migrationen für Ihre Anwendung konfigurieren. Weitere Informationen dazu finden Sie im [Code First-Migrationen](~/ef6/modeling/code-first/migrations/index.md) Thema.
+Mit diesem Befehl wird ein Ordner in der Projekt Mappe mit dem Namen Migrationen erstellt und eine einzelne Klasse als Konfiguration bezeichnet. Die Konfigurations Klasse ist der Ort, an dem Sie Migrationen für Ihre Anwendung konfigurieren. Weitere Informationen dazu finden Sie im [Code First-Migrationen](xref:ef6/modeling/code-first/migrations/index) Thema.
 
 ## <a name="step-3-add-an-initial-migration"></a>Schritt 3: Hinzufügen einer ersten Migration
 
@@ -53,10 +55,10 @@ Nachdem Migrationen erstellt und auf die lokale Datenbank angewendet wurden, kö
 
 ### <a name="option-one-use-existing-schema-as-a-starting-point"></a>Option 1: vorhandenes Schema als Ausgangspunkt verwenden
 
-Code First-Migrationen verwendet eine Momentaufnahme des Modells, das in der letzten Migration gespeichert ist, um Änderungen am Modell zu erkennen (Ausführliche Informationen hierzu finden Sie in [Code First-Migrationen in Team Umgebungen](~/ef6/modeling/code-first/migrations/teams.md)). Da wir davon ausgehen, dass die Datenbanken bereits über das Schema des aktuellen Modells verfügen, generieren wir eine leere Migration (No-OP), die das aktuelle Modell als Momentaufnahme hat.
+Code First-Migrationen verwendet eine Momentaufnahme des Modells, das in der letzten Migration gespeichert ist, um Änderungen am Modell zu erkennen (Ausführliche Informationen hierzu finden Sie in [Code First-Migrationen in Team Umgebungen](xref:ef6/modeling/code-first/migrations/teams)). Da wir davon ausgehen, dass die Datenbanken bereits über das Schema des aktuellen Modells verfügen, generieren wir eine leere Migration (No-OP), die das aktuelle Modell als Momentaufnahme hat.
 
 1.  Führen Sie den Befehl **Add-Migration InitialCreate – ignorechanges** in der Paket-Manager-Konsole aus. Dadurch wird eine leere Migration mit dem aktuellen Modell als Momentaufnahme erstellt.
-2.  Führen Sie den Befehl **Update-Database** in der Paket-Manager-Konsole aus. Dadurch wird die InitialCreate-Migration auf die Datenbank angewendet. Da die tatsächliche Migration keine Änderungen enthält, wird der \_\_migrationshistory-Tabelle eine Zeile hinzugefügt, die anzeigt, dass diese Migration bereits angewendet wurde.
+2.  Führen Sie den Befehl **Update-Database** in der Paket-Manager-Konsole aus. Dadurch wird die InitialCreate-Migration auf die Datenbank angewendet. Da die tatsächliche Migration keine Änderungen enthält, wird der migrationshistory-Tabelle einfach eine Zeile hinzugefügt, die \_ \_ anzeigt, dass diese Migration bereits angewendet wurde.
 
 ### <a name="option-two-use-empty-database-as-a-starting-point"></a>Option 2: leere Datenbank als Ausgangspunkt verwenden
 
@@ -64,7 +66,7 @@ In diesem Szenario sind Migrationen erforderlich, um die gesamte Datenbank von G
 
 1.  Führen Sie den Befehl **Add-Migration InitialCreate** in der Paket-Manager-Konsole aus. Dadurch wird eine Migration erstellt, um das vorhandene Schema zu erstellen.
 2.  Kommentieren Sie den gesamten Code in der up-Methode der neu erstellten Migration aus. Auf diese Weise können wir die Migration auf die lokale Datenbank anwenden, ohne zu versuchen, alle Tabellen neu zu erstellen usw., die bereits vorhanden sind.
-3.  Führen Sie den Befehl **Update-Database** in der Paket-Manager-Konsole aus. Dadurch wird die InitialCreate-Migration auf die Datenbank angewendet. Da die tatsächliche Migration keine Änderungen enthält (da wir Sie vorübergehend auskommentiert haben), wird der \_\_migrationshistory-Tabelle eine Zeile hinzugefügt, die anzeigt, dass diese Migration bereits angewendet wurde.
+3.  Führen Sie den Befehl **Update-Database** in der Paket-Manager-Konsole aus. Dadurch wird die InitialCreate-Migration auf die Datenbank angewendet. Da die tatsächliche Migration keine Änderungen enthält (da wir Sie vorübergehend auskommentiert haben), wird der migrationshistory-Tabelle einfach eine Zeile hinzugefügt, die \_ \_ anzeigt, dass diese Migration bereits angewendet wurde.
 4.  Kommentieren Sie den Code in der up-Methode aus. Dies bedeutet, dass beim Anwenden dieser Migration auf zukünftige Datenbanken das Schema, das bereits in der lokalen Datenbank vorhanden war, durch Migrationen erstellt wird.
 
 ## <a name="things-to-be-aware-of"></a>Worauf Sie achten sollten
@@ -80,7 +82,7 @@ Im folgenden finden Sie einige Beispiele für den Fall, dass Sie sich Folgendes 
 **Wenn Sie "Option 1: vorhandenes Schema als Ausgangspunkt verwenden" aus Schritt 3 verwendet haben:**
 
 -   Wenn zukünftige Änderungen im Modell eine Änderung oder Löschung eines Datenbankobjekts erfordern, das anders benannt ist, müssen Sie die Gerüst Migration ändern, um den richtigen Namen anzugeben. Die Migrations-APIs verfügen über einen optionalen Name-Parameter, mit dem Sie dies tun können.
-    Beispielsweise kann Ihr vorhandenes Schema über eine Post-Tabelle mit einer BlogId-Fremdschlüssel Spalte verfügen, die einen Index namens indexfk\_BlogId aufweist. Standardmäßig erwarten Migrationen jedoch, dass dieser Index den Namen "IX\_BlogId hat. Wenn Sie eine Änderung an Ihrem Modell vornehmen, die dazu führt, dass dieser Index gelöscht wird, müssen Sie den aufgerücherten DropIndex-Aufrufwert ändern, um den indexfk-\_BlogId-Namen anzugeben.
+    Beispielsweise kann Ihr vorhandenes Schema über eine Post-Tabelle mit einer BlogId-Fremdschlüssel Spalte verfügen, die einen Index namens indexfk \_ BlogId aufweist. Standardmäßig erwarten Migrationen jedoch, dass dieser Index "IX BlogId" genannt wird \_ . Wenn Sie eine Änderung an Ihrem Modell vornehmen, die dazu führt, dass dieser Index gelöscht wird, müssen Sie den aufgerücherten DropIndex-Befehl ändern, um den indexfk- \_ BlogId-Namen anzugeben.
 
 **Wenn Sie "Option 2: leere Datenbank als Ausgangspunkt verwenden" aus Schritt 3 verwendet haben:**
 

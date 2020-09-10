@@ -1,14 +1,16 @@
 ---
 title: Testen mit einem Simulations Framework EF6
+description: Testen mit einem Simulations Framework in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: bd66a638-d245-44d4-8e71-b9c6cb335cc7
-ms.openlocfilehash: 790e077c5b30c4a68a96b3c1a99b40893b2bbe55
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/fundamentals/testing/mocking
+ms.openlocfilehash: 01890ab3bb8dbf0caa7b3eff797e53b06bc8ec9b
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78415994"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89618301"
 ---
 # <a name="testing-with-a-mocking-framework"></a>Testen mit einem Frameworks
 > [!NOTE]
@@ -23,7 +25,7 @@ Es gibt zwei verschiedene Ansätze, die verwendet werden können, um eine in-Mem
 - **Erstellen Sie eigene Test Doubles** – diese Vorgehensweise umfasst das Schreiben einer eigenen in-Memory-Implementierung Ihres Kontexts und von dbsets. Dadurch haben Sie viele Kontrolle darüber, wie sich die Klassen Verhalten, aber Sie können das Schreiben und das Besitz einer angemessenen Menge an Code einschließen.  
 - **Verwenden eines kontextbasierten Frameworks zum Erstellen von Test Doubles** – mithilfe eines kontextbasierten Frameworks (wie z. b. von muq) können Sie die in-Memory-Implementierungen Ihres Kontexts und die festgelegt werden, die für Sie dynamisch zur Laufzeit erstellt werden.  
 
-In diesem Artikel wird die Verwendung eines-Frameworks behandelt. Informationen zum Erstellen eigener Test Doubles finden Sie [unter Testen mit ihren eigenen Test Doubles](writing-test-doubles.md).  
+In diesem Artikel wird die Verwendung eines-Frameworks behandelt. Informationen zum Erstellen eigener Test Doubles finden Sie [unter Testen mit ihren eigenen Test Doubles](xref:ef6/fundamentals/testing/writing-test-doubles).  
 
 Um die Verwendung von EF mit einem-Frameworks zu veranschaulichen, verwenden wir "muq". Die einfachste Möglichkeit zum Aufrufen von "muq" ist die Installation des " [muq"-Pakets von nuget](https://nuget.org/packages/Moq/).  
 
@@ -84,7 +86,7 @@ namespace TestingDemo
 
 Beachten Sie, dass die dbset-Eigenschaften für den Kontext als virtuell markiert sind. Dadurch kann das Simulation Framework aus unserem Kontext abgeleitet werden und diese Eigenschaften mit einer simulierte Implementierung überschreiben.  
 
-Wenn Sie Code First verwenden, können Sie die Klassen direkt bearbeiten. Wenn Sie den EF-Designer verwenden, müssen Sie die T4-Vorlage bearbeiten, mit der ihr Kontext generiert wird. Öffnen Sie die \<MODEL_NAME\>. Context.tt-Datei, die in der EDMX-Datei gespeichert ist, suchen Sie das folgende Code Fragment, und fügen Sie das Virtual-Schlüsselwort wie gezeigt hinzu.  
+Wenn Sie Code First verwenden, können Sie die Klassen direkt bearbeiten. Wenn Sie den EF-Designer verwenden, müssen Sie die T4-Vorlage bearbeiten, mit der ihr Kontext generiert wird. Öffnen Sie die \<model_name\> . Context.tt-Datei, die in der EDMX-Datei gespeichert ist, suchen Sie das folgende Code Fragment, und fügen Sie das Virtual-Schlüsselwort wie gezeigt hinzu.  
 
 ``` csharp
 public string DbSet(EntitySet entitySet)
@@ -150,7 +152,7 @@ namespace TestingDemo
 
 ## <a name="testing-non-query-scenarios"></a>Testen von nicht-Abfrage Szenarios  
 
-Das ist alles, was wir tun müssen, um nicht-Abfrage Methoden zu testen. Im folgenden Test wird "muq" verwendet, um einen Kontext zu erstellen. Anschließend erstellt er einen dbset-\<Blog\> und erstellt ihn, um von der Blogs-Eigenschaft des Kontexts zurückgegeben zu werden. Im nächsten Schritt wird der Kontext verwendet, um einen neuen Blog Dienst zu erstellen, der dann verwendet wird, um mithilfe der addblog-Methode einen neuen Blog zu erstellen –. Schließlich wird mit dem Test überprüft, ob der Dienst einen neuen Blog hinzugefügt und "SaveChanges" für den Kontext aufgerufen hat.  
+Das ist alles, was wir tun müssen, um nicht-Abfrage Methoden zu testen. Im folgenden Test wird "muq" verwendet, um einen Kontext zu erstellen. Anschließend wird ein dbset erstellt \<Blog\> , das aus der Blogs-Eigenschaft des Kontexts zurückgegeben wird. Im nächsten Schritt wird der Kontext verwendet, um einen neuen Blog Dienst zu erstellen, der dann verwendet wird, um mithilfe der addblog-Methode einen neuen Blog zu erstellen –. Schließlich wird mit dem Test überprüft, ob der Dienst einen neuen Blog hinzugefügt und "SaveChanges" für den Kontext aufgerufen hat.  
 
 ``` csharp
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -182,7 +184,7 @@ namespace TestingDemo
 
 ## <a name="testing-query-scenarios"></a>Testen von Abfrage Szenarios  
 
-Um Abfragen für unseren dbset-Test Double ausführen zu können, müssen wir eine Implementierung von iquervable einrichten. Der erste Schritt besteht darin, einige Daten im Arbeitsspeicher zu erstellen – wir verwenden eine Liste\<Blog\>. Im nächsten Schritt erstellen wir einen Kontext und einen dbset-\<Blog\> dann die iquerable-Implementierung für das dbset zu verknüpfen – Sie delegieren lediglich an den LINQ to Objects Anbieter, der mit List\<t\>funktioniert.  
+Um Abfragen für unseren dbset-Test Double ausführen zu können, müssen wir eine Implementierung von iquervable einrichten. Der erste Schritt besteht darin, einige Daten im Arbeitsspeicher zu erstellen – wir verwenden eine Liste \<Blog\> . Als Nächstes erstellen wir einen Kontext und dbset und \<Blog\> Verknüpfen dann die iquerable-Implementierung für das dbset – Sie delegieren lediglich an den LINQ to Objects-Anbieter, der mit List arbeitet \<T\> .  
 
 Wir können dann basierend auf den Test Doubles einen BlogService erstellen und sicherstellen, dass die Daten, die wir von getallblogs erhalten, nach dem Namen geordnet sind.  
 
@@ -235,7 +237,7 @@ In Entity Framework 6 wurde eine Reihe von Erweiterungs Methoden eingeführt, di
 
 Da Entity Framework Abfragen LINQ verwenden, werden die Erweiterungs Methoden für iquervable und IEnumerable definiert. Da Sie jedoch nur für die Verwendung mit Entity Framework entworfen wurden, erhalten Sie möglicherweise die folgende Fehlermeldung, wenn Sie versuchen, Sie in einer LINQ-Abfrage zu verwenden, die keine Entity Framework Abfrage ist:
 
-> Die iquervable-Quelle implementiert idbasyncenumerable-{0}nicht. Nur Quellen, die idbasyncenumerable implementieren, können für Entity Framework asynchronen Vorgängen verwendet werden. Weitere Informationen finden Sie unter [http://go.microsoft.com/fwlink/?LinkId=287068](https://go.microsoft.com/fwlink/?LinkId=287068).  
+> Die iquervable-Quelle implementiert idbasyncenumerable nicht {0} . Nur Quellen, die idbasyncenumerable implementieren, können für Entity Framework asynchronen Vorgängen verwendet werden. Weitere Informationen finden Sie unter [http://go.microsoft.com/fwlink/?LinkId=287068](https://go.microsoft.com/fwlink/?LinkId=287068) .  
 
 Obwohl die asynchronen Methoden nur bei der Ausführung für eine EF-Abfrage unterstützt werden, können Sie Sie in Ihrem Komponenten Test verwenden, wenn Sie für einen Test Double-Wert im Arbeitsspeicher eines dbsets ausgeführt werden.  
 

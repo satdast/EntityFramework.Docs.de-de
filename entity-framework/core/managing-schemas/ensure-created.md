@@ -1,19 +1,20 @@
 ---
 title: 'Erstellen und Löschen von APIs: EF Core'
+description: APIs zum Erstellen und Löschen von Datenbanken mit Entity Framework Core
 author: bricelam
 ms.author: bricelam
 ms.date: 11/07/2018
 uid: core/managing-schemas/ensure-created
-ms.openlocfilehash: 32ac6cd043df73cd041780ec4c8805675adc5ab1
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.openlocfilehash: 25e7352269531e881e83e44ea90108f12d4dcbea
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78414320"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89619232"
 ---
 # <a name="create-and-drop-apis"></a>Erstellen und Löschen von APIs
 
-Die ensuneu-und ensuredeleted-Methoden stellen eine leichte Alternative zu [Migrationen](migrations/index.md) zum Verwalten des Datenbankschemas dar. Diese Methoden sind in Szenarios nützlich, in denen die Daten vorübergehend sind und gelöscht werden können, wenn sich das Schema ändert. Beispielsweise während der Prototyperstellung in Tests oder für lokale Caches.
+Die ensuneu-und ensuredeleted-Methoden stellen eine leichte Alternative zu [Migrationen](xref:core/managing-schemas/migrations/index) zum Verwalten des Datenbankschemas dar. Diese Methoden sind in Szenarios nützlich, in denen die Daten vorübergehend sind und gelöscht werden können, wenn sich das Schema ändert. Beispielsweise während der Prototyperstellung in Tests oder für lokale Caches.
 
 Einige Anbieter (insbesondere nicht relationale) unterstützen keine Migrationen. Für diese Anbieter ist "ensuneu" oft die einfachste Möglichkeit, das Datenbankschema zu initialisieren.
 

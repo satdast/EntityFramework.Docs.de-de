@@ -1,16 +1,17 @@
 ---
 title: Datenseeding-EF Core
+description: Verwenden von datenseeding zum Auffüllen einer Datenbank mit einem anfänglichen Satz von Daten mithilfe von Entity Framework Core
 author: AndriySvyryd
 ms.author: ansvyryd
 ms.date: 11/02/2018
 ms.assetid: 3154BF3C-1749-4C60-8D51-AE86773AA116
 uid: core/modeling/data-seeding
-ms.openlocfilehash: 5c056c600f696ad1443ddb7b8c95c4b0ead06d21
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.openlocfilehash: cdf189a4d2ec00f2bb094045541a98d1a66ffefc
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78414572"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89619380"
 ---
 # <a name="data-seeding"></a>Datenseeding
 
@@ -32,7 +33,7 @@ Anders als in EF6 kann das Seeding von Daten in EF Core einem Entitätstyp als T
 > [!NOTE]
 > Bei Migrationen werden Modelländerungen nur berücksichtigt, wenn bestimmt wird, welcher Vorgang ausgeführt werden soll, um die Ausgangsdaten in den gewünschten Zustand zu bringen. Daher können alle Änderungen an den Daten, die außerhalb der Migrationen durchgeführt werden, verloren gehen oder einen Fehler verursachen.
 
-So werden z. b. Seed-Daten für eine `Blog` in `OnModelCreating`konfiguriert:
+So werden z. b. Seed-Daten für einen `Blog` in konfiguriert `OnModelCreating` :
 
 [!code-csharp[BlogSeed](../../../samples/core/Modeling/DataSeeding/DataSeedingContext.cs?name=BlogSeed)]
 
@@ -55,7 +56,7 @@ Nachdem die Daten dem Modell hinzugefügt [wurden, sollten](xref:core/managing-s
 > [!TIP]
 > Wenn Sie Migrationen als Teil einer automatisierten Bereitstellung anwenden müssen, können Sie [ein SQL-Skript erstellen](xref:core/managing-schemas/migrations/index#generate-sql-scripts) , das vor der Ausführung in der Vorschau angezeigt werden kann.
 
-Alternativ können Sie `context.Database.EnsureCreated()` verwenden, um eine neue Datenbank zu erstellen, die die Ausgangsdaten enthält, z. b. für eine Testdatenbank oder für die Verwendung des in-Memory-Anbieters oder einer nicht-beziehungsdatenbank. Beachten Sie Folgendes: Wenn die Datenbank bereits vorhanden ist, werden `EnsureCreated()` weder das Schema noch die Seed-Daten in der Datenbank aktualisieren. Bei relationalen Datenbanken sollten Sie `EnsureCreated()` nicht abrufen, wenn Sie beabsichtigen, Migrationen zu verwenden.
+Alternativ können Sie verwenden, `context.Database.EnsureCreated()` um eine neue Datenbank zu erstellen, die die Ausgangsdaten enthält, z. b. für eine Testdatenbank, oder wenn Sie den in-Memory-Anbieter oder eine nicht-beziehungsdatenbank verwenden. Beachten Sie Folgendes: Wenn die Datenbank bereits vorhanden ist, `EnsureCreated()` aktualisiert weder das Schema noch die Seed-Daten in der Datenbank. Bei relationalen Datenbanken sollten Sie nicht anrufen `EnsureCreated()` , wenn Sie beabsichtigen, Migrationen zu verwenden.
 
 ### <a name="limitations-of-model-seed-data"></a>Einschränkungen von modellseed-Daten
 
@@ -76,13 +77,13 @@ Wenn in Ihrem Szenario eine der folgenden Szenarien enthalten ist, wird empfohle
 
 ## <a name="manual-migration-customization"></a>Anpassung der manuellen Migration
 
-Beim Hinzufügen einer Migration werden die Änderungen an den Daten, die mit `HasData` angegeben werden, in Aufrufe von `InsertData()`, `UpdateData()`und `DeleteData()`transformiert. Eine Möglichkeit, einige der Einschränkungen von `HasData` zu umgehen, besteht darin, diese Aufrufe oder [benutzerdefinierten Vorgänge](xref:core/managing-schemas/migrations/operations) stattdessen manuell zur Migration hinzuzufügen.
+Beim Hinzufügen einer Migration werden die Änderungen an den mit angegebenen Daten `HasData` in Aufrufe von `InsertData()` , und transformiert `UpdateData()` `DeleteData()` . Eine Möglichkeit, einige der Einschränkungen von `HasData` zu umgehen, besteht darin, diese Aufrufe oder [benutzerdefinierten Vorgänge](xref:core/managing-schemas/migrations/operations) stattdessen manuell zur Migration hinzuzufügen.
 
 [!code-csharp[CustomInsert](../../../samples/core/Modeling/DataSeeding/Migrations/20181102235626_Initial.cs?name=CustomInsert)]
 
 ## <a name="custom-initialization-logic"></a>Benutzerdefinierte Initialisierungs Logik
 
-Eine einfache und leistungsfähige Methode zum Durchführen von datenseeding ist die Verwendung von [`DbContext.SaveChanges()`](xref:core/saving/index) , bevor die Haupt Anwendungslogik mit der Ausführung beginnt.
+Eine einfache und leistungsfähige Methode zum Durchführen von datenseeding ist die Verwendung von, [`DbContext.SaveChanges()`](xref:core/saving/index) bevor die Haupt Anwendungslogik mit der Ausführung beginnt.
 
 [!code-csharp[Main](../../../samples/core/Modeling/DataSeeding/Program.cs?name=CustomSeeding)]
 

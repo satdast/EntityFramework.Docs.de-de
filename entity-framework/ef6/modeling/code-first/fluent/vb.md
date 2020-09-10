@@ -1,22 +1,24 @@
 ---
 title: Fließende API mit VB.net-EF6
+description: Fließende API mit VB.net in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 763dc6a2-764a-4600-896c-f6f13abf56ec
-ms.openlocfilehash: 1c889877b827408919c6170cf997e8805cc607cf
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/modeling/code-first/fluent/vb
+ms.openlocfilehash: d6430ee254c6f0d5f093961d25902326022226cd
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78415748"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89616976"
 ---
 # <a name="fluent-api-with-vbnet"></a>Fließende API mit VB.net
-Mit Code First können Sie das Modell mithilfe von C\#-oder VB.NET-Klassen definieren. Die zusätzliche Konfiguration kann optional mithilfe von Attributen in ihren Klassen und Eigenschaften oder mithilfe einer fließenden API ausgeführt werden. Diese exemplarische Vorgehensweise veranschaulicht, wie Sie mithilfe von VB.net eine fließende API-Konfiguration ausführen.
+Mit Code First können Sie das Modell mithilfe von C- \# oder VB.NET-Klassen definieren. Die zusätzliche Konfiguration kann optional mithilfe von Attributen in ihren Klassen und Eigenschaften oder mithilfe einer fließenden API ausgeführt werden. Diese exemplarische Vorgehensweise veranschaulicht, wie Sie mithilfe von VB.net eine fließende API-Konfiguration ausführen.
 
 Auf dieser Seite wird davon ausgegangen, dass Sie über grundlegende Kenntnisse Code First verfügen. Weitere Informationen zu Code First finden Sie in den folgenden exemplarischen Vorgehensweisen:
 
--   [Code First to a New Database](~/ef6/modeling/code-first/workflows/new-database.md) (Code First für eine neue Datenbank)
--   [Code First an eine vorhandene Datenbank](~/ef6/modeling/code-first/workflows/existing-database.md)
+-   [Code First to a New Database](xref:ef6/modeling/code-first/workflows/new-database) (Code First für eine neue Datenbank)
+-   [Code First an eine vorhandene Datenbank](xref:ef6/modeling/code-first/workflows/existing-database)
 
 ## <a name="pre-requisites"></a>Voraussetzungen
 
@@ -29,7 +31,7 @@ Wenn Sie Visual Studio 2010 verwenden, müssen Sie auch [nuget](https://visualst
 Um die Dinge einfach zu halten, erstellen wir eine einfache Konsolenanwendung, die Code First verwendet, um Daten Zugriffe auszuführen.
 
 -   Öffnen Sie Visual Studio.
--   **Datei&gt; Projekt für neue&gt;...**
+-   **Datei- &gt; New- &gt; Project...**
 -   Wählen Sie im Menü auf der linken Seite und **Konsolenanwendung** **Windows** aus.
 -   Geben Sie **codefirstvbsample** als Name ein.
 -   Klicken Sie auf **OK**.
@@ -137,14 +139,14 @@ End Class
 
 Wir beginnen mit der Verwendung von Typen aus der Entity Framework daher müssen wir das nuget-Paket "EntityFramework" hinzufügen.
 
--   \* * Project –&gt; **nuget-Pakete verwalten...**
+-   * * Projekt – &gt; **nuget-Pakete verwalten...**
 > [!NOTE]
 > Wenn Sie nicht über die **nuget-Pakete verwalten verfügen...** Option Sie sollten die [neueste Version von nuget](https://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c) installieren.
 -   Auswählen der Registerkarte " **Online** "
 -   Auswählen des " **EntityFramework** "-Pakets
--   Klicken Sie auf **Installieren**
+-   Klicken Sie auf **Install** (Installieren).
 
-Nun ist es an der Zeit, einen abgeleiteten Kontext zu definieren, der eine Sitzung mit der Datenbank darstellt, sodass wir Daten Abfragen und speichern können. Wir definieren einen Kontext, der von System. Data. Entity. dbcontext abgeleitet ist und für jede Klasse in unserem Modell eine typisierte dbset-&lt;TEntity-&gt; verfügbar macht.
+Nun ist es an der Zeit, einen abgeleiteten Kontext zu definieren, der eine Sitzung mit der Datenbank darstellt, sodass wir Daten Abfragen und speichern können. Wir definieren einen Kontext, der von System. Data. Entity. dbcontext abgeleitet ist und &lt; &gt; für jede Klasse in unserem Modell eine typisierte dbset TEntity verfügbar macht.
 
 -   Fügen Sie dem Projekt eine neue Klasse hinzu, geben Sie " **schoolContext** " als Klassennamen ein.
 -   Ersetzen Sie den Inhalt der neuen Klasse durch den folgenden Code:
@@ -171,7 +173,7 @@ End Class
 
 ## <a name="configuring-with-the-fluent-api"></a>Konfigurieren mit der fließend-API
 
-In diesem Abschnitt wird veranschaulicht, wie Sie mithilfe der fließenden APIs Typen für Tabellen Zuordnung, Eigenschaften der Spalten Zuordnung und Beziehungen zwischen Tabellen\\Typ in Ihrem Modell konfigurieren. Die fließende API wird über den Typ " **dbmodelbuilder** " verfügbar gemacht und wird am häufigsten aufgerufen, indem die **onmodelcreating** -Methode für **dbcontext**überschrieben wird.
+In diesem Abschnitt wird veranschaulicht, wie Sie mithilfe der fließenden APIs Typen für Tabellen Zuordnung, Eigenschaften der Spalten Zuordnung und Beziehungen zwischen Tabellen \\ Typen in Ihrem Modell konfigurieren. Die fließende API wird über den Typ " **dbmodelbuilder** " verfügbar gemacht und wird am häufigsten aufgerufen, indem die **onmodelcreating** -Methode für **dbcontext**überschrieben wird.
 
 -   Kopieren Sie den folgenden Code, und fügen Sie ihn der **onmodelcreating** -Methode hinzu, die in der **schoolContext** -Klasse definiert ist
 
