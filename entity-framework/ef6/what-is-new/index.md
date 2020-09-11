@@ -1,21 +1,22 @@
 ---
 title: Neuerungen – EF6
+description: Neues in Entity Framework 6
 author: divega
 ms.date: 09/12/2019
 ms.assetid: 41d1f86b-ce66-4bf2-8963-48514406fb4c
 uid: ef6/what-is-new/index
-ms.openlocfilehash: e0367aeefd682434bf520301776bcff4f0e72e06
-ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
+ms.openlocfilehash: 71854e0a7009b35742a70724210708a284f50a3d
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "80136142"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89619762"
 ---
 # <a name="whats-new-in-ef6"></a>Neuerungen in EF6
 
 Es wird dringend empfohlen, dass Sie die neueste veröffentlichte Version von Entity Framework verwenden. So wird sichergestellt, dass Sie die neuesten Features nutzen und die höchste Stabilität erhalten.
 Uns ist jedoch klar, dass Sie möglicherweise eine frühere Version verwenden müssen oder die neuen Verbesserungen für die aktuelle Vorabversion ausprobieren möchten.
-Wie Sie bestimmte Versionen von EF installieren, erfahren Sie unter [Get Entity Framework (Beziehen von Entity Framework)](~/ef6/fundamentals/install.md).
+Wie Sie bestimmte Versionen von EF installieren, erfahren Sie unter [Get Entity Framework (Beziehen von Entity Framework)](xref:ef6/fundamentals/install).
 
 ## <a name="ef-640"></a>EF 6.4.0
 
@@ -56,4 +57,4 @@ Warnung: Achten Sie darauf, dass das alte .NET Framework-Projekt (d. h. nicht S
 
 ## <a name="past-releases"></a>Frühere Releases
 
-Auf der Seite [Frühere Releases](past-releases.md) finden Sie ein Archiv aller früheren Versionen von EF und die wichtigsten Features, die in den einzelnen Releases eingeführt wurden.
+Auf der Seite [Frühere Releases](xref:ef6/what-is-new/past-releases) finden Sie ein Archiv aller früheren Versionen von EF und die wichtigsten Features, die in den einzelnen Releases eingeführt wurden.

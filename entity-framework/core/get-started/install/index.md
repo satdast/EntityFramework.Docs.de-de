@@ -1,15 +1,16 @@
 ---
 title: Installieren von Entity Framework Core
+description: Installationsanweisungen für Entity Framework Core
 author: divega
 ms.date: 08/06/2017
 ms.assetid: 608cc774-c570-4809-8a3e-cd2c8446b8b2
 uid: core/get-started/install/index
-ms.openlocfilehash: 6575b1ac028f8b67b49ca7f4e49d6f19500be98f
-ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
+ms.openlocfilehash: 1cc6f8f73739e61adefb375ee37a830933903470
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "80136170"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89617986"
 ---
 # <a name="installing-entity-framework-core"></a>Installieren von Entity Framework Core
 
@@ -33,7 +34,7 @@ Wenn Sie eine ASP.NET Core-Anwendung erstellen, müssen Sie keine In-Memory- und
 
 Verwenden Sie die .NET Core-CLI (Command Line Interface, Befehlszeilenschnittstelle), das Dialogfeld für den Visual Studio-Paket-Manager oder die Visual Studio-Paket-Manager-Konsole, um NuGet-Pakete zu installieren oder zu aktualisieren.
 
-### <a name="net-core-cli"></a>.NET Core CLI
+### <a name="net-core-cli"></a>.NET Core-CLI
 
 * Verwenden Sie den folgenden .NET Core-CLI-Befehl über die Befehlszeile des Betriebssystems, um den EF Core-SQL Server-Anbieter zu installieren oder zu aktualisieren:
 

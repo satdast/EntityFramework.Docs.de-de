@@ -1,15 +1,16 @@
 ---
 title: In-Memory Database-Anbieter – EF Core
+description: Informationen zum Anbieter für Entity Framework Core-In-Memory-Datenbanken
 author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 9af0cba7-7605-4f8f-9cfa-dd616fcb880c
 uid: core/providers/in-memory/index
-ms.openlocfilehash: fd31c8ef2dc2e35e69f9845933a5578a5ff84c9c
-ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
+ms.openlocfilehash: 6af1d61a6ff76b82cc0096edbf095a6338d21109
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "78413005"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89618999"
 ---
 # <a name="ef-core-in-memory-database-provider"></a>EF Core-In-Memory Database-Anbieter
 
@@ -37,7 +38,7 @@ Install-Package Microsoft.EntityFrameworkCore.InMemory
 
 Die folgenden Ressourcen unterstützen Sie bei den ersten Schritten mit diesem Anbieter:
 
-* [Testen mit InMemory](../../miscellaneous/testing/in-memory.md)
+* [Testen mit InMemory](xref:core/miscellaneous/testing/in-memory)
 * [Tests der UnicornStore-Beispielanwendung](https://github.com/rowanmiller/UnicornStore/blob/master/UnicornStore/src/UnicornStore.Tests/Controllers/ShippingControllerTests.cs)
 
 ## <a name="supported-database-engines"></a>Unterstützte Datenbank-Engines

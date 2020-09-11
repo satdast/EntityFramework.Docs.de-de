@@ -1,14 +1,16 @@
 ---
 title: 'Designer-Vorlagen für die Codegenerierung: EF6'
+description: Designer-Vorlagen für die Codegenerierung in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 56e00fa2-f9f0-48b3-8006-f8266ca7e74b
-ms.openlocfilehash: e4e99a86e7c273682c85eba06042af9a2a837d12
-ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
+uid: ef6/modeling/designer/codegen/index
+ms.openlocfilehash: edc8fe3c269336d59d5bb7a10582881584215b1c
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "78413285"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89620563"
 ---
 # <a name="designer-code-generation-templates"></a>Designer-Vorlagen für die Codegenerierung
 Bei der Erstellung eines Modells mit dem Entity Framework Designer werden die Klassen und der abgeleitete Kontext automatisch für Sie generiert. Zusätzlich zur Standardcodegenerierung bieten wir auch verschiedene Vorlagen, mit denen sich der generierte Code anpassen lässt. Diese Vorlagen werden als T4-Textvorlagen bereitgestellt und sind daher bei Bedarf anpassbar.
@@ -30,11 +32,11 @@ Die folgenden Vorlagen werden vom Entity Framework-Team bereitgestellt:
 
 Mit dieser Vorlage werden einfache POCO-Entitätsklassen und ein Kontext generiert, der mit EF6 von DbContext abgeleitet wird.
 Dies ist die empfohlene Vorlage, es sei denn, Sie haben einen Grund, eine der anderen unten aufgeführten Vorlagen zu verwenden.
-Es handelt sich auch um eine Vorlage zur Codegenerierung, die Sie standardmäßig erhalten, wenn Sie neuere Versionen von Visual Studio verwenden (ab Visual Studio 2013): Wenn Sie ein neues Modell erstellen, wird diese Vorlage standardmäßig verwendet, und die T4-Dateien (.tt) werden unter der EDMX-Datei geschachtelt.
+Dies ist auch die Codegenerierungsvorlage, die Sie standardmäßig erhalten, wenn Sie neuere Versionen von Visual Studio verwenden (Visual Studio 2013 oder höher): Wenn Sie ein neues Modell erstellen, wird diese Vorlage standardmäßig verwendet, und die T4-Dateien (.tt) werden unter der EDMX-Datei geschachtelt.
 
 #### <a name="older-versions-of-visual-studio"></a>Ältere Visual Studio-Versionen
-- **Visual Studio 2012:** Sie müssen die neuesten **Entity Framework Tools für Visual Studio** installieren, um die **EF 6.x-DbContextGenerator**-Vorlagen abzurufen. Weitere Informationen finden Sie auf der Seite [Herunterladen von Entity Framework](~/ef6/fundamentals/install.md).
-- **Visual Studio 2010:** Die **EF 6.x-DbContextGenerator**-Vorlagen sind für Visual Studio 2010 nicht verfügbar.
+- **Visual Studio 2012:** Um die **EF 6.x DbContext Generator**-Vorlagen abzurufen, müssen Sie die neuesten **Entity Framework Tools für Visual Studio** installieren. Weitere Informationen finden Sie auf der Seite [Get Entity Framework](xref:ef6/fundamentals/install) (Beziehen von Entity Framework).
+- **Visual Studio 2010:** Die **EF 6.x DbContext Generator**-Vorlagen sind für Visual Studio 2010 nicht verfügbar.
 
 #### <a name="dbcontext-generator-for-ef-5x"></a>DbContext Generator für EF 5.x
 
@@ -86,18 +88,18 @@ Wenn Sie Visual Studio 2012 oder 2013 verwenden, müssen Sie beim Hinzufügen de
 - [EF 5.x EntityObject Generator for VB.NET (EF 5.x EntityObject Generator for VB.NET für VB.NET)](https://visualstudiogallery.msdn.microsoft.com/92c0129e-40dc-488c-a836-7e30846dfb30)
 - [EF 5.x EntityObject Generator for VB.NET Web Sites (EF 5.x EntityObject Generator für VB.NET-Websites)](https://visualstudiogallery.msdn.microsoft.com/5dd7f75c-8c98-4eb7-b4bc-06f0d0b03b41)
 
-Wenn Sie nur die ObjectContext-Codegenerierung aktivieren möchten, ohne Vorlagen bearbeiten zu müssen, können Sie die [EntityObject-Codegenerierung wiederherstellen](~/ef6/modeling/designer/codegen/legacy-objectcontext.md).
+Wenn Sie nur die ObjectContext-Codegenerierung aktivieren möchten, ohne Vorlagen bearbeiten zu müssen, können Sie die [EntityObject-Codegenerierung wiederherstellen](xref:ef6/modeling/designer/codegen/legacy-objectcontext).
 
 Wenn Sie Visual Studio 2010 verwenden, ist diese Vorlage bereits installiert. Wenn Sie ein neues Modell in Visual Studio 2010 erstellen, wird diese Vorlage zwar standardmäßig verwendet, die TT-Dateien sind jedoch nicht in Ihrem Projekt enthalten. Wenn Sie die Vorlage anpassen möchten, müssen Sie sie Ihrem Projekt hinzufügen.
 
 ### <a name="self-tracking-entities-ste-generator"></a>Generator für Entitäten mit Selbstnachverfolgung (Self-Tracking Entities, STE)
 
-Mit dieser Vorlage werden Entitätsklassen mit Selbstnachverfolgung und ein Kontext generiert, der von ObjectContext abgeleitet wird. In einer EF-Anwendung ist ein Kontext für das Verfolgen von Änderungen in den Entitäten zuständig. Allerdings steht der Kontext in n-schichtigen Szenarios möglicherweise nicht auf der Ebene zur Verfügung, auf der die Entitäten geändert werden. Mit Entitäten mit Selbstnachverfolgung können Sie Änderungen auf jeder Ebene nachverfolgen. Weitere Informationen finden Sie unter [Self-Tracking Entities (Entitäten mit Selbstnachverfolgung)](~/ef6/fundamentals/disconnected-entities/self-tracking-entities/index.md).
+Mit dieser Vorlage werden Entitätsklassen mit Selbstnachverfolgung und ein Kontext generiert, der von ObjectContext abgeleitet wird. In einer EF-Anwendung ist ein Kontext für das Verfolgen von Änderungen in den Entitäten zuständig. Allerdings steht der Kontext in n-schichtigen Szenarios möglicherweise nicht auf der Ebene zur Verfügung, auf der die Entitäten geändert werden. Mit Entitäten mit Selbstnachverfolgung können Sie Änderungen auf jeder Ebene nachverfolgen. Weitere Informationen finden Sie unter [Self-Tracking Entities (Entitäten mit Selbstnachverfolgung)](xref:ef6/fundamentals/disconnected-entities/self-tracking-entities/index).
 
 > [!NOTE]
 > Eine STE-Vorlage wird nicht empfohlen.
 
-Es wird nicht mehr empfohlen, die STE-Vorlage in neuen Anwendungen zu verwenden. Sie ist jedoch weiterhin verfügbar, um vorhandene Anwendungen zu unterstützen. Lesen Sie den [Artikel zu getrennten Entitäten](~/ef6/fundamentals/disconnected-entities/index.md), um weitere Optionen zu n-schichtigen Szenarios zu erfahren, die empfohlen werden.
+Es wird nicht mehr empfohlen, die STE-Vorlage in neuen Anwendungen zu verwenden. Sie ist jedoch weiterhin verfügbar, um vorhandene Anwendungen zu unterstützen. Lesen Sie den [Artikel zu getrennten Entitäten](xref:ef6/fundamentals/disconnected-entities/index), um weitere Optionen zu n-schichtigen Szenarios zu erfahren, die empfohlen werden.
 
 > [!NOTE]
 > Es gibt keine EF 6.x-Version der STE-Vorlage.
@@ -155,11 +157,11 @@ Um eine Vorlage für die Codegenerierung zu verwenden, klicken Sie mit der recht
 
 Wenn Sie die Vorlage, die Sie verwenden möchten, bereits installiert haben (oder sie in Visual Studio enthalten war), ist sie entweder im Abschnitt **Code** oder im Abschnitt **Daten** im linken Menü verfügbar.
 
-![Installiert](~/ef6/media/installed.png)
+![Installierte Vorlage](~/ef6/media/installed.png)
 
 Wenn Sie die Vorlage noch nicht installiert haben, klicken Sie im linken Menü auf **Online**, und suchen Sie nach der gewünschten Vorlage.
 
-![Suchen](~/ef6/media/search.png) 
+![Vorlage suchen](~/ef6/media/search.png) 
 
 Wenn Sie Visual Studio 2012 verwenden, werden die neue TT-Dateien unter der EDMX-Datei geschachtelt.*
 

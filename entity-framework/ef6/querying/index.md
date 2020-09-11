@@ -1,14 +1,16 @@
 ---
 title: 'Abfragen und Suchen von Entitäten: EF6'
+description: Abfragen und Suchen von Entitäten in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 65bb3db2-2226-44af-8864-caa575cf1b46
-ms.openlocfilehash: 29a86817e250a2f53ecaa73e8fa4bf93452f0497
-ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
+uid: ef6/querying/index
+ms.openlocfilehash: 4bfdc59527ab75e7a2e08dc743a1974246643aa3
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "78412975"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89620337"
 ---
 # <a name="querying-and-finding-entities"></a>Abfragen und Suchen von Entitäten
 Dieses Thema behandelt die verschiedenen Methoden, mit denen Sie Daten über Entity Framework abfragen können, einschließlich LINQ und der Find-Methode. Die in diesem Thema dargestellten Techniken gelten jeweils für Modelle, die mit Code First und dem EF-Designer erstellt wurden.  
@@ -41,7 +43,7 @@ Beachten Sie, dass DbSet und IDbSet immer Abfragen für die Datenbank erstellen 
 
 Wenn Ergebnisse von der Datenbank zurückgegeben werden, werden Objekte, die nicht im Kontext vorhanden sind, an den Kontext angefügt. Wenn sich ein Objekt bereits im Kontext befindet, wird das vorhandene Objekt zurückgegeben (die aktuellen und ursprünglichen Werte der Objekteigenschaften im Eintrag werden **nicht** mit Datenquellenwerten überschrieben).  
 
-Wenn Sie eine Abfrage ausführen, werden Entitäten, die zum Kontext hinzugefügt wurden, jedoch nicht auf der Datenbank gespeichert wurden, nicht als Teil des Resultsets zurückgegeben. Unter [Entity Framework Local Data (Lokale Daten von Entity Framework)](~/ef6/querying/local-data.md) erhalten Sie Informationen zum Abrufen von Daten, die sich im Kontext befinden.  
+Wenn Sie eine Abfrage ausführen, werden Entitäten, die zum Kontext hinzugefügt wurden, jedoch nicht auf der Datenbank gespeichert wurden, nicht als Teil des Resultsets zurückgegeben. Unter [Entity Framework Local Data (Lokale Daten von Entity Framework)](xref:ef6/querying/local-data) erhalten Sie Informationen zum Abrufen von Daten, die sich im Kontext befinden.  
 
 Wenn eine Abfrage keine Zeilen aus der Datenbank zurückgibt, ist das Ergebnis eine leere Sammlung anstatt **NULL**.  
 

@@ -1,15 +1,16 @@
 ---
 title: 'Entity Framework-Anbieter: EF6'
+description: Entity Framework-Anbieter in Entity Framework 6
 author: divega
 ms.date: 06/27/2018
 ms.assetid: 7BFB7763-CD6C-4520-93A2-7B265F5FA586
 uid: ef6/fundamentals/providers/index
-ms.openlocfilehash: 661398e7d6037875ce0cdb15c221a729d1f0c7d8
-ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
+ms.openlocfilehash: 5140fefeb118b6e70ac27ab010d813d03ec7000c
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "78413335"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89615875"
 ---
 # <a name="entity-framework-6-providers"></a>Anbieter von Entity Framework 6
 > [!NOTE]
@@ -69,7 +70,7 @@ Der Typ („type“) in dieser Registrierung ist der Name mit Assemblyqualifikat
 
 ### <a name="code-based-registration"></a>Codebasierte Registrierung
 
-Ab Entity Framework 6 kann die anwendungsweite Konfiguration für EF im Code angegeben werden. Ausführliche Informationen dazu finden Sie unter _[Entity Framework – Code-Based Configuration (Codebasierte Konfiguration von Entity Framework)](https://msdn.microsoft.com/data/jj680699)_ . Normalerweise wird ein EF-Anbieter, der die codebasierter Konfiguration verwendet, durch Erstellung einer neuen Klasse registriert, die von System.Data.Entity.DbConfiguration abstammt und in der gleichen Assembly platziert wird, wie Ihre DbContext-Klasse. Ihre DbConfiguration-Klasse sollte dann den Anbieter in ihrem Konstruktor registrieren. Die DbConfiguration-Klasse sieht wie folgt aus, um beispielsweise den SQL Compact-Anbieter zu registrieren:
+Ab Entity Framework 6 kann die anwendungsweite Konfiguration für EF im Code angegeben werden. Ausführliche Informationen dazu finden Sie unter _[Entity Framework – Code-Based Configuration (Codebasierte Konfiguration von Entity Framework)](https://msdn.microsoft.com/data/jj680699)_. Normalerweise wird ein EF-Anbieter, der die codebasierter Konfiguration verwendet, durch Erstellung einer neuen Klasse registriert, die von System.Data.Entity.DbConfiguration abstammt und in der gleichen Assembly platziert wird, wie Ihre DbContext-Klasse. Ihre DbConfiguration-Klasse sollte dann den Anbieter in ihrem Konstruktor registrieren. Die DbConfiguration-Klasse sieht wie folgt aus, um beispielsweise den SQL Compact-Anbieter zu registrieren:
 
 ``` csharp
     public class MyConfiguration : DbConfiguration
@@ -87,7 +88,7 @@ In diesem Code stellt „SqlCeProviderServices.ProviderInvariantName“ ein prak
 
 ## <a name="what-if-the-provider-i-need-isnt-available"></a>Was passiert, wenn der Anbieter, den ich benötige, nicht verfügbar ist?
 
-Wenn der Anbieter für vorherige Version von EF verfügbar ist, wenden Sie sich an den Besitzer des Anbieters, und bitten Sie diesen, eine EF6-Version zu erstellen. Sie sollten einen Verweis zur [Dokumentation für das EF6-Anbietermodell](~/ef6/fundamentals/providers/provider-model.md) hinzufügen.
+Wenn der Anbieter für vorherige Version von EF verfügbar ist, wenden Sie sich an den Besitzer des Anbieters, und bitten Sie diesen, eine EF6-Version zu erstellen. Sie sollten einen Verweis zur [Dokumentation für das EF6-Anbietermodell](xref:ef6/fundamentals/providers/provider-model) hinzufügen.
 
 ## <a name="can-i-write-a-provider-myself"></a>Kann ich selbst einen Anbieter schreiben?
 

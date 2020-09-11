@@ -1,19 +1,20 @@
 ---
 title: 'Testen von Code, der EF Core verwendet: EF Core'
-description: Unterschiedliche Ansätze zum Testen von Anwendungen, die EF Core verwenden
+description: Unterschiedliche Ansätze zum Testen von Anwendungen, die Entity Framework Core verwenden
 author: ajcvickers
 ms.date: 04/22/2020
 uid: core/miscellaneous/testing/index
-ms.openlocfilehash: 7929c284c2794b2fcc95235ae413d56895ebb6e2
-ms.sourcegitcommit: 949faaba02e07e44359e77d7935f540af5c32093
+ms.openlocfilehash: c55290f4af81a49bf7ab131ebe93af209f96b430
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/03/2020
-ms.locfileid: "87526809"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89617699"
 ---
 # <a name="testing-code-that-uses-ef-core"></a>Testen von Code, der EF Core verwendet
 
 Das Testen von Code, der auf eine Datenbank zugreift, erfordert Folgendes:
+
 * Das Ausführen von Abfragen und Aktualisierungen in dem Datenbanksystem, das auch in der Produktion verwendet wird, oder
 * Das Ausführen von Abfragen und Aktualisierungen in einem andere einfacher zu verwaltenden Datenbanksystem oder
 * Das Verwenden von Testdoubles oder eines anderen Mechanismus, um die Verwendung einer Datenbank grundsätzlich zu vermeiden
@@ -21,14 +22,14 @@ Das Testen von Code, der auf eine Datenbank zugreift, erfordert Folgendes:
 In diesem Dokument werden die Abwägungen dargelegt, die mit jeder dieser Optionen verbunden sind, und es wird gezeigt, wie EF Core bei jedem Ansatz eingesetzt werden kann.  
 
 > [!TIP]
-> Informationen zu den hier vorgestellten Konzepten finden Sie unter [EF Core-Testbeispiel](xref:core/miscellaneous/testing/testing-sample). 
+> Informationen zu den hier vorgestellten Konzepten finden Sie unter [EF Core-Testbeispiel](xref:core/miscellaneous/testing/testing-sample).
 
 ## <a name="all-database-providers-are-not-equal"></a>Alle Datenbankanbieter sind nicht gleich
 
 Es ist sehr wichtig zu verstehen, dass EF Core nicht darauf ausgelegt ist, jeden Aspekt des zugrunde liegenden Datenbanksystems zu abstrahieren.
 Stattdessen handelt es sich bei EF Core um einen einheitlichen Satz von Mustern und Konzepten, der bei jedem Datenbanksystem verwendet werden kann.
 EF Core-Datenbankanbieter schichten dann datenbankspezifisches Verhalten und Funktionalität über diesem allgemeinen Framework.
-Auf diese Weise kann jedes Datenbanksystem das tun, was es am besten kann, während gleichzeitig die Gemeinsamkeiten mit anderen Datenbanksystemen, falls angebracht, gewahrt bleiben. 
+Auf diese Weise kann jedes Datenbanksystem das tun, was es am besten kann, während gleichzeitig die Gemeinsamkeiten mit anderen Datenbanksystemen, falls angebracht, gewahrt bleiben.
 
 Grundsätzlich bedeutet dies, dass ein Austauschen des Datenbankanbieters das Verhalten von EF Core verändert, und es kann nicht erwartet werden, dass die Anwendung ordnungsgemäß funktioniert, wenn sie nicht explizit alle Unterschiede im Verhalten berücksichtigt.
 Dennoch wird dies in vielen Fällen funktionieren, weil es ein hohes Maß an Gemeinsamkeiten unter relationalen Datenbanken gibt.
@@ -47,23 +48,24 @@ Dies veranschaulicht den wesentlichen Haken bei diesen Ansätzen: Wann ist es an
 Glücklicherweise ist die Antwort in diesem Fall recht einfach, nämlich das Verwenden einer lokal SQL Server-Instanz für Entwicklertests.
 SQL Azure und SQL Server sind sehr ähnlich, sodass das Testen mit SQL Server in der Regel ein angemessener Kompromiss ist.
 Dennoch ist es ratsam, vor dem Aufnehmen der Produktion Tests mit SQL Azure selbst durchzuführen.
- 
-### <a name="localdb"></a>LocalDB 
+
+### <a name="localdb"></a>LocalDB
 
 Alle wichtigen Datenbanksysteme verfügen über eine Form von „Developer Edition“ für lokales Testen.
-Bei SQL Server heißt dieses Feature [LocalDB](/sql/database-engine/configure-windows/sql-server-express-localdb?view=sql-server-ver15).
+Bei SQL Server heißt dieses Feature [LocalDB](/sql/database-engine/configure-windows/sql-server-express-localdb).
 Der Hauptvorteil von LocalDB besteht darin, dass die Datenbankinstanz bei Bedarf hochgefahren wird.
 Dadurch wird vermieden, dass ein Datenbankdienst auf Ihrem Computer läuft, auch wenn gerade keine Tests ausgeführt werden.
 
 LocalDB ist nicht ohne Probleme:
-* Sie unterstützt nicht alles, was von [SQL Server Developer Edition](/sql/sql-server/editions-and-components-of-sql-server-2016?view=sql-server-ver15) unterstützt wird.
+
+* Sie unterstützt nicht alles, was von [SQL Server Developer Edition](/sql/sql-server/editions-and-components-of-sql-server-version-15?view=sql-server-ver15&preserve-view=true) unterstützt wird.
 * Sie ist unter Linux nicht verfügbar.
 * Sie kann beim ersten Testlauf Verzögerungen verursachen, wenn der Dienst hochgefahren wird.
 
 Ich persönlich habe es nie als Problem empfunden, dass ein Datenbankdienst auf meinem Entwicklungscomputer läuft, und würde generell empfehlen, stattdessen die Developer Edition zu verwenden.
 Allerdings kann LocalDB für einige Entwickler geeignet sein, insbesondere auf weniger leistungsfähigen Entwicklungscomputern.
 
-Das [Ausführen von SQL Server](/sql/linux/quickstart-install-connect-docker?view=sql-server-ver15) (oder einem anderen Datenbanksystem) in einem Docker-Container (oder ähnlichem) ist eine andere Möglichkeit, das Datenbanksystem nicht direkt auf dem Entwicklungscomputer ausführen zu müssen.  
+Das [Ausführen von SQL Server](/sql/linux/quickstart-install-connect-docker) (oder einem anderen Datenbanksystem) in einem Docker-Container (oder ähnlichem) ist eine andere Möglichkeit, das Datenbanksystem nicht direkt auf dem Entwicklungscomputer ausführen zu müssen.  
 
 ## <a name="approach-2-sqlite"></a>Ansatz 2: SQLite
 
@@ -77,17 +79,19 @@ Die nächstbeste Wahl ist die Verwendung von etwas mit ähnlicher Funktionalitä
 Dies bedeutet in der Regel eine andere relationale Datenbank, wofür [SQLite](https://sqlite.org/index.html) die offensichtliche Wahl ist.
 
 SQLite ist aus folgenden Gründen eine gute Wahl:
+
 * Sie wird In-Process mit Ihrer Anwendung ausgeführt und hat daher einen geringen Verarbeitungsaufwand.
 * Sie verwendet einfache, automatisch erstellte Dateien für Datenbanken und erfordert daher keine Datenbankverwaltung.
 * Sie hat einen InMemory-Modus, der sogar die Dateierstellung vermeidet.
 
 Beachten Sie jedoch Folgendes:
+
 * SQLite unterstützt nicht zwangsläufig alles, was Ihr Produktions-Datenbanksystem leistet.
 * SQLite verhält sich bei einigen Abfragen anders als Ihr Produktions-Datenbanksystem.
 
 Wenn Sie also SQLite für einige Tests verwenden, stellen Sie sicher, dass Sie die Test auch mit Ihrem tatsächlichen Datenbanksystem durchführen.
 
-Unter [Testen mit SQLite](xref:core/miscellaneous/testing/sqlite) finden Sie eine EF Core-spezifische Anleitung. 
+Unter [Testen mit SQLite](xref:core/miscellaneous/testing/sqlite) finden Sie eine EF Core-spezifische Anleitung.
 
 ## <a name="approach-3-the-ef-core-in-memory-database"></a>Ansatz 3: Die InMemory-Datenbank von EF Core
 
@@ -114,6 +118,6 @@ Dies ist schwierig, umständlich und instabil.
 
 Stattdessen verwenden wir die In-Memory-Datenbank von EF, wenn wir Komponententests mit Logik durchführen, die DbContext verwendet.
 In diesem Fall ist die Verwendung der In-Memory-Datenbank von EF angemessen, da der Test nicht vom Datenbankverhalten abhängig ist.
-Tun Sie dies bloß nicht, um tatsächliche Datenbankabfragen oder -aktualisierungen zu testen.   
+Tun Sie dies bloß nicht, um tatsächliche Datenbankabfragen oder -aktualisierungen zu testen.
 
-Das [EF Core-Testbeispiel](xref:core/miscellaneous/testing/testing-sample) veranschaulicht Tests mit der In-Memory-Datenbank von EF sowie SQL Server und SQLite. 
+Das [EF Core-Testbeispiel](xref:core/miscellaneous/testing/testing-sample) veranschaulicht Tests mit der In-Memory-Datenbank von EF sowie SQL Server und SQLite.

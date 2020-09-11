@@ -1,15 +1,16 @@
 ---
 title: Erste Schritte – EF Core
+description: Tutorial zu den ersten Schritten mit Entity Framework Core
 author: rick-anderson
 ms.date: 09/17/2019
 ms.assetid: 3c88427c-20c6-42ec-a736-22d3eccd5071
 uid: core/get-started/index
-ms.openlocfilehash: 7181df6ee73b09f196940178ffed38d96b075258
-ms.sourcegitcommit: ebfd3382fc583bc90f0da58e63d6e3382b30aa22
+ms.openlocfilehash: e33a18c8d3d72078eaaeba9c8cf0a1afca0cb66c
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/25/2020
-ms.locfileid: "85370317"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89618009"
 ---
 # <a name="getting-started-with-ef-core"></a>Erste Schritte mit EF Core
 
@@ -54,7 +55,7 @@ cd EFGetStarted
 
 ## <a name="install-entity-framework-core"></a>Installieren von Entity Framework Core
 
-Installieren Sie das Paket für den (oder die) gewünschten EF Core-Datenbankanbieter, um EF Core zu installieren. In diesem Tutorial wird SQLite verwendet, da es auf allen Plattformen ausgeführt werden kann, die .NET Core unterstützt. Eine Liste der verfügbaren Anbieter finden Sie unter [Datenbankanbieter](../providers/index.md).
+Installieren Sie das Paket für den (oder die) gewünschten EF Core-Datenbankanbieter, um EF Core zu installieren. In diesem Tutorial wird SQLite verwendet, da es auf allen Plattformen ausgeführt werden kann, die .NET Core unterstützt. Eine Liste der verfügbaren Anbieter finden Sie unter [Datenbankanbieter](xref:core/providers/index).
 
 ### <a name="net-core-cli"></a>[.NET Core-CLI](#tab/netcore-cli)
 
@@ -93,9 +94,9 @@ Definieren Sie eine Kontextklasse und Entitätsklassen für das Modell.
 
 [!code-csharp[Main](../../../samples/core/GetStarted/Model.cs)]
 
-EF Core kann auch [Reverse Engineering](../managing-schemas/scaffolding.md) eines Modells aus einer vorhandenen Datenbank ausführen.
+EF Core kann auch [Reverse Engineering](xref:core/managing-schemas/scaffolding) eines Modells aus einer vorhandenen Datenbank ausführen.
 
-Tipp: Bei dieser Anwendung wurden einige Vorgänge absichtlich vereinfacht, um mehr Klarheit zu bieten. [Verbindungszeichenfolgen](../miscellaneous/connection-strings.md) sollten bei Produktionsanwendungen niemals im Code gespeichert werden. Es empfiehlt sich auch, die C#-Klassen in eigene Dateien aufzuteilen.
+Tipp: Bei dieser Anwendung wurden einige Vorgänge absichtlich vereinfacht, um mehr Klarheit zu bieten. [Verbindungszeichenfolgen](xref:core/miscellaneous/connection-strings) sollten bei Produktionsanwendungen niemals im Code gespeichert werden. Es empfiehlt sich auch, die C#-Klassen in eigene Dateien aufzuteilen.
 
 ## <a name="create-the-database"></a>Erstellen der Datenbank
 
@@ -112,7 +113,7 @@ Die folgenden Schritte verwenden [Migrationen](xref:core/managing-schemas/migrat
   dotnet ef database update
   ```
 
-  Hierdurch werden [dotnet ef](../miscellaneous/cli/dotnet.md) und das Entwurfspaket installiert, das zum Ausführen des Befehls für ein Projekt erforderlich ist. Der Befehl `migrations` richtet per Gerüstbau eine Migration ein und erstellt den anfänglichen Tabellensatz für das Modell. Der Befehl `database update` erstellt die Datenbank und wendet die neue Migration auf sie an.
+  Hierdurch werden [dotnet ef](xref:core/miscellaneous/cli/dotnet) und das Entwurfspaket installiert, das zum Ausführen des Befehls für ein Projekt erforderlich ist. Der Befehl `migrations` richtet per Gerüstbau eine Migration ein und erstellt den anfänglichen Tabellensatz für das Modell. Der Befehl `database update` erstellt die Datenbank und wendet die neue Migration auf sie an.
 
 ### <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -124,7 +125,7 @@ Die folgenden Schritte verwenden [Migrationen](xref:core/managing-schemas/migrat
   Update-Database
   ```
 
-  Dadurch werden die [PMC-Tools für EF Core](../miscellaneous/cli/powershell.md) installiert. Der Befehl `Add-Migration` richtet per Gerüstbau eine Migration ein und erstellt den anfänglichen Tabellensatz für das Modell. Der Befehl `Update-Database` erstellt die Datenbank und wendet die neue Migration auf sie an.
+  Dadurch werden die [PMC-Tools für EF Core](xref:core/miscellaneous/cli/powershell) installiert. Der Befehl `Add-Migration` richtet per Gerüstbau eine Migration ein und erstellt den anfänglichen Tabellensatz für das Modell. Der Befehl `Update-Database` erstellt die Datenbank und wendet die neue Migration auf sie an.
 
 ---
 

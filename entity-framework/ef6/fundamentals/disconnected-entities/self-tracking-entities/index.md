@@ -1,19 +1,21 @@
 ---
 title: Entitäten mit Selbstnachverfolgung – EF6
+description: Entitäten mit Selbstnachverfolgung in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 5e60f5be-7bbb-4bf8-835e-0ac808d6c84a
-ms.openlocfilehash: 3bb9759d89fbd0c10b911625aa7d0afd7747de14
-ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
+uid: ef6/fundamentals/disconnected-entities/self-tracking-entities/index
+ms.openlocfilehash: 0e771c0f147589112779359ab8c06344eb05b8fc
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "78413355"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89616178"
 ---
 # <a name="self-tracking-entities"></a>Entitäten mit Selbstnachverfolgung
 
 > [!IMPORTANT]
-> Es wird nicht mehr empfohlen, die Vorlage für Entitäten mit Selbstnachverfolgung zu verwenden. Die Vorlage ist nur für die Unterstützung vorhandener Anwendungen weiterhin verfügbar. Wenn für Ihre Anwendung die Arbeit mit unverbundenen Diagrammen von Entitäten erforderlich ist, sollten Sie daher Alternativen erwägen, wie z.B. [nachverfolgbare Entitäten](https://trackableentities.github.io/). Diese Technologie ähnelt den Entitäten mit Selbstnachverfolgung und wird von der Community aktiver entwickelt. Alternativ dazu können Sie auch benutzerdefinierten Code mithilfe von APIs auf niedriger Ebene zur Änderungsnachverfolgung schreiben.
+> Es wird nicht mehr empfohlen, die Vorlage für Entitäten mit Selbstnachverfolgung zu verwenden. Die Vorlage ist nur für die Unterstützung vorhandener Anwendungen weiterhin verfügbar. Wenn für Ihre Anwendung die Arbeit mit getrennten Diagrammen von Entitäten erforderlich ist, sollten Sie daher Alternativen erwägen, wie z.B. [nachverfolgbare Entitäten](https://trackableentities.github.io/). Diese Technologie ähnelt den Entitäten mit Selbstnachverfolgung und wird von der Community aktiver entwickelt. Alternativ dazu können Sie auch benutzerdefinierten Code mithilfe von APIs auf niedriger Ebene zur Änderungsnachverfolgung schreiben.
 
 In einer auf Entity Framework basierenden Anwendung ist ein Kontext für das Nachverfolgen von Änderungen in den Objekten zuständig. Verwenden Sie anschließend zum Speichern der Änderungen in der Datenbank die SaveChanges-Methode. Bei der Arbeit mit N-schichtigen Anwendungen wird die Verbindung der Entitätsobjekte zum Kontext in der Regel getrennt. Sie müssen dann entscheiden, wie Änderungen nachverfolgt und an den Kontext zurückgemeldet werden. Mithilfe von Entitäten mit Selbstnachverfolgung (Self-Tracking Entities, STEs) können Sie Änderungen in jeder Ebene nachverfolgen und anschließend zur Speicherung in einem Kontext wiedergeben.  
 
@@ -21,16 +23,16 @@ Verwenden Sie STEs nur dann, wenn der Kontext auf einer Ebene, auf der die Ände
 
 Dieses Vorlagenelement generiert zwei TT-Dateien (Textvorlagen):  
 
-- Mit der Datei **\<Modellname\>.tt** werden die Entitätstypen und eine Hilfsklasse generiert, die die Logik zur Änderungsnachverfolgung enthält, die von Entitäten mit Selbstnachverfolgung verwendet wird. Zudem enthält sie die Erweiterungsmethoden, mit denen der Status von Entitäten mit Selbstnachverfolgung festgelegt werden kann.  
-- Mit der Datei **\<Modellname\>.Context.tt** werden ein abgeleiteter Kontext und eine Erweiterungsklasse generiert, die **ApplyChanges**-Methoden für die Klassen **ObjectContext** und **ObjectSet** enthält. Diese Methoden untersuchen die Änderungsnachverfolgungsinformationen, die im Diagramm der Entitäten mit Selbstnachverfolgung enthalten sind, um die Vorgänge abzuleiten, die ausgeführt werden müssen, um die Änderungen in der Datenbank zu speichern.  
+- Mit der Datei **\<model name\>.tt** werden die Entitätstypen und eine Hilfsklasse generiert, die die Logik zur Änderungsnachverfolgung enthält, die von Entitäten mit Selbstnachverfolgung verwendet wird. Zudem enthält sie die Erweiterungsmethoden, mit denen der Status von Entitäten mit Selbstnachverfolgung festgelegt werden kann.  
+- Mit der Datei **\<model name\>.Context.tt** werden ein abgeleiteter Kontext und eine Erweiterungsklasse generiert, die **ApplyChanges**-Methoden für die Klassen **ObjectContext** und **ObjectSet** enthält. Diese Methoden untersuchen die Änderungsnachverfolgungsinformationen, die im Diagramm der Entitäten mit Selbstnachverfolgung enthalten sind, um die Vorgänge abzuleiten, die ausgeführt werden müssen, um die Änderungen in der Datenbank zu speichern.  
 
 ## <a name="get-started"></a>Erste Schritte  
 
-Informationen zu den ersten Schritten finden Sie auf der Seite [Self-Tracking Entities Walkthrough (Exemplarische Vorgehensweise zu Entitäten mit Selbstnachverfolgung)](walkthrough.md).  
+Informationen zu den ersten Schritten finden Sie auf der Seite [Self-Tracking Entities Walkthrough (Exemplarische Vorgehensweise zu Entitäten mit Selbstnachverfolgung)](xref:ef6/fundamentals/disconnected-entities/self-tracking-entities/walkthrough).  
 
 ## <a name="functional-considerations-when-working-with-self-tracking-entities"></a>Funktionale Überlegungen für die Verwendung von Entitäten mit Selbstnachverfolgung  
 > [!IMPORTANT]
-> Es wird nicht mehr empfohlen, die Vorlage für Entitäten mit Selbstnachverfolgung zu verwenden. Die Vorlage ist nur für die Unterstützung vorhandener Anwendungen weiterhin verfügbar. Wenn für Ihre Anwendung die Arbeit mit unverbundenen Diagrammen von Entitäten erforderlich ist, sollten Sie daher Alternativen erwägen, wie z.B. [nachverfolgbare Entitäten](https://trackableentities.github.io/). Diese Technologie ähnelt den Entitäten mit Selbstnachverfolgung und wird von der Community aktiver entwickelt. Alternativ dazu können Sie auch benutzerdefinierten Code mithilfe von APIs auf niedriger Ebene zur Änderungsnachverfolgung schreiben.
+> Es wird nicht mehr empfohlen, die Vorlage für Entitäten mit Selbstnachverfolgung zu verwenden. Die Vorlage ist nur für die Unterstützung vorhandener Anwendungen weiterhin verfügbar. Wenn für Ihre Anwendung die Arbeit mit getrennten Diagrammen von Entitäten erforderlich ist, sollten Sie daher Alternativen erwägen, wie z.B. [nachverfolgbare Entitäten](https://trackableentities.github.io/). Diese Technologie ähnelt den Entitäten mit Selbstnachverfolgung und wird von der Community aktiver entwickelt. Alternativ dazu können Sie auch benutzerdefinierten Code mithilfe von APIs auf niedriger Ebene zur Änderungsnachverfolgung schreiben.
 
 Beachten Sie bei der Verwendung von Entitäten mit Selbstnachverfolgung Folgendes:  
 
@@ -46,7 +48,7 @@ Beachten Sie bei der Verwendung von Entitäten mit Selbstnachverfolgung Folgende
 - Mit Entitäten mit Selbstnachverfolgung kann kein Lazy Loading durchgeführt werden.  
 - Eine binäre Serialisierung sowie die Serialisierung in ASP.NET-Zustandsverwaltungsobjekte werden nicht von Entitäten mit Selbstnachverfolgung unterstützt. Sie können jedoch die Vorlage anpassen, um die Unterstützung der binären Serialisierung hinzuzufügen. Weitere Informationen finden Sie unter [Using Binary Serialization and ViewState with Self-Tracking Entities (Verwenden von binärer Serialisierung und ViewState mit Entitäten mit Selbstnachverfolgung)](https://go.microsoft.com/fwlink/?LinkId=199208).  
 
-## <a name="security-considerations"></a>Überlegungen zur Sicherheit  
+## <a name="security-considerations"></a>Sicherheitsüberlegungen  
 
 Die folgenden Sicherheitsüberlegungen sollten Sie beim Arbeiten mit Entitäten mit Selbstnachverfolgung berücksichtigen:  
 

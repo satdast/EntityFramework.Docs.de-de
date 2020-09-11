@@ -1,14 +1,16 @@
 ---
 title: 'Erstellen eines Modells: EF6'
+description: Erstellen eines Modells in Entity Framework 6
 author: divega
 ms.date: 07/05/2018
 ms.assetid: 4890228E-CEA1-4595-B8AD-CA81253F8767
-ms.openlocfilehash: bd9843a93121f53518a307c9d2d43b68ae03369c
-ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
+uid: ef6/modeling/index
+ms.openlocfilehash: 417671d5313bb95bb97d5de85b25b09d687c5c3d
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "78413465"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89620338"
 ---
 # <a name="creating-a-model"></a>Erstellen eines Modells
 
@@ -25,14 +27,14 @@ Entscheiden Sie sich für das Modell, das für Sie am geeignetsten ist:
 
 |                                           | Ich möchte Code schreiben...                                                                                                                   | Ich möchte einen Designer verwenden...                                                                                                                        |
 |:------------------------------------------|:-----------------------------------------------------------------------------------------------------------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Ich erstelle eine neue Datenbank**          | [Verwenden Sie **Code First**, um Ihr Modell mit Code zu definieren und dann eine Datenbank zu erstellen.](~/ef6/modeling/code-first/workflows/new-database.md)           | [Verwenden Sie **Model First**, um Ihr Modell mit Feldern und Linien zu definieren und dann eine Datenbank zu erstellen.](~/ef6/modeling/designer/workflows/model-first.md)   |
-| **Ich muss auch eine vorhandene Daten zugreifen** | [Verwenden Sie **Code First**, um ein codebasiertes Modell zu erstellen, das eine Zuordnung zu einer bereits vorhandenen Datenbank herstellt.](~/ef6/modeling/code-first/workflows/existing-database.md) | [Verwenden Sie **Database First**, um Felder und Linien zu erstellen, die eine Zuordnung zu einer bereits vorhandenen Datenbank herstellen.](~/ef6/modeling/designer/workflows/database-first.md) |
+| **Ich erstelle eine neue Datenbank**          | [Verwenden Sie **Code First**, um Ihr Modell mit Code zu definieren und dann eine Datenbank zu erstellen.](xref:ef6/modeling/code-first/workflows/new-database)           | [Verwenden Sie **Model First**, um Ihr Modell mit Feldern und Linien zu definieren und dann eine Datenbank zu erstellen.](xref:ef6/modeling/designer/workflows/model-first)   |
+| **Ich muss auch eine vorhandene Daten zugreifen** | [Verwenden Sie **Code First**, um ein codebasiertes Modell zu erstellen, das eine Zuordnung zu einer bereits vorhandenen Datenbank herstellt.](xref:ef6/modeling/code-first/workflows/existing-database) | [Verwenden Sie **Database First**, um Felder und Linien zu erstellen, die eine Zuordnung zu einer bereits vorhandenen Datenbank herstellen.](xref:ef6/modeling/designer/workflows/database-first) |
 
 ### <a name="watch-the-video-what-ef-workflow-should-i-use"></a>Sehen Sie sich ein Video an: Welcher EF-Workflow eignet sich am besten für mich?
 
 In diesem kurzen Video werden die Unterschiede beschrieben, und Sie erfahren, wie Sie sich für den passenden Workflow entscheiden.
 
-**Präsentation:** [Rowan Miller](https://romiller.com/)
+**Präsentation:**[Rowan Miller](https://romiller.com/)
 
 ![Which Workflow Thumb](../media/whichworkflow-thumb.png) [WMV](https://download.microsoft.com/download/8/F/8/8F81F4CD-3678-4229-8D79-0C63FFA3C595/HDI_ITPro_Technet_winvideo_ChoseYourWorkflow.wmv) | [MP4](https://download.microsoft.com/download/8/F/8/8F81F4CD-3678-4229-8D79-0C63FFA3C595/HDI_ITPro_Technet_mp4video_ChoseYourWorkflow.m4v) | [WMV (ZIP)](https://download.microsoft.com/download/8/F/8/8F81F4CD-3678-4229-8D79-0C63FFA3C595/HDI_ITPro_Technet_winvideo_ChoseYourWorkflow.zip)
 
@@ -44,7 +46,7 @@ Egal, ob Sie Code First oder den EF-Designer verwenden, besteht ein EF-Modell im
 
 - Die Domänenobjekte der Anwendung oder die Entitätstypen der Anwendung. Dies wird häufig als Objektebene bezeichnet.
 
-- Ein konzeptionelles Modell besteht aus domänenspezifischen Entitätstypen und -beziehungen, die mit [Entity Data Model](~/ef6/resources/glossary.md#entity-data-model) beschrieben werden. Diese Ebene wird häufig als Ebene C (Englisch: _Conceptual_) bezeichnet.
+- Ein konzeptionelles Modell besteht aus domänenspezifischen Entitätstypen und -beziehungen, die mit [Entity Data Model](xref:ef6/resources/glossary#entity-data-model) beschrieben werden. Diese Ebene wird häufig als Ebene C (Englisch: _Conceptual_) bezeichnet.
 
 - Ein Speichermodell, das Tabellen, Spalten und Beziehungen darstellt, wie in der Datenbank definiert. Diese Ebene wird häufig als Ebene S (Englisch: _Storage_) bezeichnet.  
 

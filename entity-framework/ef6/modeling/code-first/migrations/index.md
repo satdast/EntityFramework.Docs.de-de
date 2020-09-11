@@ -1,14 +1,16 @@
 ---
 title: 'Code First-Migrationen: EF6'
+description: Code-First-Migrationen in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 36591d8f-36e1-4835-8a51-90f34f633d1e
-ms.openlocfilehash: e5a91af73bab9d45b0f1f4242ce503c6b6f407f6
-ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
+uid: ef6/modeling/code-first/migrations/index
+ms.openlocfilehash: b2200a91b087cf6f2dff0803b710e2518193af40
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "78413305"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89616958"
 ---
 # <a name="code-first-migrations"></a>Code First-Migrationen
 Code First-Migrationen ist die empfohlene Methode, das Datenbankschema einer Anwendung weiterzuentwickeln, wenn Sie den Code First-Workflow verwenden. Code First-Migrationen stellt eine Reihe von Tools bereit, mit denen Sie folgende Aktionen ausführen können:
@@ -17,7 +19,7 @@ Code First-Migrationen ist die empfohlene Methode, das Datenbankschema einer Anw
 2. Generieren von Migrationen, um Änderungen an Ihrem EF-Modell nachzuverfolgen
 2. Aktualisieren der Datenbank mit den entsprechenden Änderungen
 
-Diese exemplarische Vorgehensweise bietet eine Übersicht über Code First-Migrationen in Entity Framework. Sie können entweder die gesamte exemplarische Vorgehensweise ausführen oder mit einem Thema fortfahren, das Sie besonders interessiert. Die folgenden Themen werden behandelt:
+Diese exemplarische Vorgehensweise bietet eine Übersicht über Code First-Migrationen in Entity Framework. Sie können entweder die gesamte exemplarische Vorgehensweise ausführen oder mit einem Thema fortfahren, das Sie besonders interessiert. Die folgenden Themen werden erörtert:
 
 ## <a name="building-an-initial-model--database"></a>Erstellen eines Ausgangsmodells und einer Ausgangsdatenbank
 
@@ -288,7 +290,7 @@ Bisher haben Sie immer ein Upgrade auf die neueste Migration durchgeführt, doch
 
 Angenommen, Sie möchten die Datenbank zu dem Zustand nach der **AddBlogUrl**-Migration migrieren. Verwenden Sie den Schalter **–TargetMigration**, um ein Downgrade auf diese Migration durchzuführen.
 
--   Führen Sie den Befehl **Update-Database –TargetMigration: AddBlogUrl** in der Paket-Manager-Konsole aus.
+-   Führen Sie in der Paket-Manager-Konsole den Befehl **Update-Database –TargetMigration: AddBlogUrl** aus.
 
 Mit diesem Befehl wird das Down-Skript für die Migrationen **AddBlogAbstract** und **AddPostClass** ausgeführt.
 
@@ -298,9 +300,9 @@ Verwenden Sie zum Zurücksetzen auf eine leere Datenbank den Befehl **Update-Dat
 
 Andere Entwickler können diese Änderungen auf ihren Computer übertragen, indem sie eine Synchronisierung durchführen, nachdem Sie die Änderungen in die Quellcodeverwaltung eingecheckt haben. Sobald die neuen Migrationen bei ihnen angekommen sind, müssen sie nur noch den Befehl „Update-Database“ ausführen, um die Änderungen lokal zu übernehmen. Wenn Sie jedoch diese Änderungen auf einen Testserver und eventuell zur Produktion weiterleiten möchten, benötigen Sie vermutlich ein SQL-Skript, das Sie an den DBA übergeben können.
 
--   Führen Sie den Befehl **Update-Database** aus, doch geben Sie dieses Mal das Flag **–Script** an, damit die Änderungen nicht übernommen, sondern in ein Skript geschrieben werden. Geben Sie zudem eine Quell- und Zielmigration an, für die das Skript generiert werden soll. Das Skript sollte von einer leeren Datenbank ( **$InitialDatabase**) bis zur neuesten Version (**AddPostAbstract**-Migration) reichen.
+-   Führen Sie den Befehl **Update-Database** aus, doch geben Sie dieses Mal das Flag **–Script** an, damit die Änderungen nicht übernommen, sondern in ein Skript geschrieben werden. Geben Sie zudem eine Quell- und Zielmigration an, für die das Skript generiert werden soll. Das Skript sollte von einer leeren Datenbank (**$InitialDatabase**) bis zur neuesten Version (**AddPostAbstract**-Migration) reichen.
     *Wenn Sie keine Zielmigration angeben, verwendet Code First-Migrationen die neueste Migration als Ziel. Wenn Sie keine Quellmigrationen angeben, verwendet Code First-Migrationen den aktuellen Zustand der Datenbank.*
--   Führen Sie den Befehl **Update-Database -Script -SourceMigration: $InitialDatabase -TargetMigration: AddPostAbstract** in der Paket-Manager-Konsole aus.
+-   Führen Sie in der Paket-Manager-Konsole den Befehl **Update-Database -Script -SourceMigration: $InitialDatabase -TargetMigration: AddPostAbstract** aus.
 
 Code First-Migrationen führt die Migrationspipeline aus. Doch anstatt die Änderungen tatsächlich zu übernehmen, werden sie in eine SQL-Datei geschrieben. Nachdem das Skript generiert wurde, wird es in Visual Studio geöffnet. Dort können Sie es sich ansehen oder speichern.
 

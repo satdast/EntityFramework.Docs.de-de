@@ -1,21 +1,22 @@
 ---
 title: Erstellen und Konfigurieren eines Modells – EF Core
+description: Übersicht über das Erstellen und Konfigurieren eines Modells mit Entity Framework Core
 author: rowanmiller
 ms.date: 11/05/2019
 ms.assetid: 88253ff3-174e-485c-b3f8-768243d01ee1
 uid: core/modeling/index
-ms.openlocfilehash: 0f44d9684ca5c8435d83085f9038860309bd82a2
-ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
+ms.openlocfilehash: e980f11b08bee7b07156a80c6bead829e7a8b654
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "78412775"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89616753"
 ---
 # <a name="creating-and-configuring-a-model"></a>Erstellen und Konfigurieren eines Modells
 
 Entity Framework verwendet eine Reihe von Konventionen, um ein Modell basierend auf der Anordnung Ihrer Entitätsklassen zu erstellen. Sie können zusätzliche Konfigurationen angeben, um die gemäß den Konventionen gewonnenen Ergebnisse zu ergänzen und/oder zu überschreiben.
 
-Dieser Artikel behandelt die Konfiguration, die auf ein Modell für einen beliebigen Datenspeicher und auf jede relationale Datenbank angewendet werden kann. Anbieter können auch eine Konfiguration aktivieren, die speziell für einen bestimmten Datenspeicher gilt. Dokumentation zu anbieterspezifischen Konfigurationen finden Sie im Abschnitt  [Datenbankanbieter](../providers/index.md) .
+Dieser Artikel behandelt die Konfiguration, die auf ein Modell für einen beliebigen Datenspeicher und auf jede relationale Datenbank angewendet werden kann. Anbieter können auch eine Konfiguration aktivieren, die speziell für einen bestimmten Datenspeicher gilt. Dokumentation zu anbieterspezifischen Konfigurationen finden Sie im Abschnitt  [Datenbankanbieter](xref:core/providers/index) .
 
 > [!TIP]  
 > Das in diesem Artikel verwendete  [Beispiel](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples)  finden Sie auf GitHub.
