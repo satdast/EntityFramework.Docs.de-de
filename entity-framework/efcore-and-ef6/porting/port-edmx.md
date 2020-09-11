@@ -1,15 +1,16 @@
 ---
 title: 'Portieren von EF6 auf EF Core: Portieren eines EDMX-basierten Modells'
+description: Spezifische Informationen zum Portieren einer EDMX-basierten Entity Framework 6-Modellanwendung zu Entity Framework Core
 author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 63003709-f1ec-4bdc-8083-65a60c4826d2
 uid: efcore-and-ef6/porting/port-edmx
-ms.openlocfilehash: f0bb06dc687aaa774981d97daadc55f00fbd527e
-ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
+ms.openlocfilehash: 3767b1dc083ec886115cea9b0750101fb49ad84c
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "78413528"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89619604"
 ---
 # <a name="porting-an-ef6-edmx-based-model-to-ef-core"></a>Portieren eines EDMX-basierten EF6-Modells auf EF Core
 
@@ -23,7 +24,7 @@ Installieren Sie das NuGet-Paket `Microsoft.EntityFrameworkCore.Tools`.
 
 Sie können jetzt die Reverse-Engineering-Funktion verwenden, um ein Modell auf Grundlage der vorhandenen Datenbank zu erstellen.
 
-Führen Sie in der Paket-Manager-Konsole (Extras > NuGet-Paket-Manager > Paket-Manager-Konsole) den folgenden Befehl aus. Im Artikel zur [Paket-Manager-Konsole in Visual Studio](../../core/miscellaneous/cli/powershell.md) finden Sie Befehlsoptionen für das Erstellen eines Gerüsts für eine Teilmenge von Tabellen oder anderen Komponenten.
+Führen Sie in der Paket-Manager-Konsole (Extras > NuGet-Paket-Manager > Paket-Manager-Konsole) den folgenden Befehl aus. Im Artikel zur [Paket-Manager-Konsole in Visual Studio](xref:core/miscellaneous/cli/powershell) finden Sie Befehlsoptionen für das Erstellen eines Gerüsts für eine Teilmenge von Tabellen oder anderen Komponenten.
 
 ``` powershell
 Scaffold-DbContext "<connection string>" <database provider name>
