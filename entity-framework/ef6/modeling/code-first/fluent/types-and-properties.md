@@ -3,14 +3,13 @@ title: Fließende Eigenschaften und Typen für die API-Konfiguration und-Zuordnu
 description: Fließende Eigenschaften und Typen der API-Konfiguration und-Zuordnung in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
-ms.assetid: 648ed274-c501-4630-88e0-d728ab5c4057
 uid: ef6/modeling/code-first/fluent/types-and-properties
-ms.openlocfilehash: d49da416b2df5828fce5618cc196e22dfbc2bd34
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: ddd56ff280b72adbfd2247a4f1a85e37bf2f4879
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89618053"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90072589"
 ---
 # <a name="fluent-api---configuring-and-mapping-properties-and-types"></a>Fließende Eigenschaften und Typen für die API-Konfiguration und-Zuordnung
 Beim Arbeiten mit Entity Framework Code First das Standardverhalten das Zuordnen Ihrer poco-Klassen zu Tabellen mithilfe eines Satzes von Konventionen, die in EF gebacken werden. Manchmal ist es jedoch nicht möglich, diese Konventionen einzuhalten, und die Entitäten müssen einem anderen als dem von den Konventionen vorgegeben werden.  

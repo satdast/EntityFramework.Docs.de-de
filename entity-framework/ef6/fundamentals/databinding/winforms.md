@@ -3,14 +3,13 @@ title: Datenbindung mit WinForms-EF6
 description: Datenbindung mit WinForms in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
-ms.assetid: 80fc5062-2f1c-4dbd-ab6e-b99496784b36
 uid: ef6/fundamentals/databinding/winforms
-ms.openlocfilehash: 934ea2ae488a7df128746a0607037d85e9b23771
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: b316aea0a36edc8586a81427825ed4ee11fc9ef3
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89616343"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90073226"
 ---
 # <a name="databinding-with-winforms"></a>Datenbindung mit Windows Forms
 In dieser schrittweisen exemplarischen Vorgehensweise wird veranschaulicht, wie poco-Typen an Windows Forms-Steuerelemente (WinForms) in einem Master-Detail-Formular gebunden werden. Die Anwendung verwendet Entity Framework zum Auffüllen von Objekten mit Daten aus der Datenbank, zum Nachverfolgen von Änderungen und zum persistenten Speichern von Daten in der Datenbank.
@@ -280,7 +279,7 @@ Fügen Sie die Klassen, die im Modell definiert sind, als Datenquellen für dies
 -   Wählen Sie im Fenster Daten Quellentyp auswählen die Option **Objekt** aus, und klicken Sie auf **weiter** .
 -   Erweitern Sie im Dialogfeld Wählen Sie die Datenobjekte aus das **winformswiderfsample** -Objekt zweimal, und wählen Sie die **Kategorie** aus. es ist nicht erforderlich, die Produktdaten Quelle auszuwählen, da wir Sie über die-Eigenschaft des Produkts in der Kategorie Datenquelle erhalten.
 
-    ![Datenquelle](~/ef6/media/datasource.png)
+    ![Data source](~/ef6/media/datasource.png)
 
 -   Klicken Sie auf **Fertig stellen**.
     Wenn das Fenster Datenquellen nicht angezeigt wird, wählen Sie **Ansicht- &gt; Weitere Windows- &gt; Datenquellen** aus.

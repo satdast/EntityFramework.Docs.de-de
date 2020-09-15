@@ -3,14 +3,13 @@ title: Behandeln von Parallelitäts Konflikten EF6
 description: Behandeln von Parallelitäts Konflikten in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
-ms.assetid: 2318e4d3-f561-4720-bbc3-921556806476
 uid: ef6/saving/concurrency
-ms.openlocfilehash: 1cec47ce346e8a6c86338747c01fba4d030e7388
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: b6b1b3b9f593d437ed7da1873a878fcbdb3c3548
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89619877"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90073729"
 ---
 # <a name="handling-concurrency-conflicts-ef6"></a>Behandeln von Parallelitäts Konflikten (EF6)
 

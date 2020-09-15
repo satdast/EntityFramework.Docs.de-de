@@ -3,13 +3,12 @@ title: Entity Framework Designer Tastenkombinationen-EF6
 description: Entity Framework Designer Tastenkombinationen in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
-ms.assetid: 3c76cdd5-17c5-4c54-a6a5-cf21b974636b
-ms.openlocfilehash: 8b93581e68e3a5d83685794f034c50cfe74eee9f
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 3552f2b9bfc499654bc1dce4a81d37cacc8b7996
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89620462"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90073382"
 ---
 # <a name="entity-framework-designer-keyboard-shortcuts"></a>Entity Framework Designer Tastenkombinationen
 Diese Seite enthält eine Liste der Tastenkombinationen, die in den verschiedenen Bildschirmen der Entity Framework Tools für Visual Studio verfügbar sind.
@@ -98,7 +97,7 @@ Diese Seite enthält eine Liste der Tastenkombinationen, die in den verschiedene
 | **STRG + &gt;**                                                                         | Abstieg (Fokus)             | Identisch mit dem Befehl "descen", aber Verschiebt den Fokus ohne Auswahl.                                                                                                                                                                         |
 | **Umschalt + Ende**                                                                         | Zum Verbinden folgen         | Wechselt von einer Entität zu einer Entität, mit der diese Entität verbunden ist.                                                                                                                                                               |
 | **ENTF**                                                                                 | Löschen                      | Löschen Sie ein Objekt oder einen Connector aus dem Diagramm.                                                                                                                                                                                     |
-| **ELine**                                                                                 | Insert                      | Fügt einer Entität eine neue Eigenschaft hinzu, wenn entweder der Depot Header "Scalar Properties" oder eine Eigenschaft selbst ausgewählt ist.                                                                                                           |
+| **ELine**                                                                                 | Einfügen                      | Fügt einer Entität eine neue Eigenschaft hinzu, wenn entweder der Depot Header "Scalar Properties" oder eine Eigenschaft selbst ausgewählt ist.                                                                                                           |
 | **PG-up**                                                                               | Diagramm nach oben scrollen           | Führt einen Bildlauf nach oben in Schritten von 75% der Höhe der aktuell sichtbaren Entwurfs Oberfläche durch.                                                                                                                    |
 | **PG-Down**                                                                             | Bildlauf nach unten         | Führt einen Bildlauf nach unten durch.                                                                                                                                                                                                    |
 | **UMSCHALT + PG nach unten**                                                                     | Diagramm nach rechts scrollen        | Führt einen Bildlauf zur Entwurfs Oberfläche nach rechts durch.                                                                                                                                                                                            |
@@ -120,7 +119,7 @@ Diese Seite enthält eine Liste der Tastenkombinationen, die in den verschiedene
 |:--------------------------|:---------------|:--------------------------------------------------------------------------------------------------------------------------------------|
 | **Registerkarte**                   | Kontext wechseln | Wechselt zwischen dem Hauptfenster Bereich und der Symbolleiste auf der linken Seite.                                                                     |
 | **Pfeiltasten**            | Navigation     | Verschieben Sie Zeilen nach oben und nach unten oder nach rechts und Links über Spalten im Hauptfenster Bereich. Wechseln Sie zwischen den Schaltflächen in der Symbolleiste auf der linken Seite. |
-| **EINGABETASTE** <br/> **BRaum** | Select         | Wählt in der Symbolleiste auf der linken Seite eine Schaltfläche aus.                                                                                          |
+| **EINGABETASTE** <br/> **BRaum** | Auswählen         | Wählt in der Symbolleiste auf der linken Seite eine Schaltfläche aus.                                                                                          |
 | **Alt + nach-unten-Taste**      | Liste öffnen      | Dropdown Liste, wenn eine Zelle ausgewählt ist, die eine Dropdown Liste enthält.                                                                     |
 | **EINGABETASTE**                 | Liste auswählen    | Wählt ein Element in einer Dropdown Liste aus.                                                                                               |
 | **ESC**                   | Liste schließen     | Schließt eine Dropdown Liste.                                                                                                              |

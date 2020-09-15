@@ -3,14 +3,13 @@ title: Automatisches Code First-Migrationen-EF6
 description: Automatisches Code First-Migrationen in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
-ms.assetid: 0eb86787-2161-4cb4-9cb8-67c5d6e95650
 uid: ef6/modeling/code-first/migrations/automatic
-ms.openlocfilehash: 541adf5aed517685b54d675730996c12ff0c824a
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: e7bd9ff7d9dcecb7fecf213306047a53fc04135c
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89618077"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90072563"
 ---
 # <a name="automatic-code-first-migrations"></a>Automatisches Code First-Migrationen
 Automatische Migrationen ermöglichen es Ihnen, Code First-Migrationen zu verwenden, ohne dass eine Codedatei in Ihrem Projekt für jede von Ihnen vornimmt. Nicht alle Änderungen können automatisch angewendet werden, z. b. für Spalten Umbenennungen ist die Verwendung einer Code basierten Migration erforderlich.
@@ -28,7 +27,7 @@ Bevor Sie Migrationen verwenden können, benötigen Sie ein Projekt und ein Code
 
 -   Erstellen einer neuen **migrationsautomaticdemo** -Konsolenanwendung
 -   Fügen Sie dem Projekt die neueste Version des NuGet-Pakets **EntityFramework** hinzu.
-    -   **Tools – &gt; Bibliothekspaket-Manager – &gt; Paket-Manager-Konsole**
+    -   Wählen Sie **Tools > Bibliotheks-Paket-Manger > Paket-Manager-Konsole** aus.
     -   Führen Sie den Befehl **Install-Package EntityFramework** aus.
 -   Fügen Sie eine **Model.cs**-Datei mit dem unten aufgeführten Code hinzu. Mit diesem Code wird eine einzelne **Blog**-Klasse, die das Domänenmodell bildet, und eine **BlogContext**-Klasse, die den EF Code First-Kontext darstellt, definiert.
 
@@ -99,7 +98,7 @@ Im Folgenden erfahren Sie, wie Sie weitere Änderungen am Modell vornehmen.
     public string Url { get; set; }
 ```
 
-Wenn Sie die Anwendung erneut ausführen, erhalten Sie eine InvalidOperationException, die besagt, dass *das Modell, das den Kontext "blogcontext" unterstützt, seit der Erstellung der Datenbank geändert wurde. Verwenden Sie Code First-Migrationen, um die Datenbank zu aktualisieren (* [*http://go.microsoft.com/fwlink/?LinkId=238269*](https://go.microsoft.com/fwlink/?LinkId=238269) *).*
+Wenn Sie zu diesem Zeitpunkt die Anwendung erneut ausführen würden, würden Sie die Ausnahme „InvalidOperationException“ mit folgendem Text erhalten: *The model backing the 'BlogContext' context has changed since the database was created. Consider using Code First Migrations to update the database (* [ *http://go.microsoft.com/fwlink/?LinkId=238269* ](https://go.microsoft.com/fwlink/?LinkId=238269) *) (Das Modell, das den Kontext „BlogContext“ unterstützt, wurde seit der Erstellung der Datenbank verändert. Verwenden Sie Code First-Migrationen, um die Datenbank zu aktualisieren.).*
 
 Beginnen Sie daher mit der Verwendung von Code First-Migrationen. Da wir automatische Migrationen verwenden möchten, geben wir den Schalter **– enableautomaticmigrationen** an.
 

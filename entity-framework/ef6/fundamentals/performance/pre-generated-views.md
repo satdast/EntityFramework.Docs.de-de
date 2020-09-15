@@ -3,14 +3,13 @@ title: Vorab generierte Mapping-Sichten-EF6
 description: Vorab generierte Mapping-Sichten in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
-ms.assetid: 917ba9c8-6ddf-4631-ab8c-c4fb378c2fcd
 uid: ef6/fundamentals/performance/pre-generated-views
-ms.openlocfilehash: 8318030603339c45c5c8459db580b7a8de5febda
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: b69c1eea1e219d76a8de1b2cf3b88de2cf74c8f0
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89615864"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90073551"
 ---
 # <a name="pre-generated-mapping-views"></a>Vorab generierte Mapping-Sichten
 Bevor die Entity Framework eine Abfrage ausführen oder Änderungen an der Datenquelle speichern kann, muss Sie einen Satz von zuordnungssichten generieren, um auf die Datenbank zuzugreifen. Diese Zuweisungs Sichten sind eine Reihe von Entity SQL-Anweisungen, die die Datenbank auf abstrakte Weise darstellen. Sie sind Teil der Metadaten, die pro Anwendungsdomäne zwischengespeichert werden. Wenn Sie mehrere Instanzen desselben Kontexts in derselben Anwendungsdomäne erstellen, werden die Zuordnung von Sichten aus den zwischengespeicherten Metadaten wieder verwendet, anstatt Sie neu zu generieren. Da die Generierung der Ansichts Generierung ein wesentlicher Bestandteil der Gesamtkosten für die Ausführung der ersten Abfrage ist, ermöglicht Ihnen die Entity Framework, die Zuordnung von Sichten vorab zu generieren und Sie in das kompilierte Projekt einzubeziehen.Weitere Informationen finden Sie unter  [Überlegungen zur Leistung (Entity Framework)](xref:ef6/fundamentals/performance/perf-whitepaper).

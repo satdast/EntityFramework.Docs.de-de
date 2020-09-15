@@ -3,14 +3,13 @@ title: Wert Konvertierungen-EF Core
 description: Konfigurieren von Wert Konvertern in einem Entity Framework Core Modell
 author: ajcvickers
 ms.date: 02/19/2018
-ms.assetid: 3154BF3C-1749-4C60-8D51-AE86773AA116
 uid: core/modeling/value-conversions
-ms.openlocfilehash: 79e54392bf5503b4b651f25ce6e5fc63d418df90
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 1d347eb6a7fcdcb55239e1fa854f6c38ab081b21
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89616659"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90072550"
 ---
 # <a name="value-conversions"></a>Wertkonvertierungen
 

@@ -3,14 +3,13 @@ title: Arbeiten mit Eigenschafts Werten EF6
 description: Arbeiten mit Eigenschafts Werten in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
-ms.assetid: e3278b4b-9378-4fdb-923d-f64d80aaae70
 uid: ef6/saving/change-tracking/property-values
-ms.openlocfilehash: 53c0829920c77768eae26d23c3da7d0553f44b62
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 30c8e7dbd59f0eb3ec15c0f57f022afd90fd80f8
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89619969"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90073755"
 ---
 # <a name="working-with-property-values"></a>Arbeiten mit Eigenschafts Werten
 In den meisten Fällen übernimmt Entity Framework die Nachverfolgung des Zustands, der ursprünglichen Werte und der aktuellen Werte der Eigenschaften der Entitäts Instanzen. Es gibt jedoch einige Fälle, z. b. getrennte Szenarios, in denen Sie die Informationen anzeigen oder bearbeiten möchten, die EF über die Eigenschaften verfügt. Die in diesem Thema dargestellten Techniken gelten jeweils für Modelle, die mit Code First und dem EF-Designer erstellt wurden.  
