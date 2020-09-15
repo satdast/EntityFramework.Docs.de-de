@@ -1,15 +1,16 @@
 ---
 title: 'Grundlegender Speichervorgang: EF Core'
+description: Grundlegende Informationen zum Hinzufügen, Aktualisieren und Entfernen von Daten mit Entity Framework Core
 author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 850d842e-3fad-4ef2-be17-053768e97b9e
 uid: core/saving/basic
-ms.openlocfilehash: 066d67d6104316832a33f5a3648f1f2fa6cc9c50
-ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
+ms.openlocfilehash: 21a9be10d081591a7d3b33a8e9cc48552c95fb6c
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "78413684"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89617434"
 ---
 # <a name="basic-save"></a>Grundlegender Speichervorgang
 
@@ -25,7 +26,7 @@ Verwenden Sie die Methode *DbSet.Add*, um Ihren Entitätsklassen neue Instanzen 
 [!code-csharp[Main](../../../samples/core/Saving/Basics/Sample.cs#Add)]
 
 > [!TIP]  
-> Die Methoden Add, Attach und Update wirken sich auf den vollständigen Graph an Entitäten aus, die an sie übergeben werden, wie im Abschnitt [Relevante Daten](related-data.md) beschrieben. Die Eigenschaft EntityEntry.State kann alternativ zum Festlegen des Zustands einer einzelnen Entität verwendet werden. Beispiel: `context.Entry(blog).State = EntityState.Modified`.
+> Die Methoden Add, Attach und Update wirken sich auf den vollständigen Graph an Entitäten aus, die an sie übergeben werden, wie im Abschnitt [Relevante Daten](xref:core/saving/related-data) beschrieben. Die Eigenschaft EntityEntry.State kann alternativ zum Festlegen des Zustands einer einzelnen Entität verwendet werden. Beispiel: `context.Entry(blog).State = EntityState.Modified`.
 
 ## <a name="updating-data"></a>Aktualisieren von Daten
 

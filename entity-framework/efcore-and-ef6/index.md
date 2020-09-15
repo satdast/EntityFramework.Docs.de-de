@@ -3,14 +3,13 @@ title: Vergleichen von EF6 und EF Core
 description: Leitfaden zur Wahl zwischen EF6 und EF Core.
 author: ajcvickers
 ms.date: 01/23/2019
-ms.assetid: a6b9cd22-6803-4c6c-a4d4-21147c0a81cb
 uid: efcore-and-ef6/index
-ms.openlocfilehash: 8e99cd9863d9f206ef3ae4d68226283019db835f
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 02e5e20d270d1966154e9f564256c9afa9b2d5b4
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89619749"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90073616"
 ---
 # <a name="compare-ef-core--ef6"></a>Vergleichen von EF Core und EF 6
 

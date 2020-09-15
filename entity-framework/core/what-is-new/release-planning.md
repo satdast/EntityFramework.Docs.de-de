@@ -1,14 +1,15 @@
 ---
 title: Releaseplanung für EF Core
+description: Informationen zur Planung und Veröffentlichung von Entity Framework Core
 author: ajcvickers
 ms.date: 01/28/2020
-uid: core/what-is-new/release_planning
-ms.openlocfilehash: df933ac2462fcc18c53f49d862836fd2d6a4dd99
-ms.sourcegitcommit: ebfd3382fc583bc90f0da58e63d6e3382b30aa22
+uid: core/what-is-new/release-planning
+ms.openlocfilehash: 91a130b4ddae66f626bcff8e70283a7e03192542
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/25/2020
-ms.locfileid: "85370187"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89618566"
 ---
 # <a name="release-planning-process"></a>Die Releaseplanung
 
@@ -54,7 +55,7 @@ Bei Nebenversionen bleibt der „Hauptteil“ einer Version unberührt.
 Bei EF Core 3.**1**.0 handelt es sich beispielsweise um ein Release, für das Verbesserungen an EF Core 3.**0**.0. vorgenommen wurden.
 
 Folgendes trifft auf Nebenversionen zu:
-* Nebenversionen sollen die Qualität und Features vorheriger Releases verbessern
+* Hauptversionen sollen die Qualität und Features vorheriger Releases verbessern
 * Hauptversionen enthalten in der Regel Fehlerbehebungen sowie neue Features
 * Nebenversionen enthalten keine absichtlichen Breaking Changes
 * Für Nebenversionen werden einige Vorschauversion vor dem eigentlichen Release an NuGet gepusht
@@ -65,7 +66,7 @@ Bei Hauptversionen ändert sich die Versionsnummer des „Hauptteils“ von EF.
 Bei EF Core **3**.0.0 handelt es sich beispielsweise um eine Hauptversion, bei der im Vergleich zu EF Core 2.2.x wesentliche Unterschiede bestehen.
 
 Folgendes trifft auf Hauptversionen zu:
-* Nebenversionen sollen die Qualität und Features vorheriger Releases verbessern
+* Hauptversionen sollen die Qualität und Features vorheriger Releases verbessern
 * Hauptversionen enthalten in der Regel Fehlerbehebungen sowie neue Features
   * Bei einigen der neuen Features kann es sich um erhebliche Änderungen der Funktionsweise von EF Core handeln
 * Hauptversionen enthalten in der Regel absichtliche Breaking Changes

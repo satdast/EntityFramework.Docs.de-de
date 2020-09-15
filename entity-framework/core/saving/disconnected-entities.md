@@ -1,20 +1,21 @@
 ---
 title: Getrennte Entitäten – EF Core
+description: Kontextinstanzenübergreifendes Arbeiten mit getrennten, nicht nachverfolgten Entitäten in Entity Framework Core
 author: ajcvickers
 ms.author: avickers
 ms.date: 10/27/2016
 ms.assetid: 2533b195-d357-4056-b0e0-8698971bc3b0
 uid: core/saving/disconnected-entities
-ms.openlocfilehash: 421531e68ac98c0553938f1c24892701f22fef3c
-ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
+ms.openlocfilehash: 52ba838c4d54771c51737c3940e5a88659f94144
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "78413654"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89617281"
 ---
 # <a name="disconnected-entities"></a>Getrennte Entitäten
 
-Eine DbContext-Instanz verfolgt automatisch Entitäten nach, die von der Datenbank zurückgegeben wurden. An diesen Entitäten vorgenommene Änderungen werden nach dem Aufrufen von SaveChanges erkannt, und die Datenbank wird ggf. aktualisiert. Weitere Einzelheiten finden Sie unter [Grundlegendes zum Speichern](basic.md) und [Zugehörige Daten](related-data.md).
+Eine DbContext-Instanz verfolgt automatisch Entitäten nach, die von der Datenbank zurückgegeben wurden. An diesen Entitäten vorgenommene Änderungen werden nach dem Aufrufen von SaveChanges erkannt, und die Datenbank wird ggf. aktualisiert. Weitere Einzelheiten finden Sie unter [Grundlegendes zum Speichern](xref:core/saving/basic) und [Zugehörige Daten](xref:core/saving/related-data).
 
 Entitäten werden jedoch manchmal mit einer Kontextinstanz abgefragt und anschließend mit einer anderen Instanz gespeichert. Dies geschieht häufig in „getrennten“ Szenarios, wie z.B. einer Webanwendung, in welcher die Entitäten abgefragt werden, an den Client gesendet werden, geändert werden, in einer Anforderung zurück an den Server gesendet werden und anschließend gespeichert werden. In diesem Fall muss der zweiten Kontextinstanz bekannt sein, ob die Entitäten neu (Einfügung erforderlich) oder bereits vorhanden (Aktualisierung erforderlich) sind.
 

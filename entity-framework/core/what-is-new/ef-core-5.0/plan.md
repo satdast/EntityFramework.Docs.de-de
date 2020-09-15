@@ -1,18 +1,19 @@
 ---
 title: Plan für Entity Framework Core 5.0
+description: Die für Entity Framework Core 5.0 geplanten Features
 author: ajcvickers
 ms.date: 08/22/2020
 uid: core/what-is-new/ef-core-5.0/plan
-ms.openlocfilehash: a0d41d6df844c9ca2c8a2dc8ba50ca669e23dced
-ms.sourcegitcommit: 6f7af3f138bf7c724cbdda261f97e5cf7035e8d7
+ms.openlocfilehash: 5ac7a48a70959b625b7c602ee48dc08a360bee73
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/25/2020
-ms.locfileid: "88847578"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89618663"
 ---
 # <a name="plan-for-entity-framework-core-50"></a>Plan für Entity Framework Core 5.0
 
-Wie im [Artikel zum Planungsprozess](xref:core/what-is-new/release_planning) beschrieben, haben wir aus dem Feedback der Stakeholder diesen vorläufigen Plan für EF Core 5.0 erstellt.
+Wie im [Artikel zum Planungsprozess](xref:core/what-is-new/release-planning) beschrieben, haben wir aus dem Feedback der Stakeholder diesen vorläufigen Plan für EF Core 5.0 erstellt.
 
 > [!IMPORTANT]
 > Er befindet sich aktuell in der Entwicklung. Sein Inhalt ist nicht verbindlich. Er dient als Ausgangspunkt und wird durch neues Feedback weiterentwickelt. Es kann also sein, dass die Version 5.0 Funktionen enthalten wird, die bisher nicht geplant waren. Im Gegenzug kann es jedoch auch passieren, dass Funktionen gestrichen werden, die bisher für die Version 5.0 geplant waren.
@@ -309,4 +310,4 @@ Zusätzlich werden bei der Planung auch immer die [Probleme mit den meisten Stim
 
 ## <a name="suggestions"></a>Vorschläge
 
-Ihr Feedback zur Planung ist wichtig. Sie können für ein Problem auf GitHub abstimmen (Daumen hoch) und so angeben, dass dieses Problem wichtig ist. Diese Daten werden dann in den [Planungsprozess](xref:core/what-is-new/release_planning) für das nächste Release aufgenommen.
+Ihr Feedback zur Planung ist wichtig. Sie können für ein Problem auf GitHub abstimmen (Daumen hoch) und so angeben, dass dieses Problem wichtig ist. Diese Daten werden dann in den [Planungsprozess](xref:core/what-is-new/release-planning) für das nächste Release aufgenommen.

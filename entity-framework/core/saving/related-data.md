@@ -1,15 +1,16 @@
 ---
 title: 'Speichern verwandter Daten: EF Core'
+description: Informationen zur Speicherung von Graphen für verknüpfte Entitäten und Verwaltung von Beziehungen in Entity Framework Core
 author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 07b6680f-ffcf-412c-9857-f997486b386c
 uid: core/saving/related-data
-ms.openlocfilehash: 86d32b6172ee21c12a15e9ed4bb0142afc99c8bd
-ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
+ms.openlocfilehash: 118d5933dd543a03bbe16fd8be1f00b7304e39c4
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "78413612"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89618887"
 ---
 # <a name="saving-related-data"></a>Speichern relevanter Daten
 
@@ -53,9 +54,9 @@ Das Entfernen einer Beziehung kann Nebeneffekte gemäß dem in der Beziehung kon
 
 Das Verhalten eines kaskadierenden Deletes wird standardmäßig für erforderliche Beziehungen konfiguriert, und die untergeordnete bzw. abhängige Entität wird aus der Datenbank gelöscht. Das kaskadierende Delete wird für optionale Beziehungen nicht standardmäßig konfiguriert, aber die Fremdschlüsseleigenschaft wird auf NULL festgelegt.
 
-Informationen darüber, wie die Erforderlichkeit von Beziehungen konfiguriert wird, finden Sie unter [Required and Optional Relationships (Erforderliche und optionale Beziehungen)](../modeling/relationships.md#required-and-optional-relationships).
+Informationen darüber, wie die Erforderlichkeit von Beziehungen konfiguriert wird, finden Sie unter [Required and Optional Relationships (Erforderliche und optionale Beziehungen)](xref:core/modeling/relationships#required-and-optional-relationships).
 
-Ausführliche Informationen zur Funktionsweise des kaskadierenden Deletes, wie es explizit konfiguriert werden kann und wie es gemäß der Konvention ausgewählt wird, finden Sie unter [Cascade Delete (Kaskadierendes Delete)](cascade-delete.md).
+Ausführliche Informationen zur Funktionsweise des kaskadierenden Deletes, wie es explizit konfiguriert werden kann und wie es gemäß der Konvention ausgewählt wird, finden Sie unter [Cascade Delete (Kaskadierendes Delete)](xref:core/saving/cascade-delete).
 
 Im folgenden Beispiel wird das kaskadierende Delete der Beziehung zwischen `Blog` und `Post` konfiguriert, sodass die Entität `post` aus der Datenbank gelöscht wird.
 

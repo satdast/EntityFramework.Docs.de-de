@@ -1,26 +1,27 @@
 ---
 title: 'Festlegen expliziter Werte für generierte Eigenschaften: EF Core'
+description: Informationen zum Festlegen expliziter Werte für Eigenschaften, die als mit Entity Framework Core generiert konfiguriert wurden
 author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 3f1993c2-cdf5-425b-bac2-a2665a20322b
 uid: core/saving/explicit-values-generated-properties
-ms.openlocfilehash: 43c4ab3c2a60645cdeff2a6cc40ce979f832f2fd
-ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
+ms.openlocfilehash: 6a10e8d8c056ab66226f229dcb8b032ff83f06fe
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "78413630"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89617251"
 ---
 # <a name="setting-explicit-values-for-generated-properties"></a>Festlegen expliziter Werte für generierte Eigenschaften
 
-Eine generierte Eigenschaft ist eine Eigenschaft, deren Wert (über EF oder die Datenbank) generiert wird, wenn die Entität hinzugefügt oder aktualisiert wird. Weitere Informationen finden Sie unter [Generated Properties (Generierte Eigenschaften)](../modeling/generated-properties.md).
+Eine generierte Eigenschaft ist eine Eigenschaft, deren Wert (über EF oder die Datenbank) generiert wird, wenn die Entität hinzugefügt oder aktualisiert wird. Weitere Informationen finden Sie unter [Generated Properties (Generierte Eigenschaften)](xref:core/modeling/generated-properties).
 
 Es gibt möglicherweise Situationen, in denen Sie einen expliziten Wert für einen generierten Wert festlegen möchten, anstatt einen zu generieren.
 
 > [!TIP]  
 > Das in diesem Artikel verwendete [Beispiel](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Saving/ExplicitValuesGenerateProperties/) finden Sie auf GitHub.
 
-## <a name="the-model"></a>Das Modell
+## <a name="the-model"></a>Die Model-Komponente
 
 Das in diesem Artikel verwendete Modell enthält eine einzelne `Employee`-Entität.
 

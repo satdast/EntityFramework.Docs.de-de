@@ -3,14 +3,13 @@ title: Portieren von EF6 nach EF Core
 description: Allgemeine Informationen zum Portieren einer Anwendung von Entity Framework 6 zu Entity Framework Core
 author: rowanmiller
 ms.date: 10/27/2016
-ms.assetid: 826b58bd-77b0-4bbc-bfcd-24d1ed3a8f38
 uid: efcore-and-ef6/porting/index
-ms.openlocfilehash: 132934df2ef7929372c4a092635c5c97227983f9
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 62360dda92d951fe9a4f43a2b742a7457ad8692f
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89619685"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90073590"
 ---
 # <a name="porting-from-ef6-to-ef-core"></a>Portieren von EF 6 nach EF Core
 

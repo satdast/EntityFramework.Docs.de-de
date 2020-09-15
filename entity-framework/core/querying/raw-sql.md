@@ -1,15 +1,16 @@
 ---
 title: Unformatierte SQL-Abfragen – EF Core
+description: Verwenden von reinem SQL-Code für Abfragen in Entity Framework Core
 author: smitpatel
 ms.date: 10/08/2019
 ms.assetid: 70aae9b5-8743-4557-9c5d-239f688bf418
 uid: core/querying/raw-sql
-ms.openlocfilehash: a54bb67c0fce9d621382f6372e70fe4cdca48a20
-ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
+ms.openlocfilehash: 3b95c15b2b07d1eeecf1603e6bfbb29f4931d5cc
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "78413714"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89617504"
 ---
 # <a name="raw-sql-queries"></a>Unformatierte SQL-Abfragen
 
@@ -55,6 +56,9 @@ Sie können auch einen DbParameter erstellen und diesen als Parameterwert bereit
 Mit `FromSqlRaw` können Sie benannte Parameter in der SQL-Abfragezeichenfolge verwenden. Dies ist nützlich, wenn eine gespeicherte Prozedur optionale Parameter aufweist:
 
 [!code-csharp[Main](../../../samples/core/Querying/RawSQL/Sample.cs#FromSqlRawStoredProcedureNamedSqlParameter)]
+
+> [!NOTE]
+> **Parameterreihenfolge**: Entity Framework Core übergibt Parameter basierend auf der Reihenfolge des `SqlParameter[]`-Arrays. Beim Übergeben mehrerer `SqlParameter` muss die Reihenfolge in der SQL-Zeichenfolge mit der Reihenfolge der Parameter in der Definition der gespeicherten Prozedur übereinstimmen. Ist dies nicht der Fall, führt dies möglicherweise zu Typkonvertierungsausnahmen und/oder unerwartetem Verhalten beim Ausführen der Prozedur.
 
 ## <a name="composing-with-linq"></a>Zusammensetzen mit LINQ
 
@@ -103,6 +107,6 @@ Bei der Verwendung unformatierter SQL-Abfragen sind einige wenige Einschränkung
 - Die Spaltennamen im Resultset müssen mit den Spaltennamen übereinstimmen, denen Eigenschaften zugewiesen sind. Beachten Sie, dass sich dieses Verhalten von EF6 unterscheidet. EF6 ignoriert die Zuordnung von Eigenschaften zu Spalten bei unformatierten SQL-Abfragen, und Spaltennamen von Resultsets mussten mit den Eigenschaftennamen übereinstimmen.
 - Die SQL-Abfrage darf keine zugehörigen Daten enthalten. In vielen Fällen können Sie die Abfrage jedoch mit dem Operator `Include` zusammensetzen, damit zugehörige Daten zurückgegeben werden (siehe [Einschließen zugehöriger Daten](#including-related-data)).
 
-## <a name="previous-versions"></a>Vorgängerversionen
+## <a name="previous-versions"></a>Vorherige Versionen
 
 In EF Core Version 2.2 und früher gab es zwei Überladungen für eine Methode namens `FromSql`, die sich wie die neueren Methoden `FromSqlRaw` und `FromSqlInterpolated` verhielten. Es war leicht, versehentlich die unformatierte Zeichenfolgenmethode aufzurufen, wenn eigentlich ein Aufruf der interpolierten Zeichenfolgenmethode beabsichtigt war oder umgekehrt. Versehentliche Aufrufe der falschen Überladung konnten dazu führen, dass Abfragen nicht parametrisiert wurden, wenn sie parametrisiert werden sollten.

@@ -1,15 +1,16 @@
 ---
 title: Funktionsweise von Abfragen – EF Core
+description: Allgemeine Informationen darüber, wie Abfragen von Entity Framework Core intern kompiliert und ausgeführt werden
 author: ajcvickers
 ms.date: 03/17/2020
 ms.assetid: de2e34cd-659b-4cab-b5ed-7a979c6bf120
 uid: core/querying/how-query-works
-ms.openlocfilehash: e8a50efe31468ea8df211602636dd474550bc0ef
-ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
+ms.openlocfilehash: e0e489f5f797b6f7d8f4860539a538dba90bd1c2
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "80136238"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89616363"
 ---
 # <a name="how-queries-work"></a>Funktionsweise von Abfragen
 
@@ -23,13 +24,13 @@ Nachstehend finden Sie eine grobe Übersicht über die verschiedenen Phasen des 
    1. Das Ergebnis wird zwischengespeichert, damit dieser Vorgang nicht jedes Mal ausgeführt werden muss, wenn die Abfrage ausgeführt wird.
 2. Das Ergebnis wird an den Datenbankanbieter übergeben.
    1. Der Datenbankanbieter ermittelt, welche Teile der Abfrage in der Datenbank ausgewertet werden können.
-   2. Diese Teile der Abfrage werden in die datenbankspezifische Abfragesprache übersetzt, z.B. SQL für relationale Datenbanken.
+   2. Diese Teile der Abfrage werden in die datenbankspezifische Abfragesprache übersetzt, z. B. SQL für relationale Datenbanken.
    3. Eine Abfrage wird an die Datenbank gesendet, und das Resultset wird zurückgegeben (Ergebnisse sind Datenbankwerte, keine Entitätsinstanzen).
 3. Für jedes Element im Resultset wird Folgendes ausgeführt:
-   1. Wenn es sich um eine Überwachungsabfrage handelt, überprüft EF, ob die Daten eine Entität darstellen, die bereits in der Änderungsnachverfolgung für die Kontextinstanz vorhanden ist.
+   1. Wenn es sich bei der Abfrage um eine Überwachungsabfrage handelt, überprüft EF, ob die Daten eine Entität darstellen, die bereits in der Änderungsnachverfolgung für die Kontextinstanz vorhanden ist.
       * Wenn dies der Fall ist, wird die vorhandene Entität zurückgegeben.
       * Wenn dies nicht der Fall ist, wird eine neue Entität erstellt, die Änderungsnachverfolgung wird eingerichtet, und die neue Entität wird zurückgegeben.
-   2. Wenn es sich um eine nicht nachverfolgungsbezogene Abfrage handelt, wird immer eine neue Entität erstellt und zurückgegeben.
+   2. Wenn es sich bei der Abfrage um eine nicht nachverfolgungsbezogene Abfrage handelt, wird immer eine neue Entität erstellt und zurückgegeben.
 
 ## <a name="when-queries-are-executed"></a>Ausführen von Abfragen
 
