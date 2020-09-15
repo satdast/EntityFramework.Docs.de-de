@@ -3,14 +3,13 @@ title: Entitäts Typen mit Konstruktoren-EF Core
 description: Verwenden von Konstruktoren zum Binden von Daten mit Entity Framework Core Modell
 author: ajcvickers
 ms.date: 02/23/2018
-ms.assetid: 420AFFE7-B709-4A68-9149-F06F8746FB33
 uid: core/modeling/constructors
-ms.openlocfilehash: 58529a3a68e69a31249460d402027274404dce45
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 06d18f173275599ad1e547193363e13c48fc8dcf
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89617539"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90071588"
 ---
 # <a name="entity-types-with-constructors"></a>Entitäts Typen mit Konstruktoren
 

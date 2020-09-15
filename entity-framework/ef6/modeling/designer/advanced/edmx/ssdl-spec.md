@@ -3,14 +3,13 @@ title: SSDL-Spezifikation-EF6
 description: SSDL-Spezifikation in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
-ms.assetid: a4af4b1a-40f4-48cc-b2e0-fa8f5d9d5419
 uid: ef6/modeling/designer/advanced/edmx/ssdl-spec
-ms.openlocfilehash: ab50579649c2e1b19d113cd127e52be995516e27
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: dbcd4c771e8ca1324a0520f9c8ca13ba4661487b
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89620595"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90070210"
 ---
 # <a name="ssdl-specification"></a>SSDL-Spezifikation
 Die Datenspeicherschema-Definitionssprache (Store Schema Definition Language, SSDL) ist eine XML-basierte Sprache, die das Speichermodell einer Entity Framework-Anwendung beschreibt.
@@ -633,7 +632,7 @@ In der folgenden Tabelle werden die Attribute beschrieben, die auf das **Paramet
 | **Mode**       | Nein          | **In**, out oder **INOUT** , je nachdem, ob der Parameter ein Eingabe-, Ausgabe-oder Eingabe- **/Ausgabeparameter**ist.                                                                                                                |
 | **MaxLength**  | Nein          | Die maximale Länge des Parameters.                                                                                                                                                                                            |
 | **Genauigkeit**  | Nein          | Die Genauigkeit des Parameters.                                                                                                                                                                                                 |
-| **Skalieren**      | Nein          | Der Maßstab des Parameters.                                                                                                                                                                                                     |
+| **Skalierung**      | Nein          | Der Maßstab des Parameters.                                                                                                                                                                                                     |
 | **SRID**       | Nein          | Verweis Bezeichner für räumliche Systeme. Nur für Parameter räumlicher Typen gültig. Weitere Informationen finden Sie unter [SRID](https://en.wikipedia.org/wiki/SRID) und [SRID (SQL Server)](https://msdn.microsoft.com/library/bb964707.aspx). |
 
 > [!NOTE]
@@ -718,7 +717,7 @@ In der folgenden Tabelle werden die Attribute beschrieben, die auf das **Propert
 | **MaxLength**             | Nein          | Maximale Länge der zugehörigen Spalte.                                                                                                                                                                                 |
 | **FixedLength**           | Nein          | **True** oder **false** , abhängig davon, ob der entsprechende Spaltenwert als Zeichenfolge mit fester Länge gespeichert wird.                                                                                                              |
 | **Genauigkeit**             | Nein          | Die Genauigkeit der zugehörigen Spalte.                                                                                                                                                                                      |
-| **Skalieren**                 | Nein          | Die Dezimalstellenanzahl der zugehörigen Spalte.                                                                                                                                                                                          |
+| **Skalierung**                 | Nein          | Die Dezimalstellenanzahl der zugehörigen Spalte.                                                                                                                                                                                          |
 | **Unicode**               | Nein          | **True** oder **false** , abhängig davon, ob der entsprechende Spaltenwert als Unicode-Zeichenfolge gespeichert wird.                                                                                                                   |
 | **Sortierung**             | Nein          | Eine Zeichenfolge, die angibt, welche Sortierreihenfolge in der Datenquelle verwendet wird.                                                                                                                                                   |
 | **SRID**                  | Nein          | Verweis Bezeichner für räumliche Systeme. Nur für Eigenschaften räumlicher Typen gültig. Weitere Informationen finden Sie unter [SRID](https://en.wikipedia.org/wiki/SRID) und [SRID (SQL Server)](https://msdn.microsoft.com/library/bb964707.aspx). |
@@ -1076,5 +1075,5 @@ In der folgenden Tabelle werden die in SSDL unterstützten Facets beschrieben:
 | **FixedLength** | Gibt an, ob sich die Länge des Spaltenwerts ändern kann.                                                                                                                                                                                                  |
 | **MaxLength**   | Gibt die maximale Länge des Spaltenwerts an.                                                                                                                                                                                                           |
 | **Genauigkeit**   | Gibt bei Eigenschaften vom Typ **Decimal**die Anzahl der Ziffern an, die ein Eigenschafts Wert aufweisen kann. Bei Eigenschaften vom Typ **time**, **DateTime**und **DateTimeOffset**wird die Anzahl von Ziffern für die Sekundenbruchteile des Spaltenwerts angegeben. |
-| **Skalieren**       | Gibt die Anzahl der Dezimalstellen für den Spaltenwert an.                                                                                                                                                                      |
+| **Skalierung**       | Gibt die Anzahl der Dezimalstellen für den Spaltenwert an.                                                                                                                                                                      |
 | **Unicode**     | Gibt an, ob der Spaltenwert als Unicode gespeichert wird.                                                                                                                                                                                                    |

@@ -3,14 +3,13 @@ title: Entitäts Typen-EF Core
 description: Konfigurieren und Zuordnen von Entitäts Typen mithilfe von Entity Framework Core
 author: roji
 ms.date: 12/03/2019
-ms.assetid: cbe6935e-2679-4b77-8914-a8d772240cf1
 uid: core/modeling/entity-types
-ms.openlocfilehash: b3d9ad753637d021d9aa52965da38091ae690f77
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.openlocfilehash: fead7f9e37efb7f674f429acbfd16c2ca78480d4
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78414578"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90071510"
 ---
 # <a name="entity-types"></a>Entitätstypen
 
@@ -18,13 +17,13 @@ Das Einschließen eines dbsets eines Typs in den Kontext bedeutet, dass es in EF
 
 ## <a name="including-types-in-the-model"></a>Einschließen von Typen im Modell
 
-Gemäß der Konvention sind Typen, die in dbset-Eigenschaften für den Kontext verfügbar gemacht werden, im Modell als Entitäten enthalten. In der `OnModelCreating`-Methode angegebene Entitäts Typen werden ebenfalls eingeschlossen, ebenso wie alle Typen, die gefunden werden, indem die Navigations Eigenschaften anderer ermittelter Entitäts Typen rekursiv untersucht werden.
+Gemäß der Konvention sind Typen, die in dbset-Eigenschaften für den Kontext verfügbar gemacht werden, im Modell als Entitäten enthalten. In der-Methode angegebene Entitäts Typen `OnModelCreating` werden ebenfalls eingeschlossen, ebenso wie alle Typen, die gefunden werden, indem die Navigations Eigenschaften anderer ermittelter Entitäts Typen rekursiv untersucht werden.
 
 Im folgenden Codebeispiel sind alle Typen enthalten:
 
-* `Blog` ist enthalten, da es in einer dbset-Eigenschaft im Kontext verfügbar gemacht wird.
-* `Post` ist enthalten, da es über die `Blog.Posts` Navigations Eigenschaft erkannt wird.
-* `AuditEntry`, da Sie in `OnModelCreating`angegeben wird.
+* `Blog` ist enthalten, da es in einer dbset-Eigenschaft für den Kontext verfügbar gemacht wird.
+* `Post` ist enthalten, da Sie über die- `Blog.Posts` Navigations Eigenschaft erkannt wird.
+* `AuditEntry` Da es in angegeben wird `OnModelCreating` .
 
 [!code-csharp[Main](../../../samples/core/Modeling/Conventions/EntityTypes.cs?name=EntityTypes&highlight=3,7,16)]
 
@@ -32,11 +31,11 @@ Im folgenden Codebeispiel sind alle Typen enthalten:
 
 Wenn Sie nicht möchten, dass ein Typ im Modell enthalten ist, können Sie ihn ausschließen:
 
-### <a name="data-annotations"></a>[Datenanmerkungen](#tab/data-annotations)
+### <a name="data-annotations"></a>[Daten Anmerkungen](#tab/data-annotations)
 
 [!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/IgnoreType.cs?name=IgnoreType&highlight=1)]
 
-### <a name="fluent-api"></a>[Fließende API](#tab/fluent-api)
+### <a name="fluent-api"></a>[Fluent-API](#tab/fluent-api)
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/IgnoreType.cs?name=IgnoreType&highlight=3)]
 
@@ -48,11 +47,11 @@ Gemäß der Konvention wird jeder Entitätstyp so eingerichtet, dass er einer Da
 
 Sie können den Tabellennamen manuell konfigurieren:
 
-### <a name="data-annotations"></a>[Datenanmerkungen](#tab/data-annotations)
+### <a name="data-annotations"></a>[Daten Anmerkungen](#tab/data-annotations)
 
 [!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/TableName.cs?Name=TableName&highlight=1)]
 
-### <a name="fluent-api"></a>[Fließende API](#tab/fluent-api)
+### <a name="fluent-api"></a>[Fluent-API](#tab/fluent-api)
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/TableName.cs?Name=TableName&highlight=3-4)]
 
@@ -60,15 +59,15 @@ Sie können den Tabellennamen manuell konfigurieren:
 
 ## <a name="table-schema"></a>Tabellenschema
 
-Wenn Sie eine relationale Datenbank verwenden, werden Tabellen gemäß der Konvention im Standardschema Ihrer Datenbank erstellt. Beispielsweise wird Microsoft SQL Server das `dbo` Schema verwenden (SQLite unterstützt keine Schemas).
+Wenn Sie eine relationale Datenbank verwenden, werden Tabellen gemäß der Konvention im Standardschema Ihrer Datenbank erstellt. Beispielsweise wird Microsoft SQL Server das Schema verwenden `dbo` (SQLite unterstützt keine Schemas).
 
 Tabellen, die in einem bestimmten Schema erstellt werden sollen, können wie folgt konfiguriert werden:
 
-### <a name="data-annotations"></a>[Datenanmerkungen](#tab/data-annotations)
+### <a name="data-annotations"></a>[Daten Anmerkungen](#tab/data-annotations)
 
 [!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/TableNameAndSchema.cs?name=TableNameAndSchema&highlight=1)]
 
-### <a name="fluent-api"></a>[Fließende API](#tab/fluent-api)
+### <a name="fluent-api"></a>[Fluent-API](#tab/fluent-api)
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/TableNameAndSchema.cs?name=TableNameAndSchema&highlight=3-4)]
 

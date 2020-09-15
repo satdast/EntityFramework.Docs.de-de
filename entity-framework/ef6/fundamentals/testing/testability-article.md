@@ -3,13 +3,12 @@ title: Testability und Entity Framework 4,0-EF6
 description: Testability und Entity Framework 4,0
 author: divega
 ms.date: 10/23/2016
-ms.assetid: 9430e2ab-261c-4e8e-8545-2ebc52d7a247
-ms.openlocfilehash: e1ded772bfee4f1870a891eaa525b33da8e9d3bc
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 439e2af6b0c851a2ab70d6d9ed1004deb83b1a0e
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89618354"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90070509"
 ---
 # <a name="testability-and-entity-framework-40"></a>Testability und Entity Framework 4,0
 Scott allen
@@ -960,7 +959,7 @@ Die Wahl zwischen den Mocken oder Fakes hängt größtenteils von dem System ab,
 
 In diesem Whitepaper haben wir verschiedene Ansätze zum Erstellen von testbarem Code gezeigt, während wir die ADO.NET-Entity Framework für die Daten Persistenz verwenden. Wir können integrierte Abstraktionen wie IObjectSet t nutzen &lt; &gt; oder eigene Abstraktionen wie IRepository &lt; t erstellen &gt; .In beiden Fällen ermöglicht die poco-Unterstützung im ADO.NET-Entity Framework 4,0, dass die Consumer dieser Abstraktionen permanent ignoriert werden und hochgradig testfähig bleiben. Zusätzliche EF4-Features wie implizites Lazy Loading ermöglichen, dass Geschäfts-und Anwendungs Dienst Code funktionieren, ohne sich Gedanken über die Details eines relationalen Datenspeicher zu machen. Schließlich können die von uns erstellten Abstraktionen leicht in Komponententests hinein oder gefälscht werden, und wir können diese Test Doubles verwenden, um schnelle, hochgradig isolierte und zuverlässige Tests zu erzielen.
 
-### <a name="additional-resources"></a>Weitere Ressourcen
+### <a name="additional-resources"></a>Zusätzliche Ressourcen
 
 -   Robert C. Martin " [das Prinzip der einzelnen Verantwortung](https://www.objectmentor.com/resources/articles/srp.pdf)"
 -   Martin Fowler, [Katalog mit Mustern](https://www.martinfowler.com/eaaCatalog/index.html) aus *Mustern der Unternehmens Anwendungsarchitektur*

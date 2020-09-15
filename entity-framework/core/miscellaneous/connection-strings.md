@@ -3,14 +3,13 @@ title: Verbindungs Zeichenfolgen-EF Core
 description: Verwalten von Verbindungs Zeichenfolgen in unterschiedlichen Umgebungen mit Entity Framework Core
 author: rowanmiller
 ms.date: 10/27/2016
-ms.assetid: aeb0f5f8-b212-4f89-ae83-c642a5190ba0
 uid: core/miscellaneous/connection-strings
-ms.openlocfilehash: 5b37daa9ba2869ee58c1b95ad9cbaf6b2b491391
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: e4283ada88a557e4f1e3eeea3de2634a7d0dce61
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89617765"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90071679"
 ---
 # <a name="connection-strings"></a>Verbindungszeichenfolgen
 
@@ -34,7 +33,7 @@ WinForms-, WPF-und ASP.NET 4-Anwendungen haben ein bewährtes und getestetes Ver
 > [!TIP]  
 > Die `providerName` Einstellung ist für EF Core Verbindungs Zeichenfolgen, die in App.config gespeichert sind, nicht erforderlich, da der Datenbankanbieter über Code konfiguriert ist.
 
-Anschließend können Sie die Verbindungs `ConfigurationManager` Zeichenfolge mithilfe der-API in der-Methode Ihres Kontexts lesen `OnConfiguring` . Möglicherweise müssen Sie einen Verweis auf die FrameworkAssembly hinzufügen `System.Configuration` , damit diese API verwendet werden kann.
+Anschließend können Sie die Verbindungs `ConfigurationManager` Zeichenfolge mithilfe der-API in der-Methode Ihres Kontexts lesen `OnConfiguring` . Möglicherweise müssen Sie einen Verweis auf die Frameworkassembly `System.Configuration` hinzufügen, damit diese API verwendet werden kann.
 
 ``` csharp
 public class BloggingContext : DbContext

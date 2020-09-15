@@ -3,14 +3,13 @@ title: SQLite-Datenbankanbieter-Einschränkungen-EF Core
 description: Einschränkungen für den Entity Framework Core SQLite-Datenbankanbieter im Vergleich zu anderen Anbietern
 author: bricelam
 ms.date: 07/16/2020
-ms.assetid: 94ab4800-c460-4caa-a5e8-acdfee6e6ce2
 uid: core/providers/sqlite/limitations
-ms.openlocfilehash: 2657bf03bc5cd0d5fb45c57e7f7605824deb44d2
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 546910afb9c97a93a7cc471bb813be0b9874a4bd
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89616530"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90071224"
 ---
 # <a name="sqlite-ef-core-database-provider-limitations"></a>SQLite EF Core-Datenbank-Anbieter-Einschränkungen
 
@@ -70,7 +69,7 @@ Es wird versucht, eine Neuerstellung auszuführen, um bestimmte Vorgänge auszuf
 | RenameTable          | ✔           | 1.0              |
 | Ensureschema         | ✔ (No-OP)   | 2.0              |
 | DropSchema           | ✔ (No-OP)   | 2.0              |
-| Insert               | ✔           | 2.0              |
+| Einfügen               | ✔           | 2.0              |
 | Aktualisieren               | ✔           | 2.0              |
 | Löschen               | ✔           | 2.0              |
 

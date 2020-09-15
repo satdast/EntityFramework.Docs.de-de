@@ -3,14 +3,13 @@ title: Code First einer neuen Datenbank EF6
 description: Code First einer neuen Datenbank in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
-ms.assetid: 2df6cb0a-7d8b-4e28-9d05-e2b9a90125af
 uid: ef6/modeling/code-first/workflows/new-database
-ms.openlocfilehash: 4e927bab07ae7a9719c46655e10685b59d0b65dc
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 96d76162383149c045178954196e1294331918a8
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89616892"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90070366"
 ---
 # <a name="code-first-to-a-new-database"></a>Code First to a New Database (Code First für eine neue Datenbank)
 Dieses Video und die schrittweise exemplarische Vorgehensweise bieten eine Einführung in Code First Entwicklung für eine neue Datenbank. Dieses Szenario umfasst das Ziel einer Datenbank, die nicht vorhanden ist und Code First erstellt wird, oder eine leere Datenbank, der Code First neue Tabellen hinzugefügt werden. Mit Code First können Sie das Modell mithilfe von C- \# oder VB.NET-Klassen definieren. Die zusätzliche Konfiguration kann optional mithilfe von Attributen in ihren Klassen und Eigenschaften oder mithilfe einer fließenden API ausgeführt werden.

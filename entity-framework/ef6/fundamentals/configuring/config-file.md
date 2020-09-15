@@ -3,14 +3,13 @@ title: Konfigurationsdatei Einstellungen-EF6
 description: Konfigurationsdatei Einstellungen in Entity Framework 6
 author: divega
 ms.date: 10/23/2016
-ms.assetid: 000044c6-1d32-4cf7-ae1f-ea21d86ebf8f
 uid: ef6/fundamentals/configuring/config-file
-ms.openlocfilehash: ac257c0da8da4dff852ec24f7de91c62c68f92d8
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: b407ae7d64df18f6a8d80aa13703a8c243c6f3a2
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89618479"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90070717"
 ---
 # <a name="configuration-file-settings"></a>Konfigurationsdatei Einstellungen
 Entity Framework ermöglicht, dass eine Reihe von Einstellungen in der Konfigurationsdatei angegeben werden können. Im allgemeinen folgt EF einem Prinzip der Konvention für die Konfiguration: alle in diesem Beitrag behandelten Einstellungen haben ein Standardverhalten. Sie müssen sich lediglich um das Ändern der Einstellung kümmern, wenn die Standardeinstellung Ihre Anforderungen nicht mehr erfüllt.  

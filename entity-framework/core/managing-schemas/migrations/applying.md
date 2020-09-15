@@ -5,12 +5,12 @@ author: bricelam
 ms.author: bricelam
 ms.date: 05/06/2020
 uid: core/managing-schemas/migrations/applying
-ms.openlocfilehash: c83194057d58f8278bfbb5264623858e6c022d8f
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 50937f96e63f9bda2ffcf5e94dabf688ee2ba1f3
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89619459"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90071888"
 ---
 # <a name="applying-migrations"></a>Anwenden von Migrationen
 
@@ -117,7 +117,7 @@ Script-Migration -Idempotent
 
 Die EF-Befehlszeilen Tools können zum Anwenden von Migrationen auf eine Datenbank verwendet werden. Während der Produktivität bei der lokalen Entwicklung und beim Testen von Migrationen ist dieser Ansatz nicht ideal für die Verwaltung von Produktionsdatenbanken:
 
-* Die SQL-Befehle werden direkt durch das Tool angewendet, ohne dem Entwickler eine Änderung an der Überprüfung oder Änderung zu erteilen. Dies kann in einer Produktionsumgebung gefährlich sein.
+* Die SQL-Befehle werden direkt durch das Tool angewendet, ohne dem Entwickler die Möglichkeit zu geben, Sie zu überprüfen oder zu ändern. Dies kann in einer Produktionsumgebung gefährlich sein.
 * Das .NET SDK und das EF-Tool müssen auf Produktionsservern installiert sein.
 
 ### <a name="net-core-cli"></a>[.NET Core-CLI](#tab/dotnet-core-cli)
@@ -170,7 +170,7 @@ Es ist möglich, dass die Anwendung selbst Migrationen Programm gesteuert anwend
 * Wenn eine Anwendung auf die Datenbank zugreift, während Sie von einer anderen Anwendung migriert wird, kann dies zu schwerwiegenden Problemen führen.
 * Die Anwendung muss über erhöhten Zugriff verfügen, um das Datenbankschema zu ändern. Im Allgemeinen empfiehlt es sich, die Daten Bank Berechtigungen der Anwendung in der Produktion einzuschränken.
 * Es ist wichtig, dass ein Rollback für eine angewendete Migration im Falle eines Problems ausgeführt werden kann. Die anderen Strategien stellen dies problemlos und standardmäßig bereit.
-* Die SQL-Befehle werden direkt durch das Programm angewendet, ohne dass der Entwickler eine Änderung vornehmen muss, um Sie zu überprüfen oder zu ändern. Dies kann in einer Produktionsumgebung gefährlich sein.
+* Die SQL-Befehle werden direkt durch das Programm angewendet, ohne dem Entwickler die Möglichkeit zu geben, Sie zu überprüfen oder zu ändern. Dies kann in einer Produktionsumgebung gefährlich sein.
 
 Zum programmgesteuerten Anwenden von Migrationen muss aufgerufen werden `context.Database.Migrate()` . Eine typische ASP.NET-Anwendung kann z. b. folgende Aktionen ausführen:
 
