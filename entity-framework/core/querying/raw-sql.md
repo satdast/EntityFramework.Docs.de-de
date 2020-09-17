@@ -3,14 +3,13 @@ title: Unformatierte SQL-Abfragen – EF Core
 description: Verwenden von reinem SQL-Code für Abfragen in Entity Framework Core
 author: smitpatel
 ms.date: 10/08/2019
-ms.assetid: 70aae9b5-8743-4557-9c5d-239f688bf418
 uid: core/querying/raw-sql
-ms.openlocfilehash: 3b95c15b2b07d1eeecf1603e6bfbb29f4931d5cc
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 13f5cbfbd7a110394402bff74d51b5fcda04c642
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89617504"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90071133"
 ---
 # <a name="raw-sql-queries"></a>Unformatierte SQL-Abfragen
 

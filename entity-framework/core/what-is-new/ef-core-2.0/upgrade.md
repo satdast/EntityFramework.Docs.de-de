@@ -3,14 +3,13 @@ title: 'EF Core: Upgrade für frühere Versionen auf EF Core 2'
 description: In diesem Artikel finden Sie Anweisungen und Hinweise zum Durchführen eines Upgrades auf Entity Framework Core 2.0.
 author: divega
 ms.date: 08/13/2017
-ms.assetid: 8BD43C8C-63D9-4F3A-B954-7BC518A1B7DB
 uid: core/what-is-new/ef-core-2.0/upgrade
-ms.openlocfilehash: 2bd88c0c52bcef8d5a9777f2cbd546a2787d67a9
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: bdc0cfe8c0be4a83f8c78ba2ac66bb1e18cea0f7
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89620680"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90072342"
 ---
 # <a name="upgrading-applications-from-previous-versions-to-ef-core-20"></a>Durchführen eines Upgrades für Anwendungen mit früheren Versionen auf EF Core 2.0
 

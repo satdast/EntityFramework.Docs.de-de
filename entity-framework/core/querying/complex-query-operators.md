@@ -3,14 +3,13 @@ title: Komplexe Abfrageoperatoren – EF Core
 description: Umfassende Informationen zu komplexeren LINQ-Abfrageoperatoren bei Verwendung von Entity Framework Core
 author: smitpatel
 ms.date: 10/03/2019
-ms.assetid: 2e187a2a-4072-4198-9040-aaad68e424fd
 uid: core/querying/complex-query-operators
-ms.openlocfilehash: 61a46361cc4bc1635174aaf2ca3260fa67fc6aaf
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 57157fa1593c9e5fe54e5fbe6b2c58eca3d4b0e7
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89616443"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90071158"
 ---
 # <a name="complex-query-operators"></a>Komplexe Abfrageoperatoren
 
@@ -114,11 +113,11 @@ ORDER BY [p].[AuthorId]
 Die von EF Core unterstützten Aggregate-Operatoren lauten wie folgt:
 
 - Average
-- Count
+- Anzahl
 - LongCount
-- Max
+- Max.
 - Min
-- Sum
+- SUM
 
 ## <a name="left-join"></a>Left Join
 
