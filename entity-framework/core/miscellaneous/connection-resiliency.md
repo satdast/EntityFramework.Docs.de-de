@@ -4,12 +4,12 @@ description: Verwenden der verbindungsresilienz zum automatischen erneuten Versu
 author: rowanmiller
 ms.date: 11/15/2016
 uid: core/miscellaneous/connection-resiliency
-ms.openlocfilehash: f4077672a9234bf66dc488d7450f437452e542b6
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 25b754334edd15532780cb4e40682bc211620c76
+ms.sourcegitcommit: c0e6a00b64c2dcd8acdc0fe6d1b47703405cdf09
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90071705"
+ms.lasthandoff: 09/24/2020
+ms.locfileid: "91210292"
 ---
 # <a name="connection-resiliency"></a>Verbindungsstabilität
 
@@ -55,7 +55,7 @@ Wenn Ihr Code jedoch mithilfe von eine Transaktion initiiert, `BeginTransaction(
 
 > InvalidOperationException: die konfigurierte Ausführungs Strategie "sqlserverretryingexecutionstrategy" unterstützt keine vom Benutzer initiierten Transaktionen. Verwenden Sie die Ausführungsstrategie, die von „DbContext.Database.CreateExecutionStrategy()“ zurückgegeben wird, um alle Vorgänge in der Transaktion als wiederholbare Einheit auszuführen.
 
-Die Lösung besteht darin, die Ausführungs Strategie manuell mit einem Delegaten aufzurufen, der alle auszuführenden Elemente darstellt. Wenn ein vorübergehender Fehler auftritt, wird der Delegat von der Ausführungsstrategie erneut aufgerufen.
+Die Lösung besteht darin, die Ausführungs Strategie manuell mit einem Delegaten aufzurufen, der alle auszuführenden Elemente darstellt. Die Ausführungsstrategie ruft den Delegaten erneut auf, wenn ein vorübergehender Fehler auftritt.
 
 [!code-csharp[Main](../../../samples/core/Miscellaneous/ConnectionResiliency/Program.cs#ManualTransaction)]
 
@@ -107,3 +107,7 @@ Wenn Sie vom Speicher generierte Schlüssel verwenden oder eine generische Metho
 
 > [!NOTE]
 > Stellen Sie sicher, dass für den für die Überprüfung verwendeten Kontext eine Ausführungs Strategie definiert ist, da die Verbindung bei der Überprüfung wahrscheinlich erneut ausfällt, wenn während des Transaktions Commits ein Fehler aufgetreten ist.
+
+## <a name="additional-resources"></a>Zusätzliche Ressourcen
+
+* [Behandeln vorübergehender Verbindungsfehler in Azure SQL-Datenbank und SQL verwaltete Instanz](/azure/azure-sql/database/troubleshoot-common-connectivity-issues)

@@ -3,45 +3,44 @@ title: Referenz zu EF Core Tools (.net CLI)-EF Core
 description: Referenzhandbuch für die Entity Framework Core .net Core-CLI Tools
 author: bricelam
 ms.author: bricelam
-ms.date: 09/09/2020
+ms.date: 09/17/2020
 uid: core/miscellaneous/cli/dotnet
-ms.openlocfilehash: a3fa73bf7f9173cbd49dffdabeacc98d5c35ac14
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: ee1caebcda93f627d285878f8594688a0f08c194
+ms.sourcegitcommit: c0e6a00b64c2dcd8acdc0fe6d1b47703405cdf09
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90071835"
+ms.lasthandoff: 09/24/2020
+ms.locfileid: "91210392"
 ---
 # <a name="entity-framework-core-tools-reference---net-core-cli"></a>Referenz zu Entity Framework Core Tools .net Core-CLI
 
 Die CLI-Tools (Command-Line Interface, Befehlszeilenschnittstelle) für Entity Framework Core die Entwicklungsaufgaben zur Entwurfszeit ausführen. Beispielsweise erstellen Sie [Migrationen](/aspnet/core/data/ef-mvc/migrations), wenden Migrationen an und generieren Code für ein Modell, das auf einer vorhandenen Datenbank basiert. Die Befehle sind eine Erweiterung des plattformübergreifenden [dotnet](/dotnet/core/tools) -Befehls, der Teil der [.net Core SDK](https://www.microsoft.com/net/core)ist. Diese Tools funktionieren mit .net Core-Projekten.
 
-Wenn Sie Visual Studio verwenden, empfehlen wir stattdessen die [Tools der Paket-Manager-Konsole](xref:core/miscellaneous/cli/powershell) :
+Wenn Sie Visual Studio verwenden, sollten Sie die [Tools der Paket-Manager-Konsole](xref:core/miscellaneous/cli/powershell) anstelle der CLI-Tools verwenden. Paket-Manager-Konsolen Tools automatisch:
 
-* Sie arbeiten automatisch mit dem aktuellen Projekt, das in der **Paket-Manager-Konsole** ausgewählt ist, ohne dass Sie manuell Verzeichnisse wechseln müssten.
-* Dateien, die von einem Befehl generiert werden, werden automatisch geöffnet, nachdem der Befehl abgeschlossen wurde.
+* Funktioniert mit dem aktuellen Projekt, das in der **Paket-Manager-Konsole** ausgewählt ist, ohne dass Sie manuell Verzeichnisse wechseln müssten.
+* Öffnet Dateien, die von einem Befehl generiert wurden, nachdem der Befehl abgeschlossen wurde.
+* Stellt die Befehlszeilen Vervollständigung von Befehlen, Parametern, Projektnamen, Kontext Typen und Migrations Namen bereit.
 
 ## <a name="installing-the-tools"></a>Installieren der Tools
 
 Das Installationsverfahren hängt vom Projekttyp und der Version ab:
 
-* EF Core 3.x
+* EF Core 3. x und 5. x
 * ASP.net Core Version 2,1 und höher
 * EF Core 2. x
-* EF Core 1. x
 
-### <a name="ef-core-3x"></a>EF Core 3.x
+### <a name="ef-core-3x-and-5x"></a>EF Core 3. x und 5. x
 
-* `dotnet ef` muss als globales oder lokales Tool installiert werden. Die meisten Entwickler werden `dotnet ef` mit dem folgenden Befehl als globales Tool installiert:
+* `dotnet ef` muss als globales oder lokales Tool installiert werden. Die meisten Entwickler bevorzugen `dotnet ef` die Installation als globales Tool mit dem folgenden Befehl:
 
   ```dotnetcli
   dotnet tool install --global dotnet-ef
   ```
 
-  Sie können auch `dotnet ef` als lokales Tool verwenden. Um es als lokales Tool zu verwenden, stellen Sie die Abhängigkeiten eines Projekts wieder her, das es mithilfe einer [Tool Manifest-Datei als Tool](/dotnet/core/tools/global-tools#install-a-local-tool)Abhängigkeit deklariert.
+  `dotnet ef` kann auch als lokales Tool verwendet werden. Um es als lokales Tool zu verwenden, stellen Sie die Abhängigkeiten eines Projekts wieder her, das es mithilfe einer [Tool Manifest-Datei als Tool](/dotnet/core/tools/global-tools#install-a-local-tool)Abhängigkeit deklariert.
 
 * Installieren Sie das [.NET Core SDK](https://www.microsoft.com/net/download/core).
-
 * Installieren Sie das neueste `Microsoft.EntityFrameworkCore.Design` Paket.
 
   ```dotnetcli
@@ -50,7 +49,7 @@ Das Installationsverfahren hängt vom Projekttyp und der Version ab:
 
 ### <a name="aspnet-core-21"></a>ASP.net Core 2.1 und höher
 
-* Installieren Sie die aktuelle [.net Core SDK](https://www.microsoft.com/net/download/core). Das SDK muss installiert werden, auch wenn Sie über die neueste Version von Visual Studio 2017 verfügen.
+* Installieren Sie die aktuelle [.net Core SDK](https://www.microsoft.com/net/download/core). Das SDK muss installiert werden, auch wenn Sie über die neueste Version von Visual Studio verfügen.
 
   Dies ist nur für ASP.net Core 2.1 und höher erforderlich, da das `Microsoft.EntityFrameworkCore.Design` Paket im [Metapaket Microsoft. aspnetcore. app](/aspnet/core/fundamentals/metapackage-app)enthalten ist.
 
@@ -65,42 +64,6 @@ Die `dotnet ef` Befehle sind im .net Core SDK enthalten, aber zum Aktivieren der
   ```dotnetcli
   dotnet add package Microsoft.EntityFrameworkCore.Design
   ```
-
-### <a name="ef-core-1x"></a>EF Core 1. x
-
-* Installieren Sie die .net Core SDK Version 2.1.200. Spätere Versionen sind nicht mit den CLI-Tools für EF Core 1,0 und 1,1 kompatibel.
-
-* Konfigurieren Sie die Anwendung für die Verwendung der 2.1.200 SDK-Version, indem Sie deren [global.jsin](/dotnet/core/tools/global-json) der Datei ändern. Diese Datei ist normalerweise im Projektmappenverzeichnis enthalten (eines oberhalb des Projekts).
-
-* Bearbeiten Sie die Projektdatei, und fügen Sie Sie `Microsoft.EntityFrameworkCore.Tools.DotNet` als- `DotNetCliToolReference` Element hinzu. Geben Sie die neueste Version von 1. x an, z. b.: 1.1.6. Weitere Informationen finden Sie im Beispiel für eine Projektdatei am Ende dieses Abschnitts.
-
-* Installieren Sie die neueste Version von 1. x des `Microsoft.EntityFrameworkCore.Design` Pakets, z. b.:
-
-  ```dotnetcli
-  dotnet add package Microsoft.EntityFrameworkCore.Design -v 1.1.6
-  ```
-
-  Wenn beide Paket Verweise hinzugefügt wurden, sieht die Projektdatei in etwa wie folgt aus:
-
-  ``` xml
-  <Project Sdk="Microsoft.NET.Sdk">
-    <PropertyGroup>
-      <OutputType>Exe</OutputType>
-      <TargetFramework>netcoreapp1.1</TargetFramework>
-    </PropertyGroup>
-    <ItemGroup>
-      <PackageReference Include="Microsoft.EntityFrameworkCore.Design"
-                        Version="1.1.6"
-                         PrivateAssets="All" />
-    </ItemGroup>
-    <ItemGroup>
-       <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet"
-                              Version="1.1.6" />
-    </ItemGroup>
-  </Project>
-  ```
-
-  Ein Paket Verweis mit `PrivateAssets="All"` ist nicht für Projekte verfügbar, die auf dieses Projekt verweisen. Diese Einschränkung ist besonders nützlich für Pakete, die in der Regel nur während der Entwicklung verwendet werden.
 
 ### <a name="verify-installation"></a>Überprüfen der Installation
 
@@ -127,9 +90,9 @@ Entity Framework Core .NET Command-line Tools 2.1.3-rtm-32065
 <Usage documentation follows, not shown.>
 ```
 
-## <a name="updating-the-tools"></a>Aktualisieren der Tools
+## <a name="update-the-tools"></a>Aktualisieren der Tools
 
-Verwenden `dotnet tool update --global dotnet-ef` Sie, um die globalen Tools auf die neueste verfügbare Version zu aktualisieren, wenn Sie die Tools lokal in Ihrem Projekt installiert haben `dotnet tool update dotnet-ef` . Installieren Sie eine bestimmte Version durch Anhängen `--version <VERSION>` an den Befehl. Weitere Informationen finden Sie im Abschnitt [Update](/dotnet/core/tools/dotnet-tool-update) der Dokumentation zum dotnet-Tool.
+Verwenden `dotnet tool update --global dotnet-ef` Sie, um die globalen Tools auf die neueste verfügbare Version zu aktualisieren. Wenn Sie die Tools lokal in Ihrem Projekt installiert haben, verwenden Sie `dotnet tool update dotnet-ef` . Installieren Sie eine bestimmte Version durch Anhängen `--version <VERSION>` an den Befehl. Weitere Informationen finden Sie im Abschnitt [Update](/dotnet/core/tools/dotnet-tool-update) der Dokumentation zum dotnet-Tool.
 
 ## <a name="using-the-tools"></a>Verwenden der Tools
 
@@ -162,7 +125,7 @@ Legen Sie die Umgebungsvariable **ASPNETCORE_ENVIRONMENT** vor dem Ausführen vo
 
 ## <a name="common-options"></a>Allgemeine Optionen
 
-| Option                                         | Short             | BESCHREIBUNG                                                                                                                                                                                                                                                   |
+| Option                                         | Short             | Beschreibung                                                                                                                                                                                                                                                   |
 |:-----------------------------------------------|:------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `--json`                                       |                   | JSON-Ausgabe anzeigen.                                                                                                                                                                                                                                             |
 | `--context <DBCONTEXT>`                        | <nobr>`-c`</nobr> | Die `DbContext`-Klasse, die verwendet werden soll. Der Klassenname oder voll qualifiziert mit Namespaces.  Wenn diese Option weggelassen wird, wird EF Core die Kontext Klasse finden. Wenn mehrere Kontext Klassen vorhanden sind, ist diese Option erforderlich.                                            |
@@ -185,7 +148,7 @@ Löscht die Datenbank.
 
 Optionen:
 
-| Option                   | Short             | BESCHREIBUNG                                              |
+| Option                   | Short             | Beschreibung                                              |
 |:-------------------------|:------------------|:---------------------------------------------------------|
 | `--force`                | <nobr>`-f`</nobr> | Nicht bestätigen.                                           |
 | <nobr>`--dry-run`</nobr> |                   | Zeigen Sie an, welche Datenbank gelöscht werden soll, aber löschen Sie Sie nicht. |
@@ -198,13 +161,13 @@ Aktualisiert die Datenbank auf die letzte Migration oder eine angegebene Migrati
 
 Argumente:
 
-| Argument                   | BESCHREIBUNG                                                                                                                                                                                                                                                     |
+| Argument                   | Beschreibung                                                                                                                                                                                                                                                     |
 |:---------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | <nobr>`<MIGRATION>`</nobr> | Die Ziel Migration. Migrationen können anhand des Namens oder der ID identifiziert werden. Die Zahl 0 (null) ist ein Sonderfall, der *vor der ersten Migration* steht und bewirkt, dass alle Migrationen rückgängig gemacht werden. Wenn keine Migration angegeben ist, wird für den Befehl standardmäßig die letzte Migration verwendet. |
 
 Optionen:
 
-| Option                                    | BESCHREIBUNG                                                                                                                      |
+| Option                                    | Beschreibung                                                                                                                      |
 |:------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------|
 |  <nobr>`--connection <CONNECTION>`</nobr> | Die Verbindungszeichenfolge für die Datenbank. Der Standardwert ist der in `AddDbContext` oder angegebene `OnConfiguring` . In EF Core 5,0 hinzugefügt. |
 
@@ -235,14 +198,14 @@ Generiert Code für einen `DbContext` und Entitäts Typen für eine Datenbank. D
 
 Argumente:
 
-| Argument                    | BESCHREIBUNG                                                                                                                                                                                                             |
+| Argument                    | Beschreibung                                                                                                                                                                                                             |
 |:----------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | <nobr>`<CONNECTION>`</nobr> | Die Verbindungszeichenfolge für die Datenbank. Bei ASP.net Core 2. x-Projekten kann der Wert " *Name = \<name of connection string> *" lauten. In diesem Fall stammt der Name aus den Konfigurations Quellen, die für das Projekt eingerichtet sind. |
 | `<PROVIDER>`                | Der zu verwendende Anbieter. In der Regel ist dies der Name des nuget-Pakets, z `Microsoft.EntityFrameworkCore.SqlServer` . b.:.                                                                                           |
 
 Optionen:
 
-| Option                                   | Short             | BESCHREIBUNG                                                                                                                                                                    |
+| Option                                   | Short             | Beschreibung                                                                                                                                                                    |
 |:-----------------------------------------|:------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `--data-annotations`                     | <nobr>`-d`</nobr> | Verwenden Sie Attribute, um das Modell zu konfigurieren (sofern möglich). Wenn diese Option weggelassen wird, wird nur die fließende API verwendet.                                                                |
 | `--context <NAME>`                       | `-c`              | Der Name der `DbContext` zu generierenden Klasse.                                                                                                                                 |
@@ -277,7 +240,7 @@ Generiert ein SQL-Skript aus dem dbcontext. Umgeht alle Migrationen. In EF Core 
 
 Optionen:
 
-| Option                         | Short             | BESCHREIBUNG                      |
+| Option                         | Short             | Beschreibung                      |
 | ------------------------------ | ----------------- | -------------------------------- |
 | <nobr>`--output <FILE>`</nobr> | <nobr>`-o`</nobr> | Die Datei, in die das Ergebnis geschrieben werden soll. |
 
@@ -289,13 +252,13 @@ Fügt eine neue Migration hinzu.
 
 Argumente:
 
-| Argument              | BESCHREIBUNG                |
+| Argument              | Beschreibung                |
 |:----------------------|:---------------------------|
 | <nobr>`<NAME>`</nobr> | Der Name der Migration. |
 
 Optionen:
 
-| Option                                 | Short             | BESCHREIBUNG                                                                                                            |
+| Option                                 | Short             | Beschreibung                                                                                                            |
 |:---------------------------------------|:------------------|:-----------------------------------------------------------------------------------------------------------------------|
 | `--output-dir <PATH>`                  | <nobr>`-o`</nobr> | Das Verzeichnis, mit dem die Dateien ausgegeben werden. Pfade sind relativ zum Ziel Projektverzeichnis. Der Standardwert ist "Migrationen".   |
 | <nobr>`--namespace <NAMESPACE>`</nobr> | `-n`              | Der Namespace, der für die generierten Klassen verwendet werden soll. Wird standardmäßig aus dem Ausgabeverzeichnis generiert. In EF Core 5,0 hinzugefügt. |
@@ -308,7 +271,7 @@ Listet verfügbare Migrationen auf.
 
 Optionen:
 
-| Option                                   | BESCHREIBUNG                                                                                                                  |
+| Option                                   | Beschreibung                                                                                                                  |
 | ---------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- |
 | <nobr>`--connection <CONNECTION>`</nobr> | Die Verbindungszeichenfolge für die Datenbank. Der Standardwert ist der in "adddbcontext" oder "onkonfiguration" angegebene. In EF Core 5,0 hinzugefügt. |
 | `--no-connect`                           | Stellen Sie keine Verbindung mit der Datenbank her. In EF Core 5,0 hinzugefügt.                                                                         |
@@ -321,7 +284,7 @@ Entfernt die letzte Migration (führt einen Rollback für die Codeänderungen au
 
 Optionen:
 
-| Option                 | Short             | BESCHREIBUNG                                                                     |
+| Option                 | Short             | Beschreibung                                                                     |
 |:-----------------------|:------------------|:--------------------------------------------------------------------------------|
 | <nobr>`--force`</nobr> | <nobr>`-f`</nobr> | Setzen Sie die Migration zurück (führen Sie ein Rollback der Änderungen aus, die auf die Datenbank angewendet wurden). |
 
@@ -333,14 +296,14 @@ Generiert ein SQL-Skript aus Migrationen.
 
 Argumente:
 
-| Argument              | BESCHREIBUNG                                                                                                                                                   |
+| Argument              | Beschreibung                                                                                                                                                   |
 |:----------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | <nobr>`<FROM>`</nobr> | Die Migration wird gestartet. Migrationen können anhand des Namens oder der ID identifiziert werden. Die Zahl 0 (null) ist ein Sonderfall, der *vor der ersten Migration*liegt. Der Standardwert ist 0. |
 | `<TO>`                | Die Beendigung der Migration. Standardmäßig wird die letzte Migration verwendet.                                                                                                         |
 
 Optionen:
 
-| Option                           | Short             | BESCHREIBUNG                                                        |
+| Option                           | Short             | Beschreibung                                                        |
 |:---------------------------------|:------------------|:-------------------------------------------------------------------|
 | `--output <FILE>`                | <nobr>`-o`</nobr> | Die Datei, in die das Skript geschrieben werden soll.                                   |
 | `--idempotent`                   | `-i`              | Generieren Sie ein Skript, das bei jeder Migration in einer Datenbank verwendet werden kann. |

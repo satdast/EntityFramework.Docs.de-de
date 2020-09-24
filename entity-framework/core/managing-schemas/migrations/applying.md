@@ -5,12 +5,12 @@ author: bricelam
 ms.author: bricelam
 ms.date: 05/06/2020
 uid: core/managing-schemas/migrations/applying
-ms.openlocfilehash: 50937f96e63f9bda2ffcf5e94dabf688ee2ba1f3
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: cde83a944e1e698a7f8a00c4692c0ce08a87b5ab
+ms.sourcegitcommit: c0e6a00b64c2dcd8acdc0fe6d1b47703405cdf09
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90071888"
+ms.lasthandoff: 09/24/2020
+ms.locfileid: "91210405"
 ---
 # <a name="applying-migrations"></a>Anwenden von Migrationen
 
@@ -193,5 +193,5 @@ Beachten Sie, dass `Migrate()` auf dem `IMigrator` Dienst aufbaut, der für erwe
 
 > [!WARNING]
 >
-> * Beachten Sie sorgfältig, bevor Sie diesen Ansatz in der Produktion verwenden. Es wurde gezeigt, dass die Einfachheit dieser Bereitstellungs Strategie durch die von ihr erstellten Probleme überwiegen. Verwenden Sie stattdessen SQL-Skripts.
+> * Beachten Sie sorgfältig, bevor Sie diesen Ansatz in der Produktion verwenden. Es wurde gezeigt, dass die Einfachheit dieser Bereitstellungs Strategie durch die von ihr erstellten Probleme überwiegen. Sie sollten stattdessen SQL-Skripts aus Migrationen erstellen.
 > * Rufen Sie `EnsureCreated()` nicht vor `Migrate()` auf. `EnsureCreated()` umgeht Migrationen zum Erstellen von Schemas, was dazu führt, dass `Migrate()` fehlerhaft ist.
