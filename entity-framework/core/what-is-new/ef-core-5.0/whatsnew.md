@@ -2,22 +2,664 @@
 title: Neuerungen in EF Core 5.0
 description: Übersicht über neue Features in EF Core 5.0
 author: ajcvickers
-ms.date: 07/20/2020
+ms.date: 09/10/2020
 uid: core/what-is-new/ef-core-5.0/whatsnew
-ms.openlocfilehash: b4551a3c593694b104a750d500d81eb170a83dc0
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 0605d021b46066c6af7b631c99e86c0e53caa8db
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89618605"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90070756"
 ---
 # <a name="whats-new-in-ef-core-50"></a>Neuerungen in EF Core 5.0
 
-EF Core 5.0 befindet sich derzeit in der Entwicklung. Diese Seite bietet eine Übersicht über interessante Änderungen in den einzelnen Vorschauversionen.
+Alle für EF Core 5.0 geplanten Features sind jetzt verfügbar. Diese Seite bietet eine Übersicht über interessante Änderungen in den einzelnen Vorschauversionen.
 
 Auf dieser Seite wird der [Plan für EF Core 5.0](xref:core/what-is-new/ef-core-5.0/plan) nicht erneut aufgeführt. Der Plan beschreibt die allgemeinen Themen für EF Core 5.0 einschließlich sämtlicher Features, die wir vor Auslieferung des finalen Releases integrieren möchten.
 
-Wir werden an dieser Stelle Links zur offiziellen Dokumentation einfügen, sobald diese veröffentlicht ist.
+## <a name="rc1"></a>RC1
+
+### <a name="many-to-many"></a>M:n
+
+EF Core 5.0 unterstützt m:n-Beziehungen ohne explizite Zuordnung der Jointabelle.
+
+Betrachten Sie beispielsweise die folgenden Entitätstypen:
+
+```C#
+public class Post
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public ICollection<Tag> Tags { get; set; }
+}
+
+public class Tag
+{
+    public int Id { get; set; }
+    public string Text { get; set; }
+    public ICollection<Post> Posts { get; set; }
+}
+```
+
+`Post` enthält eine `Tags`-Auflistung, und `Tag` enthält eine `Posts`-Auflistung. EF Core 5.0 erkennt dies gemäß Konvention als m:n-Beziehung. Das bedeutet, dass in `OnModelCreating` kein Code erforderlich ist:
+
+```C#
+public class BlogContext : DbContext
+{
+    public DbSet<Post> Posts { get; set; }
+    public DbSet<Blog> Blogs { get; set; }
+}
+```
+
+Wenn zum Erstellen der Datenbank Migrationen (oder `EnsureCreated`) verwendet werden, erstellt EF Core automatisch die Jointabelle. Beispielsweise generiert EF Core unter SQL Server für dieses Modell Folgendes:
+
+```sql
+CREATE TABLE [Posts] (
+    [Id] int NOT NULL IDENTITY,
+    [Name] nvarchar(max) NULL,
+    CONSTRAINT [PK_Posts] PRIMARY KEY ([Id])
+);
+
+CREATE TABLE [Tag] (
+    [Id] int NOT NULL IDENTITY,
+    [Text] nvarchar(max) NULL,
+    CONSTRAINT [PK_Tag] PRIMARY KEY ([Id])
+);
+
+CREATE TABLE [PostTag] (
+    [PostsId] int NOT NULL,
+    [TagsId] int NOT NULL,
+    CONSTRAINT [PK_PostTag] PRIMARY KEY ([PostsId], [TagsId]),
+    CONSTRAINT [FK_PostTag_Posts_PostsId] FOREIGN KEY ([PostsId]) REFERENCES [Posts] ([Id]) ON DELETE CASCADE,
+    CONSTRAINT [FK_PostTag_Tag_TagsId] FOREIGN KEY ([TagsId]) REFERENCES [Tag] ([Id]) ON DELETE CASCADE
+);
+
+CREATE INDEX [IX_PostTag_TagsId] ON [PostTag] ([TagsId]);
+```
+
+Wenn `Blog`- und `Post`-Entitäten erstellt und zugeordnet werden, wird die Jointabelle automatisch aktualisiert. Zum Beispiel:
+
+```C#
+var beginnerTag = new Tag {Text = "Beginner"};
+var advancedTag = new Tag {Text = "Advanced"};
+var efCoreTag = new Tag {Text = "EF Core"};
+
+context.AddRange(
+    new Post {Name = "EF Core 101", Tags = new List<Tag> {beginnerTag, efCoreTag}},
+    new Post {Name = "Writing an EF database provider", Tags = new List<Tag> {advancedTag, efCoreTag}},
+    new Post {Name = "Savepoints in EF Core", Tags = new List<Tag> {beginnerTag, efCoreTag}});
+
+context.SaveChanges();
+```
+
+Nach dem Einfügen von Beiträgen und Tags erstellt EF automatisch Zeilen in der Jointabelle. Beispielsweise unter SQL Server:
+
+```sql
+SET NOCOUNT ON;
+INSERT INTO [PostTag] ([PostsId], [TagsId])
+VALUES (@p6, @p7),
+(@p8, @p9),
+(@p10, @p11),
+(@p12, @p13),
+(@p14, @p15),
+(@p16, @p17);
+```
+
+Bei Abfragen funktionieren Include- und andere Abfragevorgänge wie bei jeder anderen Beziehung. Zum Beispiel:
+
+```C#
+foreach (var post in context.Posts.Include(e => e.Tags))
+{
+    Console.Write($"Post \"{post.Name}\" has tags");
+
+    foreach (var tag in post.Tags)
+    {
+        Console.Write($" '{tag.Text}'");
+    }
+}
+```
+
+Die generierte SQL-Anweisung verwendet automatisch die Jointabelle, um alle zugehörigen Tags wiederherzustellen:
+
+```sql
+SELECT [p].[Id], [p].[Name], [t0].[PostsId], [t0].[TagsId], [t0].[Id], [t0].[Text]
+FROM [Posts] AS [p]
+LEFT JOIN (
+    SELECT [p0].[PostsId], [p0].[TagsId], [t].[Id], [t].[Text]
+    FROM [PostTag] AS [p0]
+    INNER JOIN [Tag] AS [t] ON [p0].[TagsId] = [t].[Id]
+) AS [t0] ON [p].[Id] = [t0].[PostsId]
+ORDER BY [p].[Id], [t0].[PostsId], [t0].[TagsId], [t0].[Id]
+```
+
+Im Gegensatz zu EF6 kann bei EF Core die Jointabelle umfassend angepasst werden. Mit dem folgenden Code wird beispielsweise eine m:n-Beziehung konfiguriert, die auch Navigationen zur Joinentität aufweist und bei der die Joinentität eine Nutzdateneigenschaft enthält:
+
+```c#
+protected override void OnModelCreating(ModelBuilder modelBuilder)
+{
+    modelBuilder
+        .Entity<Community>()
+        .HasMany(e => e.Members)
+        .WithMany(e => e.Memberships)
+        .UsingEntity<PersonCommunity>(
+            b => b.HasOne(e => e.Member).WithMany().HasForeignKey(e => e.MembersId),
+            b => b.HasOne(e => e.Membership).WithMany().HasForeignKey(e => e.MembershipsId))
+        .Property(e => e.MemberSince).HasDefaultValueSql("CURRENT_TIMESTAMP");
+}
+```
+
+### <a name="map-entity-types-to-queries"></a>Zuordnen von Entitätstypen zu Abfragen
+
+Entitätstypen werden häufig Tabellen oder Sichten zugeordnet, sodass EF Core den Inhalt der Tabelle oder der Sicht zurückgibt, wenn dieser Typ abgefragt wird. In EF Core 5.0 kann ein Entitätstyp einer „definierenden Abfrage“ zugeordnet werden. (Diese Funktion wurde in früheren Versionen teilweise unterstützt, wurde jedoch wesentlich verbessert und weist in EF Core 5.0 eine andere Syntax auf.)
+
+Stellen Sie sich beispielsweise zwei Tabellen vor: eine mit modernen Beiträgen, die andere mit Legacybeiträgen. Die Tabelle mit modernen Beiträgen enthält einige zusätzliche Spalten. Für Ihre Anwendung sollen jedoch moderne Beiträge und Legacybeiträge vereint und mit allen erforderlichen Eigenschaften einem Entitätstyp zugeordnet werden:
+
+```c#
+public class Post
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public string Category { get; set; }
+    public int BlogId { get; set; }
+    public Blog Blog { get; set; }
+}
+```
+
+In EF Core 5.0 kann `ToSqlQuery` verwendet werden, um diesen Entitätstyp einer Abfrage zuzuordnen, die Zeilen aus beiden Tabellen abruft und vereint:
+
+```c#
+protected override void OnModelCreating(ModelBuilder modelBuilder)
+{
+    modelBuilder.Entity<Post>().ToSqlQuery(
+        @"SELECT Id, Name, Category, BlogId FROM posts
+          UNION ALL
+          SELECT Id, Name, ""Legacy"", BlogId from legacy_posts");
+}
+```
+
+Die Tabelle `legacy_posts` enthält keine `Category`-Spalte. Daher wird stattdessen für alle Legacybeiträge ein Standardwert synthetisiert.
+
+Dieser Entitätstyp kann dann auf übliche Weise für LINQ-Abfragen verwendet werden. Beispiel: LINQ-Abfrage:
+
+```c#
+var posts = context.Posts.Where(e => e.Blog.Name.Contains("Unicorn")).ToList();
+```
+
+Generiert den folgenden SQL-Code in SQLite:
+
+```sql
+SELECT "p"."Id", "p"."BlogId", "p"."Category", "p"."Name"
+FROM (
+    SELECT Id, Name, Category, BlogId FROM posts
+    UNION ALL
+    SELECT Id, Name, "Legacy", BlogId from legacy_posts
+) AS "p"
+INNER JOIN "Blogs" AS "b" ON "p"."BlogId" = "b"."Id"
+WHERE ('Unicorn' = '') OR (instr("b"."Name", 'Unicorn') > 0)
+```
+
+Die für den Entitätstyp konfigurierte Abfrage dient als Ausgangspunkt für die Erstellung der gesamten LINQ-Abfrage.
+
+### <a name="event-counters"></a>Ereignisindikatoren
+
+Mit [.NET-Ereignisindikatoren](https://devblogs.microsoft.com/dotnet/introducing-diagnostics-improvements-in-net-core-3-0/) können Leistungsmetriken aus einer Anwendung effizient verfügbar gemacht werden. Bei EF Core 5.0 befinden sich die Ereignisindikatoren in der Kategorie `Microsoft.EntityFrameworkCore`. Zum Beispiel:
+
+```
+dotnet counters monitor Microsoft.EntityFrameworkCore -p 49496
+```
+
+Damit werden dotnet-Indikatoren aufgefordert, mit der Sammlung von EF Core-Ereignissen für Prozess 49496 zu beginnen. Dadurch wird in der Konsole eine Ausgabe wie die Folgende generiert:
+
+```
+[Microsoft.EntityFrameworkCore]
+    Active DbContexts                                               1
+    Execution Strategy Operation Failures (Count / 1 sec)           0
+    Execution Strategy Operation Failures (Total)                   0
+    Optimistic Concurrency Failures (Count / 1 sec)                 0
+    Optimistic Concurrency Failures (Total)                         0
+    Queries (Count / 1 sec)                                     1,755
+    Queries (Total)                                            98,402
+    Query Cache Hit Rate (%)                                      100
+    SaveChanges (Count / 1 sec)                                     0
+    SaveChanges (Total)                                             1
+```
+
+### <a name="property-bags"></a>Eigenschaftenbehälter
+
+Bei EF Core 5.0 kann ein CLR-Typ verschiedenen Entitätstypen zugeordnet werden. Diese Typen werden als „Entitätstypen mit gemeinsamen Typen“ bezeichnet. Dieses Feature in Kombination mit Indexereigenschaften (in der Vorschauversion 1 enthalten) ermöglicht die Verwendung von Eigenschaftenbehältern als Entitätstyp.
+
+Beispielsweise wird im Folgenden mit DbContext der BCL-Typ `Dictionary<string, object>` als Entitätstyp mit gemeinsamem Typ sowohl für Produkte als auch für Kategorien verwendet.
+
+```c#
+public class ProductsContext : DbContext
+{
+    public DbSet<Dictionary<string, object>> Products => Set<Dictionary<string, object>>("Product");
+    public DbSet<Dictionary<string, object>> Categories => Set<Dictionary<string, object>>("Category");
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.SharedTypeEntity<Dictionary<string, object>>("Category", b =>
+        {
+            b.IndexerProperty<string>("Description");
+            b.IndexerProperty<int>("Id");
+            b.IndexerProperty<string>("Name").IsRequired();
+        });
+
+        modelBuilder.SharedTypeEntity<Dictionary<string, object>>("Product", b =>
+        {
+            b.IndexerProperty<int>("Id");
+            b.IndexerProperty<string>("Name").IsRequired();
+            b.IndexerProperty<string>("Description");
+            b.IndexerProperty<decimal>("Price");
+            b.IndexerProperty<int?>("CategoryId");
+
+            b.HasOne("Category", null).WithMany();
+        });
+    }
+}
+```
+
+Wörterbuchobjekte („Eigenschaftenbehälter“) können nun dem Kontext als Entitätsinstanzen hinzugefügt und gespeichert werden. Zum Beispiel:
+
+```c#
+var beverages = new Dictionary<string, object>
+{
+    ["Name"] = "Beverages",
+    ["Description"] = "Stuff to sip on"
+};
+
+context.Categories.Add(beverages);
+
+context.SaveChanges();
+```
+
+Diese Entitäten können dann auf übliche Weise abgefragt und aktualisiert werden:
+
+```c#
+var foods = context.Categories.Single(e => e["Name"] == "Foods");
+var marmite = context.Products.Single(e => e["Name"] == "Marmite");
+
+marmite["CategoryId"] = foods["Id"];
+marmite["Description"] = "Yummy when spread _thinly_ on buttered Toast!";
+
+context.SaveChanges();
+```
+
+### <a name="savechanges-interception-and-events"></a>SaveChanges-Interceptor und -Ereignisse
+
+Mit EF Core 5.0 wurden .NET-Ereignisse und ein EF Core-Interceptor eingeführt, der beim Aufrufen von SaveChanges ausgelöst wird.
+
+Die Ereignisse sind einfach zu verwenden. Zum Beispiel:
+
+```c#
+context.SavingChanges += (sender, args) =>
+{
+    Console.WriteLine($"Saving changes for {((DbContext)sender).Database.GetConnectionString()}");
+};
+
+context.SavedChanges += (sender, args) =>
+{
+    Console.WriteLine($"Saved {args.EntitiesSavedCount} changes for {((DbContext)sender).Database.GetConnectionString()}");
+};
+```
+
+Beachten Sie Folgendes:
+* Der Ereignissender ist die `DbContext`-Instanz.
+* Die Argumente für das `SavedChanges`-Ereignis enthalten die Anzahl der in der Datenbank gespeicherten Entitäten.
+
+Der Interceptor wird zwar durch `ISaveChangesInterceptor` definiert. Häufig ist es jedoch bequemer, wenn von `SaveChangesInterceptor` geerbt und so vermieden wird, dass jede einzelne Methode implementiert wird. Zum Beispiel:
+
+```c#
+public class MySaveChangesInterceptor : SaveChangesInterceptor
+{
+    public override InterceptionResult<int> SavingChanges(
+        DbContextEventData eventData,
+        InterceptionResult<int> result)
+    {
+        Console.WriteLine($"Saving changes for {eventData.Context.Database.GetConnectionString()}");
+
+        return result;
+    }
+
+    public override ValueTask<InterceptionResult<int>> SavingChangesAsync(
+        DbContextEventData eventData,
+        InterceptionResult<int> result,
+        CancellationToken cancellationToken = new CancellationToken())
+    {
+        Console.WriteLine($"Saving changes asynchronously for {eventData.Context.Database.GetConnectionString()}");
+
+        return new ValueTask<InterceptionResult<int>>(result);
+    }
+}
+```
+
+Beachten Sie Folgendes:
+* Der Interceptor arbeitet mit synchronen und asynchronen Methoden. Das kann nützlich sein, wenn Sie asynchrone E/A-Vorgänge wie Schreibvorgänge auf einem Überwachungsserver durchführen müssen.
+* Mit dem Interceptor kann SaveChanges mithilfe des in allen Interceptors vorhandenen `InterceptionResult`-Mechanismus übersprungen werden.
+
+Interceptors haben den Nachteil, dass sie bei der Erstellung bei DbContext registriert werden müssen. Zum Beispiel:
+
+```c#
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        => optionsBuilder
+            .AddInterceptors(new MySaveChangesInterceptor())
+            .UseSqlite("Data Source = test.db");
+```
+
+Im Gegensatz dazu können Ereignisse jederzeit in der DbContext-Instanz registriert werden.
+
+### <a name="exclude-tables-from-migrations"></a>Ausschließen von Tabellen aus Migrationen
+
+In manchen Fällen ist es sinnvoll, wenn ein einzelner Entitätstyp in mehreren DbContext-Objekten zugeordnet ist. Dies ist vor allem dann der Fall, wenn [Kontextgrenzen](https://www.martinfowler.com/bliki/BoundedContext.html) verwendet werden, bei denen üblicherweise für jede Kontextgrenze ein anderer DbContext-Typ verwendet wird.
+
+So kann beispielsweise ein `User`-Typ von einem Autorisierungskontext und einem Berichtskontext benötigt werden. Wenn am `User`-Typ eine Änderung vorgenommen wird, wird bei der Migration für beide DbContext-Objekte versucht, die Datenbank zu aktualisieren. Um dies zu verhindern, kann das Modell für eines der Kontextobjekte so konfiguriert werden, dass die Tabelle aus der jeweiligen Migration ausgeschlossen wird.
+
+Im folgenden Code generiert der `AuthorizationContext` Migrationen für Änderungen an der `Users`-Tabelle, der `ReportingContext` jedoch nicht. Dadurch wird verhindert, dass die Migrationen kollidieren.
+
+```C#
+public class AuthorizationContext : DbContext
+{
+    public DbSet<User> Users { get; set; }
+}
+
+public class ReportingContext : DbContext
+{
+    public DbSet<User> Users { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<User>().ToTable("Users", t => t.ExcludeFromMigrations());
+    }
+}
+```
+
+### <a name="required-11-dependents"></a>Erforderliche 1:1-Abhängigkeiten
+
+Bei EF Core 3.1 war das abhängige Ende einer 1:1-Beziehung immer optional. Bei der Verwendung von nicht eigenständigen Entitäten wurde das besonders deutlich. Betrachten Sie beispielsweise das folgende Modell und die folgende Konfiguration:
+
+```c#
+public class Person
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+
+    public Address HomeAddress { get; set; }
+    public Address WorkAddress { get; set; }
+}
+
+public class Address
+{
+    public string Line1 { get; set; }
+    public string Line2 { get; set; }
+    public string City { get; set; }
+    public string Region { get; set; }
+    public string Country { get; set; }
+    public string Postcode { get; set; }
+}
+```
+
+```c#
+protected override void OnModelCreating(ModelBuilder modelBuilder)
+{
+    modelBuilder.Entity<Person>(b =>
+    {
+        b.OwnsOne(e => e.HomeAddress,
+            b =>
+            {
+                b.Property(e => e.Line1).IsRequired();
+                b.Property(e => e.City).IsRequired();
+                b.Property(e => e.Region).IsRequired();
+                b.Property(e => e.Postcode).IsRequired();
+            });
+
+        b.OwnsOne(e => e.WorkAddress);
+    });
+}
+```
+
+Dies führt zu Migrationen, bei denen für SQLite die folgende Tabelle erstellt wird:
+
+```sql
+CREATE TABLE "People" (
+    "Id" INTEGER NOT NULL CONSTRAINT "PK_People" PRIMARY KEY AUTOINCREMENT,
+    "Name" TEXT NULL,
+    "HomeAddress_Line1" TEXT NULL,
+    "HomeAddress_Line2" TEXT NULL,
+    "HomeAddress_City" TEXT NULL,
+    "HomeAddress_Region" TEXT NULL,
+    "HomeAddress_Country" TEXT NULL,
+    "HomeAddress_Postcode" TEXT NULL,
+    "WorkAddress_Line1" TEXT NULL,
+    "WorkAddress_Line2" TEXT NULL,
+    "WorkAddress_City" TEXT NULL,
+    "WorkAddress_Region" TEXT NULL,
+    "WorkAddress_Country" TEXT NULL,
+    "WorkAddress_Postcode" TEXT NULL
+);
+```
+
+Beachten Sie, dass alle Spalten NULL-Werte zulassen, auch wenn einige der `HomeAddress`-Eigenschaften als erforderlich konfiguriert wurden. Wenn beim Abfragen einer `Person` alle Spalten für die private oder geschäftliche Adresse NULL sind, werden die `HomeAddress`- und/oder `WorkAddress`-Eigenschaften von EF Core als NULL belassen, anstatt eine leere Instanz von `Address` festzulegen.
+
+Bei EF Core 5.0 kann die `HomeAddress`-Navigation nun als erforderliche Abhängigkeit konfiguriert werden. Zum Beispiel:
+
+```c#
+protected override void OnModelCreating(ModelBuilder modelBuilder)
+{
+    modelBuilder.Entity<Person>(b =>
+    {
+        b.OwnsOne(e => e.HomeAddress,
+            b =>
+            {
+                b.Property(e => e.Line1).IsRequired();
+                b.Property(e => e.City).IsRequired();
+                b.Property(e => e.Region).IsRequired();
+                b.Property(e => e.Postcode).IsRequired();
+            });
+        b.Navigation(e => e.HomeAddress).IsRequired();
+
+        b.OwnsOne(e => e.WorkAddress);
+    });
+}
+```
+
+Die von Migrationen erstellte Tabelle enthält jetzt Non-Nullable-Spalten für die erforderlichen Eigenschaften der erforderlichen Abhängigkeit:
+
+```sql
+CREATE TABLE "People" (
+    "Id" INTEGER NOT NULL CONSTRAINT "PK_People" PRIMARY KEY AUTOINCREMENT,
+    "Name" TEXT NULL,
+    "HomeAddress_Line1" TEXT NOT NULL,
+    "HomeAddress_Line2" TEXT NULL,
+    "HomeAddress_City" TEXT NOT NULL,
+    "HomeAddress_Region" TEXT NOT NULL,
+    "HomeAddress_Country" TEXT NULL,
+    "HomeAddress_Postcode" TEXT NOT NULL,
+    "WorkAddress_Line1" TEXT NULL,
+    "WorkAddress_Line2" TEXT NULL,
+    "WorkAddress_City" TEXT NULL,
+    "WorkAddress_Region" TEXT NULL,
+    "WorkAddress_Country" TEXT NULL,
+    "WorkAddress_Postcode" TEXT NULL
+);
+```
+
+Außerdem löst EF Core jetzt eine Ausnahme aus, wenn versucht wird, einen Besitzer zu speichern, der eine Abhängigkeit aufweist, die einen NULL-Wert erfordert. In diesem Beispiel löst EF Core eine Ausnahme aus, wenn versucht wird, eine `Person` mit einer `HomeAddress` mit einem NULL-Wert zu speichern.
+
+Und schließlich erstellt EF Core weiterhin eine Instanz einer erforderlichen Abhängigkeit, auch wenn alle Spalten für die erforderliche Abhängigkeit NULL-Werte aufweisen.
+
+### <a name="options-for-migration-generation"></a>Optionen für die Migrationserstellung
+
+Ab EF Core 5.0 haben Sie eine bessere Kontrolle über die Erstellung von Migrationen für unterschiedliche Zwecke. Dazu gehören folgenden Funktionen:
+
+* Erkennen, ob die Migration für ein Skript oder für eine sofortige Ausführung erstellt wird
+* Erkennen, ob ein idempotentes Skript erstellt wird
+* Erkennen, ob das Skript Transaktionsanweisungen ausschließen soll (Informationen hierzu finden Sie unter _Migrationsskripts bei Transaktionen_ weiter unten)
+
+Dieses Verhalten wird durch eine `MigrationsSqlGenerationOptions`-Enumeration angegeben, die nun an `IMigrator.GenerateScript`übergeben werden kann.
+
+Zudem ermöglicht diese Version bei Bedarf eine bessere Erstellung von idempotenten Skripts mit Aufrufen von `EXEC` unter SQL Server. Diese Version enthält darüber hinaus auch ähnliche Verbesserungen an den Skripts, die von anderen Datenbankanbietern wie PostgreSQL erstellt werden.
+
+### <a name="migrations-scripts-with-transactions"></a>Migrationsskripts bei Transaktionen
+
+Über Migrationen erstellte SQL-Skripts enthalten nun Anweisungen zum Starten und Committen von Transaktionen für die Migration. So wurde das folgende Migrationsskript beispielsweise über zwei Migrationen erstellt. Beachten Sie, dass nun jede Migration in einer Transaktion angewendet wird.
+
+```sql
+BEGIN TRANSACTION;
+GO
+
+CREATE TABLE [Groups] (
+    [Id] int NOT NULL IDENTITY,
+    [Name] nvarchar(max) NULL,
+    CONSTRAINT [PK_Groups] PRIMARY KEY ([Id])
+);
+GO
+
+CREATE TABLE [Members] (
+    [Id] int NOT NULL IDENTITY,
+    [Name] nvarchar(max) NULL,
+    [GroupId] int NULL,
+    CONSTRAINT [PK_Members] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_Members_Groups_GroupId] FOREIGN KEY ([GroupId]) REFERENCES [Groups] ([Id]) ON DELETE NO ACTION
+);
+GO
+
+CREATE INDEX [IX_Members_GroupId] ON [Members] ([GroupId]);
+GO
+
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20200910194835_One', N'6.0.0-alpha.1.20460.2');
+GO
+
+COMMIT;
+GO
+
+BEGIN TRANSACTION;
+GO
+
+EXEC sp_rename N'[Groups].[Name]', N'GroupName', N'COLUMN';
+GO
+
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20200910195234_Two', N'6.0.0-alpha.1.20460.2');
+GO
+
+COMMIT;
+```
+
+Wie bereits im vorherigen Abschnitt erwähnt, kann diese Verwendung von Transaktionen deaktiviert werden, wenn Transaktionen anders behandelt werden müssen.
+
+### <a name="see-pending-migrations"></a>Ausstehende Migrationen anzeigen
+
+Dieses Feature stammt vom Communitymitglied [@Psypher9](https://github.com/Psypher9). Danke für diesen Beitrag!
+
+Mit dem Befehl `dotnet ef migrations list` wird nun angezeigt, welche Migrationen noch nicht auf die Datenbank angewendet wurden. Zum Beispiel:
+
+```
+ajcvickers@avickers420u:~/AllTogetherNow/Daily$ dotnet ef migrations list
+Build started...
+Build succeeded.
+20200910201647_One
+20200910201708_Two
+20200910202050_Three (Pending)
+ajcvickers@avickers420u:~/AllTogetherNow/Daily$
+```
+
+Außerdem gibt es jetzt den Befehl `Get-Migration` für die Paket-Manager-Konsole mit derselben Funktionalität.
+
+### <a name="modelbuilder-api-for-value-comparers"></a>ModelBuilder-API für Wertevergleiche
+
+EF Core-Eigenschaften für benutzerdefinierte änderbare Typen [erfordern einen Wertevergleich](xref:core/modeling/value-comparers), damit Eigenschaftsänderungen richtig erkannt werden. Dies kann jetzt als Teil der Konfiguration der Wertkonvertierung für den Typ angegeben werden. Zum Beispiel:
+
+```c#
+modelBuilder
+    .Entity<EntityType>()
+    .Property(e => e.MyProperty)
+    .HasConversion(
+        v => JsonSerializer.Serialize(v, null),
+        v => JsonSerializer.Deserialize<List<int>>(v, null),
+        new ValueComparer<List<int>>(
+            (c1, c2) => c1.SequenceEqual(c2),
+            c => c.Aggregate(0, (a, v) => HashCode.Combine(a, v.GetHashCode())),
+            c => c.ToList()));
+```
+
+### <a name="entityentry-trygetvalue-methods"></a>EntityEntry-TryGetValue-Methoden
+
+Dieses Feature stammt vom Communitymitglied [@m4ss1m0g](https://github.com/m4ss1m0g). Danke für diesen Beitrag!
+
+`EntityEntry.CurrentValues` und `EntityEntry.OriginalValues` wurde eine `TryGetValue`-Methode hinzugefügt. Dadurch kann der Wert einer Eigenschaft angefordert werden, ohne zuerst zu überprüfen, ob die Eigenschaft im EF-Modell zugeordnet ist. Zum Beispiel:
+
+```c#
+if (entry.CurrentValues.TryGetValue(propertyName, out var value))
+{
+    Console.WriteLine(value);
+}
+```
+
+### <a name="default-max-batch-size-for-sql-server"></a>Standardwert für maximale Batchgröße bei SQL Server
+
+Ab EF Core 5.0 beträgt der Standardwert für die maximale Batchgröße bei SaveChanges unter SQL Server nun 42. Bekanntlich ist dies auch die Antwort auf die ultimative Frage des Lebens, des Universums und alles Übrigen. Dies ist jedoch wahrscheinlich ein Zufall, da der Wert durch die [Analyse der Batchverarbeitungsleistung](https://github.com/dotnet/efcore/issues/9270) ermittelt wurde. Wir glauben nicht, dass wir eine Form der ultimativen Frage entdeckt haben, obwohl es einigermaßen plausibel erscheint, dass die Erde erschaffen wurde, um zu verstehen, warum SQL Server so funktioniert, wie es funktioniert.
+
+### <a name="default-environment-to-development"></a>Standardumgebung für die Entwicklung
+
+Die Befehlszeilentools von EF Core konfigurieren nun die `ASPNETCORE_ENVIRONMENT`- _und_ `DOTNET_ENVIRONMENT`-Umgebungsvariablen automatisch als „Entwicklung“. Dadurch wird die Benutzeroberfläche bei der Verwendung des generischen Hosts mit der Benutzeroberfläche für die Entwicklung von ASP.NET Core in Einklang gebracht. Informationen hierzu finden Sie unter [#19903](https://github.com/dotnet/efcore/issues/19903).
+
+### <a name="better-migrations-column-ordering"></a>Bessere Anordnung der Spalten für Migrationen
+
+Die Spalten für nicht zugeordnete Basisklassen sind nun nach anderen Spalten für zugeordnete Entitätstypen angeordnet. Dies betrifft jedoch nur neu erstellte Tabellen. Die Spaltenreihenfolge bei bereits vorhandenen Tabellen bleibt unverändert. Informationen hierzu finden Sie unter [#11314](https://github.com/dotnet/efcore/issues/11314).
+
+### <a name="query-improvements"></a>Verbesserungen bei Abfragen
+
+EF Core 5.0 RC1 umfasst einige zusätzliche Verbesserungen in Bezug auf die Abfrageübersetzung:
+
+* Übersetzung von `is` in Cosmos. Informationen hierzu finden Sie unter [#16391](https://github.com/dotnet/efcore/issues/16391).
+* Vom Benutzer zugeordnete Funktionen können nun zur Steuerung der NULL-Weitergabe mit Anmerkungen versehen werden. Informationen hierzu finden Sie unter [#19609](https://github.com/dotnet/efcore/issues/19609).
+* Unterstützung für die Übersetzung von GroupBy mit bedingten Aggregaten. Informationen hierzu finden Sie unter [#11711](https://github.com/dotnet/efcore/issues/11711).
+* Übersetzung des Distinct-Operators über Group-Element vor dem Aggregieren. Informationen hierzu finden Sie unter [#17376](https://github.com/dotnet/efcore/issues/17376).
+
+### <a name="model-building-for-fields"></a>Modellerstellung für Felder
+
+Und schließlich können mit EF Core RC1 im ModelBuilder nun Lambdamethoden sowohl für Felder als auch für Eigenschaften verwendet werden. Wenn Sie beispielsweise aus irgendeinem Grund keine Eigenschaften, sondern öffentliche Felder verwenden möchten, können diese Felder nun mithilfe der Lambda-Generatoren zugeordnet werden:
+
+```c#
+public class Post
+{
+    public int Id;
+    public string Name;
+    public string Category;
+    public int BlogId;
+    public Blog Blog;
+}
+
+public class Blog
+{
+    public int Id;
+    public string Name;
+    public ICollection<Post> Posts;
+}
+```
+
+```c#
+protected override void OnModelCreating(ModelBuilder modelBuilder)
+{
+    modelBuilder.Entity<Blog>(b =>
+    {
+        b.Property(e => e.Id);
+        b.Property(e => e.Name);
+    });
+
+    modelBuilder.Entity<Post>(b =>
+    {
+        b.Property(e => e.Id);
+        b.Property(e => e.Name);
+        b.Property(e => e.Category);
+        b.Property(e => e.BlogId);
+        b.HasOne(e => e.Blog).WithMany(e => e.Posts);
+    });
+}
+```
+
+Obwohl dies nun möglich ist, wird diese Vorgehensweise nicht empfohlen. Zudem wird EF Core damit nicht um zusätzliche Feldzuordnungsfunktionen erweitert. Damit können lediglich anstelle von Zeichenfolgenmethoden Lambdamethoden verwendet werden. Dies ist nur in Ausnahmefällen nützlich, da Felder selten öffentlich sind.
 
 ## <a name="preview-8"></a>Preview 8
 
@@ -279,7 +921,7 @@ modelBuilder.HasDbFunction(() => GetReports(default));
 
 (Die Verwendung eines Lambdaausdrucks ist hier eine einfache Methode, um `MethodInfo` an EF Core zu übergeben. Die an die Methode übergebenen Argumente werden ignoriert.)
 
-Sie können nun Abfragen schreiben, die `GetReports` aufrufen und die Ergebnisse überschreiben. Beispiel:
+Sie können nun Abfragen schreiben, die `GetReports` aufrufen und die Ergebnisse überschreiben. Zum Beispiel:
 
 ```c#
 from e in context.Employees
@@ -344,7 +986,7 @@ SELECT @@ROWCOUNT;
 
 ### <a name="context-wide-split-query-configuration"></a>Kontextbezogene Konfiguration von geteilten Abfragen
 
-Geteilte Abfragen (siehe unten) können nun als Standardabfragen konfiguriert werden, die von DbContext ausgeführt werden. Diese Konfiguration ist nur für relationale Anbieter verfügbar und muss daher im Rahmen der `UseProvider`-Konfiguration festgelegt werden. Beispiel:
+Geteilte Abfragen (siehe unten) können nun als Standardabfragen konfiguriert werden, die von DbContext ausgeführt werden. Diese Konfiguration ist nur für relationale Anbieter verfügbar und muss daher im Rahmen der `UseProvider`-Konfiguration festgelegt werden. Zum Beispiel:
 
 ```c#
 protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

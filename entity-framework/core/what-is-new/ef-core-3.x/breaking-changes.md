@@ -4,12 +4,12 @@ description: Vollständige Liste der in Entity Framework Core 3.x eingeführten
 author: ajcvickers
 ms.date: 09/05/2020
 uid: core/what-is-new/ef-core-3.x/breaking-changes
-ms.openlocfilehash: 644e61994dab4e9993c6a78792ff584c57fbe48a
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: e348cb630d91ebe4536b73b9a7bd9a7b6a46db79
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89620679"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90072238"
 ---
 # <a name="breaking-changes-included-in-ef-core-3x"></a>Breaking Changes in EF Core 3.x
 
@@ -178,7 +178,7 @@ Um Migrationen zu verwalten oder ein Gerüst für `DbContext` zu erstellen, inst
     $ dotnet tool install --global dotnet-ef
   ```
 
-Eine Verwendung als lokales Tool ist ebenfalls möglich, wenn Sie die Abhängigkeiten eines Projekts wiederherstellen, das das Tool mithilfe einer [Toolmanifestdatei](https://github.com/dotnet/cli/issues/10288) als Toolabhängigkeit deklariert.
+Eine Verwendung als lokales Tool ist ebenfalls möglich, wenn Sie die Abhängigkeiten eines Projekts wiederherstellen, das das Tool mithilfe einer [Toolmanifestdatei](/dotnet/core/tools/global-tools#install-a-local-tool) als Toolabhängigkeit deklariert.
 
 <a name="fromsql"></a>
 ### <a name="fromsql-executesql-and-executesqlasync-have-been-renamed"></a>FromSql, ExecuteSql und ExecuteSqlAsync wurden umbenannt
@@ -478,6 +478,9 @@ Dieses Verhalten wird nach wie vor nicht konventionsgemäß festgelegt, um Fehlk
 * **`DbQuery<>`** : Verwenden Sie stattdessen `DbSet<>`.
 * **`DbContext.Query<>()`** : Verwenden Sie stattdessen `DbContext.Set<>()`.
 * **`IQueryTypeConfiguration<TQuery>`** : Verwenden Sie stattdessen `IEntityTypeConfiguration<TEntity>`**.
+
+> [!NOTE]
+> Aufgrund [eines Problems in Version 3.x](https://github.com/dotnet/efcore/issues/19537) beim Abfragen von schlüssellosen Entitäten, bei denen alle Eigenschaften auf `null` festgelegt sind, wird anstelle einer Entität ein `null` zurückgegeben. Wenn dieses Problem auf Ihr Szenario zutrifft, fügen Sie außerdem eine Logik zur Verarbeitung von `null` in Ergebnissen hinzu.
 
 <a name="config"></a>
 ### <a name="configuration-api-for-owned-type-relationships-has-changed"></a>Die Konfigurations-API für Beziehungen abhängiger (owned) Typen wurde geändert

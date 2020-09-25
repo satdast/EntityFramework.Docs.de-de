@@ -2,14 +2,14 @@
 title: 'EF Core: Breaking Changes in EF Core 5.0'
 description: Vollständige Liste der in Entity Framework Core 5.0 eingeführten Breaking Changes
 author: bricelam
-ms.date: 09/08/2020
+ms.date: 09/09/2020
 uid: core/what-is-new/ef-core-5.0/breaking-changes
-ms.openlocfilehash: bc6db48edcd7406b31ec2b4369cabf5d55fb4578
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 63fd1d1a01b7a72fd34bb9a0130191131306426c
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89618677"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90070795"
 ---
 # <a name="breaking-changes-in-ef-core-50"></a>Breaking Changes in EF Core 5.0
 
@@ -20,12 +20,18 @@ Die folgenden API-Änderungen und Behavior Changes können dazu führen, dass vo
 | **Wichtige Änderung**                                                                                                                   | **Auswirkungen** |
 |:--------------------------------------------------------------------------------------------------------------------------------------|------------|
 | [Andere Semantik der Kennzeichnung als erforderlich für die Navigation von Prinzipal zu abhängiger Entität](#required-dependent)                                 | Medium     |
+| [Die definierende Abfrage wurde durch anbieterspezifische Methoden ersetzt](#defining-query)                                                          | Medium     |
 | [Die HasGeometricDimension-Methode wurde aus der SQLite NTS-Erweiterung entfernt](#geometric-sqlite)                                                   | Niedrig        |
-| [Wert-Generatoren werden aufgerufen, wenn der Entitätszustand von „Getrennt“ in „Unverändert“, „Aktualisiert“ oder „Gelöscht“ geändert wird](#non-added-generation)  | Niedrig        |
+| [Cosmos: Der Partitionsschlüssel wird nun dem Primärschlüssel hinzugefügt](#cosmos-partition-key)                                                        | Niedrig        |
+| [Cosmos: Die `id`-Eigenschaft wurde umbenannt in `__id`](#cosmos-id)                                                                                 | Niedrig        |
+| [Cosmos: byte[] wird nun als Base64-Zeichenfolge statt als Zahlenarray gespeichert](#cosmos-byte)                                             | Niedrig        |
+| [Cosmos: GetPropertyName und SetPropertyName wurden umbenannt](#cosmos-metadata)                                                          | Niedrig        |
+| [Wert-Generatoren werden aufgerufen, wenn der Entitätszustand von „Getrennt“ in „Unverändert“, „Aktualisiert“ oder „Gelöscht“ geändert wird](#non-added-generation) | Niedrig        |
 | [IMigrationsModelDiffer verwendet jetzt IRelationalModel](#relational-model)                                                                 | Niedrig        |
 | [Diskriminatoren sind schreibgeschützt](#read-only-discriminators)                                                                             | Niedrig        |
 
 <a name="geometric-sqlite"></a>
+
 ### <a name="removed-hasgeometricdimension-method-from-sqlite-nts-extension"></a>Die HasGeometricDimension-Methode wurde aus der SQLite NTS-Erweiterung entfernt.
 
 [Issue 14257](https://github.com/aspnet/EntityFrameworkCore/issues/14257)
@@ -36,7 +42,7 @@ Die HasGeometricDimension-Methode wurde dazu verwendet, zusätzliche Maße (Z un
 
 **Neues Verhalten**
 
-Zum Ermöglichen des Einfügens und Änderns von Geometriewerten mit zusätzlichen Maßen (Z und M) muss das jeweilige Maß als Teil des Spaltentypnamens angegeben werden. Dies entspricht eher dem zugrunde liegenden Verhalten der AddGeometryColumn-Funktion von SpatiaLite.
+Zum Ermöglichen des Einfügens und Änderns von Geometriewerten mit zusätzlichen Maßen (Z und M) muss das jeweilige Maß als Teil des Spaltentypnamens angegeben werden. Diese API entspricht eher dem zugrunde liegenden Verhalten der AddGeometryColumn-Funktion von SpatiaLite.
 
 **Hintergründe**
 
@@ -59,6 +65,7 @@ modelBuilder.Entity<GeoEntity>(
 ```
 
 <a name="required-dependent"></a>
+
 ### <a name="required-on-the-navigation-from-principal-to-dependent-has-different-semantics"></a>Andere Semantik der Kennzeichnung als erforderlich für die Navigation von Prinzipal zu abhängiger Entität
 
 [Tracking Issue 17286](https://github.com/aspnet/EntityFrameworkCore/issues/17286)
@@ -97,7 +104,107 @@ modelBuilder.Entity<Blog>()
     .IsRequired();
 ```
 
+<a name="cosmos-partition-key"></a>
+
+### <a name="cosmos-partition-key-is-now-added-to-the-primary-key"></a>Cosmos: Der Partitionsschlüssel wird nun dem Primärschlüssel hinzugefügt
+
+[Tracking Issue 15289](https://github.com/aspnet/EntityFrameworkCore/issues/15289)
+
+**Altes Verhalten**
+
+Die Partitionsschlüsseleigenschaft wurde nur dem alternativen Schlüssel hinzugefügt, der `id` enthält.
+
+**Neues Verhalten**
+
+Die Partitionsschlüsseleigenschaft wird gemäß Konvention jetzt auch dem Primärschlüssel hinzugefügt.
+
+**Hintergründe**
+
+Durch diese Änderung ist das Modell besser auf die Azure Cosmos DB-Semantik abgestimmt. Zudem verbessert sich dadurch die Leistung von `Find` und einigen Abfragen.
+
+**Vorbeugende Maßnahmen**
+
+Um zu verhindern, dass die Partitionsschlüsseleigenschaft dem Primärschlüssel hinzugefügt wird, konfigurieren Sie sie in `OnModelCreating`.
+
+```cs
+modelBuilder.Entity<Blog>()
+    .HasKey(b => b.Id);
+```
+
+<a name="cosmos-id"></a>
+
+### <a name="cosmos-id-property-renamed-to-__id"></a>Cosmos: Die `id`-Eigenschaft wurde umbenannt in `__id`
+
+[Issue 17751](https://github.com/aspnet/EntityFrameworkCore/issues/17751)
+
+**Altes Verhalten**
+
+Die der JSON-Eigenschaft `id` zugeordnete Schatteneigenschaft hatte ebenfalls den Namen `id`.
+
+**Neues Verhalten**
+
+Die gemäß Konvention erstellte Schatteneigenschaft trägt nun den Namen `__id`.
+
+**Hintergründe**
+
+Durch diese Änderung ist es weniger wahrscheinlich, dass die Eigenschaft `id` mit einer vorhandenen Eigenschaft des Entitätstyps kollidiert.
+
+**Vorbeugende Maßnahmen**
+
+Wenn Sie zum Verhalten der Version 3.x zurückkehren möchten, konfigurieren Sie die Eigenschaft `id` in `OnModelCreating`.
+
+```cs
+modelBuilder.Entity<Blog>()
+    .Property<string>("id")
+    .ToJsonProperty("id");
+```
+
+<a name="cosmos-byte"></a>
+
+### <a name="cosmos-byte-is-now-stored-as-a-base64-string-instead-of-a-number-array"></a>Cosmos: byte[] wird nun als Base64-Zeichenfolge statt als Zahlenarray gespeichert
+
+[Issue 17306](https://github.com/aspnet/EntityFrameworkCore/issues/17306)
+
+**Altes Verhalten**
+
+Eigenschaften vom Typ „byte[]“ wurden als Zahlenarray gespeichert.
+
+**Neues Verhalten**
+
+Eigenschaften vom Typ „byte[]“ werden nun als Base64-Zeichenfolge gespeichert.
+
+**Hintergründe**
+
+Diese Darstellung von „byte[]“ entspricht eher den Erwartungen. Zudem handelt es sich hier um das Standardverhalten der wichtigen JSON-Serialisierungsbibliotheken.
+
+**Vorbeugende Maßnahmen**
+
+Als Zahlenarrays gespeicherte, bereits vorhandene Daten werden weiterhin ordnungsgemäß abgefragt. Derzeit wird jedoch keine Möglichkeit unterstützt, das Einfügeverhalten zu ändern. Wenn Ihr Szenario durch diese Einschränkung blockiert wird, kommentieren Sie dieses [Problem](https://github.com/aspnet/EntityFrameworkCore/issues/17306).
+
+<a name="cosmos-metadata"></a>
+
+### <a name="cosmos-getpropertyname-and-setpropertyname-were-renamed"></a>Cosmos: GetPropertyName und SetPropertyName wurden umbenannt
+
+[Issue 17874](https://github.com/aspnet/EntityFrameworkCore/issues/17874)
+
+**Altes Verhalten**
+
+Bisher wurden die Erweiterungsmethoden `GetPropertyName` und `SetPropertyName` genannt.
+
+**Neues Verhalten**
+
+Die alte API ist veraltet, und es wurden neue Methoden hinzugefügt: `GetJsonPropertyName`, `SetJsonPropertyName`
+
+**Hintergründe**
+
+Durch diese Änderung wird die Mehrdeutigkeit um die Konfiguration durch diese Methoden beseitigt.
+
+**Vorbeugende Maßnahmen**
+
+Verwenden Sie die neue API, oder sperren Sie die veralteten Warnungen vorübergehend.
+
 <a name="non-added-generation"></a>
+
 ### <a name="value-generators-are-called-when-the-entity-state-is-changed-from-detached-to-unchanged-updated-or-deleted"></a>Wert-Generatoren werden aufgerufen, wenn der Entitätszustand von „Getrennt“ in „Unverändert“, „Aktualisiert“ oder „Gelöscht“ geändert wird
 
 [Tracking Issue 15289](https://github.com/aspnet/EntityFrameworkCore/issues/15289)
@@ -119,6 +226,7 @@ Diese Änderung war erforderlich, um die Verwendung von Eigenschaften zu verbess
 Weisen Sie der Eigenschaft vor der Änderung des Status einen anderen Wert als den Standardwert zu, um zu verhindern, dass der Wert-Generator aufgerufen wird.
 
 <a name="relational-model"></a>
+
 ### <a name="imigrationsmodeldiffer-now-uses-irelationalmodel"></a>IMigrationsModelDiffer verwendet jetzt IRelationalModel
 
 [Tracking Issue 20305](https://github.com/aspnet/EntityFrameworkCore/issues/20305)
@@ -158,6 +266,7 @@ var hasDifferences = modelDiffer.HasDifferences(
 Eine Verbesserung dieser Funktion in Version 6.0 ist geplant ([siehe 22031](https://github.com/dotnet/efcore/issues/22031)).
 
 <a name="read-only-discriminators"></a>
+
 ### <a name="discriminators-are-read-only"></a>Diskriminatoren sind schreibgeschützt
 
 [Tracking Issue 21154](https://github.com/aspnet/EntityFrameworkCore/issues/21154)
@@ -183,3 +292,31 @@ modelBuilder.Entity<BaseEntity>()
     .Property<string>("Discriminator")
     .Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Save);
 ```
+
+<a name="defining-query"></a>
+
+### <a name="defining-query-is-replaced-with-provider-specific-methods"></a>Die definierende Abfrage wurde durch anbieterspezifische Methoden ersetzt
+
+[Issue 18903](https://github.com/dotnet/efcore/issues/18903)
+
+**Altes Verhalten**
+
+Entitätstypen wurden zum Definieren von Abfragen auf der Kernebene zugeordnet. Jedes Mal, wenn der Entitätstyp im Abfragestamm des Entitätstyps verwendet wurde, wurde er bei allen Anbietern durch die definierende Abfrage ersetzt.
+
+**Neues Verhalten**
+
+APIs für definierende Abfragen sind veraltet. Es wurden neue anbieterspezifische APIs eingeführt.
+
+**Hintergründe**
+
+Während definierende Abfragen als Ersatzabfragen implementiert wurden, wenn in der Abfrage der Abfragestamm verwendet wird, sind einige Probleme aufgetreten:
+
+- Wenn eine definierende Abfrage einen Entitätstyp mit `new { ... }` in die `Select`-Methode projiziert, war für die Identifizierung dessen als Entität zusätzliche Arbeit erforderlich. Zudem sorgte dieses Vorgehen für Inkonsistenzen in Bezug darauf, wie EF Core nominale Typen in der Abfrage behandelt.
+- Bei relationalen Anbietern ist `FromSql` weiterhin erforderlich, um die SQL-Zeichenfolge im LINQ-Ausdrucksformat zu übergeben.
+
+Zunächst wurden definierende Abfragen als clientseitige Sichten zur Verwendung mit In-Memory-Anbietern bei schlüssellosen Entitäten eingeführt (ähnlich wie bei Datenbanksichten in relationalen Datenbanken). Eine solche Definition erleichtert das Testen der Anwendung mit In-Memory-Datenbanken. Später wurden sie allgemein anwendbar, was zwar nützlich war, aber ein inkonsistentes und schwer verständliches Verhalten mit sich brachte. Daher haben wir uns entschieden, das Konzept zu vereinfachen. Wir stellen die LINQ-basierte definierende Abfrage nur noch für In-Memory-Anbieter bereit und behandeln sie anders. Weitere Informationen finden Sie in [diesem Thema](https://github.com/dotnet/efcore/issues/20023).
+
+**Vorbeugende Maßnahmen**
+
+Verwenden Sie für relationale Anbieter die `ToSqlQuery`-Methode in `OnModelCreating`, und übergeben Sie eine SQL-Zeichenfolge zur Verwendung für den Entitätstyp.
+Verwenden Sie für den In-Memory-Anbieter die `ToInMemoryQuery`-Methode in `OnModelCreating`, und übergeben Sie eine LINQ-Abfrage zur Verwendung für den Entitätstyp.
