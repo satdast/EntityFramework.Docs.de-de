@@ -2,15 +2,14 @@
 title: 'Azure Cosmos DB-Anbieter: EF Core'
 description: Dokumentation für den Datenbankanbieter, mit der Entity Framework Core mit der SQL-API von Azure Cosmos DB verwendet werden kann
 author: AndriySvyryd
-ms.author: ansvyryd
-ms.date: 11/05/2019
+ms.date: 09/14/2020
 uid: core/providers/cosmos/index
-ms.openlocfilehash: 188c5b10aefa784715c0bbf2d50337d65c21fd62
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 94ba29f3f2643e8f563a460e17dce9d15cb7c2df
+ms.sourcegitcommit: c0e6a00b64c2dcd8acdc0fe6d1b47703405cdf09
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90071367"
+ms.lasthandoff: 09/24/2020
+ms.locfileid: "91210340"
 ---
 # <a name="ef-core-azure-cosmos-db-provider"></a>EF Core Azure Cosmos DB-Anbieter
 
@@ -66,6 +65,18 @@ Das Speichern und Abfragen von Daten folgt dem normalen EF-Muster:
 
 > [!IMPORTANT]
 > Der Aufruf von [EnsureCreatedAsync](/dotnet/api/Microsoft.EntityFrameworkCore.Storage.IDatabaseCreator.EnsureCreatedAsync) ist erforderlich, um die erforderlichen Container zu erstellen und die [Seeddaten](xref:core/modeling/data-seeding) einzufügen, wenn Sie im Modell vorhanden sind. `EnsureCreatedAsync` sollte jedoch nur während der Bereitstellung und nicht im normalen Betrieb aufgerufen werden, da dies zu Leistungsproblemen führen kann.
+
+## <a name="cosmos-options"></a>Cosmos-Optionen
+
+Es ist auch möglich, den Cosmos DB-Anbieter mit einer einzelnen Verbindungszeichenfolge zu konfigurieren und andere Optionen zum Anpassen der Verbindung anzugeben:
+
+[!code-csharp[Configuration](../../../../samples/core/Cosmos/ModelBuilding/OptionsContext.cs?name=Configuration)]
+
+> [!NOTE]
+> Die meisten dieser Optionen sind in EF Core Cosmos 5.0 neu.
+
+> [!TIP]
+> In der Dokumentation zu [Azure Cosmos DB-Optionen](/dotnet/api/microsoft.azure.cosmos.cosmosclientoptions) finden Sie eine ausführliche Beschreibung der Auswirkungen der einzelnen oben genannten Optionen.
 
 ## <a name="cosmos-specific-model-customization"></a>Cosmos-spezifische Modellanpassung
 
