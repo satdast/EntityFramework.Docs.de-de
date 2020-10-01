@@ -4,12 +4,12 @@ description: Eager Loading zugehöriger Daten mit Entity Framework Core
 author: roji
 ms.date: 9/8/2020
 uid: core/querying/related-data/eager
-ms.openlocfilehash: f7e33895293e1d7b8b32a135d60b58dd1f050621
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 5ac15a85b28f21588639f34cbaa9ef76f366f7b5
+ms.sourcegitcommit: c0e6a00b64c2dcd8acdc0fe6d1b47703405cdf09
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90078868"
+ms.lasthandoff: 09/24/2020
+ms.locfileid: "91210466"
 ---
 # <a name="eager-loading-of-related-data"></a>Eager Loading zugehöriger Daten
 
@@ -92,7 +92,7 @@ Sie können auch geteilte Abfragen als Standardeinstellung für den Kontext Ihre
 
 Wenn geteilte Abfragen als Standardeinstellung konfiguriert werden, ist es dennoch möglich, bestimmte Abfragen so zu konfigurieren, dass sie als einzelne Abfragen ausgeführt werden:
 
-[!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Sample.cs?name=AsSplitQuery&highlight=5)]
+[!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Sample.cs?name=AsSingleQuery&highlight=5)]
 
 Wenn der Abfrageteilungsmodus nicht explizit festgelegt ist, weder global noch für die Abfrage, und EF Core erkennt, dass eine einzelne Abfrage mehrere Include-Vorgänge für Sammlungen lädt, wird eine Warnung ausgegeben, um auf die möglichen daraus resultierenden Leistungsprobleme hinzuweisen. Das Festlegen des Abfragemodus auf SingleQuery führt dazu, dass diese Warnung nicht generiert wird.
 
