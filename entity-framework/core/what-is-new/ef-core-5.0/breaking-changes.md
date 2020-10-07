@@ -4,12 +4,12 @@ description: Vollständige Liste der in Entity Framework Core 5.0 eingeführten
 author: bricelam
 ms.date: 09/09/2020
 uid: core/what-is-new/ef-core-5.0/breaking-changes
-ms.openlocfilehash: 63fd1d1a01b7a72fd34bb9a0130191131306426c
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 8e9df4e2ff81e20cf5a36855247c5aff89ea2394
+ms.sourcegitcommit: c0e6a00b64c2dcd8acdc0fe6d1b47703405cdf09
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90070795"
+ms.lasthandoff: 09/24/2020
+ms.locfileid: "91210366"
 ---
 # <a name="breaking-changes-in-ef-core-50"></a>Breaking Changes in EF Core 5.0
 
@@ -29,6 +29,7 @@ Die folgenden API-Änderungen und Behavior Changes können dazu führen, dass vo
 | [Wert-Generatoren werden aufgerufen, wenn der Entitätszustand von „Getrennt“ in „Unverändert“, „Aktualisiert“ oder „Gelöscht“ geändert wird](#non-added-generation) | Niedrig        |
 | [IMigrationsModelDiffer verwendet jetzt IRelationalModel](#relational-model)                                                                 | Niedrig        |
 | [Diskriminatoren sind schreibgeschützt](#read-only-discriminators)                                                                             | Niedrig        |
+| [Anbieterspezifische EF.Functions-Methoden werden für InMemory-Anbieter ausgelöst.](#no-client-methods)                                              | Niedrig        |
 
 <a name="geometric-sqlite"></a>
 
@@ -193,7 +194,7 @@ Bisher wurden die Erweiterungsmethoden `GetPropertyName` und `SetPropertyName` g
 
 **Neues Verhalten**
 
-Die alte API ist veraltet, und es wurden neue Methoden hinzugefügt: `GetJsonPropertyName`, `SetJsonPropertyName`
+Die alte API wurde entfernt, und es wurden die neuen Methoden `GetJsonPropertyName` und `SetJsonPropertyName` hinzugefügt.
 
 **Hintergründe**
 
@@ -201,7 +202,7 @@ Durch diese Änderung wird die Mehrdeutigkeit um die Konfiguration durch diese M
 
 **Vorbeugende Maßnahmen**
 
-Verwenden Sie die neue API, oder sperren Sie die veralteten Warnungen vorübergehend.
+Verwenden Sie die neue API.
 
 <a name="non-added-generation"></a>
 
@@ -320,3 +321,25 @@ Zunächst wurden definierende Abfragen als clientseitige Sichten zur Verwendung 
 
 Verwenden Sie für relationale Anbieter die `ToSqlQuery`-Methode in `OnModelCreating`, und übergeben Sie eine SQL-Zeichenfolge zur Verwendung für den Entitätstyp.
 Verwenden Sie für den In-Memory-Anbieter die `ToInMemoryQuery`-Methode in `OnModelCreating`, und übergeben Sie eine LINQ-Abfrage zur Verwendung für den Entitätstyp.
+
+<a name="no-client-methods"></a>
+
+### <a name="provider-specific-effunctions-methods-throw-for-inmemory-provider"></a>Anbieterspezifische EF.Functions-Methoden werden für InMemory-Anbieter ausgelöst.
+
+[Issue 20294](https://github.com/dotnet/efcore/issues/20294)
+
+**Altes Verhalten**
+
+Anbieterspezifische EF.Functions-Methoden enthielten eine Implementierung für die Clientausführung, sodass sie für den InMemory-Anbieter ausgeführt werden konnten. `EF.Functions.DateDiffDay` ist beispielsweise eine SQL Server-spezifische Methode, die für InMemory-Anbieter galt.
+
+**Neues Verhalten**
+
+Anbieterspezifische Methoden wurden aktualisiert, sodass sie im Methodentext eine Ausnahme auslösen, um ihre Auswertung auf Clientseite zu blockieren.
+
+**Hintergründe**
+
+Anbieterspezifische Methoden sind einer Datenbankfunktion zugeordnet. Das Berechnungsergebnis der zugeordneten Datenbankfunktion kann auf Clientseite in LINQ nicht immer repliziert werden. Dies kann dazu führen, dass sich das Ergebnis von dem des Servers unterscheidet, wenn dieselbe Methode auf dem Client ausgeführt wird. Da diese Methoden in LINQ verwendet werden, um Übersetzungen in bestimmte Datenbankfunktionen durchzuführen, müssen sie nicht auf Clientseite ausgewertet werden. Da der InMemory-Anbieter eine andere *Datenbank* ist, sind die Methoden für diesen Anbieter nicht verfügbar. Wenn Sie versuchen, sie für den InMemory-Anbieter oder einen anderen Anbieter auszuführen, der diese Methoden nicht übersetzt, wird eine Ausnahme ausgelöst.
+
+**Vorbeugende Maßnahmen**
+
+Da es keine Möglichkeit gibt, das Verhalten von Datenbankfunktionen exakt zu imitieren, sollten Sie die Abfragen, die diese Methoden enthalten, mit demselben Datenbanktyp testen, der auch in der Produktionsumgebung verwendet wird.
