@@ -1,15 +1,15 @@
 ---
 title: Überblick über Entity Framework 6 (EF6)
 description: Überblick über Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/index
-ms.openlocfilehash: aff7aee51c4e12b278f7cab8b5122ee0edbbac0f
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 09b7cb9e0141e9739b15d6c9789286c2e47018cc
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90072121"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92065393"
 ---
 # <a name="entity-framework-6"></a>Entity Framework 6
 Entity Framework 6 (EF6) ist ein bewährtes Framework für objektrelationale Abbildung (Object-Relational Mapping, ORM) für .NET, dessen Features im Laufe der Zeit immer weiter optimiert und stabilisiert wurden.

@@ -4,12 +4,12 @@ description: Tutorial zu den ersten Schritten mit Entity Framework Core
 author: rick-anderson
 ms.date: 09/17/2019
 uid: core/get-started/index
-ms.openlocfilehash: 9f0bb1eb99cb7f4cb7542c444ad86480917bdd0f
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 132586aa41916d94ebef156330cc553a789ed5a7
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90071978"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92062112"
 ---
 # <a name="getting-started-with-ef-core"></a>Erste Schritte mit EF Core
 
@@ -67,7 +67,7 @@ dotnet add package Microsoft.EntityFrameworkCore.Sqlite
 * Wählen Sie **Tools > NuGet-Paket-Manager > Paket-Manager-Konsole** aus.
 * Führen Sie die folgenden Befehle aus:
 
-  ``` PowerShell
+  ```powershell
   Install-Package Microsoft.EntityFrameworkCore.Sqlite
   ```
 
@@ -118,7 +118,7 @@ Die folgenden Schritte verwenden [Migrationen](xref:core/managing-schemas/migrat
 
 * Führen Sie die folgenden Befehle in der **Paket-Manager-Konsole (PMC)** aus.
 
-  ``` PowerShell
+  ```powershell
   Install-Package Microsoft.EntityFrameworkCore.Tools
   Add-Migration InitialCreate
   Update-Database
@@ -149,7 +149,7 @@ Visual Studio verwendet beim Ausführen von .NET Core-Konsolen-Apps ein inkonsis
 * Klicken Sie mit der rechten Maustaste auf das Projekt, und wählen Sie **Projektdatei bearbeiten** aus.
 * Fügen Sie direkt unterhalb der Eigenschaft *TargetFramework* Folgendes hinzu:
 
-  ``` XML
+  ```xml
   <StartWorkingDirectory>$(MSBuildProjectDirectory)</StartWorkingDirectory>
   ```
 

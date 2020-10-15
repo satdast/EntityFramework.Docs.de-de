@@ -1,15 +1,15 @@
 ---
 title: Neue Features in EF Core 2.0 – EF Core
 description: Änderungen und Verbesserungen in Entity Framework Core 2.0
-author: divega
+author: ajcvickers
 ms.date: 02/20/2018
 uid: core/what-is-new/ef-core-2.0
-ms.openlocfilehash: f553e620c088a65eda64c0761aaab49313041727
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 7438d8ad1a5ade971af71186a20ec57fd83713de
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90072355"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92063451"
 ---
 # <a name="new-features-in-ef-core-20"></a>Neue Features in EF Core 2.0
 
@@ -26,7 +26,7 @@ Nun können mindestens zwei Entitätstypen derselben Tabelle zugeordnet werden, 
 
 Für die Durchführung der Tabellenaufteilung muss eine identifizierende Beziehung (wobei die Fremdschlüsseleigenschaften den Primärschlüssel bilden) zwischen allen Entitätstypen konfiguriert werden, die die Tabelle gemeinsam nutzen:
 
-``` csharp
+```csharp
 modelBuilder.Entity<Product>()
     .HasOne(e => e.Details).WithOne(e => e.Product)
     .HasForeignKey<ProductDetails>(e => e.Id);
@@ -42,7 +42,7 @@ Ein eigener Entitätstyp kann denselben .NET-Typ mit einem anderen eigenen Entit
 
 Gemäß den Konventionen wird ein Schattenprimärschlüssel für den eigenen Typ erstellt und mithilfe der Tabellenaufteilung der gleichen Tabelle wie der des Besitzers zugeordnet. Dies ermöglicht die Verwendung von eigenen Typen, ähnlich wie bei den in EF 6 verwendeten komplexen Typen:
 
-``` csharp
+```csharp
 modelBuilder.Entity<Order>().OwnsOne(p => p.OrderDetails, cb =>
     {
         cb.OwnsOne(c => c.BillingAddress);
@@ -79,7 +79,7 @@ EF Core 2.0 beinhaltet ein neues Feature, das als Abfragefilter auf Modellebene 
 
 Im Folgenden wird ein einfaches Beispiel vorgestellt, das das Feature für die zwei oben genannten Szenarien veranschaulicht:
 
-``` csharp
+```csharp
 public class BloggingContext : DbContext
 {
     public DbSet<Blog> Blogs { get; set; }
@@ -113,7 +113,7 @@ Im Folgenden wird kurz beschrieben, wie das Feature verwendet werden kann:
 
 Deklarieren Sie eine statische Methode für den Typ `DbContext`, und kommentieren Sie ihn mit `DbFunctionAttribute`:
 
-``` csharp
+```csharp
 public class BloggingContext : DbContext
 {
     [DbFunction]
@@ -126,7 +126,7 @@ public class BloggingContext : DbContext
 
 Derartige Methoden werden automatisch registriert. Nach der Registrierung können Aufrufe der Methode in eine LINQ-Abfrage zu Funktionsaufrufen in SQL übersetzt werden:
 
-``` csharp
+```csharp
 var query =
     from p in context.Posts
     where BloggingContext.PostReadCount(p.Id) > 5
@@ -143,7 +143,7 @@ Im Folgenden sollten Sie einige Aspekte berücksichtigen:
 
 In EF 6 war es möglich, die Code First-Konfiguration eines bestimmten Entitätstyps durch Ableitung von *EntityTypeConfiguration* zu kapseln. In EF Core 2.0 wird dieses Muster wieder eingeführt:
 
-``` csharp
+```csharp
 class CustomerConfiguration : IEntityTypeConfiguration<Customer>
 {
     public void Configure(EntityTypeBuilder<Customer> builder)
@@ -166,7 +166,7 @@ Das grundlegende Muster für die Verwendung von EF Core in einer ASP.NET Core-An
 
 In Version 2.0 stellen wir eine neue Möglichkeit vor, um benutzerdefinierte DbContext-Typen im Abhängigkeitsinjektionssystem zu registrieren, in dem transparent ein Pool von wiederverwendbaren DbContext-Instanzen eingeführt wird. Um DbContext-Pooling zu verwenden, verwenden Sie bei der Dienstregistrierung `AddDbContextPool` anstelle von `AddDbContext`:
 
-``` csharp
+```csharp
 services.AddDbContextPool<BloggingContext>(
     options => options.UseSqlServer(connectionString));
 ```
@@ -179,7 +179,7 @@ Dies ist konzeptionell vergleichbar mit der Funktionsweise des Verbindungspoolin
 
 Bei der neuen Methode werden einige Einschränkungen zu den Vorgängen in der `OnConfiguring()`-Methode des DbContext-Typs eingeführt.
 
-> [!WARNING]  
+> [!WARNING]
 > Verwenden Sie kein DbContext-Pooling, wenn Sie Ihren eigenen Zustand (z.B. private Felder) in Ihrer abgeleiteten DbContext-Klasse verwalten, da dieser nicht für alle Anforderungen genutzt werden sollte. EF Core setzt nur den Zustand zurück, der bekannt ist, bevor eine DbContext-Instanz zum Pool hinzugefügt wird.
 
 ### <a name="explicitly-compiled-queries"></a>Explizit kompilierte Abfragen
@@ -190,7 +190,7 @@ Manuell oder explizit kompilierte Abfrage-APIs waren in vorherigen EF-Versionen 
 
 Obwohl EF Core generell auch automatisch Abfragen basierend auf einer verschlüsselten Darstellung von Abfrageausdrücken kompilieren und zwischenspeichern kann, kann mithilfe dieses Mechanismus ein geringfügiger Leistungsgewinn erzielt werden, indem die Berechnung des Hashwerts sowie die Cachesuche umgangen werden. Dies ermöglicht die Verwendung einer bereits kompilierten Abfrage in der Anwendung durch Aufrufen eines Delegaten.
 
-``` csharp
+```csharp
 // Create an explicitly compiled query
 private static Func<CustomerContext, int, Customer> _customerById =
     EF.CompileQuery((CustomerContext db, int id) =>
@@ -227,7 +227,7 @@ Mit C# 6 wurde Zeichenfolgeninterpolation eingeführt, ein Feature, mit dem C#-A
 
 Im Folgenden ein Beispiel:
 
-``` csharp
+```csharp
 var city = "London";
 var contactTitle = "Sales Representative";
 
@@ -259,7 +259,7 @@ WHERE ""City"" = @p0
 
 Wir haben die EF.Functions-Eigenschaft hinzugefügt, mit denen EF Core oder Anbieter Methoden definieren können, die Datenbankfunktionen oder -operatoren zuordnen, sodass diese in LINQ-Abfragen aufgerufen werden können. Das erste Beispiel einer solchen Methode ist „Like()“:
 
-``` csharp
+```csharp
 var aCustomers =
     from c in context.Customers
     where EF.Functions.Like(c.Name, "a%")
@@ -276,7 +276,7 @@ In EF Core 2.0 wird ein neuer *IPluralizer*-Dienst eingeführt, mit dem Entität
 
 Im Folgenden wird gezeigt, wie es für einen Entwickler aussieht, wenn er seinen eigenen Pluralisierer als Hook integriert:
 
-``` csharp
+```csharp
 public class MyDesignTimeServices : IDesignTimeServices
 {
     public void ConfigureDesignTimeServices(IServiceCollection services)

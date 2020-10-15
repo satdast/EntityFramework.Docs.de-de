@@ -2,15 +2,14 @@
 title: 'Migrationsübersicht: EF Core'
 description: Übersicht über die Verwendung von Migrationen zum Verwalten von Datenbankschemas mit Entity Framework Core
 author: bricelam
-ms.author: bricelam
 ms.date: 05/06/2020
 uid: core/managing-schemas/migrations/index
-ms.openlocfilehash: f1197fb869c33c34672d20e9b727cd187c9c5601
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: eea2c32cccbb678cacaa63760c4f7d36d2d19bb1
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89619476"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92062281"
 ---
 # <a name="migrations-overview"></a>Migrationsübersicht
 
@@ -27,7 +26,7 @@ Der Rest dieser Seite ist eine schrittweise Anleitung für die Verwendung von Mi
 
 Angenommen, Sie haben ihre erste EF Core Anwendung abgeschlossen, die das folgende einfache Modell enthält:
 
-```c#
+```csharp
 public class Blog
 {
     public int Id { get; set; }
@@ -56,7 +55,7 @@ dotnet ef migrations add InitialCreate
 
 #### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
 
-``` powershell
+```powershell
 Add-Migration InitialCreate
 ```
 
@@ -75,7 +74,7 @@ dotnet ef database update
 ```
 #### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
 
-``` powershell
+```powershell
 Update-Database
 ```
 
@@ -87,7 +86,7 @@ Das ist alles: Ihre Anwendung ist bereit, mit Ihrer neuen Datenbank ausgeführt 
 
 Es sind einige Tage vergangen, und Sie werden gebeten, Ihren Blogs einen Zeitstempel für die Erstellung hinzuzufügen. Sie haben die erforderlichen Änderungen an Ihrer Anwendung vorgenommen, und Ihr Modell sieht jetzt so aus:
 
-```c#
+```csharp
 public class Blog
 {
     public int Id { get; set; }
@@ -106,7 +105,7 @@ dotnet ef migrations add AddBlogCreatedTimestamp
 
 #### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
 
-``` powershell
+```powershell
 Add-Migration AddBlogCreatedTimestamp
 ```
 
@@ -125,7 +124,7 @@ dotnet ef database update
 ```
 #### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
 
-``` powershell
+```powershell
 Update-Database
 ```
 

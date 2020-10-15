@@ -1,15 +1,15 @@
 ---
 title: Neue Features in Entity Framework Core 3.x (EF Core)
 description: Änderungen und Verbesserungen in Entity Framework Core 3.x
-author: divega
+author: ajcvickers
 ms.date: 09/05/2020
 uid: core/what-is-new/ef-core-3.x/index
-ms.openlocfilehash: d2c887640a9e24cef49fb469ef435d6b08937876
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: b987ca1fdbe46105162c1c7623822e15bd01ef25
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90072212"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92065627"
 ---
 # <a name="new-features-in-entity-framework-core-3x"></a>Neue Features in Entity Framework Core 3.x
 
@@ -34,7 +34,7 @@ Diese Art von clientseitiger Ausführung kann in einigen Situationen wünschensw
 
 Wenn beispielsweise EF Core 2.2 ein Prädikat in einem `Where()`-Aufruf nicht übersetzen konnte, wurde eine SQL-Anweisung ohne Filter ausgeführt, alle Zeilen aus der Datenbank wurden übertragen und dann im Arbeitsspeicher gefiltert:
 
-``` csharp
+```csharp
 var specialCustomers = context.Customers
     .Where(c => c.Name.StartsWith(n) && IsSpecialCustomer(c));
 ```
@@ -46,7 +46,7 @@ Wenn EF Core 3.x an einer anderen Stelle in der Abfrage Ausdrücke erkennt, die
 
 Um eine Prädikatbedingung auf dem Client wie im vorherigen Beispiel auszuwerten, müssen Entwickler jetzt die Auswertung der Abfrage explizit auf LINQ to Objects umstellen:
 
-``` csharp
+```csharp
 var specialCustomers = context.Customers
     .Where(c => c.Name.StartsWith(n))
     .AsEnumerable() // switches to LINQ to Objects
@@ -75,7 +75,7 @@ EF Core 3.x nutzt einige der [neuen Features in C# 8.0](/dotnet/csharp/whats-n
 
 Asynchrone Abfrageergebnisse werden jetzt mithilfe der neuen `IAsyncEnumerable<T>`-Standardschnittelle verfügbar gemacht und können mithilfe von `await foreach` konsumiert werden.
 
-``` csharp
+```csharp
 var orders =
     from o in context.Orders
     where o.Status == OrderStatus.Pending
@@ -95,7 +95,7 @@ Wenn diese neue Funktion in Ihrem Code aktiviert ist, prüft EF Core die NULL-Zu
 
 In der folgenden Klasse werden z. B. Eigenschaften mit dem Typ `string?` als optional konfiguriert, während `string` als erforderlich konfiguriert wird:
 
-``` csharp
+```csharp
 public class Customer
 {
     public int Id { get; set; }
@@ -115,7 +115,7 @@ Durch die neue Abfang-API in EF Core 3.x kann benutzerdefinierte Logik automati
 
 Zum Bearbeiten von Befehlstext können Sie beispielsweise `DbCommandInterceptor` erstellen:
 
-``` csharp
+```csharp
 public class HintCommandInterceptor : DbCommandInterceptor
 {
     public override InterceptionResult<DbDataReader> ReaderExecuting(
@@ -132,7 +132,7 @@ public class HintCommandInterceptor : DbCommandInterceptor
 
 Und bei  `DbContext` registrieren:
 
-``` csharp
+```csharp
 services.AddDbContext(b => b
     .UseSqlServer(connectionString)
     .AddInterceptors(new HintCommandInterceptor()));
@@ -151,7 +151,7 @@ dotnet ef dbcontext scaffold "Server=(localdb)\mssqllocaldb;Database=Blogging;Tr
 
 Das Tool erstellt dann automatisch einen Gerüsttyp für Ansichten und Tabellen ohne Schlüssel:
 
-``` csharp
+```csharp
 protected override void OnModelCreating(ModelBuilder modelBuilder)
 {
     modelBuilder.Entity<Names>(entity =>
@@ -173,7 +173,7 @@ Ab EF Core 3.x kann `Order` ohne `OrderDetails` und die Eigenschaften von `Orde
 
 Bei Abfragen von EF Core wird `OrderDetails` auf `null` festgelegt, wenn eine der erforderlichen Eigenschaften keinen Wert aufweist oder keine erforderlichen Eigenschaften außer dem primären Schlüssel vorhanden und alle Eigenschaften `null` sind.
 
-``` csharp
+```csharp
 public class Order
 {
     public int Id { get; set; }

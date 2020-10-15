@@ -4,12 +4,12 @@ description: Informationen zu unterstützten Plattformen in Entity Framework Cor
 author: bricelam
 ms.date: 06/26/2020
 uid: core/platforms/index
-ms.openlocfilehash: f57002af869c16eeedf931085f5e5ff9e72e2984
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 3efec5fda2aecf44306a9d41386de1e9b9612850
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89616656"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92063971"
 ---
 # <a name="net-implementations-supported-by-ef-core"></a>Von EF Core unterstützte .NET-Implementierungen
 
@@ -45,13 +45,13 @@ Die folgende Tabelle enthält Anweisungen zu den einzelnen .NET-Implementierunge
 
 Bearbeiten Sie die Projektdatei, und stellen Sie sicher, dass der folgende Eintrag in der initialen Eigenschaftengruppe angezeigt wird:
 
-``` xml
+```xml
 <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
 ```
 
 Achten Sie bei Testprojekten auch darauf, dass der folgende Eintrag vorhanden ist:
 
-``` xml
+```xml
 <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
 ```
 
@@ -59,7 +59,7 @@ Wenn Sie eine ältere Version von Visual Studio verwenden möchten, stellen Sie 
 
 Wir empfehlen außerdem die Migration des NuGet-Pakets „packages.config“ zu „PackageReference“, wenn möglich. Fügen Sie der Projektdatei die folgende Eigenschaft hinzu:
 
-``` xml
+```xml
 <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
 ```
 

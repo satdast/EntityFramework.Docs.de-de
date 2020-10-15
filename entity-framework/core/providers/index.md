@@ -4,12 +4,12 @@ description: Informationen zu bestimmten unterstützten Entity Framework Core-An
 author: ajcvickers
 ms.date: 12/17/2019
 uid: core/providers/index
-ms.openlocfilehash: 4a5490beccfb4d038f7dde04399ec3493941ac83
-ms.sourcegitcommit: c0e6a00b64c2dcd8acdc0fe6d1b47703405cdf09
+ms.openlocfilehash: 76acd8bbb833fa7c377cc90cdb67278130694bd1
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/24/2020
-ms.locfileid: "91210353"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92063997"
 ---
 # <a name="database-providers"></a>Datenbankanbieter
 
@@ -17,11 +17,11 @@ Entity Framework Core kann viele verschiedene Datenbanken über Plug-in-Biblioth
 
 ## <a name="current-providers"></a>Aktuelle Anbieter
 
-> [!IMPORTANT]  
+> [!IMPORTANT]
 > EF Core-Anbieter werden durch eine Vielzahl von Quellen erstellt. Nicht alle Anbieter werden im Rahmen des Entity [Entity Framework Core-Projekts](https://github.com/aspnet/EntityFrameworkCore) verwaltet. Wenn Sie einen Anbieter in Betracht ziehen, sollten Sie Aspekte wie Qualität, Lizenzierung und Support auswerten, um sicherzustellen, dass dieser Ihren Anforderungen entspricht. Lesen Sie außerdem in jedem Fall die ausführlichen Informationen zur Versionskompatibilität in der Dokumentation der einzelnen Anbieter.
 
-> [!IMPORTANT]  
-> EF Core-Anbieter können in der Regel für alle Nebenversionen verwendet werden, nicht jedoch für Hauptversionen. Ein für EF Core 2.1 veröffentlichter Anbieter sollte beispielsweise mit EF Core 2.2 funktionieren, kann jedoch nicht mit EF Core 3.0 verwendet werden. 
+> [!IMPORTANT]
+> EF Core-Anbieter können in der Regel für alle Nebenversionen verwendet werden, nicht jedoch für Hauptversionen. Ein für EF Core 2.1 veröffentlichter Anbieter sollte beispielsweise mit EF Core 2.2 funktionieren, kann jedoch nicht mit EF Core 3.0 verwendet werden.
 
 | NuGet-Paket                                                                                                                                                                         | Unterstützte Datenbank-Engines | Maintainer/Anbieter                                                           | Hinweise/Anforderungen     | Zielversion | Nützliche Links                                                                                                                                                                                       |
 |:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------------------|:------------------------------------------------------------------------------|:-------------------------|:------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -48,7 +48,6 @@ Entity Framework Core kann viele verschiedene Datenbanken über Plug-in-Biblioth
 | [Teradata.EntityFrameworkCore](https://www.nuget.org/packages/Teradata.EntityFrameworkCore/)                                                                                          | Teradata-Datenbank ab 16.10 | [Teradata](https://downloads.teradata.com/download/connectivity/net-data-provider-for-teradata) |   | 2.2               |[Website](https://www.nuget.org/packages/Teradata.EntityFrameworkCore/)                                                                                                                            |
 | [EntityFrameworkCore.FirebirdSql](https://www.nuget.org/packages/EntityFrameworkCore.FirebirdSql/)                                                                                    | Firebird 2.5 und 3.x       | [Rafael Almeida](https://github.com/ralmsdeveloper)                           |                          | 2.1               | [wiki](https://github.com/ralmsdeveloper/EntityFrameworkCore.FirebirdSQL/wiki)                                                                                                                     |
 | [EntityFrameworkCore.OpenEdge](https://www.nuget.org/packages/EntityFrameworkCore.OpenEdge/)                                                                                          | Progress OpenEdge          | [Alex Wiese](https://github.com/alexwiese)                                    |                          | 2.1               | [readme](https://github.com/alexwiese/EntityFrameworkCore.OpenEdge/blob/master/README.md)                                                                                                          |
-| [Pomelo.EntityFrameworkCore.MyCat](https://www.nuget.org/packages/Pomelo.EntityFrameworkCore.MyCat)                                                                                   | MyCAT-Server               | [Pomelo Foundation-Projekt](https://github.com/PomeloFoundation)              | Nur Vorabversion          | 1.1               | [readme](https://github.com/PomeloFoundation/Pomelo.EntityFrameworkCore.MyCat/blob/master/README.md)                                                                                               |
 
 ## <a name="adding-a-database-provider-to-your-application"></a>Hinzufügen eines Datenbankanbieters zu Ihrer Anwendung
 
@@ -62,7 +61,7 @@ dotnet add package provider_package_name
 
 ## <a name="visual-studio"></a>[Visual Studio](#tab/vs)
 
-``` powershell
+```powershell
 install-package provider_package_name
 ```
 
@@ -71,10 +70,10 @@ install-package provider_package_name
 Nach Abschluss der Installation konfigurieren Sie den Anbieter in `DbContext` entweder in der `OnConfiguring`-Methode oder in der `AddDbContext`-Methode, wenn Sie einen Abhängigkeitsinjektionscontainer verwenden.
 Die folgende Zeile konfiguriert z.B. den SQL Server-Anbieter mit der übergebenen Verbindungszeichenfolge:
 
-``` csharp
+```csharp
 optionsBuilder.UseSqlServer(
     "Server=(localdb)\mssqllocaldb;Database=MyDatabase;Trusted_Connection=True;");
-```  
+```
 
 Datenbankanbieter können EF Core erweitern, um datenbankspezifische Funktionen zu aktivieren.
 Einige Konzepte gelten für die meisten Datenbanken und sind im Leistungsumfang der primären EF Core-Komponenten inbegriffen.
@@ -84,7 +83,7 @@ Der SQL Server-Anbieter ermöglicht es Ihnen beispielsweise, [speicheroptimierte
 Andere Konzepte gelten speziell für eine Klasse von Anbietern.
 Beispielsweise bauen EF Core-Anbieter für relationale Datenbanken auf der gemeinsamen `Microsoft.EntityFrameworkCore.Relational`-Bibliothek auf, die u.a. APIs für die Konfiguration von Tabellen- und Spaltenzuordnungen und Fremdschlüsseleinschränkungen bereitstellt. Anbieter werden in der Regel als NuGet-Pakete verteilt.
 
-> [!IMPORTANT]  
+> [!IMPORTANT]
 > Eine neue veröffentlichte Patchversion von EF Core enthält häufig Updates für das `Microsoft.EntityFrameworkCore.Relational`-Paket.
 > Wenn Sie einen relationale Datenbankanbieter hinzufügen, wird dieses Paket zu einer transitiven Abhängigkeit Ihrer Anwendung.
 > Viele Anbieter werden jedoch unabhängig von EF Core veröffentlicht und können nicht dahingehend aktualisiert werden, dass sie von der neueren Patchversion dieses Pakets abhängen.

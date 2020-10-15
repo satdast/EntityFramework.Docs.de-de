@@ -1,15 +1,15 @@
 ---
 title: Erstellen und Konfigurieren eines Modells – EF Core
 description: Übersicht über das Erstellen und Konfigurieren eines Modells mit Entity Framework Core
-author: rowanmiller
+author: AndriySvyryd
 ms.date: 11/05/2019
 uid: core/modeling/index
-ms.openlocfilehash: 1380ed0c1af0fdd3ae24de311bea455cb57a7dcd
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 7f8ef17f33a294dc0b8cc9c4e514a8a29b761342
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90071419"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92063061"
 ---
 # <a name="creating-and-configuring-a-model"></a>Erstellen und Konfigurieren eines Modells
 

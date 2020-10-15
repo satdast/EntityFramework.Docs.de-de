@@ -3,14 +3,13 @@ title: Laden zugehöriger Daten – EF Core
 description: Verschiedene Strategien für das Laden verknüpfter Daten mit Entity Framework Core
 author: roji
 ms.date: 9/11/2020
-ms.assetid: f9fb64e2-6699-4d70-a773-592918c04c19
 uid: core/querying/related-data
-ms.openlocfilehash: 5c1addac6735de39d5c72f447d5d06280411a21e
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: a86cae91dbfbf5ebcf820c6afb72d812e278dc66
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90078850"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92063672"
 ---
 # <a name="loading-related-data"></a>Laden zugehöriger Daten
 
@@ -21,4 +20,4 @@ Mit Entity Framework Core können Sie die Navigationseigenschaften in Ihrem Mode
 * **[Lazy Loading](xref:core/querying/related-data/lazy)** bedeutet, dass die zugehörigen Daten bei Zugriff auf die Navigationseigenschaft transparent aus der Datenbank geladen werden.
 
 > [!TIP]
-> Sie können die [Beispiele](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Querying) in diesem Abschnitt auf GitHub anzeigen.
+> Sie können die [Beispiele](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Querying/RelatedData) in diesem Abschnitt auf GitHub anzeigen.

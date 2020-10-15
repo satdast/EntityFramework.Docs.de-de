@@ -1,15 +1,15 @@
 ---
 title: 'Designer-Vorlagen für die Codegenerierung: EF6'
 description: Designer-Vorlagen für die Codegenerierung in Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/modeling/designer/codegen/index
-ms.openlocfilehash: 4a8225d0186174ea2e2effbc1241389afcbe3921
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 9eb0a930d7b283e449f6b08c090c8483453de452
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90070197"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92066485"
 ---
 # <a name="designer-code-generation-templates"></a>Designer-Vorlagen für die Codegenerierung
 Bei der Erstellung eines Modells mit dem Entity Framework Designer werden die Klassen und der abgeleitete Kontext automatisch für Sie generiert. Zusätzlich zur Standardcodegenerierung bieten wir auch verschiedene Vorlagen, mit denen sich der generierte Code anpassen lässt. Diese Vorlagen werden als T4-Textvorlagen bereitgestellt und sind daher bei Bedarf anpassbar.
