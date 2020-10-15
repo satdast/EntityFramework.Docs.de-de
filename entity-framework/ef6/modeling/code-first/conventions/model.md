@@ -1,17 +1,17 @@
 ---
-title: Modellbasierte Konventionen EF6
-description: Modellbasierte Konventionen in Entity Framework 6
-author: divega
+title: Model-Based Konventionen-EF6
+description: Model-Based Konventionen in Entity Framework 6
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/modeling/code-first/conventions/model
-ms.openlocfilehash: bcb7a88f4d9fc994b51300ac30ec58671be370c8
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: c4978277ced72cc5c017af5f69b8760f316087d5
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90074002"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92066433"
 ---
-# <a name="model-based-conventions"></a>Modellbasierte Konventionen
+# <a name="model-based-conventions"></a>Model-Based Konventionen
 > [!NOTE]
 > **Nur EF6 und höher:** Die Features, APIs usw., die auf dieser Seite erläutert werden, wurden in Entity Framework 6 eingeführt. Wenn Sie eine frühere Version verwenden, gelten manche Informationen nicht.  
 

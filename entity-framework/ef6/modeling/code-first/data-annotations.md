@@ -1,15 +1,15 @@
 ---
 title: Code First Daten Anmerkungen-EF6
 description: Code First von Daten Anmerkungen in Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/modeling/code-first/data-annotations
-ms.openlocfilehash: dd91ddf674f2235190e50beb847e569a898ad59b
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: f6bf063ab99c5b7ef01993aec8fd6bdd06dd8f7d
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90074063"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92066472"
 ---
 # <a name="code-first-data-annotations"></a>Code First Data Annotations
 > [!NOTE]
@@ -370,7 +370,7 @@ Standardmäßig sind Indizes nicht eindeutig, Sie können jedoch den `IsUnique` 
     }
 ```
 
-### <a name="multiple-column-indexes"></a>Indizes mit mehreren Spalten
+### <a name="multiple-column-indexes"></a>Multiple-Column Indizes
 
 Indizes, die sich über mehrere Spalten erstrecken, werden mit dem gleichen Namen in mehreren Index Anmerkungen für eine bestimmte Tabelle angegeben. Wenn Sie mehrspaltige Indizes erstellen, müssen Sie eine Reihenfolge für die Spalten im Index angeben. Der folgende Code erstellt z. b. einen mehrspaltigen Index für `Rating` und den `BlogId` Namen " **IX \_ blogidandrating**". `BlogId` ist die erste Spalte im Index und `Rating` ist die zweite.
 

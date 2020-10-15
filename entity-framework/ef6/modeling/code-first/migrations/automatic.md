@@ -1,15 +1,15 @@
 ---
 title: Automatisches Code First-Migrationen-EF6
 description: Automatisches Code First-Migrationen in Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/modeling/code-first/migrations/automatic
-ms.openlocfilehash: e7bd9ff7d9dcecb7fecf213306047a53fc04135c
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 8152cdf642258a30d98f3750bf1ca4ccd2859978
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90072563"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92066407"
 ---
 # <a name="automatic-code-first-migrations"></a>Automatisches Code First-Migrationen
 Automatische Migrationen ermöglichen es Ihnen, Code First-Migrationen zu verwenden, ohne dass eine Codedatei in Ihrem Projekt für jede von Ihnen vornimmt. Nicht alle Änderungen können automatisch angewendet werden, z. b. für Spalten Umbenennungen ist die Verwendung einer Code basierten Migration erforderlich.
@@ -116,7 +116,7 @@ Code First-Migrationen verfügt über zwei primäre Befehle, die Sie im Folgende
 -   **Add-Migration** erstellt den Entwurf für die nächste Migration basierend auf Änderungen, die Sie seit dem Erstellen der letzten Migration an Ihrem Modell vorgenommen haben.
 -   **Update-Database** übernimmt alle ausstehenden Migrationen für die Datenbank.
 
-Wir werden die Verwendung der Add-Migration vermeiden (es sei denn, wir brauchen dies wirklich) und konzentrieren uns darauf, dass Code First-Migrationen die Änderungen automatisch berechnen und anwenden. Verwenden Sie " **Update-Database** ", um Code First-Migrationen, die Änderungen an unser Modell (die neue Eigenschaft " **Blog. ur**l") an die Datenbank zu überführen.
+Wir werden die Verwendung von Add-Migration vermeiden (es sei denn, wir brauchen dies wirklich) und konzentrieren uns darauf, dass Code First-Migrationen die Änderungen automatisch berechnen und anwenden können. Verwenden Sie " **Update-Database** ", um Code First-Migrationen, die Änderungen an unser Modell (die neue Eigenschaft " **Blog. ur**l") an die Datenbank zu überführen.
 
 -   Führen Sie den Befehl **Update-Database** in der Paket-Manager-Konsole aus.
 
@@ -164,7 +164,7 @@ Sehen wir uns nun an, wie wir eine Code basierte Migration für verwenden möcht
 ```
 
 Wir könnten einfach " **Update-Database** " ausführen, um diese Änderungen per Push in die Datenbank zu überführen. Allerdings fügen wir eine **Blogs. Rating** -Spalte hinzu, die keine NULL-Werte zulässt. Wenn in der Tabelle vorhandene Daten vorhanden sind, wird ihr die CLR-Standardeinstellung des Datentyps für die neue Spalte zugewiesen (die Bewertung ist Integer, d. h. **0**). Damit die vorhandenen Spalten der **Blogs**-Tabelle mit einem vernünftigen Rating-Wert beginnen, geben Sie den Standardwert **3** an.
-Verwenden Sie den Befehl "Add-Migration", um diese Änderung in eine Code basierte Migration zu schreiben, damit wir Sie bearbeiten können. Der Befehl " **Add-Migration** " ermöglicht es uns, diesen Migrationen einen Namen zu geben. wir nennen einfach "unsere **addblograting**".
+Verwenden Sie den Add-Migration-Befehl, um diese Änderung in eine Code basierte Migration zu schreiben, damit wir Sie bearbeiten können. Der Befehl " **Add-Migration** " ermöglicht es uns, diesen Migrationen einen Namen zu geben. wir nennen einfach "unsere **addblograting**".
 
 -   Führen Sie den Befehl **Add-Migration addblograting** in der Paket-Manager-Konsole aus.
 -   Im **Migrations** Ordner verfügen wir nun über eine neue Migration von **addblograting** . Der Dateiname der Migration ist mit einem Zeitstempel versehen, um die Reihenfolge zu unterstützen. Wir bearbeiten den generierten Code, um den Standardwert 3 für Blog. Rating (Zeile 10 im folgenden Code) anzugeben.
