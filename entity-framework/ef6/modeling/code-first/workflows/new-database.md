@@ -1,15 +1,15 @@
 ---
 title: Code First einer neuen Datenbank EF6
 description: Code First einer neuen Datenbank in Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/modeling/code-first/workflows/new-database
-ms.openlocfilehash: 96d76162383149c045178954196e1294331918a8
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 9d0082ac5226fff066d3e18c9164e2230c84b285
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90070366"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92065018"
 ---
 # <a name="code-first-to-a-new-database"></a>Code First to a New Database (Code First für eine neue Datenbank)
 Dieses Video und die schrittweise exemplarische Vorgehensweise bieten eine Einführung in Code First Entwicklung für eine neue Datenbank. Dieses Szenario umfasst das Ziel einer Datenbank, die nicht vorhanden ist und Code First erstellt wird, oder eine leere Datenbank, der Code First neue Tabellen hinzugefügt werden. Mit Code First können Sie das Modell mithilfe von C- \# oder VB.NET-Klassen definieren. Die zusätzliche Konfiguration kann optional mithilfe von Attributen in ihren Klassen und Eigenschaften oder mithilfe einer fließenden API ausgeführt werden.
@@ -238,7 +238,7 @@ public class Blog
 ```
 
 -   Führen Sie den Befehl **Add-Migration addurl** in der Paket-Manager-Konsole aus.
-    Der Befehl "Add-Migration" prüft seit der letzten Migration auf Änderungen und richtet eine neue Migration mit gefundenen Änderungen ein. Wir können Migrationen einen Namen übergeben. in diesem Fall rufen wir die Migration "addUrl" auf.
+    Der Add-Migration-Befehl überprüft seit der letzten Migration nach Änderungen und richtet eine neue Migration mit gefundenen Änderungen ein. Wir können Migrationen einen Namen übergeben. in diesem Fall rufen wir die Migration "addUrl" auf.
     Der Gerüst Code besagt, dass wir eine URL-Spalte, die Zeichen folgen Daten enthalten kann, zum dbo hinzufügen müssen. Blogs-Tabelle. Bei Bedarf könnten wir den gerüdierten Code bearbeiten, dies ist in diesem Fall jedoch nicht erforderlich.
 
 ``` csharp
@@ -263,7 +263,7 @@ namespace CodeFirstNewDatabaseSample.Migrations
 ```
 
 -   Führen Sie den Befehl **Update-Database** in der Paket-Manager-Konsole aus. Mit diesem Befehl werden alle ausstehenden Migrationen auf die Datenbank angewendet. Unsere InitialCreate-Migration wurde bereits angewendet, sodass bei der Migration nur die neue addurl-Migration angewendet wird.
-    Tipp: Sie können den Schalter " **– verbose** " verwenden, wenn Sie "Update-Database" aufrufen, um die SQL-Anweisung anzuzeigen, die für die Datenbank ausgeführt wird.
+    Tipp: Sie können den Schalter **– verbose** verwenden, wenn Sie Update-Database aufrufen, um die SQL-Anweisung anzuzeigen, die für die Datenbank ausgeführt wird.
 
 Die neue URL-Spalte wird nun der Tabelle Blogs in der-Datenbank hinzugefügt:
 

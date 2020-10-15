@@ -1,15 +1,15 @@
 ---
-title: Abfragen ohne Nachverfolgung EF6
-description: Keine nach Verfolgungs Abfragen in Entity Framework 6
-author: divega
+title: No-Tracking Abfragen-EF6
+description: No-Tracking Abfragen in Entity Framework 6
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/querying/no-tracking
-ms.openlocfilehash: ea4f05eb7a9b95fba55f70f249876bc9c5630f18
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 74826d3052cf6a249796db2845fa6b96e5ecb8f9
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90073898"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92065861"
 ---
 # <a name="no-tracking-queries"></a>Abfragen ohne Nachverfolgung
 In manchen Fällen möchten Sie Entitäten aus einer Abfrage zurückerhalten, aber diese Entitäten können nicht vom Kontext nachverfolgt werden. Dies kann zu einer besseren Leistung führen, wenn eine große Anzahl von Entitäten in schreibgeschützten Szenarien abgefragt wird. Die in diesem Thema dargestellten Techniken gelten jeweils für Modelle, die mit Code First und dem EF-Designer erstellt wurden.  

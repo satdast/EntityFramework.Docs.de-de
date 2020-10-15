@@ -1,15 +1,15 @@
 ---
 title: Aufteilung von Designer Entitäten-EF6
 description: Aufteilung von Designer Entitäten in Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/modeling/designer/entity-splitting
-ms.openlocfilehash: fa25629bae1a35b2d792e2b890e87db6c99c37ab
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 8fdb9037fc49045089016e6630316d05c8726ad8
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90073135"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92064899"
 ---
 # <a name="designer-entity-splitting"></a>Aufteilung von Designer Entitäten
 In dieser exemplarischen Vorgehensweise wird gezeigt, wie ein Entitätstyp zwei Tabellen zugeordnet wird, indem ein Modell mit dem Entity Framework Designer (EF-Designer) geändert wird. Sie können eine Entität mehreren Tabellen zuordnen, sofern für die Tabellen ein gemeinsamer Schlüssel vorhanden ist. Die Prinzipien, nach denen ein Entitätstyp zwei Tabellen zugeordnet wird, lassen sich leicht auf das Mapping zu mehr als zwei Tabellen erweitern.

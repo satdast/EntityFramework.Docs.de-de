@@ -1,15 +1,15 @@
 ---
 title: Datenbindung mit WinForms-EF6
 description: Datenbindung mit WinForms in Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/fundamentals/databinding/winforms
-ms.openlocfilehash: b316aea0a36edc8586a81427825ed4ee11fc9ef3
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: ef2f19831cd5ce8b1faefeb51f23faef4e167529
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90073226"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92065679"
 ---
 # <a name="databinding-with-winforms"></a>Datenbindung mit Windows Forms
 In dieser schrittweisen exemplarischen Vorgehensweise wird veranschaulicht, wie poco-Typen an Windows Forms-Steuerelemente (WinForms) in einem Master-Detail-Formular gebunden werden. Die Anwendung verwendet Entity Framework zum Auffüllen von Objekten mit Daten aus der Datenbank, zum Nachverfolgen von Änderungen und zum persistenten Speichern von Daten in der Datenbank.

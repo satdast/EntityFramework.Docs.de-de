@@ -1,15 +1,15 @@
 ---
 title: 'Portieren von EF6 auf EF Core: Portieren eines EDMX-basierten Modells'
 description: Spezifische Informationen zum Portieren einer EDMX-basierten Entity Framework 6-Modellanwendung zu Entity Framework Core
-author: rowanmiller
+author: ajcvickers
 ms.date: 10/27/2016
 uid: efcore-and-ef6/porting/port-edmx
-ms.openlocfilehash: 7bd832f459ae3893e6a90e8483c95a41ca13f9ab
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 27b37ad1c2e3436ae96a71bc97e953763c48ee50
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90070002"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92064262"
 ---
 # <a name="porting-an-ef6-edmx-based-model-to-ef-core"></a>Portieren eines EDMX-basierten EF6-Modells auf EF Core
 
@@ -25,13 +25,13 @@ Sie können jetzt die Reverse-Engineering-Funktion verwenden, um ein Modell auf 
 
 Führen Sie in der Paket-Manager-Konsole (Extras > NuGet-Paket-Manager > Paket-Manager-Konsole) den folgenden Befehl aus. Im Artikel zur [Paket-Manager-Konsole in Visual Studio](xref:core/miscellaneous/cli/powershell) finden Sie Befehlsoptionen für das Erstellen eines Gerüsts für eine Teilmenge von Tabellen oder anderen Komponenten.
 
-``` powershell
+```powershell
 Scaffold-DbContext "<connection string>" <database provider name>
 ```
 
 Hier sehen Sie z. B. den Befehl, um das Gerüst eines Modell aus der Blogging-Datenbank auf Ihrer SQL Server-LocalDB-Instanz zu erstellen.
 
-``` powershell
+```powershell
 Scaffold-DbContext "Server=(localdb)\mssqllocaldb;Database=Blogging;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer
 ```
 

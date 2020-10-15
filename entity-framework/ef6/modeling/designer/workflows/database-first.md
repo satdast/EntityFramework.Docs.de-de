@@ -1,15 +1,15 @@
 ---
 title: Database First-EF6
 description: Database First in Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/modeling/designer/workflows/database-first
-ms.openlocfilehash: 412d83b37ed5f3e2b863dca0913746e61ecdef76
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 4046144ff3f1ecb4a3c9e7d4cb5d6c462c3782c7
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90073174"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92066108"
 ---
 # <a name="database-first"></a>Database First
 Dieses Video und die schrittweise exemplarische Vorgehensweise bieten eine Einführung in die Database First Entwicklung mit Entity Framework. Mit Database First können Sie ein Modell aus einer vorhandenen Datenbank umkehren. Das Modell wird in einer EDMX-Datei (edmx-Erweiterung) gespeichert und kann in der Entity Framework Designer angezeigt und bearbeitet werden. Die Klassen, mit denen Sie in Ihrer Anwendung interagieren, werden automatisch aus der EDMX-Datei generiert.

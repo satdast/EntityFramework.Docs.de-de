@@ -1,15 +1,15 @@
 ---
 title: Fließende API mit VB.net-EF6
 description: Fließende API mit VB.net in Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/modeling/code-first/fluent/vb
-ms.openlocfilehash: d59e685578fb151aea2ae0b41a933f3e13de6c50
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 22c56285a0d2ae761931d62e07bd18c66ac474be
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90072576"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92065133"
 ---
 # <a name="fluent-api-with-vbnet"></a>Fließende API mit VB.net
 Mit Code First können Sie das Modell mithilfe von C- \# oder VB.NET-Klassen definieren. Die zusätzliche Konfiguration kann optional mithilfe von Attributen in ihren Klassen und Eigenschaften oder mithilfe einer fließenden API ausgeführt werden. Diese exemplarische Vorgehensweise veranschaulicht, wie Sie mithilfe von VB.net eine fließende API-Konfiguration ausführen.

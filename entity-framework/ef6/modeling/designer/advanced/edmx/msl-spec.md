@@ -1,15 +1,15 @@
 ---
 title: MSL-Spezifikation-EF6
 description: MSL-Spezifikation in Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/modeling/designer/advanced/edmx/msl-spec
-ms.openlocfilehash: 36527b9827a7576f73c9ef476462d9392b601984
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 0780a549d4cbb60bf84bbed927d52588e99148e1
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90070111"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92066342"
 ---
 # <a name="msl-specification"></a>MSL-Spezifikation
 Bei der Mapping-Spezifikationssprache (MSL) handelt es sich um eine XML-basierte Sprache, die die Zuordnung zwischen dem konzeptionellen Modell und dem Speichermodell einer Entity Framework Anwendung beschreibt.

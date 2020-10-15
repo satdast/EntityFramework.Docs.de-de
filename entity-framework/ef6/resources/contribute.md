@@ -1,14 +1,14 @@
 ---
 title: An Entity Framework-EF6 mitwirken
 description: An Entity Framework 6 mitwirken
-author: divega
+author: ajcvickers
 ms.date: 07/05/2018
-ms.openlocfilehash: 7043f911c5f01de33964e122c5f0a7f7e42049f2
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: d3b5207a7f06fb886325b7682b7984773a30189f
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90073833"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92064678"
 ---
 # <a name="contribute-to-entity-framework-6"></a>An Entity Framework 6 mitwirken
 Entity Framework 6 wird mit einem Open-Source-Modell auf GitHub entwickelt. Obwohl der Hauptschwerpunkt des Entity Framework Teams bei Microsoft darin besteht, neue Features zu Entity Framework Core hinzuzufügen, und wir nicht erwarten, dass Entity Framework 6 wichtige Features hinzugefügt werden, akzeptieren wir weiterhin Beiträge.

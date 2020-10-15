@@ -1,14 +1,14 @@
 ---
 title: Fallstudien für Entity Framework-EF6
 description: Fallstudien für Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
-ms.openlocfilehash: 342929f70aa09704c934bd1d89e177f6953bfc43
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: ca2315ac8aad8d28240f4bef6c962de0f63ac0df
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90073820"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92064665"
 ---
 # <a name="microsoft-case-studies-for-entity-framework"></a>Microsoft-Fallstudien für Entity Framework
 In den Fallstudien auf dieser Seite werden einige reale Produktionsprojekte hervorgehoben, die Entity Framework eingesetzt haben.
@@ -17,7 +17,7 @@ In den Fallstudien auf dieser Seite werden einige reale Produktionsprojekte herv
 
 ## <a name="epicor"></a>Epicor
 Epicor ist ein großes globales Softwareunternehmen (mit mehr als 400 Entwicklern), das ERP-Lösungen (Enterprise Resource Planning) für Unternehmen in mehr als 150 Ländern entwickelt.
-Das Hauptprodukt Epicor 9 basiert auf einer Dienst orientierten Architektur (SOA), die die .NET Framework verwendet.
+Das Hauptprodukt Epicor 9 basiert auf einer Service-Oriented-Architektur (SOA), die die .NET Framework verwendet.
 Im Vergleich zu zahlreichen Kundenanforderungen zur Unterstützung von LINQ (Language Integrated Query) und der Reduzierung der Last auf ihren Back-End-SQL-Servern entschied sich das Team für ein Upgrade auf Visual Studio 2010 und den .NET Framework 4,0.
 Mit dem Entity Framework 4,0 konnten diese Ziele erreichen und die Entwicklung und Wartung erheblich vereinfachen.
 Insbesondere die Rich T4-Unterstützung des Entity Framework ermöglichte es Ihnen, die vollständige Kontrolle über den generierten Code zu übernehmen und automatisch in Funktionen zum Speichern von Funktionen zu erstellen, wie z. b. vorkompilierte Abfragen und Caching.

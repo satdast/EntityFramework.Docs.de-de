@@ -1,15 +1,15 @@
 ---
 title: Datenbindung mit WPF-EF6
 description: Datenbindung mit WPF in Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 05/19/2020
 uid: ef6/fundamentals/databinding/wpf
-ms.openlocfilehash: 85aea308d89241f1da9633ef60f4bc8c3997561d
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: b6dc484d09340671dfcd841e34234d55e9808af2
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90072979"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92065653"
 ---
 # <a name="databinding-with-wpf"></a>Datenbindung mit WPF
 
@@ -257,7 +257,7 @@ Fügen Sie die Klassen, die im Modell definiert sind, als Datenquellen für dies
 - Das Fenster Datenquellen wird neben dem Fenster MainWindow. XAML geöffnet *, wenn das Fenster Datenquellen nicht angezeigt wird, wählen Sie **Ansicht- &gt; Weitere Windows- &gt; Datenquellen** * aus.
 - Klicken Sie auf das anheft Symbol, damit das Fenster Datenquellen nicht automatisch ausgeblendet wird. Sie müssen möglicherweise auf die Schaltfläche "Aktualisieren" klicken, wenn das Fenster bereits sichtbar war.
 
-    ![Projektmappen-Explorer](~/ef6/media/datasources.png)
+    ![Datenquellen](~/ef6/media/datasources.png)
 
 - Wählen Sie die **kategoriedatenquelle** aus, und ziehen Sie Sie auf das Formular.
 
@@ -400,6 +400,6 @@ Nach dem Aufrufe von " **SaveChanges ()**" von dbcontext werden die IDs mit den 
 
 ![Hauptfenster mit aufgefüllten IDs](~/ef6/media/screen2.png)
 
-## <a name="additional-resources"></a>Zusätzliche Ressourcen
+## <a name="additional-resources"></a>Weitere Ressourcen
 
 Weitere Informationen zur Datenbindung an Auflistungen mithilfe von WPF finden Sie in [diesem Thema](/dotnet/framework/wpf/data/data-binding-overview#binding-to-collections) in der WPF-Dokumentation.  

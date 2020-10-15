@@ -1,22 +1,22 @@
 ---
 title: Gespeicherte Prozeduren mit mehreren Resultsets EF6
 description: Gespeicherte Prozeduren mit mehreren Resultsets in Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/modeling/designer/advanced/multiple-result-sets
-ms.openlocfilehash: 6b213b944ca06a7ca141746d86f1127be2fd7d87
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 8c80e2b8c861a763b7f63ea2523194028498dace
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90070223"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92066277"
 ---
 # <a name="stored-procedures-with-multiple-result-sets"></a>Gespeicherte Prozeduren mit mehreren Resultsets
 Manchmal müssen Sie, wenn Sie gespeicherte Prozeduren verwenden, mehr als ein Resultset zurückgeben. Dieses Szenario wird häufig verwendet, um die Anzahl der Daten Bank Roundtrips zu reduzieren, die zum Verfassen eines einzelnen Bildschirms erforderlich sind.Vor EF5 konnte Entity Framework die gespeicherte Prozedur aufrufen, aber nur das erste Resultset an den aufrufenden Code zurückgeben.
 
 In diesem Artikel werden zwei Möglichkeiten für den Zugriff auf mehr als ein Resultset aus einer gespeicherten Prozedur in Entity Framework erläutert. Eine, die nur Code verwendet und sowohl mit Code First als auch mit dem EF-Designer und einem, der nur mit dem EF-Designer funktioniert, funktioniert. Die Tools und API-Unterstützung für diese sollte in zukünftigen Versionen von Entity Framework verbessert werden.
 
-## <a name="model"></a>Modellierung
+## <a name="model"></a>Modell
 
 In den Beispielen in diesem Artikel wird ein grundlegender Blog verwendet, bei dem ein Blog viele Beiträge enthält und ein Beitrag zu einem einzelnen Blog gehört. Wir verwenden eine gespeicherte Prozedur in der Datenbank, die alle Blogs und Beiträge wie folgt zurückgibt:
 

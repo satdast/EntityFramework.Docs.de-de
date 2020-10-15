@@ -1,14 +1,14 @@
 ---
 title: Entity Framework Designer Tastenkombinationen-EF6
 description: Entity Framework Designer Tastenkombinationen in Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
-ms.openlocfilehash: 3552f2b9bfc499654bc1dce4a81d37cacc8b7996
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 90589419a52a198747eadee740775e2761bc757c
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90073382"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92064886"
 ---
 # <a name="entity-framework-designer-keyboard-shortcuts"></a>Entity Framework Designer Tastenkombinationen
 Diese Seite enthält eine Liste der Tastenkombinationen, die in den verschiedenen Bildschirmen der Entity Framework Tools für Visual Studio verfügbar sind.
@@ -119,7 +119,7 @@ Diese Seite enthält eine Liste der Tastenkombinationen, die in den verschiedene
 |:--------------------------|:---------------|:--------------------------------------------------------------------------------------------------------------------------------------|
 | **Registerkarte**                   | Kontext wechseln | Wechselt zwischen dem Hauptfenster Bereich und der Symbolleiste auf der linken Seite.                                                                     |
 | **Pfeiltasten**            | Navigation     | Verschieben Sie Zeilen nach oben und nach unten oder nach rechts und Links über Spalten im Hauptfenster Bereich. Wechseln Sie zwischen den Schaltflächen in der Symbolleiste auf der linken Seite. |
-| **EINGABETASTE** <br/> **BRaum** | Auswählen         | Wählt in der Symbolleiste auf der linken Seite eine Schaltfläche aus.                                                                                          |
+| **EINGABETASTE** <br/> **BRaum** | Wählen Sie das         | Wählt in der Symbolleiste auf der linken Seite eine Schaltfläche aus.                                                                                          |
 | **Alt + nach-unten-Taste**      | Liste öffnen      | Dropdown Liste, wenn eine Zelle ausgewählt ist, die eine Dropdown Liste enthält.                                                                     |
 | **EINGABETASTE**                 | Liste auswählen    | Wählt ein Element in einer Dropdown Liste aus.                                                                                               |
 | **ESC**                   | Liste schließen     | Schließt eine Dropdown Liste.                                                                                                              |

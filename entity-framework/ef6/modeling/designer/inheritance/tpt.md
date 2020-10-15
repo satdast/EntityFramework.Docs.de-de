@@ -1,15 +1,15 @@
 ---
 title: Designer-TPT-Vererbung-EF6
 description: Designer-TPT-Vererbung in Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/modeling/designer/inheritance/tpt
-ms.openlocfilehash: e60965550db3f140dfebf4c1952b3901b9b00aab
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: f8e4198278fb44309916d57b44fb9af41d572108
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90073369"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92066173"
 ---
 # <a name="designer-tpt-inheritance"></a>Designer-TPT-Vererbung
 In dieser schrittweisen exemplarischen Vorgehensweise wird veranschaulicht, wie Sie die "Tabelle pro Typ"-Vererbung (TPT) in Ihrem Modell mithilfe der Entity Framework Designer (EF-Designer) implementieren. Bei der "Tabelle pro Typ"-Vererbung wird eine separate Tabelle in der Datenbank verwendet, um die Daten für nicht geerbte Eigenschaften und Schlüsseleigenschaften für jeden Typ in der Vererbungshierarchie zu verwalten.

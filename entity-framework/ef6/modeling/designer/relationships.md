@@ -1,15 +1,15 @@
 ---
 title: Beziehungen-EF-Designer-EF6
 description: 'Beziehungen: EF-Designer in Entity Framework 6'
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/modeling/designer/relationships
-ms.openlocfilehash: 65960dcfcafc239b5ecd8b396a52dababbb4ab08
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 0211eb1916a7372874f0b7812c512e6eeba0974f
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90073291"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92066134"
 ---
 # <a name="relationships---ef-designer"></a>Beziehungen: EF-Designer
 > [!NOTE]

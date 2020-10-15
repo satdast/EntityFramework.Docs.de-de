@@ -1,15 +1,15 @@
 ---
 title: Code First-Migrationen in Team Umgebungen-EF6
 description: Code First-Migrationen in Team Umgebungen in Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/modeling/code-first/migrations/teams
-ms.openlocfilehash: c3f12788f2aba85f54dc062bdb6a7919be47b56d
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: c617dc3c34e829585b21766c7738bd622890b286
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90072225"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92065081"
 ---
 # <a name="code-first-migrations-in-team-environments"></a>Code First Migrations in Team Environments (Code First-Migrationen in Teamumgebungen)
 > [!NOTE]
@@ -141,7 +141,7 @@ Der folgende Prozess kann für diese Vorgehensweise verwendet werden, beginnend 
 1.  Stellen Sie sicher, dass alle ausstehenden Modelländerungen in der lokalen Codebasis in eine Migration geschrieben wurden. Mit diesem Schritt wird sichergestellt, dass Sie keine legitimen Änderungen übersehen, wenn es an der Zeit ist, die leere Migration zu generieren.
 2.  Mit Quell Code Verwaltung synchronisieren.
 3.  Führen Sie **Update-Database** aus, um alle neuen Migrationen anzuwenden, die andere Entwickler eingecheckten.
-    **_Hinweis:_** *Wenn Sie keine Warnungen vom Update-Database-Befehl erhalten, gab es keine neuen Migrationen von anderen Entwicklern, und es besteht keine Notwendigkeit, eine weitere Zusammenführung auszuführen.*
+    **_Hinweis:_** *Wenn Sie keine Warnungen vom Update-Database Befehl erhalten, gab es keine neuen Migrationen von anderen Entwicklern, und es besteht keine Notwendigkeit, eine weitere Zusammenführung auszuführen.*
 4.  Ausführen von **Add-Migration &lt; Pick \_ a \_ Name &gt; – ignorechanges** (z. b. **Add-Migration Merge – ignorechanges**). Dadurch wird eine Migration mit allen Metadaten (einschließlich einer Momentaufnahme des aktuellen Modells) generiert, aber alle Änderungen, die erkannt werden, beim Vergleich des aktuellen Modells mit der Momentaufnahme in den letzten Migrationen werden ignoriert (was bedeutet, dass Sie eine leere **up** -und **down** -Methode erhalten).
 5.  Führen Sie **Update-Database** aus, um die neueste Migration mit den aktualisierten Metadaten erneut anzuwenden.
 6.  Setzen Sie die Entwicklung fort, oder übermitteln Sie die Quell Code Verwaltung (nachdem Sie die Komponententests natürlich ausgeführt haben).
@@ -163,7 +163,7 @@ Der folgende Prozess kann für diese Vorgehensweise verwendet werden, beginnend 
 1.  Stellen Sie sicher, dass alle ausstehenden Modelländerungen in der lokalen Codebasis in eine Migration geschrieben wurden. Mit diesem Schritt wird sichergestellt, dass Sie keine legitimen Änderungen übersehen, wenn es an der Zeit ist, die leere Migration zu generieren.
 2.  Synchronisierung mit der Quell Code Verwaltung.
 3.  Führen Sie **Update-Database** aus, um alle neuen Migrationen anzuwenden, die andere Entwickler eingecheckten.
-    **_Hinweis:_** *Wenn Sie keine Warnungen vom Update-Database-Befehl erhalten, gab es keine neuen Migrationen von anderen Entwicklern, und es besteht keine Notwendigkeit, eine weitere Zusammenführung auszuführen.*
+    **_Hinweis:_** *Wenn Sie keine Warnungen vom Update-Database Befehl erhalten, gab es keine neuen Migrationen von anderen Entwicklern, und es besteht keine Notwendigkeit, eine weitere Zusammenführung auszuführen.*
 4.  Führen Sie **Update-Database – targetmigration &lt; zweite \_ Letzte \_ Migration &gt; ** aus (in dem Beispiel, das folgt, wäre " **Update-Database" – targetmigration addrating**). Dadurch wird die Datenbank wieder in den Zustand der zweiten letzten Migration versetzt – wodurch die letzte Migration von der Datenbank deaktiviert wird.
     **_Hinweis:_** *dieser Schritt ist erforderlich, damit die Metadaten der Migration sicher bearbeitet werden können, da die Metadaten auch in der \_ \_ migrationshistorytable der Datenbank gespeichert werden. Aus diesem Grund sollten Sie diese Option nur verwenden, wenn die letzte Migration nur in der lokalen Codebasis erfolgt. Wenn die letzte Migration für andere Datenbanken angewendet wurde, müssten Sie auch ein Rollback durchführen und die letzte Migration erneut anwenden, um die Metadaten zu aktualisieren.* 
 5.  Führen **Sie den vollständigen Namen der Add-Migration &lt; \_ \_ einschließlich \_ Zeitstempel \_ der \_ letzten \_ Migration aus** &gt; (in dem Beispiel, das folgt, wie etwa **Add-Migration 201311062215252- \_ adressader**).

@@ -1,15 +1,15 @@
 ---
 title: Zurücksetzen von ObjectContext in Entity Framework Designer-EF6
 description: Zurücksetzen von ObjectContext in Entity Framework Designer in Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/modeling/designer/codegen/legacy-objectcontext
-ms.openlocfilehash: 9ceb8ef43e4df083fe3cc5e63862ba2eb338f659
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 563c1defd12a72836a158d9c2398202c421dd6f3
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90069963"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92064938"
 ---
 # <a name="reverting-to-objectcontext-in-entity-framework-designer"></a>Zurücksetzen auf ObjectContext in Entity Framework Designer
 Mit einer früheren Version von Entity Framework ein mit dem EF-Designer erstelltes Modell einen Kontext generieren, der von ObjectContext und Entitäts Klassen abgeleitet wurde, die von EntityObject abgeleitet wurden.
@@ -30,7 +30,7 @@ Wenn Sie VB.NET verwenden, müssen Sie die Schaltfläche **alle Dateien anzeigen
 
 ![Alle Dateien anzeigen](~/ef6/media/showallfiles.png)
 
-### <a name="2-re-enable-objectcontext-code-generation"></a>2. Erneutes Aktivieren der ObjectContext-Code Generierung
+### <a name="2-re-enable-objectcontext-code-generation"></a>2. Re-Enable ObjectContext-Code Generierung
 
 Öffnen Sie das Modell im EF-Designer, klicken Sie mit der rechten Maustaste auf einen leeren Bereich der Entwurfs Oberfläche, und wählen Sie **Eigenschaften**aus.
 

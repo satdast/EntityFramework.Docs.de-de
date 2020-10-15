@@ -1,15 +1,15 @@
 ---
 title: 'Portieren von EF6 auf EF Core: Portieren eines codebasierten Modells'
 description: Spezifische Informationen zum Portieren einer codebasierten Entity Framework 6-Modellanwendung zu Entity Framework Core
-author: rowanmiller
+author: ajcvickers
 ms.date: 10/27/2016
 uid: efcore-and-ef6/porting/port-code
-ms.openlocfilehash: a5bbdc2ee95ea6bea96e24bee4588b524e0ffc58
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 819c3bc0eba140c023cdcd5038a4cd63c300ed4c
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90073577"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92064223"
 ---
 # <a name="porting-an-ef6-code-based-model-to-ef-core"></a>Portieren eines codebasierten EF6-Modells auf EF Core
 
@@ -33,7 +33,7 @@ Wie unter [Portieren von EF 6 nach EF Core](xref:efcore-and-ef6/porting/index) b
 
 In den meisten EF6-Anwendungen wird die Verbindungszeichenfolge in der Anwendungsdatei `App/Web.config` gespeichert. In EF Core wird diese Verbindungszeichenfolge mit der `ConfigurationManager`-API gelesen. Möglicherweise müssen Sie einen Verweis auf die Frameworkassembly `System.Configuration` hinzufügen, damit diese API verwendet werden kann.
 
-``` csharp
+```csharp
 public class BloggingContext : DbContext
 {
     public DbSet<Blog> Blogs { get; set; }

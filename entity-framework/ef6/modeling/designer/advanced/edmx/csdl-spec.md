@@ -1,15 +1,15 @@
 ---
 title: CSDL-Spezifikation-EF6
 description: CSDL-Spezifikation in Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/modeling/designer/advanced/edmx/csdl-spec
-ms.openlocfilehash: a4abfcd6438ca92fff4448844e0812060b1ae029
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 9fdd8fc5ed16f7ba7d11e79a9449f120f5d579c2
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90070405"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92066355"
 ---
 # <a name="csdl-specification"></a>CSDL-Spezifikation
 Die konzeptionelle Schemadefinitionssprache (CSDL) ist eine XML-basierte Sprache, die die Entitäten, Beziehungen und Funktionen beschreibt, die ein konzeptionelles Modell einer datengesteuerten Anwendung bilden. Dieses konzeptionelle Modell kann von der Entity Framework oder WCF Data Services verwendet werden. Die Metadaten, die mit CSDL beschrieben werden, werden vom-Entity Framework verwendet, um Entitäten und Beziehungen, die in einem konzeptionellen Modell definiert sind, einer-Datenquelle zuzuordnen. Weitere Informationen finden Sie unter [SSDL-Spezifikation](xref:ef6/modeling/designer/advanced/edmx/ssdl-spec) und [MSL-Spezifikation](xref:ef6/modeling/designer/advanced/edmx/msl-spec).
@@ -955,7 +955,7 @@ In der folgenden Tabelle werden die Attribute beschrieben, die auf das **Navigat
 | Attributname   | Ist erforderlich | Wert                                                                                                                                                                                                                                            |
 |:-----------------|:------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Name**         | Ja         | Der Name der Navigationseigenschaft.                                                                                                                                                                                                             |
-| **Beziehung** | Ja         | Der Name einer Zuordnung, die sich innerhalb des Bereichs des Modells befindet.                                                                                                                                                                                |
+| **Relationship** | Ja         | Der Name einer Zuordnung, die sich innerhalb des Bereichs des Modells befindet.                                                                                                                                                                                |
 | **ToRole**       | Ja         | Das Ende der Zuordnung, an dem die Navigation endet. Der Wert des Attributs " **Tor** " muss mit dem Wert eines der **Rollen** Attribute übereinstimmen, die für eine der Zuordnungs enden definiert sind (definiert im AssociationEnd-Element).       |
 | **FromRole**     | Ja         | Das Ende der Zuordnung, an dem die Navigation beginnt. Der Wert des **FromRole** -Attributs muss mit dem Wert eines der **Rollen** Attribute übereinstimmen, die für eine der Zuordnungs enden definiert sind (definiert im AssociationEnd-Element). |
 
@@ -1216,7 +1216,7 @@ In der folgenden Tabelle werden die Attribute beschrieben, die auf das **Propert
 
 | Attributname                                                         | Ist erforderlich | Wert                                                                                                                                                                                                                           |
 |:-----------------------------------------------------------------------|:------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Name**                                                               | Ja         | Den Namen der Eigenschaft.                                                                                                                                                                                                       |
+| **Name**                                                               | Ja         | Der Name der Eigenschaft.                                                                                                                                                                                                       |
 | **Typ**                                                               | Ja         | Der Typ des Eigenschaftswerts. Der Typ des Eigenschaftswerts muss ein **EDMSimpleType** oder ein komplexer Typ sein (erkennbar am vollqualifizierten Namen), der im Gültigkeitsbereich des Modells liegt.                                                 |
 | **NULL zulassen**                                                           | Nein          | **True** (Standardwert) oder <strong>False</strong> abhängig davon, ob die Eigenschaft einen NULL-Wert haben kann. <br/> [!NOTE]                                                                                                   |
 | > in CSDL v1 muss eine komplexe Typeigenschaft über verfügen `Nullable="False"` . |             |                                                                                                                                                                                                                                 |
@@ -1293,7 +1293,7 @@ In der folgenden Tabelle werden die Attribute beschrieben, die auf das **Propert
 
 | Attributname                                                     | Ist erforderlich | Wert                                                                                                                                                                                                                           |
 |:-------------------------------------------------------------------|:------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Name**                                                           | Ja         | Den Namen der Eigenschaft.                                                                                                                                                                                                       |
+| **Name**                                                           | Ja         | Der Name der Eigenschaft.                                                                                                                                                                                                       |
 | **Typ**                                                           | Ja         | Der Typ des Eigenschaftswerts.                                                                                                                                                                                                 |
 | **NULL zulassen**                                                       | Nein          | **True** (Standardwert) oder **False** abhängig davon, ob die Eigenschaft einen NULL-Wert haben kann. <br/> [!NOTE]                                                                                                                |
 | > in CSDL v1 muss eine komplexe Typeigenschaft über verfügen `Nullable="False"` . |             |                                                                                                                                                                                                                                 |
@@ -1655,7 +1655,7 @@ Das **Schema** Element kann NULL oder mehr der folgenden untergeordneten Element
 -   EnumType
 -   Zuordnung
 -   ComplexType
--   Funktion
+-   Aufgabe
 
 Ein **Schema** Element kann NULL oder ein Element mit Anmerkungen enthalten.
 
@@ -2009,7 +2009,7 @@ Die konzeptionelle Schema Definitions Sprache (CSDL) unterstützt einen Satz abs
 
 In der nachfolgenden Tabelle werden die von CSDL unterstützten primitiven Datentypen aufgeführt. In der Tabelle werden auch die Facetten aufgelistet, die auf jeden **edmsimpletype**angewendet werden können.
 
-| EDMSimpleType                    | BESCHREIBUNG                                                | Anwendbare Facets                                                        |
+| EDMSimpleType                    | Beschreibung                                                | Anwendbare Facets                                                        |
 |:---------------------------------|:-----------------------------------------------------------|:-------------------------------------------------------------------------|
 | **Edm.Binary**                   | Enthält Binärdaten.                                      | MaxLength, FixedLength, Nullable, Default                                |
 | **Edm.Boolean**                  | Enthält den Wert **true** oder **false**.                  | Nullable, Default                                                        |
@@ -2056,7 +2056,7 @@ In der folgenden Tabelle werden die in CSDL unterstützten Facets beschrieben. A
 > [!NOTE]
 > Informationen zu Datentypen in einem konzeptionellen Modell finden Sie unter konzeptionelle Modelltypen (CSDL).
 
-| Facet               | BESCHREIBUNG                                                                                                                                                                                                                                                   | Anwendungsbereich                                                                                                                                                                                                                                                                                                                                                                           | Wird für die Datenbankgenerierung verwendet | Wird von der Laufzeit verwendet |
+| Facet               | Beschreibung                                                                                                                                                                                                                                                   | Gilt für:                                                                                                                                                                                                                                                                                                                                                                           | Wird für die Datenbankgenerierung verwendet | Wird von der Laufzeit verwendet |
 |:--------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------------------------|:--------------------|
 | **Sortierung**       | Gibt die bei Vergleich- und Sortiervorgängen zu verwendende Sortierreihenfolge für die Werte der Eigenschaft an.                                                                                                               | **Edm.String**                                                                                                                                                                                                                                                                                                                                                                       | Ja                              | Nein                  |
 | **ConcurrencyMode** | Gibt an, dass der Eigenschaftswert für Prüfungen der vollständigen Parallelität verwendet werden soll.                                                                                                                                                                    | Alle **edmsimpletype** -Eigenschaften                                                                                                                                                                                                                                                                                                                                                     | Nein                               | Ja                 |

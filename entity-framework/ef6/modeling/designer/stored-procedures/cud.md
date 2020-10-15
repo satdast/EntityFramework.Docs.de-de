@@ -1,15 +1,15 @@
 ---
 title: Gespeicherte Prozeduren für Designer-CUD-EF6
 description: Gespeicherte Designer-CUD-Prozeduren in Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/modeling/designer/stored-procedures/cud
-ms.openlocfilehash: fae795922980452cf062a62e3cbb47de49b49c74
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 167504d3abbd156f426c481c410a1953bc047de4
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90073213"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92066121"
 ---
 # <a name="designer-cud-stored-procedures"></a>Designer-CUD-Prozeduren
 

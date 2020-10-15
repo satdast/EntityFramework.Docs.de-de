@@ -1,15 +1,15 @@
 ---
 title: Entity Framework Glossar-EF6
 description: Entity Framework 6-Glossar
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/resources/glossary
-ms.openlocfilehash: 819bdda133b427fa6f8fc1915cde07560e6ca568
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 6c11b45978ad8efaf70bb640567c79b60ff7a708
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90072888"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92064652"
 ---
 # <a name="entity-framework-glossary"></a>Entity Framework Glossar
 ## <a name="code-first"></a>Code First
@@ -61,7 +61,7 @@ Erstellen eines Entity Framework Modells mit dem EF-Designer, das dann verwendet
 Eine Eigenschaft einer Entität, die auf eine andere Entität verweist. Das Produkt enthält z. b. eine Kategorie-Navigations Eigenschaft, und die Kategorie enthält eine Eigenschaft für die PRODUKTNAVIGATION.
 
 ## <a name="poco"></a>POCO
-Das Akronym für das Plain Old CLR-Objekt. Eine einfache Benutzerklasse, die über keine Abhängigkeiten mit einem Framework verfügt. Im Kontext von EF ist eine Entitäts Klasse, die nicht von EntityObject abgeleitet wird, beliebige Schnittstellen implementiert oder alle in EF definierten Attribute enthält. Solche Entitäts Klassen, die vom Persistenzframework entkoppelt werden, werden auch als "Persistenz ignorierend" bezeichnet.  
+Das Akronym für Plain-Old CLR-Objekt. Eine einfache Benutzerklasse, die über keine Abhängigkeiten mit einem Framework verfügt. Im Kontext von EF ist eine Entitäts Klasse, die nicht von EntityObject abgeleitet wird, beliebige Schnittstellen implementiert oder alle in EF definierten Attribute enthält. Solche Entitäts Klassen, die vom Persistenzframework entkoppelt werden, werden auch als "Persistenz ignorierend" bezeichnet.  
 
 ## <a name="relationship-inverse"></a>Beziehung umgekehrt
 Das gegenüberliegende Ende einer Beziehung, z. b. Product. Kategorie und Kategorie. Product.

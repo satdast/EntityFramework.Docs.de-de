@@ -1,14 +1,14 @@
 ---
 title: Auswählen Entity Framework Lauf Zeit Version für EF-Designer-Modelle EF6
 description: Auswählen Entity Framework Lauf Zeit Version für EF-Designer-Modelle in Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
-ms.openlocfilehash: 2025ca5e46c7d9a38ba596d57c023a2c1b224129
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: dcd06ed9585028b3a318d867b03980254979a32f
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90073265"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92066095"
 ---
 # <a name="selecting-entity-framework-runtime-version-for-ef-designer-models"></a>Auswählen Entity Framework Lauf Zeit Version für EF-Designer-Modelle
 > [!NOTE]
@@ -27,7 +27,7 @@ EF6 wird deaktiviert, wenn Sie bereits eine ältere Version von EF installiert h
 1.  Klicken Sie in Projektmappen-Explorer mit der rechten Maustaste auf das Projekt, und wählen Sie **nuget-Pakete verwalten aus.**
 2.  **Updates** auswählen
 3.  Wählen Sie **EntityFramework** aus (stellen Sie sicher, dass es auf die gewünschte Version aktualisiert wird).
-4.  Klicken Sie auf **Aktualisieren**
+4.  Klicken Sie auf **Aktualisieren**.
 
  
 

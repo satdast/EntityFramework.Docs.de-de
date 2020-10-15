@@ -1,15 +1,15 @@
 ---
 title: Fließende Eigenschaften und Typen für die API-Konfiguration und-Zuordnung EF6
 description: Fließende Eigenschaften und Typen der API-Konfiguration und-Zuordnung in Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/modeling/code-first/fluent/types-and-properties
-ms.openlocfilehash: ddd56ff280b72adbfd2247a4f1a85e37bf2f4879
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 821672bcb797314c96189443ace7f875a79c8582
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90072589"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92065146"
 ---
 # <a name="fluent-api---configuring-and-mapping-properties-and-types"></a>Fließende Eigenschaften und Typen für die API-Konfiguration und-Zuordnung
 Beim Arbeiten mit Entity Framework Code First das Standardverhalten das Zuordnen Ihrer poco-Klassen zu Tabellen mithilfe eines Satzes von Konventionen, die in EF gebacken werden. Manchmal ist es jedoch nicht möglich, diese Konventionen einzuhalten, und die Entitäten müssen einem anderen als dem von den Konventionen vorgegeben werden.  
@@ -18,7 +18,7 @@ Es gibt zwei Hauptmethoden zum Konfigurieren von EF, um etwas anderes als Konven
 
 Der Zugriff auf die Code First-fließend-API wird am häufigsten durch Überschreiben der [onmodelcreating](https://msdn.microsoft.com/library/system.data.entity.dbcontext.onmodelcreating.aspx) -Methode für den abgeleiteten [dbcontext](https://msdn.microsoft.com/library/system.data.entity.dbcontext.aspx)erreicht. Die folgenden Beispiele veranschaulichen, wie verschiedene Aufgaben mit der fließend-API ausgeführt werden können und wie Sie den Code kopieren und an Ihr Modell anpassen können. Wenn Sie sehen möchten, wie das Modell, mit dem Sie arbeiten können, unverändert verwendet werden kann, wird es am Ende dieses Artikels bereitgestellt.  
 
-## <a name="model-wide-settings"></a>Modell weite Einstellungen  
+## <a name="model-wide-settings"></a>Model-Wide Einstellungen  
 
 ### <a name="default-schema-ef6-onwards"></a>Standard Schema (EF6 oder höher)  
 

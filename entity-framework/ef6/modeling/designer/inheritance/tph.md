@@ -1,15 +1,15 @@
 ---
 title: Designer-TPH-Vererbung-EF6
 description: Designer-TPH-Vererbung in Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/modeling/designer/inheritance/tph
-ms.openlocfilehash: 39675f9533dfef0ddad1867e3b70cd13b30708ea
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: bf689e02a76e46e5eee5a64cb9825e667c8cd65c
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90073395"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92064847"
 ---
 # <a name="designer-tph-inheritance"></a>Designer-TPH-Vererbung
 Diese schrittweise exemplarische Vorgehensweise veranschaulicht, wie Sie die "Tabelle pro Hierarchie"-Vererbung (TPH) im konzeptionellen Modell mit dem Entity Framework Designer (EF-Designer) implementieren. Die TPH-Vererbung verwendet eine Datenbanktabelle, um Daten für alle Entitäts Typen in einer Vererbungs Hierarchie zu verwalten.

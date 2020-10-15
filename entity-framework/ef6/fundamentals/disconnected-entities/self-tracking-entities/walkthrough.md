@@ -1,17 +1,17 @@
 ---
-title: Exemplarische Vorgehensweise für Entitäten mit selbst Nachverfolgung EF6
+title: 'Exemplarische Vorgehensweise zu Self-Tracking Entitäten: EF6'
 description: Exemplarische Vorgehensweise für Entitäten mit selbst Nachverfolgung für Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/fundamentals/disconnected-entities/self-tracking-entities/walkthrough
-ms.openlocfilehash: 398be11d330f5a7413f5a84424217ea3eda446ef
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 7c50bbc9fad10a474728b03e79b685c549cf675d
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90072797"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92065601"
 ---
-# <a name="self-tracking-entities-walkthrough"></a>Exemplarische Vorgehensweise zur Self-Tracking
+# <a name="self-tracking-entities-walkthrough"></a>Exemplarische Vorgehensweise zu Self-Tracking Entities
 > [!IMPORTANT]
 > Es wird nicht mehr empfohlen, die Vorlage für Entitäten mit Selbstnachverfolgung zu verwenden. Die Vorlage ist nur für die Unterstützung vorhandener Anwendungen weiterhin verfügbar. Wenn für Ihre Anwendung die Arbeit mit getrennten Diagrammen von Entitäten erforderlich ist, sollten Sie daher Alternativen erwägen, wie z.B. [nachverfolgbare Entitäten](https://trackableentities.github.io/). Diese Technologie ähnelt den Entitäten mit Selbstnachverfolgung und wird von der Community aktiver entwickelt. Alternativ dazu können Sie auch benutzerdefinierten Code mithilfe von APIs auf niedriger Ebene zur Änderungsnachverfolgung schreiben.
 
@@ -23,7 +23,7 @@ Diese exemplarische Vorgehensweise umfasst die folgenden Aktionen:
 
 -   Erstellt eine Datenbank, auf die zugegriffen werden soll.
 -   Erstellt eine Klassenbibliothek, die das Modell enthält.
--   Vertauscht zur Vorlage für Entitäts-Generator mit selbst Nachverfolgung.
+-   Tauscht die Vorlage für den Self-Tracking Entity Generator aus.
 -   Verschiebt die Entitäts Klassen in ein separates Projekt.
 -   Erstellt einen WCF-Dienst, der Vorgänge zum Abfragen und Speichern von Entitäten verfügbar macht.
 -   Erstellt Client Anwendungen (Konsole und WPF), die den-Dienst nutzen.
@@ -104,7 +104,7 @@ Im EF-Designer erstellen wir nun ein einfaches Modell für den Zugriff auf unser
 
 ## <a name="swap-to-ste-code-generation"></a>An ste-Code Generierung austauschen
 
-Nun müssen wir die Standard Codegenerierung deaktivieren und in Entitäten mit selbst Nachverfolgung wechseln.
+Nun müssen Sie die Standard Codegenerierung und den Austausch in Self-Tracking Entitäten deaktivieren.
 
 ### <a name="if-you-are-using-visual-studio-2012"></a>Wenn Sie Visual Studio 2012 verwenden
 
@@ -118,13 +118,13 @@ Nun müssen wir die Standard Codegenerierung deaktivieren und in Entitäten mit 
 ### <a name="if-you-are-using-visual-studio-2010"></a>Wenn Sie Visual Studio 2010 verwenden
 
 -   Klicken Sie mit der rechten Maustaste auf einen leeren Bereich auf der EF-Designer Oberfläche, und wählen Sie **Code Generierungs Element hinzufügen aus.**
--   Wählen Sie im linken Bereich **Code** und dann **ADO.net Entitäts-Generator mit selbst Nachverfolgung** aus.
+-   Wählen Sie im linken Bereich **Code** aus, und klicken Sie dann auf **ADO.net Self-Tracking Entity Generator**
 -   Geben Sie **stetemplate** als Name ein, und klicken Sie auf **Hinzufügen**
 -   Die Dateien **STETemplate.tt** und **STETemplate.Context.tt** werden direkt dem Projekt hinzugefügt.
 
 ## <a name="move-entity-types-into-separate-project"></a>Verschieben von Entitäts Typen in ein separates Projekt
 
-Zur Verwendung von Entitäten mit selbst Nachverfolgung benötigt unsere Client Anwendung Zugriff auf die Entitäts Klassen, die aus dem Modell generiert werden. Da wir das gesamte Modell nicht für die Client Anwendung verfügbar machen möchten, verschieben wir die Entitäts Klassen in ein separates Projekt.
+Um Self-Tracking Entitäten verwenden zu können, benötigt unsere Client Anwendung Zugriff auf die vom Modell generierten Entitäts Klassen. Da wir das gesamte Modell nicht für die Client Anwendung verfügbar machen möchten, verschieben wir die Entitäts Klassen in ein separates Projekt.
 
 Im ersten Schritt wird das Erstellen von Entitäts Klassen im vorhandenen Projekt beendet:
 

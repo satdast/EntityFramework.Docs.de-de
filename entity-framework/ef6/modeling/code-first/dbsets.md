@@ -1,15 +1,15 @@
 ---
 title: Definieren von dbsets-EF6
 description: Definieren von dbsets in Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/modeling/code-first/dbsets
-ms.openlocfilehash: 49ffe3ddb8cd4f7c414d7d45d108405b88a0115e
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: dc5ad7f8b4ba32454c702f354b37223007e856e3
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90073950"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92065224"
 ---
 # <a name="defining-dbsets"></a>Definieren von dbsets
 Wenn Sie mit dem Code First-Workflow entwickeln, definieren Sie einen abgeleiteten dbcontext, der Ihre Sitzung mit der Datenbank repräsentiert und ein dbset für jeden Typ im Modell verfügbar macht. In diesem Thema werden die verschiedenen Möglichkeiten beschrieben, wie Sie die dbset-Eigenschaften definieren können.  
