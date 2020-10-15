@@ -2,15 +2,14 @@
 title: Getrennte Entitäten – EF Core
 description: Kontextinstanzenübergreifendes Arbeiten mit getrennten, nicht nachverfolgten Entitäten in Entity Framework Core
 author: ajcvickers
-ms.author: avickers
 ms.date: 10/27/2016
 uid: core/saving/disconnected-entities
-ms.openlocfilehash: d9b6d2d2c0761dd6f670ba51f935c866e10460b7
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: f21cc71ef11ee4ef37618a68d5a5219e8174bf8b
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90070886"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92063568"
 ---
 # <a name="disconnected-entities"></a>Getrennte Entitäten
 
@@ -73,9 +72,6 @@ Wenn die Entität automatisch generierte Schlüsselwerte verwendet, kann die Upd
 [!code-csharp[Main](../../../samples/core/Saving/Disconnected/Sample.cs#InsertOrUpdateSingleEntity)]
 
 Die Update-Methode markiert die Entität normalerweise für das Update, nicht für die Einfügung. Wenn die Entität über einen automatisch generierten Schlüssel verfügt und kein Schlüsselwert festgelegt wurde, wird die Entität jedoch stattdessen für eine Einfügung markiert.
-
-> [!TIP]  
-> Dieses Verhalten wurde in EF Core 2.0 eingeführt. Bei früheren Releases muss immer explizit die Add- oder die Update-Methode ausgewählt werden.
 
 Wenn die Entität keine automatisch generierten Schlüssel verwendet, muss die Anwendung entscheiden, ob die Entität eingefügt oder aktualisiert werden sollte. Beispiel:
 

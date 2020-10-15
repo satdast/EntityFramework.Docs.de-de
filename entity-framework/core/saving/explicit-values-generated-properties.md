@@ -1,15 +1,15 @@
 ---
 title: 'Festlegen expliziter Werte für generierte Eigenschaften: EF Core'
 description: Informationen zum Festlegen expliziter Werte für Eigenschaften, die als mit Entity Framework Core generiert konfiguriert wurden
-author: rowanmiller
+author: ajcvickers
 ms.date: 10/27/2016
 uid: core/saving/explicit-values-generated-properties
-ms.openlocfilehash: efaa87356a78c4ec7e11d57c1effad776bd01cba
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: b3a31d8139b244bec72347cf20600b6c2b65c7d2
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90072485"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92062996"
 ---
 # <a name="setting-explicit-values-for-generated-properties"></a>Festlegen expliziter Werte für generierte Eigenschaften
 
@@ -17,7 +17,7 @@ Eine generierte Eigenschaft ist eine Eigenschaft, deren Wert (über EF oder die 
 
 Es gibt möglicherweise Situationen, in denen Sie einen expliziten Wert für einen generierten Wert festlegen möchten, anstatt einen zu generieren.
 
-> [!TIP]  
+> [!TIP]
 > Das in diesem Artikel verwendete [Beispiel](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Saving/ExplicitValuesGenerateProperties/) finden Sie auf GitHub.
 
 ## <a name="the-model"></a>Die Model-Komponente
@@ -41,7 +41,7 @@ Der folgende Code fügt zwei Mitarbeiter in die Datenbank ein.
 
 Die Ausgabe zeigt, dass die Datenbank einen Wert für den ersten Mitarbeiter generiert hat und der explizite Wert für den zweiten Mitarbeiter verwendet wurde.
 
-``` Console
+```output
 1: John Doe, 1/26/2017 12:00:00 AM
 2: Jane Doe, 1/1/2000 12:00:00 AM
 ```
@@ -52,14 +52,14 @@ Gemäß der Konvention ist die Eigenschaft `Employee.EmployeeId` eine im Speiche
 
 In den meisten Fällen funktioniert der oben gezeigte Ansatz für Schlüsseleigenschaften. Zum Einfügen expliziter Werte in eine `IDENTITY`-Spalte von SQL Server müssen Sie jedoch `IDENTITY_INSERT` manuell aktivieren, bevor Sie `SaveChanges()` aufrufen.
 
-> [!NOTE]  
+> [!NOTE]
 > Die Automatisierung dieses Vorgangs im SQL Server-Anbieter ist eine [Featureanforderung](https://github.com/aspnet/EntityFramework/issues/703), die sich im Backlog befindet.
 
 [!code-csharp[Main](../../../samples/core/Saving/ExplicitValuesGenerateProperties/Sample.cs#EmployeeId)]
 
 Die Ausgabe zeigt an, dass die angegebenen IDs in der Datenbank gespeichert wurden.
 
-``` Console
+```output
 100: John Doe
 101: Jane Doe
 ```
@@ -70,11 +70,8 @@ Die Eigenschaft `Employee.LastPayRaise` ist so konfiguriert, dass ihre Werte wä
 
 [!code-csharp[Main](../../../samples/core/Saving/ExplicitValuesGenerateProperties/EmployeeContext.cs#LastPayRaise)]
 
-> [!NOTE]  
+> [!NOTE]
 > EF Core löst standardmäßig eine Ausnahme aus, wenn Sie versuchen einen expliziten Wert für eine Eigenschaft zu speichern, die so konfiguriert ist, dass er während des Updates generiert wird. Sie können dies umgehen, indem Sie wie oben gezeigt `AfterSaveBehavior` in der Metadaten-API festlegen.
-
-> [!NOTE]  
-> **Änderungen in EF Core 2.0:** In vorherigen Releases wurde das Verhalten nach dem Speichern durch das Flag `IsReadOnlyAfterSave` gesteuert. Das Flag ist veraltet und wurde durch `AfterSaveBehavior` ersetzt.
 
 Außerdem gibt es in der Datenbank einen Trigger zum Generieren von Werten für die `LastPayRaise`-Spalte während `UPDATE`-Vorgängen.
 
@@ -89,7 +86,7 @@ Im folgenden Code wird das Gehalt von zwei Mitarbeitern in der Datenbank erhöht
 
 Die Ausgabe zeigt, dass die Datenbank einen Wert für den ersten Mitarbeiter generiert hat und der explizite Wert für den zweiten Mitarbeiter verwendet wurde.
 
-``` Console
+```output
 1: John Doe, 1/26/2017 12:00:00 AM
 2: Jane Doe, 1/19/2017 12:00:00 AM
 ```

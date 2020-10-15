@@ -4,12 +4,12 @@ description: Explizites Laden zugehöriger Daten mit Entity Framework Core
 author: roji
 ms.date: 9/8/2020
 uid: core/querying/related-data/explicit
-ms.openlocfilehash: def1c8c2736c64bc6f39af0d344fd1330f8a06f5
-ms.sourcegitcommit: c0e6a00b64c2dcd8acdc0fe6d1b47703405cdf09
+ms.openlocfilehash: 0cfc4b5304d81d5a58497857474804946d3f85d7
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/24/2020
-ms.locfileid: "91210453"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92065718"
 ---
 # <a name="explicit-loading-of-related-data"></a>Explizites Laden zugehöriger Daten
 
@@ -17,7 +17,7 @@ ms.locfileid: "91210453"
 
 Sie können eine Navigationseigenschaft über die API `DbContext.Entry(...)` explizit laden.
 
-[!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Sample.cs#Eager)]
+[!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Program.cs#Eager)]
 
 Sie können eine Navigationseigenschaft auch explizit laden, indem Sie eine separate Abfrage ausführen, die die zugehörigen Entitäten zurückgibt. Wenn die Änderungsnachverfolgung aktiviert ist, legt EF Core, wenn eine Abfrage eine Entität materialisiert, die Navigationseigenschaften der neu geladenen Entität automatisch so fest, dass diese auf bereits geladene Entitäten verweisen, und die Navigationseigenschaften der bereits geladenen Entitäten so, dass diese auf die neu geladene Entität verweisen.
 
@@ -27,8 +27,8 @@ Sie können auch eine LINQ-Abfrage abrufen, welche die Inhalte einer Navigations
 
 Damit können Sie zusätzliche Operatoren auf die Abfrage anwenden. Beispielsweise können Sie einen Aggregatoperator auf die verknüpften Entitäten anwenden, ohne diese in den Arbeitsspeicher zu laden.
 
-[!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Sample.cs#NavQueryAggregate)]
+[!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Program.cs#NavQueryAggregate)]
 
 Darüber hinaus können Sie filtern, welche zugehörigen Entitäten in den Speicher geladen werden.
 
-[!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Sample.cs#NavQueryFiltered)]
+[!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Program.cs#NavQueryFiltered)]

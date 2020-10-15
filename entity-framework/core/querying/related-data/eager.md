@@ -4,12 +4,12 @@ description: Eager Loading zugehöriger Daten mit Entity Framework Core
 author: roji
 ms.date: 9/8/2020
 uid: core/querying/related-data/eager
-ms.openlocfilehash: 5ac15a85b28f21588639f34cbaa9ef76f366f7b5
-ms.sourcegitcommit: c0e6a00b64c2dcd8acdc0fe6d1b47703405cdf09
+ms.openlocfilehash: 97ec45a0f8bfecce4d4a59e5d1c36c0268d96052
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/24/2020
-ms.locfileid: "91210466"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92062575"
 ---
 # <a name="eager-loading-of-related-data"></a>Eager Loading zugehöriger Daten
 
@@ -17,32 +17,32 @@ ms.locfileid: "91210466"
 
 Sie können mit der `Include`-Methode zugehörige Daten angeben, die in den Abfrageergebnissen enthalten sein sollen. Im folgenden Beispiel weisen die in den Ergebnissen zurückgegebenen Blogs ihre `Posts`-Eigenschaft auf, die mit den zugehörigen Beiträgen aufgefüllt wurden.
 
-[!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Sample.cs#SingleInclude)]
+[!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Program.cs#SingleInclude)]
 
 > [!TIP]
 > Entity Framework Core korrigiert automatisch Navigationseigenschaften zur Korrektur für alle anderen Entitäten, die zuvor in die Kontextinstanz geladen wurden. Auch wenn Sie die Daten für eine Navigationseigenschaft nicht explizit eingeschlossen haben, kann die Eigenschaft folglich immer noch aufgefüllt werden, wenn einige oder alle zugehörigen Entitäten zuvor geladen wurden.
 
 Sie können zugehörigen Daten aus mehreren Beziehungen in einer einzelnen Abfrage einschließen.
 
-[!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Sample.cs#MultipleIncludes)]
+[!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Program.cs#MultipleIncludes)]
 
 ## <a name="including-multiple-levels"></a>Einschließen mehrerer Ebenen
 
 Sie können mit der `ThenInclude`-Methode einen Drilldown für Beziehungen ausführen, um mehrere Ebenen zugehöriger Daten einzuschließen. Im folgenden Beispiel werden sämtliche Blogs, die zugehörigen Beiträge und die Autoren der einzelnen Beiträge geladen.
 
-[!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Sample.cs#SingleThenInclude)]
+[!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Program.cs#SingleThenInclude)]
 
 Sie können mehrere Aufrufe mit `ThenInclude` verbinden, um mit dem Einschließen weiterer Ebenen zugehöriger Daten fortzufahren.
 
-[!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Sample.cs#MultipleThenIncludes)]
+[!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Program.cs#MultipleThenIncludes)]
 
 Sie können alle diese Aufrufe kombinieren, um eine gemeinsame Abfrage für verknüpfte Daten aus mehreren Ebenen und Stämmen auszuführen.
 
-[!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Sample.cs#IncludeTree)]
+[!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Program.cs#IncludeTree)]
 
 Für eine der Entitäten, die eingeschlossen wird, sollten Sie mehrere zugehörige Entitäten einschließen. Beispiel: Beim Abfragen von `Blogs` schließen Sie `Posts` ein und möchten anschließend `Author` und `Tags` von `Posts` einschließen. Hierzu müssen Sie die einzelnen Include-Pfade beginnend beim Stamm angeben. Beispiel: `Blog -> Posts -> Author` und `Blog -> Posts -> Tags`. Dies bedeutet nicht, dass Sie redundante Verknüpfungen erhalten. In den meisten Fällen kombiniert EF die Verknüpfungen beim Generieren von SQL-Code.
 
-[!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Sample.cs#MultipleLeafIncludes)]
+[!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Program.cs#MultipleLeafIncludes)]
 
 ## <a name="single-and-split-queries"></a>Einzelne und geteilte Abfragen
 
@@ -66,7 +66,7 @@ Wenn ein typischer Blog mehrere zugehörige Beiträge enthält, duplizieren die 
 
 In EF können Sie angeben, dass eine bestimmte LINQ-Abfrage in auf mehrere SQL-Abfragen *aufgeteilt* werden soll. Anstelle von JOINs führen aufgeteilte Abfragen eine zusätzliche SQL-Abfrage für jede enthaltene 1:n-Navigation durch:
 
-[!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Sample.cs?name=AsSplitQuery&highlight=5)]
+[!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Program.cs?name=AsSplitQuery&highlight=5)]
 
 Dabei wird der folgende SQL-Code erzeugt:
 
@@ -92,7 +92,7 @@ Sie können auch geteilte Abfragen als Standardeinstellung für den Kontext Ihre
 
 Wenn geteilte Abfragen als Standardeinstellung konfiguriert werden, ist es dennoch möglich, bestimmte Abfragen so zu konfigurieren, dass sie als einzelne Abfragen ausgeführt werden:
 
-[!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Sample.cs?name=AsSingleQuery&highlight=5)]
+[!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Program.cs?name=AsSingleQuery&highlight=5)]
 
 Wenn der Abfrageteilungsmodus nicht explizit festgelegt ist, weder global noch für die Abfrage, und EF Core erkennt, dass eine einzelne Abfrage mehrere Include-Vorgänge für Sammlungen lädt, wird eine Warnung ausgegeben, um auf die möglichen daraus resultierenden Leistungsprobleme hinzuweisen. Das Festlegen des Abfragemodus auf SingleQuery führt dazu, dass diese Warnung nicht generiert wird.
 
@@ -117,15 +117,15 @@ Folgende Vorgänge werden unterstützt: `Where`, `OrderBy`, `OrderByDescending`,
 
 Solche Vorgänge sollten auf die Sammlungsnavigation in der Lambdafunktion angewendet werden, die an die Include-Methode übergeben wird, wie im folgenden Beispiel gezeigt:
 
-[!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Sample.cs#FilteredInclude)]
+[!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Program.cs#FilteredInclude)]
 
 Jede per „Include“ eingeschlossene Navigation ermöglicht nur einen eindeutigen Satz von Filtervorgängen. In Fällen, in denen mehrere Include-Vorgänge für eine bestimmte Sammlungsnavigation angewendet werden (`blog.Posts` in den folgenden Beispielen), können Filtervorgänge nur für einen von ihnen angegeben werden:
 
-[!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Sample.cs#MultipleLeafIncludesFiltered1)]
+[!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Program.cs#MultipleLeafIncludesFiltered1)]
 
 Alternativ können identische Vorgänge für jede Navigation angewendet werden, die mehrmals über „Include“ eingeschlossen wird:
 
-[!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Sample.cs#MultipleLeafIncludesFiltered2)]
+[!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Program.cs#MultipleLeafIncludesFiltered2)]
 
 > [!CAUTION]
 > Bei der Nachverfolgung von Abfragen können aufgrund einer [Navigationskorrektur](xref:core/querying/tracking) unerwartete Ergebnisse für gefilterte Include-Abfragen auftreten. Alle relevanten Entitäten, die zuvor abgefragt und in der Änderungsnachverfolgung gespeichert wurden, werden in den Ergebnissen der gefilterten Include-Abfrage angezeigt, auch wenn sie die Anforderungen des Filters nicht erfüllen. Verwenden Sie `NoTracking`-Abfragen, oder erstellen Sie DbContext neu, wenn Sie gefilterte Include-Abfragen in diesen Situationen nutzen.
@@ -196,4 +196,3 @@ Inhalte der `School`-Navigation für alle Personen, die Studenten sind, können 
   ```csharp
   context.People.Include("School").ToList()
   ```
-  

@@ -1,15 +1,15 @@
 ---
 title: 'EF Core: Upgrade für frühere Versionen auf EF Core 2'
 description: In diesem Artikel finden Sie Anweisungen und Hinweise zum Durchführen eines Upgrades auf Entity Framework Core 2.0.
-author: divega
+author: ajcvickers
 ms.date: 08/13/2017
 uid: core/what-is-new/ef-core-2.0/upgrade
-ms.openlocfilehash: bdc0cfe8c0be4a83f8c78ba2ac66bb1e18cea0f7
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: c7c736629209da99f191ceb0d4000d19f40414b9
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90072342"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92063438"
 ---
 # <a name="upgrading-applications-from-previous-versions-to-ef-core-20"></a>Durchführen eines Upgrades für Anwendungen mit früheren Versionen auf EF Core 2.0
 
@@ -37,7 +37,7 @@ Das empfohlene Muster für ASP.NET Core-Webanwendungen wurde für Version 2.0 s
 
 Zur Standardvorlage von ASP.NET Core 2.0 wurde ein neues Entwurfszeithook hinzugefügt. Die statische `Program.BuildWebHost`-Methode ermöglicht EF Core zur Entwurfszeit den Zugriff auf den Dienstanbieter der Anwendung. Wenn Sie ein Upgrade für eine ASP.NET Core 1.x-Anwendung durchführen, müssen Sie die `Program`-Klasse aktualisieren, damit sie der folgenden ähnelt.
 
-``` csharp
+```csharp
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 
@@ -108,13 +108,13 @@ Außerdem wurden IDs von „Microsoft.EntityFrameworkCore.Infrastructure“ in d
 
 EF Core 2.0 erstellt nun eine andere [IModel](/dotnet/api/microsoft.entityframeworkcore.metadata.imodel)-Klasse für die verschiedenen verwendeten Anbieter. Dies geschieht in der Regel auf eine für die Anwendung transparente Weise. Dies hat eine Vereinfachung der untergeordneten Metadaten-APIs ermöglicht, sodass Zugriffe auf _gemeinsame relationale Metadatenkonzepte_ immer durch Aufrufen von `.Relational` statt `.SqlServer`, `.Sqlite` usw. erfolgen. Beispielsweise sollte der folgende 1.1.x-Code:
 
-``` csharp
+```csharp
 var tableName = context.Model.FindEntityType(typeof(User)).SqlServer().TableName;
 ```
 
 nun wie folgt geschrieben werden:
 
-``` csharp
+```csharp
 var tableName = context.Model.FindEntityType(typeof(User)).Relational().TableName;
 ```
 
@@ -137,7 +137,7 @@ Aufrufe von `AddEntityFramework`, `AddEntityFrameworkSqlServer` und so weiter si
 
 Die globale unbenannte In-Memory-Datenbank wurde entfernt, stattdessen müssen nun alle In-Memory-Datenbanken benannt werden. Beispiel:
 
-``` csharp
+```csharp
 optionsBuilder.UseInMemoryDatabase("MyDatabase");
 ```
 
@@ -161,7 +161,7 @@ Dies wird in die Entwurfszeitpakete für Anbieter weitergeleitet. Diese Pakete (
 
 Zum Aktivieren von `Scaffold-DbContext` oder `dotnet ef dbcontext scaffold` in EF Core 2.0 müssen Sie lediglich auf ein einzelnes Anbieterpaket verweisen:
 
-``` xml
+```xml
 <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer"
     Version="2.0.0" />
 <PackageReference Include="Microsoft.EntityFrameworkCore.Tools"

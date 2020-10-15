@@ -1,15 +1,15 @@
 ---
 title: Neue Features in EF Core 2.2 – EF Core
 description: Änderungen und Verbesserungen in Entity Framework Core 2.2
-author: divega
+author: ajcvickers
 ms.date: 11/14/2018
 uid: core/what-is-new/ef-core-2.2
-ms.openlocfilehash: 68e3cbd5c7345330a47f1457c9b096fee5dd49e9
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: ca71c7479254b25fe932e6abf43fe0fd8f1781b3
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90072328"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92065692"
 ---
 # <a name="new-features-in-ef-core-22"></a>Neue Features in EF Core 2.2
 
@@ -27,7 +27,7 @@ Räumliche Typen können direkt mit dem [EF Core-In-Memory-Anbieter](xref:core/p
 
 Wenn die Anbietererweiterung installiert ist, können Sie Ihren Entitäten Eigenschaften der unterstützten Typen hinzufügen. Beispiel:
 
-``` csharp
+```csharp
 using NetTopologySuite.Geometries;
 
 namespace MyApp
@@ -36,7 +36,7 @@ namespace MyApp
   {
     [Key]
     public string Name { get; set; }
-  
+
     [Required]
     public Point Location { get; set; }
   }
@@ -45,7 +45,7 @@ namespace MyApp
 
 Dann können Entitäten neben räumlichen Daten bestehen:
 
-``` csharp
+```csharp
 using (var context = new MyDbContext())
 {
     context.Add(
@@ -60,11 +60,11 @@ using (var context = new MyDbContext())
 
 Außerdem können Sie Datenbankabfragen auf Grundlage von räumlichen Daten und Vorgängen ausführen:
 
-``` csharp
-  var nearestFriends =
-      (from f in context.Friends
-      orderby f.Location.Distance(myLocation) descending
-      select f).Take(5).ToList();
+```csharp
+var nearestFriends =
+    (from f in context.Friends
+    orderby f.Location.Distance(myLocation) descending
+    select f).Take(5).ToList();
 ```
 
 Weitere Informationen zu diesem Feature finden Sie in der [Dokumentation über räumliche Typen](xref:core/modeling/spatial).
@@ -85,7 +85,7 @@ Für dokumentorientierte Datenbanken planen wir jedoch eine Schachtelung nicht e
 
 Sie können die Funktion verwenden, indem Sie die neue OwnsMany()-API aufrufen:
 
-``` csharp
+```csharp
 modelBuilder.Entity<Customer>().OwnsMany(c => c.Addresses);
 ```
 
@@ -98,16 +98,16 @@ Diese Funktion vereinfacht das Korrelieren zwischen LINQ-Abfragen im Code und ge
 Kommentieren Sie eine LINQ-Abfrage mit der neuen TagWith()-Methode, um Abfragetags zu verwenden.
 So sieht die Verwendung der Abfrage nach räumlichen Daten aus einem vorherigen Beispiel aus:
 
-``` csharp
-  var nearestFriends =
-      (from f in context.Friends.TagWith(@"This is my spatial query!")
-      orderby f.Location.Distance(myLocation) descending
-      select f).Take(5).ToList();
+```csharp
+var nearestFriends =
+    (from f in context.Friends.TagWith(@"This is my spatial query!")
+    orderby f.Location.Distance(myLocation) descending
+    select f).Take(5).ToList();
 ```
 
 Diese LINQ-Abfrage erzeugt die folgende SQL-Ausgabe:
 
-``` sql
+```sql
 -- This is my spatial query!
 
 SELECT TOP(@__p_1) [f].[Name], [f].[Location]

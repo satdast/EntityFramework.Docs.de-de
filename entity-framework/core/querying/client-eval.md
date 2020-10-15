@@ -4,12 +4,12 @@ description: Auswertung von Abfragen mit Entity Framework Core auf dem Client un
 author: smitpatel
 ms.date: 10/03/2019
 uid: core/querying/client-eval
-ms.openlocfilehash: 41be7da26423f50017f57a7686f65bd8baf69ef5
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: f2e80541439de8cc824c182e52400f730dd2af48
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90071172"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92062710"
 ---
 # <a name="client-vs-server-evaluation"></a>Clientauswertung im Vergleich zur Serverauswertung
 
@@ -19,21 +19,21 @@ Im Allgemeinen versucht Entity Framework Core, eine Abfrage auf dem Server mögl
 > Vor Version 3.0 hat Entity Framework Core die Clientauswertung überall in der Abfrage unterstützt. Weitere Informationen finden Sie im [Abschnitt zu vorherigen Versionen](#previous-versions).
 
 > [!TIP]
-> Das in diesem Artikel verwendete [Beispiel](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Querying) finden Sie auf GitHub.
+> Das in diesem Artikel verwendete [Beispiel](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Querying/ClientEvaluation) finden Sie auf GitHub.
 
 ## <a name="client-evaluation-in-the-top-level-projection"></a>Clientauswertung in der Projektion auf oberster Ebene
 
 Im folgenden Beispiel wird eine Hilfsmethode verwendet, um URLs für Blogs zu standardisieren, die von einer SQL Server-Datenbank zurückgegeben werden. Da der SQL Server-Anbieter keinen Einblick darin hat, wie diese Methode implementiert wird, kann sie nicht in SQL übersetzt werden. Alle anderen Aspekte der Abfrage werden in der Datenbank ausgewertet. Die Rückgabe der `URL` über diese Methode erfolgt jedoch über den Client.
 
-[!code-csharp[Main](../../../samples/core/Querying/ClientEval/Sample.cs#ClientProjection)]
+[!code-csharp[Main](../../../samples/core/Querying/ClientEvaluation/Program.cs#ClientProjection)]
 
-[!code-csharp[Main](../../../samples/core/Querying/ClientEval/Sample.cs#ClientMethod)]
+[!code-csharp[Main](../../../samples/core/Querying/ClientEvaluation/Program.cs#ClientMethod)]
 
 ## <a name="unsupported-client-evaluation"></a>Nicht unterstützte Clientauswertung
 
 Obwohl die Clientauswertung nützlich ist, kann sie manchmal zu Leistungseinbußen führen. Betrachten Sie die folgende Abfrage, in der die Hilfsmethode nun in einem Where-Filter verwendet wird. Da der Filter nicht in der Datenbank angewendet werden kann, müssen alle Daten in den Arbeitsspeicher gepullt werden, um den Filter auf den Client anzuwenden. Basierend auf dem Filter und der Menge der Daten auf dem Server, könnte die Clientauswertung zu Leistungseinbußen führen. Daher blockiert Entity Framework Core diese Clientauswertung und löst eine Laufzeitausnahme aus.
 
-[!code-csharp[Main](../../../samples/core/Querying/ClientEval/Sample.cs#ClientWhere)]
+[!code-csharp[Main](../../../samples/core/Querying/ClientEvaluation/Program.cs#ClientWhere)]
 
 ## <a name="explicit-client-evaluation"></a>Explizite Clientauswertung
 
@@ -44,7 +44,7 @@ In bestimmten Fällen müssen Sie die Clientauswertung explizit erzwingen, zum B
 
 In solchen Fällen können Sie die Clientauswertung explizit aktivieren, indem Sie Methoden wie `AsEnumerable` oder `ToList` (`AsAsyncEnumerable` oder `ToListAsync` bei asynchronen Abfragen) aufrufen. Wenn Sie `AsEnumerable` verwenden, würden Sie die Ergebnisse streamen. Wenn Sie jedoch `ToList` verwenden, würde eine Pufferung verursacht werden, indem eine Liste erstellt wird, was ebenfalls zusätzlichen Arbeitsspeicher erfordert. Wenn Sie jedoch mehrere Aufzählungen durchführen, ist das Speichern der Ergebnisse in einer Liste hilfreicher, da die Datenbank nur einmal abgefragt wird. Abhängig von der jeweiligen Nutzung sollten Sie auswerten, welche Methode sich am besten eignet.
 
-[!code-csharp[Main](../../../samples/core/Querying/ClientEval/Sample.cs#ExplicitClientEval)]
+[!code-csharp[Main](../../../samples/core/Querying/ClientEvaluation/Program.cs#ExplicitClientEvaluation)]
 
 ## <a name="potential-memory-leak-in-client-evaluation"></a>Potenzieller Arbeitsspeicherverlust bei der Clientauswertung
 

@@ -1,15 +1,15 @@
 ---
 title: 'Grundlegender Speichervorgang: EF Core'
 description: Grundlegende Informationen zum Hinzufügen, Aktualisieren und Entfernen von Daten mit Entity Framework Core
-author: rowanmiller
+author: ajcvickers
 ms.date: 10/27/2016
 uid: core/saving/basic
-ms.openlocfilehash: ea73ff86d8843acf8226f9d6696b79b99da9dab7
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: c6288fc8ca79b78b6c377f25e3874211b38059b2
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90070951"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92063633"
 ---
 # <a name="basic-save"></a>Grundlegender Speichervorgang
 
