@@ -11,12 +11,12 @@ no-loc:
 - Tags
 - items
 - tags
-ms.openlocfilehash: 839f932f48e1cc6cb1b4c86d5e1405e888d5227a
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 07cde296f07a883ba6abf45f94a31e072fb6d6cb
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89617650"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92063048"
 ---
 # <a name="ef-core-testing-sample"></a>EF Core Testbeispiel
 
@@ -183,7 +183,7 @@ Zwei etwas mehr beteiligte Tests decken die Geschäftslogik um das Hinzufügen v
 ## <a name="issues-using-different-database-providers"></a>Probleme bei der Verwendung verschiedener Datenbankanbieter
 
 Das Testen mit einem anderen Datenbanksystem, das in der Produktionsanwendung verwendet wird, kann zu Problemen führen.
-Diese werden auf der konzeptionellen Ebene im [Testcode behandelt, der EF Core verwendet](xref:core/miscellaneous/testing/index).  
+Diese werden auf der konzeptionellen Ebene im [Testcode behandelt, der EF Core verwendet](xref:core/miscellaneous/testing/index).
 In den folgenden Abschnitten werden zwei Beispiele für solche Probleme behandelt, die von den Tests in diesem Beispiel demonstriert werden.
 
 ### <a name="test-passes-when-the-application-is-broken"></a>Test läuft, wenn die Anwendung beschädigt ist
@@ -197,7 +197,7 @@ Das Ausführen dieses Tests für den EF-in-Memory Database gibt an, dass alles i
 Bei der Verwendung von SQLite ist alles weiterhin einwandfrei.
 Der Test schlägt jedoch fehl, wenn er auf SQL Server ausgeführt wird.
 
-```console
+```output
 System.InvalidOperationException : Sequence contains more than one element
    at System.Linq.ThrowHelper.ThrowMoreThanOneElementException()
    at System.Linq.Enumerable.Single[TSource](IEnumerable`1 source)
@@ -224,7 +224,7 @@ Auch hier leicht zu testen:
 
 Dieser Test wird SQL Server und SQLite bestanden, schlägt jedoch mit dem EF-in-Memory Database fehl!
 
-```console
+```output
 Assert.False() Failure
 Expected: False
 Actual:   True

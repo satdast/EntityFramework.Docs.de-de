@@ -1,15 +1,15 @@
 ---
 title: Anbieter Unterstützung für räumliche Typen EF6
 description: Anbieter Unterstützung für räumliche Typen in Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/fundamentals/providers/spatial-support
-ms.openlocfilehash: d6214ec503af8ea02b586cfddfd958ec7b47e42f
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: e2a543bc309001b14fb770d747a0dea22bcc91ca
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90070444"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92062905"
 ---
 # <a name="provider-support-for-spatial-types"></a>Anbieter Unterstützung für räumliche Typen
 Entity Framework unterstützt das Arbeiten mit räumlichen Daten durch die dbgeography-Klasse oder die dbgeometry-Klasse. Diese Klassen basieren auf datenbankspezifischen Funktionen, die der Entity Framework Anbieter bietet. Nicht alle Anbieter unterstützen räumliche Daten, und solche, die möglicherweise zusätzliche Voraussetzungen aufweisen, wie z. b. die Installation von Assemblys für räumliche Weitere Informationen zur Anbieter Unterstützung für räumliche Typen finden Sie weiter unten.  

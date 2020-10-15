@@ -1,20 +1,20 @@
 ---
 title: Konfigurationsdatei Einstellungen-EF6
 description: Konfigurationsdatei Einstellungen in Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/fundamentals/configuring/config-file
-ms.openlocfilehash: b407ae7d64df18f6a8d80aa13703a8c243c6f3a2
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: fc991810e93840c27e6631dfb5bc1796c1328d37
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90070717"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92063321"
 ---
 # <a name="configuration-file-settings"></a>Konfigurationsdatei Einstellungen
 Entity Framework ermöglicht, dass eine Reihe von Einstellungen in der Konfigurationsdatei angegeben werden können. Im allgemeinen folgt EF einem Prinzip der Konvention für die Konfiguration: alle in diesem Beitrag behandelten Einstellungen haben ein Standardverhalten. Sie müssen sich lediglich um das Ändern der Einstellung kümmern, wenn die Standardeinstellung Ihre Anforderungen nicht mehr erfüllt.  
 
-## <a name="a-code-based-alternative"></a>Eine Code basierte Alternative  
+## <a name="a-code-based-alternative"></a>Eine Code-Based Alternative  
 
 Alle diese Einstellungen können auch mithilfe von Code angewendet werden. Ab EF6 haben wir eine [Code basierte Konfiguration](xref:ef6/fundamentals/configuring/code-based)eingeführt, die eine zentrale Methode zum Anwenden der Konfiguration aus dem Code bereitstellt. Vor EF6 kann die Konfiguration weiterhin aus dem Code übernommen werden, Sie müssen jedoch verschiedene APIs verwenden, um verschiedene Bereiche zu konfigurieren. Mithilfe der Option Konfigurationsdatei können diese Einstellungen während der Bereitstellung problemlos geändert werden, ohne den Code zu aktualisieren.
 
@@ -71,7 +71,7 @@ EF-Designer-basierte Modelle verwenden spezielle EF-Verbindungs Zeichenfolgen. B
 </connectionStrings>
 ```
 
-## <a name="code-based-configuration-type-ef6-onwards"></a>Code basierter Konfigurationstyp (EF6 oder höher)  
+## <a name="code-based-configuration-type-ef6-onwards"></a>Code-Based Konfigurationstyp (EF6 oder höher)  
 
 Ab EF6 können Sie die dbconfiguration für EF angeben, die für die [Code basierte Konfiguration](xref:ef6/fundamentals/configuring/code-based) in der Anwendung verwendet werden soll. In den meisten Fällen müssen Sie diese Einstellung nicht angeben, da EF ihre dbconfiguration automatisch erkennt. Ausführliche Informationen dazu, wann Sie dbconfiguration in der Konfigurationsdatei angeben müssen, finden Sie im Abschnitt **Verschieben von dbconfiguration** der [Code basierten Konfiguration](xref:ef6/fundamentals/configuring/code-based).  
 

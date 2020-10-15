@@ -1,20 +1,37 @@
 ---
 title: Protokollierung-EF Core
 description: Konfigurieren der Protokollierung mit Entity Framework Core
-author: rowanmiller
-ms.date: 10/27/2016
+author: ajcvickers
+ms.date: 10/06/2020
 uid: core/miscellaneous/logging
-ms.openlocfilehash: 0fd1c83f01989095a813727390179db2327b610d
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 389834b3822aeeaefb8c085538bc6359ccfa7094
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90071666"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92063009"
 ---
 # <a name="logging"></a>Protokollierung
 
-> [!TIP]  
+> [!TIP]
 > Das in diesem Artikel verwendete [Beispiel](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/Logging) finden Sie auf GitHub.
+
+## <a name="simple-logging"></a>Einfache Protokollierung
+
+> [!NOTE]
+> Diese Funktion wurde in EF Core 5,0 hinzugefügt.
+
+Entity Framework Core (EF Core) generiert Protokollmeldungen für Vorgänge wie das Ausführen einer Abfrage oder das Speichern von Änderungen in der Datenbank. Auf diese kann von jedem Anwendungstyp aus mithilfe von [logto](https://github.com/dotnet/efcore/blob/ec3df8fd7e4ea4ebeebfa747619cef37b23ab2c6/src/EFCore/DbContextOptionsBuilder.cs#L135) zugegriffen werden. <!-- Issue #2748 <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.LogTo%2A> --> beim [Konfigurieren einer dbcontext-Instanz](xref:core/miscellaneous/configuring-dbcontext). Diese Konfiguration erfolgt in der Regel in einer außer Kraft Setzung von <xref:Microsoft.EntityFrameworkCore.DbContext.OnConfiguring%2A?displayProperty=nameWithType> . Beispiel:
+
+<!--
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        => optionsBuilder.LogTo(Console.WriteLine);
+-->
+[!code-csharp[LogToConsole](../../../samples/core/Miscellaneous/Logging/SimpleLogging/Program.cs?name=LogToConsole)]
+
+Dieses Konzept ähnelt <xref:System.Data.Entity.Database.Log?displayProperty=nameWithType> in EF6.
+
+Weitere Informationen finden Sie unter [einfache Protokollierung](xref:core/miscellaneous/events/simple-logging) .
 
 ## <a name="aspnet-core-applications"></a>ASP.NET Core-Anwendungen
 
@@ -42,7 +59,7 @@ Nachdem Sie die entsprechenden Pakete installiert haben, sollte die Anwendung ei
 > [!NOTE]
 > Im folgenden Codebeispiel wird ein `ConsoleLoggerProvider` Konstruktor verwendet, der in Version 2,2 veraltet ist und in 3,0 ersetzt wurde. Es ist sicher, dass die Warnungen bei Verwendung von 2,2 ignoriert und unterdrückt werden.
 
-``` csharp
+```csharp
 public static readonly LoggerFactory MyLoggerFactory
     = new LoggerFactory(new[] { new ConsoleLoggerProvider((_, __) => true, true) });
 ```
@@ -69,7 +86,7 @@ Die Anwendung kann steuern, was protokolliert wird, indem ein Filter für den il
 > [!NOTE]
 > Im folgenden Codebeispiel wird ein `ConsoleLoggerProvider` Konstruktor verwendet, der in Version 2,2 veraltet ist und in 3,0 ersetzt wurde. Es ist sicher, dass die Warnungen bei Verwendung von 2,2 ignoriert und unterdrückt werden.
 
-``` csharp
+```csharp
 public static readonly LoggerFactory MyLoggerFactory
     = new LoggerFactory(new[]
     {

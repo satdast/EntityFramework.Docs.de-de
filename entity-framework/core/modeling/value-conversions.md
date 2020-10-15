@@ -4,17 +4,14 @@ description: Konfigurieren von Wert Konvertern in einem Entity Framework Core Mo
 author: ajcvickers
 ms.date: 02/19/2018
 uid: core/modeling/value-conversions
-ms.openlocfilehash: 1d347eb6a7fcdcb55239e1fa854f6c38ab081b21
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 221560a145fe25c2b7bf094839dd37791bc25955
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90072550"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92063958"
 ---
 # <a name="value-conversions"></a>Wertkonvertierungen
-
-> [!NOTE]  
-> Dieses Feature ist neu in EF Core 2.1.
 
 Mithilfe von Wert Konvertern können Eigenschaftswerte beim Lesen aus der Datenbank oder beim Schreiben in die Datenbank konvertiert werden. Diese Konvertierung kann von einem Wert in einen anderen desselben Typs (z. b. das Verschlüsseln von Zeichen folgen) oder von einem Wert eines Typs zu einem Wert eines anderen Typs erfolgen (z. b. beim Konvertieren von Enumerationswerten in und aus Zeichen folgen in der Datenbank).
 
@@ -28,7 +25,7 @@ Konvertierungen werden mithilfe `Func` von zwei Ausdrucks Baumstrukturen definie
 
 Wert Konvertierungen werden für Eigenschaften in der definiert `OnModelCreating` `DbContext` . Stellen Sie sich z. b. eine Aufzählung und einen Entitätstyp vor
 
-``` csharp
+```csharp
 public class Rider
 {
     public int Id { get; set; }
@@ -46,7 +43,7 @@ public enum EquineBeast
 
 Anschließend können Konvertierungen in definiert werden `OnModelCreating` , um die Enumerationswerte als Zeichen folgen (z. b. "Esel", "maulzeichen",...) in der Datenbank zu speichern:
 
-``` csharp
+```csharp
 protected override void OnModelCreating(ModelBuilder modelBuilder)
 {
     modelBuilder
@@ -58,14 +55,14 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 }
 ```
 
-> [!NOTE]  
+> [!NOTE]
 > Ein `null` Wert wird nie an einen Wert Konverter übermittelt. Dies vereinfacht die Implementierung von Konvertierungen und ermöglicht die gemeinsame Nutzung zwischen NULL-Werten und nicht auf NULL festleg baren Eigenschaften.
 
 ## <a name="the-valueconverter-class"></a>Die ValueConverter-Klasse
 
 `HasConversion`Wenn Sie wie oben gezeigt aufrufen, wird eine `ValueConverter` -Instanz erstellt und für die-Eigenschaft festgelegt. `ValueConverter`Stattdessen kann explizit erstellt werden. Beispiel:
 
-``` csharp
+```csharp
 var converter = new ValueConverter<EquineBeast, string>(
     v => v.ToString(),
     v => (EquineBeast)Enum.Parse(typeof(EquineBeast), v));
@@ -78,7 +75,7 @@ modelBuilder
 
 Dies kann hilfreich sein, wenn mehrere Eigenschaften dieselbe Konvertierung verwenden.
 
-> [!NOTE]  
+> [!NOTE]
 > Es gibt derzeit keine Möglichkeit, an einem Ort anzugeben, dass jede Eigenschaft eines bestimmten Typs denselben Wert Konverter verwenden muss. Diese Funktion wird für eine zukünftige Version in Erwägung gezogen.
 
 ## <a name="built-in-converters"></a>Integrierte Konverter
@@ -109,7 +106,7 @@ EF Core enthält eine Reihe vordefinierter `ValueConverter` Klassen, die im- `Mi
 
 Beachten Sie, dass `EnumToStringConverter` in dieser Liste enthalten ist. Dies bedeutet, dass die Konvertierung nicht explizit angegeben werden muss, wie oben gezeigt. Verwenden Sie stattdessen einfach den integrierten Konverter:
 
-``` csharp
+```csharp
 var converter = new EnumToStringConverter<EquineBeast>();
 
 modelBuilder
@@ -124,7 +121,7 @@ Beachten Sie, dass alle integrierten Konverter zustandslos sind, sodass eine ein
 
 Für allgemeine Konvertierungen, bei denen ein integrierter Konverter vorhanden ist, muss der Konverter nicht explizit angegeben werden. Stattdessen konfigurieren Sie einfach den zu verwendenden Anbietertyp, und EF verwendet automatisch den entsprechenden integrierten Konverter. Konvertierungen von Enum zu Zeichen folgen werden als Beispiel oben verwendet, EF führt dies jedoch automatisch aus, wenn der Anbietertyp konfiguriert ist:
 
-``` csharp
+```csharp
 modelBuilder
     .Entity<Rider>()
     .Property(e => e.Mount)
@@ -133,7 +130,7 @@ modelBuilder
 
 Dies kann auch durch explizites angeben des Spalten Typs erreicht werden. Beispielsweise, wenn der Entitätstyp wie folgt definiert ist:
 
-``` csharp
+```csharp
 public class Rider
 {
     public int Id { get; set; }

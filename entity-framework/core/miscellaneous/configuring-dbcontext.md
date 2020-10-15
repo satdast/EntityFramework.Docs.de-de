@@ -1,15 +1,15 @@
 ---
 title: Konfigurieren eines dbcontext-EF Core
 description: Strategien zum Konfigurieren von dbcontext mit Entity Framework Core
-author: rowanmiller
+author: ajcvickers
 ms.date: 10/27/2016
 uid: core/miscellaneous/configuring-dbcontext
-ms.openlocfilehash: 95b855c01b4b0b721eb91d53e0257295527ea44e
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 3afad8d220acecbb01b15bbb855b52a895e6eb66
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90071692"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92062021"
 ---
 # <a name="configuring-a-dbcontext"></a>Konfigurieren einer DbContext-Instanz
 
@@ -32,13 +32,13 @@ Obwohl jedes Muster, das die erforderlichen Konfigurationsinformationen für ber
 
 Im folgenden Beispiel wird das `DbContextOptions` für die Verwendung des SQL Server Anbieters, eine in der-Variable enthaltene Verbindung, `connectionString` ein Befehls Timeout auf Anbieter Ebene und eine EF Core Verhaltens Auswahl konfiguriert, die standardmäßig alle Abfragen in der `DbContext` [nicht-Nachverfolgung](xref:core/querying/tracking#no-tracking-queries) ausführt:
 
-``` csharp
+```csharp
 optionsBuilder
     .UseSqlServer(connectionString, providerOptions=>providerOptions.CommandTimeout(60))
     .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
 ```
 
-> [!NOTE]  
+> [!NOTE]
 > Anbieter Auswahlmethoden und andere Verhaltens Auswahlmethoden, die oben erwähnt werden, sind Erweiterungs Methoden für `DbContextOptions` oder anbieterspezifische Options Klassen. Um Zugriff auf diese Erweiterungs Methoden zu erhalten, benötigen Sie möglicherweise einen Namespace (in der Regel `Microsoft.EntityFrameworkCore` ) im Gültigkeitsbereich und fügen zusätzliche Paketabhängigkeiten in das Projekt ein.
 
 `DbContextOptions`Kann für das bereitgestellt werden, `DbContext` indem die-Methode überschrieben wird, `OnConfiguring` oder extern über ein Konstruktorargument.
@@ -49,7 +49,7 @@ Wenn beide verwendet werden, `OnConfiguring` wird zuletzt angewendet, und die f�
 
 Der Konstruktor kann einfach `DbContextOptions` wie folgt akzeptieren:
 
-``` csharp
+```csharp
 public class BloggingContext : DbContext
 {
     public BloggingContext(DbContextOptions<BloggingContext> options)
@@ -60,12 +60,12 @@ public class BloggingContext : DbContext
 }
 ```
 
-> [!TIP]  
+> [!TIP]
 > Der Basiskonstruktor von dbcontext akzeptiert auch die nicht generische Version von `DbContextOptions` , aber die Verwendung der nicht generischen Version wird nicht für Anwendungen mit mehreren Kontext Typen empfohlen.
 
 Die Anwendung kann nun beim `DbContextOptions` Instanziieren eines Kontexts wie folgt übergeben:
 
-``` csharp
+```csharp
 var optionsBuilder = new DbContextOptionsBuilder<BloggingContext>();
 optionsBuilder.UseSqlite("Data Source=blog.db");
 
@@ -81,7 +81,7 @@ Sie können auch den `DbContextOptions` innerhalb des Kontexts selbst initialisi
 
 Um `DbContextOptions` innerhalb des Kontexts zu initialisieren, überschreiben Sie die `OnConfiguring` -Methode, und nennen Sie die Methoden für die bereitgestellten `DbContextOptionsBuilder`
 
-``` csharp
+```csharp
 public class BloggingContext : DbContext
 {
     public DbSet<Blog> Blogs { get; set; }
@@ -95,7 +95,7 @@ public class BloggingContext : DbContext
 
 Eine Anwendung kann einen solchen Kontext einfach instanziieren, ohne etwas an den Konstruktor zu übergeben:
 
-``` csharp
+```csharp
 using (var context = new BloggingContext())
 {
   // do stuff
@@ -115,7 +115,7 @@ Weitere Informationen zur Abhängigkeitsinjektion finden Sie unten unter [Weiter
 
 Hinzufügen von `DbContext` zur Abhängigkeitsinjektion:
 
-``` csharp
+```csharp
 public void ConfigureServices(IServiceCollection services)
 {
     services.AddDbContext<BloggingContext>(options => options.UseSqlite("Data Source=blog.db"));
@@ -126,7 +126,7 @@ Dies erfordert das Hinzufügen eines [Konstruktorarguments](#constructor-argumen
 
 Kontext Code:
 
-``` csharp
+```csharp
 public class BloggingContext : DbContext
 {
     public BloggingContext(DbContextOptions<BloggingContext> options)
@@ -139,7 +139,7 @@ public class BloggingContext : DbContext
 
 Anwendungscode (in ASP.net Core):
 
-``` csharp
+```csharp
 public class MyController
 {
     private readonly BloggingContext _context;
@@ -155,7 +155,7 @@ public class MyController
 
 Anwendungscode (Verwenden von Service Provider direkt, weniger häufig):
 
-``` csharp
+```csharp
 using (var context = serviceProvider.GetService<BloggingContext>())
 {
   // do stuff
@@ -180,7 +180,7 @@ Es gibt häufige Fehler, die versehentlich den gleichzeitigen Zugriff auf diesel
 
 Asynchrone Methoden ermöglichen EF Core das Initiieren von Vorgängen, die auf eine nicht blockierende Weise auf die Datenbank zugreifen. Wenn ein Aufrufer jedoch nicht auf den Abschluss einer dieser Methoden wartet und weiterhin andere Vorgänge auf dem ausführt `DbContext` , kann der Zustand von `DbContext` (und wahrscheinlich) beschädigt sein.
 
-Asynchrone Methoden sollten immer sofort EF Core werden.  
+Asynchrone Methoden sollten immer sofort EF Core werden.
 
 ### <a name="implicitly-sharing-dbcontext-instances-across-multiple-threads-via-dependency-injection"></a>Implizites Freigeben von dbcontext-Instanzen über mehrere Threads über Abhängigkeitsinjektion
 

@@ -2,15 +2,14 @@
 title: Datenseeding-EF Core
 description: Verwenden von datenseeding zum Auffüllen einer Datenbank mit einem anfänglichen Satz von Daten mithilfe von Entity Framework Core
 author: AndriySvyryd
-ms.author: ansvyryd
 ms.date: 11/02/2018
 uid: core/modeling/data-seeding
-ms.openlocfilehash: 1d7adbe45c4cbc64a39485c76d8f516e32ffeba5
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: f8284d7473c6fbcafde25d01ec0709c2d50b666f
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90071601"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92063698"
 ---
 # <a name="data-seeding"></a>Datenseeding
 
@@ -23,9 +22,6 @@ Es gibt mehrere Möglichkeiten, wie dies in EF Core erreicht werden kann:
 * Benutzerdefinierte Initialisierungs Logik
 
 ## <a name="model-seed-data"></a>Modellseed-Daten
-
-> [!NOTE]
-> Dieses Feature ist neu in EF Core 2.1.
 
 Anders als in EF6 kann das Seeding von Daten in EF Core einem Entitätstyp als Teil der Modell Konfiguration zugeordnet werden. Anschließend können EF Core [Migrationen](xref:core/managing-schemas/migrations/index) automatisch berechnen, welche INSERT-, Update-oder DELETE-Vorgänge angewendet werden müssen, wenn die Datenbank auf eine neue Version des Modells aktualisiert wird.
 

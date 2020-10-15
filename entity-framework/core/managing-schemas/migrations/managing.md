@@ -2,15 +2,14 @@
 title: 'Verwalten von Migrationen: EF Core'
 description: Hinzufügen, entfernen und Verwalten von Datenbankschema Migrationen mit Entity Framework Core
 author: bricelam
-ms.author: bricelam
 ms.date: 05/06/2020
 uid: core/managing-schemas/migrations/managing
-ms.openlocfilehash: 366824cecab57a0f1744fa58cc12e5d3f6675723
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: fdfda6f3dea306fbbc343c1be3f4d5754d1f65c4
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89617961"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92062060"
 ---
 # <a name="managing-migrations"></a>Verwalten von Migrationen
 
@@ -31,7 +30,7 @@ dotnet ef migrations add AddBlogCreatedTimestamp
 
 ### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
 
-``` powershell
+```powershell
 Add-Migration AddBlogCreatedTimestamp
 ```
 
@@ -59,7 +58,7 @@ dotnet ef migrations add InitialCreate --namespace Your.Namespace
 
 ### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
 
-``` powershell
+```powershell
 Add-Migration InitialCreate -Namespace Your.Namespace
 ```
 
@@ -73,7 +72,7 @@ Während EF Core in der Regel exakte Migrationen erstellt, sollten Sie den Code 
 
 Ein wichtiges Beispiel, bei dem das Anpassen von Migrationen erforderlich ist, ist das Umbenennen einer Eigenschaft. Wenn Sie z. b. eine Eigenschaft von `Name` in umbenennen `FullName` , generiert EF Core die folgende Migration:
 
-```c#
+```csharp
 migrationBuilder.DropColumn(
     name: "Name",
     table: "Customers");
@@ -86,7 +85,7 @@ migrationBuilder.AddColumn<string>(
 
 EF Core kann im Allgemeinen nicht wissen, wann eine Spalte gelöscht und ein neues erstellt werden soll (zwei separate Änderungen) und wann eine Spalte umbenannt werden sollte. Wenn die oben genannte Migration unverändert angewendet wird, gehen alle Ihre Kundennamen verloren. Zum Umbenennen einer Spalte ersetzen Sie die oben generierte Migration durch Folgendes:
 
-```c#
+```csharp
 migrationBuilder.RenameColumn(
     name: "Name",
     table: "Customers",
@@ -100,7 +99,7 @@ migrationBuilder.RenameColumn(
 
 Das Umbenennen einer Spalte kann über eine integrierte API erreicht werden, in vielen Fällen ist dies jedoch nicht möglich. Beispielsweise möchten wir eventuell vorhandene `FirstName` -und- `LastName` Eigenschaften durch eine einzelne neue Eigenschaft ersetzen `FullName` . Die von EF Core generierte Migration sieht wie folgt aus:
 
-``` csharp
+```csharp
 migrationBuilder.DropColumn(
     name: "FirstName",
     table: "Customer");
@@ -117,7 +116,7 @@ migrationBuilder.AddColumn<string>(
 
 Wie zuvor würde dies zu unerwünschten Datenverlusten führen. Um die Daten aus den alten Spalten zu übertragen, ordnen wir die Migrationen neu an und führen einen unformatierten SQL-Vorgang wie folgt ein:
 
-``` csharp
+```csharp
 migrationBuilder.AddColumn<string>(
     name: "FullName",
     table: "Customer",
@@ -144,7 +143,7 @@ Unformatierte SQL-Daten können auch zum Verwalten von Datenbankobjekten verwend
 
 Beispielsweise wird mit der folgenden Migration eine gespeicherte Prozedur SQL Server erstellt:
 
-```c#
+```csharp
 migrationBuilder.Sql(
 @"
     EXEC ('CREATE PROCEDURE getFullName
@@ -159,7 +158,7 @@ Dies kann verwendet werden, um einen beliebigen Aspekt der Datenbank zu verwalte
 * Gespeicherte Prozeduren
 * Volltextsuche
 * Funktionen
-* Trigger
+* Auslöser
 * Ansichten
 
 In den meisten Fällen wird jede Migration beim Anwenden von Migrationen von EF Core automatisch in der eigenen Transaktion umschlossen. Leider können einige Migrations Vorgänge nicht innerhalb einer Transaktion in einigen Datenbanken ausgeführt werden. in diesen Fällen können Sie die Transaktion ablehnen, indem Sie an übergeben `suppressTransaction: true` `migrationBuilder.Sql` .
@@ -178,7 +177,7 @@ dotnet ef migrations remove
 
 ### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
 
-``` powershell
+```powershell
 Remove-Migration
 ```
 
@@ -206,4 +205,7 @@ Es ist auch möglich, alle Migrationen zurückzusetzen und eine einzelne zu erst
 * **Migrations** Ordner löschen
 * Erstellen einer neuen Migration und Generieren eines SQL-Skripts für dieses
 * Löschen Sie in der Datenbank alle Zeilen aus der Migrations Verlaufs Tabelle.
-* Fügen Sie eine einzelne Zeile in den Migrations Verlauf ein, um aufzuzeichnen, dass die erste Migration bereits angewendet wurde, da Ihre Tabellen bereits vorhanden sind. Die INSERT-Abfrage ist der letzte Vorgang im oben generierten SQL-Skript.
+* Fügen Sie eine einzelne Zeile in den Migrations Verlauf ein, um aufzuzeichnen, dass die erste Migration bereits angewendet wurde, da Ihre Tabellen bereits vorhanden sind. Die SQL-Einfügung ist der letzte Vorgang im oben generierten SQL-Skript.
+
+> [!WARNING]
+> Alle [benutzerdefinierten Migrations Codes](#customize-migration-code) gehen verloren, wenn der **Migrations** Ordner gelöscht wird.  Alle Anpassungen müssen manuell auf die neue anfängliche Migration angewendet werden, damit Sie beibehalten werden.

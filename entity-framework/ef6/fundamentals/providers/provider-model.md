@@ -1,15 +1,15 @@
 ---
 title: Das Entity Framework 6-Anbieter Modell EF6
 description: Das Entity Framework 6-Anbieter Modell in Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 06/27/2018
 uid: ef6/fundamentals/providers/provider-model
-ms.openlocfilehash: 4fc45ba5fe916253be348182196be236729d685d
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 15b5443ff05b5c8704f80d4f2f83b4ed20edd1c0
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90074015"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92063191"
 ---
 # <a name="the-entity-framework-6-provider-model"></a>Das Entity Framework 6-Anbieter Modell
 
@@ -206,8 +206,8 @@ Ein Beispiel hierfür ist das Paket "EntityFramework. sqlservercompact", das in 
 
 Wenn das nuget-Paket "EntityFramework" installiert ist, wird ein PowerShell-Modul registriert, das zwei Befehle enthält, die für Anbieter Pakete sehr nützlich sind:
 
-*   Add-efprovider fügt eine neue Entität für den Anbieter in der Konfigurationsdatei des Ziel Projekts hinzu und stellt sicher, dass Sie sich am Ende der Liste registrierter Anbieter befindet.
-*   Add-efdefaultconnectionfactory fügt entweder die defaultconnectionfactory-Registrierung in der Konfigurationsdatei des Ziel Projekts hinzu oder aktualisiert sie.
+*   Add-EFProvider fügt eine neue Entität für den Anbieter in der Konfigurationsdatei des Ziel Projekts hinzu und stellt sicher, dass Sie sich am Ende der Liste registrierter Anbieter befindet.
+*   Add-EFDefaultConnectionFactory entweder die defaultconnectionfactory-Registrierung in der Konfigurationsdatei des Ziel Projekts hinzufügt oder aktualisiert.
 
 Beide Befehle kümmern sich um die Hinzufügung eines EntityFramework-Abschnitts zur Konfigurationsdatei und das Hinzufügen einer Anbieter Auflistung, falls erforderlich.
 

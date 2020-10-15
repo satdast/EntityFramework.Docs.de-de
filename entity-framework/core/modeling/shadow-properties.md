@@ -1,17 +1,17 @@
 ---
-title: Schatten Eigenschaften-EF Core
-description: Konfigurieren von Schatten Eigenschaften in einem Entity Framework Core Modell
+title: Eigenschaften von Schatten und Indexer-EF Core
+description: Konfigurieren von Schatten-und Indexereigenschaften in einem Entity Framework Core Modell
 author: AndriySvyryd
-ms.date: 01/03/2020
+ms.date: 10/09/2020
 uid: core/modeling/shadow-properties
-ms.openlocfilehash: 735659a1a8523e63afa908d4fe3904e62f46cbd0
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 417ab57a4a77ecf626e54eeca900744d84e3fe08
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90071380"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92063893"
 ---
-# <a name="shadow-properties"></a>Schatteneigenschaften
+# <a name="shadow-and-indexer-properties"></a>Eigenschaften von Schatten und Indexer
 
 Schatten Eigenschaften sind Eigenschaften, die nicht in der .net-Entitäts Klasse definiert sind, aber für diesen Entitätstyp im EF Core Modell definiert sind. Der Wert und der Status dieser Eigenschaften werden ausschließlich in der Änderungs Nachverfolgung beibehalten. Schatten Eigenschaften sind nützlich, wenn Daten in der Datenbank vorhanden sind, die für die zugeordneten Entitäts Typen nicht verfügbar gemacht werden sollen.
 
@@ -37,15 +37,24 @@ Wenn der für die Methode angegebene Name mit `Property` dem Namen einer vorhand
 
 Schatten Eigenschaftswerte können über die API abgerufen und geändert werden `ChangeTracker` :
 
-``` csharp
+```csharp
 context.Entry(myBlog).Property("LastUpdated").CurrentValue = DateTime.Now;
 ```
 
 Auf Schatten Eigenschaften kann in LINQ-Abfragen über die `EF.Property` statische Methode verwiesen werden:
 
-``` csharp
+```csharp
 var blogs = context.Blogs
     .OrderBy(b => EF.Property<DateTime>(b, "LastUpdated"));
 ```
 
 Auf Schatten Eigenschaften kann nicht nach einer Abfrage ohne Nachverfolgung zugegriffen werden, da die zurückgegebenen Entitäten nicht von der Änderungs Nachverfolgung nachverfolgt werden.
+
+## <a name="property-bag-entity-types"></a>Eigenschaften Behälter-Entitäts Typen
+
+> [!NOTE]
+> Unterstützung für Eigenschaften Behälter-Entitäts Typen wurde in EF Core 5,0 hinzugefügt.
+
+Entitäts Typen, die nur Indexer-Eigenschaften enthalten, werden als Entitäts Typen für Eigenschaften Behälter bezeichnet. Diese Entitäts Typen haben keine Schatten Eigenschaften. Derzeit `Dictionary<string, object>` wird nur als Entitätstyp für Eigenschaften Behälter unterstützt. Dies bedeutet, dass Sie als frei gegebener Entitätstyp mit einem eindeutigen Namen konfiguriert werden muss, und die entsprechende `DbSet` Eigenschaft muss mithilfe eines- `Set` Aufrufes implementiert werden.
+
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/SharedType.cs?name=SharedType&highlight=3,7)]

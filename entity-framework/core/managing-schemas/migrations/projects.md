@@ -2,15 +2,14 @@
 title: Verwenden eines separaten Migrations Projekts-EF Core
 description: Verwenden eines separaten Migrationsprojekts zum Verwalten von Datenbankschemas mit Entity Framework Core
 author: bricelam
-ms.author: bricelam
 ms.date: 10/30/2017
 uid: core/managing-schemas/migrations/projects
-ms.openlocfilehash: a3f0ed96c6a8e3e8629d9a4bb1610fcbfe6ca043
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 6f28027c320f0d1c13d13bef7d8227b2bb68df91
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89617918"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92062489"
 ---
 # <a name="using-a-separate-migrations-project"></a>Verwenden eines separaten Migrations Projekts
 
@@ -25,11 +24,11 @@ Aufgabe
 3. Verschieben Sie die Migrationen und die Modell Momentaufnahme-Dateien in die Klassenbibliothek.
    > [!TIP]
    > Wenn keine Migrationen vorhanden sind, generieren Sie eine im Projekt, das den dbcontext enthält, und verschieben Sie Sie dann.
-   > Dies ist wichtig, denn wenn die Migrationsassembly keine vorhandene Migration enthält, kann der Befehl "Add-Migration" den dbcontext nicht finden.
+   > Dies ist wichtig, denn wenn die Migrationsassembly keine vorhandene Migration enthält, wird der Add-Migration-Befehl den dbcontext nicht finden.
 
 4. Konfigurieren Sie die Migrations Assembly:
 
-   ``` csharp
+   ```csharp
    options.UseSqlServer(
        connectionString,
        x => x.MigrationsAssembly("MyApp.Migrations"));
@@ -38,7 +37,7 @@ Aufgabe
 5. Fügen Sie einen Verweis auf ihre Migrationen-Assembly aus der Startassembly hinzu.
    * Wenn dies eine zirkuläre Abhängigkeit verursacht, aktualisieren Sie den Ausgabepfad der Klassenbibliothek:
 
-     ``` xml
+     ```xml
      <PropertyGroup>
        <OutputPath>..\MyStartupProject\bin\$(Configuration)\</OutputPath>
      </PropertyGroup>
@@ -54,7 +53,7 @@ dotnet ef migrations add NewMigration --project MyApp.Migrations
 
 ## <a name="visual-studio"></a>[Visual Studio](#tab/vs)
 
-``` powershell
+```powershell
 Add-Migration NewMigration -Project MyApp.Migrations
 ```
 

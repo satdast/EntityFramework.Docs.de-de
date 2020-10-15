@@ -2,15 +2,14 @@
 title: Migrationen in Team Umgebungen-EF Core
 description: Bewährte Methoden zum Verwalten von Migrationen und Auflösen von Konflikten in Team Umgebungen mit Entity Framework Core
 author: bricelam
-ms.author: bricelam
 ms.date: 10/30/2017
 uid: core/managing-schemas/migrations/teams
-ms.openlocfilehash: 1fbb7173a52218a4d00780ebc76e33600f3558c1
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 90549b369624301bc183e5a8a3cc1d6a92bb7008
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89619204"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92062502"
 ---
 # <a name="migrations-in-team-environments"></a>Migrationen in Teamumgebungen
 
@@ -20,7 +19,7 @@ Wenn Sie mit Migrationen in Team Umgebungen arbeiten, achten Sie besonders auf d
 
 Wenn Sie Migrationen von ihren Teamkollegen zusammenführen, treten möglicherweise Konflikte in der Modell Momentaufnahme-Datei auf. Wenn beide Änderungen nicht miteinander verbunden sind, ist die Zusammenführung trivial, und die beiden Migrationen können nebeneinander bestehen. Beispielsweise erhalten Sie möglicherweise einen Mergekonflikt in der Customer-Entitätstyp Konfiguration, der wie folgt aussieht:
 
-``` output
+```output
 <<<<<<< Mine
 b.Property<bool>("Deactivated");
 =======
@@ -30,7 +29,7 @@ b.Property<int>("LoyaltyPoints");
 
 Da diese beiden Eigenschaften im endgültigen Modell vorhanden sein müssen, müssen Sie die Zusammenführung durch Hinzufügen beider Eigenschaften vervollständigen. In vielen Fällen kann Ihr Versionskontrollsystem solche Änderungen automatisch zusammenführen.
 
-``` csharp
+```csharp
 b.Property<bool>("Deactivated");
 b.Property<int>("LoyaltyPoints");
 ```
@@ -41,7 +40,7 @@ In diesen Fällen sind die Migration und die Migration Ihres Teamkollegen vonein
 
 Manchmal tritt beim Zusammenführen des Modell Momentaufnahme-Modells ein echter Konflikt auf. Beispielsweise können Sie und Ihr Teamkollegen die gleiche Eigenschaft umbenennen.
 
-``` output
+```output
 <<<<<<< Mine
 b.Property<string>("Username");
 =======

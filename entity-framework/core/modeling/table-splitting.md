@@ -2,15 +2,14 @@
 title: Tabellen Aufteilung-EF Core
 description: Konfigurieren der Tabellen Aufteilung mithilfe von Entity Framework Core
 author: AndriySvyryd
-ms.author: ansvyryd
 ms.date: 01/03/2020
 uid: core/modeling/table-splitting
-ms.openlocfilehash: e7428bc516a69310b6a6f521acc49aee0ba9f802
-ms.sourcegitcommit: 949faaba02e07e44359e77d7935f540af5c32093
+ms.openlocfilehash: 71d332ec3f500f48e12863c71ac44ce4d60699f0
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 08/03/2020
-ms.locfileid: "87526498"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92063035"
 ---
 # <a name="table-splitting"></a>Tabellenaufteilung
 
@@ -35,7 +34,7 @@ Zusätzlich zur erforderlichen Konfiguration wird aufgerufen `Property(o => o.St
 > [!TIP]
 > Weitere Informationen finden Sie im [vollständigen Beispiel Projekt](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Modeling/TableSplitting) .
 
-## <a name="usage"></a>Verbrauch
+## <a name="usage"></a>Verwendung
 
 Das Speichern und Abfragen von Entitäten mithilfe von Tabellen Aufteilung erfolgt auf dieselbe Weise wie andere Entitäten:
 

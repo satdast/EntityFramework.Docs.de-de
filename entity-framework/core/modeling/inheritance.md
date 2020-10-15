@@ -2,24 +2,18 @@
 title: Vererbung-EF Core
 description: Konfigurieren der Vererbung von Entitäts Typen mit Entity Framework Core
 author: AndriySvyryd
-ms.author: ansvyryd
-ms.date: 10/27/2016
+ms.date: 10/01/2020
 uid: core/modeling/inheritance
-ms.openlocfilehash: 0e94013a0b894b162f4bb3ca8e7acb1aca349011
-ms.sourcegitcommit: 92d54fe3702e0c92e198334da22bacb42e9842b1
+ms.openlocfilehash: 47aae0d57d7203f0e6da5868bdc082ad85d59620
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 06/10/2020
-ms.locfileid: "84664051"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92063867"
 ---
 # <a name="inheritance"></a>Vererbung
 
 EF kann eine .net-Typhierarchie einer Datenbank zuordnen. Dies ermöglicht es Ihnen, Ihre .NET-Entitäten wie gewohnt mit Basis-und abgeleiteten Typen in Code zu schreiben und EF nahtlos das geeignete Datenbankschema zu erstellen, Abfragen auszugeben usw. Die tatsächlichen Details, wie eine Typhierarchie zugeordnet wird, sind Anbieter abhängig. Diese Seite beschreibt die Vererbungs Unterstützung im Kontext einer relationalen Datenbank.
-
-Zurzeit unterstützt EF Core nur das TPH-Muster (Table-per Hierarchy). TPH verwendet eine einzelne Tabelle zum Speichern der Daten für alle Typen in der Hierarchie, und eine diskriminatorspalte wird verwendet, um den Typ zu identifizieren, den jede Zeile darstellt.
-
-> [!NOTE]
-> Die Tabelle pro Typ (TPT) und "Table-per-Concrete-Type" (TPC), die von EF6 unterstützt werden, werden von EF Core noch nicht unterstützt. TPT ist ein wichtiges Feature, das für EF Core 5,0 geplant ist.
 
 ## <a name="entity-type-hierarchy-mapping"></a>Entitätstyp-Hierarchie Zuordnung
 
@@ -29,19 +23,21 @@ Im folgenden Beispiel wird ein dbset für `Blog` und seine Unterklasse verfügba
 
 [!code-csharp[Main](../../../samples/core/Modeling/Conventions/InheritanceDbSets.cs?name=InheritanceDbSets&highlight=3-4)]
 
-Dieses Modell wird dem folgenden Datenbankschema zugeordnet (Beachten Sie die implizit erstellte *diskriminatorspalte* , die angibt, welcher Typ von *Blog* in den einzelnen Zeilen gespeichert wird):
+> [!NOTE]
+> Bei Verwendung der TPH-Zuordnung werden bei Bedarf automatisch NULL-Werte für Daten Bank Spalten festgelegt. Beispielsweise kann die-Spalte auf NULL festgelegt werden, `RssUrl` da reguläre `Blog` Instanzen nicht über diese Eigenschaft verfügen.
 
-![image](_static/inheritance-tph-data.png)
-
->[!NOTE]
-> Bei Verwendung der TPH-Zuordnung werden bei Bedarf automatisch NULL-Werte für Daten Bank Spalten festgelegt. Beispielsweise kann die Spalte *rssurl* auf NULL festgelegt werden, da reguläre *Blog* Instanzen nicht über diese Eigenschaft verfügen.
-
-Wenn Sie kein dbset für eine oder mehrere Entitäten in der Hierarchie verfügbar machen möchten, können Sie auch die fließende API verwenden, um sicherzustellen, dass Sie im Modell enthalten sind.
+Wenn Sie `DbSet` für eine oder mehrere Entitäten in der Hierarchie keinen verfügbar machen möchten, können Sie auch die fließende API verwenden, um sicherzustellen, dass Sie im Modell enthalten sind.
 
 > [!TIP]
 > Wenn Sie sich nicht auf Konventionen verlassen, können Sie den Basistyp explizit mithilfe von angeben `HasBaseType` . Sie können auch verwenden `.HasBaseType((Type)null)` , um einen Entitätstyp aus der Hierarchie zu entfernen.
 
-## <a name="discriminator-configuration"></a>Diskriminatorkonfiguration
+## <a name="table-per-hierarchy-and-discriminator-configuration"></a>Tabelle pro Hierarchie und diskriminatorkonfiguration
+
+Standardmäßig ordnet EF die Vererbung mithilfe des TPH-Musters ( *Table-per Hierarchy* ) zu. TPH verwendet eine einzelne Tabelle zum Speichern der Daten für alle Typen in der Hierarchie, und eine diskriminatorspalte wird verwendet, um den Typ zu identifizieren, den jede Zeile darstellt.
+
+Das obige Modell ist dem folgenden Datenbankschema zugeordnet (Beachten Sie die implizit erstellte `Discriminator` Spalte, die angibt, welcher Typ von `Blog` in den einzelnen Zeilen gespeichert ist).
+
+![image](_static/inheritance-tph-data.png)
 
 Sie können den Namen und den Typ der diskriminatorspalte und die Werte, die zum Identifizieren der einzelnen Typen in der Hierarchie verwendet werden, konfigurieren:
 
@@ -55,8 +51,41 @@ Schließlich kann der Diskriminator auch einer regulären .net-Eigenschaft in de
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/NonShadowDiscriminator.cs?name=NonShadowDiscriminator&highlight=4)]
 
-## <a name="shared-columns"></a>Freigegebene Spalten
+### <a name="shared-columns"></a>Freigegebene Spalten
 
 Wenn zwei gleich geordnete Entitäts Typen in der Hierarchie über eine Eigenschaft mit demselben Namen verfügen, werden Sie standardmäßig zwei separaten Spalten zugeordnet. Wenn Ihr Typ jedoch identisch ist, können Sie derselben Daten Bank Spalte zugeordnet werden:
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/SharedTPHColumns.cs?name=SharedTPHColumns&highlight=9,13)]
+
+## <a name="table-per-type-configuration"></a>"Tabelle pro Typ"-Konfiguration
+
+> [!NOTE]
+> Die Tabelle pro Typ (TPT) ist ein neues Feature in EF Core 5,0. "Table-per-Concrete-Type" (TPC) wird von EF6 unterstützt, aber noch nicht von EF Core unterstützt.
+
+Im TPT-Zuordnungsmuster werden alle Typen einzelnen Tabellen zugeordnet. Eigenschaften, die nur zu einem Basistyp oder einem abgeleiteten Typ gehören, werden in einer Tabelle gespeichert, die diesem Typ zugeordnet ist. Tabellen, die abgeleiteten Typen zugeordnet sind, speichern auch einen Fremdschlüssel, der die abgeleitete Tabelle mit der Basistabelle verbindet.
+
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/TPTConfiguration.cs?name=TPTConfiguration)]
+
+EF erstellt das folgende Datenbankschema für das obige Modell.
+
+```sql
+CREATE TABLE [Blogs] (
+    [BlogId] int NOT NULL IDENTITY,
+    [Url] nvarchar(max) NULL,
+    CONSTRAINT [PK_Blogs] PRIMARY KEY ([BlogId])
+);
+
+CREATE TABLE [RssBlogs] (
+    [BlogId] int NOT NULL,
+    [RssUrl] nvarchar(max) NULL,
+    CONSTRAINT [PK_RssBlogs] PRIMARY KEY ([BlogId]),
+    CONSTRAINT [FK_RssBlogs_Blogs_BlogId] FOREIGN KEY ([BlogId]) REFERENCES [Blogs] ([BlogId]) ON DELETE NO ACTION
+);
+```
+
+> [!NOTE]
+> Wenn die PRIMARY KEY-Einschränkung umbenannt wird, wird der neue Name auf alle Tabellen angewendet, die der Hierarchie zugeordnet sind. in zukünftigen EF-Versionen wird das Umbenennen der Einschränkung nur für eine bestimmte Tabelle ermöglicht, wenn das [Problem 19970](https://github.com/dotnet/efcore/issues/19970) behoben ist.
+
+Wenn Sie die Massen Konfiguration verwenden, können Sie den Spaltennamen für eine bestimmte Tabelle abrufen, indem Sie aufrufen <xref:Microsoft.EntityFrameworkCore.RelationalPropertyExtensions.GetColumnName%2A> .
+
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/TPTConfiguration.cs?name=Metadata&highlight=10)]

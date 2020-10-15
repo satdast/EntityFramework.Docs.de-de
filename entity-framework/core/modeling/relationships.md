@@ -2,14 +2,14 @@
 title: Beziehungen-EF Core
 description: Konfigurieren von Beziehungen zwischen Entitäts Typen bei Verwendung von Entity Framework Core
 author: AndriySvyryd
-ms.date: 11/21/2019
+ms.date: 10/01/2020
 uid: core/modeling/relationships
-ms.openlocfilehash: 9946b2190cb3c3973f245d44da7e359b60845541
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 71d960a15dfb938af1dcc7035dc2587df7ad4677
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89619115"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92063841"
 ---
 # <a name="relationships"></a>Beziehungen
 
@@ -148,7 +148,10 @@ Wenn Sie nur über eine Navigations Eigenschaft verfügen, gibt es Parameter los
 
 ### <a name="configuring-navigation-properties"></a>Konfigurieren von Navigations Eigenschaften
 
-Nachdem die Navigations Eigenschaft erstellt wurde, müssen Sie Sie möglicherweise weiter konfigurieren. In efcore 5,0 wird eine neue, fließende API hinzugefügt, mit der Sie diese Konfiguration durchführen können.
+> [!NOTE]
+> Diese Funktion wurde in EF Core 5,0 hinzugefügt.
+
+Nachdem die Navigations Eigenschaft erstellt wurde, müssen Sie Sie möglicherweise weiter konfigurieren.
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/NavigationConfiguration.cs?name=NavigationConfiguration&highlight=7-9)]
 
@@ -224,6 +227,8 @@ Wenn Sie möchten, dass der Fremdschlüssel auf eine andere Eigenschaft als den 
 
 Mit der fließend-API können Sie konfigurieren, ob die Beziehung erforderlich oder optional ist. Letztendlich steuert dies, ob die Fremdschlüssel Eigenschaft erforderlich oder optional ist. Dies ist besonders nützlich, wenn Sie einen Schatten Zustands-Fremdschlüssel verwenden. Wenn Sie über eine Fremdschlüssel Eigenschaft in der Entitäts Klasse verfügen, wird die Eignung der Beziehung abhängig davon bestimmt, ob die Fremdschlüssel Eigenschaft erforderlich oder optional ist (Weitere Informationen finden Sie unter [erforderliche und optionale Eigenschaften](xref:core/modeling/entity-properties#required-and-optional-properties) ).
 
+Die Fremdschlüssel Eigenschaften befinden sich auf dem abhängigen Entitätstyp. Wenn Sie daher als erforderlich konfiguriert werden, bedeutet dies, dass für jede abhängige Entität eine entsprechende Prinzipal Entität erforderlich ist.
+
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/Required.cs?name=Required&highlight=6)]
 
 > [!NOTE]
@@ -254,8 +259,69 @@ Wenn Sie den Fremdschlüssel konfigurieren, müssen Sie den abhängigen Entität
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/OneToOne.cs?name=OneToOne&highlight=11)]
 
+Die abhängige Seite wird standardmäßig als optional betrachtet, kann jedoch als erforderlich konfiguriert werden. EF überprüft jedoch nicht, ob eine abhängige Entität bereitgestellt wurde, sodass diese Konfiguration nur einen Unterschied macht, wenn die Daten Bank Zuordnung die Durchsetzung zulässt. Ein häufiges Szenario hierfür sind Referenztypen, die standardmäßig Tabellen Aufteilung verwenden.
+
+[!code-csharp[Main](../../../samples/core/Modeling/OwnedEntities/OwnedEntityContext.cs?name=Required&highlight=11-12)]
+
+Mit dieser Konfiguration werden die Spalten, die entsprechen, `ShippingAddress` in der Datenbank als nicht auf NULL festlegbar gekennzeichnet.
+
+> [!NOTE]
+> Wenn Sie Verweis Typen verwenden, die keine [NULL-Werte](/dotnet/csharp/nullable-references) zulassen, ist das Aufrufen von `IsRequired` nicht erforderlich.
+
+> [!NOTE]
+> Die Möglichkeit, zu konfigurieren, ob die abhängige erforderlich ist, wurde in EF Core 5,0 hinzugefügt.
+
 ### <a name="many-to-many"></a>M:n
 
-M:n-Beziehungen ohne Entitäts Klasse zur Darstellung der jointabelle werden noch nicht unterstützt. Sie können jedoch eine m:n-Beziehung darstellen, indem Sie eine Entitäts Klasse für die jointabelle einschließen und zwei separate 1: n-Beziehungen Mapping.
+Für m:n-Beziehungen ist auf beiden Seiten eine Auflistungs Navigations Eigenschaft erforderlich. Sie werden gemäß der Konvention wie andere Beziehungstypen erkannt.
+
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/ManyToManyShared.cs?name=ManyToManyShared)]
+
+Die Art und Weise, in der diese Beziehung in der Datenbank implementiert wird, ist eine jointabelle, die Fremdschlüssel für `Post` und enthält `Tag` . Dies ist beispielsweise der Fall, den EF in einer relationalen Datenbank für das obige Modell erstellt.
+
+```sql
+CREATE TABLE [Posts] (
+    [PostId] int NOT NULL IDENTITY,
+    [Title] nvarchar(max) NULL,
+    [Content] nvarchar(max) NULL,
+    CONSTRAINT [PK_Posts] PRIMARY KEY ([PostId])
+);
+
+CREATE TABLE [Tags] (
+    [TagId] nvarchar(450) NOT NULL,
+    CONSTRAINT [PK_Tags] PRIMARY KEY ([TagId])
+);
+
+CREATE TABLE [PostTag] (
+    [PostId] int NOT NULL,
+    [TagId] nvarchar(450) NOT NULL,
+    CONSTRAINT [PK_PostTag] PRIMARY KEY ([PostId], [TagId]),
+    CONSTRAINT [FK_PostTag_Posts_PostId] FOREIGN KEY ([PostId]) REFERENCES [Posts] ([PostId]) ON DELETE CASCADE,
+    CONSTRAINT [FK_PostTag_Tags_TagId] FOREIGN KEY ([TagId]) REFERENCES [Tags] ([TagId]) ON DELETE CASCADE
+);
+```
+
+Intern erstellt EF einen Entitätstyp, der die jointabelle darstellt, die als joinentitätstyp bezeichnet wird. Hierfür gibt es keinen spezifischen CLR-Typ, der verwendet werden kann `Dictionary<string, object>` . Mehrere m:n-Beziehungen können im Modell vorhanden sein. Daher muss dem joinentitätstyp ein eindeutiger Name zugewiesen werden, in diesem Fall `PostTag` . Die Funktion, die dies zulässt, wird als Entitätstyp mit gemeinsamer Typbezeichnung bezeichnet.
+
+Die m:n-Navigationen werden als "Skip Navigationen" bezeichnet, da Sie den joinentitätstyp effektiv überspringen. Wenn Sie die Massen Konfiguration verwenden, können alle Skip-Navigationen aus abgerufen werden `GetSkipNavigations` .
+
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/ManyToManyShared.cs?name=Metadata)]
+
+Es kommt häufig vor, dass die Konfiguration auf den Join-Entitätstyp angewendet wird. Diese Aktion kann mithilfe von durchgeführt werden `UsingEntity` .
+
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/ManyToManyShared.cs?name=SharedConfiguration)]
+
+[Modell Ausgangsdaten](xref:core/modeling/data-seeding) können mithilfe anonymer Typen für den Join-Entitätstyp bereitgestellt werden. Sie können die modelldebugansicht überprüfen, um die von der Konvention erstellten Eigenschaftsnamen zu ermitteln.
+
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/ManyToManyShared.cs?name=Seeding)]
+
+Zusätzliche Daten können im Join-Entitätstyp gespeichert werden, aber hierfür ist es am besten, einen beständigen CLR-Typ zu erstellen. Beim Konfigurieren der Beziehung mit einem benutzerdefinierten Join-Entitätstyp müssen beide Fremdschlüssel explizit angegeben werden.
+
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/ManyToManyPayload.cs?name=ManyToManyPayload)]
+
+> [!NOTE]
+> Die Möglichkeit zum Konfigurieren von m:n-Beziehungen wurde in EF Core 5,0 hinzugefügt. verwenden Sie für die vorherige Version die folgende Vorgehensweise.
+
+Sie können auch eine m:n-Beziehung darstellen, indem Sie einfach den Join-Entitätstyp hinzufügen und zwei separate 1: n-Beziehungen Mapping.
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/ManyToMany.cs?name=ManyToMany&highlight=11-14,16-19,39-46)]

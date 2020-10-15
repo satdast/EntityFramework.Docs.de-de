@@ -1,14 +1,14 @@
 ---
 title: Testability und Entity Framework 4,0-EF6
 description: Testability und Entity Framework 4,0
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
-ms.openlocfilehash: 439e2af6b0c851a2ab70d6d9ed1004deb83b1a0e
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 8a9c8fbf7d6131498bd9b37567fdb90010b808cc
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90070509"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92062983"
 ---
 # <a name="testability-and-entity-framework-40"></a>Testability und Entity Framework 4,0
 Scott allen
@@ -959,7 +959,7 @@ Die Wahl zwischen den Mocken oder Fakes hängt größtenteils von dem System ab,
 
 In diesem Whitepaper haben wir verschiedene Ansätze zum Erstellen von testbarem Code gezeigt, während wir die ADO.NET-Entity Framework für die Daten Persistenz verwenden. Wir können integrierte Abstraktionen wie IObjectSet t nutzen &lt; &gt; oder eigene Abstraktionen wie IRepository &lt; t erstellen &gt; .In beiden Fällen ermöglicht die poco-Unterstützung im ADO.NET-Entity Framework 4,0, dass die Consumer dieser Abstraktionen permanent ignoriert werden und hochgradig testfähig bleiben. Zusätzliche EF4-Features wie implizites Lazy Loading ermöglichen, dass Geschäfts-und Anwendungs Dienst Code funktionieren, ohne sich Gedanken über die Details eines relationalen Datenspeicher zu machen. Schließlich können die von uns erstellten Abstraktionen leicht in Komponententests hinein oder gefälscht werden, und wir können diese Test Doubles verwenden, um schnelle, hochgradig isolierte und zuverlässige Tests zu erzielen.
 
-### <a name="additional-resources"></a>Zusätzliche Ressourcen
+### <a name="additional-resources"></a>Weitere Ressourcen
 
 -   Robert C. Martin " [das Prinzip der einzelnen Verantwortung](https://www.objectmentor.com/resources/articles/srp.pdf)"
 -   Martin Fowler, [Katalog mit Mustern](https://www.martinfowler.com/eaaCatalog/index.html) aus *Mustern der Unternehmens Anwendungsarchitektur*

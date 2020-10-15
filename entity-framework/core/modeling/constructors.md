@@ -4,28 +4,25 @@ description: Verwenden von Konstruktoren zum Binden von Daten mit Entity Framewo
 author: ajcvickers
 ms.date: 02/23/2018
 uid: core/modeling/constructors
-ms.openlocfilehash: 06d18f173275599ad1e547193363e13c48fc8dcf
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 9502d75072eebb80c37cf1805e21f7d112269ba1
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90071588"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92063711"
 ---
 # <a name="entity-types-with-constructors"></a>Entitäts Typen mit Konstruktoren
 
-> [!NOTE]  
-> Dieses Feature ist neu in EF Core 2.1.
+Es ist möglich, einen Konstruktor mit Parametern zu definieren und EF Core diesen Konstruktor aufzurufen, wenn eine Instanz der Entität erstellt wird. Die Konstruktorparameter können an zugeordnete Eigenschaften oder an verschiedene Arten von Diensten gebunden werden, um Verhalten wie Lazy Load zu vereinfachen.
 
-Ab EF Core 2,1 ist es möglich, einen Konstruktor mit Parametern zu definieren, und EF Core diesen Konstruktor aufzurufen, wenn eine Instanz der Entität erstellt wird. Die Konstruktorparameter können an zugeordnete Eigenschaften oder an verschiedene Arten von Diensten gebunden werden, um Verhalten wie Lazy Load zu vereinfachen.
-
-> [!NOTE]  
-> Ab EF Core 2,1 ist die gesamte konstruktorbindung gemäß der Konvention. Die Konfiguration bestimmter zu verwendende Konstruktoren ist für eine zukünftige Version geplant.
+> [!NOTE]
+> Derzeit ist die gesamte konstruktorbindung gemäß Konvention. Die Konfiguration bestimmter zu verwendende Konstruktoren ist für eine zukünftige Version geplant.
 
 ## <a name="binding-to-mapped-properties"></a>Binden an zugeordnete Eigenschaften
 
 Ein typisches Blog-/Post-Modell:
 
-``` csharp
+```csharp
 public class Blog
 {
     public int Id { get; set; }
@@ -50,7 +47,7 @@ public class Post
 
 Wenn EF Core Instanzen dieser Typen erstellt, z. b. für die Ergebnisse einer Abfrage, wird zuerst der standardmäßige Parameter lose Konstruktor aufgerufen und dann jede Eigenschaft auf den Wert aus der Datenbank festgelegt. Wenn EF Core jedoch einen parametrisierten Konstruktor mit Parameternamen und-Typen findet, die mit den zugeordneten Eigenschaften identisch sind, wird stattdessen der parametrisierte Konstruktor mit Werten für diese Eigenschaften aufgerufen, und jede Eigenschaft wird nicht explizit festgelegt. Beispiel:
 
-``` csharp
+```csharp
 public class Blog
 {
     public Blog(int id, string name, string author)
@@ -103,7 +100,7 @@ Nachdem Eigenschaften über den Konstruktor festgelegt wurden, kann es sinnvoll 
 
 Eine einfache Möglichkeit, diese Dinge zu vermeiden, ist die Verwendung privater Setter. Beispiel:
 
-``` csharp
+```csharp
 public class Blog
 {
     public Blog(int id, string name, string author)
@@ -142,9 +139,9 @@ public class Post
 
 EF Core eine Eigenschaft mit einem privaten Setter als Lese-/Schreibzugriff sehen, bedeutet dies, dass alle Eigenschaften wie zuvor zugeordnet sind und der Schlüssel weiterhin vom Speicher generiert werden kann.
 
-Eine Alternative zur Verwendung von privaten Setter besteht darin, dass Eigenschaften wirklich schreibgeschützt sind und in onmodelcreating eine explizite Zuordnung hinzugefügt wird. Ebenso können einige Eigenschaften vollständig entfernt und durch nur Felder ersetzt werden. Beachten Sie z. b. die folgenden Entitäts Typen:
+Eine Alternative zur Verwendung von privaten Setter besteht darin, dass Eigenschaften wirklich schreibgeschützt sind und in onmodelcreating eine explizite Zuordnung hinzugefügt wird. Ebenso können einige Eigenschaften vollständig entfernt und durch nur Felder ersetzt werden. Betrachten Sie beispielsweise die folgenden Entitätstypen:
 
-``` csharp
+```csharp
 public class Blog
 {
     private int _id;
@@ -181,7 +178,7 @@ public class Post
 
 Und diese Konfiguration in onmodelcreating:
 
-``` csharp
+```csharp
 protected override void OnModelCreating(ModelBuilder modelBuilder)
 {
     modelBuilder.Entity<Blog>(
@@ -208,7 +205,7 @@ Hinweise:
 * Die anderen Eigenschaften sind schreibgeschützte Eigenschaften, die nur im Konstruktor festgelegt sind.
 * Wenn der Primärschlüssel Wert nur von EF festgelegt oder aus der Datenbank gelesen wird, muss er nicht in den Konstruktor eingeschlossen werden. Dadurch bleibt der Schlüssel "Property" als einfaches Feld, und es wird klar, dass er beim Erstellen neuer Blogs oder Beiträge nicht explizit festgelegt werden sollte.
 
-> [!NOTE]  
+> [!NOTE]
 > Dieser Code führt zu einer Compilerwarnung "169", die angibt, dass das Feld niemals verwendet wird. Dies kann ignoriert werden, da EF Core das Feld in der Praxis auf extralweise verwendet.
 
 ## <a name="injecting-services"></a>Einschleusen von Diensten
@@ -220,12 +217,12 @@ EF Core können auch "Dienste" in den Konstruktor eines Entitäts Typs einfügen
 * `Action<object, string>` -einen Delegaten verzögert laden: Weitere Informationen finden Sie in der [Dokumentation Lazy Load](xref:core/querying/related-data) .
 * `IEntityType` -Die EF Core Metadaten, die diesem Entitätstyp zugeordnet sind.
 
-> [!NOTE]  
-> Ab EF Core 2,1 können nur von EF Core bekannte Dienste eingefügt werden. Die Unterstützung für das Einfügen von Anwendungsdiensten wird für eine zukünftige Version berücksichtigt.
+> [!NOTE]
+> Derzeit können nur von EF Core bekannte Dienste eingefügt werden. Die Unterstützung für das Einfügen von Anwendungsdiensten wird für eine zukünftige Version berücksichtigt.
 
 Beispielsweise kann ein eingefügter dbcontext zum selektiven zugreifen auf die Datenbank verwendet werden, um Informationen zu verknüpften Entitäten abzurufen, ohne Sie zu laden. Im folgenden Beispiel wird dies verwendet, um die Anzahl von Beiträgen in einem Blog abzurufen, ohne die Beiträge zu laden:
 
-``` csharp
+```csharp
 public class Blog
 {
     public Blog()
@@ -268,5 +265,5 @@ Hier sind einige Punkte zu beachten:
 * Der Code, der den injizierten Dienst (d. h. den Kontext) verwendet, ist für die Behandlung `null` von Fällen zuständig, in denen EF Core die Instanz nicht erstellt.
 * Da der Dienst in einer Lese-/Schreibeigenschaft gespeichert wird, wird er zurückgesetzt, wenn die Entität an eine neue Kontext Instanz angefügt wird.
 
-> [!WARNING]  
+> [!WARNING]
 > Das Einfügen von dbcontext wie diesem wird häufig als Antimuster betrachtet, da die Entitäts Typen direkt an EF Core gekoppelt werden. Berücksichtigen Sie alle Optionen sorgfältig, bevor Sie Service Injection wie folgt verwenden.

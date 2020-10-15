@@ -2,15 +2,14 @@
 title: Azure Cosmos DB Anbieter-Einschränkungen-EF Core
 description: Einschränkungen der Entity Framework Core Azure Cosmos DB Anbieter im Vergleich zu anderen Anbietern
 author: AndriySvyryd
-ms.author: ansvyryd
 ms.date: 11/05/2019
 uid: core/providers/cosmos/limitations
-ms.openlocfilehash: 0b8edd9ac5fa3d684498efe222ce11a0356040b8
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: e4d1c38da14d1e722797f8543313a69c7fb088cc
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89619276"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92064036"
 ---
 # <a name="ef-core-azure-cosmos-db-provider-limitations"></a>Einschränkungen für EF Core Azure Cosmos DB-Anbieter
 

@@ -2,15 +2,14 @@
 title: Referenz zu EF Core Tools (.net CLI)-EF Core
 description: Referenzhandbuch für die Entity Framework Core .net Core-CLI Tools
 author: bricelam
-ms.author: bricelam
-ms.date: 09/17/2020
+ms.date: 10/13/2020
 uid: core/miscellaneous/cli/dotnet
-ms.openlocfilehash: ee1caebcda93f627d285878f8594688a0f08c194
-ms.sourcegitcommit: c0e6a00b64c2dcd8acdc0fe6d1b47703405cdf09
+ms.openlocfilehash: 4056fb99659ee3390d16b18eca9b12cfc8a2dd03
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/24/2020
-ms.locfileid: "91210392"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92062515"
 ---
 # <a name="entity-framework-core-tools-reference---net-core-cli"></a>Referenz zu Entity Framework Core Tools .net Core-CLI
 
@@ -24,59 +23,37 @@ Wenn Sie Visual Studio verwenden, sollten Sie die [Tools der Paket-Manager-Konso
 
 ## <a name="installing-the-tools"></a>Installieren der Tools
 
-Das Installationsverfahren hängt vom Projekttyp und der Version ab:
+`dotnet ef` kann als globales oder lokales Tool installiert werden. Die meisten Entwickler bevorzugen `dotnet ef` die Installation als globales Tool mit dem folgenden Befehl:
 
-* EF Core 3. x und 5. x
-* ASP.net Core Version 2,1 und höher
-* EF Core 2. x
+```dotnetcli
+dotnet tool install --global dotnet-ef
+```
 
-### <a name="ef-core-3x-and-5x"></a>EF Core 3. x und 5. x
+Um es als lokales Tool zu verwenden, stellen Sie die Abhängigkeiten eines Projekts wieder her, das es mithilfe einer [Tool Manifest-Datei als Tool](/dotnet/core/tools/global-tools#install-a-local-tool)Abhängigkeit deklariert.
 
-* `dotnet ef` muss als globales oder lokales Tool installiert werden. Die meisten Entwickler bevorzugen `dotnet ef` die Installation als globales Tool mit dem folgenden Befehl:
+Aktualisieren Sie das Tool Tool mit dem folgenden Befehl:
 
-  ```dotnetcli
-  dotnet tool install --global dotnet-ef
-  ```
+```dotnetcli
+dotnet tool update --global dotnet-ef
+```
 
-  `dotnet ef` kann auch als lokales Tool verwendet werden. Um es als lokales Tool zu verwenden, stellen Sie die Abhängigkeiten eines Projekts wieder her, das es mithilfe einer [Tool Manifest-Datei als Tool](/dotnet/core/tools/global-tools#install-a-local-tool)Abhängigkeit deklariert.
+Bevor Sie die Tools für ein bestimmtes Projekt verwenden können, müssen Sie das Paket hinzufügen `Microsoft.EntityFrameworkCore.Design` .
 
-* Installieren Sie das [.NET Core SDK](https://www.microsoft.com/net/download/core).
-* Installieren Sie das neueste `Microsoft.EntityFrameworkCore.Design` Paket.
-
-  ```dotnetcli
-  dotnet add package Microsoft.EntityFrameworkCore.Design
-  ```
-
-### <a name="aspnet-core-21"></a>ASP.net Core 2.1 und höher
-
-* Installieren Sie die aktuelle [.net Core SDK](https://www.microsoft.com/net/download/core). Das SDK muss installiert werden, auch wenn Sie über die neueste Version von Visual Studio verfügen.
-
-  Dies ist nur für ASP.net Core 2.1 und höher erforderlich, da das `Microsoft.EntityFrameworkCore.Design` Paket im [Metapaket Microsoft. aspnetcore. app](/aspnet/core/fundamentals/metapackage-app)enthalten ist.
-
-### <a name="ef-core-2x-not-aspnet-core"></a>EF Core 2. x (nicht ASP.net Core)
-
-Die `dotnet ef` Befehle sind im .net Core SDK enthalten, aber zum Aktivieren der Befehle, die Sie zum Installieren des `Microsoft.EntityFrameworkCore.Design` Pakets haben.
-
-* Installieren Sie die aktuelle [.net Core SDK](https://www.microsoft.com/net/download/core). Das SDK muss installiert werden, auch wenn Sie über die neueste Version von Visual Studio verfügen.
-
-* Installieren Sie das aktuellste stabile `Microsoft.EntityFrameworkCore.Design` Paket.
-
-  ```dotnetcli
-  dotnet add package Microsoft.EntityFrameworkCore.Design
-  ```
+```dotnetcli
+dotnet add package Microsoft.EntityFrameworkCore.Design
+```
 
 ### <a name="verify-installation"></a>Überprüfen der Installation
 
 Führen Sie die folgenden Befehle aus, um sicherzustellen, dass EF Core CLI-Tools ordnungsgemäß installiert sind
 
   ```dotnetcli
-  dotnet restore
   dotnet ef
   ```
 
 Die Ausgabe des Befehls identifiziert die Version der verwendeten Tools:
 
-```console
+```output
 
                      _/\__
                ---==/    \\

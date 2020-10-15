@@ -2,15 +2,14 @@
 title: Eigene Entitäts Typen-EF Core
 description: Konfigurieren eigener Entitäts Typen oder Aggregate bei Verwendung von Entity Framework Core
 author: AndriySvyryd
-ms.author: ansvyryd
 ms.date: 11/06/2019
 uid: core/modeling/owned-entities
-ms.openlocfilehash: f65c07c79daf38e733c76f328843c90466c657f5
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: a49d9aab735232dfd5a3db456410d527f94f3c18
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89619326"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92063776"
 ---
 # <a name="owned-entity-types"></a>Nicht eigenständige Entitätstypen
 
@@ -20,7 +19,7 @@ Besitzende Entitäten sind im wesentlichen Teil des Besitzers und können nicht 
 
 ## <a name="explicit-configuration"></a>Explizite Konfiguration
 
-Eigene Entitäts Typen werden nie von EF Core im Modell nach Konvention eingeschlossen. Sie können die- `OwnsOne` Methode in `OnModelCreating` oder mit dem-Typ mit versehen `OwnedAttribute` (neu in EF Core 2,1), um den Typ als eigenen Typ zu konfigurieren.
+Eigene Entitäts Typen werden nie von EF Core im Modell nach Konvention eingeschlossen. Sie können die- `OwnsOne` Methode in verwenden `OnModelCreating` oder den Typ mit kommentieren `OwnedAttribute` , um den Typ als eigenen Typ zu konfigurieren.
 
 In diesem Beispiel `StreetAddress` ist ein Typ ohne Identity-Eigenschaft. Dieser Typ wird als Eigenschaft des Typs „Order“ verwendet, um die Lieferadresse für eine bestimmte Bestellung anzugeben.
 
@@ -40,6 +39,9 @@ Wenn die `ShippingAddress` Eigenschaft im-Typ privat ist `Order` , können Sie d
 
 Weitere Informationen finden Sie im [vollständigen Beispiel Projekt](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Modeling/OwnedEntities) .
 
+> [!TIP]
+> Der zugehörige Entitätstyp kann als erforderlich markiert werden. Weitere Informationen finden [Sie unter erforderliche 1-zu-eins-abhängige Abhängigkeiten](xref:core/modeling/relationships#one-to-one) .
+
 ## <a name="implicit-keys"></a>Implizite Schlüssel
 
 `OwnsOne`Besitzer Typen, die mit einer Verweis Navigation konfiguriert oder ermittelt wurden, haben immer eine eins-zu-eins-Beziehung mit dem Besitzer und benötigen daher keine eigenen Schlüsselwerte, da die Fremdschlüssel Werte eindeutig sind. Im vorherigen Beispiel muss der- `StreetAddress` Typ keine Schlüsseleigenschaft definieren.  
@@ -47,9 +49,6 @@ Weitere Informationen finden Sie im [vollständigen Beispiel Projekt](https://gi
 Um zu verstehen, wie EF Core diese Objekte verfolgt, ist es hilfreich zu wissen, dass ein Primärschlüssel als [Schatten Eigenschaft](xref:core/modeling/shadow-properties) für den eigenen Typ erstellt wird. Der Wert des Schlüssels einer Instanz des eigenen Typs ist mit dem Wert des Schlüssels der Besitzer Instanz identisch.
 
 ## <a name="collections-of-owned-types"></a>Auflistungen von eigenen Typen
-
-> [!NOTE]
-> Dieses Feature ist neu in EF Core 2.2.
 
 Verwenden Sie zum Konfigurieren einer Sammlung von eigenen Typen `OwnsMany` in `OnModelCreating` .
 
@@ -60,18 +59,15 @@ Die beiden einfachsten Lösungen hierfür sind:
 - Definieren eines Ersatz Primärschlüssels für eine neue Eigenschaft, unabhängig vom Fremdschlüssel, der auf den Besitzer zeigt. Die enthaltenen Werte müssen für alle Besitzer eindeutig sein (z. b. wenn das übergeordnete Element über ein untergeordnetes Element {1} verfügt, das übergeordnete Element kein unter {1} geordnetes Element {2} haben kann {1} ), sodass der Wert keine inhärente Bedeutung hat Da der Fremdschlüssel nicht Teil des Primärschlüssels ist, können seine Werte geändert werden, sodass Sie ein untergeordnetes Element von einem übergeordneten Element zu einem anderen verschieben können. Dies ist jedoch in der Regel gegen Aggregat Semantik.
 - Verwenden des fremd Schlüssels und einer zusätzlichen Eigenschaft als zusammengesetzten Schlüssel. Der zusätzliche Eigenschafts Wert muss nun nur für ein bestimmtes übergeordnetes Element eindeutig sein (wenn das übergeordnete Element über ein untergeordnetes Element verfügt, kann das übergeordnete Element {1} {1,1} {2} nach wie vor über {2,1} Durch den Fremdschlüssel Teil des Primärschlüssels wird die Beziehung zwischen dem Besitzer und der Entität, die im Besitz des Primärschlüssels ist, unveränderlich und die Aggregat Semantik ist besser. Dies geschieht EF Core standardmäßig.
 
-In diesem Beispiel verwenden wir die- `Distributor` Klasse:
+In diesem Beispiel verwenden wir die- `Distributor` Klasse.
 
 [!code-csharp[Distributor](../../../samples/core/Modeling/OwnedEntities/Distributor.cs?name=Distributor)]
 
 Standardmäßig ist der Primärschlüssel, der für den eigenen Typ verwendet wird, auf den über die Navigations Eigenschaft verwiesen wird, `ShippingCenters` `("DistributorId", "Id")` wobei `"DistributorId"` der FK und ein eindeutiger `"Id"` `int` Wert ist.
 
-So konfigurieren Sie einen anderen PK-Befehl `HasKey` :
+Zum Konfigurieren eines anderen Primärschlüssel Aufrufes `HasKey` .
 
 [!code-csharp[OwnsMany](../../../samples/core/Modeling/OwnedEntities/OwnedEntityContext.cs?name=OwnsMany)]
-
-> [!NOTE]
-> Bevor EF Core 3,0- `WithOwner()` Methode nicht vorhanden war, sollte dieser-Befehl entfernt werden. Außerdem wurde der Primärschlüssel nicht automatisch erkannt, sodass er immer angegeben werden musste.
 
 ## <a name="mapping-owned-types-with-table-splitting"></a>Zuordnung eigener Typen mit Tabellen Aufteilung
 
@@ -79,7 +75,7 @@ Bei der Verwendung von relationalen Datenbanken werden Verweis eigene Typen stan
 
 Standardmäßig benennen EF Core die Daten Bank Spalten für die Eigenschaften des eigenen Entitäts Typs nach dem Muster _Navigation_OwnedEntityProperty_. Daher `StreetAddress` werden die Eigenschaften in der Tabelle "Orders" mit den Namen "ShippingAddress_Street" und "ShippingAddress_City" angezeigt.
 
-Sie können die- `HasColumnName` Methode verwenden, um diese Spalten umzubenennen:
+Sie können die- `HasColumnName` Methode verwenden, um diese Spalten umzubenennen.
 
 [!code-csharp[ColumnNames](../../../samples/core/Modeling/OwnedEntities/OwnedEntityContext.cs?name=ColumnNames)]
 
@@ -92,7 +88,7 @@ Ein eigener Entitätstyp kann vom gleichen .NET-Typ wie ein anderer eigener Enti
 
 In diesen Fällen wird die-Eigenschaft, die vom Besitzer auf die eigene Entität zeigt, zur _definierenden Navigation_ des eigenen Entitäts Typs. Aus Sicht der EF Core ist die definierende Navigation Teil der Typidentität neben dem .NET-Typ.
 
-Beispielsweise sind in der folgenden Klasse `ShippingAddress` und `BillingAddress` beide identisch mit dem .NET-Typ `StreetAddress` :
+In der folgenden Klasse `ShippingAddress` und `BillingAddress` sind z. b. beide identisch mit dem .NET-Typ `StreetAddress` .
 
 [!code-csharp[OrderDetails](../../../samples/core/Modeling/OwnedEntities/OrderDetails.cs?name=OrderDetails)]
 
@@ -145,15 +141,14 @@ Einige dieser Einschränkungen sind grundlegend für die Funktionsweise von Enti
 ### <a name="by-design-restrictions"></a>Entwurfs Einschränkungen
 
 - Sie können keinen `DbSet<T>` für einen eigenen Typ erstellen.
-- Der-Typ kann nicht `Entity<T>()` mit einem eigenen Typ aufgerufen werden. `ModelBuilder`
+- Es ist nicht möglich, `Entity<T>()` mit einem eigenen Typ für aufzurufen `ModelBuilder` .
+- Instanzen von eigenen Entitäts Typen können nicht von mehreren Besitzern gemeinsam genutzt werden (Dies ist ein bekanntes Szenario für Wert Objekte, das nicht mit Entitäts Typen im Besitz von Entitäten implementiert werden kann).
 
 ### <a name="current-shortcomings"></a>Aktuelle Mängel
 
 - Besitzende Entitäts Typen dürfen keine Vererbungs Hierarchien aufweisen
-- Verweis Navigation auf eigene Entitäts Typen darf nicht NULL sein, es sei denn, Sie sind explizit einer separaten Tabelle vom Besitzer zugeordnet.
-- Instanzen von eigenen Entitäts Typen können nicht von mehreren Besitzern gemeinsam genutzt werden (Dies ist ein bekanntes Szenario für Wert Objekte, das nicht mit Entitäts Typen im Besitz von Entitäten implementiert werden kann).
 
 ### <a name="shortcomings-in-previous-versions"></a>Mängel in früheren Versionen
 
-- In EF Core 2,0 können Navigationen zu besitzenden Entitäts Typen nicht in abgeleiteten Entitäts Typen deklariert werden, es sei denn, die im Besitz befindlichen Entitäten werden explizit einer separaten Tabelle der Besitzer Hierarchie zugeordnet. Diese Einschränkung wurde in EF Core 2,1 entfernt.
-- In EF Core 2,0 und 2,1 wurden nur Verweis Navigation auf eigene Typen unterstützt. Diese Einschränkung wurde in EF Core 2,2 entfernt.
+- In EF Core 2. x-Referenz Navigation zu besitzenden Entitäts Typen dürfen nicht NULL sein, es sei denn, Sie werden explizit einer separaten Tabelle vom Besitzer zugeordnet.
+- In EF Core 3. x werden die Spalten für eigene Entitäts Typen, die derselben Tabelle wie der Besitzer zugeordnet sind, immer als "Nullable" markiert.

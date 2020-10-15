@@ -2,14 +2,14 @@
 title: SQLite-Datenbankanbieter-Einschränkungen-EF Core
 description: Einschränkungen für den Entity Framework Core SQLite-Datenbankanbieter im Vergleich zu anderen Anbietern
 author: bricelam
-ms.date: 07/16/2020
+ms.date: 09/24/2020
 uid: core/providers/sqlite/limitations
-ms.openlocfilehash: 546910afb9c97a93a7cc471bb813be0b9874a4bd
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 3d696474d401e8fd6c26a78067d292f0bb97a457
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90071224"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92062736"
 ---
 # <a name="sqlite-ef-core-database-provider-limitations"></a>SQLite EF Core-Datenbank-Anbieter-Einschränkungen
 
@@ -35,7 +35,7 @@ Anstelle von `DateTimeOffset` wird empfohlen, DateTime-Werte zu verwenden. Wenn 
 
 Der- `Decimal` Typ bietet eine hohe Genauigkeit. Wenn Sie diese Genauigkeits Stufe nicht benötigen, empfiehlt sich stattdessen die Verwendung von Double. Sie können einen [Wert Konverter](xref:core/modeling/value-conversions) verwenden, um in ihren Klassen weiterhin Decimal zu verwenden.
 
-``` csharp
+```csharp
 modelBuilder.Entity<MyEntity>()
     .Property(e => e.DecimalProperty)
     .HasConversion<double>();
@@ -50,31 +50,52 @@ Es wird versucht, eine Neuerstellung auszuführen, um bestimmte Vorgänge auszuf
 | Vorgang            | Unterstützt?  | Erfordert Version |
 |:---------------------|:------------|:-----------------|
 | Addcheckeinschränkung   | ✔ (neu erstellen) | 5.0              |
-| AddColumn            | ✔           | 1.0              |
+| AddColumn            | ✔           |                  |
 | Addfremdnkey        | ✔ (neu erstellen) | 5.0              |
 | Addprimarykey        | ✔ (neu erstellen) | 5.0              |
 | AddUniqueConstraint  | ✔ (neu erstellen) | 5.0              |
 | AlterColumn          | ✔ (neu erstellen) | 5.0              |
-| CreateIndex          | ✔           | 1.0              |
-| CreateTable          | ✔           | 1.0              |
+| CreateIndex          | ✔           |                  |
+| CreateTable          | ✔           |                  |
 | Dropcheck-Einschränkung  | ✔ (neu erstellen) | 5.0              |
 | DropColumn           | ✔ (neu erstellen) | 5.0              |
 | Dropfremdnkey       | ✔ (neu erstellen) | 5.0              |
-| DropIndex            | ✔           | 1.0              |
+| DropIndex            | ✔           |                  |
 | Dropprimarykey       | ✔ (neu erstellen) | 5.0              |
-| DropTable            | ✔           | 1.0              |
+| DropTable            | ✔           |                  |
 | Dropuniqueconstraint | ✔ (neu erstellen) | 5.0              |
-| Renamecolumn         | ✔           | 2.2.2            |
-| Renameingedex          | ✔ (neu erstellen) | 2.1              |
-| RenameTable          | ✔           | 1.0              |
-| Ensureschema         | ✔ (No-OP)   | 2.0              |
-| DropSchema           | ✔ (No-OP)   | 2.0              |
-| Einfügen               | ✔           | 2.0              |
-| Aktualisieren               | ✔           | 2.0              |
-| Löschen               | ✔           | 2.0              |
+| Renamecolumn         | ✔           | 2.2              |
+| Renameingedex          | ✔ (neu erstellen) |                  |
+| RenameTable          | ✔           |                  |
+| Ensureschema         | ✔ (No-OP)   |                  |
+| DropSchema           | ✔ (No-OP)   |                  |
+| Einfügen               | ✔           |                  |
+| Aktualisieren               | ✔           |                  |
+| Löschen               | ✔           |                  |
 
-## <a name="migrations-limitations-workaround"></a>Problem Umgehung der Migrations Einschränkungen
+### <a name="migrations-limitations-workaround"></a>Problem Umgehung der Migrations Einschränkungen
 
 Sie können einige dieser Einschränkungen umgehen, indem Sie Code in ihren Migrationen manuell schreiben, um eine Neuerstellung durchzuführen. Tabellen neubuilds umfassen das Erstellen einer neuen Tabelle, das Kopieren von Daten in die neue Tabelle, das Löschen der alten Tabelle und das Umbenennen der neuen Tabelle. Sie müssen die-Methode verwenden `Sql(string)` , um einige dieser Schritte auszuführen.
 
 Weitere Informationen finden Sie unter [vornehmen anderer Arten von Tabellen Schema Änderungen](https://sqlite.org/lang_altertable.html#otheralter) in der SQLite-Dokumentation.
+
+### <a name="idempotent-script-limitations"></a>Einschränkungen für idempotente Skripts
+
+Anders als andere Datenbanken enthält SQLite keine prozedurale Sprache. Aus diesem Grund gibt es keine Möglichkeit, die von den idempotenten Migrations Skripts benötigte if-then-Logik zu generieren.
+
+Wenn Sie wissen, dass die letzte Migration auf eine Datenbank angewendet wurde, können Sie ein Skript aus dieser Migration zur neuesten Migration generieren.
+
+```dotnetcli
+dotnet ef migrations script CurrentMigration
+```
+
+Andernfalls wird empfohlen, `dotnet ef database update` zum Anwenden von Migrationen zu verwenden. Ab EF Core 5,0 können Sie die Datenbankdatei angeben, wenn Sie den Befehl ausführen.
+
+```dotnetcli
+dotnet ef database update --connection "Data Source=My.db"
+```
+
+## <a name="see-also"></a>Weitere Informationen
+
+* [Microsoft. Data. sqlite Async-Einschränkungen](/dotnet/standard/data/sqlite/async)
+* [Microsoft. Data. sqlite ADO.net Einschränkungen](/dotnet/standard/data/sqlite/adonet-limitations)

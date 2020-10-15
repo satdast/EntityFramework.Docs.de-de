@@ -1,15 +1,15 @@
 ---
 title: Unterstützungs Felder-EF Core
 description: Konfigurieren von Unterstützungs Feldern für Eigenschaften in einem Entity Framework Core Modell
-author: rowanmiller
+author: ajcvickers
 ms.date: 10/27/2016
 uid: core/modeling/backing-field
-ms.openlocfilehash: 48ef28e7b880fee571cb1857601fb2cead535fbf
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 4f5680b14c7f0e1fa5128d366f2960c4ae9b3735
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90071627"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92063685"
 ---
 # <a name="backing-fields"></a>Unterstützungsfelder
 
@@ -17,7 +17,7 @@ Mit Unterstützungs Feldern kann EF anstelle einer Eigenschaft ein Feld lesen un
 
 ## <a name="basic-configuration"></a>Basiskonfiguration
 
-Gemäß der Konvention werden die folgenden Felder als Sicherungs Felder für eine bestimmte Eigenschaft (aufgelistet in der Rangfolge) erkannt. 
+Gemäß der Konvention werden die folgenden Felder als Sicherungs Felder für eine bestimmte Eigenschaft (aufgelistet in der Rangfolge) erkannt.
 
 * `_<camel-cased property name>`
 * `_<property name>`
@@ -63,6 +63,6 @@ EF versucht, eine CLR-Eigenschaft mit dem angegebenen Namen oder einem Feld zu f
 
 Möglicherweise müssen Sie in LINQ-Abfragen auf eine Eigenschaft vom Typ "Feld" verweisen, diese Felder sind jedoch in der Regel privat. Sie können die- `EF.Property(...)` Methode in einer LINQ-Abfrage verwenden, um auf das-Feld zu verweisen:
 
-``` csharp
+```csharp
 var blogs = db.blogs.OrderBy(b => EF.Property<string>(b, "_validatedUrl"));
 ```

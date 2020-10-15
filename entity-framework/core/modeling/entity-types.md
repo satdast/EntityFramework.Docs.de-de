@@ -2,14 +2,14 @@
 title: Entitäts Typen-EF Core
 description: Konfigurieren und Zuordnen von Entitäts Typen mithilfe von Entity Framework Core
 author: roji
-ms.date: 12/03/2019
+ms.date: 10/06/2020
 uid: core/modeling/entity-types
-ms.openlocfilehash: fead7f9e37efb7f674f429acbfd16c2ca78480d4
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: bfefa29c08679a1524c00769b3495d75a301e2d3
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90071510"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92062229"
 ---
 # <a name="entity-types"></a>Entitätstypen
 
@@ -40,6 +40,19 @@ Wenn Sie nicht möchten, dass ein Typ im Modell enthalten ist, können Sie ihn a
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/IgnoreType.cs?name=IgnoreType&highlight=3)]
 
 ***
+
+### <a name="excluding-from-migrations"></a>Ausschließen von Migrationen
+
+> [!NOTE]
+> Die Möglichkeit, Tabellen aus Migrationen auszuschließen, wurde in EF Core 5,0 hinzugefügt.
+
+Es ist manchmal hilfreich, den gleichen Entitätstyp in mehreren Typen zugeordnet zu haben `DbContext` . Dies trifft vor allem dann zu, wenn [begrenzte Kontexte](https://www.martinfowler.com/bliki/BoundedContext.html)verwendet werden, für die es üblich ist, `DbContext` für jeden Kontext Kontext einen anderen Typ zu verwenden.
+
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/TableExcludeFromMigrations.cs?name=TableExcludeFromMigrations&highlight=4)]
+
+Bei dieser Konfigurations Migration wird die Tabelle nicht erstellt `blogs` , Sie `Blog` ist jedoch noch im Modell enthalten und kann normal verwendet werden.
+
+Wenn Sie erneut mit der Verwaltung der Tabelle beginnen müssen, sollte eine neue Migration erstellt werden, bei der `blogs` nicht ausgeschlossen ist. Die nächste Migration enthält jetzt alle Änderungen, die an der Tabelle vorgenommen werden.
 
 ## <a name="table-name"></a>Tabellenname
 
@@ -78,3 +91,14 @@ Anstatt das Schema für jede Tabelle anzugeben, können Sie auch das Standardsch
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/DefaultSchema.cs?name=DefaultSchema&highlight=3)]
 
 Beachten Sie, dass das Festlegen des Standard Schemas auch andere Datenbankobjekte, z. b. Sequenzen, beeinträchtigt.
+
+## <a name="view-mapping"></a>Zuordnung anzeigen
+
+Entitäts Typen können mithilfe der flüssigen API Daten Bank Sichten zugeordnet werden.
+
+> [!Note]
+> EF nimmt an, dass die Sicht, auf die verwiesen wird, bereits in der Datenbank vorhanden ist, wird Sie in einer Migration nicht automatisch erstellt.
+
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/ViewNameAndSchema.cs?name=ViewNameAndSchema&highlight=1)]
+
+ Durch die Zuordnung zu einer Sicht wird die Standard Tabellen Zuordnung entfernt. der Entitätstyp kann jedoch auch explizit einer Tabelle zugeordnet werden. In diesem Fall wird die Abfrage Zuordnung für Abfragen verwendet, und die Tabellen Zuordnung wird für Updates verwendet.

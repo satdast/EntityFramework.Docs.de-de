@@ -1,15 +1,15 @@
 ---
 title: Verbindungs Zeichenfolgen und Modelle EF6
 description: Verbindungs Zeichenfolgen und Modelle in Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/fundamentals/configuring/connection-strings
-ms.openlocfilehash: 45db461b18cde3bc1f1fccadec3c8ece6dd16832
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: c60acb965b7062f3cd35dab94ee8dfe48394969a
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90070782"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92063386"
 ---
 # <a name="connection-strings-and-models"></a>Verbindungs Zeichenfolgen und Modelle
 In diesem Thema wird erläutert, wie Entity Framework ermittelt, welche Datenbankverbindung verwendet werden soll, und wie Sie Sie ändern können. Die Modelle, die mit Code First und dem EF-Designer erstellt wurden, werden in diesem Thema behandelt.  

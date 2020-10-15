@@ -1,15 +1,15 @@
 ---
 title: Verbindungsresilienz-EF Core
 description: Verwenden der verbindungsresilienz zum automatischen erneuten Versuch fehlgeschlagener Befehle mit Entity Framework Core
-author: rowanmiller
+author: AndriySvyryd
 ms.date: 11/15/2016
 uid: core/miscellaneous/connection-resiliency
-ms.openlocfilehash: 25b754334edd15532780cb4e40682bc211620c76
-ms.sourcegitcommit: c0e6a00b64c2dcd8acdc0fe6d1b47703405cdf09
+ms.openlocfilehash: db0666a49cbd41ef3eacf447eaeed1fb54ffcbf4
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/24/2020
-ms.locfileid: "91210292"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92061917"
 ---
 # <a name="connection-resiliency"></a>Verbindungsstabilität
 
@@ -23,7 +23,7 @@ Beim Konfigurieren der Optionen für den Kontext wird eine Ausführungs Strategi
 
 oder in `Startup.cs` für eine ASP.net Core Anwendung:
 
-``` csharp
+```csharp
 public void ConfigureServices(IServiceCollection services)
 {
     services.AddDbContext<PicnicContext>(
@@ -37,7 +37,7 @@ public void ConfigureServices(IServiceCollection services)
 
 Es gibt einen Mechanismus, mit dem Sie eine benutzerdefinierte Ausführungs Strategie selbst registrieren können, wenn Sie die Standardwerte ändern möchten.
 
-``` csharp
+```csharp
 protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 {
     optionsBuilder
@@ -65,7 +65,7 @@ Dieser Ansatz kann auch mit Ambient-Transaktionen verwendet werden.
 
 ## <a name="transaction-commit-failure-and-the-idempotency-issue"></a>Transaktionscommitfehler und das Idempotenz-Problem
 
-Im Allgemeinen wird bei einem Verbindungsfehler für die aktuelle Transaktion ein Rollback ausgeführt. Wenn die Verbindung jedoch getrennt wird, während für die Transaktion ein Commit ausgeführt wird, ist der resultierende Status der Transaktion unbekannt. 
+Im Allgemeinen wird bei einem Verbindungsfehler für die aktuelle Transaktion ein Rollback ausgeführt. Wenn die Verbindung jedoch getrennt wird, während für die Transaktion ein Commit ausgeführt wird, ist der resultierende Status der Transaktion unbekannt.
 
 Standardmäßig wiederholt die Ausführungs Strategie den Vorgang so, als ob für die Transaktion ein Rollback ausgeführt wurde. wenn dies jedoch nicht der Fall ist, führt dies zu einer Ausnahme, wenn der neue Daten Bank Status nicht kompatibel ist oder zu **Daten** Beschädigungen führen kann, wenn der Vorgang nicht von einem bestimmten Zustand abhängig ist, z. b. Wenn eine neue Zeile mit automatisch generierten Schlüsselwerten eingefügt wird.
 

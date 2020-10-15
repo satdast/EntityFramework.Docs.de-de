@@ -5,12 +5,12 @@ author: rick-anderson
 ms.author: riande
 ms.date: 9/19/2020
 uid: core/miscellaneous/context-pooling
-ms.openlocfilehash: fd5f53ff97a73895f0c4239439730dd8cb3ecc29
-ms.sourcegitcommit: c0e6a00b64c2dcd8acdc0fe6d1b47703405cdf09
+ms.openlocfilehash: 8638c838511be85bd994751b9911b107974dfe2f
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/24/2020
-ms.locfileid: "91215583"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92061956"
 ---
 # <a name="dbcontext-pooling"></a>DbContext-Pooling
 
@@ -20,7 +20,7 @@ Das typische Muster in einer ASP.net Core-APP, die EF Core verwendet, umfasst da
 
 <xref:Microsoft.Extensions.DependencyInjection.EntityFrameworkServiceCollectionExtensions.AddDbContextPool%2A> aktiviert einen Pool von wiederverwendbaren Kontext Instanzen. Um Kontext Pooling zu verwenden, verwenden Sie die- `AddDbContextPool` Methode anstelle von `AddDbContext` bei der Dienst Registrierung:
 
-``` csharp
+```csharp
 services.AddDbContextPool<BloggingContext>(
     options => options.UseSqlServer(connectionString));
 ```
@@ -37,7 +37,7 @@ Für apps sollte ein Profil erstellt und getestet werden, um anzuzeigen, dass di
 
 `AddDbContextPool` in gibt es einige Einschränkungen, die in der- `OnConfiguring` Methode des-Kontexts ausgeführt werden können.
 
-> [!WARNING]  
+> [!WARNING]
 > Vermeiden Sie die Verwendung von Kontext Pooling in apps, die den Zustand beibehalten. Beispielsweise private Felder im Kontext, die nicht über Anforderungen hinweg freigegeben werden sollten. EF Core setzt den Zustand, den es kennt, nur dann zurück, wenn dem Pool eine Kontext Instanz hinzugefügt wurde.
 
 Das Kontext Pooling verwendet die gleiche Kontext Instanz in allen Anforderungen. Dies bedeutet, dass Sie als [Singleton](/aspnet/core/fundamentals/dependency-injection#service-lifetimes) in Bezug auf die Instanz selbst registriert ist, damit Sie persistent gespeichert werden kann.

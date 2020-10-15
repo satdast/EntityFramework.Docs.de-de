@@ -1,15 +1,15 @@
 ---
 title: Überlegungen zur Leistung für EF4, EF5 und EF6-EF6
 description: Überlegungen zur Leistung für Entity Framework 4, 5 und 6
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/fundamentals/performance/perf-whitepaper
-ms.openlocfilehash: 65584382df3d510f314a576f41c5dee3d2e718e7
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: ae9374401b66f0493f7318ffcbfd9c4d6a24ada5
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90070535"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92063425"
 ---
 # <a name="performance-considerations-for-ef-4-5-and-6"></a>Überlegungen zur Leistung von EF 4, 5 und 6
 Von David Obando, Eric erttinger und anderen
@@ -22,7 +22,7 @@ Letzte Aktualisierung: Mai 2014
 
 ## <a name="1-introduction"></a>1. Einführung
 
-Objekt relationale Mapping-Frameworks sind eine bequeme Möglichkeit, eine Abstraktion für den Datenzugriff in einer objektorientierten Anwendung bereitzustellen. Für .NET-Anwendungen ist der empfohlene O/RM von Microsoft Entity Framework. Mit jeder Abstraktion kann die Leistung jedoch zu einem Problem werden.
+Object-Relational Mapping-Frameworks sind eine bequeme Möglichkeit, eine Abstraktion für den Datenzugriff in einer objektorientierten Anwendung bereitzustellen. Für .NET-Anwendungen ist der empfohlene O/RM von Microsoft Entity Framework. Mit jeder Abstraktion kann die Leistung jedoch zu einem Problem werden.
 
 Dieses Whitepaper wurde geschrieben, um die Leistungs Überlegungen beim Entwickeln von Anwendungen mit Entity Framework zu veranschaulichen, um Entwicklern eine Vorstellung von den Entity Framework internen Algorithmen zu vermitteln, die die Leistung beeinträchtigen können, und um Tipps zur Untersuchung und zur Verbesserung der Leistung in Ihren Anwendungen bereitzustellen, die Entity Framework verwenden. Es gibt eine Reihe von guten Themen zur Leistung, die bereits im Web verfügbar sind, und wir haben auch versucht, nach Möglichkeit auf diese Ressourcen zu verweisen.
 
