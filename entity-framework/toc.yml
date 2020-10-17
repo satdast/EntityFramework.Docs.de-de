@@ -113,7 +113,7 @@
               href: core/modeling/generated-properties.md
             - name: Parallelitätstoken
               href: core/modeling/concurrency.md
-            - name: Schatteneigenschaften
+            - name: Schatten- und Indexereigenschaften
               href: core/modeling/shadow-properties.md
             - name: Beziehungen
               href: core/modeling/relationships.md
@@ -228,10 +228,15 @@
               items:
                 - name: Übersicht
                   href: core/providers/sql-server/index.md
+                - name: Funktionszuordnungen
+                  href: core/providers/sql-server/functions.md
                 - name: Indizes
                   href: core/providers/sql-server/indexes.md
                 - name: Speicheroptimierte Tabellen
                   href: core/providers/sql-server/memory-optimized-tables.md
+                - name: Räumliche Daten
+                  displayName: GIS
+                  href: core/providers/sql-server/spatial.md
                 - name: Angeben von Azure SQL-Datenbank-Optionen
                   href: core/providers/sql-server/azure-sql-database.md
             - name: SQLite
@@ -240,6 +245,13 @@
                   href: core/providers/sqlite/index.md
                 - name: SQLite-Einschränkungen
                   href: core/providers/sqlite/limitations.md
+                - name: Funktionszuordnungen
+                  href: core/providers/sqlite/functions.md
+                - name: Räumliche Daten
+                  displayName: GIS
+                  href: core/providers/sqlite/spatial.md
+                - name: Microsoft.Data.Sqlite >>
+                  href: /dotnet/standard/data/sqlite/
             - name: Cosmos
               items:
                 - name: Übersicht
@@ -248,6 +260,8 @@
                   href: core/providers/cosmos/unstructured-data.md
                 - name: Cosmos-Einschränkungen
                   href: core/providers/cosmos/limitations.md
+                - name: Funktionszuordnungen
+                  href: core/providers/cosmos/functions.md
             - name: InMemory (für Tests)
               href: core/providers/in-memory/index.md
             - name: Schreiben eines Datenbankanbieters
