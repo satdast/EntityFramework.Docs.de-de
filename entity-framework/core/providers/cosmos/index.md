@@ -2,14 +2,14 @@
 title: 'Azure Cosmos DB-Anbieter: EF Core'
 description: Dokumentation für den Datenbankanbieter, mit der Entity Framework Core mit der SQL-API von Azure Cosmos DB verwendet werden kann
 author: AndriySvyryd
-ms.date: 09/14/2020
+ms.date: 10/09/2020
 uid: core/providers/cosmos/index
-ms.openlocfilehash: 94ba29f3f2643e8f563a460e17dce9d15cb7c2df
-ms.sourcegitcommit: c0e6a00b64c2dcd8acdc0fe6d1b47703405cdf09
+ms.openlocfilehash: 26be2b604453aa2d5b21ae45f590b294639db887
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/24/2020
-ms.locfileid: "91210340"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92064049"
 ---
 # <a name="ef-core-azure-cosmos-db-provider"></a>EF Core Azure Cosmos DB-Anbieter
 
@@ -35,7 +35,7 @@ dotnet add package Microsoft.EntityFrameworkCore.Cosmos
 
 ### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
 
-``` powershell
+```powershell
 Install-Package Microsoft.EntityFrameworkCore.Cosmos
 ```
 
@@ -43,7 +43,7 @@ Install-Package Microsoft.EntityFrameworkCore.Cosmos
 
 ## <a name="get-started"></a>Erste Schritte
 
-> [!TIP]  
+> [!TIP]
 > Das in diesem Artikel verwendete [Beispiel finden Sie auf GitHub](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Cosmos).
 
 Wie bei anderen Anbietern besteht der erste Schritt darin, [UseCosmos](/dotnet/api/Microsoft.EntityFrameworkCore.CosmosDbContextOptionsExtensions.UseCosmos) aufzurufen:
@@ -115,7 +115,7 @@ Nicht eigenständige Cosmos-Entitäten sind in das gleiche Element wie der Besit
 
 Mit dieser Konfiguration wird die Reihenfolge des obigen Beispiels wie folgt gespeichert:
 
-``` json
+```json
 {
     "Id": 1,
     "PartitionKey": "1",
@@ -143,7 +143,7 @@ Die nicht eigenständigen Entitäten müssen keine expliziten Schlüsselwerte an
 
 Sie werden auf diese Weise persistent gespeichert:
 
-``` json
+```json
 {
     "Id": 1,
     "Discriminator": "Distributor",
@@ -183,7 +183,7 @@ Um diese Einschränkung zu umgehen, können Sie den `id`-Wert manuell erstellen 
 
 Dieser JSON-Code ergibt sich:
 
-``` json
+```json
 {
     "Id": 1,
     "Discriminator": "Distributor",
@@ -201,3 +201,16 @@ Dieser JSON-Code ergibt sich:
     "_ts": 1572917100
 }
 ```
+
+## <a name="optimistic-concurrency-with-etags"></a>Optimistische Nebenläufigkeit mit ETags
+
+> [!NOTE]
+> Die Nebenläufigkeit für ETags wird seit EF Core 5.0 unterstützt.
+
+Rufen Sie `UseETagConcurrency` auf, um einen Entitätstyp so zu konfigurieren, dass die [optimistische Nebenläufigkeit](xref:core/modeling/concurrency) verwendet wird. Dieser Aufruf erstellt eine `_etag`-Eigenschaft als [Schatteneigenschaft](xref:core/modeling/shadow-properties), und diese Eigenschaft wird als Nebenläufigkeitstoken festgelegt.
+
+[!code-csharp[Main](../../../../samples/core/Cosmos/ModelBuilding/OrderContext.cs?name=ETag)]
+
+Wenn Sie das Auflösen von Nebenläufigkeitsfehlern vereinfachen möchten, können Sie das ETag mithilfe von `IsETagConcurrency` einer CLR-Eigenschaft zuordnen.
+
+[!code-csharp[Main](../../../../samples/core/Cosmos/ModelBuilding/OrderContext.cs?name=ETagProperty)]

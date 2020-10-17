@@ -1,19 +1,19 @@
 ---
 title: In-Memory Database-Anbieter – EF Core
 description: Informationen zum Anbieter für Entity Framework Core-In-Memory-Datenbanken
-author: rowanmiller
+author: ajcvickers
 ms.date: 10/27/2016
 uid: core/providers/in-memory/index
-ms.openlocfilehash: 9d0a5d14cdb047b80788fbe4d9d34deccdbd4ce1
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 1857ebbfa0eded1572220825a5b0d75961bcf3dd
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90071354"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92064010"
 ---
 # <a name="ef-core-in-memory-database-provider"></a>EF Core-In-Memory Database-Anbieter
 
-Dieser Datenbankanbieter ermöglicht, dass Entity Framework Core mit einer In-Memory Database verwendet wird. Dies kann für Tests nützlich sein, obwohl der SQLite-Anbieter im In-Memory-Modus für Testersatz für relationale Datenbanken besser geeignet sein kann. Dieser Anbieter wird nicht im Rahmen des [Entity Framework Core-Projekts](https://github.com/aspnet/EntityFrameworkCore) verwaltet.
+Dieser Datenbankanbieter ermöglicht, dass Entity Framework Core mit einer In-Memory Database verwendet wird. Die In-Memory-Datenbank kann für Tests nützlich sein, obwohl der SQLite-Anbieter im In-Memory-Modus als Testersatz für relationale Datenbanken besser geeignet sein kann. Die In-Memory-Datenbank ist nur für Testzwecke vorgesehen. Dieser Anbieter wird nicht im Rahmen des [Entity Framework Core-Projekts](https://github.com/aspnet/EntityFrameworkCore) verwaltet.
 
 ## <a name="install"></a>Installieren
 
@@ -27,7 +27,7 @@ dotnet add package Microsoft.EntityFrameworkCore.InMemory
 
 ### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
 
-``` powershell
+```powershell
 Install-Package Microsoft.EntityFrameworkCore.InMemory
 ```
 
@@ -42,4 +42,4 @@ Die folgenden Ressourcen unterstützen Sie bei den ersten Schritten mit diesem A
 
 ## <a name="supported-database-engines"></a>Unterstützte Datenbank-Engines
 
-In-Process-Speicherdatenbank (nur für Testzwecke konzipiert)
+In-Process-Arbeitsspeicherdatenbank (nur für Testzwecke konzipiert).
