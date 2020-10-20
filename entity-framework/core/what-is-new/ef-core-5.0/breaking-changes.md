@@ -2,14 +2,14 @@
 title: 'EF Core: Breaking Changes in EF Core 5.0'
 description: Vollständige Liste der in Entity Framework Core 5.0 eingeführten Breaking Changes
 author: bricelam
-ms.date: 09/09/2020
+ms.date: 09/24/2020
 uid: core/what-is-new/ef-core-5.0/breaking-changes
-ms.openlocfilehash: 8e9df4e2ff81e20cf5a36855247c5aff89ea2394
-ms.sourcegitcommit: c0e6a00b64c2dcd8acdc0fe6d1b47703405cdf09
+ms.openlocfilehash: e64f2b387d236e96d0451f3d55b3241daaba32d8
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/24/2020
-ms.locfileid: "91210366"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92065640"
 ---
 # <a name="breaking-changes-in-ef-core-50"></a>Breaking Changes in EF Core 5.0
 
@@ -30,6 +30,8 @@ Die folgenden API-Änderungen und Behavior Changes können dazu führen, dass vo
 | [IMigrationsModelDiffer verwendet jetzt IRelationalModel](#relational-model)                                                                 | Niedrig        |
 | [Diskriminatoren sind schreibgeschützt](#read-only-discriminators)                                                                             | Niedrig        |
 | [Anbieterspezifische EF.Functions-Methoden werden für InMemory-Anbieter ausgelöst.](#no-client-methods)                                              | Niedrig        |
+| [IndexBuilder.HasName ist mittlerweile veraltet](#index-obsolete)                                                                               | Niedrig        |
+| [Ein Pluarlizer ist nun für den Gerüstbau zurückentwickelter Modelle enthalten](#pluralizer)                                                 | Niedrig        |
 
 <a name="geometric-sqlite"></a>
 
@@ -53,7 +55,7 @@ Die Verwendung der HasGeometricDimension-Methode, nachdem das Maß im Spaltentyp
 
 Verwenden Sie `HasColumnType` zum Festlegen der Maße:
 
-```cs
+```csharp
 modelBuilder.Entity<GeoEntity>(
     x =>
     {
@@ -81,7 +83,7 @@ Dank der hinzugefügten Unterstützung von erforderlichen abhängigen Entitäten
 
 Das Aufrufen von `IsRequired` vor der Angabe der abhängigen Entität ist nun mehrdeutig:
 
-```cs
+```csharp
 modelBuilder.Entity<Blog>()
     .HasOne(b => b.BlogImage)
     .WithOne(i => i.Blog)
@@ -97,7 +99,7 @@ Das neue Verhalten ist erforderlich, um die Unterstützung von erforderlichen ab
 
 Entfernen Sie `RequiredAttribute` aus der Navigation zur abhängigen Entität, und verwenden Sie „RequiredAttribute“ stattdessen in der Navigation zum Prinzipal, oder konfigurieren Sie die Beziehung in `OnModelCreating`:
 
-```cs
+```csharp
 modelBuilder.Entity<Blog>()
     .HasOne(b => b.BlogImage)
     .WithOne(i => i.Blog)
@@ -127,7 +129,7 @@ Durch diese Änderung ist das Modell besser auf die Azure Cosmos DB-Semantik abg
 
 Um zu verhindern, dass die Partitionsschlüsseleigenschaft dem Primärschlüssel hinzugefügt wird, konfigurieren Sie sie in `OnModelCreating`.
 
-```cs
+```csharp
 modelBuilder.Entity<Blog>()
     .HasKey(b => b.Id);
 ```
@@ -154,7 +156,7 @@ Durch diese Änderung ist es weniger wahrscheinlich, dass die Eigenschaft `id` m
 
 Wenn Sie zum Verhalten der Version 3.x zurückkehren möchten, konfigurieren Sie die Eigenschaft `id` in `OnModelCreating`.
 
-```cs
+```csharp
 modelBuilder.Entity<Blog>()
     .Property<string>("id")
     .ToJsonProperty("id");
@@ -248,7 +250,7 @@ Die `IMigrationsModelDiffer`-API verwendet jetzt `IRelationalModel`. Die Modellm
 
 Verwenden Sie den folgenden Code, um das Modell von `snapshot` mit dem Modell von `context` zu vergleichen:
 
-```cs
+```csharp
 var dependencies = context.GetService<ProviderConventionSetBuilderDependencies>();
 var relationalDependencies = context.GetService<RelationalConventionSetBuilderDependencies>();
 
@@ -288,7 +290,7 @@ EF erwartet nicht, dass der Entitätstyp geändert wird, während er noch nachve
 
 Wenn eine Änderung des Diskriminatorwerts erforderlich ist und der Kontext direkt nach dem Aufruf von `SaveChanges` verworfen wird, kann der Diskriminator als änderbar festgelegt werden:
 
-```cs
+```csharp
 modelBuilder.Entity<BaseEntity>()
     .Property<string>("Discriminator")
     .Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Save);
@@ -343,3 +345,49 @@ Anbieterspezifische Methoden sind einer Datenbankfunktion zugeordnet. Das Berech
 **Vorbeugende Maßnahmen**
 
 Da es keine Möglichkeit gibt, das Verhalten von Datenbankfunktionen exakt zu imitieren, sollten Sie die Abfragen, die diese Methoden enthalten, mit demselben Datenbanktyp testen, der auch in der Produktionsumgebung verwendet wird.
+
+<a name="index-obsolete"></a>
+
+### <a name="indexbuilderhasname-is-now-obsolete"></a>IndexBuilder.HasName ist mittlerweile veraltet
+
+[Nachverfolgung von Issue 21089](https://github.com/dotnet/efcore/issues/21089)
+
+**Altes Verhalten**
+
+Bisher konnte nur ein Index für eine bestimmte Gruppe von Eigenschaften definiert werden. Der Datenbankname eines Indexes wurde mithilfe von IndexBuilder.HasName konfiguriert.
+
+**Neues Verhalten**
+
+Für dieselbe Gruppe oder dieselben Eigenschaften sind jetzt mehrere Indizes zulässig. Diese Indizes unterscheiden sich nun durch einen Namen im Modell. Gemäß der Konvention wird der Modellname als Datenbankname verwendet. Er kann jedoch auch unabhängig mit HasDatabaseName konfiguriert werden.
+
+**Hintergründe**
+
+In Zukunft möchten wir sowohl aufsteigende als auch absteigende Indizes oder Indizes mit unterschiedlichen Sortierungen für denselben Satz von Eigenschaften aktivieren. Diese Änderung ist ein weiterer Schritt in diese Richtung.
+
+**Vorbeugende Maßnahmen**
+
+Sämtlicher Code, der zuvor IndexBuilder.HasName aufgerufen hat, sollte so aktualisiert werden, dass stattdessen HasDatabaseName aufgerufen wird.
+
+Wenn das Projekt Migrationen enthält, die vor EF Core Version 2.0.0 generiert wurden, können Sie die Warnung in diesen Dateien problemlos ignorieren und unterdrücken, indem Sie `#pragma warning disable 612, 618` hinzufügen.
+
+<a name="pluralizer"></a>
+
+### <a name="a-pluarlizer-is-now-included-for-scaffolding-reverse-engineered-models"></a>Ein Pluarlizer ist nun für den Gerüstbau zurückentwickelter Modelle enthalten
+
+[Nachverfolgung von Issue 11160](https://github.com/dotnet/efcore/issues/11160)
+
+**Altes Verhalten**
+
+Früher mussten Sie beim Gerüstbau für einen DbContext und Entitätstypen durch Reverse Engineering eines Datenbankschemas ein separates Pluralizer-Paket installieren, um DbSet- und Sammlungsnavigationsnamen in die Pluralform und Tabellennamen in die Singularform umzuwandeln.
+
+**Neues Verhalten**
+
+EF Core enthält jetzt einen Pluarlizer, der die [Humanizer](https://github.com/Humanizr/Humanizer)-Bibliothek verwendet. Dies ist dieselbe Bibliothek, die Visual Studio verwendet, um Variablennamen zu empfehlen.
+
+**Hintergründe**
+
+Die Verwendung von Pluralformen von Wörtern für Sammlungseigenschaften und Singularformen für Typen und Verweiseigenschaften ist in .NET idiomatisch.
+
+**Vorbeugende Maßnahmen**
+
+Um den Pluralizer zu deaktivieren, verwenden Sie die Option `--no-pluralize` auf `dotnet ef dbcontext scaffold` oder den `-NoPluralize`-Switch auf `Scaffold-DbContext`.

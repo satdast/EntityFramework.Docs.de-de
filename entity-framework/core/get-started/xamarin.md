@@ -5,12 +5,12 @@ author: codemillmatt
 ms.date: 07/07/2020
 ms.author: masoucou
 uid: core/get-started/xamarin
-ms.openlocfilehash: b4a7e2260337d74329d309e9db32fe97a2131d73
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 0552038d471e294834bed9e3bf1f05fd74c39192
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89619295"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92062541"
 ---
 # <a name="getting-started-with-ef-core-and-xamarin"></a>Erste Schritte mit EF Core und Xamarin
 
@@ -72,6 +72,14 @@ Wechseln Sie zurück zur Seite mit der Liste der Blogs. Klicken Sie dann auf der
 In den folgenden Abschnitten durchlaufen Sie den Code im Beispielprojekt, der Daten aus einer SQLite-Datenbank mithilfe von EF Core mit Xamarin.Forms liest, erstellt, aktualisiert und löscht.
 
 Dabei wird davon ausgegangen, dass Sie mit den Xamarin.Forms-Themen zum [Anzeigen von Daten](/xamarin/xamarin-forms/app-fundamentals/data-binding/) und zum [Navigieren zwischen Seiten](/xamarin/xamarin-forms/app-fundamentals/navigation/) vertraut sind.
+
+> [!IMPORTANT]
+> Entity Framework Core verwendet Reflektion, um Funktionen aufzurufen, die der Xamarin.iOS-Linker in **Release**-Moduskonfigurationen möglicherweise entfernen könnte. Sie können eine von zwei Möglichkeiten auswählen, dies zu vermeiden.
+> 
+> * Die erste ist, `--linkskip System.Core` zu **Weitere mtouch-Argumente** in den **iOS-Build**-Optionen hinzuzufügen.
+> * Alternativ können Sie das Xamarin.iOS-**Linkerverhalten** in den **iOS-Build**-Optionen auf `Don't Link` festlegen.
+> [Dieser Artikel enthält weitere Informationen zum Xamarin.iOS-Linker](/xamarin/ios/deploy-test/linker), unter anderem zum Festlegen des Verhaltens in Xamarin.iOS.
+> 
 
 ## <a name="entity-framework-core-nuget-packages"></a>NuGet-Pakete für Entity Framework Core
 
