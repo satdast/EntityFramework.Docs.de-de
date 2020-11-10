@@ -4,16 +4,16 @@ description: Konfigurieren eigener Entitäts Typen oder Aggregate bei Verwendung
 author: AndriySvyryd
 ms.date: 11/06/2019
 uid: core/modeling/owned-entities
-ms.openlocfilehash: a49d9aab735232dfd5a3db456410d527f94f3c18
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: 36f756b70c9ad1727c48b5c789fd324c9dc6cd29
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92063776"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94429436"
 ---
 # <a name="owned-entity-types"></a>Nicht eigenständige Entitätstypen
 
-EF Core ermöglicht es Ihnen, Entitäts Typen zu modellieren, die nur in den Navigations Eigenschaften anderer Entitäts Typen angezeigt werden können. Diese werden als _eigene Entitäts Typen_bezeichnet. Die Entität, die einen eigenen Entitätstyp enthält, ist Ihr _Besitzer_.
+EF Core ermöglicht es Ihnen, Entitäts Typen zu modellieren, die nur in den Navigations Eigenschaften anderer Entitäts Typen angezeigt werden können. Diese werden als _eigene Entitäts Typen_ bezeichnet. Die Entität, die einen eigenen Entitätstyp enthält, ist Ihr _Besitzer_.
 
 Besitzende Entitäten sind im wesentlichen Teil des Besitzers und können nicht ohne Sie vorhanden sein, Sie sind konzeptionell ähnlich wie [Aggregate](https://martinfowler.com/bliki/DDD_Aggregate.html). Dies bedeutet, dass die eigene Entität definitionsgemäß auf der abhängigen Seite der Beziehung mit dem Besitzer ist.
 
@@ -36,6 +36,10 @@ Es ist auch möglich, mit der- `OwnsOne` Methode in `OnModelCreating` anzugeben,
 Wenn die `ShippingAddress` Eigenschaft im-Typ privat ist `Order` , können Sie die Zeichen folgen Version der- `OwnsOne` Methode verwenden:
 
 [!code-csharp[OwnsOneString](../../../samples/core/Modeling/OwnedEntities/OwnedEntityContext.cs?name=OwnsOneString)]
+
+Das obige Modell ist dem folgenden Datenbankschema zugeordnet:
+
+![Sceenshot des Datenbankmodells für eine Entität, die einen eigenen Verweis enthält](_static/owned-entities-ownsone.png)
 
 Weitere Informationen finden Sie im [vollständigen Beispiel Projekt](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Modeling/OwnedEntities) .
 
@@ -68,6 +72,10 @@ Standardmäßig ist der Primärschlüssel, der für den eigenen Typ verwendet wi
 Zum Konfigurieren eines anderen Primärschlüssel Aufrufes `HasKey` .
 
 [!code-csharp[OwnsMany](../../../samples/core/Modeling/OwnedEntities/OwnedEntityContext.cs?name=OwnsMany)]
+
+Das obige Modell ist dem folgenden Datenbankschema zugeordnet:
+
+![Sceenshot des Datenbankmodells für eine Entität, die eine eigene Sammlung enthält](_static/owned-entities-ownsmany.png)
 
 ## <a name="mapping-owned-types-with-table-splitting"></a>Zuordnung eigener Typen mit Tabellen Aufteilung
 
@@ -119,6 +127,10 @@ Beachten Sie den-Befehl `WithOwner` , der zum Definieren der Navigations Eigensc
 Sie können dieses Ergebnis auch mithilfe `OwnedAttribute` von sowohl in als auch in erreichen `OrderDetails` `StreetAddress` .
 
 Beachten Sie außerdem den-Befehl `Navigation` . In efcore 5,0 können Navigations Eigenschaften zu eigenen Typen [für nicht-eigene Navigations Eigenschaften](xref:core/modeling/relationships#configuring-navigation-properties)weiter konfiguriert werden.
+
+Das obige Modell ist dem folgenden Datenbankschema zugeordnet:
+
+![Sceenshot des Datenbankmodells für eine Entität, die geschpostete Verweise enthält](_static/owned-entities-nested.png)
 
 ## <a name="storing-owned-types-in-separate-tables"></a>Speichern von eigenen Typen in separaten Tabellen
 

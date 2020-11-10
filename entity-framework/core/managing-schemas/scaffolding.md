@@ -4,12 +4,12 @@ description: Rückgängigmachen eines Modells aus einer vorhandenen Datenbank mi
 author: bricelam
 ms.date: 11/13/2018
 uid: core/managing-schemas/scaffolding
-ms.openlocfilehash: e1b4ed8d5209688fbe5c89ae60cf0d981136305f
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: 11ffa2e62136e47959ebbfd54ccb55c2b9e23e04
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92061969"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94429766"
 ---
 # <a name="reverse-engineering"></a> Reverse Engineering
 
@@ -17,7 +17,7 @@ Reverse Engineering ist der Prozess der Gerüstbau von Entitäts Typen Klassen u
 
 ## <a name="installing"></a>Installation
 
-Bevor Reverse Engineering, müssen Sie entweder die [PMC-Tools](xref:core/miscellaneous/cli/powershell) (nur Visual Studio) oder die CLI- [Tools](xref:core/miscellaneous/cli/dotnet)installieren. Weitere Informationen finden Sie unter Links.
+Bevor Reverse Engineering, müssen Sie entweder die [PMC-Tools](xref:core/cli/powershell) (nur Visual Studio) oder die CLI- [Tools](xref:core/cli/dotnet)installieren. Weitere Informationen finden Sie unter Links.
 
 Außerdem müssen Sie einen geeigneten [Datenbankanbieter](xref:core/providers/index) für das Datenbankschema installieren, das Sie rückgängig machen möchten.
 
@@ -80,7 +80,7 @@ Verwenden Sie ein Array, um mehrere Tabellen einzubeziehen:
 Scaffold-DbContext ... -Tables Artist, Album
 ```
 
-***
+**_
 
 ## <a name="preserving-names"></a>Beibehalten von Namen
 
@@ -108,7 +108,7 @@ public string Title { get; set; }
 
 ## <a name="dbcontext-name"></a>Dbcontext-Name
 
-Der Name der dbcontext-Klasse mit dem Gerüst ist der Name der Datenbank, der standardmäßig mit dem *Kontext* versehen wird. Um einen anderen anzugeben, verwenden Sie `-Context` in der PMC und `--context` in der .net Core-CLI.
+Der Name der dbcontext-Klasse mit dem Gerüst ist der Name der Datenbank, der standardmäßig mit _Context * versehen wird. Um einen anderen anzugeben, verwenden Sie `-Context` in der PMC und `--context` in der .net Core-CLI.
 
 ## <a name="directories-and-namespaces"></a>Verzeichnisse und Namespaces
 
@@ -157,7 +157,7 @@ Schließlich wird das Modell verwendet, um Code zu generieren. Die entsprechende
 * Nicht alles über ein Modell kann mithilfe eines Datenbankschemas dargestellt werden. Beispielsweise sind Informationen zu [**Vererbungs Hierarchien**](xref:core/modeling/inheritance), [**eigenen Typen**](xref:core/modeling/owned-entities)und [**Tabellen Aufteilung**](xref:core/modeling/table-splitting) im Datenbankschema nicht vorhanden. Aus diesem Grund werden diese Konstrukte nie in umgekehrter Reihenfolge entwickelt.
 * Außerdem werden **einige Spaltentypen** möglicherweise vom EF Core Anbieter nicht unterstützt. Diese Spalten werden nicht in das Modell eingeschlossen.
 * Sie können Parallelitäts [**Token**](xref:core/modeling/concurrency)in einem EF Core Modell definieren, um zu verhindern, dass zwei Benutzer gleichzeitig dieselbe Entität aktualisieren. Einige Datenbanken verfügen über einen besonderen Typ, der diese Art von Spalte darstellt (z. b. rowversion in SQL Server). in diesem Fall können wir diese Informationen umkehren. andere Parallelitäts Token werden jedoch nicht in umgekehrter Reihenfolge entwickelt.
-* [Der Referenztyp c# 8, der NULL-Werte](/dotnet/csharp/tutorials/nullable-reference-types) zulässt, wird derzeit in Reverse Engineering nicht unterstützt: EF Core generiert immer c#-Code, der annimmt, dass das Feature deaktiviert ist. Beispielsweise werden Textspalten, die NULL-Werte zulassen, als Eigenschaft mit dem Typ `string` erstellt, nicht `string?` mit der fließenden API oder den Daten Anmerkungen, mit denen konfiguriert wird, ob eine Eigenschaft erforderlich ist. Sie können den Gerüst Code bearbeiten und durch c#-Anmerkungen zur NULL-Zulässigkeit ersetzen. Die Gerüstbau Unterstützung für Verweis Typen, die NULL-Werte zulassen, wird von Issue [#15520](https://github.com/aspnet/EntityFrameworkCore/issues/15520)
+* [Der Referenztyp c# 8, der NULL-Werte](/dotnet/csharp/tutorials/nullable-reference-types) zulässt, wird derzeit in Reverse Engineering nicht unterstützt: EF Core generiert immer c#-Code, der annimmt, dass das Feature deaktiviert ist. Beispielsweise werden Textspalten, die NULL-Werte zulassen, als Eigenschaft mit dem Typ `string` erstellt, nicht `string?` mit der fließenden API oder den Daten Anmerkungen, mit denen konfiguriert wird, ob eine Eigenschaft erforderlich ist. Sie können den Gerüst Code bearbeiten und durch c#-Anmerkungen zur NULL-Zulässigkeit ersetzen. Die Gerüstbau Unterstützung für Verweis Typen, die NULL-Werte zulassen, wird von Issue [#15520](https://github.com/dotnet/efcore/issues/15520)
 
 ## <a name="customizing-the-model"></a>Anpassen des Modells
 
@@ -173,7 +173,7 @@ Nachdem Sie Änderungen an der Datenbank vorgenommen haben, müssen Sie möglich
 
 Bedeutendere Änderungen sind jedoch nicht so einfach wie die manuelle Ausführung. Ein allgemeiner Workflow besteht darin, das Modell mithilfe von `-Force` (PMC) oder (CLI) erneut aus der Datenbank `--force` zu entwickeln, um das vorhandene Modell mit einem aktualisierten zu überschreiben.
 
-Ein weiteres häufig angefordertes Feature ist die Möglichkeit, das Modell aus der Datenbank zu aktualisieren und gleichzeitig Anpassungen wie Umbenennungen, Typhierarchien usw. beizubehalten. Verwenden Sie das Problem [#831](https://github.com/aspnet/EntityFrameworkCore/issues/831) , um den Fortschritt dieses Features zu verfolgen.
+Ein weiteres häufig angefordertes Feature ist die Möglichkeit, das Modell aus der Datenbank zu aktualisieren und gleichzeitig Anpassungen wie Umbenennungen, Typhierarchien usw. beizubehalten. Verwenden Sie das Problem [#831](https://github.com/dotnet/efcore/issues/831) , um den Fortschritt dieses Features zu verfolgen.
 
 > [!WARNING]
 > Wenn Sie das Modell erneut aus der Datenbank zurück entwickeln, gehen alle Änderungen, die Sie an den Dateien vorgenommen haben, verloren.

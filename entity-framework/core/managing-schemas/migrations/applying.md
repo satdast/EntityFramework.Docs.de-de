@@ -4,12 +4,12 @@ description: Strategien zum Anwenden von Schema Migrationen auf Produktions-und 
 author: bricelam
 ms.date: 05/06/2020
 uid: core/managing-schemas/migrations/applying
-ms.openlocfilehash: 68d482a34e5f5c7acf968acdfd8825e1d21ecb13
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: 7ff84636fb0999941b832c6a2d65d77b0ad368c5
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92062346"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94429849"
 ---
 # <a name="applying-migrations"></a>Anwenden von Migrationen
 
@@ -83,14 +83,15 @@ Im folgenden wird ein SQL-Skript aus der angegebenen `from` Migration zur angege
 ```powershell
 Script-Migration AddNewTables AddAuditTable
 ```
+
 Sie können ein `from` verwenden, das aktueller ist als `to`, um ein Rollbackskript zu generieren. *Bitte achten Sie auf mögliche Datenverlustszenarios.*
 
 ***
 
 Die Skript Generierung akzeptiert die folgenden zwei Argumente in, um anzugeben, welcher Bereich von Migrationen generiert werden soll:
 
-* Die **from**-Migration sollte die letzte Migration sein, die vor der Skriptausführung für die Datenbank durchgeführt wurde. Wenn keine Migrationen durchgeführt wurden, geben Sie `0` an (dies ist die Standardeinstellung).
-* Die **to**-Migration ist die letzte Migration, die nach der Skriptausführung für die Datenbank durchgeführt wurde. Dies ist standardmäßig die letzte Migration in Ihrem Projekt.
+* Die **from** -Migration sollte die letzte Migration sein, die vor der Skriptausführung für die Datenbank durchgeführt wurde. Wenn keine Migrationen durchgeführt wurden, geben Sie `0` an (dies ist die Standardeinstellung).
+* Die **to** -Migration ist die letzte Migration, die nach der Skriptausführung für die Datenbank durchgeführt wurde. Dies ist standardmäßig die letzte Migration in Ihrem Projekt.
 
 ## <a name="idempotent-sql-scripts"></a>Idempotente SQL-Skripts
 
@@ -98,25 +99,25 @@ Die oben generierten SQL-Skripts können nur angewendet werden, um das Schema vo
 
 Im folgenden werden idempotente Migrationen generiert:
 
-#### <a name="net-core-cli"></a>[.NET Core-CLI](#tab/dotnet-core-cli)
+### <a name="net-core-cli"></a>[.NET Core-CLI](#tab/dotnet-core-cli)
 
 ```dotnetcli
 dotnet ef migrations script --idempotent
 ```
 
-#### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
+### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
 
 ```powershell
 Script-Migration -Idempotent
 ```
 
-***
+**_
 
 ## <a name="command-line-tools"></a>Befehlszeilentools
 
 Die EF-Befehlszeilen Tools können zum Anwenden von Migrationen auf eine Datenbank verwendet werden. Während der Produktivität bei der lokalen Entwicklung und beim Testen von Migrationen ist dieser Ansatz nicht ideal für die Verwaltung von Produktionsdatenbanken:
 
-* Die SQL-Befehle werden direkt durch das Tool angewendet, ohne dem Entwickler die Möglichkeit zu geben, Sie zu überprüfen oder zu ändern. Dies kann in einer Produktionsumgebung gefährlich sein.
+_ Die SQL-Befehle werden direkt durch das Tool angewendet, ohne dem Entwickler die Möglichkeit zu geben, Sie zu überprüfen oder zu ändern. Dies kann in einer Produktionsumgebung gefährlich sein.
 * Das .NET SDK und das EF-Tool müssen auf Produktionsservern installiert sein.
 
 ### <a name="net-core-cli"></a>[.NET Core-CLI](#tab/dotnet-core-cli)
@@ -159,7 +160,7 @@ Beachten Sie, dass dies auch für einen Rollback zu einer früheren Migration ve
 
 ***
 
-Weitere Informationen zum Anwenden von Migrationen über die Befehlszeilen Tools finden Sie in der [EF Core Tools-Referenz](xref:core/miscellaneous/cli/index).
+Weitere Informationen zum Anwenden von Migrationen über die Befehlszeilen Tools finden Sie in der [EF Core Tools-Referenz](xref:core/cli/index).
 
 ## <a name="apply-migrations-at-runtime"></a>Anwenden von Migrationen zur Laufzeit
 

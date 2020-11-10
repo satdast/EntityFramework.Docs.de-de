@@ -4,20 +4,51 @@ description: Verwalten von Verbindungs Zeichenfolgen in unterschiedlichen Umgebu
 author: bricelam
 ms.date: 10/27/2016
 uid: core/miscellaneous/connection-strings
-ms.openlocfilehash: f657d39f66e6a757380ca25436a638b47c11cd12
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: fee7e8f6de1faa11203cfcdab033b73a0a8ef6ea
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92062320"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94429727"
 ---
 # <a name="connection-strings"></a>Verbindungszeichenfolgen
 
 Die meisten Datenbankanbieter benötigen eine bestimmte Verbindungs Zeichenfolge, um eine Verbindung mit der Datenbank herzustellen. Manchmal enthält diese Verbindungs Zeichenfolge vertrauliche Informationen, die geschützt werden müssen. Möglicherweise müssen Sie auch die Verbindungs Zeichenfolge ändern, wenn Sie Ihre Anwendung zwischen Umgebungen, wie z. b. Entwicklung, Tests und Produktion, verschieben.
 
+## <a name="aspnet-core"></a>ASP.NET Core
+
+In ASP.net Core das Konfigurationssystem sehr flexibel, und die Verbindungs Zeichenfolge kann in `appsettings.json` , einer Umgebungsvariablen, dem geheimen Benutzerspeicher oder einer anderen Konfigurations Quelle gespeichert werden. Weitere Informationen finden Sie im [Abschnitt zur Konfiguration der ASP.net Core-Dokumentation](/aspnet/core/fundamentals/configuration) .
+
+Beispielsweise können Sie das Geheimnis- [Manager-Tool](/aspnet/core/security/app-secrets#secret-manager) verwenden, um Ihr Daten Bank Kennwort zu speichern, und dann in Gerüstbau eine Verbindungs Zeichenfolge verwenden, die einfach aus besteht `Name=<database-alias>` .
+
+```dotnetcli
+dotnet user-secrets set ConnectionStrings.YourDatabaseAlias "Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=YourDatabase"
+dotnet ef dbcontext scaffold Name=ConnectionStrings.YourDatabaseAlias Microsoft.EntityFrameworkCore.SqlServer
+```
+
+Das folgende Beispiel zeigt die Verbindungs Zeichenfolge, die in gespeichert ist `appsettings.json` .
+
+```json
+{
+  "ConnectionStrings": {
+    "BloggingDatabase": "Server=(localdb)\\mssqllocaldb;Database=EFGetStarted.ConsoleApp.NewDb;Trusted_Connection=True;"
+  },
+}
+```
+
+Anschließend wird der Kontext in der Regel in konfiguriert `Startup.cs` , wobei die Verbindungs Zeichenfolge aus der Konfiguration gelesen wird. Beachten Sie, dass die- `GetConnectionString()` Methode nach einem Konfigurations Wert sucht, dessen Schlüssel ist `ConnectionStrings:<connection string name>` . Sie müssen den [Microsoft.Extensions.Configurations](/dotnet/api/microsoft.extensions.configuration) -Namespace importieren, um diese Erweiterungsmethode zu verwenden.
+
+```csharp
+public void ConfigureServices(IServiceCollection services)
+{
+    services.AddDbContext<BloggingContext>(options =>
+        options.UseSqlServer(Configuration.GetConnectionString("BloggingDatabase")));
+}
+```
+
 ## <a name="winforms--wpf-applications"></a>WinForms-& WPF-Anwendungen
 
-WinForms-, WPF-und ASP.NET 4-Anwendungen haben ein bewährtes und getestetes Verbindungs Zeichen folgen Muster. Die Verbindungs Zeichenfolge sollte der App.config Datei Ihrer Anwendung hinzugefügt werden (Web.config, wenn Sie ASP.NET verwenden). Wenn Ihre Verbindungs Zeichenfolge vertrauliche Informationen (z. b. Benutzername und Kennwort) enthält, können Sie den Inhalt der Konfigurationsdatei mit dem [Geheimnis-Manager-Tool](/aspnet/core/security/app-secrets#secret-manager)schützen.
+WinForms-, WPF-und ASP.NET 4-Anwendungen haben ein bewährtes und getestetes Verbindungs Zeichen folgen Muster. Die Verbindungs Zeichenfolge sollte der App.config Datei Ihrer Anwendung hinzugefügt werden (Web.config, wenn Sie ASP.NET verwenden). Wenn Ihre Verbindungs Zeichenfolge vertrauliche Informationen (z. b. Benutzername und Kennwort) enthält, können Sie den Inhalt der Konfigurationsdatei mithilfe der [geschützten Konfiguration](/dotnet/framework/data/adonet/connection-strings-and-configuration-files#encrypting-configuration-file-sections-using-protected-configuration)schützen.
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -62,36 +93,5 @@ public class BloggingContext : DbContext
     {
             optionsBuilder.UseSqlite("Data Source=blogging.db");
     }
-}
-```
-
-## <a name="aspnet-core"></a>ASP.NET Core
-
-In ASP.net Core das Konfigurationssystem sehr flexibel, und die Verbindungs Zeichenfolge kann in `appsettings.json` , einer Umgebungsvariablen, dem geheimen Benutzerspeicher oder einer anderen Konfigurations Quelle gespeichert werden. Weitere Informationen finden Sie im [Abschnitt zur Konfiguration der ASP.net Core-Dokumentation](/aspnet/core/fundamentals/configuration) .
-
-Beispielsweise können Sie das Geheimnis- [Manager-Tool](/aspnet/core/security/app-secrets#secret-manager) verwenden, um Ihr Daten Bank Kennwort zu speichern, und dann in Gerüstbau eine Verbindungs Zeichenfolge verwenden, die einfach aus besteht `Name=<database-alias>` .
-
-```dotnetcli
-dotnet user-secrets set ConnectionStrings.YourDatabaseAlias "Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=YourDatabase"
-dotnet ef dbcontext scaffold Name=ConnectionStrings.YourDatabaseAlias Microsoft.EntityFrameworkCore.SqlServer
-```
-
-Das folgende Beispiel zeigt die Verbindungs Zeichenfolge, die in gespeichert ist `appsettings.json` .
-
-```json
-{
-  "ConnectionStrings": {
-    "BloggingDatabase": "Server=(localdb)\\mssqllocaldb;Database=EFGetStarted.ConsoleApp.NewDb;Trusted_Connection=True;"
-  },
-}
-```
-
-Anschließend wird der Kontext in der Regel in konfiguriert `Startup.cs` , wobei die Verbindungs Zeichenfolge aus der Konfiguration gelesen wird. Beachten Sie, dass die- `GetConnectionString()` Methode nach einem Konfigurations Wert sucht, dessen Schlüssel ist `ConnectionStrings:<connection string name>` . Sie müssen den [Microsoft.Extensions.Configurations](/dotnet/api/microsoft.extensions.configuration) -Namespace importieren, um diese Erweiterungsmethode zu verwenden.
-
-```csharp
-public void ConfigureServices(IServiceCollection services)
-{
-    services.AddDbContext<BloggingContext>(options =>
-        options.UseSqlServer(Configuration.GetConnectionString("BloggingDatabase")));
 }
 ```

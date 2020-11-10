@@ -4,16 +4,16 @@ description: Konfigurieren und Zuordnen von Entitäts Typen mithilfe von Entity 
 author: roji
 ms.date: 10/06/2020
 uid: core/modeling/entity-types
-ms.openlocfilehash: bfefa29c08679a1524c00769b3495d75a301e2d3
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: 9094193640e7cab6db3fed7ae0ab818a455156ca
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92062229"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94429584"
 ---
 # <a name="entity-types"></a>Entitätstypen
 
-Das Einschließen eines dbsets eines Typs in den Kontext bedeutet, dass es in EF Core Modell enthalten ist. Normalerweise wird ein solcher Typ als *Entität*bezeichnet. EF Core können Entitäts Instanzen aus der Datenbank lesen und in diese schreiben. Wenn Sie eine relationale Datenbank verwenden, können EF Core Tabellen für Ihre Entitäten über Migrationen erstellen.
+Das Einschließen eines dbsets eines Typs in den Kontext bedeutet, dass es in EF Core Modell enthalten ist. Normalerweise wird ein solcher Typ als *Entität* bezeichnet. EF Core können Entitäts Instanzen aus der Datenbank lesen und in diese schreiben. Wenn Sie eine relationale Datenbank verwenden, können EF Core Tabellen für Ihre Entitäten über Migrationen erstellen.
 
 ## <a name="including-types-in-the-model"></a>Einschließen von Typen im Modell
 
@@ -50,9 +50,9 @@ Es ist manchmal hilfreich, den gleichen Entitätstyp in mehreren Typen zugeordne
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/TableExcludeFromMigrations.cs?name=TableExcludeFromMigrations&highlight=4)]
 
-Bei dieser Konfigurations Migration wird die Tabelle nicht erstellt `blogs` , Sie `Blog` ist jedoch noch im Modell enthalten und kann normal verwendet werden.
+Bei dieser Konfigurations Migration wird die Tabelle nicht erstellt `AspNetUsers` , Sie `IdentityUser` ist jedoch noch im Modell enthalten und kann normal verwendet werden.
 
-Wenn Sie erneut mit der Verwaltung der Tabelle beginnen müssen, sollte eine neue Migration erstellt werden, bei der `blogs` nicht ausgeschlossen ist. Die nächste Migration enthält jetzt alle Änderungen, die an der Tabelle vorgenommen werden.
+Wenn Sie erneut mit der Verwaltung der Tabelle beginnen müssen, sollte eine neue Migration erstellt werden, bei der `AspNetUsers` nicht ausgeschlossen ist. Die nächste Migration enthält jetzt alle Änderungen, die an der Tabelle vorgenommen werden.
 
 ## <a name="table-name"></a>Tabellenname
 
@@ -68,7 +68,7 @@ Sie können den Tabellennamen manuell konfigurieren:
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/TableName.cs?Name=TableName&highlight=3-4)]
 
-***
+**_
 
 ## <a name="table-schema"></a>Tabellenschema
 
@@ -84,7 +84,7 @@ Tabellen, die in einem bestimmten Schema erstellt werden sollen, können wie fol
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/TableNameAndSchema.cs?name=TableNameAndSchema&highlight=3-4)]
 
-***
+_**
 
 Anstatt das Schema für jede Tabelle anzugeben, können Sie auch das Standardschema auf Modell Ebene mit der fließenden API definieren:
 
@@ -101,4 +101,7 @@ Entitäts Typen können mithilfe der flüssigen API Daten Bank Sichten zugeordne
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/ViewNameAndSchema.cs?name=ViewNameAndSchema&highlight=1)]
 
- Durch die Zuordnung zu einer Sicht wird die Standard Tabellen Zuordnung entfernt. der Entitätstyp kann jedoch auch explizit einer Tabelle zugeordnet werden. In diesem Fall wird die Abfrage Zuordnung für Abfragen verwendet, und die Tabellen Zuordnung wird für Updates verwendet.
+ Durch die Zuordnung zu einer Sicht wird die Standard Tabellen Zuordnung entfernt. ab EF 5,0 kann der Entitätstyp jedoch auch explizit einer Tabelle zugeordnet werden. In diesem Fall wird die Abfrage Zuordnung für Abfragen verwendet, und die Tabellen Zuordnung wird für Updates verwendet.
+
+> [!TIP]
+> Zum Testen von Entitäts Typen, die Ansichten zugeordnet sind, mithilfe des Speicher internen Anbieters, ordnen Sie Sie einer Abfrage über zu `ToInMemoryQuery` . Weitere Informationen finden Sie unter [ausführbares Beispiel](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/Testing/ItemsWebApi/) mit dieser Technik.

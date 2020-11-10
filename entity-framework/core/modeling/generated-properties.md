@@ -4,12 +4,12 @@ description: Konfigurieren der Wert Generierung für Eigenschaften bei Verwendun
 author: AndriySvyryd
 ms.date: 11/06/2019
 uid: core/modeling/generated-properties
-ms.openlocfilehash: d89739cf8bd2612b97bbf338e9685e9888b6216b
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: 347cedbf5fdebc985d75c6cad3c28f17d1344993
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92062216"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94429623"
 ---
 # <a name="generated-values"></a>Generierte Werte
 
@@ -34,7 +34,7 @@ Abhängig vom verwendeten Datenbankanbieter können die Werte Client seitig von 
 Wenn Sie dem Kontext eine Entität hinzufügen, die über einen Wert verfügt, der der Eigenschaft zugewiesen ist, versucht EF, diesen Wert einzufügen, anstatt einen neuen zu erstellen. Einer Eigenschaft wird ein Wert zugewiesen, wenn ihr kein CLR-Standardwert (für, für, `null` `string` `0` `int` `Guid.Empty` `Guid` usw.) zugewiesen ist. Weitere Informationen finden Sie unter [explizite Werte für generierte Eigenschaften](xref:core/saving/explicit-values-generated-properties).
 
 > [!WARNING]
-> Die Art, wie der Wert für hinzugefügte Entitäten generiert wird, hängt vom verwendeten Datenbankanbieter ab. Datenbankanbieter können die Wert Generierung für einige Eigenschafts Typen automatisch einrichten, bei anderen müssen Sie jedoch möglicherweise manuell einrichten, wie der Wert generiert wird.
+> Die Art, wie der Wert für hinzugefügte Entitäten generiert wird, hängt vom verwendeten Datenbankanbieter ab. Datenbankanbieter richten möglicherweise automatisch die Wert Generierung für einige Eigenschafts Typen ein, bei anderen müssen Sie jedoch möglicherweise manuell festlegen, wie der Wert generiert wird.
 >
 > Wenn Sie z. b. SQL Server verwenden, werden Werte automatisch für `GUID` Eigenschaften generiert (mithilfe des SQL Server sequenziellen GUID-Algorithmus). Wenn Sie jedoch angeben, dass eine `DateTime` Eigenschaft beim Hinzufügen generiert wird, müssen Sie eine Möglichkeit einrichten, damit die Werte generiert werden. Eine Möglichkeit, dies zu erreichen, besteht darin, einen Standardwert von zu konfigurieren `GETDATE()` , siehe [Standardwerte](#default-values).
 
@@ -45,9 +45,9 @@ Der beim Hinzufügen oder aktualisieren generierte Wert bedeutet, dass bei jedem
 `value generated on add`Wenn Sie z. b. einen Wert für die-Eigenschaft in einer neu hinzugefügten Instanz einer Entität angeben, wird dieser Wert anstelle eines generierten Werts eingefügt. Es ist auch möglich, bei der Aktualisierung einen expliziten Wert festzulegen. Weitere Informationen finden Sie unter [explizite Werte für generierte Eigenschaften](xref:core/saving/explicit-values-generated-properties).
 
 > [!WARNING]
-> Die Art und Weise, wie der Wert für hinzugefügte und aktualisierte Entitäten generiert wird, hängt vom verwendeten Datenbankanbieter ab. Datenbankanbieter können die Wert Generierung für einige Eigenschafts Typen automatisch einrichten, während andere die Generierung des Werts manuell einrichten müssen.
+> Die Art und Weise, wie der Wert für hinzugefügte und aktualisierte Entitäten generiert wird, hängt vom verwendeten Datenbankanbieter ab. Datenbankanbieter können die Wert Generierung für einige Eigenschafts Typen automatisch einrichten, während andere manuell festlegen müssen, wie der Wert generiert wird.
 >
-> Wenn Sie z. b. SQL Server verwenden, werden Eigenschaften, die `byte[]` beim Hinzufügen oder aktualisieren als generiert und als Parallelitäts Token gekennzeichnet sind, mit dem `rowversion` -Datentyp eingerichtet, sodass Werte in der Datenbank generiert werden. Wenn Sie jedoch angeben, dass eine `DateTime` Eigenschaft beim Hinzufügen oder aktualisieren generiert wird, müssen Sie eine Möglichkeit einrichten, damit die Werte generiert werden. Eine Möglichkeit hierfür besteht darin, den Standardwert `GETDATE()` (siehe [Standardwerte](#default-values)) zu konfigurieren, um Werte für neue Zeilen zu generieren. Sie können dann mithilfe eines Daten Bank Auslösers Werte während der Aktualisierung generieren (z. b. im folgenden Beispiel-auslösen).
+> Wenn Sie z. b. SQL Server verwenden, werden Eigenschaften, die `byte[]` beim Hinzufügen oder aktualisieren als generiert und als Parallelitäts Token gekennzeichnet sind, mit dem `rowversion` -Datentyp festgelegt, sodass Werte in der Datenbank generiert werden. Wenn Sie jedoch angeben, dass eine `DateTime` Eigenschaft beim Hinzufügen oder aktualisieren generiert wird, müssen Sie eine Möglichkeit einrichten, damit die Werte generiert werden. Eine Möglichkeit hierfür besteht darin, den Standardwert `GETDATE()` (siehe [Standardwerte](#default-values)) zu konfigurieren, um Werte für neue Zeilen zu generieren. Sie können dann mithilfe eines Daten Bank Auslösers Werte während der Aktualisierung generieren (z. b. im folgenden Beispiel-auslösen).
 >
 > [!code-sql[Main](../../../samples/core/Modeling/FluentAPI/ValueGeneratedOnAddOrUpdate.sql)]
 
@@ -68,7 +68,7 @@ Sie können jede Eigenschaft so konfigurieren, dass ihr Wert für eingefügte En
 ***
 
 > [!WARNING]
-> Dies ermöglicht EF nur zu wissen, dass Werte für hinzugefügte Entitäten generiert werden, und es wird nicht garantiert, dass EF den eigentlichen Mechanismus zum Generieren von Werten eingibt. Weitere Informationen finden [Sie unter im Abschnitt "hinzufügen" generierter Wert](#value-generated-on-add) .
+> Dadurch kann EF nur wissen, dass Werte für hinzugefügte Entitäten generiert werden, und es wird nicht garantiert, dass EF den eigentlichen Mechanismus zum Generieren von Werten einrichtet. Weitere Informationen finden [Sie unter im Abschnitt "hinzufügen" generierter Wert](#value-generated-on-add) .
 
 ### <a name="default-values"></a>Standardwerte
 
@@ -94,19 +94,23 @@ Wenn Sie einen Standardwert angeben, wird die Eigenschaft implizit als Wert konf
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/ValueGeneratedOnAddOrUpdate.cs?name=ValueGeneratedOnAddOrUpdate&highlight=5)]
 
-***
+**_
 
 > [!WARNING]
-> Dies ermöglicht EF nur zu wissen, dass Werte für hinzugefügte oder aktualisierte Entitäten generiert werden. es wird nicht garantiert, dass EF den eigentlichen Mechanismus zum Generieren von Werten eingibt. Weitere Informationen finden [Sie im Abschnitt hinzufügen oder aktualisieren generierter Wert](#value-generated-on-add-or-update) .
+> Dies ermöglicht EF nur zu wissen, dass Werte für hinzugefügte oder aktualisierte Entitäten generiert werden. es wird nicht garantiert, dass EF den eigentlichen Mechanismus zum Generieren von Werten einrichtet. Weitere Informationen finden [Sie im Abschnitt hinzufügen oder aktualisieren generierter Wert](#value-generated-on-add-or-update) .
 
 ### <a name="computed-columns"></a>Berechnete Spalten
 
-In einigen relationalen Datenbanken kann eine Spalte so konfiguriert werden, dass ihr Wert in der Datenbank berechnet wird, in der Regel mit einem Ausdruck, der auf andere Spalten verweist:
+Bei den meisten relationalen Datenbanken kann eine Spalte so konfiguriert werden, dass ihr Wert in der Datenbank berechnet wird, in der Regel mit einem Ausdruck, der auf andere Spalten verweist:
 
-[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/ComputedColumn.cs?name=ComputedColumn&highlight=5)]
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/ComputedColumn.cs?name=DefaultComputedColumn)]
+
+Im obigen Beispiel wird eine _virtual * berechnete Spalte erstellt, deren Wert jedes Mal berechnet wird, wenn Sie aus der Datenbank abgerufen wird. Sie können auch angeben, dass eine berechnete Spalte *gespeichert* werden soll (manchmal als *persistent bezeichnet)* , was bedeutet, dass Sie bei jedem Update der Zeile berechnet wird und auf dem Datenträger neben regulären Spalten gespeichert wird:
+
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/ComputedColumn.cs?name=StoredComputedColumn)]
 
 > [!NOTE]
-> In einigen Fällen wird der Wert der Spalte jedes Mal berechnet, wenn er abgerufen wird (auch als *virtuelle* *Spalten bezeichnet* ), und in anderen Fällen wird er bei jedem Update der Zeile berechnet und gespeichert (manchmal als *gespeicherte* oder beibehaltene Spalten bezeichnet). Dies variiert in den Datenbankanbietern.
+> Unterstützung für das Erstellen gespeicherter berechneter Spalten wurde in EF Core 5,0 hinzugefügt.
 
 ## <a name="no-value-generation"></a>Keine Wert Generierung
 

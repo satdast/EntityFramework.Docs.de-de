@@ -4,12 +4,12 @@ description: Konfigurieren der Vererbung von Entitäts Typen mit Entity Framewor
 author: AndriySvyryd
 ms.date: 10/01/2020
 uid: core/modeling/inheritance
-ms.openlocfilehash: 47aae0d57d7203f0e6da5868bdc082ad85d59620
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: 3ec6e7bd98f9c9716c460d69fc707d95e5e47a05
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92063867"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94429519"
 ---
 # <a name="inheritance"></a>Vererbung
 
@@ -37,7 +37,7 @@ Standardmäßig ordnet EF die Vererbung mithilfe des TPH-Musters ( *Table-per Hi
 
 Das obige Modell ist dem folgenden Datenbankschema zugeordnet (Beachten Sie die implizit erstellte `Discriminator` Spalte, die angibt, welcher Typ von `Blog` in den einzelnen Zeilen gespeichert ist).
 
-![image](_static/inheritance-tph-data.png)
+![Screenshot der Ergebnisse der Abfrage der Blog-Entitäts Hierarchie mithilfe eines "Tabelle pro Hierarchie"-Musters](_static/inheritance-tph-data.png)
 
 Sie können den Namen und den Typ der diskriminatorspalte und die Werte, die zum Identifizieren der einzelnen Typen in der Hierarchie verwendet werden, konfigurieren:
 
@@ -50,6 +50,10 @@ In den obigen Beispielen wurde der Diskriminator von EF implizit als [Schatten E
 Schließlich kann der Diskriminator auch einer regulären .net-Eigenschaft in der Entität zugeordnet werden:
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/NonShadowDiscriminator.cs?name=NonShadowDiscriminator&highlight=4)]
+
+Beim Abfragen abgeleiteter Entitäten, die das TPH-Muster verwenden, fügt EF Core in der Abfrage ein Prädikat für die diskriminatorspalte hinzu. Dieser Filter stellt sicher, dass keine zusätzlichen Zeilen für Basis Typen oder gleich geordnete Typen, die nicht im Ergebnis sind, angezeigt werden. Dieses Filter Prädikat wird für den Basis Entitätstyp übersprungen, da Abfragen für die Basis Entität Ergebnisse für alle Entitäten in der Hierarchie erhalten. Wenn beim Materialisieren der Ergebnisse aus einer Abfrage ein Diskriminatorwert vorhanden ist, der keinem Entitätstyp im Modell zugeordnet ist, wird eine Ausnahme ausgelöst, da wir nicht wissen, wie die Ergebnisse materialisiert werden. Dieser Fehler tritt nur auf, wenn die Datenbank Zeilen mit diskriminatorwerten enthält, die im EF-Modell nicht zugeordnet sind. Wenn Sie solche Daten haben, können Sie die diskriminatorzuordnung in EF Core Modell als unvollständig kennzeichnen, um anzugeben, dass wir immer ein Filter Prädikat zum Abfragen beliebiger Typen in der Hierarchie hinzufügen sollten. `IsComplete(false)` der-Befehl für die diskriminatorkonfiguration markiert die Zuordnung als unvollständig.
+
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/DiscriminatorMappingIncomplete.cs?name=DiscriminatorMappingIncomplete&highlight=5)]
 
 ### <a name="shared-columns"></a>Freigegebene Spalten
 

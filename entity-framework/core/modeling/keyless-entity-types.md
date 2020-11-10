@@ -4,19 +4,19 @@ description: Konfigurieren von schlüssellosen Entitäts Typen mithilfe von Enti
 author: AndriySvyryd
 ms.date: 9/13/2019
 uid: core/modeling/keyless-entity-types
-ms.openlocfilehash: cb4ce44526ada77e37eb4dceb9986a670ea3656b
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: d1a60e0504b22623b97c1a4963d2e3f70faa365c
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92063802"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94429506"
 ---
 # <a name="keyless-entity-types"></a>Schlüssellose Entitätstypen
 
 > [!NOTE]
 > Diese Funktion wurde unter dem Namen der Abfrage Typen hinzugefügt. In EF Core 3,0 wurde das Konzept in schlüssellose Entitäts Typen umbenannt. Die `[Keyless]` Daten Anmerkung wurde in efcore 5,0 verfügbar.
 
-Zusätzlich zu regulären Entitäts Typen kann ein EF Core Modell _Schlüssel-Entitäts Typen_enthalten, die verwendet werden können, um Datenbankabfragen für Daten auszuführen, die keine Schlüsselwerte enthalten.
+Zusätzlich zu regulären Entitäts Typen kann ein EF Core Modell _Schlüssel-Entitäts Typen_ enthalten, die verwendet werden können, um Datenbankabfragen für Daten auszuführen, die keine Schlüsselwerte enthalten.
 
 ## <a name="defining-keyless-entity-types"></a>Definieren von schlüssellosen Entitäts Typen
 
@@ -47,7 +47,7 @@ Sie unterscheiden sich jedoch von regulären Entitäts Typen darin, dass Sie:
   - Sie können nur Verweis Navigations Eigenschaften enthalten, die auf reguläre Entitäten verweisen.
   - Entitäten können keine Navigations Eigenschaften für Entitäts Typen ohne Schlüssel enthalten.
 - Muss mit einer `[Keyless]` Daten Anmerkung oder einem Methoden Befehl konfiguriert werden `.HasNoKey()` .
-- Kann einer _definierenden Abfrage_zugeordnet werden. Eine definierende Abfrage ist eine im Modell deklarierte Abfrage, die als Datenquelle für einen schlüssellosen Entitätstyp fungiert.
+- Kann einer _definierenden Abfrage_ zugeordnet werden. Eine definierende Abfrage ist eine im Modell deklarierte Abfrage, die als Datenquelle für einen schlüssellosen Entitätstyp fungiert.
 
 ## <a name="usage-scenarios"></a>Verwendungsszenarios
 
@@ -60,7 +60,7 @@ Einige der wichtigsten Verwendungs Szenarien für Typen von schlüssellosen Enti
 
 ## <a name="mapping-to-database-objects"></a>Zuordnung zu Datenbankobjekten
 
-Die Zuordnung eines Entitäts Typs mit einer anderen Tastatur zu einem Datenbankobjekt erfolgt mithilfe der-oder-über `ToTable` `ToView` flüssigen API. Aus Sicht der EF Core ist das in dieser Methode angegebene Datenbankobjekt eine _Sicht_. Dies bedeutet, dass es als schreibgeschützte Abfrage Quelle behandelt wird und nicht das Ziel von Aktualisierungs-, Einfüge-oder Lösch Vorgängen sein kann. Dies bedeutet jedoch nicht, dass das Datenbankobjekt tatsächlich eine Daten Bank Sicht sein muss. Alternativ kann es sich um eine Datenbanktabelle handeln, die als schreibgeschützt behandelt wird. Im Gegensatz dazu geht EF Core bei regulären Entitäts Typen davon aus, dass ein in der-Methode angegebenes Datenbankobjekt `ToTable` als _Tabelle_behandelt werden kann. Dies bedeutet, dass es als Abfrage Quelle, aber auch als Ziel für Update-, DELETE-und INSERT-Vorgänge verwendet werden kann. In der Tat können Sie den Namen einer Daten Bank Sicht in angeben, `ToTable` und alles sollte einwandfrei funktionieren, solange die Sicht so konfiguriert ist, dass Sie für die Datenbank aktualisierbar ist.
+Die Zuordnung eines Entitäts Typs mit einer anderen Tastatur zu einem Datenbankobjekt erfolgt mithilfe der-oder-über `ToTable` `ToView` flüssigen API. Aus Sicht der EF Core ist das in dieser Methode angegebene Datenbankobjekt eine _Sicht_. Dies bedeutet, dass es als schreibgeschützte Abfrage Quelle behandelt wird und nicht das Ziel von Aktualisierungs-, Einfüge-oder Lösch Vorgängen sein kann. Dies bedeutet jedoch nicht, dass das Datenbankobjekt tatsächlich eine Daten Bank Sicht sein muss. Alternativ kann es sich um eine Datenbanktabelle handeln, die als schreibgeschützt behandelt wird. Im Gegensatz dazu geht EF Core bei regulären Entitäts Typen davon aus, dass ein in der-Methode angegebenes Datenbankobjekt `ToTable` als _Tabelle_ behandelt werden kann. Dies bedeutet, dass es als Abfrage Quelle, aber auch als Ziel für Update-, DELETE-und INSERT-Vorgänge verwendet werden kann. In der Tat können Sie den Namen einer Daten Bank Sicht in angeben, `ToTable` und alles sollte einwandfrei funktionieren, solange die Sicht so konfiguriert ist, dass Sie für die Datenbank aktualisierbar ist.
 
 > [!NOTE]
 > `ToView` geht davon aus, dass das Objekt bereits in der Datenbank vorhanden ist, und wird nicht durch Migrationen erstellt.
@@ -99,3 +99,6 @@ Schließlich können wir die Daten Bank Sicht standardmäßig Abfragen:
 
 > [!TIP]
 > Beachten Sie, dass wir auch eine Kontext Stufen-Abfrage Eigenschaft (dbset) definiert haben, die als Stamm für Abfragen dieses Typs fungiert.
+
+> [!TIP]
+> Um Schlüssel-Entitäts Typen, die Ansichten zugeordnet sind, mithilfe des Speicher internen Anbieters zu testen, ordnen Sie Sie einer Abfrage über zu `ToInMemoryQuery` . Weitere Informationen finden Sie unter [ausführbares Beispiel](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/Testing/ItemsWebApi/) mit dieser Technik.

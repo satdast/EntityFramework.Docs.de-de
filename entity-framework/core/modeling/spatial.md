@@ -4,12 +4,12 @@ description: Verwenden räumlicher Daten in einem Entity Framework Core Modell
 author: bricelam
 ms.date: 10/02/2020
 uid: core/modeling/spatial
-ms.openlocfilehash: 2c0cd7a8acf7e4b58eadf8805afa1fe4a1d6e949
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: fa9cf30ddb4291d96486934544b568b67b126846
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92063932"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94430520"
 ---
 # <a name="spatial-data"></a>Räumliche Daten
 
@@ -78,7 +78,7 @@ In LINQ werden die NTS-Methoden und-Eigenschaften, die als Datenbankfunktionen v
 
 ## <a name="reverse-engineering"></a>Reverse Engineering
 
-Die räumlichen nuget-Pakete ermöglichen auch die [Reverse Engineering](xref:core/managing-schemas/scaffolding) von Modellen mit räumlichen Eigenschaften. Sie müssen das Paket jedoch ***vor*** dem Ausführen von `Scaffold-DbContext` oder installieren `dotnet ef dbcontext scaffold` . Wenn Sie dies nicht tun, erhalten Sie Warnungen, wenn Sie keine Typzuordnungen für die Spalten finden und die Spalten übersprungen werden.
+Die räumlichen nuget-Pakete ermöglichen auch das [Reverse Engineering](xref:core/managing-schemas/scaffolding) von Modellen mit räumlichen Eigenschaften. Sie müssen jedoch das Paket installieren * *_vor_* _ Ausführen von `Scaffold-DbContext` oder `dotnet ef dbcontext scaffold` . Wenn Sie dies nicht tun, erhalten Sie Warnungen, wenn Sie keine Typzuordnungen für die Spalten finden und die Spalten übersprungen werden.
 
 ## <a name="srid-ignored-during-client-operations"></a>SRID wird bei Client Vorgängen ignoriert.
 
@@ -97,9 +97,15 @@ Im folgenden finden Sie ein Beispiel für die Verwendung von ProjNet4GeoAPI, um 
 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
+### <a name="database-specific-information"></a>Datenbankspezifische Informationen
+
 Lesen Sie unbedingt die Dokumentation Ihres Anbieters, um weitere Informationen zum Arbeiten mit räumlichen Daten zu erhalten.
 
-* [Räumliche Daten im SQL Server-Anbieter](xref:core/providers/sql-server/spatial)
+_ [Räumliche Daten im SQL Server-Anbieter](xref:core/providers/sql-server/spatial)
 * [Räumliche Daten im SQLite-Anbieter](xref:core/providers/sqlite/spatial)
 * [Räumliche Daten im npgsql-Anbieter](https://www.npgsql.org/efcore/mapping/nts.html)
+
+### <a name="other-resources"></a>Weitere Ressourcen
+
 * [Nettopologysuite-Dokumentation](https://nettopologysuite.github.io/NetTopologySuite/)
+* [EF Core Community Standup-Sitzung](https://www.youtube.com/watch?v=IHslY5rrxD0&list=PLdo4fOcmZ0oX-DBuRG4u58ZTAJgBAeQ-t&index=15)mit Schwerpunkt auf räumliche Daten und nettopologysuite.

@@ -4,12 +4,12 @@ description: Konfigurieren und Zuordnen von Entitäts Eigenschaften mithilfe von
 author: roji
 ms.date: 05/27/2020
 uid: core/modeling/entity-properties
-ms.openlocfilehash: 99b0a9ee1e11714e98ebea8b2e6ac53bd2dc6e55
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: 55c6f31543d4ce3257cf203eaf9fd2191301ea7e
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92062294"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94429595"
 ---
 # <a name="entity-properties"></a>Entitätseigenschaften
 
@@ -45,7 +45,7 @@ Wenn Sie Ihre Spalten lieber mit unterschiedlichen Namen konfigurieren möchten,
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/ColumnName.cs?Name=ColumnName&highlight=3-5)]
 
-***
+**_
 
 ## <a name="column-data-types"></a>Spaltendatentypen
 
@@ -63,7 +63,7 @@ Sie können auch die Spalten so konfigurieren, dass Sie einen exakten Datentyp f
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/ColumnDataType.cs?name=ColumnDataType&highlight=5-6)]
 
-***
+_*_
 
 ### <a name="maximum-length"></a>Maximale Länge
 
@@ -82,7 +82,7 @@ Im folgenden Beispiel bewirkt das Konfigurieren einer maximalen Länge von 500, 
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/MaxLength.cs?name=MaxLength&highlight=3-5)]
 
-***
+_*_
 
 ### <a name="precision-and-scale"></a>Genauigkeit und Skalierung
 
@@ -97,7 +97,7 @@ Im folgenden Beispiel führt die Konfiguration der `Score` -Eigenschaft für die
 
 #### <a name="data-annotations"></a>[Daten Anmerkungen](#tab/data-annotations)
 
-Derzeit ist es nicht möglich, Daten Anmerkungen zum Konfigurieren von zu verwenden.
+Genauigkeit und Skalierung können zurzeit nicht über Daten Anmerkungen konfiguriert werden.
 
 #### <a name="fluent-api"></a>[Fluent-API](#tab/fluent-api)
 
@@ -106,7 +106,7 @@ Derzeit ist es nicht möglich, Daten Anmerkungen zum Konfigurieren von zu verwen
 > [!NOTE]
 > Die Skalierung wird nie definiert, ohne dass zuerst die Genauigkeit definiert wird, daher ist die fließende API zum Definieren der Skala `HasPrecision(precision, scale)` .
 
-***
+_*_
 
 ## <a name="required-and-optional-properties"></a>Erforderliche und optionale Eigenschaften
 
@@ -116,18 +116,18 @@ Eine Eigenschaft wird als optional eingestuft, wenn Sie gültig ist `null` . Wen
 
 Gemäß der Konvention wird eine Eigenschaft, deren .NET-Typ NULL enthalten kann, als optional konfiguriert, wohingegen Eigenschaften, deren .NET-Typ keinen NULL-Wert enthalten darf, als erforderlich konfiguriert werden. Beispielsweise werden alle Eigenschaften mit .net-Werttypen ( `int` , `decimal` , `bool` usw.) als erforderlich konfiguriert, und alle Eigenschaften mit .net-Werttypen, die NULL-Werte zulassen ( `int?` , `decimal?` , `bool?` usw.) werden als optional konfiguriert.
 
-In c# 8 wurde ein neues Feature namens " [Werte zulässt Reference Types](/dotnet/csharp/tutorials/nullable-reference-types)" eingeführt, mit dem Verweis Typen mit Anmerkungen versehen werden können. Dies gibt an, ob es zulässig ist, dass NULL-Werte enthalten sind. Diese Funktion ist standardmäßig deaktiviert. Wenn Sie aktiviert ist, ändert Sie das Verhalten der EF Core auf folgende Weise:
+In c# 8 wurde ein neues Feature namens " [Werte zulässt Reference Types (NRT)](/dotnet/csharp/tutorials/nullable-reference-types)" eingeführt, mit dem Verweis Typen mit Anmerkungen versehen werden können. Dies gibt an, ob es zulässig ist, dass NULL-Werte enthalten sind. Diese Funktion ist standardmäßig deaktiviert und wirkt sich auf das Verhalten EF Core wie folgt aus:
 
-* Wenn NULL-Werte zulassen (Standardeinstellung), werden alle Eigenschaften mit .net-Verweis Typen gemäß der Konvention (z. b.) als optional konfiguriert `string` .
+_ Wenn Verweis Typen, die NULL-Werte zulassen, deaktiviert sind (Standardeinstellung), werden alle Eigenschaften mit .net-Verweis Typen gemäß der Konvention (z. b.) als optional konfiguriert `string` .
 * Wenn Verweis Typen, die NULL-Werte zulassen, aktiviert sind, werden die Eigenschaften basierend auf der c#-NULL-Zulässigkeit ihres .net-Typs konfiguriert: `string?` wird als optional konfiguriert, `string` wird jedoch als erforderlich konfiguriert.
 
 Das folgende Beispiel zeigt einen Entitätstyp mit erforderlichen und optionalen Eigenschaften, wobei die Verweis Funktion NULL-Werte ist deaktiviert (Standard) und aktiviert ist:
 
-#### <a name="without-nullable-reference-types-default"></a>[Ohne Verweis Typen, die NULL-Werte zulassen (Standard)](#tab/without-nrt)
+#### <a name="without-nrt-default"></a>[Ohne NRT (Standard)](#tab/without-nrt)
 
 [!code-csharp[Main](../../../samples/core/Miscellaneous/NullableReferenceTypes/CustomerWithoutNullableReferenceTypes.cs?name=Customer&highlight=4-8)]
 
-#### <a name="with-nullable-reference-types"></a>[Mit auf NULL festleg baren Verweis Typen](#tab/with-nrt)
+#### <a name="with-nrt"></a>[Mit NRT](#tab/with-nrt)
 
 [!code-csharp[Main](../../../samples/core/Miscellaneous/NullableReferenceTypes/Customer.cs?name=Customer&highlight=4-6)]
 

@@ -4,12 +4,12 @@ description: Konfigurieren von Sortierungen und Berücksichtigung der Groß-/Kle
 author: roji
 ms.date: 04/27/2020
 uid: core/miscellaneous/collations-and-case-sensitivity
-ms.openlocfilehash: e327df8adf777bfa5603a71eca8297a051f5bd56
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: cced7e11f7bf02223d3f181677ad1707c1da4051
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90071718"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94429740"
 ---
 # <a name="collations-and-case-sensitivity"></a>Sortierungen und Groß-/Kleinschreibung
 
@@ -20,7 +20,7 @@ Die Text Verarbeitung in Datenbanken kann sehr komplex sein und erfordert eine h
 
 ## <a name="introduction-to-collations"></a>Einführung in Sortierungen
 
-Ein grundlegendes Konzept bei der Textverarbeitung ist die *Sortierung*, bei der es sich um einen Satz von Regeln handelt, der festlegt, wie Text Werte auf Gleichheit sortiert und verglichen werden. Bei einer Sortierung ohne Beachtung der Groß-/Kleinschreibung werden z. b. Unterschiede zwischen Groß-und Kleinbuchstaben für den Gleichheits Vergleich ignoriert. bei der Sortierung wird die Groß-/Kleinschreibung beachtet. Da die Unterscheidung nach Groß-/Kleinschreibung Kultur abhängig ist (z. b. `i` und `I` einen anderen Buchstaben in Türkisch darstellt), gibt es mehrere Sortierungen ohne Beachtung der Groß-/Kleinschreibung, die jeweils über einen eigenen Regelsatz verfügen Der Gültigkeitsbereich von Sortierungen ist auch über die Unterscheidung nach Groß-/Kleinschreibung und andere Aspekte von Zeichendaten hinaus. in Deutsch ist beispielsweise manchmal (aber nicht immer) wünschenswert, um `ä` und `ae` als identisch zu behandeln. Und schließlich definieren Sortierungen auch, wie Text Werte *sortiert*werden: bei deutschen stellen `ä` nach `a` wird der schwedische am Ende des Alphabets platziert.
+Ein grundlegendes Konzept bei der Textverarbeitung ist die *Sortierung* , bei der es sich um einen Satz von Regeln handelt, der festlegt, wie Text Werte auf Gleichheit sortiert und verglichen werden. Bei einer Sortierung ohne Beachtung der Groß-/Kleinschreibung werden z. b. Unterschiede zwischen Groß-und Kleinbuchstaben für den Gleichheits Vergleich ignoriert. bei der Sortierung wird die Groß-/Kleinschreibung beachtet. Da die Unterscheidung nach Groß-/Kleinschreibung Kultur abhängig ist (z. b. `i` und `I` einen anderen Buchstaben in Türkisch darstellt), gibt es mehrere Sortierungen ohne Beachtung der Groß-/Kleinschreibung, die jeweils über einen eigenen Regelsatz verfügen Der Gültigkeitsbereich von Sortierungen ist auch über die Unterscheidung nach Groß-/Kleinschreibung und andere Aspekte von Zeichendaten hinaus. in Deutsch ist beispielsweise manchmal (aber nicht immer) wünschenswert, um `ä` und `ae` als identisch zu behandeln. Und schließlich definieren Sortierungen auch, wie Text Werte *sortiert* werden: bei deutschen stellen `ä` nach `a` wird der schwedische am Ende des Alphabets platziert.
 
 Bei allen Text Vorgängen in einer Datenbank wird eine Sortierung (explizit oder implizit) verwendet, um zu bestimmen, wie der Vorgang im Vergleich und Auftrags Zeichenfolgen verwendet wird. Die tatsächliche Liste der verfügbaren Sortierungen und ihrer Benennungs Schemas ist datenbankspezifisch. Links zu relevanten Dokumentationsseiten verschiedener Datenbanken [finden Sie im Abschnitt weiter unten](#database-specific-information) . Glücklicherweise ist es in der Regel möglich, eine Standardsortierung auf Datenbank-oder Spaltenebene zu definieren und explizit anzugeben, welche Sortierung für bestimmte Vorgänge in einer Abfrage verwendet werden soll.
 
@@ -69,9 +69,15 @@ In .net wird bei der Zeichen folgen Gleichheit standardmäßig die Groß-/Kleins
 
 Außerdem bietet .net über Ladungen [`string.Equals`](/dotnet/api/system.string.equals#System_String_Equals_System_String_System_StringComparison_) [`StringComparison`](/dotnet/api/system.stringcomparison) , die eine-Enum akzeptieren, die die Berücksichtigung der Groß-/Kleinschreibung und der Kultur für den Vergleich ermöglicht. EF Core können diese über Ladungen nicht in SQL übersetzen, und der Versuch, Sie zu verwenden, führt zu einer Ausnahme. EF Core weiß nicht, welche Sortierung mit Beachtung der Groß-/Kleinschreibung oder ohne Beachtung der Groß-/Kleinschreibung verwendet werden sollte. Noch wichtiger ist, dass das Anwenden einer Sortierung in den meisten Fällen die Index Verwendung verhindert, wodurch sich die Leistung für ein sehr einfaches und häufig verwendetes .net-Konstrukt erheblich beeinträchtigt. Wenn Sie erzwingen möchten, dass eine Abfrage die Groß-/Kleinschreibung beachtet oder den Vergleich ohne Berücksichtigung der Groß-/Kleinschreibung verwendet, geben Sie eine Sortierung explizit über `EF.Functions.Collate` [detailed above](#explicit-collations-and-indexes)
 
-## <a name="database-specific-information"></a>Datenbankspezifische Informationen
+## <a name="additional-resources"></a>Zusätzliche Ressourcen
+
+### <a name="database-specific-information"></a>Datenbankspezifische Informationen
 
 * [SQL Server Dokumentation zu Sortierungen](/sql/relational-databases/collations/collation-and-unicode-support).
 * [Microsoft. Data. sqlite-Dokumentation zu Sortierungen](/dotnet/standard/data/sqlite/collation).
 * [PostgreSQL-Dokumentation zu Sortierungen](https://www.postgresql.org/docs/current/collation.html).
 * [MySQL-Dokumentation zu Sortierungen](https://dev.mysql.com/doc/refman/en/charset-general.html).
+
+### <a name="other-resources"></a>Weitere Ressourcen
+
+* [EF Core Community Standup-Sitzung](https://www.youtube.com/watch?v=OgMhLVa_VfA&list=PLdo4fOcmZ0oX-DBuRG4u58ZTAJgBAeQ-t&index=1), in der Sortierungen eingeführt und Leistungs-und Indizierungs Aspekte untersucht werden.

@@ -2,14 +2,14 @@
 title: Benutzerdefinierte Migrations Vorgänge-EF Core
 description: Verwalten von benutzerdefinierten und unformatierten SQL-Migrationen für die Datenbankschema Entity Framework Core Verwaltung
 author: bricelam
-ms.date: 11/07/2017
+ms.date: 10/27/2020
 uid: core/managing-schemas/migrations/operations
-ms.openlocfilehash: d1d29b7789eea5e887490364a7ce3abfdc903545
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: 2abde4d5eac977a746863dcfd77bc85a34e2166c
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92062034"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94429831"
 ---
 # <a name="custom-migrations-operations"></a>Benutzerdefinierte Migrations Vorgänge
 
@@ -25,36 +25,14 @@ migrationBuilder.CreateUser("SQLUser1", "Password");
 
 Die einfachste Möglichkeit zum Implementieren eines benutzerdefinierten Vorgangs besteht darin, eine Erweiterungsmethode zu definieren, die aufruft `MigrationBuilder.Sql()` . Es folgt ein Beispiel, das die entsprechende Transact-SQL-Anwendung generiert.
 
-```csharp
-static MigrationBuilder CreateUser(
-    this MigrationBuilder migrationBuilder,
-    string name,
-    string password)
-    => migrationBuilder.Sql($"CREATE USER {name} WITH PASSWORD '{password}';");
-```
+[!code-csharp[](../../../../samples/core/Schemas/Migrations/CustomOperationSql.cs#snippet_CustomOperationSql)]
+
+> [!TIP]
+> Verwenden Sie die- `EXEC` Funktion, wenn eine Anweisung der erste oder einzige in einem SQL-Batch sein muss. Es kann auch erforderlich sein, Parserfehler in idempotenten Migrations Skripts zu umgehen, die auftreten können, wenn Spalten, auf die verwiesen wird, derzeit nicht in einer Tabelle vorhanden sind
 
 Wenn Ihre Migrationen mehrere Datenbankanbieter unterstützen müssen, können Sie die- `MigrationBuilder.ActiveProvider` Eigenschaft verwenden. Hier sehen Sie ein Beispiel, das sowohl Microsoft SQL Server als auch PostgreSQL unterstützt.
 
-```csharp
-static MigrationBuilder CreateUser(
-    this MigrationBuilder migrationBuilder,
-    string name,
-    string password)
-{
-    switch (migrationBuilder.ActiveProvider)
-    {
-        case "Npgsql.EntityFrameworkCore.PostgreSQL":
-            return migrationBuilder
-                .Sql($"CREATE USER {name} WITH PASSWORD '{password}';");
-
-        case "Microsoft.EntityFrameworkCore.SqlServer":
-            return migrationBuilder
-                .Sql($"CREATE USER {name} WITH PASSWORD = '{password}';");
-    }
-
-    return migrationBuilder;
-}
-```
+[!code-csharp[](../../../../samples/core/Schemas/Migrations/CustomOperationMultiSql.cs#snippet_CustomOperationMultiSql)]
 
 Dieser Ansatz funktioniert nur, wenn Sie jeden Anbieter kennen, auf den der benutzerdefinierte Vorgang angewendet wird.
 
@@ -62,83 +40,16 @@ Dieser Ansatz funktioniert nur, wenn Sie jeden Anbieter kennen, auf den der benu
 
 Um den benutzerdefinierten Vorgang von SQL zu entkoppeln, können Sie einen eigenen definieren, `MigrationOperation` um ihn zu repräsentieren. Der Vorgang wird dann an den Anbieter weitergegeben, damit er die zu generierende SQL-Datei bestimmen kann.
 
-```csharp
-class CreateUserOperation : MigrationOperation
-{
-    public string Name { get; set; }
-    public string Password { get; set; }
-}
-```
+[!code-csharp[](../../../../samples/core/Schemas/Migrations/CustomOperation.cs#snippet_CreateUserOperation)]
 
 Bei diesem Ansatz muss die Erweiterungsmethode nur einen dieser Vorgänge hinzufügen `MigrationBuilder.Operations` .
 
-```csharp
-static MigrationBuilder CreateUser(
-    this MigrationBuilder migrationBuilder,
-    string name,
-    string password)
-{
-    migrationBuilder.Operations.Add(
-        new CreateUserOperation
-        {
-            Name = name,
-            Password = password
-        });
-
-    return migrationBuilder;
-}
-```
+[!code-csharp[](../../../../samples/core/Schemas/Migrations/CustomOperation.cs#snippet_MigrationBuilderExtension)]
 
 Diese Vorgehensweise erfordert, dass jeder Anbieter weiß, wie SQL für diesen Vorgang in seinem Dienst generiert wird `IMigrationsSqlGenerator` . Hier ist ein Beispiel, das den Generator der SQL Server überschreibt, um den neuen Vorgang zu verarbeiten.
 
-```csharp
-class MyMigrationsSqlGenerator : SqlServerMigrationsSqlGenerator
-{
-    public MyMigrationsSqlGenerator(
-        MigrationsSqlGeneratorDependencies dependencies,
-        IMigrationsAnnotationProvider migrationsAnnotations)
-        : base(dependencies, migrationsAnnotations)
-    {
-    }
-
-    protected override void Generate(
-        MigrationOperation operation,
-        IModel model,
-        MigrationCommandListBuilder builder)
-    {
-        if (operation is CreateUserOperation createUserOperation)
-        {
-            Generate(createUserOperation, builder);
-        }
-        else
-        {
-            base.Generate(operation, model, builder);
-        }
-    }
-
-    private void Generate(
-        CreateUserOperation operation,
-        MigrationCommandListBuilder builder)
-    {
-        var sqlHelper = Dependencies.SqlGenerationHelper;
-        var stringMapping = Dependencies.TypeMappingSource.FindMapping(typeof(string));
-
-        builder
-            .Append("CREATE USER ")
-            .Append(sqlHelper.DelimitIdentifier(operation.Name))
-            .Append(" WITH PASSWORD = ")
-            .Append(stringMapping.GenerateSqlLiteral(operation.Password))
-            .AppendLine(sqlHelper.StatementTerminator)
-            .EndCommand();
-    }
-}
-```
+[!code-csharp[](../../../../samples/core/Schemas/Migrations/CustomOperation.cs#snippet_MigrationsSqlGenerator)]
 
 Ersetzen Sie den SQL-Generator-Standard Migrationsdienst durch den aktualisierten Dienst.
 
-```csharp
-protected override void OnConfiguring(DbContextOptionsBuilder options)
-    => options
-        .UseSqlServer(connectionString)
-        .ReplaceService<IMigrationsSqlGenerator, MyMigrationsSqlGenerator>();
-```
+[!code-csharp[](../../../../samples/core/Schemas/Migrations/CustomOperation.cs#snippet_OnConfiguring)]

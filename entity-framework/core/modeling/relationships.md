@@ -4,12 +4,12 @@ description: Konfigurieren von Beziehungen zwischen Entitäts Typen bei Verwendu
 author: AndriySvyryd
 ms.date: 10/01/2020
 uid: core/modeling/relationships
-ms.openlocfilehash: 71d960a15dfb938af1dcc7035dc2587df7ad4677
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: 567d212ddf41f33ee32443d85d2a17234fbc026b
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92063841"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94430182"
 ---
 # <a name="relationships"></a>Beziehungen
 
@@ -85,7 +85,7 @@ In diesem Beispiel werden die markierten Eigenschaften zum Konfigurieren der Bez
 > Wenn die Eigenschaft der Primärschlüssel oder ein Typ ist, der nicht mit dem Prinzipal Schlüssel kompatibel ist, wird Sie nicht als Fremdschlüssel konfiguriert.
 
 > [!NOTE]
-> Vor EF Core 3,0 wurde die Eigenschaft mit dem gleichen Namen wie die Prinzipal Schlüsseleigenschaft [ebenfalls als Fremdschlüssel abgeglichen](https://github.com/aspnet/EntityFrameworkCore/issues/13274) .
+> Vor EF Core 3,0 wurde die Eigenschaft mit dem gleichen Namen wie die Prinzipal Schlüsseleigenschaft [ebenfalls als Fremdschlüssel abgeglichen](https://github.com/dotnet/efcore/issues/13274) .
 
 ### <a name="no-foreign-key-property"></a>Keine Fremdschlüssel Eigenschaft
 
@@ -149,7 +149,7 @@ Wenn Sie nur über eine Navigations Eigenschaft verfügen, gibt es Parameter los
 ### <a name="configuring-navigation-properties"></a>Konfigurieren von Navigations Eigenschaften
 
 > [!NOTE]
-> Diese Funktion wurde in EF Core 5,0 hinzugefügt.
+> Dieses Feature wurde in EF Core 5.0 hinzugefügt.
 
 Nachdem die Navigations Eigenschaft erstellt wurde, müssen Sie Sie möglicherweise weiter konfigurieren.
 
@@ -194,7 +194,7 @@ Sie können die Zeichen folgen Überladung von verwenden `HasForeignKey(...)` , 
 
 #### <a name="foreign-key-constraint-name"></a>Name der FOREIGN KEY-Einschränkung
 
-Gemäß der Konvention werden Foreign Key-Einschränkungen, wenn Sie eine relationale Datenbank als Ziel haben, FK_ benannt <dependent type name> _<principal type name>_ <foreign key property name> . Für zusammengesetzte Fremdschlüssel <foreign key property name> wird zu einer durch Trennzeichen getrennten Liste von Fremdschlüssel Eigenschaftsnamen.
+Gemäß der Konvention werden Foreign Key-Einschränkungen beim Ziel einer relationalen Datenbank als "FK" benannt \_ \<dependent type name> \_ \<principal type name> \_ \<foreign key property name> . Bei zusammengesetzten Fremdschlüsseln \<foreign key property name> wird zu einer durch Trennzeichen getrennten Liste von Fremdschlüssel Eigenschaftsnamen.
 
 Sie können den Einschränkungs Namen auch wie folgt konfigurieren:
 
@@ -325,3 +325,10 @@ Zusätzliche Daten können im Join-Entitätstyp gespeichert werden, aber hierfü
 Sie können auch eine m:n-Beziehung darstellen, indem Sie einfach den Join-Entitätstyp hinzufügen und zwei separate 1: n-Beziehungen Mapping.
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/ManyToMany.cs?name=ManyToMany&highlight=11-14,16-19,39-46)]
+
+> [!NOTE]
+> Es wurde noch keine Unterstützung für das Gerüstbau von m:n-Beziehungen aus der Datenbank hinzugefügt. Siehe nach [Verfolgungs Problem](https://github.com/dotnet/efcore/issues/22475).
+
+## <a name="additional-resources"></a>Zusätzliche Ressourcen
+
+* [EF Core Community Standup-Sitzung](https://www.youtube.com/watch?v=W1sxepfIMRM&list=PLdo4fOcmZ0oX-DBuRG4u58ZTAJgBAeQ-t&index=32)mit einem detaillierten Einblick in m:n-Beziehungen und der zugrunde liegenden Infrastruktur.
