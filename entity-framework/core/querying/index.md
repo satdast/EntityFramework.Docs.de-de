@@ -4,16 +4,16 @@ description: Informationsübersicht zu Abfragen in Entity Framework Core
 author: smitpatel
 ms.date: 10/03/2019
 uid: core/querying/index
-ms.openlocfilehash: 7cf53d59a577c5bc45f3ea4ea0cfbe257437b44e
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: da5177dda4f2df6537ee9133edf4f1240a4b5e94
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92062562"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94430117"
 ---
 # <a name="querying-data"></a>Abfrage von Daten
 
-Entity Framework Core verwendet Language Integrated Query (LINQ), um Daten von der Datenbank abzufragen. LINQ ermöglicht Ihnen, mit C# (oder Ihrer bevorzugten .NET-Sprache) stark typisierte Abfragen zu schreiben. Dabei werden der abgeleitete Kontext und Entitätsklassen verwendet, um auf Datenbankobjekte zu verweisen. EF Core übergibt eine Darstellung der LINQ-Abfrage an den Datenbankanbieter. Die Datenbankanbieter übersetzen diese dann in die datenbankspezifische Abfragesprache, z. B. SQL für relationale Datenbanken.
+Entity Framework Core verwendet Language Integrated Query (LINQ), um Daten aus der Datenbank abzufragen. LINQ ermöglicht Ihnen, mit C# (oder Ihrer bevorzugten .NET-Sprache) stark typisierte Abfragen zu schreiben. Dabei werden der abgeleitete Kontext und Entitätsklassen verwendet, um auf Datenbankobjekte zu verweisen. EF Core übergibt eine Darstellung der LINQ-Abfrage an den Datenbankanbieter. Die Datenbankanbieter übersetzen diese dann in die datenbankspezifische Abfragesprache, z. B. SQL für relationale Datenbanken. Abfragen werden immer für die Datenbank ausgeführt, auch wenn die im Ergebnis zurückgegebenen Entitäten bereits im Kontext vorhanden sind.
 
 > [!TIP]
 > Das in diesem Artikel verwendete [Beispiel](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Querying/Overview) finden Sie auf GitHub.

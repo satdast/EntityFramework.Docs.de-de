@@ -4,16 +4,16 @@ description: Allgemeine Einführungsübersicht für Entity Framework Core
 author: ajcvickers
 ms.date: 9/20/2020
 uid: core/index
-ms.openlocfilehash: 011900b55bc941d6ae6a7ac8aca6001713088c69
-ms.sourcegitcommit: c0e6a00b64c2dcd8acdc0fe6d1b47703405cdf09
+ms.openlocfilehash: ccb1fa4cbc0bd1a02e1aeb613475bfe4b2c1d118
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/24/2020
-ms.locfileid: "91210379"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94429896"
 ---
 # <a name="entity-framework-core"></a>Entity Framework Core
 
-Entity Framework Core (EF Core) ist eine einfache, erweiterbare und plattformübergreifende [Open Source](https://github.com/aspnet/EntityFrameworkCore)-Version der beliebten Entity Framework-Datenzugriffstechnologie.
+Entity Framework Core (EF Core) ist eine einfache, erweiterbare und plattformübergreifende [Open Source](https://github.com/dotnet/efcore)-Version der beliebten Entity Framework-Datenzugriffstechnologie.
 
 EF Core kann als objektrelationaler Mapper (O/RM) fungieren, für den Folgendes gilt:
 
@@ -36,7 +36,7 @@ EF unterstützt die folgenden Ansätze für Modellentwicklung:
 
 ## <a name="querying"></a>Abfragen
 
-Instanzen Ihrer Entitätsklassen werden mit Language [Integrated Query (LINQ)](/dotnet/csharp/programming-guide/concepts/linq/) von der Datenbank abgerufen. Weitere Informationen finden Sie unter [Abfragen von Daten](xref:core/querying/index).
+Instanzen Ihrer Entitätsklassen werden mit Language [Integrated Query (LINQ)](/dotnet/csharp/programming-guide/concepts/linq/) aus der Datenbank abgerufen. Weitere Informationen finden Sie unter [Abfragen von Daten](xref:core/querying/index).
 
 [!code-csharp[Main](../../samples/core/Intro/Program.cs#Querying)]
 
@@ -46,21 +46,21 @@ Daten werden in der Datenbank mithilfe von Instanzen Ihrer Entitätsklassen erst
 
 [!code-csharp[Main](../../samples/core/Intro/Program.cs#SavingData)]
 
-## <a name="ef-orm-considerations"></a>EF ORM-Überlegungen
+## <a name="ef-orm-considerations"></a>EF O/RM-Überlegungen
 
-Obwohl EF Core viele Programmierungsdetails gut abstrahieren kann, gibt es einige für jedes ORM anwendbare bewährte Methoden, die dazu beitragen, häufige Fallstricke in Produktionsanwendungen zu vermeiden:
+Obwohl EF Core viele Programmierungsdetails gut abstrahieren kann, gibt es einige für jeden O/RM anwendbare bewährte Methoden, die dazu beitragen, häufige Fallstricke in Produktionsanwendungen zu vermeiden:
 
- - Kenntnisse auf mittlerem oder höherem Niveau des zugrundeliegenden Datenbankservers sind für Architektur, Debuggen, Profilerstellung und Datenmigration in Hochleistungsproduktions-Apps unerlässlich. Beispielsweise Kenntnisse zu Primär- und Fremdschlüsseln, Einschränkungen, Indizes, Normalisierung, DML- und DDL-Anweisungen, Datentypen, Profilerstellung usw.
-- Funktions-und Integrationstests:  Es ist wichtig, die Produktionsumgebung so genau wie möglich zu replizieren, um Folgendes zu erreichen:
-  - Finden von Problemen in der App, die nur bei Verwendung einer bestimmten Version oder Edition des Datenbankservers auftreten.
-  - Erfassen von Breaking Changes beim Upgrade von EF Core und anderen Abhängigkeiten. Beispielsweise beim Hinzufügen oder Upgraden von Frameworks wie ASP.NET Core, OData oder Automapper. Diese Abhängigkeiten können sich auf EF Core auf unerwartete Weise auswirken.
-- Leistungs- und Belastungstests mit repräsentativen Auslastungen. Die naive Verwendung einiger Funktionen ist nicht gut skalierbar. Beispielsweise mehrere Sammlungs-Includes, übermäßige Verwendung von Lazy Loading, bedingte Abfragen für nicht indizierte Spalten, massive Updates und Einfügungen mit vom Store generierten Werten, fehlende Parallelitätsverarbeitung, große Modelle, unzureichende Cacherichtlinien.
-- Sicherheitsüberprüfung: Beispielsweise Verarbeitung von Verbindungszeichenfolgen und anderen Geheimnissen, Datenbankberechtigungen für Nicht-Bereitstellungsvorgänge, Eingabevalidierung für Roh-SQL, Verschlüsselung für sensible Daten.
-- Stellen Sie sicher, dass Protokollierung und Diagnose ausreichend und verwendbar sind. Beispielsweise geeignete Protokollierungskonfiguration, Abfragetags und Application Insights.
-- Wiederherstellung nach Fehlern. Vorbereiten von Eventualitäten für häufige Ausfallszenarien wie Versionsrollback, Fallbackserver, horizontale Skalierung und Lastenausgleich, DoS-Entschärfung und Datensicherungen.
-- Anwendungsbereitstellung und -migration. Planen, wie Migrationen während der Bereitstellung angewendet werden sollen. Die Ausführung beim Anwendungsstart kann unter Parallelitätsproblemen leiden und erfordert höhere Berechtigungen, als für den normalen Betrieb erforderlich sind. Verwenden von Staging, um Wiederherstellung nach schwerwiegenden Fehlern während der Migration zu ermöglichen. Weitere Informationen finden Sie unter [Anwenden von Migrationen](xref:core/managing-schemas/migrations/applying).
-- Ausführliche Untersuchung und Testen generierter Migrationen. Migrationen sollten gründlich getestet werden, bevor sie auf Produktionsdaten angewendet werden. Die Form des Schemas und die Spaltentypen können nicht einfach geändert werden, sobald die Tabellen Produktionsdaten enthalten. Beispielsweise sind `nvarchar(max)` und `decimal(18, 2)` in SQL Server selten die besten Typen für Spalten, die Zeichenfolgen- und Dezimaleigenschaften zugeordnet sind. Dies sind aber die Standardwerte, die EF aufgrund fehlender Kenntnisse bezüglich Ihres speziellen Szenarios verwendet.
+* Kenntnisse auf mittlerem oder höherem Niveau des zugrundeliegenden Datenbankservers sind für Architektur, Debuggen, Profilerstellung und Datenmigration in Hochleistungsproduktions-Apps unerlässlich. Beispielsweise Kenntnisse zu Primär- und Fremdschlüsseln, Einschränkungen, Indizes, Normalisierung, DML- und DDL-Anweisungen, Datentypen, Profilerstellung usw.
+* Funktions-und Integrationstests:  Es ist wichtig, die Produktionsumgebung so genau wie möglich zu replizieren, um Folgendes zu erreichen:
+  * Finden von Problemen in der App, die nur bei Verwendung einer bestimmten Version oder Edition des Datenbankservers auftreten.
+  * Erfassen von Breaking Changes beim Upgrade von EF Core und anderen Abhängigkeiten. Beispielsweise beim Hinzufügen oder Upgraden von Frameworks wie ASP.NET Core, OData oder Automapper. Diese Abhängigkeiten können sich auf EF Core auf unerwartete Weise auswirken.
+* Leistungs- und Belastungstests mit repräsentativen Auslastungen. Die naive Verwendung einiger Funktionen ist nicht gut skalierbar. Beispielsweise mehrere Sammlungs-Includes, übermäßige Verwendung von Lazy Loading, bedingte Abfragen für nicht indizierte Spalten, massive Updates und Einfügungen mit vom Store generierten Werten, fehlende Parallelitätsverarbeitung, große Modelle, unzureichende Cacherichtlinien.
+* Sicherheitsüberprüfung: Beispielsweise Verarbeitung von Verbindungszeichenfolgen und anderen Geheimnissen, Datenbankberechtigungen für Nicht-Bereitstellungsvorgänge, Eingabevalidierung für Roh-SQL, Verschlüsselung für sensible Daten.
+* Stellen Sie sicher, dass Protokollierung und Diagnose ausreichend und verwendbar sind. Beispielsweise geeignete Protokollierungskonfiguration, Abfragetags und Application Insights.
+* Wiederherstellung nach Fehlern. Vorbereiten von Eventualitäten für häufige Ausfallszenarien wie Versionsrollback, Fallbackserver, horizontale Skalierung und Lastenausgleich, DoS-Entschärfung und Datensicherungen.
+* Anwendungsbereitstellung und -migration. Planen, wie Migrationen während der Bereitstellung angewendet werden sollen. Die Ausführung beim Anwendungsstart kann unter Parallelitätsproblemen leiden und erfordert höhere Berechtigungen, als für den normalen Betrieb erforderlich sind. Verwenden von Staging, um Wiederherstellung nach schwerwiegenden Fehlern während der Migration zu ermöglichen. Weitere Informationen finden Sie unter [Anwenden von Migrationen](xref:core/managing-schemas/migrations/applying).
+* Ausführliche Untersuchung und Testen generierter Migrationen. Migrationen sollten gründlich getestet werden, bevor sie auf Produktionsdaten angewendet werden. Die Form des Schemas und die Spaltentypen können nicht einfach geändert werden, sobald die Tabellen Produktionsdaten enthalten. Beispielsweise sind `nvarchar(max)` und `decimal(18, 2)` in SQL Server selten die besten Typen für Spalten, die Zeichenfolgen- und Dezimaleigenschaften zugeordnet sind. Dies sind aber die Standardwerte, die EF aufgrund fehlender Kenntnisse bezüglich Ihres speziellen Szenarios verwendet.
 
 ## <a name="next-steps"></a>Nächste Schritte
 
-Einführungstutorials finden Sie unter [Erste Schritte mit Entity Framework Core](xref:core/get-started/index).
+Einführungstutorials finden Sie unter [Erste Schritte mit Entity Framework Core](xref:core/get-started/overview/first-app).

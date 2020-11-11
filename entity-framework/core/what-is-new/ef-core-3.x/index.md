@@ -4,12 +4,12 @@ description: Änderungen und Verbesserungen in Entity Framework Core 3.x
 author: ajcvickers
 ms.date: 09/05/2020
 uid: core/what-is-new/ef-core-3.x/index
-ms.openlocfilehash: b987ca1fdbe46105162c1c7623822e15bd01ef25
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: 0c005345505c1c2f3712e489ab69ec4a20564293
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92065627"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94429259"
 ---
 # <a name="new-features-in-entity-framework-core-3x"></a>Neue Features in Entity Framework Core 3.x
 
@@ -130,7 +130,7 @@ public class HintCommandInterceptor : DbCommandInterceptor
 }
 ```
 
-Und bei  `DbContext` registrieren:
+Und bei `DbContext` registrieren:
 
 ```csharp
 services.AddDbContext(b => b
@@ -143,7 +143,7 @@ services.AddDbContext(b => b
 Abfragetypen, die Daten darstellen, die aus der Datenbank gelesen, aber nicht aktualisiert werden können, wurden in [schlüssellose Entitätstypen](xref:core/modeling/keyless-entity-types) umbenannt.
 Da sie in den meisten Szenarien ideal für die Zuordnung von Datenbankansichten sind, erstellt EF Core jetzt automatisch schlüssellose Entitätstypen beim Reverse Engineering von Datenbankansichten.
 
-Mit dem [dotnet ef-Befehlszeilenprogramm](xref:core/miscellaneous/cli/dotnet) können Sie z. B. Folgendes eingeben:
+Mit dem [dotnet ef-Befehlszeilenprogramm](xref:core/cli/dotnet) können Sie z. B. Folgendes eingeben:
 
 ```dotnetcli
 dotnet ef dbcontext scaffold "Server=(localdb)\mssqllocaldb;Database=Blogging;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer
@@ -202,5 +202,5 @@ Weitere Informationen finden Sie im [Artikel zu Neuerungen in EF 6](xref:ef6/wh
 
 Einige Features, die ursprünglich für EF Core 3.x geplant waren, wurden auf zukünftige Releases verschoben:
 
-- Die Fähigkeit, Teile eines Modells in Migrationen zu ignorieren, nachverfolgt als [#2725](https://github.com/aspnet/EntityFrameworkCore/issues/2725).
-- Entitäten von Eigenschaftenbehältern, die in zwei separaten Problemen nachverfolgt werden: [#9914](https://github.com/aspnet/EntityFrameworkCore/issues/9914) über Entitäten von gemeinsam genutzten Typen und [#13610](https://github.com/aspnet/EntityFrameworkCore/issues/13610) über Unterstützung der Zuordnung von indizierten Eigenschaften.
+- Die Fähigkeit, Teile eines Modells in Migrationen zu ignorieren, nachverfolgt als [#2725](https://github.com/dotnet/efcore/issues/2725).
+- Entitäten von Eigenschaftenbehältern, die in zwei separaten Problemen nachverfolgt werden: [#9914](https://github.com/dotnet/efcore/issues/9914) über Entitäten von gemeinsam genutzten Typen und [#13610](https://github.com/dotnet/efcore/issues/13610) über Unterstützung der Zuordnung von indizierten Eigenschaften.

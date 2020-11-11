@@ -4,19 +4,19 @@ description: Dokumentation für den Datenbankanbieter, mit der Entity Framework 
 author: AndriySvyryd
 ms.date: 10/09/2020
 uid: core/providers/cosmos/index
-ms.openlocfilehash: 26be2b604453aa2d5b21ae45f590b294639db887
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: 825517e79891378a61f9564c90dbf4522459e9d0
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92064049"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94430313"
 ---
 # <a name="ef-core-azure-cosmos-db-provider"></a>EF Core Azure Cosmos DB-Anbieter
 
 > [!NOTE]
 > Dieser Anbieter ist neu in EF Core 3.0.
 
-Dieser Datenbankanbieter ermöglicht die Verwendung von Entity Framework Core mit Azure Cosmos DB. Dieser Anbieter wird nicht im Rahmen des [Entity Framework Core-Projekts](https://github.com/aspnet/EntityFrameworkCore) verwaltet.
+Dieser Datenbankanbieter ermöglicht die Verwendung von Entity Framework Core mit Azure Cosmos DB. Dieser Anbieter wird nicht im Rahmen des [Entity Framework Core-Projekts](https://github.com/dotnet/efcore) verwaltet.
 
 Es wird dringend empfohlen, sich vor dem Lesen dieses Abschnitts mit der [Azure Cosmos DB-Dokumentation](/azure/cosmos-db/introduction) vertraut zu machen.
 
@@ -103,9 +103,14 @@ Standardmäßig erstellt EF Core Container, bei denen der Partitionsschlüssel a
 > [!NOTE]
 >Als Eigenschaft des Partitionsschlüssels kann ein beliebiger Typ verwendet werden, sofern dieser in [eine Zeichenfolge konvertiert wird](xref:core/modeling/value-conversions).
 
-Nach der Konfiguration muss die Partitionsschlüsseleigenschaft immer einen Wert aufweisen, der nicht NULL ist. Beim Ausgeben einer Abfrage kann eine Bedingung hinzugefügt werden, um eine einzelne Partition zu erstellen.
+Nach der Konfiguration muss die Partitionsschlüsseleigenschaft immer einen Wert aufweisen, der nicht NULL ist. Eine Abfrage kann durch Hinzufügen eines `WithPartitionKey`-Aufrufs einer einzelnen Partition zugewiesen werden.
 
-[!code-csharp[PartitionKey](../../../../samples/core/Cosmos/ModelBuilding/Sample.cs?name=PartitionKey)]
+[!code-csharp[PartitionKey](../../../../samples/core/Cosmos/ModelBuilding/Sample.cs?name=PartitionKey&highlight=15)]
+
+> [!NOTE]
+> `WithPartitionKey` wurde in EF Core 5.0 hinzugefügt.
+
+Im Allgemeinen wird empfohlen, den Partitionsschlüssel dem Primärschlüssel hinzuzufügen, da dies die Serversemantik am besten widerspiegelt und einige Optimierungen ermöglicht, z. B. in `FindAsync`.
 
 ## <a name="embedded-entities"></a>Eingebettete Entitäten
 
