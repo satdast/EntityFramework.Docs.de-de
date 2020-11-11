@@ -4,16 +4,16 @@ description: Informationen zum Anbieter für Entity Framework Core-SQLite-Datenb
 author: bricelam
 ms.date: 10/27/2016
 uid: core/providers/sqlite/index
-ms.openlocfilehash: 2d221168c093271d220d4d8fbc7779c1a5aab701
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: 6dac555456ed347b3eb07bbd0f2a89ab9179d20e
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92063984"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94430299"
 ---
 # <a name="sqlite-ef-core-database-provider"></a>SQLite-EF Core-Datenbankanbieter
 
-Dieser Datenbankanbieter ermöglicht die Verwendung von Entity Framework Core mit SQLite. Dieser Anbieter wird nicht im Rahmen des [Entity Framework Core-Projekts](https://github.com/aspnet/EntityFrameworkCore) verwaltet.
+Dieser Datenbankanbieter ermöglicht die Verwendung von Entity Framework Core mit SQLite. Dieser Anbieter wird nicht im Rahmen des [Entity Framework Core-Projekts](https://github.com/dotnet/efcore) verwaltet.
 
 ## <a name="install"></a>Installieren
 

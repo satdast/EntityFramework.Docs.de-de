@@ -4,19 +4,19 @@ description: Änderungen und Verbesserungen in Entity Framework Core 2.0
 author: ajcvickers
 ms.date: 02/20/2018
 uid: core/what-is-new/ef-core-2.0
-ms.openlocfilehash: 7438d8ad1a5ade971af71186a20ec57fd83713de
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: a670cba56c9ba4ebc45c81c1185faa114b78c146
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92063451"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94429376"
 ---
 # <a name="new-features-in-ef-core-20"></a>Neue Features in EF Core 2.0
 
 ## <a name="net-standard-20"></a>.NET-Standard 2.0
 
 Für EF Core wird nun die Zielversion für .NET Standard 2.0 festgelegt, was bedeutet, dass EF Core mit .NET Core 2.0, .NET Framework 4.6.1 und anderen Bibliotheken, die.NET Standard 2.0 implementieren, kompatibel ist.
-Weitere Informationen zu unterstützten Implementierungen finden Sie unter [Unterstützte .NET-Implementierungen](xref:core/platforms/index).
+Weitere Informationen zu unterstützten Implementierungen finden Sie unter [Unterstützte .NET-Implementierungen](xref:core/miscellaneous/platforms).
 
 ## <a name="modeling"></a>Modellierung
 
@@ -272,7 +272,7 @@ Beachten Sie, dass „Like()“ über eine In-Memory-Implementierung verfügt, d
 
 ### <a name="pluralization-hook-for-dbcontext-scaffolding"></a>Pluralisierungshook für den DbContext-Gerüstbau
 
-In EF Core 2.0 wird ein neuer *IPluralizer*-Dienst eingeführt, mit dem Entitätstypnamen in den Singular und DbSet-Namen in den Plural gesetzt werden. Die Standardimplementierung ist eine No-Op-Bedingung. Somit ist dies lediglich ein Hook, mit dem Benutzer mühelos eigene Pluralisierer verbinden können.
+In EF Core 2.0 wird ein neuer *IPluralizer* -Dienst eingeführt, mit dem Entitätstypnamen in den Singular und DbSet-Namen in den Plural gesetzt werden. Die Standardimplementierung ist eine No-Op-Bedingung. Somit ist dies lediglich ein Hook, mit dem Benutzer mühelos eigene Pluralisierer verbinden können.
 
 Im Folgenden wird gezeigt, wie es für einen Entwickler aussieht, wenn er seinen eigenen Pluralisierer als Hook integriert:
 

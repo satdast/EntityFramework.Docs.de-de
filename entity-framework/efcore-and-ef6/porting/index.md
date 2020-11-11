@@ -4,12 +4,12 @@ description: Allgemeine Informationen zum Portieren einer Anwendung von Entity F
 author: ajcvickers
 ms.date: 10/27/2016
 uid: efcore-and-ef6/porting/index
-ms.openlocfilehash: 0dfb4cc5f7c65aa081d0175708a0db95b0688e50
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: d50def47e65455c8cf5242cad4386f157148c0bc
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92064210"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94429207"
 ---
 # <a name="porting-from-ef6-to-ef-core"></a>Portieren von EF 6 nach EF Core
 
@@ -33,17 +33,12 @@ In EF6 führt das Aufrufen von `DbSet.Add()` für eine Entität zu einer rekursi
 
 **EF Core führt eine ähnliche rekursive Suche aus, allerdings mit etwas anderen Regeln.**
 
-*  Die Stammentität befindet sich immer im angeforderten Zustand (hinzugefügt für `DbSet.Add` und unverändert für `DbSet.Attach`).
-
-*  **Für Entitäten, die während der rekursiven Suche von Navigationseigenschaften gefunden werden:**
-
-    *  **Wenn der Primärschlüssel der Entität im Speicher generiert wird**
-
-        * Wenn der Primärschlüssel nicht auf einen Wert festgelegt ist, wird der Zustand auf hinzugefügt festgelegt. Der Primärschlüsselwert wird als nicht festgelegt betrachtet, wenn ihm der CLR-Standardwert für den Eigenschaftentyp zugewiesen ist (z. B. `0` für `int`, `null` für `string` usw.).
-
-        * Wenn der Primärschlüssel auf einen Wert festgelegt ist, wird der Zustand auf unverändert festgelegt.
-
-    *  Wenn der Primärschlüssel nicht von der Datenbank generiert wird, wird die Entität in denselben Zustand wie der Stamm versetzt.
+* Die Stammentität befindet sich immer im angeforderten Zustand (hinzugefügt für `DbSet.Add` und unverändert für `DbSet.Attach`).
+* **Für Entitäten, die während der rekursiven Suche von Navigationseigenschaften gefunden werden:**
+  * **Wenn der Primärschlüssel der Entität im Speicher generiert wird**
+    * Wenn der Primärschlüssel nicht auf einen Wert festgelegt ist, wird der Zustand auf hinzugefügt festgelegt. Der Primärschlüsselwert wird als nicht festgelegt betrachtet, wenn ihm der CLR-Standardwert für den Eigenschaftentyp zugewiesen ist (z. B. `0` für `int`, `null` für `string` usw.).
+    * Wenn der Primärschlüssel auf einen Wert festgelegt ist, wird der Zustand auf unverändert festgelegt.
+  * Wenn der Primärschlüssel nicht von der Datenbank generiert wird, wird die Entität in denselben Zustand wie der Stamm versetzt.
 
 ### <a name="code-first-database-initialization"></a>Code First-Datenbankinitialisierung
 

@@ -4,12 +4,12 @@ description: Aktuelle EF Core-Releases und Zeitplan/Planungsdetails für künfti
 author: ajcvickers
 ms.date: 06/11/2020
 uid: core/what-is-new/index
-ms.openlocfilehash: 4424f9233016edbc8d98e8df840091f2adaf1ee9
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 24b814bd906ece9cc485bf96713b9f8feac5eb2c
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89618595"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94430533"
 ---
 # <a name="ef-core-releases-and-planning"></a>EF Core-Releases und Planung
 
@@ -25,7 +25,7 @@ ms.locfileid: "89618595"
 | ~~[EF Core 1.1](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore/1.1.6)~~ | .NET Standard 1.3 | Am 27. Juni 2019 abgelaufen | [Ankündigung](https://devblogs.microsoft.com/dotnet/announcing-entity-framework-core-1-1/)
 | ~~[EF Core 1.0](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore/1.0.6)~~ | .NET Standard 1.3 | Am 27. Juni 2019 abgelaufen | [Ankündigung](https://devblogs.microsoft.com/dotnet/entity-framework-core-1-0-0-available/)
 
-Weitere Informationen über die speziellen Plattformen, die von den jeweiligen EF Core-Releases unterstützt werden, finden Sie unter [Unterstützte Plattformen](xref:core/platforms/index).
+Weitere Informationen über die speziellen Plattformen, die von den jeweiligen EF Core-Releases unterstützt werden, finden Sie unter [Unterstützte Plattformen](xref:core/miscellaneous/platforms).
 
 Weitere Informationen zum Ablaufdatum des Supports und zu Releases mit langfristigem Support (long-term support, LTS) finden Sie unter [Supportrichtlinie für .NET](https://dotnet.microsoft.com/platform/support/policy/dotnet-core).
 
@@ -55,7 +55,7 @@ Ihr Feedback zur Planung ist wichtig.
 Sie können für ein Problem auf GitHub abstimmen (Daumen hoch 👍) und so angeben, dass dieses Problem wichtig ist.
 Diese Daten werden dann in den Planungsprozess für das nächste Release aufgenommen.
 
-### <a name="get-it-now"></a>Jetzt herunterladen
+### <a name="get-it-now"></a>Jetzt anfordern
 
 Die Pakete von EF Core 5.0 sind **ab sofort**
 
