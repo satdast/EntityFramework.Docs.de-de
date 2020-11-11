@@ -4,16 +4,18 @@ description: Konfigurieren von Schatten-und Indexereigenschaften in einem Entity
 author: AndriySvyryd
 ms.date: 10/09/2020
 uid: core/modeling/shadow-properties
-ms.openlocfilehash: f03dc000bb111253ae74c05a668703f2e6237a57
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 180478212b683a271d2519cc1a4c79be5d3f11b9
+ms.sourcegitcommit: 42bbf7f68e92c364c5fff63092d3eb02229f568d
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94430416"
+ms.lasthandoff: 11/11/2020
+ms.locfileid: "94503188"
 ---
 # <a name="shadow-and-indexer-properties"></a>Eigenschaften von Schatten und Indexer
 
 Schatten Eigenschaften sind Eigenschaften, die nicht in der .net-Entitäts Klasse definiert sind, aber für diesen Entitätstyp im EF Core Modell definiert sind. Der Wert und der Status dieser Eigenschaften werden ausschließlich in der Änderungs Nachverfolgung beibehalten. Schatten Eigenschaften sind nützlich, wenn Daten in der Datenbank vorhanden sind, die für die zugeordneten Entitäts Typen nicht verfügbar gemacht werden sollen.
+
+Indexer-Eigenschaften sind Entitätstyp Eigenschaften, die von einem [Indexer](/dotnet/csharp/programming-guide/indexers/) in der .net-Entitäts Klasse unterstützt werden. Auf Sie kann mithilfe des Indexers auf den .NET-Klassen Instanzen zugegriffen werden. Außerdem können Sie zusätzliche Eigenschaften zum Entitätstyp hinzufügen, ohne die CLR-Klasse zu ändern.
 
 ## <a name="foreign-key-shadow-properties"></a>Fremdschlüssel Schatten-Eigenschaften
 
@@ -50,11 +52,19 @@ var blogs = context.Blogs
 
 Auf Schatten Eigenschaften kann nicht nach einer Abfrage ohne Nachverfolgung zugegriffen werden, da die zurückgegebenen Entitäten nicht von der Änderungs Nachverfolgung nachverfolgt werden.
 
+## <a name="configuring-indexer-properties"></a>Konfigurieren von Indexer-Eigenschaften
+
+Sie können die fließende API verwenden, um Indexer-Eigenschaften zu konfigurieren. Nachdem Sie die-Methode aufgerufen haben `IndexerProperty` , können Sie alle Konfigurations Aufrufe verketten, die Sie für andere Eigenschaften durchsuchen. Im folgenden Beispiel `Blog` ist ein Indexer definiert, der zum Erstellen einer Indexer-Eigenschaft verwendet wird.
+
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/IndexerProperty.cs?name=ShadowProperty&highlight=3)]
+
+Wenn der für die Methode angegebene Name mit `IndexerProperty` dem Namen einer vorhandenen Indexer-Eigenschaft übereinstimmt, wird diese vorhandene Eigenschaft vom Code konfiguriert. Wenn der Entitätstyp über eine Eigenschaft verfügt, die von einer Eigenschaft in der Entitäts Klasse unterstützt wird, wird eine Ausnahme ausgelöst, da auf Indexer-Eigenschaften nur über den Indexer zugegriffen werden muss.
+
 ## <a name="property-bag-entity-types"></a>Eigenschaften Behälter-Entitäts Typen
 
 > [!NOTE]
 > Unterstützung für Eigenschaften Behälter-Entitäts Typen wurde in EF Core 5,0 hinzugefügt.
 
-Entitäts Typen, die nur Indexer-Eigenschaften enthalten, werden als Entitäts Typen für Eigenschaften Behälter bezeichnet. Diese Entitäts Typen haben keine Schatten Eigenschaften. Derzeit `Dictionary<string, object>` wird nur als Entitätstyp für Eigenschaften Behälter unterstützt. Dies bedeutet, dass Sie als frei gegebener Entitätstyp mit einem eindeutigen Namen konfiguriert werden muss, und die entsprechende `DbSet` Eigenschaft muss mithilfe eines- `Set` Aufrufes implementiert werden.
+Entitäts Typen, die nur Indexer-Eigenschaften enthalten, werden als Entitäts Typen für Eigenschaften Behälter bezeichnet. Diese Entitäts Typen haben keine Schatten Eigenschaften, stattdessen erstellt EF Indexer-Eigenschaften. Derzeit `Dictionary<string, object>` wird nur als Entitätstyp für Eigenschaften Behälter unterstützt. Er muss als frei gegebener Entitätstyp mit einem eindeutigen Namen konfiguriert werden, und die entsprechende `DbSet` Eigenschaft muss mithilfe eines- `Set` Aufrufes implementiert werden.
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/SharedType.cs?name=SharedType&highlight=3,7)]

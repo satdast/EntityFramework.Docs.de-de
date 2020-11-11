@@ -4,12 +4,12 @@ description: Abfangen von Daten Bank Vorgängen und anderen Ereignissen
 author: ajcvickers
 ms.date: 10/08/2020
 uid: core/logging-events-diagnostics/interceptors
-ms.openlocfilehash: 6ee54c0bd45c55de1fae3e1949bfa2d5b3b2566e
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 61ec6968344798af8ecffb878a1e47a6a8e031cd
+ms.sourcegitcommit: 42bbf7f68e92c364c5fff63092d3eb02229f568d
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94431251"
+ms.lasthandoff: 11/11/2020
+ms.locfileid: "94503201"
 ---
 # <a name="interceptors"></a>Interceptors
 
@@ -594,7 +594,7 @@ Jede Interceptor Methode verfügt über einen- `eventData` Parameter, der Kontex
 Das Ergebnis ist eine `SaveChangesAudit` Entität mit einer Auflistung von `EntityAudit` Entitäten, eine für jede INSERT-, Update-oder DELETE-Auflistung. Der Interceptor fügt diese Entitäten dann in die Überwachungs Datenbank ein.
 
 > [!TIP]
-> ToString wird in jeder EF Core Ereignisdaten Klasse überschrieben, um die entsprechende Protokollmeldung für das Ereignis zu generieren. Durch Aufrufen von wird z `ContextInitializedEventData.ToString` . b. "Entity Framework Core 5.0.0-RC. 2.20475.6 initialisierte ' blogscontext ' mithilfe des Anbieters ' Microsoft. entityframeworkcore. sqlite ' mit den Optionen: None" generiert.
+> ToString wird in jeder EF Core Ereignisdaten Klasse überschrieben, um die entsprechende Protokollmeldung für das Ereignis zu generieren. Durch Aufrufen von wird z. b. `ContextInitializedEventData.ToString` "Entity Framework Core 5.0.0" blogscontext "mithilfe des Anbieters" Microsoft. entityframeworkcore. sqlite "mit den Optionen" None "initialisiert.
 
 #### <a name="detecting-success"></a>Erkennen von Erfolg
 

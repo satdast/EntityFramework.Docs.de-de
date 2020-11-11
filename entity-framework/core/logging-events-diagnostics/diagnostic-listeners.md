@@ -4,12 +4,12 @@ description: Verwenden von diagnosticlistener für den globalen Verbrauch von EF
 author: ajcvickers
 ms.date: 10/16/2020
 uid: core/logging-events-diagnostics/diagnostic-listeners
-ms.openlocfilehash: dba82a910e2b551e692f37d721d41968981849cf
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: a2a962ac714cf80c42c269cee3770699aaa4c0c9
+ms.sourcegitcommit: 42bbf7f68e92c364c5fff63092d3eb02229f568d
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94431254"
+ms.lasthandoff: 11/11/2020
+ms.locfileid: "94503227"
 ---
 # <a name="using-diagnostic-listeners-in-ef-core"></a>Verwenden von diagnoselistener in EF Core
 
@@ -95,7 +95,7 @@ Der Wert des Schlüssel-Wert-Paars ist ein für das ereignisspezifischer Nutz La
 Der obige Code verarbeitet z <xref:Microsoft.EntityFrameworkCore.Diagnostics.CoreEventId.ContextInitialized> . b. das-Ereignis und das- <xref:Microsoft.EntityFrameworkCore.Diagnostics.RelationalEventId.ConnectionOpening> Ereignis. Für den ersten Wert ist die Nutzlast <xref:Microsoft.EntityFrameworkCore.Diagnostics.ContextInitializedEventData> . Der zweite Wert ist <xref:Microsoft.EntityFrameworkCore.Diagnostics.ConnectionEventData> .
 
 > [!TIP]
-> ToString wird in jeder EF Core Ereignisdaten Klasse überschrieben, um die entsprechende Protokollmeldung für das Ereignis zu generieren. Durch Aufrufen von wird z `ContextInitializedEventData.ToString` . b. "Entity Framework Core 5.0.0-RC. 2.20475.6 initialisierte ' blogscontext ' mithilfe des Anbieters ' Microsoft. entityframeworkcore. sqlite ' mit den Optionen: None" generiert.
+> ToString wird in jeder EF Core Ereignisdaten Klasse überschrieben, um die entsprechende Protokollmeldung für das Ereignis zu generieren. Durch Aufrufen von wird z. b. `ContextInitializedEventData.ToString` "Entity Framework Core 5.0.0" blogscontext "mithilfe des Anbieters" Microsoft. entityframeworkcore. sqlite "mit den Optionen" None "initialisiert.
 
 Das [Beispiel](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/DiagnosticListeners) enthält eine einfache Konsolenanwendung, die Änderungen an der Blog Datenbank vornimmt und die gefundenen Diagnose Ereignisse ausgibt.
 
