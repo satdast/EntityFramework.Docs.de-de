@@ -4,12 +4,12 @@ description: Die für Entity Framework Core 5.0 geplanten Features
 author: ajcvickers
 ms.date: 08/22/2020
 uid: core/what-is-new/ef-core-5.0/plan
-ms.openlocfilehash: 5ac7a48a70959b625b7c602ee48dc08a360bee73
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: f2639e41499f3bfca5942d613922fd97212fc2b9
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89618663"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94429233"
 ---
 # <a name="plan-for-entity-framework-core-50"></a>Plan für Entity Framework Core 5.0
 
@@ -44,18 +44,18 @@ Wir haben einige wichtige Bereiche/Themen bestimmt, die die Grundlage für die g
 
 Leitende Entwickler: @smitpatel, @AndriySvyryd und @lajones
 
-Nachverfolgbar über [Issue 10508](https://github.com/aspnet/EntityFrameworkCore/issues/10508)
+Nachverfolgbar über [Issue 10508](https://github.com/dotnet/efcore/issues/10508)
 
 T-Shirt-Größe: L
 
 Status: Vorgehensweise
 
-„m:n“ ist das am [meisten geforderte Feature](https://github.com/aspnet/EntityFrameworkCore/issues/1368) (ca. 506 Stimmen) im GitHub-Backlog.
+„m:n“ ist das am [meisten geforderte Feature](https://github.com/dotnet/efcore/issues/1368) (ca. 506 Stimmen) im GitHub-Backlog.
 
 Die Unterstützung für m:n-Beziehungen kann in drei Hauptbereiche aufgeteilt werden:
 
 * Das Überspringen von Navigationseigenschaften wird im nächsten Artikel behandelt.
-* Entitätstypen für Eigenschaftenbehälter. Dank dieser Entitätstypen kann für Entitätsinstanzen ein Standard-CLR-Typ wie `Dictionary` verwendet werden. So ist für einen Entitätstyp kein expliziter CLR-Typ mehr notwendig. Nachverfolgbar über [Issue 9914](https://github.com/aspnet/EntityFrameworkCore/issues/9914)
+* Entitätstypen für Eigenschaftenbehälter. Dank dieser Entitätstypen kann für Entitätsinstanzen ein Standard-CLR-Typ wie `Dictionary` verwendet werden. So ist für einen Entitätstyp kein expliziter CLR-Typ mehr notwendig. Nachverfolgbar über [Issue 9914](https://github.com/dotnet/efcore/issues/9914)
 * Sugar für die einfache Konfiguration von m:n-Beziehungen.
 
 Nicht nur das Überspringen von Navigationseigenschaften wird unterstützt, sondern auch folgende weitere Bereiche von m:n werden in EF Core 5.0 integriert, damit Sie diese Option vollständig nutzen können.
@@ -64,7 +64,7 @@ Nicht nur das Überspringen von Navigationseigenschaften wird unterstützt, sond
 
 Leitende Entwickler: @smitpatel und @AndriySvyryd
 
-Nachverfolgbar über [#19003](https://github.com/aspnet/EntityFrameworkCore/issues/19003)
+Nachverfolgbar über [#19003](https://github.com/dotnet/efcore/issues/19003)
 
 T-Shirt-Größe: L
 
@@ -79,7 +79,7 @@ Der Entitätstyp „Jointabelle“ existiert zwar noch, sollte in Geschäftslogi
 
 Leitende Entwickler: @AndriySvyryd und @smitpatel
 
-Nachverfolgbar über [#2266](https://github.com/aspnet/EntityFrameworkCore/issues/2266)
+Nachverfolgbar über [#2266](https://github.com/dotnet/efcore/issues/2266)
 
 T-Shirt-Größe: XL
 
@@ -91,7 +91,7 @@ Wir arbeiten an der TPT-Unterstützung, weil dieses Feature sehr stark nachgefra
 
 Leitender Entwickler: @maumar
 
-Nachverfolgbar über [#1833](https://github.com/aspnet/EntityFrameworkCore/issues/1833)
+Nachverfolgbar über [#1833](https://github.com/dotnet/efcore/issues/1833)
 
 T-Shirt-Größe: M
 
@@ -131,7 +131,7 @@ In EF Core 3.0 sind alle abhängigen Elemente optional, einschließlich nicht e
 
 Leitende Entwickler: @AndriySvyryd und @smitpatel
 
-Nachverfolgbar über [#17270](https://github.com/aspnet/EntityFrameworkCore/issues/17270)
+Nachverfolgbar über [#17270](https://github.com/dotnet/efcore/issues/17270)
 
 T-Shirt-Größe: L
 
@@ -302,7 +302,7 @@ Zusätzlich zu den oben beschriebenen größeren Funktionen sind in Version 5.0
 
 ## <a name="below-the-line"></a>Verschoben auf nächste Version
 
-Nachverfolgbar über [Liste der Probleme im 5.0-Meilenstein mit der Bezeichnung `consider-for-next-release`](https://github.com/aspnet/EntityFrameworkCore/issues?q=is%3Aopen+is%3Aissue+label%3Aconsider-for-next-release)
+Nachverfolgbar über [Liste der Probleme im 5.0-Meilenstein mit der Bezeichnung `consider-for-next-release`](https://github.com/dotnet/efcore/issues?q=is%3Aopen+is%3Aissue+label%3Aconsider-for-next-release)
 
 Dabei handelt es sich um Fehlerbehebungen und Verbesserungen, die aktuell **nicht** für das Release 5.0 vorgesehen sind, aber je nach Fortschritt bei den oben beschriebenen Zielen zusätzlich angegangen werden.
 

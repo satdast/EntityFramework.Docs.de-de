@@ -4,12 +4,12 @@ description: Änderungen und Verbesserungen in Entity Framework Core 2.1
 author: ajcvickers
 ms.date: 02/20/2018
 uid: core/what-is-new/ef-core-2.1
-ms.openlocfilehash: c98a44f9bc06447bb41f0278c59b412f770c5bd4
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: f235c310cbd336da65cd05d25e1338d87534eb2a
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92065705"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94429337"
 ---
 # <a name="new-features-in-ef-core-21"></a>Neue Features in EF Core 2.1
 
@@ -152,9 +152,9 @@ public class Order
 
 ## <a name="command-line-tool-dotnet-ef-included-in-net-core-sdk"></a>dotnet-ef-Befehle des Befehlszeilentools im .NET Core SDK
 
-Die _dotnet-ef_-Befehle sind nun im .NET Core SDK enthalten. Deshalb ist es nicht mehr erforderlich, „DotNetCliToolReference“ für Migrationen oder den DbContext-Gerüstbau aus einer vorhandenen Datenbank im Projekt zu verwenden.
+Die _dotnet-ef_ -Befehle sind nun im .NET Core SDK enthalten. Deshalb ist es nicht mehr erforderlich, „DotNetCliToolReference“ für Migrationen oder den DbContext-Gerüstbau aus einer vorhandenen Datenbank im Projekt zu verwenden.
 
-Weitere Details zum Aktivieren der Befehlszeilentools für verschiedene Versionen des .NET Core SDK und von EF Core finden Sie im Abschnitt zur [Installation der Tools](xref:core/miscellaneous/cli/dotnet#installing-the-tools).
+Weitere Details zum Aktivieren der Befehlszeilentools für verschiedene Versionen des .NET Core SDK und von EF Core finden Sie im Abschnitt zur [Installation der Tools](xref:core/cli/dotnet#installing-the-tools).
 
 ## <a name="microsoftentityframeworkcoreabstractions-package"></a>Paket „Microsoft.EntityFrameworkCore.Abstractions“
 
@@ -178,4 +178,4 @@ var query = context.People.FromSql(sql);
 Es wird empfohlen, EF Core 2.1 mit Anbietern zu verwenden, die ein Update auf EF Core 2.1 durchgeführt oder EF Core 2.1 bereits getestet haben.
 
 > [!TIP]
-> Falls unerwarteterweise keine Kompatibilität besteht oder Probleme mit den neuen Features auftreten, oder falls Sie uns Ihre Feedback mitteilen möchten, melden Sie uns dies über [unsere Problemverfolgung](https://github.com/aspnet/EntityFrameworkCore/issues/new).
+> Falls unerwarteterweise keine Kompatibilität besteht oder Probleme mit den neuen Features auftreten, oder falls Sie uns Ihre Feedback mitteilen möchten, melden Sie uns dies über [unsere Problemverfolgung](https://github.com/dotnet/efcore/issues/new).

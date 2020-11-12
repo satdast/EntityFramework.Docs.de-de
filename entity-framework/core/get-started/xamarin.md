@@ -5,12 +5,12 @@ author: codemillmatt
 ms.date: 07/07/2020
 ms.author: masoucou
 uid: core/get-started/xamarin
-ms.openlocfilehash: 0552038d471e294834bed9e3bf1f05fd74c39192
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: a08c5582b063f4a7748a43811c2bf28e8f3e5c14
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92062541"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94429909"
 ---
 # <a name="getting-started-with-ef-core-and-xamarin"></a>Erste Schritte mit EF Core und Xamarin
 
@@ -74,12 +74,12 @@ In den folgenden Abschnitten durchlaufen Sie den Code im Beispielprojekt, der Da
 Dabei wird davon ausgegangen, dass Sie mit den Xamarin.Forms-Themen zum [Anzeigen von Daten](/xamarin/xamarin-forms/app-fundamentals/data-binding/) und zum [Navigieren zwischen Seiten](/xamarin/xamarin-forms/app-fundamentals/navigation/) vertraut sind.
 
 > [!IMPORTANT]
-> Entity Framework Core verwendet Reflektion, um Funktionen aufzurufen, die der Xamarin.iOS-Linker in **Release**-Moduskonfigurationen möglicherweise entfernen könnte. Sie können eine von zwei Möglichkeiten auswählen, dies zu vermeiden.
-> 
-> * Die erste ist, `--linkskip System.Core` zu **Weitere mtouch-Argumente** in den **iOS-Build**-Optionen hinzuzufügen.
-> * Alternativ können Sie das Xamarin.iOS-**Linkerverhalten** in den **iOS-Build**-Optionen auf `Don't Link` festlegen.
+> Entity Framework Core verwendet Reflektion, um Funktionen aufzurufen, die der Xamarin.iOS-Linker in **Release** -Moduskonfigurationen möglicherweise entfernen könnte. Sie können eine von zwei Möglichkeiten auswählen, dies zu vermeiden.
+>
+> * Die erste ist, `--linkskip System.Core` zu **Weitere mtouch-Argumente** in den **iOS-Build** -Optionen hinzuzufügen.
+> * Alternativ können Sie das Xamarin.iOS- **Linkerverhalten** in den **iOS-Build** -Optionen auf `Don't Link` festlegen.
 > [Dieser Artikel enthält weitere Informationen zum Xamarin.iOS-Linker](/xamarin/ios/deploy-test/linker), unter anderem zum Festlegen des Verhaltens in Xamarin.iOS.
-> 
+>
 
 ## <a name="entity-framework-core-nuget-packages"></a>NuGet-Pakete für Entity Framework Core
 
@@ -206,6 +206,6 @@ In diesen ersten Schritten haben Sie gelernt, wie Sie eine Xamarin.Forms-Anwendu
 
 Im Folgenden finden Sie weitere Entity Framework Core-Themen, die für Xamarin-Entwickler interessant sind:
 
-* [Konfigurieren einer `DbContext`-Klasse](xref:core/miscellaneous/configuring-dbcontext)
+* [Konfigurieren einer `DbContext`-Klasse](xref:core/dbcontext-configuration/index)
 * Weitere Informationen zu [LINQ-Abfrageausdrücken](/dotnet/csharp/programming-guide/concepts/linq/basic-linq-query-operations)
 * [Konfigurieren Sie das Modell](xref:core/modeling/index), um Aspekte wie [required](xref:core/modeling/entity-properties#required-and-optional-properties) (erforderlich) und [maximum length](xref:core/modeling/entity-properties#maximum-length) (maximale Länge) anzugeben.

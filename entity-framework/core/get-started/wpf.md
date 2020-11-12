@@ -5,12 +5,12 @@ author: jeremylikness
 ms.author: jeliknes
 ms.date: 07/24/2020
 uid: core/get-started/wpf
-ms.openlocfilehash: 1198da5c9564663ca26392b33462c727275a432d
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: f183064fafbe2d0e7b8dbdafa921169afc9ffe78
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89619306"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94429922"
 ---
 # <a name="getting-started-with-wpf"></a>Erste Schritte mit WPF
 
@@ -25,16 +25,14 @@ Die Screenshots und Codeauflistungen in dieser exemplarischen Vorgehensweise sta
 
 ## <a name="pre-requisites"></a>Voraussetzungen
 
-* Um diese exemplarische Vorgehensweise nachvollziehen zu können, müssen Sie Visual Studio 2019 16.3 oder höher mit ausgewählter **.NET-Desktopworkload** installiert haben.
-    
-    Weitere Informationen zur Installation der neuesten Version von Visual Studio finden Sie unter [Installieren von Visual Studio](/visualstudio/install/install-visual-studio).
+Um diese exemplarische Vorgehensweise nachvollziehen zu können, müssen Sie Visual Studio 2019 16.3 oder höher mit ausgewählter **.NET-Desktopworkload** installiert haben. Weitere Informationen zur Installation der neuesten Version von Visual Studio finden Sie unter [Installieren von Visual Studio](/visualstudio/install/install-visual-studio).
 
 ## <a name="create-the-application"></a>Erstellen der Anwendung
 
 1. Öffnen Sie Visual Studio.
 2. Wählen Sie im Startfenster **Neues Projekt erstellen** aus.
 3. Suchen Sie nach „WPF“, wählen Sie **WPF-App (.NET Core)** aus, und wählen Sie dann **Weiter** aus.
-4. Geben Sie dem Projekt auf dem nächsten Bildschirm einen Namen (z. B. **GetStartedWPF**), und wählen Sie **Erstellen** aus.
+4. Geben Sie dem Projekt auf dem nächsten Bildschirm einen Namen (z. B. **GetStartedWPF** ), und wählen Sie **Erstellen** aus.
 
 ## <a name="install-the-entity-framework-nuget-packages"></a>Installieren des Entity Framework-NuGet-Pakets
 
@@ -51,7 +49,7 @@ Die Screenshots und Codeauflistungen in dieser exemplarischen Vorgehensweise sta
 1. Wiederholen Sie die Schritte, um nach `entityframeworkcore.proxies` zu suchen und **Microsoft.EntityFrameworkCore.Proxies** zu installieren.
 
 > [!NOTE]
-> Als Sie das SQLite-Paket installiert haben, wurde das zugehörige **Microsoft.EntityFrameworkCore**-Basispaket automatisch heruntergeladen. Das **Microsoft. EntityFrameworkCore.Proxies**-Paket unterstützt „Lazy Loading“ von Daten. Dies bedeutet, dass bei Entitäten mit untergeordneten Entitäten nur die übergeordneten Elemente beim anfänglichen Laden abgerufen werden. Die Proxys erkennen, wenn versucht wird, auf die untergeordneten Entitäten zuzugreifen. Diese werden bei Bedarf automatisch geladen. 
+> Als Sie das SQLite-Paket installiert haben, wurde das zugehörige **Microsoft.EntityFrameworkCore** -Basispaket automatisch heruntergeladen. Das **Microsoft. EntityFrameworkCore.Proxies** -Paket unterstützt „Lazy Loading“ von Daten. Dies bedeutet, dass bei Entitäten mit untergeordneten Entitäten nur die übergeordneten Elemente beim anfänglichen Laden abgerufen werden. Die Proxys erkennen, wenn versucht wird, auf die untergeordneten Entitäten zuzugreifen. Diese werden bei Bedarf automatisch geladen.
 
 ## <a name="define-a-model"></a>Definieren eines Modells
 
@@ -69,7 +67,7 @@ Fügen Sie dann eine Klasse mit dem Namen `Category.cs` hinzu, und füllen Sie s
 
 [!code-csharp[](../../../samples/core/WPF/GetStartedWPF/GetStartedWPF/Category.cs)]
 
-Die **Products**-Eigenschaft für die **Category**-Klasse und die **Category**-Eigenschaft für die **Product**-Klasse sind Navigationseigenschaften. Im Entity Framework bieten Navigationseigenschaften eine Möglichkeit, in einer Beziehung zwischen zwei Entitätstypen zu navigieren.
+Die **Products** -Eigenschaft für die **Category** -Klasse und die **Category** -Eigenschaft für die **Product** -Klasse sind Navigationseigenschaften. Im Entity Framework bieten Navigationseigenschaften eine Möglichkeit, in einer Beziehung zwischen zwei Entitätstypen zu navigieren.
 
 Zusätzlich zur Definition von Entitäten müssen Sie eine Klasse definieren, die von DbContext abgeleitet ist und DbSet&lt;TEntity&gt;-Eigenschaften bereitstellt. Die DbSet&lt;TEntity&gt;-Eigenschaften informieren den Kontext darüber, welche Typen Sie in das Modell einbeziehen möchten.
 
@@ -82,28 +80,28 @@ Fügen Sie dem Projekt eine neue `ProductContext.cs`-Klasse mit der folgenden De
 [!code-csharp[](../../../samples/core/WPF/GetStartedWPF/GetStartedWPF/ProductContext.cs)]
 
 * `DbSet` informiert EF Core, welche C#-Entitäten der Datenbank zugeordnet werden sollen.
-* Es gibt eine Vielzahl von Möglichkeiten, `DbContext` von EF Core zu konfigurieren. Informationen zu diesem Thema finden Sie hier: [Konfigurieren eines DbContext](xref:core/miscellaneous/configuring-dbcontext).
+* Es gibt eine Vielzahl von Möglichkeiten, `DbContext` von EF Core zu konfigurieren. Informationen zu diesem Thema finden Sie hier: [Konfigurieren eines DbContext](xref:core/dbcontext-configuration/index).
 * In diesem Beispiel wird die `OnConfiguring`-Überschreibung verwendet, um eine SQLite-Datendatei anzugeben.
 * Der `UseLazyLoadingProxies`-Aufruf informiert EF Core, Lazy Loading zu implementieren, damit untergeordnete Entitäten automatisch geladen werden, wenn der Zugriff über das übergeordnete Element erfolgt.
 
-Drücken Sie **STRG+UMSCHALT+B**, oder navigieren Sie zu **Build &gt; Projektmappe erstellen**, um das Projekt zu kompilieren.
+Drücken Sie **STRG+UMSCHALT+B** , oder navigieren Sie zu **Build &gt; Projektmappe erstellen** , um das Projekt zu kompilieren.
 
 > [!TIP]
 > Informieren Sie sich über die verschiedenen Möglichkeiten, die Datenbank und EF Core-Modelle synchron zu halten: [Verwalten von Datenbankschemas](xref:core/managing-schemas/index).
 
 ## <a name="lazy-loading"></a>Lazy Loading
 
-Die **Products**-Eigenschaft für die **Category**-Klasse und die **Category**-Eigenschaft für die **Product**-Klasse sind Navigationseigenschaften. In Entity Framework Core bieten Navigationseigenschaften eine Möglichkeit, in einer Beziehung zwischen zwei Entitätstypen zu navigieren.
+Die **Products** -Eigenschaft für die **Category** -Klasse und die **Category** -Eigenschaft für die **Product** -Klasse sind Navigationseigenschaften. In Entity Framework Core bieten Navigationseigenschaften eine Möglichkeit, in einer Beziehung zwischen zwei Entitätstypen zu navigieren.
 
 EF Core bietet Ihnen die Möglichkeit, verwandte Entitäten aus der Datenbank automatisch zu laden, wenn Sie zum ersten Mal auf die Navigationseigenschaft zugreifen. Beachten Sie bei dieser Art von Laden (das als „Lazy Loading“ bezeichnet wird), dass beim ersten Zugriff auf jede Navigationseigenschaft eine separate Abfrage für die Datenbank ausgeführt wird, wenn sich die Inhalte nicht bereits im Kontext befinden.
 
-Bei der Verwendung von POCO-Entitätstypen („Plain Old C# Object“) erreicht EF Core Lazy Loading, indem während der Laufzeit Instanzen abgeleiteter Proxytypen erstellt und dann virtuelle Eigenschaften in Ihren Klassen überschrieben werden, um den Ladehook hinzuzufügen. Um Lazy Loading von verwandten Objekten zu erzielen, müssen Sie Navigationseigenschaftsgetter als **public** und **virtual** deklarieren (**Overridable** in Visual Basic), und Ihre Klasse darf nicht **sealed** (**NotOverridable** in Visual Basic) sein. Wenn Database First verwendet wird, werden Navigationseigenschaften automatisch als virtuell festgelegt, um Lazy Loading zu ermöglichen. 
+Bei der Verwendung von POCO-Entitätstypen („Plain Old C# Object“) erreicht EF Core Lazy Loading, indem während der Laufzeit Instanzen abgeleiteter Proxytypen erstellt und dann virtuelle Eigenschaften in Ihren Klassen überschrieben werden, um den Ladehook hinzuzufügen. Um Lazy Loading von verwandten Objekten zu erzielen, müssen Sie Navigationseigenschaftsgetter als **public** und **virtual** deklarieren ( **Overridable** in Visual Basic), und Ihre Klasse darf nicht **sealed** ( **NotOverridable** in Visual Basic) sein. Wenn Database First verwendet wird, werden Navigationseigenschaften automatisch als virtuell festgelegt, um Lazy Loading zu ermöglichen.
 
 ## <a name="bind-object-to-controls"></a>Binden von Objekten an Steuerelemente
 
 Fügen Sie die Klassen, die im Modell definiert sind, als Datenquellen für diese WPF-Anwendung hinzu.
 
-1. Doppelklicken Sie im Projektmappen-Explorer auf **MainWindow.xaml**, um das Hauptformular zu öffnen.
+1. Doppelklicken Sie im Projektmappen-Explorer auf **MainWindow.xaml** , um das Hauptformular zu öffnen.
 1. Wählen Sie die Registerkarte **XAML** aus, um den XAML-Code zu bearbeiten.
 1. Fügen Sie direkt nach dem öffnenden `Window`-Tag die folgenden Quellen hinzu, um eine Verbindung mit den EF Core-Entitäten herzustellen.
 
@@ -143,7 +141,7 @@ Es ist an der Zeit, dem Hauptfenster einige Ereignishandler hinzuzufügen.
 
 Damit gelangen Sie zum Code Behind für das Formular. Nun bearbeiten wir den Code so, dass `ProductContext` für den Datenzugriff verwendet wird. Aktualisieren Sie den Code wie unten gezeigt.
 
-Der Code deklariert eine Instanz von `ProductContext` mit langer Ausführungszeit. Das `ProductContext`-Objekt wird verwendet, um Daten abzufragen und in der Datenbank zu speichern. Die `Dispose()`-Methode für die `ProductContext`-Instanz wird dann von der überschriebenen `OnClosing`-Methode aufgerufen.Die Codekommentare erläutern die Funktionsweise der einzelnen Schritte.
+Der Code deklariert eine Instanz von `ProductContext` mit langer Ausführungszeit. Das `ProductContext`-Objekt wird verwendet, um Daten abzufragen und in der Datenbank zu speichern. Die `Dispose()`-Methode für die `ProductContext`-Instanz wird dann von der überschriebenen `OnClosing`-Methode aufgerufen. Die Codekommentare erläutern die Funktionsweise der einzelnen Schritte.
 
 **`MainWindow.xaml.cs`**
 
@@ -154,7 +152,7 @@ Der Code deklariert eine Instanz von `ProductContext` mit langer Ausführungszei
 
 ## <a name="test-the-wpf-application"></a>Testen der WPF-Anwendung
 
-Kompilieren Sie die Anwendung, und führen Sie sie aus, indem Sie **F5** drücken oder **Debuggen &gt; Debuggen starten** auswählen. Die Datenbank sollte automatisch mit einer Datei namens `products.db` erstellt werden. Geben Sie einen Kategorienamen ein, und drücken Sie die EINGABETASTE. Fügen Sie dann dem unteren Raster Produkte hinzu. Klicken Sie auf „Speichern“, und beobachten Sie, wie das Raster mit den von der Datenbank bereitgestellten IDs aktualisiert wird. Markieren Sie eine Zeile, und klicken Sie auf **Löschen**, um die Zeile zu entfernen. Die Entität wird gelöscht, wenn Sie auf **Speichern** klicken.
+Kompilieren Sie die Anwendung, und führen Sie sie aus, indem Sie **F5** drücken oder **Debuggen &gt; Debuggen starten** auswählen. Die Datenbank sollte automatisch mit einer Datei namens `products.db` erstellt werden. Geben Sie einen Kategorienamen ein, und drücken Sie die EINGABETASTE. Fügen Sie dann dem unteren Raster Produkte hinzu. Klicken Sie auf „Speichern“, und beobachten Sie, wie das Raster mit den von der Datenbank bereitgestellten IDs aktualisiert wird. Markieren Sie eine Zeile, und klicken Sie auf **Löschen** , um die Zeile zu entfernen. Die Entität wird gelöscht, wenn Sie auf **Speichern** klicken.
 
 ![Ausgeführte Anwendung](_static/wpf-tutorial-app.jpg)
 
@@ -174,4 +172,4 @@ Dies funktioniert für unser Beispiel mit ersten Schritten, aber Sie benötigen 
 
 ## <a name="next-steps"></a>Nächste Schritte
 
-Weitere Informationen zum [Konfigurieren eines DbContext](xref:core/miscellaneous/configuring-dbcontext).
+Weitere Informationen zum [Konfigurieren eines DbContext](xref:core/dbcontext-configuration/index).

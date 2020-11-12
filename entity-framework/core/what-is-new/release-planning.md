@@ -4,12 +4,12 @@ description: Informationen zur Planung und Veröffentlichung von Entity Framewor
 author: ajcvickers
 ms.date: 01/28/2020
 uid: core/what-is-new/release-planning
-ms.openlocfilehash: 91a130b4ddae66f626bcff8e70283a7e03192542
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: f84b8cef40a74245575df6013d94fcda5738e229
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89618566"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94429142"
 ---
 # <a name="release-planning-process"></a>Die Releaseplanung
 
@@ -25,7 +25,7 @@ Das bedeutet wiederum, dass sich die Releaseplanung von Releaseart zu Releaseart
 ### <a name="patch-releases"></a>Patchreleases
 
 Bei Patchreleases wird nur der „Patch“-Teil einer Version geändert.
-Bei EF Core 3.1.**1** handelt es sich beispielsweise um ein Release, bei dem Probleme repariert werden, die in EF Core 3.1.**0** festgestellt wurden.
+Bei EF Core 3.1. **1** handelt es sich beispielsweise um ein Release, bei dem Probleme repariert werden, die in EF Core 3.1. **0** festgestellt wurden.
 
 Patchreleases dienen dazu, kritische Fehler für Kunden zu beheben.
 Das bedeutet, dass Patchreleases keine neuen Features einführen.
@@ -36,14 +36,16 @@ Das liegt daran, dass ein Patchrelease keinesfalls neue Fehler einführen darf.
 Deshalb geht es beim Entscheidungsprozess um hohen Nutzen und niedriges Risiko.
 
 In folgenden Fällen wird ein Problem sehr wahrscheinlich per Patchrelease behoben:
-  * Ein Fehler betrifft mehrere Kunden
-  * Beim Fehler handelt es sich um eine Regression eines früheren Release
-  * Der Fehler führt zu Datenbeschädigung
+
+* Ein Fehler betrifft mehrere Kunden
+* Beim Fehler handelt es sich um eine Regression eines früheren Release
+* Der Fehler führt zu Datenbeschädigung
 
 In folgenden Fällen ist es eher unwahrscheinlich, dass ein Problem per Patchrelease behoben wird:
-  * Es gibt ausreichend anderweitige Möglichkeiten zur Problemumgehung
-  * Die Behebung eines Fehlers könnte sehr wahrscheinlich zu Fehlern an anderer Stelle führen
-  * Beim Fehler handelt es sich um einen selten auftretenden Fall
+
+* Es gibt ausreichend anderweitige Möglichkeiten zur Problemumgehung
+* Die Behebung eines Fehlers könnte sehr wahrscheinlich zu Fehlern an anderer Stelle führen
+* Beim Fehler handelt es sich um einen selten auftretenden Fall
 
 Die Wahrscheinlichkeit, dass ein Fehler per Patchrelease behoben wird, wird im Laufe der Lebenszeit eines Release mit [langfristigem Support (Long-Term Support, LTS)](https://dotnet.microsoft.com/platform/support/policy/dotnet-core) immer geringer. Das liegt daran, dass für LTS-Releases die Stabilität im Vordergrund steht.
 
@@ -52,9 +54,10 @@ Die endgültige Entscheidung darüber, ob ein Fehler per Patchrelease behoben wi
 ### <a name="minor-releases"></a>Nebenversionen
 
 Bei Nebenversionen bleibt der „Hauptteil“ einer Version unberührt.
-Bei EF Core 3.**1**.0 handelt es sich beispielsweise um ein Release, für das Verbesserungen an EF Core 3.**0**.0. vorgenommen wurden.
+Bei EF Core 3. **1**.0 handelt es sich beispielsweise um ein Release, für das Verbesserungen an EF Core 3. **0**.0. vorgenommen wurden.
 
 Folgendes trifft auf Nebenversionen zu:
+
 * Hauptversionen sollen die Qualität und Features vorheriger Releases verbessern
 * Hauptversionen enthalten in der Regel Fehlerbehebungen sowie neue Features
 * Nebenversionen enthalten keine absichtlichen Breaking Changes
@@ -63,9 +66,10 @@ Folgendes trifft auf Nebenversionen zu:
 ### <a name="major-releases"></a>Hauptversionen
 
 Bei Hauptversionen ändert sich die Versionsnummer des „Hauptteils“ von EF.
-Bei EF Core **3**.0.0 handelt es sich beispielsweise um eine Hauptversion, bei der im Vergleich zu EF Core 2.2.x wesentliche Unterschiede bestehen.
+Bei EF Core  **3**.0.0 handelt es sich beispielsweise um eine Hauptversion, bei der im Vergleich zu EF Core 2.2.x wesentliche Unterschiede bestehen.
 
 Folgendes trifft auf Hauptversionen zu:
+
 * Hauptversionen sollen die Qualität und Features vorheriger Releases verbessern
 * Hauptversionen enthalten in der Regel Fehlerbehebungen sowie neue Features
   * Bei einigen der neuen Features kann es sich um erhebliche Änderungen der Funktionsweise von EF Core handeln
