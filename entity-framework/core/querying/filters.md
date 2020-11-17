@@ -4,12 +4,12 @@ description: Verwenden von globalen Abfragefiltern zum Filtern von Ergebnissen m
 author: maumar
 ms.date: 11/03/2017
 uid: core/querying/filters
-ms.openlocfilehash: 8a9eabd7e86864c9ebb4b1dc4a06bf7fc207d496
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: 6436f9f8e2e09d44ef9528fd2022720d40095fe0
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92062606"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94430130"
 ---
 # <a name="global-query-filters"></a>Globale Abfragefilter
 
@@ -46,6 +46,21 @@ Die Prädikatausdrücke, die an `HasQueryFilter` weitergegeben werden, werden nu
 ## <a name="use-of-navigations"></a>Verwenden von Navigationselementen
 
 Navigationselemente können beim Definieren lokaler Abfragefilter verwendet werden. Das Verwenden von Navigationselementen in Abfragefiltern führt dazu, dass Abfragefilter rekursiv angewendet werden. Wenn EF Core die in Navigationselementen verwendeten Abfragefilter erweitert, werden auch die für die Entitäten, auf die verwiesen wird, definierten Abfragefilter angewendet.
+
+Um dies zu veranschaulichen, konfigurieren Sie Abfragefilter in `OnModelCreating` wie folgt: [!code-csharp[Main](../../../samples/core/Querying/QueryFilters/FilteredBloggingContextRequired.cs#NavigationInFilter)]
+
+Als Nächstes fragen Sie alle `Blog`-Entitäten ab: [!code-csharp[Main](../../../samples/core/Querying/QueryFilters/FilteredBloggingContextRequired.cs#QueriesNavigation)]
+
+Diese Abfrage erzeugt den folgenden SQL-Code, der Abfragefilter anwendet, die für die Entitäten `Blog` und `Post` definiert sind:
+
+```sql
+SELECT [b].[BlogId], [b].[Name], [b].[Url]
+FROM [Blogs] AS [b]
+WHERE (
+    SELECT COUNT(*)
+    FROM [Posts] AS [p]
+    WHERE ([p].[Title] LIKE N'%fish%') AND ([b].[BlogId] = [p].[BlogId])) > 0
+```
 
 > [!NOTE]
 > Derzeit ermittelt EF Core keine Zyklen in globalen Abfragefilterdefinitionen. Daher sollten Sie bei der Definition vorsichtig vorgehen. Wenn diese fehlerhaft angegeben wird, können Endlosschleifen bei der Abfrageübersetzung auftreten.

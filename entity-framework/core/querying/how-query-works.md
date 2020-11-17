@@ -4,16 +4,19 @@ description: Allgemeine Informationen darüber, wie Abfragen von Entity Framewor
 author: ajcvickers
 ms.date: 03/17/2020
 uid: core/querying/how-query-works
-ms.openlocfilehash: f3a6794b9bfdf70ae40bc8e97ee41861931b9b46
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 7b3014cf64f8467ccbec10598ea1bb47304dfe43
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90071185"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94430468"
 ---
 # <a name="how-queries-work"></a>Funktionsweise von Abfragen
 
 Entity Framework Core verwendet Language Integrated Query (LINQ), um Daten von der Datenbank abzufragen. LINQ ermöglicht Ihnen, mit C# (oder Ihrer bevorzugten .NET-Sprache) stark typisierte Abfragen basierend auf Ihrem abgeleiteten Kontext und Entitätsklassen zu schreiben.
+
+> [!NOTE]
+> Dieser Artikel ist veraltet und muss in einigen Teilen aufgrund von Änderungen bei der Gestaltung der Abfragepipeline aktualisiert werden. Wenn Sie Zweifel bezüglich eines hier erwähnten Verhaltens haben, [stellen Sie eine Frage](https://github.com/dotnet/efcore/issues/new/choose).
 
 ## <a name="the-life-of-a-query"></a>Der Abfragezyklus
 

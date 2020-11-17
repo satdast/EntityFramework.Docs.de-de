@@ -154,6 +154,10 @@
           items:
             - name: Übersicht
               href: core/querying/index.md
+            - name: Client- und Serverauswertung im Vergleich
+              href: core/querying/client-eval.md
+            - name: Nachverfolgung und keine Nachverfolgung im Vergleich
+              href: core/querying/tracking.md
             - name: Laden relevanter Daten
               items:
                 - name: Übersicht
@@ -166,16 +170,14 @@
                   href: core/querying/related-data/lazy.md
                 - name: Zugehörige Daten und Serialisierung
                   href: core/querying/related-data/serialization.md
-            - name: Client- und Serverauswertung im Vergleich
-              href: core/querying/client-eval.md
-            - name: Nachverfolgung und keine Nachverfolgung im Vergleich
-              href: core/querying/tracking.md
             - name: Geteilte Abfragen
               href: core/querying/single-split-queries.md
             - name: Komplexe Abfrageoperatoren
               href: core/querying/complex-query-operators.md
             - name: Unformatierte SQL-Abfragen
               href: core/querying/raw-sql.md
+            - name: Datenbankfunktionen
+              href: core/querying/database-functions.md
             - name: Globale Abfragefilter
               href: core/querying/filters.md
             - name: Abfragetags

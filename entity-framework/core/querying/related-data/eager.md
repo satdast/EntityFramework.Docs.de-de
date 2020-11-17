@@ -4,12 +4,12 @@ description: Eager Loading zugehöriger Daten mit Entity Framework Core
 author: roji
 ms.date: 9/8/2020
 uid: core/querying/related-data/eager
-ms.openlocfilehash: 97ec45a0f8bfecce4d4a59e5d1c36c0268d96052
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: bd9c9045c1c2707d69ee4070bea59ad8066789f3
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92062575"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94430104"
 ---
 # <a name="eager-loading-of-related-data"></a>Eager Loading zugehöriger Daten
 
@@ -25,6 +25,9 @@ Sie können mit der `Include`-Methode zugehörige Daten angeben, die in den Abfr
 Sie können zugehörigen Daten aus mehreren Beziehungen in einer einzelnen Abfrage einschließen.
 
 [!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Program.cs#MultipleIncludes)]
+
+> [!CAUTION]
+> Eager Loading einer Sammlungsnavigation in einer einzelnen Abfrage kann zu Leistungsproblemen führen. Weitere Informationen finden Sie unter [Vergleich von Einzel- und geteilten Abfragen](xref:core/querying/single-split-queries).
 
 ## <a name="including-multiple-levels"></a>Einschließen mehrerer Ebenen
 
@@ -44,74 +47,12 @@ Für eine der Entitäten, die eingeschlossen wird, sollten Sie mehrere zugehöri
 
 [!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Program.cs#MultipleLeafIncludes)]
 
-## <a name="single-and-split-queries"></a>Einzelne und geteilte Abfragen
-
-### <a name="single-queries"></a>Einzelne Abfragen
-
-In relationalen Datenbanken werden alle zugehörigen Entitäten standardmäßig durch Einführung von JOINs geladen:
-
-```sql
-SELECT [b].[BlogId], [b].[OwnerId], [b].[Rating], [b].[Url], [p].[PostId], [p].[AuthorId], [p].[BlogId], [p].[Content], [p].[Rating], [p].[Title]
-FROM [Blogs] AS [b]
-LEFT JOIN [Post] AS [p] ON [b].[BlogId] = [p].[BlogId]
-ORDER BY [b].[BlogId], [p].[PostId]
-```
-
-Wenn ein typischer Blog mehrere zugehörige Beiträge enthält, duplizieren die Zeilen für diese Beiträge die Informationen des Blogs, was zum so genannten „Problem der kartesischen Explosion“ führt. Wenn weitere 1:n-Beziehungen geladen werden, wächst die Menge an duplizierten Daten weiter und beeinträchtigt die Leistung Ihrer Anwendung. Standardmäßig gibt EF Core eine Warnung aus, wenn Abfragen erkannt werden, die Include-Vorgänge für Sammlungen laden, die zu Leistungsproblemen führen können.
-
-### <a name="split-queries"></a>Geteilte Abfragen
-
-> [!NOTE]
-> Diese Funktion wird in EF Core 5.0 eingeführt.
-
-In EF können Sie angeben, dass eine bestimmte LINQ-Abfrage in auf mehrere SQL-Abfragen *aufgeteilt* werden soll. Anstelle von JOINs führen aufgeteilte Abfragen eine zusätzliche SQL-Abfrage für jede enthaltene 1:n-Navigation durch:
-
-[!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Program.cs?name=AsSplitQuery&highlight=5)]
-
-Dabei wird der folgende SQL-Code erzeugt:
-
-```sql
-SELECT [b].[BlogId], [b].[OwnerId], [b].[Rating], [b].[Url]
-FROM [Blogs] AS [b]
-ORDER BY [b].[BlogId]
-
-SELECT [p].[PostId], [p].[AuthorId], [p].[BlogId], [p].[Content], [p].[Rating], [p].[Title], [b].[BlogId]
-FROM [Blogs] AS [b]
-INNER JOIN [Post] AS [p] ON [b].[BlogId] = [p].[BlogId]
-ORDER BY [b].[BlogId]
-```
-
-> [!NOTE]
-> Entitäten mit 1:1-Beziehung werden immer über Verknüpfungen in dieselbe Abfrage geladen, da dies keine Auswirkungen auf die Leistung hat.
-
-### <a name="enabling-split-queries-globally"></a>Globales Aktivieren von geteilten Abfragen
-
-Sie können auch geteilte Abfragen als Standardeinstellung für den Kontext Ihrer Anwendung konfigurieren:
-
-[!code-csharp[Main](../../../../samples/core/Querying/RelatedData/SplitQueriesBloggingContext.cs?name=QuerySplittingBehaviorSplitQuery&highlight=6)]
-
-Wenn geteilte Abfragen als Standardeinstellung konfiguriert werden, ist es dennoch möglich, bestimmte Abfragen so zu konfigurieren, dass sie als einzelne Abfragen ausgeführt werden:
-
-[!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Program.cs?name=AsSingleQuery&highlight=5)]
-
-Wenn der Abfrageteilungsmodus nicht explizit festgelegt ist, weder global noch für die Abfrage, und EF Core erkennt, dass eine einzelne Abfrage mehrere Include-Vorgänge für Sammlungen lädt, wird eine Warnung ausgegeben, um auf die möglichen daraus resultierenden Leistungsprobleme hinzuweisen. Das Festlegen des Abfragemodus auf SingleQuery führt dazu, dass diese Warnung nicht generiert wird.
-
-### <a name="characteristics-of-split-queries"></a>Merkmale von geteilten Abfragen
-
-Zwar werden bei geteilten Abfragen die Leistungsprobleme im Zusammenhang mit Verknüpfungen und der kartesischen Explosion vermieden, allerdings weist dieser Modus auch einige Nachteile auf:
-
-* Die meisten Datenbanken garantieren Datenkonsistenz bei einzelnen Abfragen. Bei mehreren Abfragen gibt es eine solche Garantie nicht. Wenn die Datenbank während dem Ausführen der Abfragen aktualisiert wird, sind die resultierenden Daten möglicherweise nicht konsistent. Dieses Problem können Sie minimieren, indem Sie die Abfragen mit einer serialisierbaren Transaktion oder Momentaufnahmentransaktion umschließen. Allerdings kann auch dieses Vorgehen Leistungsprobleme nach sich ziehen. Weitere Informationen finden Sie in der Dokumentation Ihrer Datenbank.
-* Jede Abfrage impliziert derzeit einen zusätzlichen Netzwerkroundtrip zu Ihrer Datenbank. Durch mehrere Netzwerkroundtrips kann die Leistung beeinträchtigt werden, insbesondere, wenn die Latenz bei der Datenbank hoch ist (z. B. bei Clouddiensten).
-* Zwar erlauben einige Datenbanken die gleichzeitige Nutzung der Ergebnisse mehrerer Abfragen (SQL Server mit MARS, Sqlite), aber in den meisten darf zu jedem Zeitpunkt immer nur eine Abfrage aktiv sein. Folglich müssen alle Ergebnisse früherer Abfragen im Arbeitsspeicher der Anwendung gepuffert werden, bevor spätere Abfragen ausgeführt werden. Dadurch steigen die Arbeitsspeicheranforderungen.
-
-Leider gibt es nicht die eine perfekte Strategie zum Laden von zugehörigen Entitäten, die in allen Szenarien passt. Erwägen Sie sehr sorgfältig die Vor- und Nachteile von einzelnen und geteilten Abfragen, und wählen Sie die Variante aus, die sich für Ihre Anforderungen besser eignet.
-
 ## <a name="filtered-include"></a>Gefilterte Include-Funktion
 
 > [!NOTE]
 > Diese Funktion wird in EF Core 5.0 eingeführt.
 
-Wenn Sie „Include“ zum Laden von zugehörigen Daten anwenden, können Sie bestimmte aufzählbare Vorgänge auf die enthaltene Sammlungsnavigation anwenden, mit denen Sie die Ergebnisse filtern und sortieren können.
+Wenn Sie „Include“ zum Laden zugehöriger Daten anwenden, können Sie bestimmte aufzählbare Vorgänge zur enthaltenen Sammlungsnavigation hinzufügen, mit denen Sie die Ergebnisse filtern und sortieren können.
 
 Folgende Vorgänge werden unterstützt: `Where`, `OrderBy`, `OrderByDescending`, `ThenBy`, `ThenByDescending`, `Skip` und `Take`.
 
@@ -138,6 +79,9 @@ var orders = context.Orders.Where(o => o.Id > 1000).ToList();
 // customer entities will have references to all orders where Id > 1000, rather than > 5000
 var filtered = context.Customers.Include(c => c.Orders.Where(o => o.Id > 5000)).ToList();
 ```
+
+> [!NOTE]
+> Bei Nachverfolgungsabfragen gilt die Navigation, auf die die gefilterte Include-Funktion angewendet wurde, als geladen. Das bedeutet, dass EF Core nicht versucht, seine Werte mit [explizitem Laden](xref:core/querying/related-data/explicit) oder [verzögertem Laden](xref:core/querying/related-data/lazy) neu zu laden, auch wenn einige Elemente noch fehlen könnten.
 
 ## <a name="include-on-derived-types"></a>Einschließen in abgeleiteten Typen
 

@@ -4,12 +4,12 @@ description: Umfassende Informationen zu komplexeren LINQ-Abfrageoperatoren bei 
 author: smitpatel
 ms.date: 10/03/2019
 uid: core/querying/complex-query-operators
-ms.openlocfilehash: 03375e6c46a68a719df82572333f0a57e7de6262
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: 84c2518972355d31cf5a6a7bafc57b44162412c8
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92062619"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94430481"
 ---
 # <a name="complex-query-operators"></a>Komplexe Abfrageoperatoren
 
@@ -20,7 +20,7 @@ LINQ (Language Integrated Query) enthält viele komplexe Operatoren, die mehrere
 
 ## <a name="join"></a>Join
 
-Mit dem LINQ-Join-Operator können Sie zwei Datenquellen anhand des Schlüsselselektors für die jeweilige Quelle verbinden und ein Tupel von Werten erstellen, wenn der Schlüssel übereinstimmt. Dies wird für relationale Datenbanken natürlich in `INNER JOIN` übersetzt. Während der LINQ-Join-Operator äußere und innere Schlüsselselektoren aufweist, erfordert die Datenbank eine einzelne Verknüpfungsbedingung. Daher generiert EF Core eine Verknüpfungsbedingung mithilfe eines Vergleichs der Gleichheit des äußeren und inneren Schlüsselselektors. Des Weiteren generiert EF Core eine Verknüpfungsbedingung, um die Gleichheit der Komponenten zu vergleichen, wenn die Schlüsselselektoren einen anonymen Typ aufweisen.
+Mit dem LINQ-Join-Operator können Sie zwei Datenquellen anhand des Schlüsselselektors für die jeweilige Quelle verbinden und ein Tupel von Werten erstellen, wenn der Schlüssel übereinstimmt. Dies wird für relationale Datenbanken natürlich in `INNER JOIN` übersetzt. Während der LINQ-Join-Operator äußere und innere Schlüsselselektoren aufweist, erfordert die Datenbank eine einzelne Verknüpfungsbedingung. Daher generiert EF Core eine Verknüpfungsbedingung mithilfe eines Vergleichs der Gleichheit des äußeren und inneren Schlüsselselektors.
 
 [!code-csharp[Main](../../../samples/core/Querying/ComplexQuery/Program.cs#Join)]
 
@@ -28,6 +28,16 @@ Mit dem LINQ-Join-Operator können Sie zwei Datenquellen anhand des Schlüsselse
 SELECT [p].[PersonId], [p].[Name], [p].[PhotoId], [p0].[PersonPhotoId], [p0].[Caption], [p0].[Photo]
 FROM [PersonPhoto] AS [p0]
 INNER JOIN [Person] AS [p] ON [p0].[PersonPhotoId] = [p].[PhotoId]
+```
+
+Des Weiteren generiert EF Core eine Verknüpfungsbedingung, um die Gleichheit der Komponenten zu vergleichen, wenn die Schlüsselselektoren einen anonymen Typ aufweisen.
+
+[!code-csharp[Main](../../../samples/core/Querying/ComplexQuery/Program.cs#JoinComposite)]
+
+```sql
+SELECT [p].[PersonId], [p].[Name], [p].[PhotoId], [p0].[PersonPhotoId], [p0].[Caption], [p0].[Photo]
+FROM [PersonPhoto] AS [p0]
+INNER JOIN [Person] AS [p] ON ([p0].[PersonPhotoId] = [p].[PhotoId] AND ([p0].[Caption] = N'SN'))
 ```
 
 ## <a name="groupjoin"></a>GroupJoin

@@ -2,14 +2,14 @@
 title: 'Abfragen mit Nachverfolgung im Vergleich zu Abfragen ohne Nachverfolgung: EF Core'
 description: Informationen zu Abfragen mit und ohne Nachverfolgung in Entity Framework Core
 author: smitpatel
-ms.date: 10/10/2019
+ms.date: 11/09/2020
 uid: core/querying/tracking
-ms.openlocfilehash: dff6c14edcd69e7d16be8bab5fa3088c2c1288e1
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: b4c059f9a9b726697009589271e007bd1d2afd56
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92063659"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94430442"
 ---
 # <a name="tracking-vs-no-tracking-queries"></a>Abfragen mit Nachverfolgung im Vergleich zu Abfragen ohne Nachverfolgung
 
@@ -27,9 +27,11 @@ Abfragen, die Entitätstypen zurückgeben, verfügen standardmäßig über Nachv
 
 [!code-csharp[Main](../../../samples/core/Querying/Tracking/Program.cs#Tracking)]
 
+Wenn die Ergebnisse in einer Abfrage mit Nachverfolgung zurückgegeben werden, prüft EF Core, ob die Entität bereits im Kontext ist. Wenn EF Core eine vorhandene Entität findet, wird dieselbe Instanz zurückgegeben. EF Core überschreibt im Eintrag mit den Datenbankwerten nicht die aktuellen und ursprünglichen Werte der Eigenschaften der Entität. Wenn die Entität nicht im Kontext gefunden wird, erstellt EF Core eine neue Entitätsinstanz und fügt sie an den Kontext an. Abfrageergebnisse enthalten keine Entität, die dem Kontext hinzugefügt, aber noch nicht in der Datenbank gespeichert wurde.
+
 ## <a name="no-tracking-queries"></a>Abfragen ohne Nachverfolgung
 
-Abfragen ohne Nachverfolgung sind nützlich, wenn die Ergebnisse in einem schreibgeschützten Szenario verwendet werden. Sie werden schneller ausgeführt, da keine Informationen für die Änderungsnachverfolgung eingerichtet werden müssen. Wenn Sie die aus der Datenbank abgerufenen Entitäten nicht aktualisieren müssen, sollte eine Abfrage ohne Nachverfolgung verwendet werden. Sie können eine einzelne Abfrage ändern, sodass sie keine Nachverfolgung ausführt.
+Abfragen ohne Nachverfolgung sind nützlich, wenn die Ergebnisse in einem schreibgeschützten Szenario verwendet werden. Sie werden schneller ausgeführt, da keine Informationen für die Änderungsnachverfolgung eingerichtet werden müssen. Wenn Sie die aus der Datenbank abgerufenen Entitäten nicht aktualisieren müssen, sollte eine Abfrage ohne Nachverfolgung verwendet werden. Sie können eine einzelne Abfrage ändern, sodass sie keine Nachverfolgung ausführt. Keine Abfrage mit Nachverfolgung liefert Ihnen zudem Ergebnisse, die auf dem Inhalt der Datenbank basieren, wobei lokale Änderungen oder hinzugefügte Entitäten unberücksichtigt bleiben.
 
 [!code-csharp[Main](../../../samples/core/Querying/Tracking/Program.cs#NoTracking)]
 
@@ -40,6 +42,10 @@ Sie können das Standardnachverfolgungsverhalten auch auf der Ebene der Kontexti
 ## <a name="identity-resolution"></a>Identitätsauflösung
 
 Da eine Nachverfolgungsabfrage die Änderungsprotokollierung verwendet, führt EF Core in einer Nachverfolgungsabfrage eine Identitätsauflösung durch. Beim Materialisieren einer Entität gibt EF Core dieselbe Entitätsinstanz aus der Änderungsprotokollierung zurück, wenn sie bereits nachverfolgt wird. Wenn das Ergebnis mehrmals dieselbe Entität enthält, erhalten Sie für jedes Vorkommen dieselbe Instanz. Abfragen ohne Nachverfolgung verwenden weder die Änderungsprotokollierung, noch führen sie eine Identitätsauflösung durch. Sie erhalten also auch dann eine neue Instanz der Entität, wenn dieselbe Entität mehrmals im Ergebnis enthalten ist. Dieses Verhalten war in Versionen vor EF Core 3.0 anders, siehe [frühere Versionen](#previous-versions).
+
+Ab EF Core 5.0 können Sie beide oben genannten Verhalten in derselben Abfrage kombinieren. Das heißt, Sie können eine Abfrage ohne Nachverfolgung haben, die eine Identitätsauflösung in den Ergebnissen vornimmt. Genau wie den abfragbaren Operator `AsNoTracking()` haben wir mit `AsNoTrackingWithIdentityResolution()` einen weiteren Operator hinzugefügt. Der Enumeration <xref:Microsoft.EntityFrameworkCore.QueryTrackingBehavior> wurde außerdem ein zugeordneter Eintrag hinzugefügt. Wenn Sie die Abfrage so konfigurieren, dass die Identitätsauflösung ohne Nachverfolgung verwendet wird, verwenden wir bei der Generierung der Abfrageergebnisse eine eigenständige Änderungsnachverfolgung im Hintergrund, sodass jede Instanz sich nur einmal materialisiert. Da sich diese Änderungsnachverfolgung von der im Kontext unterscheidet, werden die Ergebnisse nicht vom Kontext nachverfolgt. Nachdem die Abfrage vollständig aufgezählt ist, verlässt die Änderungsnachverfolgung den Gültigkeitsbereich, und die Garbage Collection erfolgt den Anforderungen entsprechend.
+
+[!code-csharp[Main](../../../samples/core/Querying/Tracking/Program.cs#NoTrackingWithIdentityResolution)]
 
 ## <a name="tracking-and-custom-projections"></a>Nachverfolgung und benutzerdefinierte Projektionen
 

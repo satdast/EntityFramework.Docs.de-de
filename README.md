@@ -1,12 +1,12 @@
-## <a name="entity-framework-docs"></a>Entity Framework-Dokumentation
+# <a name="entity-framework-docs"></a>Entity Framework-Dokumentation
 
-Dieses Projekt enthält die Quelle für die EF Core- und die EF6-Dokumentation, die Sie unter [docs.Microsoft.com/EF](https://docs.microsoft.com/ef/) finden. 
+Dieses Projekt enthält die Quelle für die EF Core- und die EF6-Dokumentation, die Sie unter [docs.Microsoft.com/EF](https://docs.microsoft.com/ef/) finden.
 
 Probleme mit der Dokumentation für EF Core und EF6 sollten in diesem Repository abgelegt werden. Probleme mit dem Produkt (Fehler) sollten bei Bedarf im [EF Core-Repository](https://github.com/dotnet/efcore) oder im [EF6-Repository](https://github.com/dotnet/ef6) abgelegt werden.
 
 **Microsoft akzeptiert Pull Requests.**
 
-## <a name="fixing-typosspellinggrammaretc"></a>Beheben von Tipp-, Rechtschreib- und Grammatikfehlern
+## <a name="fixing-typosspellinggrammaretc"></a>Beheben von Tipp-, Rechtschreib- und Grammatikfehlern usw.
 
 Sie sollten besser einen Pull Request senden, anstatt ein Issue zu erstellen. Dies können Sie über das Web tun:
 

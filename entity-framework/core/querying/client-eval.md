@@ -2,14 +2,14 @@
 title: Clientauswertung im Vergleich zur Serverauswertung – EF Core
 description: Auswertung von Abfragen mit Entity Framework Core auf dem Client und auf dem Server
 author: smitpatel
-ms.date: 10/03/2019
+ms.date: 11/09/2020
 uid: core/querying/client-eval
-ms.openlocfilehash: f2e80541439de8cc824c182e52400f730dd2af48
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: a1ddfb625be36cb05f01da08eb3be29512c54ab5
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92062710"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94430143"
 ---
 # <a name="client-vs-server-evaluation"></a>Clientauswertung im Vergleich zur Serverauswertung
 
@@ -46,6 +46,9 @@ In solchen Fällen können Sie die Clientauswertung explizit aktivieren, indem S
 
 [!code-csharp[Main](../../../samples/core/Querying/ClientEvaluation/Program.cs#ExplicitClientEvaluation)]
 
+> [!TIP]
+> Wenn Sie `AsAsyncEnumerable` verwenden und die Abfrage auf Clientseite weiter gestalten möchten, können Sie die Bibliothek [System.Interactive.Async](https://www.nuget.org/packages/System.Interactive.Async/) verwenden, die Operatoren für asynchrone aufzählbare Elemente definiert. Weitere Informationen finden Sie unter [Clientseitige LINQ-Operatoren](xref:core/miscellaneous/async#client-side-async-linq-operators).
+
 ## <a name="potential-memory-leak-in-client-evaluation"></a>Potenzieller Arbeitsspeicherverlust bei der Clientauswertung
 
 Da die Übersetzung und Kompilierung von Abfragen leistungsintensiv ist, wird der kompilierte Abfrageplan von EF Core zwischengespeichert. Der zwischengespeicherte Delegat kann Clientcode während der Clientauswertung der Projektion auf oberster Ebene verwenden. EF Core generiert Parameter für die vom Client ausgewerteten Teile der Struktur und verwendet den Abfrageplan erneut, indem die Parameterwerte ersetzt werden. Gewisse Konstanten in der Ausdrucksbaumstruktur können jedoch nicht in Parameter konvertiert werden. Wenn der zwischengespeicherte Delegat solche Konstanten enthält, kann keine Garbage Collection für diese Objekte durchgeführt werden, da immer noch auf sie verwiesen wird. Wenn ein solches Objekt eine DbContext-Instanz oder andere Dienste enthält, würde die Arbeitsspeichernutzung der App mit der Zeit wachsen. In der Regel ist dieses Verhalten ein Anzeichen für Arbeitsspeicherverlust. EF Core löst eine Ausnahme aus, wenn Konstanten eines Typs ermittelt werden, die nicht mithilfe des aktuellen Datenbankanbieters zugeordnet werden können. Häufige Gründe und Lösungen lauten wie folgt:
@@ -58,7 +61,7 @@ Da die Übersetzung und Kompilierung von Abfragen leistungsintensiv ist, wird de
 
 Der folgende Abschnitt gilt für Versionen von EF Core vor Version 3.0.
 
-Ältere EF Core-Versionen haben die Clientauswertung in beliebigen Teilen der Abfrage unterstützt, nicht nur in der Projektion auf oberster Ebene. Daher haben Abfragen wie die im Abschnitt [Nicht unterstützte Clientauswertung](#unsupported-client-evaluation) ordnungsgemäß funktioniert. Da dieses Verhalten zu unbemerkten Leistungsproblemen führte, hat EF Core eine Warnung für die Clientauswertung protokolliert. Weitere Informationen zum Anzeigen von Protokollierungsausgaben finden Sie unter [Protokollierung](xref:core/miscellaneous/logging).
+Ältere EF Core-Versionen haben die Clientauswertung in beliebigen Teilen der Abfrage unterstützt, nicht nur in der Projektion auf oberster Ebene. Daher haben Abfragen wie die im Abschnitt [Nicht unterstützte Clientauswertung](#unsupported-client-evaluation) ordnungsgemäß funktioniert. Da dieses Verhalten zu unbemerkten Leistungsproblemen führte, hat EF Core eine Warnung für die Clientauswertung protokolliert. Weitere Informationen zum Anzeigen von Protokollierungsausgaben finden Sie unter [Protokollierung](xref:core/logging-events-diagnostics/index).
 
 Optional konnten Sie das Standardverhalten mit EF Core ändern, um bei der Clientauswertung entweder eine Ausnahme auszulösen oder keine Aktion durchzuführen (außer bei der Projektion). Das Verhalten zum Auslösen einer Ausnahme ähnelt dem Verhalten von Version 3.0. Zum Ändern des Verhaltens müssen Sie Warnungen konfigurieren, während Sie die Optionen für Ihren Kontext einrichten. Dies erfolgt in der Regel in `DbContext.OnConfiguring` oder in `Startup.cs`, wenn Sie ASP.NET Core verwenden.
 
