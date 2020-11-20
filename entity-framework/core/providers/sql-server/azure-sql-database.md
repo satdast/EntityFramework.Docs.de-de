@@ -4,17 +4,17 @@ description: Angeben der Dienst Ebene und Leistungsstufe für die Azure SQL-Date
 author: AndriySvyryd
 ms.date: 11/05/2019
 uid: core/providers/sql-server/azure-sql-database
-ms.openlocfilehash: 9b2cc5e0790beb41295dcea6ae30c4ad15b537fa
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: ad202336c2c2efdfe17776952f2a65e98222ecc0
+ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92065367"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "95003587"
 ---
 # <a name="specifying-azure-sql-database-options"></a>Angeben von Azure SQL-Datenbank-Optionen
 
 >[!NOTE]
-> Diese API ist neu in EF Core 3,1.
+> Diese API wurde in EF Core 3,1 eingeführt.
 
 Azure SQL-Datenbank bietet [eine Vielzahl von Preisoptionen](https://azure.microsoft.com/pricing/details/sql-database/single/) , die normalerweise über das Azure-Portal konfiguriert werden. Wenn Sie das Schema jedoch mit [EF Core Migrationen](xref:core/managing-schemas/migrations/index) verwalten, können Sie die gewünschten Optionen im Modell selbst angeben.
 

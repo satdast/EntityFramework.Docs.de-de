@@ -4,23 +4,23 @@ description: Konfigurieren von Sortierungen und Berücksichtigung der Groß-/Kle
 author: roji
 ms.date: 04/27/2020
 uid: core/miscellaneous/collations-and-case-sensitivity
-ms.openlocfilehash: cced7e11f7bf02223d3f181677ad1707c1da4051
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: eca68af6e658f76e1480b1e1083212f160fa765c
+ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94429740"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "95003457"
 ---
 # <a name="collations-and-case-sensitivity"></a>Sortierungen und Groß-/Kleinschreibung
 
 > [!NOTE]
-> Diese Funktion wird in EF Core 5.0 eingeführt.
+> Diese Funktion wurde in EF Core 5,0 eingeführt.
 
 Die Text Verarbeitung in Datenbanken kann sehr komplex sein und erfordert eine höhere Benutzer Aufmerksamkeit. Datenbanken unterscheiden sich in der Art und Weise, wie Sie Text verarbeiten. während bei einigen Datenbanken standardmäßig die Groß-/Kleinschreibung beachtet wird (z. b. sqlite, PostgreSQL), wird bei anderen Datenbanken die Groß-/Kleinschreibung nicht beachtet (SQL Server MySQL Außerdem können aufgrund der Index Verwendung die Unterscheidung nach Groß-/Kleinschreibung und ähnliche Aspekte eine weitreichende Auswirkung auf die Abfrageleistung haben: Obwohl es möglicherweise verlockend ist, zu verwenden, um einen Vergleich ohne Berücksichtigung der Groß-/Kleinschreibung `string.Lower` zu erzwingen, kann dies dazu führen, dass Ihre Anwendung keine Indizes verwendet. Auf dieser Seite erfahren Sie, wie Sie die Groß-/Kleinschreibung oder eher Sortierungen konfigurieren, und wie Sie dies auf effiziente Weise durchführen können, ohne die Abfrageleistung zu beeinträchtigen.
 
 ## <a name="introduction-to-collations"></a>Einführung in Sortierungen
 
-Ein grundlegendes Konzept bei der Textverarbeitung ist die *Sortierung* , bei der es sich um einen Satz von Regeln handelt, der festlegt, wie Text Werte auf Gleichheit sortiert und verglichen werden. Bei einer Sortierung ohne Beachtung der Groß-/Kleinschreibung werden z. b. Unterschiede zwischen Groß-und Kleinbuchstaben für den Gleichheits Vergleich ignoriert. bei der Sortierung wird die Groß-/Kleinschreibung beachtet. Da die Unterscheidung nach Groß-/Kleinschreibung Kultur abhängig ist (z. b. `i` und `I` einen anderen Buchstaben in Türkisch darstellt), gibt es mehrere Sortierungen ohne Beachtung der Groß-/Kleinschreibung, die jeweils über einen eigenen Regelsatz verfügen Der Gültigkeitsbereich von Sortierungen ist auch über die Unterscheidung nach Groß-/Kleinschreibung und andere Aspekte von Zeichendaten hinaus. in Deutsch ist beispielsweise manchmal (aber nicht immer) wünschenswert, um `ä` und `ae` als identisch zu behandeln. Und schließlich definieren Sortierungen auch, wie Text Werte *sortiert* werden: bei deutschen stellen `ä` nach `a` wird der schwedische am Ende des Alphabets platziert.
+Ein grundlegendes Konzept bei der Textverarbeitung ist die *Sortierung*, bei der es sich um einen Satz von Regeln handelt, der festlegt, wie Text Werte auf Gleichheit sortiert und verglichen werden. Bei einer Sortierung ohne Beachtung der Groß-/Kleinschreibung werden z. b. Unterschiede zwischen Groß-und Kleinbuchstaben für den Gleichheits Vergleich ignoriert. bei der Sortierung wird die Groß-/Kleinschreibung beachtet. Da die Unterscheidung nach Groß-/Kleinschreibung Kultur abhängig ist (z. b. `i` und `I` einen anderen Buchstaben in Türkisch darstellt), gibt es mehrere Sortierungen ohne Beachtung der Groß-/Kleinschreibung, die jeweils über einen eigenen Regelsatz verfügen Der Gültigkeitsbereich von Sortierungen ist auch über die Unterscheidung nach Groß-/Kleinschreibung und andere Aspekte von Zeichendaten hinaus. in Deutsch ist beispielsweise manchmal (aber nicht immer) wünschenswert, um `ä` und `ae` als identisch zu behandeln. Und schließlich definieren Sortierungen auch, wie Text Werte *sortiert* werden: bei deutschen stellen `ä` nach `a` wird der schwedische am Ende des Alphabets platziert.
 
 Bei allen Text Vorgängen in einer Datenbank wird eine Sortierung (explizit oder implizit) verwendet, um zu bestimmen, wie der Vorgang im Vergleich und Auftrags Zeichenfolgen verwendet wird. Die tatsächliche Liste der verfügbaren Sortierungen und ihrer Benennungs Schemas ist datenbankspezifisch. Links zu relevanten Dokumentationsseiten verschiedener Datenbanken [finden Sie im Abschnitt weiter unten](#database-specific-information) . Glücklicherweise ist es in der Regel möglich, eine Standardsortierung auf Datenbank-oder Spaltenebene zu definieren und explizit anzugeben, welche Sortierung für bestimmte Vorgänge in einer Abfrage verwendet werden soll.
 

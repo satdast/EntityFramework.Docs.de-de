@@ -4,12 +4,12 @@ description: Konfigurieren von Schatten-und Indexereigenschaften in einem Entity
 author: AndriySvyryd
 ms.date: 10/09/2020
 uid: core/modeling/shadow-properties
-ms.openlocfilehash: 180478212b683a271d2519cc1a4c79be5d3f11b9
-ms.sourcegitcommit: 42bbf7f68e92c364c5fff63092d3eb02229f568d
+ms.openlocfilehash: d419de2da2a9fc29e675dde76e824217347d2e9c
+ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/11/2020
-ms.locfileid: "94503188"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "95003431"
 ---
 # <a name="shadow-and-indexer-properties"></a>Eigenschaften von Schatten und Indexer
 
@@ -63,7 +63,7 @@ Wenn der für die Methode angegebene Name mit `IndexerProperty` dem Namen einer 
 ## <a name="property-bag-entity-types"></a>Eigenschaften Behälter-Entitäts Typen
 
 > [!NOTE]
-> Unterstützung für Eigenschaften Behälter-Entitäts Typen wurde in EF Core 5,0 hinzugefügt.
+> Die Unterstützung für Eigenschaften Behälter-Entitäts Typen wurde in EF Core 5,0 eingeführt.
 
 Entitäts Typen, die nur Indexer-Eigenschaften enthalten, werden als Entitäts Typen für Eigenschaften Behälter bezeichnet. Diese Entitäts Typen haben keine Schatten Eigenschaften, stattdessen erstellt EF Indexer-Eigenschaften. Derzeit `Dictionary<string, object>` wird nur als Entitätstyp für Eigenschaften Behälter unterstützt. Er muss als frei gegebener Entitätstyp mit einem eindeutigen Namen konfiguriert werden, und die entsprechende `DbSet` Eigenschaft muss mithilfe eines- `Set` Aufrufes implementiert werden.
 

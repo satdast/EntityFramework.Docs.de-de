@@ -4,17 +4,17 @@ description: Verwenden räumlicher Daten in einem Entity Framework Core Modell
 author: bricelam
 ms.date: 10/02/2020
 uid: core/modeling/spatial
-ms.openlocfilehash: fa9cf30ddb4291d96486934544b568b67b126846
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: a38e75e150b3d3404f2ed7619d05ba478c411117
+ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94430520"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "95003444"
 ---
 # <a name="spatial-data"></a>Räumliche Daten
 
 > [!NOTE]
-> Diese Funktion wurde in EF Core 2,2 hinzugefügt.
+> Diese Funktion wurde in EF Core 2,2 eingeführt.
 
 Räumliche Daten repräsentieren den physischen Speicherort und die Form von Objekten. Viele Datenbanken unterstützen diese Art von Daten, damit Sie zusammen mit anderen Daten indiziert und abgefragt werden können. Häufige Szenarien umfassen das Abfragen von Objekten in einer bestimmten Entfernung von einem Speicherort oder das Auswählen des Objekts, dessen Rahmen eine bestimmte Position enthält. EF Core unterstützt die Zuordnung räumlicher Datentypen mithilfe der räumlichen Bibliothek nettopologysuite.
 
@@ -78,7 +78,7 @@ In LINQ werden die NTS-Methoden und-Eigenschaften, die als Datenbankfunktionen v
 
 ## <a name="reverse-engineering"></a>Reverse Engineering
 
-Die räumlichen nuget-Pakete ermöglichen auch das [Reverse Engineering](xref:core/managing-schemas/scaffolding) von Modellen mit räumlichen Eigenschaften. Sie müssen jedoch das Paket installieren * *_vor_* _ Ausführen von `Scaffold-DbContext` oder `dotnet ef dbcontext scaffold` . Wenn Sie dies nicht tun, erhalten Sie Warnungen, wenn Sie keine Typzuordnungen für die Spalten finden und die Spalten übersprungen werden.
+Die räumlichen nuget-Pakete ermöglichen auch das [Reverse Engineering](xref:core/managing-schemas/scaffolding) von Modellen mit räumlichen Eigenschaften. Sie müssen jedoch das Paket installieren **_vor_* _ Ausführen von `Scaffold-DbContext` oder `dotnet ef dbcontext scaffold` . Wenn Sie dies nicht tun, erhalten Sie Warnungen, wenn Sie keine Typzuordnungen für die Spalten finden und die Spalten übersprungen werden.
 
 ## <a name="srid-ignored-during-client-operations"></a>SRID wird bei Client Vorgängen ignoriert.
 

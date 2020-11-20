@@ -4,12 +4,12 @@ description: Konfigurieren der Vererbung von Entitäts Typen mit Entity Framewor
 author: AndriySvyryd
 ms.date: 10/01/2020
 uid: core/modeling/inheritance
-ms.openlocfilehash: 3ec6e7bd98f9c9716c460d69fc707d95e5e47a05
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 33429bbc4a9941ff8ea98a8f99cc652c8ea26455
+ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94429519"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "95003626"
 ---
 # <a name="inheritance"></a>Vererbung
 
@@ -64,7 +64,7 @@ Wenn zwei gleich geordnete Entitäts Typen in der Hierarchie über eine Eigensch
 ## <a name="table-per-type-configuration"></a>"Tabelle pro Typ"-Konfiguration
 
 > [!NOTE]
-> Die Tabelle pro Typ (TPT) ist ein neues Feature in EF Core 5,0. "Table-per-Concrete-Type" (TPC) wird von EF6 unterstützt, aber noch nicht von EF Core unterstützt.
+> Die Funktion "Tabelle pro Typ" (TPT) wurde in EF Core 5,0 eingeführt. "Table-per-Concrete-Type" (TPC) wird von EF6 unterstützt, aber noch nicht von EF Core unterstützt.
 
 Im TPT-Zuordnungsmuster werden alle Typen einzelnen Tabellen zugeordnet. Eigenschaften, die nur zu einem Basistyp oder einem abgeleiteten Typ gehören, werden in einer Tabelle gespeichert, die diesem Typ zugeordnet ist. Tabellen, die abgeleiteten Typen zugeordnet sind, speichern auch einen Fremdschlüssel, der die abgeleitete Tabelle mit der Basistabelle verbindet.
 

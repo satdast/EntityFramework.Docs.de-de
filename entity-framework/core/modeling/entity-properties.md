@@ -4,12 +4,12 @@ description: Konfigurieren und Zuordnen von Entitäts Eigenschaften mithilfe von
 author: roji
 ms.date: 05/27/2020
 uid: core/modeling/entity-properties
-ms.openlocfilehash: 55c6f31543d4ce3257cf203eaf9fd2191301ea7e
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 67ea6eb9cc62c01c16ef33d4d1d1597576ec8b3d
+ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94429595"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "95003409"
 ---
 # <a name="entity-properties"></a>Entitätseigenschaften
 
@@ -157,7 +157,7 @@ Eine Eigenschaft, die gemäß der Konvention optional ist, kann so konfiguriert 
 ## <a name="column-collations"></a>Spalten Sortierungen
 
 > [!NOTE]
-> Diese Funktion wird in EF Core 5.0 eingeführt.
+> Diese Funktion wurde in EF Core 5,0 eingeführt.
 
 Eine Sortierung kann für Textspalten definiert werden, um zu bestimmen, wie Sie verglichen und sortiert werden. Der folgende Code Ausschnitt konfiguriert z. b. eine SQL Server Spalte so, dass die Groß-/Kleinschreibung nicht beachtet wird:
 

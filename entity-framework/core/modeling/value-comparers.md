@@ -4,17 +4,17 @@ description: Verwenden von Wert vergleichen zum Steuern der Art EF Core Vergleic
 author: ajcvickers
 ms.date: 03/20/2020
 uid: core/modeling/value-comparers
-ms.openlocfilehash: d07aee866a542f55c4e1074c5782e67cb4035a89
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: d59ab093c7e9d251aac80420972d3e35edabae0b
+ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89616680"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "95003613"
 ---
 # <a name="value-comparers"></a>Wert Vergleiche
 
 > [!NOTE]  
-> Diese Funktion ist neu in EF Core 3,0.
+> Diese Funktion wurde in EF Core 3,0 eingeführt.
 
 > [!TIP]  
 > Den Code in diesem Dokument finden Sie auf GitHub als Ausführ [bares Beispiel](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Modeling/ValueConversions/).
@@ -47,7 +47,7 @@ Es ist unwahrscheinlich, dass eine große Leistung erzielt wird, da binäre Schl
 ### <a name="snapshots"></a>Momentaufnahmen
 
 Tiefe Vergleiche bei änderbaren Typen bedeutet, dass EF Core die Möglichkeit benötigt, eine Tiefe "Momentaufnahme" des Eigenschafts Werts zu erstellen.
-Wenn Sie stattdessen nur den Verweis kopieren, würde dies dazu führen, dass der aktuelle Wert und die Momentaufnahme geändert werden, da es sich um _dasselbe Objekt_handelt.
+Wenn Sie stattdessen nur den Verweis kopieren, würde dies dazu führen, dass der aktuelle Wert und die Momentaufnahme geändert werden, da es sich um _dasselbe Objekt_ handelt.
 Wenn Deep-Vergleiche für änderbare Typen verwendet werden, ist daher auch Deep snapshotts erforderlich.
 
 ## <a name="properties-with-value-converters"></a>Eigenschaften mit Wert Konvertern

@@ -4,20 +4,20 @@ description: Abfangen von Daten Bank Vorgängen und anderen Ereignissen
 author: ajcvickers
 ms.date: 10/08/2020
 uid: core/logging-events-diagnostics/interceptors
-ms.openlocfilehash: 61ec6968344798af8ecffb878a1e47a6a8e031cd
-ms.sourcegitcommit: 42bbf7f68e92c364c5fff63092d3eb02229f568d
+ms.openlocfilehash: 22d860a083c5ece9be109be630c3ce01dd742bf2
+ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/11/2020
-ms.locfileid: "94503201"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "95003410"
 ---
 # <a name="interceptors"></a>Interceptors
 
-Entity Framework Core (EF Core)-Interceptors ermöglichen das Abfangen, ändern und/oder Unterdrücken von EF Core Vorgängen. Dies umfasst Daten Bank Vorgänge auf niedriger Ebene, z. b. das Ausführen eines Befehls, sowie Vorgänge höherer Ebene, z. b. Aufrufe von SaveChanges.
+Entity Framework Core (EF Core)-Interceptors ermöglichen das Abfangen, ändern und/oder Unterdrücken von EF Core Vorgängen. Dies umfasst Datenbankvorgänge auf niedriger Ebene, z. B. das Ausführen eines Befehls, sowie Vorgänge höherer Ebene, z. B. Aufrufe von SaveChanges.
 
-Interceptors unterscheiden sich von der Protokollierung und Diagnose darin, dass Sie eine Änderung oder Unterdrückung des abzufangenden Vorgangs ermöglichen. [Einfache Protokollierung](xref:core/logging-events-diagnostics/simple-logging) oder [Microsoft. Extensions. Logging](xref:core/logging-events-diagnostics/extensions-logging) sind bessere Optionen für die Protokollierung.
+Abfangfunktionen unterscheiden sich von Protokollierung und Diagnose insofern, als sie eine Änderung oder Unterdrückung des abzufangenden Vorgangs ermöglichen. [Einfache Protokollierung](xref:core/logging-events-diagnostics/simple-logging) oder [Microsoft.Extensions.Logging](xref:core/logging-events-diagnostics/extensions-logging) sind bessere Optionen für Protokollierung.
 
-Interceptors werden bei der Konfiguration des Kontexts pro dbcontext-Instanz registriert. Verwenden Sie einen [diagnoselistener](xref:core/logging-events-diagnostics/diagnostic-listeners) , um dieselben Informationen, aber für alle dbcontext-Instanzen im Prozess zu erhalten.
+Abfangfunktionen werden pro DbContext-Instanz registriert, wenn der Kontext konfiguriert wird. Verwenden Sie einen [Diagnoselistener](xref:core/logging-events-diagnostics/diagnostic-listeners), um dieselben Informationen abzurufen, jedoch für alle DbContext-Instanzen im Prozess.
 
 ## <a name="registering-interceptors"></a>Interceptors werden registriert
 
@@ -56,8 +56,8 @@ Jede Interceptor Instanz muss eine oder mehrere Schnittstellen implementieren, d
 ## <a name="database-interception"></a>Daten Bank Abfang
 
 > [!NOTE]
-> Das Abfangen der Datenbank wurde in EF Core 3,0 hinzugefügt und ist nur für relationale Datenbankanbieter verfügbar.
-> Die Sicherungspunkt Unterstützung wurde in EF Core 5,0 hinzugefügt.
+> Die Daten Bank Abfang Funktion wurde in EF Core 3,0 eingeführt und ist nur für relationale Datenbankanbieter verfügbar.
+> Die SAVEPOINT-Unterstützung wurde in EF Core 5,0 eingeführt.
 
 Die Daten Bank Abfang Funktion auf niedriger Ebene wird in die drei in der folgenden Tabelle dargestellten Schnittstellen aufgeteilt.
 
@@ -396,7 +396,7 @@ Beachten Sie aus der Protokoll Ausgabe, dass die Anwendung die zwischengespeiche
 ## <a name="savechanges-interception"></a>Abfangen von SaveChanges
 
 > [!NOTE]
-> Das Abfangen von SaveChanges wurde in EF Core 5,0 hinzugefügt.
+> Das Abfangen von SaveChanges wurde in EF Core 5,0 eingeführt.
 
 > [!TIP]  
 > Sie können [das Beispiel für das SaveChanges-Interceptor](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/SaveChangesInterception) von GitHub herunterladen.

@@ -4,12 +4,12 @@ description: Hinzufügen, entfernen und Verwalten von Datenbankschema Migratione
 author: bricelam
 ms.date: 10/27/2020
 uid: core/managing-schemas/migrations/managing
-ms.openlocfilehash: 81f7cec54510d95b1e2432d56ff95110224fd9bf
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: ef5e1b9bb10d6f1cd428db2fee327ec513c3f528
+ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94429850"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "95003275"
 ---
 # <a name="managing-migrations"></a>Verwalten von Migrationen
 
@@ -40,8 +40,8 @@ Der Migrationsname kann wie eine Commitnachricht in einem Versionskontrollsystem
 
 Drei Dateien werden Ihrem Projekt im Verzeichnis **Migrationen** hinzugefügt:
 
-* **XXXXXXXXXXXXXX_AddCreatedTimestamp. cs** -die Haupt Migrations Datei. Enthält die Vorgänge, die zum Durchführen der Migration (in `Up`) und Rückgängigmachen (in `Down`) erforderlich sind.
-* **XXXXXXXXXXXXXX_AddCreatedTimestamp. Designer. cs** -die Migrations Metadatendatei. Enthält Informationen, die vom EF verwendet werden.
+* **XXXXXXXXXXXXXX_AddCreatedTimestamp. cs**-die Haupt Migrations Datei. Enthält die Vorgänge, die zum Durchführen der Migration (in `Up`) und Rückgängigmachen (in `Down`) erforderlich sind.
+* **XXXXXXXXXXXXXX_AddCreatedTimestamp. Designer. cs**-die Migrations Metadatendatei. Enthält Informationen, die vom EF verwendet werden.
 * **MyContextModelSnapshot.cs** – Eine Momentaufnahme des aktuellen Modells. Diese wird verwendet, um festzustellen, was sich beim Hinzufügen der nächsten Migration geändert hat.
 
 Mit dem Zeitstempel im Dateinamen können Migrationen chronologisch angeordnet werden, sodass Sie den Fortschritt der Änderungen mitverfolgen können.
@@ -210,7 +210,7 @@ dotnet ef migrations list
 ### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
 
 > [!NOTE]
-> Dieser Befehl wurde in EF Core 5,0 hinzugefügt.
+> Dieser Befehl wurde in EF Core 5,0 eingeführt.
 
 ```powershell
 Get-Migration
@@ -220,7 +220,7 @@ Get-Migration
 
 ## <a name="resetting-all-migrations"></a>Zurücksetzen aller Migrationen
 
-In einigen Extremfällen ist es möglicherweise erforderlich, alle Migrationen zu entfernen und zu beginnen. Dies lässt sich problemlos erreichen, indem der Ordner _ *Migrationen* * gelöscht und die Datenbank gelöscht wird. an diesem Punkt können Sie eine neue anfängliche Migration erstellen, die das gesamte aktuelle Schema enthält.
+In einigen Extremfällen ist es möglicherweise erforderlich, alle Migrationen zu entfernen und zu beginnen. Dies lässt sich problemlos erreichen, indem der Ordner _ *Migrationen** gelöscht und die Datenbank gelöscht wird. an diesem Punkt können Sie eine neue anfängliche Migration erstellen, die das gesamte aktuelle Schema enthält.
 
 Es ist auch möglich, alle Migrationen zurückzusetzen und eine einzelne zu erstellen, ohne die Daten zu verlieren. Dies wird mitunter als "Squashing" bezeichnet und umfasst einige manuelle Aufgaben:
 
