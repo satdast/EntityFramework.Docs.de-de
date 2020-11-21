@@ -4,12 +4,12 @@ description: Konfigurieren und Zuordnen von Entitäts Typen mithilfe von Entity 
 author: roji
 ms.date: 10/06/2020
 uid: core/modeling/entity-types
-ms.openlocfilehash: 9094193640e7cab6db3fed7ae0ab818a455156ca
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 9d86b959b5e0360df6d782d8d1c1c2f9393fdf8b
+ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94429584"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "95003496"
 ---
 # <a name="entity-types"></a>Entitätstypen
 
@@ -44,7 +44,7 @@ Wenn Sie nicht möchten, dass ein Typ im Modell enthalten ist, können Sie ihn a
 ### <a name="excluding-from-migrations"></a>Ausschließen von Migrationen
 
 > [!NOTE]
-> Die Möglichkeit, Tabellen aus Migrationen auszuschließen, wurde in EF Core 5,0 hinzugefügt.
+> Die Möglichkeit, Tabellen aus Migrationen auszuschließen, wurde in EF Core 5,0 eingeführt.
 
 Es ist manchmal hilfreich, den gleichen Entitätstyp in mehreren Typen zugeordnet zu haben `DbContext` . Dies trifft vor allem dann zu, wenn [begrenzte Kontexte](https://www.martinfowler.com/bliki/BoundedContext.html)verwendet werden, für die es üblich ist, `DbContext` für jeden Kontext Kontext einen anderen Typ zu verwenden.
 

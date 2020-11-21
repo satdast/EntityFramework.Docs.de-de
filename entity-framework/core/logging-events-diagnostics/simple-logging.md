@@ -4,17 +4,17 @@ description: Protokollieren von einem EF Core dbcontext mithilfe von logto
 author: ajcvickers
 ms.date: 10/03/2020
 uid: core/logging-events-diagnostics/simple-logging
-ms.openlocfilehash: 49619cc10ea098e39e71dde347e00bbc3c39b13a
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 274fca39c45c4e2ccfd47f3c4eeb0834e00d18aa
+ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94431250"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "95003509"
 ---
 # <a name="simple-logging"></a>Einfache Protokollierung
 
 > [!NOTE]
-> Dieses Feature wurde in EF Core 5.0 hinzugefügt.
+> Diese Funktion wurde in EF Core 5,0 eingeführt.
 
 > [!TIP]  
 > Sie können [das Beispiel dieses Artikels](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/SimpleLogging) von GitHub herunterladen.
@@ -26,7 +26,7 @@ Die einfache Protokollierung von Entity Framework Core (EF Core) kann verwendet 
 
 ## <a name="configuration"></a>Konfiguration
 
-Auf EF Core Protokolle können von jedem Anwendungstyp aus mithilfe von [logto](https://github.com/dotnet/efcore/blob/ec3df8fd7e4ea4ebeebfa747619cef37b23ab2c6/src/EFCore/DbContextOptionsBuilder.cs#L135) zugegriffen werden. <!-- Issue #2748 <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.LogTo%2A> --> beim [Konfigurieren einer DbContext-Instanz](xref:core/dbcontext-configuration/index) möglich. Diese Konfiguration erfolgt in der Regel durch ein Überschreiben von <xref:Microsoft.EntityFrameworkCore.DbContext.OnConfiguring%2A?displayProperty=nameWithType>. Beispiel:
+Der Zugriff auf EF Core-Protokolle ist über Anwendungen jeglichen Typs über die Verwendung von [LogTo](https://github.com/dotnet/efcore/blob/ec3df8fd7e4ea4ebeebfa747619cef37b23ab2c6/src/EFCore/DbContextOptionsBuilder.cs#L135) <!-- Issue #2748 <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.LogTo%2A> --> beim [Konfigurieren einer DbContext-Instanz](xref:core/dbcontext-configuration/index) möglich. Diese Konfiguration erfolgt in der Regel durch ein Überschreiben von <xref:Microsoft.EntityFrameworkCore.DbContext.OnConfiguring%2A?displayProperty=nameWithType>. Beispiel:
 
 <!--
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -143,7 +143,7 @@ Jeder Protokollmeldung wird eine zugewiesen <xref:Microsoft.Extensions.Logging.E
 
 Jede Protokollmeldung wird einer benannten hierarchischen Protokollierungs Kategorie zugewiesen. Die Kategorien lauten:
 
-| Category                                             | Meldungen
+| Kategorie                                             | Meldungen
 |:-----------------------------------------------------|-------------------------------------------------
 | Microsoft.EntityFrameworkCore                        | Alle EF Core Meldungen
 | Microsoft. entityframeworkcore. Database               | Alle Daten Bank Interaktionen

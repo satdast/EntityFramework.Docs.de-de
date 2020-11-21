@@ -4,12 +4,12 @@ description: Konfigurieren von Beziehungen zwischen Entitäts Typen bei Verwendu
 author: AndriySvyryd
 ms.date: 10/01/2020
 uid: core/modeling/relationships
-ms.openlocfilehash: c92fa1904436ec43ff8918354a99440079e2a96a
-ms.sourcegitcommit: 42bbf7f68e92c364c5fff63092d3eb02229f568d
+ms.openlocfilehash: 716c034bd73d831996b727da18c2c1f83dd55290
+ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/11/2020
-ms.locfileid: "94503214"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "95003262"
 ---
 # <a name="relationships"></a>Beziehungen
 
@@ -149,7 +149,7 @@ Wenn Sie nur über eine Navigations Eigenschaft verfügen, gibt es Parameter los
 ### <a name="configuring-navigation-properties"></a>Konfigurieren von Navigations Eigenschaften
 
 > [!NOTE]
-> Dieses Feature wurde in EF Core 5.0 hinzugefügt.
+> Diese Funktion wurde in EF Core 5,0 eingeführt.
 
 Nachdem die Navigations Eigenschaft erstellt wurde, müssen Sie Sie möglicherweise weiter konfigurieren.
 
@@ -269,7 +269,7 @@ Mit dieser Konfiguration werden die Spalten, die entsprechen, `ShippingAddress` 
 > Wenn Sie Verweis Typen verwenden, die keine [NULL-Werte](/dotnet/csharp/nullable-references) zulassen, ist das Aufrufen von `IsRequired` nicht erforderlich.
 
 > [!NOTE]
-> Die Möglichkeit, zu konfigurieren, ob die abhängige erforderlich ist, wurde in EF Core 5,0 hinzugefügt.
+> Die Möglichkeit, zu konfigurieren, ob die abhängige erforderlich ist, wurde in EF Core 5,0 eingeführt.
 
 ### <a name="many-to-many"></a>M:n
 
@@ -320,14 +320,14 @@ Zusätzliche Daten können im Join-Entitätstyp gespeichert werden, aber hierfü
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/ManyToManyPayload.cs?name=ManyToManyPayload)]
 
 > [!NOTE]
-> Die Möglichkeit zum Konfigurieren von m:n-Beziehungen wurde in EF Core 5,0 hinzugefügt. verwenden Sie für die vorherige Version die folgende Vorgehensweise.
+> Die Möglichkeit zum Konfigurieren von m:n-Beziehungen wurde in EF Core 5,0 eingeführt. verwenden Sie für die vorherige Version die folgende Vorgehensweise.
 
 Sie können auch eine m:n-Beziehung darstellen, indem Sie einfach den Join-Entitätstyp hinzufügen und zwei separate 1: n-Beziehungen Mapping.
 
-[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/ManyToMany.cs?name=ManyToMany&highlight=11-14,16-19,39-46)]
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/ManyToMany.cs?name=ManyToMany&highlight=16-19,21-24)]
 
 > [!NOTE]
-> Es wurde noch keine Unterstützung für das Gerüstbau von m:n-Beziehungen aus der Datenbank hinzugefügt. Siehe nach [Verfolgungs Problem](https://github.com/dotnet/efcore/issues/22475).
+> Der Gerüstbau für m:n-Beziehungen anhand der Datenbank wird noch nicht unterstützt. Siehe [Nachverfolgung von Issue](https://github.com/dotnet/efcore/issues/22475).
 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
