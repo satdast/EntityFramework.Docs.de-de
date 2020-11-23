@@ -4,12 +4,12 @@ description: Übersicht über die Verwendung von Migrationen zum Verwalten von D
 author: bricelam
 ms.date: 10/28/2020
 uid: core/managing-schemas/migrations/index
-ms.openlocfilehash: 9f1c9e266d60b7ed4aed783bb8e01864c93867ea
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: b9547298714af59453aeae6d05742a03c067708b
+ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94429818"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "95003394"
 ---
 # <a name="migrations-overview"></a>Migrationsübersicht
 
@@ -61,7 +61,7 @@ Add-Migration InitialCreate
 
 **_
 
-EF Core erstellt ein Verzeichnis namens _ *Migrations* * in Ihrem Projekt und generiert einige Dateien. Es ist eine gute Idee, zu überprüfen, was genau EF Core generiert hat (und es möglicherweise zu ändern), aber wir überspringen dies vorerst.
+EF Core erstellt ein Verzeichnis namens _ *Migrations** in Ihrem Projekt und generiert einige Dateien. Es ist eine gute Idee, zu überprüfen, was genau EF Core generiert hat (und es möglicherweise zu ändern), aber wir überspringen dies vorerst.
 
 ### <a name="create-your-database-and-schema"></a>Erstellen der Datenbank und des Schemas
 
@@ -141,7 +141,7 @@ Beachten Sie, dass EF dieses Mal erkennt, dass die Datenbank bereits vorhanden i
 ### <a name="excluding-parts-of-your-model"></a>Ausschließen von Teilen des Modells
 
 > [!NOTE]
-> Dieses Feature wurde in EF Core 5.0 hinzugefügt.
+> Dieses Feature wurde in EF Core 5.0 eingeführt.
 
 Manchmal möchten Sie möglicherweise auf Typen aus einem anderen DbContext verweisen. Dies kann zu Migrationskonflikten führen. Um diese zu verhindern, schließen Sie den Typ aus den Migrationen der DbContexts aus.
 

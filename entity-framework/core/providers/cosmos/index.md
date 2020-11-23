@@ -4,17 +4,17 @@ description: Dokumentation für den Datenbankanbieter, mit der Entity Framework 
 author: AndriySvyryd
 ms.date: 10/09/2020
 uid: core/providers/cosmos/index
-ms.openlocfilehash: 825517e79891378a61f9564c90dbf4522459e9d0
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: b167f53515799efdaead232f44ad5eab37fb0b14
+ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94430313"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "95003600"
 ---
 # <a name="ef-core-azure-cosmos-db-provider"></a>EF Core Azure Cosmos DB-Anbieter
 
 > [!NOTE]
-> Dieser Anbieter ist neu in EF Core 3.0.
+> Dieser Anbieter wurde in EF Core 3.0 eingeführt.
 
 Dieser Datenbankanbieter ermöglicht die Verwendung von Entity Framework Core mit Azure Cosmos DB. Dieser Anbieter wird nicht im Rahmen des [Entity Framework Core-Projekts](https://github.com/dotnet/efcore) verwaltet.
 
@@ -73,7 +73,7 @@ Es ist auch möglich, den Cosmos DB-Anbieter mit einer einzelnen Verbindungszeic
 [!code-csharp[Configuration](../../../../samples/core/Cosmos/ModelBuilding/OptionsContext.cs?name=Configuration)]
 
 > [!NOTE]
-> Die meisten dieser Optionen sind in EF Core Cosmos 5.0 neu.
+> Die meisten dieser Optionen wurden in EF Core 5.0 eingeführt.
 
 > [!TIP]
 > In der Dokumentation zu [Azure Cosmos DB-Optionen](/dotnet/api/microsoft.azure.cosmos.cosmosclientoptions) finden Sie eine ausführliche Beschreibung der Auswirkungen der einzelnen oben genannten Optionen.
@@ -108,7 +108,7 @@ Nach der Konfiguration muss die Partitionsschlüsseleigenschaft immer einen Wert
 [!code-csharp[PartitionKey](../../../../samples/core/Cosmos/ModelBuilding/Sample.cs?name=PartitionKey&highlight=15)]
 
 > [!NOTE]
-> `WithPartitionKey` wurde in EF Core 5.0 hinzugefügt.
+> `WithPartitionKey` wurde in EF Core 5.0 eingeführt.
 
 Im Allgemeinen wird empfohlen, den Partitionsschlüssel dem Primärschlüssel hinzuzufügen, da dies die Serversemantik am besten widerspiegelt und einige Optimierungen ermöglicht, z. B. in `FindAsync`.
 
@@ -210,7 +210,7 @@ Dieser JSON-Code ergibt sich:
 ## <a name="optimistic-concurrency-with-etags"></a>Optimistische Nebenläufigkeit mit ETags
 
 > [!NOTE]
-> Die Nebenläufigkeit für ETags wird seit EF Core 5.0 unterstützt.
+> Nebenläufigkeit für ETags wurde in EF Core 5.0 eingeführt.
 
 Rufen Sie `UseETagConcurrency` auf, um einen Entitätstyp so zu konfigurieren, dass die [optimistische Nebenläufigkeit](xref:core/modeling/concurrency) verwendet wird. Dieser Aufruf erstellt eine `_etag`-Eigenschaft als [Schatteneigenschaft](xref:core/modeling/shadow-properties), und diese Eigenschaft wird als Nebenläufigkeitstoken festgelegt.
 

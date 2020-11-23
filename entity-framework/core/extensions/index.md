@@ -4,12 +4,12 @@ description: Externe Tools und Erweiterungen für Entity Framework Core
 author: ErikEJ
 ms.date: 04/11/2020
 uid: core/extensions/index
-ms.openlocfilehash: c7056bcb0831ae1919b3060aacf73dc5cb9c8cb1
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: dc8125ab522b5b0c5126fda2d7c8093c2babdc29
+ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94429935"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "95003301"
 ---
 # <a name="ef-core-tools--extensions"></a>EF Core Tools und -Erweiterungen
 
@@ -240,3 +240,9 @@ Eine-Implementierung für das vorläufige Löschen von Entitäten. Für EF Core:
 Erweitert EF Core zum Auflösen von Verbindungszeichenfolgen aus „App.config“. Für EF Core: 3.
 
 [GitHub-Repository](https://github.com/efcore/EFCore.ConfigurationManager)
+
+### <a name="detached-mapper"></a>Getrennter Mapper
+
+Ein DTO-Entity-Mapper mit Kompositions-/Aggregationsverarbeitung (ähnlich wie GraphDiff). Für EF Core: 3, 5.
+
+[NuGet](https://www.nuget.org/packages/Detached.Mappers.EntityFramework)

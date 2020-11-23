@@ -4,12 +4,12 @@ description: Übersicht über Protokollierung, Ereignisse, Interceptors und Diag
 author: ajcvickers
 ms.date: 10/01/2020
 uid: core/logging-events-diagnostics/index
-ms.openlocfilehash: fdf536dc6ec15e6e520d574b14527a4e7a7b1d72
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 2c44772b22112645f85cf0bffa680bc510ea5afb
+ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94431120"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "95003522"
 ---
 # <a name="overview-of-logging-and-interception"></a>Übersicht über Protokollierung und Abfangfunktionen
 
@@ -32,7 +32,7 @@ In der folgenden Tabelle finden Sie eine kurze Übersicht über die Unterschiede
 ## <a name="simple-logging"></a>Einfache Protokollierung
 
 > [!NOTE]
-> Dieses Feature wurde in EF Core 5.0 hinzugefügt.
+> Dieses Feature wurde in EF Core 5.0 eingeführt.
 
 Der Zugriff auf EF Core-Protokolle ist über Anwendungen jeglichen Typs über die Verwendung von [LogTo](https://github.com/dotnet/efcore/blob/ec3df8fd7e4ea4ebeebfa747619cef37b23ab2c6/src/EFCore/DbContextOptionsBuilder.cs#L135) <!-- Issue #2748 <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.LogTo%2A> --> beim [Konfigurieren einer DbContext-Instanz](xref:core/dbcontext-configuration/index) möglich. Diese Konfiguration erfolgt in der Regel durch ein Überschreiben von <xref:Microsoft.EntityFrameworkCore.DbContext.OnConfiguring%2A?displayProperty=nameWithType>. Beispiel:
 
@@ -55,7 +55,7 @@ Weitere Informationen finden Sie unter [Verwenden von Microsoft.Extensions.Loggi
 ## <a name="events"></a>Ereignisse
 
 > [!NOTE]
-> In EF Core 5.0 wurden weitere Ereignisse hinzugefügt.
+> Zusätzliche Ereignisse wurden in EF Core 5.0 eingeführt.
 
 EF Core stellt [.NET-Ereignisse](/dotnet/standard/events/) bereit, die als Rückrufe fungieren, wenn bestimmte Dinge im EF Core-Code auftreten. Ereignisse sind einfacher als Abfangfunktionen und ermöglichen eine flexiblere Registrierung. Sie sind jedoch nur synchron und können daher keine nicht blockierenden asynchronen E/A-Vorgänge durchführen.
 
@@ -66,7 +66,7 @@ Weitere Informationen finden Sie unter [.NET-Ereignisse in EF Core](xref:core/l
 ## <a name="interception"></a>Interception
 
 > [!NOTE]
-> Dieses Feature wurde in EF Core 3.0 hinzugefügt. In EF Core 5.0 wurden weitere Abfangfunktionen hinzugefügt.
+> Dieses Feature wurde in EF Core 3.0 eingeführt. In EF Core 5.0 wurden weitere Abfangfunktionen (Interceptors) eingeführt.
 
 EF Core-Abfangfunktionen ermöglichen das Abfangen, Ändern und/oder Unterdrücken von EF Core-Vorgängen. Dies umfasst Datenbankvorgänge auf niedriger Ebene, z. B. das Ausführen eines Befehls, sowie Vorgänge höherer Ebene, z. B. Aufrufe von SaveChanges.
 
