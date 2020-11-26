@@ -4,12 +4,12 @@ description: Übersetzen von Abfragen in einfache und geteilte Abfragen in SQL m
 author: smitpatel
 ms.date: 10/03/2019
 uid: core/querying/single-split-queries
-ms.openlocfilehash: 1c99d931c01b99de199710ffe661e1aac7a37263
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: ba282a0c5242b2eb87d681906571036d4751f6ac
+ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94431189"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "95003561"
 ---
 # <a name="single-vs-split-queries"></a>Vergleich von Einzel- und geteilten Abfragen
 
@@ -29,7 +29,7 @@ Wenn ein typischer Blog mehrere zugehörige Beiträge enthält, werden in den Ze
 ## <a name="split-queries"></a>Geteilte Abfragen
 
 > [!NOTE]
-> Diese Funktion wird in EF Core 5.0 eingeführt. Sie funktioniert nur bei Verwenden von `Include`. [Dieses Problem](https://github.com/dotnet/efcore/issues/21234) stellt die Nachverfolgung der Unterstützung für geteilte Abfragen beim Laden zugehöriger Daten in die Projektion ohne `Include` dar.
+> Dieses Feature wurde in EF Core 5.0 eingeführt. Sie funktioniert nur bei Verwenden von `Include`. [Dieses Problem](https://github.com/dotnet/efcore/issues/21234) stellt die Nachverfolgung der Unterstützung für geteilte Abfragen beim Laden zugehöriger Daten in die Projektion ohne `Include` dar.
 
 In EF können Sie angeben, dass eine bestimmte LINQ-Abfrage in auf mehrere SQL-Abfragen *aufgeteilt* werden soll. Anstelle von JOIN-Vorgängen generieren geteilte Abfragen für jede enthaltene Sammlungsnavigation eine zusätzliche SQL-Abfrage:
 
