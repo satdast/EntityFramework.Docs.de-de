@@ -4,12 +4,12 @@ description: Eager Loading zugehöriger Daten mit Entity Framework Core
 author: roji
 ms.date: 9/8/2020
 uid: core/querying/related-data/eager
-ms.openlocfilehash: bd9c9045c1c2707d69ee4070bea59ad8066789f3
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 66956fcd85bb21a08c69fa93b93c12382bbfc8eb
+ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94430104"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "95003574"
 ---
 # <a name="eager-loading-of-related-data"></a>Eager Loading zugehöriger Daten
 
@@ -47,10 +47,15 @@ Für eine der Entitäten, die eingeschlossen wird, sollten Sie mehrere zugehöri
 
 [!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Program.cs#MultipleLeafIncludes)]
 
+> [!TIP]
+> Sie können auch mehrere Navigationen mit einer einzelnen `Include`-Methode laden. Dies ist für „Navigationsketten“ möglich, die alle Verweise sind, oder wenn Sie mit einer einzelnen Sammlung enden.
+
+[!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Program.cs#IncludeMultipleNavigationsWithSingleInclude)]
+
 ## <a name="filtered-include"></a>Gefilterte Include-Funktion
 
 > [!NOTE]
-> Diese Funktion wird in EF Core 5.0 eingeführt.
+> Dieses Feature wurde in EF Core 5.0 eingeführt.
 
 Wenn Sie „Include“ zum Laden zugehöriger Daten anwenden, können Sie bestimmte aufzählbare Vorgänge zur enthaltenen Sammlungsnavigation hinzufügen, mit denen Sie die Ergebnisse filtern und sortieren können.
 

@@ -4,12 +4,12 @@ description: Verwalten von Transaktionen für Unteilbarkeit beim Speichern von D
 author: roji
 ms.date: 9/26/2020
 uid: core/saving/transactions
-ms.openlocfilehash: 2cefe23068a40122b7a37c21536213456eef7b66
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: b5e1fa2a0bcc466f22f03fee7ecaef9dcea1efaf
+ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92063620"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "95003548"
 ---
 # <a name="using-transactions"></a>Verwenden von Transaktionen
 
@@ -34,7 +34,13 @@ Während alle Anbieter relationaler Datenbanken Transaktionen unterstützen, kö
 
 ## <a name="savepoints"></a>Sicherungspunkte
 
+> [!NOTE]
+> Dieses Feature wurde in EF Core 5.0 eingeführt.
+
 Wenn `SaveChanges` aufgerufen und im Kontext bereits eine Transaktion ausgeführt wird, erstellt EF automatisch einen *Sicherungspunkt*, bevor Daten gespeichert werden. Sicherungspunkte sind Punkte innerhalb einer Datenbanktransaktion, für die später ein Rollback ausgeführt werden kann, wenn ein Fehler auftritt, oder aus einem anderen Grund. Wenn bei `SaveChanges` ein Fehler auftritt, wird die Transaktion automatisch an den Sicherungspunkt zurückgesetzt, sodass die Transaktion sich in demselben Zustand befindet, als sei sie nie gestartet worden. Dies ermöglicht Ihnen, mögliche Probleme zu beheben und den Speichervorgang zu wiederholen, insbesondere wenn Probleme mit der [optimistischen Nebenläufigkeit](xref:core/saving/concurrency) auftreten.
+
+> [!WARNING]
+> Sicherungspunkte sind mit mehreren aktiven Resultsets von SQL Server nicht kompatibel und werden nicht verwendet. Wenn während `SaveChanges` ein Fehler auftritt, bleibt die Transaktion möglicherweise in einem unbekannten Zustand.
 
 Es ist auch möglich, Sicherungspunkte wie bei Transaktionen manuell zu verwalten. Im folgenden Beispiel wird ein Sicherungspunkt innerhalb einer Transaktion erstellt und bei einem Fehler ein Rollback dahin ausgeführt:
 
