@@ -4,12 +4,12 @@ description: Verfolgen der EF Core Leistung und Diagnostizieren von Anomalien mi
 author: roji
 ms.date: 11/17/2020
 uid: core/logging-events-diagnostics/event-counters
-ms.openlocfilehash: 46acfe82d8aeb7d16146bae0cc2cd4ff733e2831
-ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
+ms.openlocfilehash: 73d360b266db3d3252defbf4a4035c0eb430e22e
+ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/20/2020
-ms.locfileid: "95003688"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97635821"
 ---
 # <a name="event-counters"></a>Ereignis Zähler
 
@@ -77,7 +77,7 @@ Press p to pause, r to resume, q to quit.
 
 Name des Leistungsindikators                          | BESCHREIBUNG
 ------------------------------------- | ----
-Aktive dbkontexte                     | Die Anzahl der aktiven, nicht verworfenen dbcontext-Instanzen, die sich derzeit in der Anwendung befinden. Wenn diese Anzahl kontinuierlich zunimmt, liegt möglicherweise ein Leck vor, da dbcontext-Instanzen nicht ordnungsgemäß verworfen werden. Beachten Sie, dass bei aktiviertem [Kontext Pooling](xref:core/miscellaneous/context-pooling) diese Anzahl in einem Pool zusammengefasste dbcontext-Instanzen enthält, die derzeit nicht verwendet werden.
+Aktive dbkontexte                     | Die Anzahl der aktiven, nicht verworfenen dbcontext-Instanzen, die sich derzeit in der Anwendung befinden. Wenn diese Anzahl kontinuierlich zunimmt, liegt möglicherweise ein Leck vor, da dbcontext-Instanzen nicht ordnungsgemäß verworfen werden. Beachten Sie, dass bei aktiviertem [Kontext Pooling](xref:core/performance/advanced-performance-topics#dbcontext-pooling) diese Anzahl in einem Pool zusammengefasste dbcontext-Instanzen enthält, die derzeit nicht verwendet werden.
 Vorgangs Fehler bei Ausführungs Strategie | Gibt an, wie oft ein Daten Bank Vorgang nicht ausgeführt werden konnte. Wenn eine Wiederholungs Ausführungs Strategie aktiviert ist, schließt dies jeden einzelnen Fehler innerhalb mehrerer Versuche desselben Vorgangs ein. Dies kann zum erkennen vorübergehender Probleme mit Ihrer-Infrastruktur verwendet werden.
 Fehler bei optimistischer Parallelität       | Die Häufigkeit, mit der aufgrund eines vollständigen Parallelitäts `SaveChanges` Fehlers ein Fehler aufgetreten ist, da die Daten im Datenspeicher geändert wurden, seit Sie vom Code geladen wurden. Dies entspricht einem, das ausgelöst <xref:Microsoft.EntityFrameworkCore.DbUpdateConcurrencyException> wird.
 Abfragen                               | Die Anzahl der ausgeführten Abfragen.

@@ -4,12 +4,12 @@ description: Konfigurieren von Beziehungen zwischen Entitäts Typen bei Verwendu
 author: AndriySvyryd
 ms.date: 10/01/2020
 uid: core/modeling/relationships
-ms.openlocfilehash: 716c034bd73d831996b727da18c2c1f83dd55290
-ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
+ms.openlocfilehash: 9c8fe469c4e0b8714a36624ff5bcf236e5b1652f
+ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/20/2020
-ms.locfileid: "95003262"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97635743"
 ---
 # <a name="relationships"></a>Beziehungen
 
@@ -149,7 +149,7 @@ Wenn Sie nur über eine Navigations Eigenschaft verfügen, gibt es Parameter los
 ### <a name="configuring-navigation-properties"></a>Konfigurieren von Navigations Eigenschaften
 
 > [!NOTE]
-> Diese Funktion wurde in EF Core 5,0 eingeführt.
+> Dieses Feature wurde in EF Core 5.0 eingeführt.
 
 Nachdem die Navigations Eigenschaft erstellt wurde, müssen Sie Sie möglicherweise weiter konfigurieren.
 
@@ -301,11 +301,13 @@ CREATE TABLE [PostTag] (
 );
 ```
 
-Intern erstellt EF einen Entitätstyp, der die jointabelle darstellt, die als joinentitätstyp bezeichnet wird. Hierfür gibt es keinen spezifischen CLR-Typ, der verwendet werden kann `Dictionary<string, object>` . Mehrere m:n-Beziehungen können im Modell vorhanden sein. Daher muss dem joinentitätstyp ein eindeutiger Name zugewiesen werden, in diesem Fall `PostTag` . Die Funktion, die dies zulässt, wird als Entitätstyp mit gemeinsamer Typbezeichnung bezeichnet.
+Intern erstellt EF einen Entitätstyp, der die jointabelle darstellt, die als joinentitätstyp bezeichnet wird. `Dictionary<string, object>` wird verwendet, um eine beliebige Kombination von Fremdschlüssel Eigenschaften zu verarbeiten. Weitere Informationen finden Sie unter Eigenschaften Behälter- [Entitäts Typen](shadow-properties.md#property-bag-entity-types) . Mehrere m:n-Beziehungen können im Modell vorhanden sein. Daher muss dem joinentitätstyp ein eindeutiger Name zugewiesen werden, in diesem Fall `PostTag` . Die Funktion, die dies zulässt, wird als Entitätstyp mit gemeinsamer Typbezeichnung bezeichnet.
 
-Die m:n-Navigationen werden als "Skip Navigationen" bezeichnet, da Sie den joinentitätstyp effektiv überspringen. Wenn Sie die Massen Konfiguration verwenden, können alle Skip-Navigationen aus abgerufen werden `GetSkipNavigations` .
+Die m:n-Navigationen werden als "Skip Navigationen" bezeichnet, da Sie den joinentitätstyp effektiv überspringen. Wenn Sie die Massen Konfiguration verwenden, können alle Skip-Navigationen aus abgerufen werden <xref:Microsoft.EntityFrameworkCore.Metadata.IEntityType.GetSkipNavigations%2A> .
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/ManyToManyShared.cs?name=Metadata)]
+
+#### <a name="join-entity-type-configuration"></a>Join-Entitätstyp Konfiguration
 
 Es kommt häufig vor, dass die Konfiguration auf den Join-Entitätstyp angewendet wird. Diese Aktion kann mithilfe von durchgeführt werden `UsingEntity` .
 
@@ -319,8 +321,16 @@ Zusätzliche Daten können im Join-Entitätstyp gespeichert werden, aber hierfü
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/ManyToManyPayload.cs?name=ManyToManyPayload)]
 
+#### <a name="joining-relationships-configuration"></a>Beziehungs Konfiguration beitreten
+
+EF verwendet 2 1-zu-viele-Beziehungen für den Join-Entitätstyp, um die m:n-Beziehung darzustellen. Sie können diese Beziehungen in den `UsingEntity` Argumenten konfigurieren.
+
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/ManyToManyShared.cs?name=Components)]
+
 > [!NOTE]
 > Die Möglichkeit zum Konfigurieren von m:n-Beziehungen wurde in EF Core 5,0 eingeführt. verwenden Sie für die vorherige Version die folgende Vorgehensweise.
+
+#### <a name="indirect-many-to-many-relationships"></a>Indirekte m:n-Beziehungen
 
 Sie können auch eine m:n-Beziehung darstellen, indem Sie einfach den Join-Entitätstyp hinzufügen und zwei separate 1: n-Beziehungen Mapping.
 

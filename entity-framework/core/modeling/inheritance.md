@@ -4,12 +4,12 @@ description: Konfigurieren der Vererbung von Entitäts Typen mit Entity Framewor
 author: AndriySvyryd
 ms.date: 10/01/2020
 uid: core/modeling/inheritance
-ms.openlocfilehash: 33429bbc4a9941ff8ea98a8f99cc652c8ea26455
-ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
+ms.openlocfilehash: 11bd653a53767aa732790b1222da1beff8ad26a9
+ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/20/2020
-ms.locfileid: "95003626"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97635756"
 ---
 # <a name="inheritance"></a>Vererbung
 
@@ -90,6 +90,9 @@ CREATE TABLE [RssBlogs] (
 > [!NOTE]
 > Wenn die PRIMARY KEY-Einschränkung umbenannt wird, wird der neue Name auf alle Tabellen angewendet, die der Hierarchie zugeordnet sind. in zukünftigen EF-Versionen wird das Umbenennen der Einschränkung nur für eine bestimmte Tabelle ermöglicht, wenn das [Problem 19970](https://github.com/dotnet/efcore/issues/19970) behoben ist.
 
-Wenn Sie die Massen Konfiguration verwenden, können Sie den Spaltennamen für eine bestimmte Tabelle abrufen, indem Sie aufrufen <xref:Microsoft.EntityFrameworkCore.RelationalPropertyExtensions.GetColumnName%2A> .
+Wenn Sie die Massen Konfiguration verwenden, können Sie den Spaltennamen für eine bestimmte Tabelle abrufen, indem Sie aufrufen <xref:Microsoft.EntityFrameworkCore.RelationalPropertyExtensions.GetColumnName(Microsoft.EntityFrameworkCore.Metadata.IProperty,Microsoft.EntityFrameworkCore.Metadata.StoreObjectIdentifier@)> .
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/TPTConfiguration.cs?name=Metadata&highlight=10)]
+
+> [!WARNING]
+> In vielen Fällen zeigt TPT im Vergleich zu TPH eine geringere Leistung. [Weitere Informationen finden](xref:core/performance/modeling-for-performance#inheritance-mapping)Sie in der Dokumentation zur Leistung.

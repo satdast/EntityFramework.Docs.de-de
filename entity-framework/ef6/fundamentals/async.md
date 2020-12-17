@@ -4,12 +4,12 @@ description: Asynchrone Abfrage und Speicherung in Entity Framework 6
 author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/fundamentals/async
-ms.openlocfilehash: 2b5f6f868cbf2e0699a943cf68c8568550f4ba36
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: 77204f56e4dca63322c8ae2e1117318262f16f83
+ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92063399"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97635730"
 ---
 # <a name="async-query-and-save"></a>Asynchrone Abfrage und Speicherung
 > [!NOTE]
@@ -77,7 +77,7 @@ Wir verwenden den [Code First Workflow](xref:ef6/modeling/code-first/workflows/n
     }
 ```
 
- 
+ 
 
 ## <a name="create-a-synchronous-program"></a>Erstellen eines synchronen Programms
 
@@ -137,32 +137,32 @@ Nachdem wir nun über ein EF-Modell verfügen, schreiben wir Code, der ihn verwe
     }
 ```
 
-Dieser Code Ruft die **performdatabaseoperations** -Methode auf, die einen neuen **Blog** in der Datenbank speichert und dann alle **Blogs** aus der Datenbank abruft und Sie in der **Konsole**ausgibt. Danach schreibt das Programm ein Anführungszeichen in die **Konsole**.
+Dieser Code Ruft die `PerformDatabaseOperations` -Methode auf, die einen neuen **Blog** in der Datenbank speichert und dann alle **Blogs** aus der Datenbank abruft und Sie in der **Konsole** ausgibt. Danach schreibt das Programm ein Anführungszeichen in die **Konsole**.
 
 Da der Code synchron ist, können wir beim Ausführen des Programms den folgenden Ausführungs Ablauf beobachten:
 
-1.  **SaveChanges** beginnt, den neuen **Blog** an die Datenbank zu überbringen.
-2.  **SaveChanges** ist abgeschlossen.
+1.  `SaveChanges` beginnt, den neuen **Blog** an die Datenbank zu überbringen.
+2.  `SaveChanges` Bit
 3.  Die Abfrage für alle **Blogs** wird an die Datenbank gesendet.
 4.  Abfrage Rückgabe und Ergebnisse werden in die **Konsole** geschrieben
 5.  Das Anführungszeichen des Tages wird in die **Konsole** geschrieben.
 
-![Ausgabe synchronisieren](~/ef6/media/syncoutput.png) 
+![Ausgabe synchronisieren](~/ef6/media/syncoutput.png) 
 
- 
+ 
 
 ## <a name="making-it-asynchronous"></a>Asynchrone Erstellung
 
 Nachdem das Programm jetzt betriebsbereit ist, können wir mit der Verwendung der neuen Schlüsselwörter "Async" und "Erwartung" beginnen. Wir haben die folgenden Änderungen an Program.cs vorgenommen.
 
-1.  Zeile 2: die using-Anweisung für den **System. Data. Entity** -Namespace ermöglicht uns den Zugriff auf die EF-Async-Erweiterungs Methoden.
-2.  Zeile 4: mithilfe der using-Anweisung für den **System. Threading. Tasks** -Namespace können wir den **Tasktyp verwenden** .
-3.  Zeile 12 & 18: Wir erfassen als Task, der den Status von **performsomedatabaseoperations** (Zeile 12) überwacht und dann die Ausführung des Programms blockiert, damit diese Aufgabe abgeschlossen wird, sobald die gesamte Arbeit für das Programm abgeschlossen ist (Zeile 18).
-4.  Zeile 25: Wir haben " **performsomedatabaseoperations** " so aktualisiert, dass Sie als " **Async** " gekennzeichnet sind und eine **Aufgabe**zurückgeben.
-5.  Zeile 35: Wir rufen nun die asynchrone Version von SaveChanges auf und warten darauf, dass der Vorgang abgeschlossen ist.
-6.  Zeile 42: Wir rufen jetzt die Async-Version von ToList auf und warten auf das Ergebnis.
+1.  Zeile 2: die using-Anweisung für den- `System.Data.Entity` Namespace ermöglicht uns den Zugriff auf die EF-Async-Erweiterungs Methoden.
+2.  Zeile 4: mithilfe der using-Anweisung für den- `System.Threading.Tasks` Namespace können wir den- `Task` Typ verwenden.
+3.  Zeile 12 & 18: Wir erfassen als Task, der den Fortschritt von `PerformSomeDatabaseOperations` (Zeile 12) überwacht und dann die Ausführung des Programms blockiert, damit diese Aufgabe abgeschlossen ist, sobald die gesamte Arbeit für das Programm abgeschlossen ist (Zeile 18).
+4.  Zeile 25: Wir aktualisieren `PerformSomeDatabaseOperations` , damit Sie als gekennzeichnet werden, `async` und geben zurück `Task` .
+5.  Zeile 35: Wir rufen nun die asynchrone Version von auf und warten darauf, dass der Vorgang `SaveChanges` abgeschlossen ist.
+6.  Zeile 42: Wir rufen nun die asynchrone Version von `ToList` auf und warten auf das Ergebnis.
 
-Eine umfassende Liste der verfügbaren Erweiterungs Methoden im System. Data. Entity-Namespace finden Sie in der queryableextensions-Klasse. *Sie müssen auch "using System. Data. Entity" zu ihren using-Anweisungen hinzufügen.*
+Eine umfassende Liste der verfügbaren Erweiterungs Methoden im- `System.Data.Entity` Namespace finden Sie in der- `QueryableExtensions` Klasse. *Sie müssen auch `using System.Data.Entity` ihren using-Anweisungen hinzufügen.*
 
 ``` csharp
     using System;
@@ -222,18 +222,18 @@ Eine umfassende Liste der verfügbaren Erweiterungs Methoden im System. Data. En
 
 Nun, da der Code asynchron ist, können wir einen anderen Ausführungs Fluss beobachten, wenn wir das Programm ausführen:
 
-1. **SaveChanges** beginnt, den neuen **Blog** an die Datenbank zu überbringen.  
-    *Nachdem der Befehl an die Datenbank gesendet wurde, ist für den aktuell verwalteten Thread keine Compute-Zeit mehr erforderlich. Die **performdatabaseoperations** -Methode gibt zurück (obwohl die Ausführung noch nicht abgeschlossen ist), und der Programmablauf in der Main-Methode wird fortgesetzt.*
+1. `SaveChanges` beginnt, den neuen **Blog** an die Datenbank zu überbringen.  
+    *Nachdem der Befehl an die Datenbank gesendet wurde, ist für den aktuell verwalteten Thread keine Compute-Zeit mehr erforderlich. Die `PerformDatabaseOperations` -Methode gibt zurück (obwohl die Ausführung noch nicht abgeschlossen ist), und der Programmfluss in der Main-Methode wird fortgesetzt.*
 2. **Das Anführungszeichen des Tages wird in die Konsole geschrieben.**  
-    *Da keine weiteren Aufgaben in der Main-Methode durchgeführt werden müssen, wird der verwaltete Thread für den Wait-Vorgang blockiert, bis der Daten Bank Vorgang abgeschlossen ist. Sobald der Vorgang abgeschlossen ist, werden die restlichen **performdatabaseoperations** ausgeführt.*
-3.  **SaveChanges** ist abgeschlossen.  
+    *Da es in der Main-Methode keine weiteren Aufgaben gibt, wird der verwaltete Thread für den- `Wait` aufrufblock blockiert, bis der Daten Bank Vorgang abgeschlossen ist. Sobald der Vorgang abgeschlossen ist, wird der Rest des `PerformDatabaseOperations` ausgeführt.*
+3.  `SaveChanges` Bit  
 4.  Die Abfrage für alle **Blogs** wird an die Datenbank gesendet.  
     *Auch hier kann der verwaltete Thread andere Aufgaben ausführen, während die Abfrage in der Datenbank verarbeitet wird. Da die Ausführung der anderen Ausführung abgeschlossen ist, hält der Thread den Wait-Befehl jedoch nur an.*
 5.  Abfrage Rückgabe und Ergebnisse werden in die **Konsole** geschrieben  
 
-![Asynchrone Ausgabe](~/ef6/media/asyncoutput.png) 
+![Asynchrone Ausgabe](~/ef6/media/asyncoutput.png) 
 
- 
+ 
 
 ## <a name="the-takeaway"></a>Der Schluss
 

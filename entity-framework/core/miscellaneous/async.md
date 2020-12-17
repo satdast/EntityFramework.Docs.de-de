@@ -4,12 +4,12 @@ description: Asynchrones Abfragen und Speichern von Daten mit Entity Framework C
 author: roji
 ms.date: 9/2/2020
 uid: core/miscellaneous/async
-ms.openlocfilehash: cefbe32b34a38ed6d749ef3ddfff210d5db12332
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: d887bf898d741070f3f3d64b3baf0311b0ab2b63
+ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90071899"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97635795"
 ---
 # <a name="asynchronous-programming"></a>Asynchrone Programmierung
 
@@ -23,6 +23,9 @@ Weitere Informationen finden Sie in [der allgemeinen Dokumentation zur asynchron
 
 > [!WARNING]
 > EF Core unterstützt nicht die Ausführung mehrerer paralleler Vorgänge, die auf derselben Kontextinstanz ausgeführt werden. Sie sollten immer auf den Abschluss eines Vorgangs warten, bevor Sie den nächsten starten. In der Regel erfolgt dies für alle asynchronen Vorgänge durch das Schlüsselwort `await`.
+
+> [!WARNING]
+> Bei der asynchronen Implementierung von [Microsoft. Data. SqlClient](https://github.com/dotnet/SqlClient) sind leider einige bekannte Probleme aufgetreten (z. b. [#593](https://github.com/dotnet/SqlClient/issues/593), [#601](https://github.com/dotnet/SqlClient/issues/601)und andere).
 
 > [!NOTE]
 > EF Core übergibt Abbruch Token an den verwendeten zugrunde liegenden Datenbankanbieter (z. b. Microsoft. Data. SqlClient). Diese Token werden möglicherweise nicht berücksichtigt. Informationen hierzu finden Sie in der Dokumentation des Datenbankanbieters.  

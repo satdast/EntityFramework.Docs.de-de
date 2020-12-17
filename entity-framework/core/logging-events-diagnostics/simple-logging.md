@@ -4,17 +4,17 @@ description: Protokollieren von einem EF Core dbcontext mithilfe von logto
 author: ajcvickers
 ms.date: 10/03/2020
 uid: core/logging-events-diagnostics/simple-logging
-ms.openlocfilehash: 274fca39c45c4e2ccfd47f3c4eeb0834e00d18aa
-ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
+ms.openlocfilehash: 076c4b12aa033b51a2b839686c520a76520ee415
+ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/20/2020
-ms.locfileid: "95003509"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97635613"
 ---
 # <a name="simple-logging"></a>Einfache Protokollierung
 
 > [!NOTE]
-> Diese Funktion wurde in EF Core 5,0 eingeführt.
+> Dieses Feature wurde in EF Core 5.0 eingeführt.
 
 > [!TIP]  
 > Sie können [das Beispiel dieses Artikels](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/SimpleLogging) von GitHub herunterladen.
@@ -26,7 +26,7 @@ Die einfache Protokollierung von Entity Framework Core (EF Core) kann verwendet 
 
 ## <a name="configuration"></a>Konfiguration
 
-Der Zugriff auf EF Core-Protokolle ist über Anwendungen jeglichen Typs über die Verwendung von [LogTo](https://github.com/dotnet/efcore/blob/ec3df8fd7e4ea4ebeebfa747619cef37b23ab2c6/src/EFCore/DbContextOptionsBuilder.cs#L135) <!-- Issue #2748 <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.LogTo%2A> --> beim [Konfigurieren einer DbContext-Instanz](xref:core/dbcontext-configuration/index) möglich. Diese Konfiguration erfolgt in der Regel durch ein Überschreiben von <xref:Microsoft.EntityFrameworkCore.DbContext.OnConfiguring%2A?displayProperty=nameWithType>. Beispiel:
+<xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.LogTo%2A>Bei der [Konfiguration einer dbcontext-Instanz](xref:core/dbcontext-configuration/index)kann von jedem Anwendungstyp aus auf EF Core Protokolle zugegriffen werden. Diese Konfiguration erfolgt in der Regel durch ein Überschreiben von <xref:Microsoft.EntityFrameworkCore.DbContext.OnConfiguring%2A?displayProperty=nameWithType>. Beispiel:
 
 <!--
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -188,7 +188,7 @@ Da Kategorien hierarchisch sind, beinhaltet dieses Beispiel mit der `Database` K
 [!code-csharp[CustomFilter](../../../samples/core/Miscellaneous/Logging/SimpleLogging/Program.cs?name=CustomFilter)]
 
 > [!TIP]
-> Das Filtern mit benutzerdefinierten Filtern oder das Verwenden einer der hier gezeigten anderen Optionen ist effizienter als das Filtern im logto-Delegaten. Dies liegt daran, dass die Protokollmeldung nicht einmal erstellt wird, wenn der Filter bestimmt, dass die Nachricht nicht protokolliert werden soll.
+> Das Filtern mit benutzerdefinierten Filtern oder das Verwenden einer der hier gezeigten anderen Optionen ist effizienter als das Filtern im Delegaten `LogTo` . Dies liegt daran, dass die Protokollmeldung nicht einmal erstellt wird, wenn der Filter bestimmt, dass die Nachricht nicht protokolliert werden soll.
 
 ## <a name="configuration-for-specific-messages"></a>Konfiguration für bestimmte Nachrichten
 
@@ -260,14 +260,14 @@ dbug: 10/6/2020 10:52:45.585 RelationalEventId.TransactionCommitted[20202] (Micr
       Committed transaction.
 ```
 
-Dieser Inhalt kann durch Übergeben von Werten von [dbcontextloggeroptions](https://github.com/dotnet/efcore/blob/ec3df8fd7e4ea4ebeebfa747619cef37b23ab2c6/src/EFCore/Diagnostics/DbContextLoggerOptions.cs#L15) angepasst werden. <!-- Issue #2748 <xref:Microsoft.EntityFrameworkCore.Diagnostics.DbContextLoggerOptions> -->, wie in den folgenden Abschnitten dargestellt.
+Dieser Inhalt kann durch Übergeben von Werten von angepasst werden <xref:Microsoft.EntityFrameworkCore.Diagnostics.DbContextLoggerOptions> , wie in den folgenden Abschnitten dargestellt.
 
 > [!TIP]
 > Verwenden Sie [Microsoft. Extensions. Logging](/aspnet/core/fundamentals/logging) , um die Protokoll Formatierung besser steuern zu können.
 
 ### <a name="using-utc-time"></a>Verwenden der UTC-Zeit
 
-Standardmäßig sind timestamnps für den lokalen Verbrauch während des Debuggens konzipiert. Verwenden `DbContextLoggerOptions.DefaultWithUtcTime` Sie stattdessen, um die Kultur unabhängigen UTC-Zeitstempel zu verwenden, aber behalten Sie alle anderen Werte bei. Beispiel:
+Standardmäßig sind Zeitstempel für die lokale Nutzung während des Debuggens konzipiert. Verwenden <xref:Microsoft.EntityFrameworkCore.Diagnostics.DbContextLoggerOptions.DefaultWithUtcTime?displayProperty=nameWithType> Sie stattdessen, um die Kultur unabhängigen UTC-Zeitstempel zu verwenden, aber behalten Sie alle anderen Werte bei. Beispiel:
 
 <!--
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -295,7 +295,7 @@ dbug: 2020-10-06T17:55:39.0351684Z RelationalEventId.TransactionCommitted[20202]
 
 ### <a name="single-line-logging"></a>Einzeilige Protokollierung
 
-Manchmal ist es hilfreich, genau eine Zeile pro Protokollnachricht zu erhalten. Dies kann durch aktiviert werden `DbContextLoggerOptions.SingleLine` . Beispiel:
+Manchmal ist es hilfreich, genau eine Zeile pro Protokollnachricht zu erhalten. Dies kann durch aktiviert werden <xref:Microsoft.EntityFrameworkCore.Diagnostics.DbContextLoggerOptions.SingleLine?displayProperty=nameWithType> . Beispiel:
 
 <!--
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -316,7 +316,7 @@ dbug: 10/6/2020 10:52:45.725 RelationalEventId.TransactionCommitted[20202] (Micr
 
 ### <a name="other-content-options"></a>Weitere Inhalts Optionen
 
-Andere Flags in [dbcontextloggeroptions](https://github.com/dotnet/efcore/blob/ec3df8fd7e4ea4ebeebfa747619cef37b23ab2c6/src/EFCore/Diagnostics/DbContextLoggerOptions.cs#L15) <!-- Issue #2748 <xref:Microsoft.EntityFrameworkCore.Diagnostics.DbContextLoggerOptions> --> kann verwendet werden, um die Menge der im Protokoll enthaltenen Metadaten zu kürzen. Dies kann in Verbindung mit der einzeiligen Protokollierung nützlich sein. Beispiel:
+Andere Flags in <xref:Microsoft.EntityFrameworkCore.Diagnostics.DbContextLoggerOptions> können verwendet werden, um die Menge der im Protokoll enthaltenen Metadaten zu kürzen. Dies kann in Verbindung mit der einzeiligen Protokollierung nützlich sein. Beispiel:
 
 <!--
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

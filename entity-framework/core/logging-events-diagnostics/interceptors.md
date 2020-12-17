@@ -4,12 +4,12 @@ description: Abfangen von Daten Bank Vorgängen und anderen Ereignissen
 author: ajcvickers
 ms.date: 10/08/2020
 uid: core/logging-events-diagnostics/interceptors
-ms.openlocfilehash: 22d860a083c5ece9be109be630c3ce01dd742bf2
-ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
+ms.openlocfilehash: fba9f3d02b8cf504c2cadca8eb844cd3e818e915
+ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/20/2020
-ms.locfileid: "95003410"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97635808"
 ---
 # <a name="interceptors"></a>Interceptors
 
@@ -401,7 +401,7 @@ Beachten Sie aus der Protokoll Ausgabe, dass die Anwendung die zwischengespeiche
 > [!TIP]  
 > Sie können [das Beispiel für das SaveChanges-Interceptor](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/SaveChangesInterception) von GitHub herunterladen.
 
-<xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> und <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync%2A> Abfang Punkte werden vom `ISaveChangesInterceptor` <!-- Issue #2748 --> Schnittstelle implementiert. Wie bei anderen Interceptors ist das `SaveChangesInterceptor` <!-- Issue #2748 --> die Basisklasse mit No-op-Methoden wird zur einfacheren Bereitstellung bereitgestellt.
+<xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> und <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync%2A> Abfang Punkte werden von der- <xref:Microsoft.EntityFrameworkCore.Diagnostics.ISaveChangesInterceptor> Schnittstelle definiert. Wie bei anderen Interceptors wird die <xref:Microsoft.EntityFrameworkCore.Diagnostics.SaveChangesInterceptor> Basisklasse ohne op-Methoden als praktische Bereitstellung bereitgestellt.
 
 > [!TIP]
 > Interceptors sind leistungsstark. In vielen Fällen kann es jedoch einfacher sein, die SaveChanges-Methode außer Kraft zu setzen oder die [.net-Ereignisse für SaveChanges](xref:core/logging-events-diagnostics/events) zu verwenden, die in dbcontext verfügbar gemacht werden.
@@ -502,7 +502,7 @@ Die allgemeine Idee für die Überwachung mit dem Interceptor lautet wie folgt:
 * Wenn SaveChanges erfolgreich ist, wird die Überwachungs Meldung aktualisiert, um die erfolgreiche Ausführung anzuzeigen.
 * Wenn SaveChanges fehlschlägt, wird die Überwachungs Meldung aktualisiert, um den Fehler anzuzeigen.
 
-Die erste Phase wird behandelt, bevor Änderungen an die Datenbank gesendet werden, indem außer Kraft setzungen von `ISaveChangesInterceptor.SavingChanges` <!-- Issue #2748 -->  und `ISaveChangesInterceptor.SavingChangesAsync`<!-- Issue #2748 -->.
+Die erste Phase wird behandelt, bevor Änderungen mithilfe von außer Kraft setzungen von und an die Datenbank gesendet werden <xref:Microsoft.EntityFrameworkCore.Diagnostics.ISaveChangesInterceptor.SavingChanges%2A?displayProperty=nameWithType> <xref:Microsoft.EntityFrameworkCore.Diagnostics.ISaveChangesInterceptor.SavingChangesAsync%2A?displayProperty=nameWithType> .
 
 <!--
     public async ValueTask<InterceptionResult<int>> SavingChangesAsync(
@@ -538,7 +538,7 @@ Die erste Phase wird behandelt, bevor Änderungen an die Datenbank gesendet werd
 -->
 [!code-csharp[SavingChanges](../../../samples/core/Miscellaneous/SaveChangesInterception/AuditingInterceptor.cs?name=SavingChanges)]
 
-Durch das Überschreiben von Synchronisierungs-und asynchronen Methoden wird sichergestellt, dass die Überwachung unabhängig davon erfolgt, ob SaveChanges oder savechangesasync aufgerufen werden. Beachten Sie auch, dass die asynchrone Überladung selbst eine nicht blockierende asynchrone e/a für die Überwachungs Datenbank ausführen kann. Möglicherweise möchten Sie von der Sync SavingChanges-Methode eine Ausnahme auslösen, um sicherzustellen, dass alle Datenbank-e/a-Vorgänge Async sind. Dies erfordert, dass die Anwendung immer savechangesasync aufruft und nie SaveChanges.
+Durch Überschreiben von Synchronisierungs-und asynchronen Methoden wird sichergestellt, dass die Überwachung unabhängig davon erfolgt, ob `SaveChanges` oder `SaveChangesAsync` aufgerufen werden Beachten Sie auch, dass die asynchrone Überladung selbst eine nicht blockierende asynchrone e/a für die Überwachungs Datenbank ausführen kann. Möglicherweise möchten Sie die Synchronisierungsmethode auslösen, `SavingChanges` um sicherzustellen, dass alle Datenbank-e/a Async ist. Dies erfordert, dass die Anwendung immer `SaveChangesAsync` und nie aufruft `SaveChanges` .
 
 #### <a name="the-audit-message"></a>Die Überwachungs Meldung
 
@@ -598,7 +598,7 @@ Das Ergebnis ist eine `SaveChangesAudit` Entität mit einer Auflistung von `Enti
 
 #### <a name="detecting-success"></a>Erkennen von Erfolg
 
-Die Audit-Entität wird auf dem Interceptor gespeichert, sodass wieder auf Sie zugegriffen werden kann, sobald SaveChanges entweder erfolgreich ist oder fehlschlägt. Für Erfolg: `ISaveChangesInterceptor.SavedChanges` <!-- Issue #2748 --> oder `ISaveChangesInterceptor.SavedChangesAsync` <!-- Issue #2748 -->  wird aufgerufen.
+Die Audit-Entität wird auf dem Interceptor gespeichert, sodass wieder auf Sie zugegriffen werden kann, sobald SaveChanges entweder erfolgreich ist oder fehlschlägt. Für Erfolg <xref:Microsoft.EntityFrameworkCore.Diagnostics.ISaveChangesInterceptor.SavedChanges%2A?displayProperty=nameWithType> wird oder <xref:Microsoft.EntityFrameworkCore.Diagnostics.ISaveChangesInterceptor.SavedChangesAsync%2A?displayProperty=nameWithType> aufgerufen.
 
 <!--
     public int SavedChanges(SaveChangesCompletedEventData eventData, int result)
@@ -638,7 +638,7 @@ Die Audit-Entität wird an den Überwachungs Kontext angefügt, da Sie bereits i
 
 #### <a name="detecting-failure"></a>Erkennen von Fehlern
 
-Der Fehler wird auf die gleiche Weise wie bei Erfolg behandelt, aber im `ISaveChangesInterceptor.SaveChangesFailed` <!-- Issue #2748 --> oder `ISaveChangesInterceptor.SaveChangesFailedAsync` <!-- Issue #2748 --> -Methode. Die Ereignisdaten enthalten die ausgelöste Ausnahme.
+Fehler werden auf die gleiche Weise behandelt wie Erfolg, aber in der- <xref:Microsoft.EntityFrameworkCore.Diagnostics.ISaveChangesInterceptor.SaveChangesFailed%2A?displayProperty=nameWithType> Methode oder der- <xref:Microsoft.EntityFrameworkCore.Diagnostics.ISaveChangesInterceptor.SaveChangesFailedAsync%2A?displayProperty=nameWithType> Methode. Die Ereignisdaten enthalten die ausgelöste Ausnahme.
 
 <!--
     public void SaveChangesFailed(DbContextErrorEventData eventData)

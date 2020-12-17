@@ -4,21 +4,21 @@ description: Durch EF Core definierte .net-Ereignisse
 author: ajcvickers
 ms.date: 10/15/2020
 uid: core/logging-events-diagnostics/events
-ms.openlocfilehash: 21ee65b7a2c5155c4d5b45350f3f47bdcee22921
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 51c0bba5cf25e1d9ddd1fd9aebea50b9a03481a3
+ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94431252"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97635691"
 ---
 # <a name="net-events-in-ef-core"></a>.Net-Ereignisse in EF Core
 
 > [!TIP]  
 > Sie können [das Ereignis Beispiel](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/Events) von GitHub herunterladen.
 
-Entity Framework Core (EF Core) macht [.net-Ereignisse](/dotnet/standard/events/) verfügbar, die als Rückrufe fungieren, wenn bestimmte Dinge im EF Core Code auftreten. Ereignisse sind einfacher als [Interceptors](xref:core/logging-events-diagnostics/interceptors) und ermöglichen eine flexiblere Registrierung. Sie sind jedoch nur synchron und können daher keine nicht blockierende asynchrone e/a-Vorgänge durchführen.
+Entity Framework Core (EF Core) macht [.net-Ereignisse](/dotnet/standard/events/) verfügbar, die als Rückrufe fungieren, wenn bestimmte Dinge im EF Core Code auftreten. Ereignisse sind einfacher als [Interceptors](xref:core/logging-events-diagnostics/interceptors) und ermöglichen eine flexiblere Registrierung. Sie sind jedoch nur synchron und können daher keine nicht blockierenden asynchronen E/A-Vorgänge durchführen.
 
-Ereignisse werden pro `DbContext` Instanz registriert. Verwenden Sie einen [diagnoselistener](xref:core/logging-events-diagnostics/diagnostic-listeners) , um dieselben Informationen, aber für alle dbcontext-Instanzen im Prozess zu erhalten.
+Ereignisse werden pro `DbContext` Instanz registriert. Verwenden Sie einen [Diagnoselistener](xref:core/logging-events-diagnostics/diagnostic-listeners), um dieselben Informationen abzurufen, jedoch für alle DbContext-Instanzen im Prozess.
 
 ## <a name="events-raised-by-ef-core"></a>Ereignisse, die von EF Core ausgelöst werden
 
@@ -26,9 +26,9 @@ Die folgenden Ereignisse werden von EF Core ausgelöst:
 
 | Ereignis | Eingeführt in Version | Wenn ausgelöst
 |:------|--------------------|-------
-| `DbContext.SavingChanges` <!-- Issue #2748 -->| 5.0 | Am Anfang von <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> oder <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync%2A>
-| `DbContext.SavedChanges`  <!-- Issue #2748 -->| 5.0 | Am Ende eines erfolgreichen <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> oder <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync%2A>
-| `DbContext.SaveChangesFailed`  <!-- Issue #2748 -->| 5.0 | Am Ende einer fehlgeschlagenen <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> oder <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync%2A>
+| <xref:Microsoft.EntityFrameworkCore.DbContext.SavingChanges?displayProperty=nameWithType> | 5.0 | Am Anfang von <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> oder <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync%2A>
+| <xref:Microsoft.EntityFrameworkCore.DbContext.SavedChanges?displayProperty=nameWithType> | 5.0 | Am Ende eines erfolgreichen <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> oder <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync%2A>
+| <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChangesFailed?displayProperty=nameWithType> | 5.0 | Am Ende einer fehlgeschlagenen <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> oder <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync%2A>
 | <xref:Microsoft.EntityFrameworkCore.ChangeTracking.ChangeTracker.Tracked?displayProperty=nameWithType> | 2.1 | Wenn eine Entität vom Kontext nachverfolgt wird
 | <xref:Microsoft.EntityFrameworkCore.ChangeTracking.ChangeTracker.StateChanged?displayProperty=nameWithType> | 2.1 | Wenn eine nach verfolgte Entität ihren Zustand ändert
 
