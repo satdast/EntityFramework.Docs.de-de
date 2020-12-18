@@ -4,12 +4,12 @@ description: Muster für das Erstellen und Verwalten von DbContext-Instanzen mit
 author: ajcvickers
 ms.date: 11/07/2020
 uid: core/dbcontext-configuration/index
-ms.openlocfilehash: f4d51e10555844b5a14000a464f86d3440d5749e
-ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
+ms.openlocfilehash: 93d5942fbc81ee0ae9aeff0c5c8b9e20b160d512
+ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/20/2020
-ms.locfileid: "95003288"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97635391"
 ---
 # <a name="dbcontext-lifetime-configuration-and-initialization"></a>DbContext-Lebensdauer, -Konfiguration und -Initialisierung
 
@@ -42,7 +42,7 @@ Eine typische Arbeitseinheit bei Verwendung von Entity Framework Core (EF Core)
 
 In vielen Webanwendungen entspricht jede HTTP-Anforderung einer einzelnen Arbeitseinheit. Dies bewirkt, dass das Anbinden der Kontextlebensdauer an die Anforderung für Webanwendungen eine gute Standardeinstellung ist.
 
-ASP.NET Core-Anwendungen werden [mithilfe von Abhängigkeitsinjektion konfiguriert](/aspnet/core/fundamentals/startup). EF Core kann dieser Konfiguration mithilfe von <xref:Microsoft.Extensions.DependencyInjection.EntityFrameworkServiceCollectionExtensions.AddDbContext%2A> in der [`ConfigurureServices`](/aspnet/core/fundamentals/startup#the-configureservices-method)-Methode von `Startup.cs` hinzugefügt werden. Beispiel:
+ASP.NET Core-Anwendungen werden [mithilfe von Abhängigkeitsinjektion konfiguriert](/aspnet/core/fundamentals/startup). EF Core kann dieser Konfiguration mithilfe von <xref:Microsoft.Extensions.DependencyInjection.EntityFrameworkServiceCollectionExtensions.AddDbContext%2A> in der [`ConfigureServices`](/aspnet/core/fundamentals/startup#the-configureservices-method)-Methode von `Startup.cs` hinzugefügt werden. Beispiel:
 
 <!--
         public void ConfigureServices(IServiceCollection services)

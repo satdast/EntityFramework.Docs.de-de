@@ -4,12 +4,12 @@ description: Dokumentation für den Datenbankanbieter, mit der Entity Framework 
 author: AndriySvyryd
 ms.date: 10/09/2020
 uid: core/providers/cosmos/index
-ms.openlocfilehash: b167f53515799efdaead232f44ad5eab37fb0b14
-ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
+ms.openlocfilehash: 8bfce78465e8194544562c3ecac4d3398ca91265
+ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/20/2020
-ms.locfileid: "95003600"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97635587"
 ---
 # <a name="ef-core-azure-cosmos-db-provider"></a>EF Core Azure Cosmos DB-Anbieter
 
@@ -103,12 +103,12 @@ Standardmäßig erstellt EF Core Container, bei denen der Partitionsschlüssel a
 > [!NOTE]
 >Als Eigenschaft des Partitionsschlüssels kann ein beliebiger Typ verwendet werden, sofern dieser in [eine Zeichenfolge konvertiert wird](xref:core/modeling/value-conversions).
 
-Nach der Konfiguration muss die Partitionsschlüsseleigenschaft immer einen Wert aufweisen, der nicht NULL ist. Eine Abfrage kann durch Hinzufügen eines `WithPartitionKey`-Aufrufs einer einzelnen Partition zugewiesen werden.
+Nach der Konfiguration muss die Partitionsschlüsseleigenschaft immer einen Wert aufweisen, der nicht NULL ist. Eine Abfrage kann durch Hinzufügen eines <xref:Microsoft.EntityFrameworkCore.CosmosQueryableExtensions.WithPartitionKey%2A>-Aufrufs einer einzelnen Partition zugewiesen werden.
 
 [!code-csharp[PartitionKey](../../../../samples/core/Cosmos/ModelBuilding/Sample.cs?name=PartitionKey&highlight=15)]
 
 > [!NOTE]
-> `WithPartitionKey` wurde in EF Core 5.0 eingeführt.
+> <xref:Microsoft.EntityFrameworkCore.CosmosQueryableExtensions.WithPartitionKey%2A> wurde in EF Core 5.0 eingeführt.
 
 Im Allgemeinen wird empfohlen, den Partitionsschlüssel dem Primärschlüssel hinzuzufügen, da dies die Serversemantik am besten widerspiegelt und einige Optimierungen ermöglicht, z. B. in `FindAsync`.
 
@@ -212,10 +212,10 @@ Dieser JSON-Code ergibt sich:
 > [!NOTE]
 > Nebenläufigkeit für ETags wurde in EF Core 5.0 eingeführt.
 
-Rufen Sie `UseETagConcurrency` auf, um einen Entitätstyp so zu konfigurieren, dass die [optimistische Nebenläufigkeit](xref:core/modeling/concurrency) verwendet wird. Dieser Aufruf erstellt eine `_etag`-Eigenschaft als [Schatteneigenschaft](xref:core/modeling/shadow-properties), und diese Eigenschaft wird als Nebenläufigkeitstoken festgelegt.
+Rufen Sie <xref:Microsoft.EntityFrameworkCore.CosmosEntityTypeBuilderExtensions.UseETagConcurrency%2A> auf, um einen Entitätstyp so zu konfigurieren, dass die [optimistische Nebenläufigkeit](xref:core/modeling/concurrency) verwendet wird. Dieser Aufruf erstellt eine `_etag`-Eigenschaft als [Schatteneigenschaft](xref:core/modeling/shadow-properties), und diese Eigenschaft wird als Nebenläufigkeitstoken festgelegt.
 
 [!code-csharp[Main](../../../../samples/core/Cosmos/ModelBuilding/OrderContext.cs?name=ETag)]
 
-Wenn Sie das Auflösen von Nebenläufigkeitsfehlern vereinfachen möchten, können Sie das ETag mithilfe von `IsETagConcurrency` einer CLR-Eigenschaft zuordnen.
+Wenn Sie das Auflösen von Nebenläufigkeitsfehlern vereinfachen möchten, können Sie das ETag mithilfe von <xref:Microsoft.EntityFrameworkCore.CosmosPropertyBuilderExtensions.IsETagConcurrency%2A> einer CLR-Eigenschaft zuordnen.
 
 [!code-csharp[Main](../../../../samples/core/Cosmos/ModelBuilding/OrderContext.cs?name=ETagProperty)]
