@@ -10,12 +10,12 @@ metadata:
   author: WadePickett
   ms.author: wpickett
   ms.date: 04/15/2020
-  ms.openlocfilehash: 71b676ca7890997c84aa6c80cfdbcf934406d7a9
-  ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
+  ms.openlocfilehash: 644d3ad0654e8d97835d4a2e6ee3d2ba3cbaf370
+  ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
   ms.translationtype: HT
   ms.contentlocale: de-DE
-  ms.lasthandoff: 11/20/2020
-  ms.locfileid: "95003678"
+  ms.lasthandoff: 12/17/2020
+  ms.locfileid: "97635834"
 highlightedContent:
   items:
   - title: Entity Framework Core
@@ -136,6 +136,8 @@ additionalContent:
         text: Asynchrone Abfragen
       - url: core/querying/raw-sql.md
         text: Unformatierte SQL-Abfragen
+      - url: core/querying/user-defined-function-mapping.md
+        text: Zuordnung benutzerdefinierter Funktionen
       - url: core/querying/filters.md
         text: Globale Abfragefilter
     - title: Verwalten von Datenbankschemas
