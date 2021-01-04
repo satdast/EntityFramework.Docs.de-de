@@ -4,12 +4,12 @@ description: Übersicht über Protokollierung, Ereignisse, Interceptors und Diag
 author: ajcvickers
 ms.date: 10/01/2020
 uid: core/logging-events-diagnostics/index
-ms.openlocfilehash: 2c44772b22112645f85cf0bffa680bc510ea5afb
-ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
+ms.openlocfilehash: d85a506167661523bf70b62d3a075a6248180d11
+ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/20/2020
-ms.locfileid: "95003522"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97635678"
 ---
 # <a name="overview-of-logging-and-interception"></a>Übersicht über Protokollierung und Abfangfunktionen
 
@@ -34,7 +34,7 @@ In der folgenden Tabelle finden Sie eine kurze Übersicht über die Unterschiede
 > [!NOTE]
 > Dieses Feature wurde in EF Core 5.0 eingeführt.
 
-Der Zugriff auf EF Core-Protokolle ist über Anwendungen jeglichen Typs über die Verwendung von [LogTo](https://github.com/dotnet/efcore/blob/ec3df8fd7e4ea4ebeebfa747619cef37b23ab2c6/src/EFCore/DbContextOptionsBuilder.cs#L135) <!-- Issue #2748 <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.LogTo%2A> --> beim [Konfigurieren einer DbContext-Instanz](xref:core/dbcontext-configuration/index) möglich. Diese Konfiguration erfolgt in der Regel durch ein Überschreiben von <xref:Microsoft.EntityFrameworkCore.DbContext.OnConfiguring%2A?displayProperty=nameWithType>. Beispiel:
+Beim [Konfigurieren einer DbContext-Instanz](xref:core/dbcontext-configuration/index) kann von jedem Anwendungstyp aus mithilfe von <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.LogTo%2A> auf EF Core-Protokolle zugegriffen werden. Diese Konfiguration erfolgt in der Regel durch ein Überschreiben von <xref:Microsoft.EntityFrameworkCore.DbContext.OnConfiguring%2A?displayProperty=nameWithType>. Beispiel:
 
 <!--
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
