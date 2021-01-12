@@ -4,19 +4,19 @@ description: Verwenden von SQLite zum Testen einer Entity Framework Core Anwendu
 author: ajcvickers
 ms.date: 04/24/2020
 uid: core/testing/sqlite
-ms.openlocfilehash: ebfcd36bf236cb83cab8683a8c31d4752d437998
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: da2504cfe7997a10a5ee8c447b1c6ef00dd02369
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94431270"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98129056"
 ---
 # <a name="using-sqlite-to-test-an-ef-core-application"></a>Verwenden von SQLite zum Testen einer EF Core Anwendung
 
 > [!WARNING]
 > Die Verwendung von SQLite kann eine effektive Möglichkeit zum Testen einer EF Core Anwendung sein.
 > Es können jedoch Probleme auftreten, wenn SQLite anders als andere Datenbanksysteme verhält.
-> Eine Erläuterung der Probleme und Kompromisse finden Sie unter [Testen von Code, der EF Core verwendet](xref:core/testing/index) .  
+> Eine Erläuterung der Probleme und Kompromisse finden Sie unter [Testen von Code, der EF Core verwendet](xref:core/testing/index) .
 
 In diesem Dokument werden die im Beispiel eingeführten Konzepte verwendet, die veranschaulichen, [wie Sie Anwendungen testen, die EF Core verwenden](xref:core/testing/testing-sample).
 Die hier gezeigten Codebeispiele stammen aus diesem Beispiel.
@@ -33,7 +33,7 @@ Dies ist mit EF Core leicht zu verwenden, solange Sie die in-Memory Database Leb
 * Die Datenbank wird gelöscht, wenn die Verbindung mit der Datenbank geschlossen wird.
 
 EF Core wird eine bereits geöffnete Verbindung verwendet, wenn eine vorhanden ist, und versucht nie, Sie zu schließen.
-Der Schlüssel für die Verwendung von EF Core mit einer in-Memory SQLite-Datenbank besteht also darin, die Verbindung zu öffnen, bevor Sie Sie an EF übergibt.  
+Der Schlüssel für die Verwendung von EF Core mit einer in-Memory SQLite-Datenbank besteht also darin, die Verbindung zu öffnen, bevor Sie Sie an EF übergibt.
 
 Das [Beispiel](xref:core/testing/testing-sample) erreicht dies mit folgendem Code:
 

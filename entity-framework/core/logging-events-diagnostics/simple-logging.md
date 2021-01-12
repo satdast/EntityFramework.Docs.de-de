@@ -4,20 +4,20 @@ description: Protokollieren von einem EF Core dbcontext mithilfe von logto
 author: ajcvickers
 ms.date: 10/03/2020
 uid: core/logging-events-diagnostics/simple-logging
-ms.openlocfilehash: 076c4b12aa033b51a2b839686c520a76520ee415
-ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
+ms.openlocfilehash: 5c2dc41122dfa3919d1e6a26b0760883d77ee1a0
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/17/2020
-ms.locfileid: "97635613"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98129212"
 ---
 # <a name="simple-logging"></a>Einfache Protokollierung
 
 > [!NOTE]
 > Dieses Feature wurde in EF Core 5.0 eingeführt.
 
-> [!TIP]  
-> Sie können [das Beispiel dieses Artikels](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/SimpleLogging) von GitHub herunterladen.
+> [!TIP]
+> Sie können [das Beispiel dieses Artikels](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/Logging/SimpleLogging) von GitHub herunterladen.
 
 Die einfache Protokollierung von Entity Framework Core (EF Core) kann verwendet werden, um beim entwickeln und Debuggen von Anwendungen problemlos Protokolle zu erhalten. Für diese Art der Protokollierung ist eine minimale Konfiguration und keine zusätzliche nuget-Pakete erforderlich.
 
@@ -26,7 +26,7 @@ Die einfache Protokollierung von Entity Framework Core (EF Core) kann verwendet 
 
 ## <a name="configuration"></a>Konfiguration
 
-<xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.LogTo%2A>Bei der [Konfiguration einer dbcontext-Instanz](xref:core/dbcontext-configuration/index)kann von jedem Anwendungstyp aus auf EF Core Protokolle zugegriffen werden. Diese Konfiguration erfolgt in der Regel durch ein Überschreiben von <xref:Microsoft.EntityFrameworkCore.DbContext.OnConfiguring%2A?displayProperty=nameWithType>. Beispiel:
+Beim [Konfigurieren einer DbContext-Instanz](xref:core/dbcontext-configuration/index) kann von jedem Anwendungstyp aus mithilfe von <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.LogTo%2A> auf EF Core-Protokolle zugegriffen werden. Diese Konfiguration erfolgt in der Regel durch ein Überschreiben von <xref:Microsoft.EntityFrameworkCore.DbContext.OnConfiguring%2A?displayProperty=nameWithType>. Beispiel:
 
 <!--
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -62,7 +62,7 @@ Die- <xref:System.Console.WriteLine%2A?displayProperty=nameWithType> Methode wir
 Zum Schreiben in eine Datei muss ein <xref:System.IO.StreamWriter> oder ein ähnliches für die Datei erstellt werden. Die- <xref:System.IO.StreamWriter.WriteLine%2A> Methode kann dann wie in den anderen Beispielen oben verwendet werden. Stellen Sie sicher, dass die Datei ordnungsgemäß geschlossen wird, indem Sie den Writer verwerfen, wenn der Kontext verworfen wird. Beispiel:
 
 <!--
-    private readonly StreamWriter _logStream = new StreamWriter("mylog.txt", append: true); 
+    private readonly StreamWriter _logStream = new StreamWriter("mylog.txt", append: true);
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         => optionsBuilder.LogTo(_logStream.WriteLine);
@@ -72,7 +72,7 @@ Zum Schreiben in eine Datei muss ein <xref:System.IO.StreamWriter> oder ein ähn
         base.Dispose();
         _logStream.Dispose();
     }
-    
+
     public override async ValueTask DisposeAsync()
     {
         await base.DisposeAsync();
@@ -130,7 +130,7 @@ Jede EF Core Log-Nachricht wird einer Ebene zugewiesen, die von der-Aufzählung 
 
 Jeder Protokollmeldung wird eine zugewiesen <xref:Microsoft.Extensions.Logging.EventId> . Auf diese IDs kann von der- <xref:Microsoft.EntityFrameworkCore.Diagnostics.CoreEventId> Klasse oder der- <xref:Microsoft.EntityFrameworkCore.Diagnostics.RelationalEventId> Klasse für relationale spezifische Nachrichten zugegriffen werden. Ein Datenbankanbieter kann auch anbieterspezifische IDs in einer ähnlichen Klasse aufweisen. Beispielsweise <xref:Microsoft.EntityFrameworkCore.Diagnostics.SqlServerEventId> für den SQL Server-Anbieter.
 
-`LogTo` kann so konfiguriert werden, dass nur die einer oder mehreren Ereignis-IDs zugeordneten Nachrichten protokolliert werden. Zum Protokollieren von Meldungen für den Kontext, der initialisiert oder verworfen wird, z. b.:  
+`LogTo` kann so konfiguriert werden, dass nur die einer oder mehreren Ereignis-IDs zugeordneten Nachrichten protokolliert werden. Zum Protokollieren von Meldungen für den Kontext, der initialisiert oder verworfen wird, z. b.:
 
 <!--
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -143,7 +143,7 @@ Jeder Protokollmeldung wird eine zugewiesen <xref:Microsoft.Extensions.Logging.E
 
 Jede Protokollmeldung wird einer benannten hierarchischen Protokollierungs Kategorie zugewiesen. Die Kategorien lauten:
 
-| Kategorie                                             | Meldungen
+| Category                                             | Nachrichten
 |:-----------------------------------------------------|-------------------------------------------------
 | Microsoft.EntityFrameworkCore                        | Alle EF Core Meldungen
 | Microsoft. entityframeworkcore. Database               | Alle Daten Bank Interaktionen

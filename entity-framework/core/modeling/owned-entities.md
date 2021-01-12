@@ -4,12 +4,12 @@ description: Konfigurieren eigener Entitäts Typen oder Aggregate bei Verwendung
 author: AndriySvyryd
 ms.date: 11/06/2019
 uid: core/modeling/owned-entities
-ms.openlocfilehash: 36f756b70c9ad1727c48b5c789fd324c9dc6cd29
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 0cd6bfd25d4462509a3e6c112b892d652d29e45e
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94429436"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98128627"
 ---
 # <a name="owned-entity-types"></a>Nicht eigenständige Entitätstypen
 
@@ -48,7 +48,7 @@ Weitere Informationen finden Sie im [vollständigen Beispiel Projekt](https://gi
 
 ## <a name="implicit-keys"></a>Implizite Schlüssel
 
-`OwnsOne`Besitzer Typen, die mit einer Verweis Navigation konfiguriert oder ermittelt wurden, haben immer eine eins-zu-eins-Beziehung mit dem Besitzer und benötigen daher keine eigenen Schlüsselwerte, da die Fremdschlüssel Werte eindeutig sind. Im vorherigen Beispiel muss der- `StreetAddress` Typ keine Schlüsseleigenschaft definieren.  
+`OwnsOne`Besitzer Typen, die mit einer Verweis Navigation konfiguriert oder ermittelt wurden, haben immer eine eins-zu-eins-Beziehung mit dem Besitzer und benötigen daher keine eigenen Schlüsselwerte, da die Fremdschlüssel Werte eindeutig sind. Im vorherigen Beispiel muss der- `StreetAddress` Typ keine Schlüsseleigenschaft definieren.
 
 Um zu verstehen, wie EF Core diese Objekte verfolgt, ist es hilfreich zu wissen, dass ein Primärschlüssel als [Schatten Eigenschaft](xref:core/modeling/shadow-properties) für den eigenen Typ erstellt wird. Der Wert des Schlüssels einer Instanz des eigenen Typs ist mit dem Wert des Schlüssels der Besitzer Instanz identisch.
 
@@ -130,7 +130,7 @@ Beachten Sie außerdem den-Befehl `Navigation` . In efcore 5,0 können Navigatio
 
 Das obige Modell ist dem folgenden Datenbankschema zugeordnet:
 
-![Sceenshot des Datenbankmodells für eine Entität, die geschpostete Verweise enthält](_static/owned-entities-nested.png)
+![Screenshot des Datenbankmodells für Entitäten, die geclusterte Verweise enthalten](_static/owned-entities-nested.png)
 
 ## <a name="storing-owned-types-in-separate-tables"></a>Speichern von eigenen Typen in separaten Tabellen
 

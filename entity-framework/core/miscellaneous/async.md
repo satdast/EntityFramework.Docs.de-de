@@ -4,12 +4,12 @@ description: Asynchrones Abfragen und Speichern von Daten mit Entity Framework C
 author: roji
 ms.date: 9/2/2020
 uid: core/miscellaneous/async
-ms.openlocfilehash: d887bf898d741070f3f3d64b3baf0311b0ab2b63
-ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
+ms.openlocfilehash: 52b3ac20a50babbed6937ebe3365ac1947dcaef1
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/17/2020
-ms.locfileid: "97635795"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98128575"
 ---
 # <a name="asynchronous-programming"></a>Asynchrone Programmierung
 
@@ -28,7 +28,7 @@ Weitere Informationen finden Sie in [der allgemeinen Dokumentation zur asynchron
 > Bei der asynchronen Implementierung von [Microsoft. Data. SqlClient](https://github.com/dotnet/SqlClient) sind leider einige bekannte Probleme aufgetreten (z. b. [#593](https://github.com/dotnet/SqlClient/issues/593), [#601](https://github.com/dotnet/SqlClient/issues/601)und andere).
 
 > [!NOTE]
-> EF Core übergibt Abbruch Token an den verwendeten zugrunde liegenden Datenbankanbieter (z. b. Microsoft. Data. SqlClient). Diese Token werden möglicherweise nicht berücksichtigt. Informationen hierzu finden Sie in der Dokumentation des Datenbankanbieters.  
+> EF Core übergibt Abbruch Token an den verwendeten zugrunde liegenden Datenbankanbieter (z. b. Microsoft. Data. SqlClient). Diese Token werden möglicherweise nicht berücksichtigt. Informationen hierzu finden Sie in der Dokumentation des Datenbankanbieters.
 
 ## <a name="async-linq-operators"></a>Asynchrone LINQ-Operatoren
 

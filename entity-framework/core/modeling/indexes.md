@@ -4,35 +4,66 @@ description: Konfigurieren von Indizes in einem Entity Framework Core Modell
 author: roji
 ms.date: 12/16/2019
 uid: core/modeling/indexes
-ms.openlocfilehash: 3a89f1ae9727dcd8f086e915e666721572636314
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: ab81b108c4ff518cf98b7e835da3553c0c41efed
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90071406"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98128536"
 ---
 # <a name="indexes"></a>Indizes
 
-Indizes sind ein gängiges Konzept in vielen Daten speichern. Während Ihre Implementierung im Datenspeicher variieren kann, werden Sie verwendet, um Suchvorgänge auf Grundlage einer Spalte (oder einer Gruppe von Spalten) effizienter zu gestalten.
+Indizes sind ein gängiges Konzept in vielen Daten speichern. Während Ihre Implementierung im Datenspeicher variieren kann, werden Sie verwendet, um Suchvorgänge auf Grundlage einer Spalte (oder einer Gruppe von Spalten) effizienter zu gestalten. Weitere Informationen zur guten Index Verwendung finden Sie im [Abschnitt "Indizes](xref:core/performance/efficient-querying#use-indexes-properly) " in der Leistungsdokumentation.
 
-Indizes können nicht mithilfe von Daten Anmerkungen erstellt werden. Sie können die fließende API verwenden, um einen Index für eine einzelne Spalte wie folgt anzugeben:
+Sie können einen Index für eine Spalte wie folgt angeben:
+
+## <a name="data-annotations"></a>[Daten Anmerkungen](#tab/data-annotations)
+
+[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Index.cs?name=Index&highlight=1)]
+
+> [!NOTE]
+> Das Konfigurieren von Indizes über Daten Anmerkungen wurde in EF Core 5,0 eingeführt.
+
+## <a name="fluent-api"></a>[Fluent-API](#tab/fluent-api)
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Index.cs?name=Index&highlight=4)]
 
-Sie können einen Index auch über mehr als eine Spalte angeben:
-
-[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/IndexComposite.cs?name=Composite&highlight=4)]
+***
 
 > [!NOTE]
 > Gemäß der Konvention wird ein Index in jeder Eigenschaft (oder einem Satz von Eigenschaften) erstellt, die als Fremdschlüssel verwendet wird.
 >
-> EF Core unterstützt nur einen Index pro eindeutigem Satz von Eigenschaften. Wenn Sie die fließende API verwenden, um einen Index für eine Gruppe von Eigenschaften zu konfigurieren, für die bereits ein Index definiert wurde (entweder durch Konvention oder vorherige Konfiguration), ändern Sie die Definition des Indexes. Dies ist hilfreich, wenn Sie einen von der Konvention erstellten Index weiter konfigurieren möchten.
+> EF Core unterstützt nur einen Index pro eindeutigem Satz von Eigenschaften. Wenn Sie einen Index für eine Gruppe von Eigenschaften konfigurieren, für die bereits ein Index festgelegt wurde (entweder durch Konvention oder vorherige Konfiguration), ändern Sie die Definition des Indexes. Dies ist hilfreich, wenn Sie einen von der Konvention erstellten Index weiter konfigurieren möchten.
+
+## <a name="composite-index"></a>Zusammengesetzter Index
+
+Ein Index kann sich auch über mehrere Spalten erstrecken:
+
+### <a name="data-annotations"></a>[Daten Anmerkungen](#tab/data-annotations)
+
+[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/IndexComposite.cs?name=Composite&highlight=1)]
+
+### <a name="fluent-api"></a>[Fluent-API](#tab/fluent-api)
+
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/IndexComposite.cs?name=Composite&highlight=4)]
+
+**_
+
+Indizes für mehrere Spalten, auch bekannt als _composite Indizes *, beschleunigen Abfragen, die nach Index Spalten filtern, aber auch Abfragen, die nur nach den *ersten* Spalten filtern, die vom Index abgedeckt werden. Weitere Informationen finden Sie in der Dokumentation zur [Leistung](xref:core/performance/efficient-querying#use-indexes-properly) .
 
 ## <a name="index-uniqueness"></a>Index Eindeutigkeit
 
 Standardmäßig sind Indizes nicht eindeutig: mehrere Zeilen dürfen für den Spalten Satz des Indexes die gleichen Werte aufweisen. Sie können einen Index wie folgt eindeutig gestalten:
 
+### <a name="data-annotations"></a>[Daten Anmerkungen](#tab/data-annotations)
+
+[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/IndexUnique.cs?name=IndexUnique&highlight=1)]
+
+### <a name="fluent-api"></a>[Fluent-API](#tab/fluent-api)
+
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/IndexUnique.cs?name=IndexUnique&highlight=5)]
+
+***
 
 Wenn Sie versuchen, mehr als eine Entität mit denselben Werten für den Spalten Satz des Indexes einzufügen, wird eine Ausnahme ausgelöst.
 
@@ -40,9 +71,17 @@ Wenn Sie versuchen, mehr als eine Entität mit denselben Werten für den Spalten
 
 Gemäß der Konvention werden Indizes, die in einer relationalen Datenbank erstellt werden, benannt `IX_<type name>_<property name>` . Wird bei zusammengesetzten Indizes `<property name>` zu einer durch Trennzeichen getrennten Liste von Eigenschaftsnamen.
 
-Mit der flüssigen API können Sie den Namen des Indexes festlegen, der in der Datenbank erstellt wurde:
+Sie können den Namen des Indexes festlegen, der in der Datenbank erstellt wurde:
+
+### <a name="data-annotations"></a>[Daten Anmerkungen](#tab/data-annotations)
+
+[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/IndexName.cs?name=IndexName&highlight=1)]
+
+### <a name="fluent-api"></a>[Fluent-API](#tab/fluent-api)
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/IndexName.cs?name=IndexName&highlight=5)]
+
+***
 
 ## <a name="index-filter"></a>Index Filter
 

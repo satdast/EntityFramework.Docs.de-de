@@ -4,12 +4,12 @@ description: Leistungs Leit Faden für effiziente Abfragen mithilfe von Entity F
 author: roji
 ms.date: 12/1/2020
 uid: core/performance/efficient-querying
-ms.openlocfilehash: acd5388745e74a42925c8500ce610aef83e75384
-ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
+ms.openlocfilehash: e945a1e0f734d62ce8948904bcbe819455fcbefa
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/17/2020
-ms.locfileid: "97657714"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98128484"
 ---
 # <a name="efficient-querying"></a>Effiziente Abfragen
 
@@ -136,7 +136,7 @@ info: Microsoft.EntityFrameworkCore.Database.Command[20101]
 
 Was geht da vor? Warum werden all diese Abfragen für die oben genannten einfachen Schleifen gesendet? Bei Lazy Loading werden die Beiträge eines Blogs nur (verzögert) geladen, wenn auf seine Posts-Eigenschaft zugegriffen wird. Folglich löst jede Iterationen im Inneren foreach eine zusätzliche Datenbankabfrage in einem eigenen Roundtrip aus. Nachdem die erste Abfrage alle Blogs geladen hat, haben wir daher eine weitere Abfrage *pro Blog*, die alle Beiträge lädt. Dies wird manchmal als " *N + 1* "-Problem bezeichnet und kann zu erheblichen Leistungsproblemen führen.
 
-Angenommen, wir benötigen alle Blogbeiträge, aber es ist sinnvoll, stattdessen Eager Loading zu verwenden. Wir können den [include](xref:core/querying/related-data/eager#eager-loading) -Operator verwenden, um das Laden auszuführen, aber da wir nur die URLs der Blogs benötigen (und nur die [benötigten Elemente laden](xref:core/performance/efficient-updating#project-only-properties-you-need)sollten). Wir verwenden stattdessen eine Projektion:
+Angenommen, wir benötigen alle Blogbeiträge, aber es ist sinnvoll, stattdessen Eager Loading zu verwenden. Wir können den [include](xref:core/querying/related-data/eager#eager-loading) -Operator verwenden, um das Laden auszuführen, aber da wir nur die URLs der Blogs benötigen (und nur die [benötigten Elemente laden](xref:core/performance/efficient-querying#project-only-properties-you-need)sollten). Wir verwenden stattdessen eine Projektion:
 
 [!code-csharp[Main](../../../samples/core/Performance/Program.cs#EagerlyLoadRelatedAndProject)]
 
@@ -147,7 +147,7 @@ Dadurch wird EF Core alle Blogs zusammen mit ihren Beiträgen in einer einzigen 
 
 ## <a name="buffering-and-streaming"></a>Pufferung und Streaming
 
-Die Pufferung bezieht sich auf das Laden aller Abfrageergebnisse in den Arbeitsspeicher, während Streaming bedeutet, dass EF die Anwendung jedes Mal ein einzelnes Ergebnis übergibt, ohne dass das gesamte Resultset im Arbeitsspeicher enthalten ist. Im Prinzip werden die Arbeitsspeicher Anforderungen einer streaminganfrage korrigiert. Sie sind identisch, unabhängig davon, ob die Abfrage eine Zeile oder 1000 zurückgibt. eine Puffer Abfrage hingegen erfordert mehr Arbeitsspeicher, je mehr Zeilen zurückgegeben werden. Bei Abfragen, die umfangreiche Resultsets ergeben, kann dies ein wichtiger Leistungsfaktor sein.
+Die Pufferung bezieht sich auf das Laden aller Abfrageergebnisse in den Arbeitsspeicher, während Streaming bedeutet, dass EF die Anwendung jedes Mal ein einzelnes Ergebnis übergibt und nie das gesamte Resultset im Arbeitsspeicher enthält. Im Prinzip werden die Arbeitsspeicher Anforderungen einer streaminganfrage korrigiert. Sie sind identisch, unabhängig davon, ob die Abfrage eine Zeile oder 1000 zurückgibt. eine Puffer Abfrage hingegen erfordert mehr Arbeitsspeicher, je mehr Zeilen zurückgegeben werden. Bei Abfragen, die umfangreiche Resultsets ergeben, kann dies ein wichtiger Leistungsfaktor sein.
 
 Ob ein Abfrage Puffer oder Datenströme von der Auswertung abhängig sind:
 
@@ -208,3 +208,7 @@ Weitere Informationen finden Sie auf der Seite zu [Async-Programmierung](xref:co
 
 > [!WARNING]
 > Vermeiden Sie das Kombinieren von synchronem und asynchronem Code in derselben Anwendung. es ist sehr einfach, Probleme mit einem geringfügigen Thread Pool zu beheben.
+
+## <a name="additional-resources"></a>Zusätzliche Ressourcen
+
+Im [Abschnitt Leistung](xref:core/querying/null-comparisons#writing-performant-queries) der Seite mit der NULL-Vergleichs Dokumentation finden Sie einige bewährte Methoden beim Vergleich von Werten, die NULL-Werte zulassen.

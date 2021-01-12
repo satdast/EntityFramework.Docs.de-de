@@ -4,12 +4,12 @@ description: Arbeiten mit Verweis Typen, die NULL-Werte zulassen, bei Verwendung
 author: roji
 ms.date: 09/09/2019
 uid: core/miscellaneous/nullable-reference-types
-ms.openlocfilehash: 648b79576838d2ba424b5216d5ad6811912f8ccb
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 749fef8560c6777dcb2314126b11d2dd6a3562f8
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94429714"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98128562"
 ---
 # <a name="working-with-nullable-reference-types"></a>Arbeiten mit Verweis Typen, die NULL-Werte zulassen
 
@@ -76,4 +76,4 @@ Wenn Sie dies sehr viel tun und die fraglichen Entitäts Typen vorwiegend (oder 
 ## <a name="limitations"></a>Einschränkungen
 
 * Reverse Engineering unterstützt zurzeit keine [c# 8-Verweis Typen (NULL-Werte zulassen)](/dotnet/csharp/tutorials/nullable-reference-types): EF Core generiert immer c#-Code, der voraussetzt, dass das Feature deaktiviert ist. Beispielsweise werden Textspalten, die NULL-Werte zulassen, als Eigenschaft mit dem Typ `string` erstellt, nicht `string?` mit der fließenden API oder den Daten Anmerkungen, mit denen konfiguriert wird, ob eine Eigenschaft erforderlich ist. Sie können den Gerüst Code bearbeiten und durch c#-Anmerkungen zur NULL-Zulässigkeit ersetzen. Die Gerüstbau Unterstützung für Verweis Typen, die NULL-Werte zulassen, wird von Issue [#15520](https://github.com/dotnet/efcore/issues/15520)
-* Die öffentliche API-Oberfläche von EF Core wurde noch nicht für NULL-Zulässigkeit mit Anmerkungen versehen (die öffentliche API ist "Null-schräg"), was manchmal umständlich ist, wenn die NRT-Funktion aktiviert ist. Dies umfasst insbesondere die asynchronen LINQ-Operatoren, die von EF Core verfügbar gemacht werden, z. b. [firstordefaultasync](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.firstordefaultasync#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_FirstOrDefaultAsync__1_System_Linq_IQueryable___0__System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_Threading_CancellationToken_). Wir planen, dies für die Version 5,0 zu beheben.
+* Die öffentliche API-Oberfläche von EF Core wurde noch nicht für NULL-Zulässigkeit mit Anmerkungen versehen (die öffentliche API ist "Null-schräg"), was manchmal umständlich ist, wenn die NRT-Funktion aktiviert ist. Dies umfasst insbesondere die asynchronen LINQ-Operatoren, die von EF Core verfügbar gemacht werden, z. b. [firstordefaultasync](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.firstordefaultasync#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_FirstOrDefaultAsync__1_System_Linq_IQueryable___0__System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_Threading_CancellationToken_). Wir planen, dies für die Version 6,0 zu beheben.

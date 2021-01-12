@@ -4,23 +4,23 @@ description: Verwenden von diagnosticlistener für den globalen Verbrauch von EF
 author: ajcvickers
 ms.date: 10/16/2020
 uid: core/logging-events-diagnostics/diagnostic-listeners
-ms.openlocfilehash: a2a962ac714cf80c42c269cee3770699aaa4c0c9
-ms.sourcegitcommit: 42bbf7f68e92c364c5fff63092d3eb02229f568d
+ms.openlocfilehash: afb80aa8f05f70761e423f58653f681938079858
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/11/2020
-ms.locfileid: "94503227"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98129264"
 ---
 # <a name="using-diagnostic-listeners-in-ef-core"></a>Verwenden von diagnoselistener in EF Core
 
-> [!TIP]  
+> [!TIP]
 > Sie können [das Beispiel dieses Artikels](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/DiagnosticListeners) von GitHub herunterladen.
 
-Diagnoselistener ermöglichen das Lauschen auf EF Core Ereignis, das im aktuellen .NET-Prozess auftritt. Die- <xref:System.Diagnostics.DiagnosticListener> Klasse ist Teil eines [allgemeinen Mechanismus in .net](https://github.com/dotnet/runtime/blob/master/src/libraries/System.Diagnostics.DiagnosticSource/src/DiagnosticSourceUsersGuide.md) zum Abrufen von Diagnoseinformationen von ausgelaufenden Anwendungen.
+Diagnoselistener ermöglichen das Lauschen auf EF Core-Ereignisse, die im aktuellen .NET-Prozess auftreten. Die- <xref:System.Diagnostics.DiagnosticListener> Klasse ist Teil eines [allgemeinen Mechanismus in .net](https://github.com/dotnet/runtime/blob/master/src/libraries/System.Diagnostics.DiagnosticSource/src/DiagnosticSourceUsersGuide.md) zum Abrufen von Diagnoseinformationen von ausgelaufenden Anwendungen.
 
-Diagnoselistener sind nicht geeignet, um Ereignisse aus einer einzelnen dbcontext-Instanz zu erhalten. EF Core [Interceptors](xref:core/logging-events-diagnostics/interceptors) ermöglichen den Zugriff auf dieselben Ereignisse mit pro-Kontext-Registrierung.
+Diagnoselistener sind nicht geeignet, um Ereignisse aus einer einzelnen DbContext-Instanz abzurufen. EF Core [Interceptors](xref:core/logging-events-diagnostics/interceptors) ermöglichen den Zugriff auf dieselben Ereignisse mit pro-Kontext-Registrierung.
 
-Diagnoselistener sind nicht für die Protokollierung konzipiert. Verwenden Sie für die Protokollierung die [einfache Protokollierung](xref:core/logging-events-diagnostics/simple-logging) oder [Microsoft. Extensions. Logging](xref:core/logging-events-diagnostics/extensions-logging) .
+Diagnoselistener sind nicht für Protokollierung konzipiert. Verwenden Sie für die Protokollierung die [einfache Protokollierung](xref:core/logging-events-diagnostics/simple-logging) oder [Microsoft. Extensions. Logging](xref:core/logging-events-diagnostics/extensions-logging) .
 
 ## <a name="example-observing-diagnostic-events"></a>Beispiel: beobachten von Diagnose Ereignissen
 
@@ -29,10 +29,10 @@ Das Auflösen von EF Core Ereignissen ist ein zweistufiger Prozess. Zuerst muss 
 <!--
 public class DiagnosticObserver : IObserver<DiagnosticListener>
 {
-    public void OnCompleted() 
+    public void OnCompleted()
         => throw new NotImplementedException();
-    
-    public void OnError(Exception error) 
+
+    public void OnError(Exception error)
         => throw new NotImplementedException();
 
     public void OnNext(DiagnosticListener value)
@@ -60,10 +60,10 @@ Zweitens wird ein neuer Schlüsselwert Beobachter erstellt, um die eigentlichen 
 <!--
 public class KeyValueObserver : IObserver<KeyValuePair<string, object>>
 {
-    public void OnCompleted() 
+    public void OnCompleted()
         => throw new NotImplementedException();
-    
-    public void OnError(Exception error) 
+
+    public void OnError(Exception error)
         => throw new NotImplementedException();
 
     public void OnNext(KeyValuePair<string, object> value)
@@ -105,12 +105,12 @@ Das [Beispiel](https://github.com/dotnet/EntityFramework.Docs/tree/master/sample
         #region RegisterDiagnosticListener
         DiagnosticListener.AllListeners.Subscribe(new DiagnosticObserver());
         #endregion
-        
+
         using (var context = new BlogsContext())
         {
             context.Database.EnsureDeleted();
             context.Database.EnsureCreated();
-            
+
             context.Add(
                 new Blog
                 {

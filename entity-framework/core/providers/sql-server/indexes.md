@@ -4,12 +4,12 @@ description: Spezifische Index Features für den Entity Framework Core SQL Serve
 author: roji
 ms.date: 9/1/2020
 uid: core/providers/sql-server/indexes
-ms.openlocfilehash: 66b4e3ce5ab1d4da855c106a6a2d2e75c43081f7
-ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
+ms.openlocfilehash: 42411a562b4741ba39b4eb855bb84c66e100456b
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/20/2020
-ms.locfileid: "95003159"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98129160"
 ---
 # <a name="index-features-specific-to-the-entity-framework-core-sql-server-provider"></a>Spezifische Index Features für den Entity Framework Core SQL Server-Anbieter
 
@@ -25,10 +25,13 @@ Sie können einen Index oder Schlüssel so konfigurieren, dass er wie folgt grup
 
 [!code-csharp[ClusteredIndex](../../../../samples/core/SqlServer/Indexes/ClusteredIndexContext.cs?name=ClusteredIndex)]
 
+> [!NOTE]
+> SQL Server unterstützt nur einen gruppierten Index pro Tabelle, und der Primärschlüssel ist standardmäßig gruppiert. Wenn Sie einen gruppierten Index für eine nicht Schlüssel Spalte erstellen möchten, müssen Sie den Schlüssel explizit als nicht gruppierten Schlüssel festlegen.
+
 ## <a name="fill-factor"></a>Füllfaktor
 
 > [!NOTE]
-> Diese Funktion wurde in EF Core 5,0 eingeführt.
+> Dieses Feature wurde in EF Core 5.0 eingeführt.
 
 Die Füllfaktor Option Index wird für die Feinabstimmung der Speicherung und Leistung von Indexdaten bereitgestellt. Weitere Informationen finden [Sie in der SQL Server-Dokumentation zum Füllfaktor](/sql/relational-databases/indexes/specify-fill-factor-for-an-index).
 

@@ -4,12 +4,12 @@ description: Beispiel, das zeigt, wie eine Datenbank zwischen mehreren Tests gem
 author: ajcvickers
 ms.date: 04/25/2020
 uid: core/testing/sharing-databases
-ms.openlocfilehash: 95b756c80b983356a07fd836aa1b02f2835e6629
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 7a90a144271d5c34e9d5043aa439f84db805c6af
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94431224"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98128835"
 ---
 # <a name="sharing-databases-between-tests"></a>Freigeben von Datenbanken zwischen Tests
 
@@ -29,7 +29,7 @@ Dies erfordert Folgendes:
 
 * Sicheres Freigeben von Objekten zwischen Tests
 * Wenn das Test Framework Tests parallel ausführt
-* So halten Sie die Datenbank für jeden Test in einem sauberen Zustand  
+* So halten Sie die Datenbank für jeden Test in einem sauberen Zustand
 
 ## <a name="the-fixture"></a>Die Fixierung
 
@@ -65,7 +65,7 @@ Dadurch wird sichergestellt, dass die Datenbank mit dem aktuellen EF-Modell übe
 Die Datenbankverbindung wird verworfen, wenn die Fixierung verworfen wird.
 Sie können auch das Löschen der Testdatenbank an dieser Stelle in Erwägung gezogen.
 Dies erfordert jedoch zusätzliche Sperren und eine Verweis Zählung, wenn die Fixierung von mehreren Test Klassen gemeinsam genutzt wird.
-Außerdem ist es häufig hilfreich, dass die Testdatenbank weiterhin zum Debuggen von fehlgeschlagenen Tests verfügbar ist.  
+Außerdem ist es häufig hilfreich, dass die Testdatenbank weiterhin zum Debuggen von fehlgeschlagenen Tests verfügbar ist.
 
 ## <a name="using-the-fixture"></a>Verwenden der Fixierung
 

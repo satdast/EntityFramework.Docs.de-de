@@ -4,18 +4,18 @@ description: Konfigurieren von Beziehungen zwischen Entitäts Typen bei Verwendu
 author: AndriySvyryd
 ms.date: 10/01/2020
 uid: core/modeling/relationships
-ms.openlocfilehash: 9c8fe469c4e0b8714a36624ff5bcf236e5b1652f
-ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
+ms.openlocfilehash: 2bc17365adb802f2e813077731ae70c68f8e3be3
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/17/2020
-ms.locfileid: "97635743"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98129173"
 ---
 # <a name="relationships"></a>Beziehungen
 
 Eine Beziehung definiert, wie zwei Entitäten miteinander in Beziehung stehen. In einer relationalen Datenbank wird dies durch eine FOREIGN KEY-Einschränkung repräsentiert.
 
-> [!NOTE]  
+> [!NOTE]
 > Die meisten Beispiele in diesem Artikel verwenden eine 1: n-Beziehung, um die Konzepte zu veranschaulichen. Beispiele für 1:1-und m:n-Beziehungen finden Sie im Abschnitt [andere Beziehungsmuster](#other-relationship-patterns) am Ende des Artikels.
 
 ## <a name="definition-of-terms"></a>Definition von Begriffen
@@ -37,7 +37,7 @@ Es gibt eine Reihe von Begriffen, die zum Beschreiben von Beziehungen verwendet 
   * **Verweis Navigations Eigenschaft:** Eine Navigations Eigenschaft, die einen Verweis auf eine einzelne verknüpfte Entität enthält.
 
   * **Umgekehrte Navigations Eigenschaft:** Bei der Erörterung einer bestimmten Navigations Eigenschaft bezieht sich dieser Begriff auf die Navigations Eigenschaft am anderen Ende der Beziehung.
-  
+
 * **Selbst verweisende Beziehung:** Eine Beziehung, in der die abhängigen und die Prinzipal Entitäts Typen identisch sind.
 
 Der folgende Code zeigt eine 1: n-Beziehung zwischen `Blog` und. `Post`
@@ -62,7 +62,7 @@ Der folgende Code zeigt eine 1: n-Beziehung zwischen `Blog` und. `Post`
 
 Standardmäßig wird eine Beziehung erstellt, wenn eine Navigations Eigenschaft für einen Typ erkannt wird. Eine Eigenschaft wird als Navigations Eigenschaft betrachtet, wenn der Typ, auf den Sie verweist, nicht vom aktuellen Datenbankanbieter als Skalartyp zugeordnet werden kann.
 
-> [!NOTE]  
+> [!NOTE]
 > Die von der Konvention ermittelten Beziehungen richten sich immer nach dem Primärschlüssel der Prinzipal Entität. Um einen alternativen Schlüssel als Ziel zu verwenden, muss mithilfe der flüssigen API eine zusätzliche Konfiguration durchgeführt werden.
 
 ### <a name="fully-defined-relationships"></a>Vollständig definierte Beziehungen
@@ -178,7 +178,7 @@ Mit den Daten Anmerkungen können Sie konfigurieren, welche Eigenschaft als Frem
 
 [!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Relationships/ForeignKey.cs?name=ForeignKey&highlight=17)]
 
-> [!TIP]  
+> [!TIP]
 > Die-Anmerkung `[ForeignKey]` kann für jede Navigations Eigenschaft in der Beziehung platziert werden. Die Navigations Eigenschaft in der abhängigen Entitäts Klasse muss nicht verwendet werden.
 
 > [!NOTE]
@@ -218,7 +218,7 @@ Wenn Sie möchten, dass der Fremdschlüssel auf eine andere Eigenschaft als den 
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/CompositePrincipalKey.cs?name=CompositePrincipalKey&highlight=11)]
 
-> [!WARNING]  
+> [!WARNING]
 > Die Reihenfolge, in der Sie die Prinzipal Schlüsseleigenschaften angeben, muss mit der Reihenfolge identisch sein, in der Sie für den Fremdschlüssel angegeben werden.
 
 ---
@@ -250,7 +250,7 @@ Eine zu 1 Beziehung hat eine Verweis Navigations Eigenschaft auf beiden Seiten. 
 
 [!code-csharp[Main](../../../samples/core/Modeling/Conventions/Relationships/OneToOne.cs?name=OneToOne&highlight=6,15-16)]
 
-> [!NOTE]  
+> [!NOTE]
 > EF wählt eine der Entitäten aus, die abhängig von der Fähigkeit, eine Fremdschlüssel Eigenschaft zu erkennen, abhängig ist. Wenn die falsche Entität als abhängig ausgewählt wird, können Sie diese mithilfe der flüssigen API korrigieren.
 
 Beim Konfigurieren der Beziehung mit der flüssigen API verwenden Sie die `HasOne` -Methode und die- `WithOne` Methode.
