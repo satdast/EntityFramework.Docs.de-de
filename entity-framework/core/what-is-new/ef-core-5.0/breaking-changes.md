@@ -4,12 +4,12 @@ description: Vollständige Liste der in Entity Framework Core 5.0 eingeführten
 author: bricelam
 ms.date: 11/07/2020
 uid: core/what-is-new/ef-core-5.0/breaking-changes
-ms.openlocfilehash: e2537dbc1d5dba48450bd0fea7712054ba2fa622
-ms.sourcegitcommit: 42bbf7f68e92c364c5fff63092d3eb02229f568d
+ms.openlocfilehash: 7a13c9a6f6bd299991c379ec490480e1fbb4ba46
+ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/11/2020
-ms.locfileid: "94503175"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97635470"
 ---
 # <a name="breaking-changes-in-ef-core-50"></a>Breaking Changes in EF Core 5.0
 
@@ -29,10 +29,13 @@ Die folgenden API-Änderungen und Behavior Changes können dazu führen, dass vo
 | [Cosmos: GetPropertyName und SetPropertyName wurden umbenannt](#cosmos-metadata)                                                          | Niedrig        |
 | [Wert-Generatoren werden aufgerufen, wenn der Entitätszustand von „Getrennt“ in „Unverändert“, „Aktualisiert“ oder „Gelöscht“ geändert wird](#non-added-generation) | Niedrig        |
 | [IMigrationsModelDiffer verwendet jetzt IRelationalModel](#relational-model)                                                                 | Niedrig        |
+| [ToView() wird von Migrationen anders verarbeitet](#toview)                                                                              | Niedrig        |
+| [ToTable(null) markiert den Entitätstyp als nicht einer Tabelle zugeordnet](#totable)                                                              | Niedrig        |
 | [Diskriminatoren sind schreibgeschützt](#read-only-discriminators)                                                                             | Niedrig        |
 | [Anbieterspezifische EF.Functions-Methoden werden für InMemory-Anbieter ausgelöst.](#no-client-methods)                                              | Niedrig        |
+| [IProperty.GetColumnName() gilt ab sofort als veraltet](#getcolumnname-obsolete)                                                                  | Niedrig        |
 | [IndexBuilder.HasName ist mittlerweile veraltet](#index-obsolete)                                                                               | Niedrig        |
-| [Ein Pluarlizer ist nun für den Gerüstbau zurückentwickelter Modelle enthalten](#pluralizer)                                                 | Niedrig        |
+| [Ein Pluralizer ist nun für den Gerüstbau für Modelle mit Reverse Engineering enthalten](#pluralizer)                                                 | Niedrig        |
 | [INavigationBase ersetzt INavigation in einigen APIs zur Unterstützung überspringender Navigationen](#inavigationbase)                                     | Niedrig        |
 | [Einige Abfragen mit korrelierter Sammlung, die ebenfalls `Distinct` oder `GroupBy` verwenden, werden nicht mehr unterstützt](#collection-distinct-groupby) | Niedrig        |
 | [Die Verwendung einer Sammlung abfragbarer Typen in der Projektion wird nicht unterstützt](#queryable-projection)                                          | Niedrig        |
@@ -340,6 +343,64 @@ var hasDifferences = modelDiffer.HasDifferences(
 
 Eine Verbesserung dieser Funktion in Version 6.0 ist geplant ([siehe 22031](https://github.com/dotnet/efcore/issues/22031)).
 
+<a name="toview"></a>
+
+### <a name="toview-is-treated-differently-by-migrations"></a>ToView() wird von Migrationen anders verarbeitet
+
+[Nachverfolgung von Issue #2725](https://github.com/dotnet/efcore/issues/2725)
+
+#### <a name="old-behavior"></a>Altes Verhalten
+
+Das Aufrufen von `ToView(string)` hat dazu geführt, dass Migrationen den Entitätstyp ignorieren und ihn einer Ansicht zuordnen.
+
+#### <a name="new-behavior"></a>Neues Verhalten
+
+`ToView(string)` markiert den Entitätstyp nun als nicht einer Tabelle zugeordnet und ordnet ihn einer Ansicht zu. Dies führt dazu, dass bei der ersten Migration nach einem Upgrade zu EF Core 5 versucht wird, die Standardtabelle für diesen Entitätstyp zu löschen, da er nicht mehr ignoriert wird.
+
+#### <a name="why"></a>Warum?
+
+EF Core ermöglicht es nun, dass ein Entitätstyp gleichzeitig sowohl einer Tabelle als auch einer Ansicht zugeordnet werden kann. `ToView` ist also kein gültiger Indikator dafür mehr, dass der Typ von Migrationen ignoriert werden soll.
+
+#### <a name="mitigations"></a>Gegenmaßnahmen
+
+Verwenden Sie den folgenden Code, um die zugeordnete Tabelle als von Migrationen ausgeschlossen zu markieren:
+
+```csharp
+protected override void OnModelCreating(ModelBuilder modelBuilder)
+{
+    modelBuilder.Entity<User>().ToTable("UserView", t => t.ExcludeFromMigrations());
+}
+```
+
+<a name="totable"></a>
+
+### <a name="totablenull-marks-the-entity-type-as-not-mapped-to-a-table"></a>ToTable(null) markiert den Entitätstyp als nicht einer Tabelle zugeordnet
+
+[Nachverfolgung von Issue #21172](https://github.com/dotnet/efcore/issues/21172)
+
+#### <a name="old-behavior"></a>Altes Verhalten
+
+`ToTable(null)` hat den Tabellennamen auf den Standardwert zurückgesetzt.
+
+#### <a name="new-behavior"></a>Neues Verhalten
+
+`ToTable(null)` markiert den Entitätstyp nun als nicht einer Tabelle zugeordnet.
+
+#### <a name="why"></a>Warum?
+
+EF Core ermöglicht es nun, dass ein Entitätstyp gleichzeitig sowohl einer Tabelle als auch einer Ansicht zugeordnet werden kann. `ToTable(null)` wird also verwendet, um anzugeben, dass der Typ keiner Tabelle zugeordnet ist.
+
+#### <a name="mitigations"></a>Gegenmaßnahmen
+
+Verwenden Sie den folgenden Code, um den Tabellennamen in den Standardwert zurückzusetzen, wenn keine Zuordnung zu einer Ansicht oder einer DbFunction-Klasse vorliegt:
+
+```csharp
+protected override void OnModelCreating(ModelBuilder modelBuilder)
+{
+    modelBuilder.Entity<User>().Metadata.RemoveAnnotation(RelationalAnnotationNames.TableName);
+}
+```
+
 <a name="read-only-discriminators"></a>
 
 ### <a name="discriminators-are-read-only"></a>Diskriminatoren sind schreibgeschützt
@@ -389,6 +450,32 @@ Anbieterspezifische Methoden sind einer Datenbankfunktion zugeordnet. Das Berech
 #### <a name="mitigations"></a>Gegenmaßnahmen
 
 Da es keine Möglichkeit gibt, das Verhalten von Datenbankfunktionen exakt zu imitieren, sollten Sie die Abfragen, die diese Methoden enthalten, mit demselben Datenbanktyp testen, der auch in der Produktionsumgebung verwendet wird.
+
+<a name="getcolumnname-obsolete"></a>
+
+### <a name="ipropertygetcolumnname-is-now-obsolete"></a>IProperty.GetColumnName() gilt ab sofort als veraltet
+
+[Nachverfolgung von Issue #2266](https://github.com/dotnet/efcore/issues/2266)
+
+#### <a name="old-behavior"></a>Altes Verhalten
+
+`GetColumnName()` hat den Namen der Spalte zurückgegeben, der die Eigenschaft zugeordnet ist.
+
+#### <a name="new-behavior"></a>Neues Verhalten
+
+`GetColumnName()` gibt weiterhin den Namen der Spalte zurück, der eine Eigenschaft zugeordnet ist. Dieses Verhalten ist nun jedoch mehrdeutig, da EF Core 5 die TPT-Methode (Tabelle pro Typ) und gleichzeitiges Zuordnen zu einer Ansicht oder einer Funktion unterstützt, wenn diese Zuordnungen verschiedene Spaltennamen für dieselbe Eigenschaft verwenden könnten.
+
+#### <a name="why"></a>Warum?
+
+Diese Methode wurde als veraltet gekennzeichnet, um Benutzern nahezulegen, eine exaktere Überladung zu verwenden: <xref:Microsoft.EntityFrameworkCore.RelationalPropertyExtensions.GetColumnName(Microsoft.EntityFrameworkCore.Metadata.IProperty,Microsoft.EntityFrameworkCore.Metadata.StoreObjectIdentifier@)>.
+
+#### <a name="mitigations"></a>Gegenmaßnahmen
+
+Verwenden Sie den folgenden Code, um den Spaltennamen für eine bestimmte Tabelle abzurufen:
+
+```csharp
+var columnName = property.GetColumnName(StoreObjectIdentifier.Table("Users", null)));
+```
 
 <a name="index-obsolete"></a>
 

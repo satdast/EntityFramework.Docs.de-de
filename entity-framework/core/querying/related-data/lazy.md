@@ -4,12 +4,12 @@ description: Lazy Loading zugehöriger Daten mit Entity Framework Core
 author: roji
 ms.date: 9/8/2020
 uid: core/querying/related-data/lazy
-ms.openlocfilehash: c42cde469e2be38d53a46cb6c5c252a088978e5c
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 55622b9c5a8f70ef4e7246d6eb14678036948f18
+ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90078867"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97635457"
 ---
 # <a name="lazy-loading-of-related-data"></a>Lazy Loading zugehöriger Daten
 
@@ -52,6 +52,9 @@ public class Post
     public virtual Blog Blog { get; set; }
 }
 ```
+
+> [!WARNING]
+> Verzögertes Laden kann zu unnötigen zusätzlichen Datenbankroundtrips führen (das sogenannte N+1-Problem). Sie sollten Maßnahmen ergreifen, um dies zu vermeiden. Weitere Details finden Sie im Abschnitt [Vermeiden von verzögertem Laden](xref:core/performance/efficient-querying#beware-of-lazy-loading).
 
 ## <a name="lazy-loading-without-proxies"></a>Lazy Loading ohne Proxys
 
