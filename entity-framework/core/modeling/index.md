@@ -4,12 +4,12 @@ description: Übersicht über das Erstellen und Konfigurieren eines Modells mit 
 author: AndriySvyryd
 ms.date: 10/13/2020
 uid: core/modeling/index
-ms.openlocfilehash: b18db0059efd335abe2fc44bbc78e0106717e058
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 709e2bde60c8e2c31f0a39390624c5d31a9cfa08
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94429610"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98129199"
 ---
 # <a name="creating-and-configuring-a-model"></a>Erstellen und Konfigurieren eines Modells
 
@@ -17,7 +17,7 @@ Entity Framework verwendet eine Reihe von Konventionen, um ein Modell basierend 
 
 Dieser Artikel behandelt die Konfiguration, die auf ein Modell für einen beliebigen Datenspeicher und auf jede relationale Datenbank angewendet werden kann. Anbieter können auch eine Konfiguration aktivieren, die speziell für einen bestimmten Datenspeicher gilt. Dokumentation zu anbieterspezifischen Konfigurationen finden Sie im Abschnitt [Datenbankanbieter](xref:core/providers/index).
 
-> [!TIP]  
+> [!TIP]
 > Das in diesem Artikel verwendete [Beispiel](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples) finden Sie auf GitHub.
 
 ## <a name="use-fluent-api-to-configure-a-model"></a>Verwenden der Fluent-API zum Konfigurieren eines Modells

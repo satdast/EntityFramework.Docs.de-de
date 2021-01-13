@@ -4,12 +4,12 @@ description: Übersicht über Protokollierung, Ereignisse, Interceptors und Diag
 author: ajcvickers
 ms.date: 10/01/2020
 uid: core/logging-events-diagnostics/index
-ms.openlocfilehash: d85a506167661523bf70b62d3a075a6248180d11
-ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
+ms.openlocfilehash: 5ddbffc8d39e97065f2e06af14443c62b4a9465d
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/17/2020
-ms.locfileid: "97635678"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98129225"
 ---
 # <a name="overview-of-logging-and-interception"></a>Übersicht über Protokollierung und Abfangfunktionen
 

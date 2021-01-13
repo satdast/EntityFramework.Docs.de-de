@@ -4,12 +4,12 @@ description: Unterschiedliche Ansätze zum Testen von Anwendungen, die Entity Fr
 author: ajcvickers
 ms.date: 04/22/2020
 uid: core/testing/index
-ms.openlocfilehash: db25a51ec83bff15ff8c8a959a5f1707dbcf7f0f
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: d94c40bdb1082473ee88e7c3c1fbfecee90ba4ff
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94431141"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98129069"
 ---
 # <a name="testing-code-that-uses-ef-core"></a>Testen von Code, der EF Core verwendet
 
@@ -19,7 +19,7 @@ Das Testen von Code, der auf eine Datenbank zugreift, erfordert Folgendes:
 * Das Ausführen von Abfragen und Aktualisierungen in einem andere einfacher zu verwaltenden Datenbanksystem oder
 * Das Verwenden von Testdoubles oder eines anderen Mechanismus, um die Verwendung einer Datenbank grundsätzlich zu vermeiden
 
-In diesem Dokument werden die Abwägungen dargelegt, die mit jeder dieser Optionen verbunden sind, und es wird gezeigt, wie EF Core bei jedem Ansatz eingesetzt werden kann.  
+In diesem Dokument werden die Abwägungen dargelegt, die mit jeder dieser Optionen verbunden sind, und es wird gezeigt, wie EF Core bei jedem Ansatz eingesetzt werden kann.
 
 > [!TIP]
 > Informationen zu den hier vorgestellten Konzepten finden Sie unter [EF Core-Testbeispiel](xref:core/testing/testing-sample).
@@ -35,7 +35,7 @@ Grundsätzlich bedeutet dies, dass ein Austauschen des Datenbankanbieters das Ve
 Dennoch wird dies in vielen Fällen funktionieren, weil es ein hohes Maß an Gemeinsamkeiten unter relationalen Datenbanken gibt.
 Das ist gut und schlecht zugleich.
 Gut, da das Wechseln zwischen Datenbanksystemen relativ einfach erfolgen kann.
-Schlecht, weil es ein falsches Gefühl der Sicherheit vermitteln kann, wenn die Anwendung nicht vollständig mit dem neuen Datenbanksystem getestet wird.  
+Schlecht, weil es ein falsches Gefühl der Sicherheit vermitteln kann, wenn die Anwendung nicht vollständig mit dem neuen Datenbanksystem getestet wird.
 
 ## <a name="approach-1-production-database-system"></a>Ansatz 1: Produktions-Datenbanksystem
 
@@ -65,7 +65,7 @@ LocalDB ist nicht ohne Probleme:
 Ich persönlich habe es nie als Problem empfunden, dass ein Datenbankdienst auf meinem Entwicklungscomputer läuft, und würde generell empfehlen, stattdessen die Developer Edition zu verwenden.
 Allerdings kann LocalDB für einige Entwickler geeignet sein, insbesondere auf weniger leistungsfähigen Entwicklungscomputern.
 
-Das [Ausführen von SQL Server](/sql/linux/quickstart-install-connect-docker) (oder einem anderen Datenbanksystem) in einem Docker-Container (oder ähnlichem) ist eine andere Möglichkeit, das Datenbanksystem nicht direkt auf dem Entwicklungscomputer ausführen zu müssen.  
+Das [Ausführen von SQL Server](/sql/linux/quickstart-install-connect-docker) (oder einem anderen Datenbanksystem) in einem Docker-Container (oder ähnlichem) ist eine andere Möglichkeit, das Datenbanksystem nicht direkt auf dem Entwicklungscomputer ausführen zu müssen.
 
 ## <a name="approach-2-sqlite"></a>Ansatz 2: SQLite
 

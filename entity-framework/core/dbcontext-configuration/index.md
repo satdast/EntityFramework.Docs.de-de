@@ -4,12 +4,12 @@ description: Muster für das Erstellen und Verwalten von DbContext-Instanzen mit
 author: ajcvickers
 ms.date: 11/07/2020
 uid: core/dbcontext-configuration/index
-ms.openlocfilehash: 93d5942fbc81ee0ae9aeff0c5c8b9e20b160d512
-ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
+ms.openlocfilehash: 10ed474df2c4c52e61083d9d671909be02cd8cef
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/17/2020
-ms.locfileid: "97635391"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98129030"
 ---
 # <a name="dbcontext-lifetime-configuration-and-initialization"></a>DbContext-Lebensdauer, -Konfiguration und -Initialisierung
 
@@ -48,7 +48,7 @@ ASP.NET Core-Anwendungen werden [mithilfe von Abhängigkeitsinjektion konfigurie
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            
+
             services.AddDbContext<ApplicationDbContext>(
                 options => options.UseSqlServer("name=ConnectionStrings:DefaultConnection"));
         }
@@ -303,7 +303,7 @@ Die folgende Tabelle enthält Beispiele für gängige Methoden, die für `DbCont
 |:-------------------------------------------------------------------------------------------|-------------------------------------------------------------|--------------
 | <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.UseQueryTrackingBehavior%2A>   | Legt das Standardverhalten der Nachverfolgung für Abfragen fest.              | [Verhalten der Abfragenachverfolgung](xref:core/querying/tracking)
 | <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.LogTo%2A>                      | Eine einfache Möglichkeit, EF Core-Protokolle zu erhalten (EF Core 5.0 oder höher).    | [Protokollierung, Ereignisse und Diagnose](xref:core/logging-events-diagnostics/index)
-| <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.UseLoggerFactory%2A>           | Registriert eine `Micrsofot.Extensions.Logging`-Factory.         | [Protokollierung, Ereignisse und Diagnose](xref:core/logging-events-diagnostics/index)
+| <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.UseLoggerFactory%2A>           | Registriert eine `Microsoft.Extensions.Logging`-Factory.         | [Protokollierung, Ereignisse und Diagnose](xref:core/logging-events-diagnostics/index)
 | <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.EnableSensitiveDataLogging%2A> | Schließt Anwendungsdaten in Ausnahmen und Protokollierung ein.         | [Protokollierung, Ereignisse und Diagnose](xref:core/logging-events-diagnostics/index)
 | <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.EnableDetailedErrors%2A>       | Ausführlichere Abfragefehler (auf Kosten der Leistung).  | [Protokollierung, Ereignisse und Diagnose](xref:core/logging-events-diagnostics/index)
 | <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.ConfigureWarnings%2A>          | Ignoriert Warnungen und andere Ereignisse oder löst diese aus.               | [Protokollierung, Ereignisse und Diagnose](xref:core/logging-events-diagnostics/index)
