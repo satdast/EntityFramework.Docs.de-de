@@ -4,12 +4,12 @@ description: Allgemeine Informationen darüber, wie Abfragen von Entity Framewor
 author: ajcvickers
 ms.date: 03/17/2020
 uid: core/querying/how-query-works
-ms.openlocfilehash: 7b3014cf64f8467ccbec10598ea1bb47304dfe43
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 4f856bf7e084d020edee1585d5c6c64873a5ed15
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94430468"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98129004"
 ---
 # <a name="how-queries-work"></a>Funktionsweise von Abfragen
 
@@ -43,5 +43,5 @@ Dies sind die üblichsten Vorgänge, aufgrund derer die Abfrage wird an die Date
 * Durchlaufen die Ergebnisse in einer `for`-Schleife
 * Verwenden eines Operators wie `ToList`, `ToArray`, `Single`, `Count` oder die äquivalenten asynchronen Überladungen
 
-> [!WARNING]  
+> [!WARNING]
 > **Benutzereingaben immer überprüfen:** Zwar schützt EF Core vor SQL-Einschleusungsangriffen durch Verwendung von Parametern und das Escapen von Literalen in Abfragen, es überprüft jedoch keine Eingaben. Geeignete Validierung gemäß den Anforderungen der Anwendung sollte erfolgen, bevor Werte aus nicht vertrauenswürdigen Quellen in LINQ-Abfragen verwendet, Entitätseigenschaften zugewiesen oder an andere EF Core-APIs übergeben werden. Dies schließt alle Benutzereingaben ein, mit denen Abfragen dynamisch erstellt werden. Wenn Sie Benutzereingaben zum Erstellen von Ausdrücken zulassen, müssen Sie selbst bei LINQ sicherstellen, dass nur beabsichtigte Ausdrücke erstellt werden können.

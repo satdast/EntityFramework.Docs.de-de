@@ -4,18 +4,18 @@ description: Grundlegende Informationen zum Hinzufügen, Aktualisieren und Entfe
 author: ajcvickers
 ms.date: 10/27/2016
 uid: core/saving/basic
-ms.openlocfilehash: c6288fc8ca79b78b6c377f25e3874211b38059b2
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: 8c98f95dee85641f11af716290333b47f340bff8
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92063633"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98129108"
 ---
 # <a name="basic-save"></a>Grundlegender Speichervorgang
 
 Erfahren Sie, wie Sie Daten mithilfe Ihrer Kontext- und Entitätsklassen hinzufügen, ändern und entfernen können.
 
-> [!TIP]  
+> [!TIP]
 > Das in diesem Artikel verwendete [Beispiel](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Saving/Basics/) finden Sie auf GitHub.
 
 ## <a name="adding-data"></a>Hinzufügen von Daten
@@ -24,7 +24,7 @@ Verwenden Sie die Methode *DbSet.Add*, um Ihren Entitätsklassen neue Instanzen 
 
 [!code-csharp[Main](../../../samples/core/Saving/Basics/Sample.cs#Add)]
 
-> [!TIP]  
+> [!TIP]
 > Die Methoden Add, Attach und Update wirken sich auf den vollständigen Graph an Entitäten aus, die an sie übergeben werden, wie im Abschnitt [Relevante Daten](xref:core/saving/related-data) beschrieben. Die Eigenschaft EntityEntry.State kann alternativ zum Festlegen des Zustands einer einzelnen Entität verwendet werden. Beispiel: `context.Entry(blog).State = EntityState.Modified`.
 
 ## <a name="updating-data"></a>Aktualisieren von Daten
@@ -47,7 +47,7 @@ Wenn die Entität bereits in der Datenbank vorhanden ist, wird sie während des 
 
 Sie können Hinzufügungs-, Update- und Entfernungsvorgänge in einem einzelnen Aufruf von *SaveChanges* kombinieren.
 
-> [!NOTE]  
+> [!NOTE]
 > Für die meisten Datenbankanbieter ist *SaveChanges* transaktional. Das bedeutet, dass alle Vorgänge entweder erfolgreich oder gar nicht abgeschlossen werden und niemals nur teilweise angewendet werden.
 
 [!code-csharp[Main](../../../samples/core/Saving/Basics/Sample.cs#MultipleOperations)]

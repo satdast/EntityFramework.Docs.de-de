@@ -4,18 +4,18 @@ description: Verwenden von reinem SQL-Code für Abfragen in Entity Framework Cor
 author: smitpatel
 ms.date: 10/08/2019
 uid: core/querying/raw-sql
-ms.openlocfilehash: 9c480d13c46c7c84554996bcb581627a1df318dd
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: 56724f9fddc9126fd4dfe0f348a0c525b43a3478
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92062593"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98128380"
 ---
 # <a name="raw-sql-queries"></a>Unformatierte SQL-Abfragen
 
 Mit Entity Framework Core können Sie bei der Arbeit mit einer relationalen Datenbank die Struktur unformatierter SQL-Abfragen maximieren. Unformatierte SQL-Abfragen sind nützlich, wenn die gewünschte Abfrage nicht mithilfe von LINQ ausgedrückt werden kann. Unformatierte SQL-Abfragen werden auch verwendet, wenn eine LINQ-Abfrage zu einer ineffizienten SQL-Abfrage führt. Unformatierte SQL-Abfragen können reguläre Entitätstypen oder [schlüssellose Entitätstypen](xref:core/modeling/keyless-entity-types) zurückgeben, die Teil des Modells sind.
 
-> [!TIP]  
+> [!TIP]
 > Das in diesem Artikel verwendete [Beispiel](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Querying/RawSQL) finden Sie auf GitHub.
 
 ## <a name="basic-raw-sql-queries"></a>Grundlegende unformatierte SQL-Abfragen

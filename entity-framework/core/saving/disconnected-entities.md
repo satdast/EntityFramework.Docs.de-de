@@ -4,12 +4,12 @@ description: Kontextinstanzenübergreifendes Arbeiten mit getrennten, nicht nach
 author: ajcvickers
 ms.date: 10/27/2016
 uid: core/saving/disconnected-entities
-ms.openlocfilehash: f21cc71ef11ee4ef37618a68d5a5219e8174bf8b
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: 4ddae08b68aa99fb81de77fed8a195c60927e0bb
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92063568"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98128848"
 ---
 # <a name="disconnected-entities"></a>Getrennte Entitäten
 
@@ -45,7 +45,7 @@ EF verfügt jedoch auch über eine integrierte Möglichkeit, diesen Vorgang für
 
 [!code-csharp[Main](../../../samples/core/Saving/Disconnected/Sample.cs#IsItNewGeneral)]
 
-> [!TIP]  
+> [!TIP]
 > Schlüssel werden festgelegt, sobald Entitäten vom Kontext nachverfolgt werden, selbst dann, wenn die Entität den Status „Hinzugefügt“ aufweist. Dies ist hilfreich, wenn ein Graph mit Entitäten durchlaufen wird und entschieden wird, wie mit den einzelnen Entitäten umgegangen werden soll, z.B. bei der Verwendung der TrackGraph-API. Der Schlüsselwert sollte nur auf die hier dargestellte Weise verwendet werden, _bevor_ ein Aufruf zum Nachverfolgen der Entität durchgeführt wird.
 
 ### <a name="with-other-keys"></a>Mit anderen Schlüsseln
@@ -84,7 +84,7 @@ Folgende Schritte müssen ausgeführt werden:
   * Anschließend werden die Werte für sämtliche Eigenschaften dieser Entität mit der SetValues-Methode auf die vom Client stammenden Werte festgelegt.
   * Beim SetValues-Aufruf wird die Entität entsprechend ihrer Markierung nach Bedarf aktualisiert.
 
-> [!TIP]  
+> [!TIP]
 > SetValues markiert nur die Eigenschaften als geändert, die andere Werte aufweisen als die Eigenschaften in der verfolgten Entität. Das heißt, wenn das Update gesendet wird, werden nur die Spalten aktualisiert, die tatsächlich geändert wurden. (Und wenn keine Änderungen vorgenommen wurden, wird gar kein Update gesendet.)
 
 ## <a name="working-with-graphs"></a>Arbeiten mit Graphen

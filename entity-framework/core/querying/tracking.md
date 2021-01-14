@@ -4,12 +4,12 @@ description: Informationen zu Abfragen mit und ohne Nachverfolgung in Entity Fra
 author: smitpatel
 ms.date: 11/09/2020
 uid: core/querying/tracking
-ms.openlocfilehash: b4c059f9a9b726697009589271e007bd1d2afd56
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 1b3c1db702438390c0de4a2ad5d13e868a522b65
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94430442"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98128900"
 ---
 # <a name="tracking-vs-no-tracking-queries"></a>Abfragen mit Nachverfolgung im Vergleich zu Abfragen ohne Nachverfolgung
 
@@ -18,7 +18,7 @@ Das Nachverfolgungsverhalten steuert, ob Entity Framework Core Informationen üb
 > [!NOTE]
 > [Schlüssellose Entitätstypen](xref:core/modeling/keyless-entity-types) werden nie nachverfolgt. Wenn in diesem Artikel Entitätstypen erwähnt werden, sind Entitätstypen gemeint, für die ein Schlüssel definiert ist.
 
-> [!TIP]  
+> [!TIP]
 > Das in diesem Artikel verwendete [Beispiel](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Querying/Tracking) finden Sie auf GitHub.
 
 ## <a name="tracking-queries"></a>Abfragen mit Nachverfolgung

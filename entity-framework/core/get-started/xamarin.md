@@ -5,12 +5,12 @@ author: codemillmatt
 ms.date: 07/07/2020
 ms.author: masoucou
 uid: core/get-started/xamarin
-ms.openlocfilehash: a08c5582b063f4a7748a43811c2bf28e8f3e5c14
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: c19c70903926c2c8ff4b51cca7781859af7e3567
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94429909"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98128783"
 ---
 # <a name="getting-started-with-ef-core-and-xamarin"></a>Erste Schritte mit EF Core und Xamarin
 
@@ -74,10 +74,10 @@ In den folgenden Abschnitten durchlaufen Sie den Code im Beispielprojekt, der Da
 Dabei wird davon ausgegangen, dass Sie mit den Xamarin.Forms-Themen zum [Anzeigen von Daten](/xamarin/xamarin-forms/app-fundamentals/data-binding/) und zum [Navigieren zwischen Seiten](/xamarin/xamarin-forms/app-fundamentals/navigation/) vertraut sind.
 
 > [!IMPORTANT]
-> Entity Framework Core verwendet Reflektion, um Funktionen aufzurufen, die der Xamarin.iOS-Linker in **Release** -Moduskonfigurationen möglicherweise entfernen könnte. Sie können eine von zwei Möglichkeiten auswählen, dies zu vermeiden.
+> Entity Framework Core verwendet Reflektion, um Funktionen aufzurufen, die der Xamarin.iOS-Linker in **Release**-Moduskonfigurationen möglicherweise entfernen könnte. Sie können eine von zwei Möglichkeiten auswählen, dies zu vermeiden.
 >
-> * Die erste ist, `--linkskip System.Core` zu **Weitere mtouch-Argumente** in den **iOS-Build** -Optionen hinzuzufügen.
-> * Alternativ können Sie das Xamarin.iOS- **Linkerverhalten** in den **iOS-Build** -Optionen auf `Don't Link` festlegen.
+> * Die erste ist, `--linkskip System.Core` zu **Weitere mtouch-Argumente** in den **iOS-Build**-Optionen hinzuzufügen.
+> * Alternativ können Sie das Xamarin.iOS-**Linkerverhalten** in den **iOS-Build**-Optionen auf `Don't Link` festlegen.
 > [Dieser Artikel enthält weitere Informationen zum Xamarin.iOS-Linker](/xamarin/ios/deploy-test/linker), unter anderem zum Festlegen des Verhaltens in Xamarin.iOS.
 >
 
@@ -165,7 +165,7 @@ using (var blogContext = new BloggingContext())
 
 * Aktualisieren eines vorhandenen Datensatzes
   * Die `Save_Clicked`-Funktion von `AddPostPage.xaml.cs` aktualisiert ein vorhandenes `Blog`-Objekt mit einem neuen `Post`.
-  
+
 ```csharp
 var newPost = new Post
 {
