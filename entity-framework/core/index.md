@@ -4,12 +4,12 @@ description: Allgemeine Einführungsübersicht für Entity Framework Core
 author: ajcvickers
 ms.date: 9/20/2020
 uid: core/index
-ms.openlocfilehash: ccb1fa4cbc0bd1a02e1aeb613475bfe4b2c1d118
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: f2905fc55419e196a6f5b8883cf2a2a76b8a1ab2
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94429896"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98128601"
 ---
 # <a name="entity-framework-core"></a>Entity Framework Core
 
@@ -53,7 +53,7 @@ Obwohl EF Core viele Programmierungsdetails gut abstrahieren kann, gibt es eini
 * Kenntnisse auf mittlerem oder höherem Niveau des zugrundeliegenden Datenbankservers sind für Architektur, Debuggen, Profilerstellung und Datenmigration in Hochleistungsproduktions-Apps unerlässlich. Beispielsweise Kenntnisse zu Primär- und Fremdschlüsseln, Einschränkungen, Indizes, Normalisierung, DML- und DDL-Anweisungen, Datentypen, Profilerstellung usw.
 * Funktions-und Integrationstests:  Es ist wichtig, die Produktionsumgebung so genau wie möglich zu replizieren, um Folgendes zu erreichen:
   * Finden von Problemen in der App, die nur bei Verwendung einer bestimmten Version oder Edition des Datenbankservers auftreten.
-  * Erfassen von Breaking Changes beim Upgrade von EF Core und anderen Abhängigkeiten. Beispielsweise beim Hinzufügen oder Upgraden von Frameworks wie ASP.NET Core, OData oder Automapper. Diese Abhängigkeiten können sich auf EF Core auf unerwartete Weise auswirken.
+  * Erfassen von Breaking Changes beim Upgrade von EF Core und anderen Abhängigkeiten. Beispielsweise beim Hinzufügen oder Upgraden von Frameworks wie ASP.NET Core, OData oder AutoMapper. Diese Abhängigkeiten können sich auf EF Core auf unerwartete Weise auswirken.
 * Leistungs- und Belastungstests mit repräsentativen Auslastungen. Die naive Verwendung einiger Funktionen ist nicht gut skalierbar. Beispielsweise mehrere Sammlungs-Includes, übermäßige Verwendung von Lazy Loading, bedingte Abfragen für nicht indizierte Spalten, massive Updates und Einfügungen mit vom Store generierten Werten, fehlende Parallelitätsverarbeitung, große Modelle, unzureichende Cacherichtlinien.
 * Sicherheitsüberprüfung: Beispielsweise Verarbeitung von Verbindungszeichenfolgen und anderen Geheimnissen, Datenbankberechtigungen für Nicht-Bereitstellungsvorgänge, Eingabevalidierung für Roh-SQL, Verschlüsselung für sensible Daten.
 * Stellen Sie sicher, dass Protokollierung und Diagnose ausreichend und verwendbar sind. Beispielsweise geeignete Protokollierungskonfiguration, Abfragetags und Application Insights.

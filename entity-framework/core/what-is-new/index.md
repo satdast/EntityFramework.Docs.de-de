@@ -2,14 +2,14 @@
 title: EF Core-Releases und Planung
 description: Aktuelle EF Core-Releases und Zeitplan/Planungsdetails für künftige Releases
 author: ajcvickers
-ms.date: 10/11/2020
+ms.date: 01/12/2021
 uid: core/what-is-new/index
-ms.openlocfilehash: 983a8b21d353481df4f1db232d00761e070d893b
-ms.sourcegitcommit: 42bbf7f68e92c364c5fff63092d3eb02229f568d
+ms.openlocfilehash: 18d8055840b5a38dc62d20e7e18c440b7360c9e4
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/11/2020
-ms.locfileid: "94503140"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98128328"
 ---
 # <a name="ef-core-releases-and-planning"></a>EF Core-Releases und Planung
 
@@ -50,7 +50,7 @@ Unsere detaillierte Planung geht in der Regel nicht über die nächste Haupt- od
 
 Der nächste stabile Release auf **EF Core 6.0** ist für **November 2021** geplant.
 
-Wir arbeiten zurzeit an einem allgemeinen Plan, der auf der [Releaseplanung](xref:core/what-is-new/release-planning) basiert.
+Mithilfe der dokumentierten [Releaseplanung](xref:core/what-is-new/release-planning) wurde ein [allgemeiner Plan für EF Core 6.0](xref:core/what-is-new/ef-core-6.0/plan) erstellt.
 
 Ihr Feedback zur Planung ist wichtig.
 Sie können für ein Problem auf GitHub abstimmen (Daumen hoch 👍) und so angeben, dass dieses Problem wichtig ist.
@@ -61,7 +61,7 @@ Diese Daten werden dann in den Planungsprozess für das nächste Release aufgeno
 Die Pakete von EF Core 6.0 sind **ab sofort**
 
 * als [tägliche Builds](https://github.com/dotnet/aspnetcore/blob/master/docs/DailyBuilds.md) verfügbar:
-  * Hier sind alle aktuellen Features und Fehlerbehebungen enthalten. Die Pakete sind in der Regel sehr stabil. Für jede Buildversion werden mehr als 57.000 Testläufe durchgeführt.
+  * Hier sind alle aktuellen Features und Fehlerbehebungen enthalten. Die Pakete sind in der Regel sehr stabil. Für jede Buildversion werden mehr als 75.000 Testläufe durchgeführt.
 
 Außerdem werden häufige Vorschauversionen im Verlauf an NuGet gepusht. Beachten Sie, dass diese Vorschauversionen zeitlich hinter den Builds zurückliegen. Es wird aber getestet, ob sie mit den entsprechenden Vorschauversionen von ASP.NET Core und .NET Core funktionieren.
 
