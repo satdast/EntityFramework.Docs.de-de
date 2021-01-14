@@ -19,6 +19,8 @@
       items:
         - name: Willkommen!
           href: core/index.md
+        - name: "Neuerungen in EF\_Core\_5.0"
+          href: /ef/core/what-is-new/ef-core-5.0/whatsnew
         - name: Erste Schritte
           items:
             - name: "Übersicht über EF\_Core"
@@ -41,6 +43,14 @@
               href: core/what-is-new/index.md
             - name: Die Releaseplanung
               href: core/what-is-new/release-planning.md
+            - name: EF Core 6.0
+              items:
+                - name: Allgemeiner Plan
+                  href: core/what-is-new/ef-core-6.0/plan.md
+                - name: Neuigkeiten
+                  href: core/what-is-new/ef-core-6.0/whatsnew.md
+                - name: Breaking Changes
+                  href: core/what-is-new/ef-core-6.0/breaking-changes.md
             - name: "EF Core\_5.0"
               items:
                 - name: Allgemeiner Plan
@@ -182,6 +192,8 @@
               href: core/querying/filters.md
             - name: Abfragetags
               href: core/querying/tags.md
+            - name: Vergleiche mit NULL-Werten in Abfragen
+              href: core/querying/null-comparisons.md
             - name: Funktionsweise von Abfragen
               href: core/querying/how-query-works.md
         - name: Speichern von Daten
@@ -202,6 +214,24 @@
               href: core/saving/disconnected-entities.md
             - name: Explizite Werte für generierte Eigenschaften
               href: core/saving/explicit-values-generated-properties.md
+        - name: Änderungsnachverfolgung
+          items:
+            - name: Übersicht
+              href: core/change-tracking/index.md
+            - name: Explizite Nachverfolgung von Entitäten
+              href: core/change-tracking/explicit-tracking.md
+            - name: Zugriff auf nachverfolgte Entitäten
+              href: core/change-tracking/entity-entries.md
+            - name: Ändern von Fremdschlüsseln und Navigationen
+              href: core/change-tracking/relationship-changes.md
+            - name: Änderungserkennung und Benachrichtigungen
+              href: core/change-tracking/change-detection.md
+            - name: Identitätsauflösung
+              href: core/change-tracking/identity-resolution.md
+            - name: Zusätzliche Features für die Änderungsnachverfolgung
+              href: core/change-tracking/miscellaneous.md
+            - name: Debuggen der Änderungsnachverfolgung
+              href: core/change-tracking/debug-views.md
         - name: 'Protokollierung, Ereignisse und Diagnose'
           items:
             - name: Übersicht
