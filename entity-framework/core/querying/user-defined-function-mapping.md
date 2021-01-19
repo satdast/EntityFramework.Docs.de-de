@@ -3,13 +3,13 @@ title: 'Zuordnung benutzerdefinierter Funktionen: EF Core'
 description: Hier erhalten Sie Informationen zum Zuordnen benutzerdefinierter Funktionen zu Datenbankfunktionen.
 author: maumar
 ms.date: 11/23/2020
-uid: core/user-defined-function-mapping
-ms.openlocfilehash: ba60abdc9c81b34b8f4ed8f501cf2f7e52ba9d7d
-ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
+uid: core/querying/user-defined-function-mapping
+ms.openlocfilehash: 3e49ed9c49b38b98430128ffdc7ceef0b844b9df
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/17/2020
-ms.locfileid: "97657697"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98129121"
 ---
 # <a name="user-defined-function-mapping"></a>Zuordnung benutzerdefinierter Funktionen
 
@@ -94,6 +94,52 @@ Dies generiert diese SQL-Anweisung:
 SELECT 100 * (ABS(CAST([p].[BlogId] AS float) - 3) / ((CAST([p].[BlogId] AS float) + 3) / 2))
 FROM [Posts] AS [p]
 ```
+
+## <a name="configuring-nullability-of-user-defined-function-based-on-its-arguments"></a>Konfigurieren der NULL-Zulässigkeit von benutzerdefinierten Funktionen auf Basis von Argumenten
+
+Wenn die benutzerdefinierte Funktion nur `null` zurückgeben kann, wenn mindestens ein Argument `null` ist, kann dies in EF Core angegeben werden. Dies führt zu einem leistungsfähigeren SQL-Code. Dazu muss der Modellkonfiguration des relevanten Funktionsparameters ein `PropagatesNullability()`-Aufruf hinzugefügt werden.
+
+Zur Veranschaulichung wird die Benutzerfunktion `ConcatStrings` definiert:
+
+```sql
+CREATE FUNCTION [dbo].[ConcatStrings] (@prm1 nvarchar(max), @prm2 nvarchar(max))
+RETURNS nvarchar(max)
+AS
+BEGIN
+    RETURN @prm1 + @prm2;
+END
+```
+
+Außerdem werden zwei CLR-Methoden definiert, die ihr zugeordnet sind:
+
+[!code-csharp[Main](../../../samples/core/Querying/UserDefinedFunctionMapping/Model.cs#NullabilityPropagationFunctionDefinition)]
+
+Die Modellkonfiguration (innerhalb der Methode `OnModelCreating`) lautet wie folgt:
+
+[!code-csharp[Main](../../../samples/core/Querying/UserDefinedFunctionMapping/Model.cs#NullabilityPropagationModelConfiguration)]
+
+Die erste Funktion wird standardmäßig konfiguriert. Die zweite Funktion ist so konfiguriert, dass sie die Propagierungsoptimierung der NULL-Zulässigkeit nutzt und weitere Informationen zur Funktionsweise der Funktion im Kontext von NULL-Parametern bietet.
+
+Die folgenden Abfragen:
+
+[!code-csharp[Main](../../../samples/core/Querying/UserDefinedFunctionMapping/Program.cs#NullabilityPropagationExamples)]
+
+Ergeben den folgenden SQL-Code:
+
+```sql
+SELECT [b].[BlogId], [b].[Rating], [b].[Url]
+FROM [Blogs] AS [b]
+WHERE ([dbo].[ConcatStrings]([b].[Url], CONVERT(VARCHAR(11), [b].[Rating])) <> N'Lorem ipsum...') OR [dbo].[ConcatStrings]([b].[Url], CONVERT(VARCHAR(11), [b].[Rating])) IS NULL
+
+SELECT [b].[BlogId], [b].[Rating], [b].[Url]
+FROM [Blogs] AS [b]
+WHERE ([dbo].[ConcatStrings]([b].[Url], CONVERT(VARCHAR(11), [b].[Rating])) <> N'Lorem ipsum...') OR ([b].[Url] IS NULL OR [b].[Rating] IS NULL)
+```
+
+Die zweite Abfrage muss die Funktion nicht selbst neu auswerten, um deren NULL-Zulässigkeit zu testen.
+
+> [!NOTE]
+> Diese Optimierung sollte nur eingesetzt werden, wenn die Funktion nur `null` zurückgeben kann, wenn ihre Parameter `null` sind.
 
 ## <a name="mapping-a-queryable-function-to-a-table-valued-function"></a>Zuordnen einer abfragbaren Funktion zu einer Tabellenwertfunktion
 

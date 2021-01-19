@@ -4,12 +4,12 @@ description: Vollständige Liste der in Entity Framework Core 3.x eingeführten
 author: ajcvickers
 ms.date: 09/05/2020
 uid: core/what-is-new/ef-core-3.x/breaking-changes
-ms.openlocfilehash: bfcfb7257091d1b6889f7c0af00ddab10e0e12e3
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 8c0be4193c79e838e40bfc2dc10c9d12b01381cd
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94429311"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98128770"
 ---
 # <a name="breaking-changes-included-in-ef-core-3x"></a>Breaking Changes in EF Core 3.x
 
@@ -170,6 +170,9 @@ Eine Verwendung als lokales Tool ist ebenfalls möglich, wenn Sie die Abhängigk
 ### <a name="fromsql-executesql-and-executesqlasync-have-been-renamed"></a>FromSql, ExecuteSql und ExecuteSqlAsync wurden umbenannt
 
 [Issue #10996](https://github.com/dotnet/efcore/issues/10996)
+
+> [!IMPORTANT]
+> `ExecuteSqlCommand` und `ExecuteSqlCommandAsync` sind veraltet. Verwenden Sie diese Methoden stattdessen.
 
 #### <a name="old-behavior"></a>Altes Verhalten
 
