@@ -4,27 +4,27 @@ description: Explizites Nachverfolgen von Entitäten mit dbcontext mithilfe von 
 author: ajcvickers
 ms.date: 12/30/2020
 uid: core/change-tracking/explicit-tracking
-ms.openlocfilehash: 28a6ec3e3c25dad70882b8681f78744a5979efe6
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: 1428096b362c8016f7924c72ec9ac3e2f9203ed6
+ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98129597"
+ms.lasthandoff: 01/28/2021
+ms.locfileid: "98983273"
 ---
 # <a name="explicitly-tracking-entities"></a>Entitäten explizit nachverfolgen
 
-Jede <xref:Microsoft.EntityFrameworkCore.DbContext> Instanz verfolgt Änderungen, die an Entitäten vorgenommen wurden. Diese überwachten Entitäten Steuern wiederum die Änderungen an der Datenbank, wenn <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> aufgerufen wird.
+Jede <xref:Microsoft.EntityFrameworkCore.DbContext>-Instanz verfolgt Änderungen nach, die an Entitäten vorgenommen wurden. Diese nachverfolgten Entitäten bestimmen wiederum die Änderungen an der Datenbank, wenn <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> aufgerufen wird.
 
-Entity Framework Core (EF Core)-Änderungs Nachverfolgung funktioniert am besten, wenn die gleiche <xref:Microsoft.EntityFrameworkCore.DbContext> Instanz verwendet wird, um Entitäten abzufragen und durch Aufrufen von zu aktualisieren <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> . Der Grund hierfür ist, dass EF Core den Status von abgefragten Entitäten automatisch nachverfolgt und dann alle Änderungen erkennt, die an diesen Entitäten vorgenommen werden, wenn SaveChanges aufgerufen wird. Diese Vorgehensweise wird in [Änderungsnachverfolgung in EF Core](xref:core/change-tracking/index)behandelt.
+Entity Framework Core (EF Core)-Änderungs Nachverfolgung funktioniert am besten, wenn die gleiche <xref:Microsoft.EntityFrameworkCore.DbContext> Instanz verwendet wird, um Entitäten abzufragen und durch Aufrufen von zu aktualisieren <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> . Der Grund hierfür ist, dass EF Core den Status von abgefragten Entitäten automatisch nachverfolgt und dann alle Änderungen erkennt, die an diesen Entitäten vorgenommen werden, wenn SaveChanges aufgerufen wird. Diese Vorgehensweise wird in [Änderungsnachverfolgung in EF Core](xref:core/change-tracking/index)behandelt.
 
 > [!TIP]
 > In diesem Dokument wird davon ausgegangen, dass die Entitäts Zustände und die Grundlagen EF Core Änderungs Nachverfolgung verstanden werden. Weitere Informationen zu diesen Themen finden Sie [unter Änderungsnachverfolgung in EF Core](xref:core/change-tracking/index) .
 
 > [!TIP]
-> Sie können den gesamten Code in diesem Dokument ausführen und Debuggen, indem Sie [den Beispielcode von GitHub herunterladen](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/ChangeTracking/ChangeTrackingInEFCore).
+> Sie können den gesamten Code in diesem Dokument ausführen und debuggen, indem Sie [den Beispielcode von GitHub herunterladen](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/ChangeTracking/ChangeTrackingInEFCore).
 
 > [!TIP]
-> Aus Gründen der Einfachheit verwendet dieses Dokument synchrone Methoden, wie z. b., und verweist auf synchrone Methoden wie <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync%2A> z.b.. Das aufrufen und warten auf die asynchrone Methode kann ersetzt werden, sofern nicht anders angegeben.
+> Der Einfachheit halber werden in diesem Dokument synchrone Methoden wie z. B. <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> anstatt ihrer asynchronen Entsprechungen wie <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync%2A> verwendet und darauf verwiesen. Das Aufrufen und Warten auf die asynchrone Methode kann ersetzt werden, sofern nicht anders angegeben.
 
 ## <a name="introduction"></a>Einführung
 
@@ -311,7 +311,7 @@ Post {Id: 2} Unchanged
 Dabei handelt es sich genau um denselben Endzustand wie im vorherigen Beispiel, in dem explizite Schlüsselwerte verwendet wurden.
 
 > [!TIP]
-> Ein expliziter Schlüsselwert kann auch dann festgelegt werden, wenn generierte Schlüsselwerte verwendet werden. EF Core wird dann versucht, mit diesem Schlüsselwert einzufügen. Einige Daten Bank Konfigurationen, einschließlich SQL Server mit Identitäts Spalten, unterstützen solche Einfügungen nicht und lösen diese aus.
+> Ein expliziter Schlüsselwert kann auch dann festgelegt werden, wenn generierte Schlüsselwerte verwendet werden. EF Core wird dann versucht, mit diesem Schlüsselwert einzufügen. Einige Daten Bank Konfigurationen, einschließlich SQL Server mit Identitäts Spalten, unterstützen solche Einfügungen nicht und lösen Sie[aus (Weitere Informationen finden](xref:core/providers/sql-server/value-generation#inserting-explicit-values-into-identity-columns)Sie in diesen Dokumenten).
 
 ## <a name="attaching-existing-entities"></a>Anhängen vorhandener Entitäten
 
@@ -394,35 +394,6 @@ Das Aufrufen von SaveChanges an dieser Stelle hat keine Auswirkungen. Alle Entit
 ### <a name="generated-key-values"></a>Generierte Schlüsselwerte
 
 Wie bereits erwähnt, werden ganzzahlige und GUID- [Schlüsseleigenschaften](xref:core/modeling/keys) standardmäßig für die Verwendung [automatisch generierter Schlüsselwerte](xref:core/modeling/generated-properties) konfiguriert. Dies hat beim Arbeiten mit getrennten Entitäten einen großen Vorteil: ein nicht festgelegter Schlüsselwert gibt an, dass die Entität noch nicht in die Datenbank eingefügt wurde. Dies ermöglicht es dem Änderungs nach Verfolgungs, neue Entitäten automatisch zu erkennen und in den Zustand zu versetzen `Added` . Nehmen Sie beispielsweise an, dieses Diagramm eines Blogs und Beiträge anzufügen:
-
-```c#
-            context.Attach(
-                new Blog
-                {
-                    Id = 1,
-                    Name = ".NET Blog",
-                    Posts =
-                    {
-                        new Post
-                        {
-                            Id = 1,
-                            Title = "Announcing the Release of EF Core 5.0",
-                            Content = "Announcing the release of EF Core 5.0, a full featured cross-platform..."
-                        },
-                        new Post
-                        {
-                            Id = 2,
-                            Title = "Announcing F# 5",
-                            Content = "F# 5 is the latest version of F#, the functional programming language..."
-                        },
-                        new Post
-                        {
-                            Title = "Announcing .NET 5.0",
-                            Content = ".NET 5.0 includes many enhancements, including single file applications, more..."
-                        },
-                    }
-                });
-```
 
 <!--
             context.Attach(
@@ -922,7 +893,7 @@ Nachdem SaveChanges abgeschlossen ist, werden alle gelöschten Entitäten von db
 
 <xref:Microsoft.EntityFrameworkCore.ChangeTracking.ChangeTracker.TrackGraph%2A?displayProperty=nameWithType> funktioniert wie `Add` , `Attach` und `Update` mit der Ausnahme, dass ein Rückruf für jede Entitäts Instanz generiert wird, bevor Sie nachverfolgt wird. Dadurch kann eine benutzerdefinierte Logik verwendet werden, um zu bestimmen, wie einzelne Entitäten in einem Diagramm nachverfolgt werden.
 
-Nehmen Sie z. b. die Regel EF Core die beim Nachverfolgen von Entitäten mit generierten Schlüsselwerten verwendet: Wenn der Kye-Wert 0 (null) ist, ist die Entität neu und sollte eingefügt werden. Wir erweitern diese Regel, um zu sagen, dass der Schlüsselwert negativ ist, dann sollte die Entität gelöscht werden. Dies ermöglicht es uns, die Primärschlüssel Werte in Entitäten eines getrennten Diagramms so zu ändern, dass gelöschte Entitäten markiert werden:
+Nehmen Sie z. b. die Regel EF Core die beim Nachverfolgen von Entitäten mit generierten Schlüsselwerten verwendet: Wenn der Schlüsselwert 0 (null) ist, ist die Entität neu und sollte eingefügt werden. Wir erweitern diese Regel, um zu sagen, dass der Schlüsselwert negativ ist, dann sollte die Entität gelöscht werden. Dies ermöglicht es uns, die Primärschlüssel Werte in Entitäten eines getrennten Diagramms so zu ändern, dass gelöschte Entitäten markiert werden:
 
 <!--
             blog.Posts.Add(

@@ -4,12 +4,12 @@ description: Konfigurieren von Beziehungen zwischen Entitäts Typen bei Verwendu
 author: AndriySvyryd
 ms.date: 10/01/2020
 uid: core/modeling/relationships
-ms.openlocfilehash: 2bc17365adb802f2e813077731ae70c68f8e3be3
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: 93d129435a3583ac5f741cc27952fb702f415a01
+ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98129173"
+ms.lasthandoff: 01/28/2021
+ms.locfileid: "98983468"
 ---
 # <a name="relationships"></a>Beziehungen
 
@@ -301,7 +301,10 @@ CREATE TABLE [PostTag] (
 );
 ```
 
-Intern erstellt EF einen Entitätstyp, der die jointabelle darstellt, die als joinentitätstyp bezeichnet wird. `Dictionary<string, object>` wird verwendet, um eine beliebige Kombination von Fremdschlüssel Eigenschaften zu verarbeiten. Weitere Informationen finden Sie unter Eigenschaften Behälter- [Entitäts Typen](shadow-properties.md#property-bag-entity-types) . Mehrere m:n-Beziehungen können im Modell vorhanden sein. Daher muss dem joinentitätstyp ein eindeutiger Name zugewiesen werden, in diesem Fall `PostTag` . Die Funktion, die dies zulässt, wird als Entitätstyp mit gemeinsamer Typbezeichnung bezeichnet.
+Intern erstellt EF einen Entitätstyp, der die jointabelle darstellt, die als joinentitätstyp bezeichnet wird. `Dictionary<string, object>` wird derzeit verwendet, um eine beliebige Kombination von Fremdschlüssel Eigenschaften zu verarbeiten. Weitere Informationen finden Sie unter [Entitäts Typen für Eigenschaften](shadow-properties.md#property-bag-entity-types) Behälter. Mehrere m:n-Beziehungen können im Modell vorhanden sein. Daher muss dem joinentitätstyp ein eindeutiger Name zugewiesen werden, in diesem Fall `PostTag` . Die Funktion, die dies zulässt, wird als Entitätstyp mit gemeinsamer Typbezeichnung bezeichnet.
+
+> [!IMPORTANT]
+> Der CLR-Typ, der für joinentitäts Typen gemäß der Konvention verwendet wird, kann sich in zukünftigen Versionen ändern, um die Leistung Verlassen Sie sich nicht auf den Jointyp `Dictionary<string, object>` , wenn dies nicht explizit konfiguriert wurde, wie im nächsten Abschnitt beschrieben.
 
 Die m:n-Navigationen werden als "Skip Navigationen" bezeichnet, da Sie den joinentitätstyp effektiv überspringen. Wenn Sie die Massen Konfiguration verwenden, können alle Skip-Navigationen aus abgerufen werden <xref:Microsoft.EntityFrameworkCore.Metadata.IEntityType.GetSkipNavigations%2A> .
 

@@ -4,12 +4,12 @@ description: Referenzhandbuch für die Entity Framework Core .net Core-CLI Tools
 author: bricelam
 ms.date: 10/27/2020
 uid: core/cli/dotnet
-ms.openlocfilehash: 83989b8690236dbec3466cda78c204ab67fd10c4
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 60655c03a7fc29137ccb8d9304c94dac6b803cb2
+ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94431262"
+ms.lasthandoff: 01/28/2021
+ms.locfileid: "98983585"
 ---
 # <a name="entity-framework-core-tools-reference---net-core-cli"></a>Referenz zu Entity Framework Core Tools .net Core-CLI
 
@@ -186,7 +186,7 @@ Argumente:
 
 | Argument                    | BESCHREIBUNG                                                                                                                                                                                                             |
 |:----------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| <nobr>`<CONNECTION>`</nobr> | Die Verbindungszeichenfolge für die Datenbank. Bei ASP.net Core 2. x-Projekten kann der Wert " *Name = \<name of connection string>* " lauten. In diesem Fall stammt der Name aus den Konfigurations Quellen, die für das Projekt eingerichtet sind. |
+| <nobr>`<CONNECTION>`</nobr> | Die Verbindungszeichenfolge für die Datenbank. Bei ASP.net Core 2. x-Projekten kann der Wert " *Name = \<name of connection string>*" lauten. In diesem Fall stammt der Name aus den Konfigurations Quellen, die für das Projekt eingerichtet sind. |
 | `<PROVIDER>`                | Der zu verwendende Anbieter. In der Regel ist dies der Name des nuget-Pakets, z `Microsoft.EntityFrameworkCore.SqlServer` . b.:.                                                                                           |
 
 Optionen:
@@ -223,8 +223,8 @@ dotnet ef dbcontext scaffold "Server=(localdb)\mssqllocaldb;Database=Blogging;Tr
 Im folgenden Beispiel wird die Verbindungs Zeichenfolge mit dem Geheimnis-Manager- [Tool](/aspnet/core/security/app-secrets#secret-manager)aus dem Konfigurationssatz des Projekts gelesen.
 
 ```dotnetcli
-dotnet user-secrets set ConnectionStrings.Blogging "Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Blogging"
-dotnet ef dbcontext scaffold Name=ConnectionStrings.Blogging Microsoft.EntityFrameworkCore.SqlServer
+dotnet user-secrets set ConnectionStrings:Blogging "Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Blogging"
+dotnet ef dbcontext scaffold Name=ConnectionStrings:Blogging Microsoft.EntityFrameworkCore.SqlServer
 ```
 
 ## <a name="dotnet-ef-dbcontext-script"></a>DotNet EF-dbcontext-Skript

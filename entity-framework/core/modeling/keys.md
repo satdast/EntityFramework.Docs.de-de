@@ -2,18 +2,20 @@
 title: Schlüssel-EF Core
 description: Konfigurieren von Schlüsseln für Entitäts Typen bei Verwendung von Entity Framework Core
 author: AndriySvyryd
-ms.date: 11/06/2019
+ms.date: 1/10/2021
 uid: core/modeling/keys
-ms.openlocfilehash: 805396a13227aa62ed86ac17c742d055d7a22bbf
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: c79ab0445e80b0b6f4a8b49ef0d4c063bf938851
+ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98129186"
+ms.lasthandoff: 01/28/2021
+ms.locfileid: "98983532"
 ---
 # <a name="keys"></a>Schlüssel
 
 Ein Schlüssel dient als eindeutiger Bezeichner für jede Entitäts Instanz. Die meisten Entitäten in EF verfügen über einen einzelnen Schlüssel, der dem Konzept eines *Primärschlüssels* in relationalen Datenbanken zugeordnet ist (für Entitäten ohne Schlüssel siehe [Keyless Entities](xref:core/modeling/keyless-entity-types)). Entitäten können über den Primärschlüssel hinaus zusätzliche Schlüssel aufweisen (Weitere Informationen finden Sie in den [Alternativen Schlüsseln](#alternate-keys) ).
+
+## <a name="configuring-a-primary-key"></a>Konfigurieren eines Primärschlüssels
 
 Gemäß der Konvention wird eine Eigenschaft mit `Id` dem Namen oder `<type name>Id` als Primärschlüssel einer Entität konfiguriert.
 
@@ -24,11 +26,11 @@ Gemäß der Konvention wird eine Eigenschaft mit `Id` dem Namen oder `<type name
 
 Sie können eine einzelne Eigenschaft wie folgt als Primärschlüssel einer Entität konfigurieren:
 
-## <a name="data-annotations"></a>[Daten Anmerkungen](#tab/data-annotations)
+### <a name="data-annotations"></a>[Daten Anmerkungen](#tab/data-annotations)
 
 [!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/KeySingle.cs?name=KeySingle&highlight=3)]
 
-## <a name="fluent-api"></a>[Fluent-API](#tab/fluent-api)
+### <a name="fluent-api"></a>[Fluent-API](#tab/fluent-api)
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/KeySingle.cs?name=KeySingle&highlight=4)]
 
@@ -37,6 +39,10 @@ Sie können eine einzelne Eigenschaft wie folgt als Primärschlüssel einer Enti
 Sie können auch mehrere Eigenschaften als Schlüssel für eine Entität konfigurieren. Dies wird als zusammengesetzter Schlüssel bezeichnet. Zusammengesetzte Schlüssel können nur mithilfe der fließenden API konfiguriert werden. Konventionen richten nie einen zusammengesetzten Schlüssel ein, und Sie können keine Daten Anmerkungen verwenden, um einen zusammengesetzten Schlüssel zu konfigurieren.
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/KeyComposite.cs?name=KeyComposite&highlight=4)]
+
+## <a name="value-generation"></a>Wertschöpfung
+
+Bei nicht zusammengesetzten numerischen und GUID-primär Schlüsseln legt EF Core die Wert Generierung für Sie gemäß der Konvention fest. Beispielsweise wird ein numerischer Primärschlüssel in SQL Server automatisch als Identitäts Spalte festgelegt. Weitere Informationen finden Sie [in der Dokumentation zur Wert Generierung](xref:core/modeling/generated-properties).
 
 ## <a name="primary-key-name"></a>Primärschlüssel Name
 
@@ -51,7 +57,7 @@ Obwohl EF Core die Verwendung von Eigenschaften eines beliebigen primitiven Typs
 Schlüsseleigenschaften müssen immer einen nicht standardmäßigen Wert aufweisen, wenn eine neue Entität zum Kontext hinzugefügt wird, aber einige Typen werden [von der Datenbank generiert](xref:core/modeling/generated-properties). In diesem Fall versucht EF, einen temporären Wert zu generieren, wenn die Entität zu nach Verfolgungs Zwecken hinzugefügt wird. Nachdem [SaveChanges](/dotnet/api/Microsoft.EntityFrameworkCore.DbContext.SaveChanges) aufgerufen wurde, wird der temporäre Wert durch den von der Datenbank generierten Wert ersetzt.
 
 > [!Important]
-> Wenn eine Schlüsseleigenschaft den von der Datenbank generierten Wert aufweist und beim Hinzufügen einer Entität ein nicht standardmäßiger Wert angegeben wird, geht EF davon aus, dass die Entität bereits in der Datenbank vorhanden ist, und versucht dann, Sie zu aktualisieren, anstatt eine neue einzufügen. Um dies zu vermeiden, deaktivieren Sie die Wert Generierung, oder erfahren Sie, [wie Sie explizite Werte für generierte Eigenschaften angeben](xref:core/saving/explicit-values-generated-properties).
+> Wenn eine Schlüsseleigenschaft den von der Datenbank generierten Wert aufweist und beim Hinzufügen einer Entität ein nicht standardmäßiger Wert angegeben wird, geht EF davon aus, dass die Entität bereits in der Datenbank vorhanden ist, und versucht dann, Sie zu aktualisieren, anstatt eine neue einzufügen. Um dies zu vermeiden, deaktivieren Sie die Wert Generierung, oder erfahren Sie, [wie Sie explizite Werte für generierte Eigenschaften angeben](xref:core/modeling/generated-properties#overriding-value-generation).
 
 ## <a name="alternate-keys"></a>Alternativschlüssel
 

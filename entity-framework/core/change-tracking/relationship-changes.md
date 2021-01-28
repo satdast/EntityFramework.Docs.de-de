@@ -4,12 +4,12 @@ description: Ändern von Beziehungen zwischen Entitäten durch manipulieren von 
 author: ajcvickers
 ms.date: 12/30/2020
 uid: core/change-tracking/relationship-changes
-ms.openlocfilehash: ac2110509b6748e85411dbb14989522465925ecf
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: b1ebe77ed29291beeef3708b603db026c38bbbec
+ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98129596"
+ms.lasthandoff: 01/28/2021
+ms.locfileid: "98983611"
 ---
 # <a name="changing-foreign-keys-and-navigations"></a>Ändern von Fremdschlüsseln und Navigationen
 
@@ -25,7 +25,7 @@ Navigationen können auf beiden Seiten der Beziehung nur auf einer Seite oder ga
 > In diesem Dokument wird davon ausgegangen, dass die Entitäts Zustände und die Grundlagen EF Core Änderungs Nachverfolgung verstanden werden. Weitere Informationen zu diesen Themen finden Sie [unter Änderungsnachverfolgung in EF Core](xref:core/change-tracking/index) .
 
 > [!TIP]
-> Sie können den gesamten Code in diesem Dokument ausführen und Debuggen, indem Sie [den Beispielcode von GitHub herunterladen](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/ChangeTracking/ChangingFKsAndNavigations).
+> Sie können den gesamten Code in dieser Dokumentation ausführen und debuggen, indem Sie [den Beispielcode von GitHub herunterladen](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/ChangeTracking/ChangingFKsAndNavigations).
 
 ### <a name="example-model"></a>Beispielmodell
 
@@ -184,8 +184,8 @@ Beziehungs Korrektur erfolgt auch zwischen Entitäten, die von einer Überwachun
         var posts = context.Posts.ToList();
         Console.WriteLine(context.ChangeTracker.DebugView.LongView);
 -->
-[! Code-csharp-[Relationship_fixup_2](../../../ samples / core / ChangeTracking / ChangingFKsAndNavigations / OptionalRelationshipsSamples.cs ? name = Relationship_fixup_2
-) ] Wenn Sie die debugansichten erneut betrachten, werden nur die beiden Blogs nachverfolgt, nachdem die erste Abfrage durchgeführt wurde:
+[!code-csharp[Relationship_fixup_2](../../../samples/core/ChangeTracking/ChangingFKsAndNavigations/OptionalRelationshipsSamples.cs?name=Relationship_fixup_2)]
+Wenn Sie die debugansichten erneut betrachten, werden nur die beiden Blogs nachverfolgt, nachdem die erste Abfrage durchgeführt wurde:
 
 ```output
 Blog {Id: 1} Unchanged
@@ -421,7 +421,7 @@ Auf Grundlage dieser Informationen können wir sehen, dass zum Verschieben eines
 -->
 [!code-csharp[Fixup_for_added_or_deleted_entities_1](../../../samples/core/ChangeTracking/ChangingFKsAndNavigations/OptionalRelationshipsSamples.cs?name=Fixup_for_added_or_deleted_entities_1)]
 
-Nach:
+in:
 
 <!--
         var post = vsBlog.Posts.Single(e => e.Title.StartsWith("Disassembly improvements"));
@@ -746,7 +746,7 @@ Post {Id: 4} Modified
 
 Beachten Sie Folgendes:
 
-- Der Blog ist als markiert `Deleted` .
+- Der Blog ist als `Deleted` markiert.
 - Die Ressourcen im Zusammenhang mit dem gelöschten Blog haben einen NULL-Wert für den FK ( `BlogId: <null> FK Modified Originally 2` ) und eine NULL-Verweis Navigation ( `Blog: <null>` ).
 - Jeder Beitrag im Zusammenhang mit dem gelöschten Blog weist einen NULL `BlogId: <null> FK Modified Originally 2` -Wert () und eine NULL-Verweis Navigation () auf. `Blog: <null>`
 
@@ -790,7 +790,7 @@ Standardmäßig erfolgt das Löschen von Lösch Vorgängen, sobald der übergeor
 Das Löschen von Lösch Vorgängen sowie das Löschen von Waisen können jederzeit erzwungen werden, indem aufgerufen wird <xref:Microsoft.EntityFrameworkCore.ChangeTracking.ChangeTracker.CascadeChanges?displayProperty=nameWithType> . Durch die Kombination dieser mit dem Festlegen der Zeitüberschreitungen für Löschvorgänge auf `Never` wird sichergestellt, dass Löschvorgänge nie durchgeführt werden, es sei denn, EF Core
 
 > [!TIP]
-> Kaskadierende Lösch-und Lösch verwaisten sind eng verwandt. Beide führen dazu, dass abhängige/untergeordnete Entitäten gelöscht werden, wenn die Beziehung zum erforderlichen Prinzipal/übergeordneten Element getrennt wird. Zum Löschen von Lösch Vorgängen tritt dieser Vorgang auf, weil der Prinzipal/das übergeordnete Element selbst gelöscht wird. Für verwaiste Elemente ist die Prinzipal/übergeordnete Entität weiterhin vorhanden, Sie ist jedoch nicht mehr mit den abhängigen/untergeordneten Entitäten verknüpft.
+> Das kaskadierende Delete und das Löschen verwaister Entitäten sind eng verwandt. Beide führen dazu, dass abhängige/untergeordnete Entitäten gelöscht werden, wenn die Beziehung zum erforderlichen Prinzipal bzw. der übergeordneten Entität getrennt wird. Beim kaskadierenden Delete erfolgt diese Trennung, weil der Prinzipal bzw. die übergeordnete Entität selbst gelöscht wird. Bei verwaisten Entitäten ist der Prinzipal bzw. die übergeordnete Entität weiterhin vorhanden, jedoch besteht die Beziehung zur abhängigen/untergeordneten Entität nicht mehr.
 
 ## <a name="many-to-many-relationships"></a>M:n-Beziehungen
 

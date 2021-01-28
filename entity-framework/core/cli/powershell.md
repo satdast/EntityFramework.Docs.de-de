@@ -4,12 +4,12 @@ description: Referenzhandbuch für die Entity Framework Core Visual Studio-Paket
 author: bricelam
 ms.date: 10/27/2020
 uid: core/cli/powershell
-ms.openlocfilehash: 4a1ab889fc1117b67252ace51fd3df4797b6c8d3
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 51f2dbcad0606a0d5571e96d7a7951cf595e2b9e
+ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94431261"
+ms.lasthandoff: 01/28/2021
+ms.locfileid: "98983507"
 ---
 # <a name="entity-framework-core-tools-reference---package-manager-console-in-visual-studio"></a>Referenz zur Entity Framework Core Tools-Paket-Manager-Konsole in Visual Studio
 
@@ -106,7 +106,7 @@ In der folgenden Tabelle sind die Parameter aufgeführt, die für alle EF Core-B
 |:--------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | -Kontext \<String>        | Die `DbContext`-Klasse, die verwendet werden soll. Der Klassenname oder voll qualifiziert mit Namespaces.  Wenn dieser Parameter ausgelassen wird, wird EF Core die Kontext Klasse findet. Wenn mehrere Kontext Klassen vorhanden sind, ist dieser Parameter erforderlich. |
 | -Projekt \<String>        | Das Ziel Projekt. Wenn dieser Parameter ausgelassen wird, wird das **Standard Projekt** für die **Paket-Manager-Konsole** als Ziel Projekt verwendet.                                                                             |
-| <nobr>-StartupProject</nobr>\<String> | Das Startprojekt. Wenn dieser Parameter ausgelassen wird, wird das **Startprojekt** in Projektmappeneigenschaften als Ziel Projekt verwendet. **Solution properties**                                                                                 |
+| <nobr>-StartupProject</nobr>\<String> | Das Startprojekt. Wenn dieser Parameter ausgelassen wird, wird das **Startprojekt** in Projektmappeneigenschaften als Ziel Projekt verwendet.                                                                                  |
 | -Args \<String>           | Argumente, die an die Anwendung übermittelt werden. In EF Core 5,0 hinzugefügt.                                                                                                                                                           |
 | -Verbose                  | Zeigt eine ausführliche Ausgabe an.                                                                                                                                                                                                 |
 
@@ -180,7 +180,7 @@ Parameter:
 
 | Parameter                          | BESCHREIBUNG                                                                                                                                                                                                                                                             |
 |:-----------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| <nobr>-Verbindung \<String></nobr> | Die Verbindungszeichenfolge für die Datenbank. Bei ASP.net Core 2. x-Projekten kann der Wert " *Name = \<name of connection string>* " lauten. In diesem Fall stammt der Name aus den Konfigurations Quellen, die für das Projekt eingerichtet sind. Dies ist ein Positions Parameter, der erforderlich ist. |
+| <nobr>-Verbindung \<String></nobr> | Die Verbindungszeichenfolge für die Datenbank. Bei ASP.net Core 2. x-Projekten kann der Wert " *Name = \<name of connection string>*" lauten. In diesem Fall stammt der Name aus den Konfigurations Quellen, die für das Projekt eingerichtet sind. Dies ist ein Positions Parameter, der erforderlich ist. |
 | <nobr>-Anbieter \<String></nobr>   | Der zu verwendende Anbieter. In der Regel ist dies der Name des nuget-Pakets, z `Microsoft.EntityFrameworkCore.SqlServer` . b.:. Dies ist ein Positions Parameter, der erforderlich ist.                                                                                           |
 | -OutputDir \<String>               | Das Verzeichnis, in dem Dateien abgelegt werden sollen. Pfade sind relativ zum Projektverzeichnis.                                                                                                                                                                                             |
 | -Contextdir \<String>              | Das Verzeichnis, in das die Datei eingefügt werden soll `DbContext` . Pfade sind relativ zum Projektverzeichnis.                                                                                                                                                               |
@@ -212,7 +212,7 @@ Scaffold-DbContext "Server=(localdb)\mssqllocaldb;Database=Blogging;Trusted_Conn
 Im folgenden Beispiel wird die Verbindungs Zeichenfolge aus der Konfiguration des Projekts gelesen, die möglicherweise mit dem [Secret Manager-Tool](/aspnet/core/security/app-secrets#secret-manager)festgelegt wird
 
 ```powershell
-Scaffold-DbContext "Name=ConnectionStrings.Blogging" Microsoft.EntityFrameworkCore.SqlServer
+Scaffold-DbContext "Name=ConnectionStrings:Blogging" Microsoft.EntityFrameworkCore.SqlServer
 ```
 
 ## <a name="script-dbcontext"></a>Script-DbContext

@@ -4,12 +4,12 @@ description: Rückgängigmachen eines Modells aus einer vorhandenen Datenbank mi
 author: bricelam
 ms.date: 11/13/2018
 uid: core/managing-schemas/scaffolding
-ms.openlocfilehash: 11ffa2e62136e47959ebbfd54ccb55c2b9e23e04
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 4cad43f4b1300e1ef3cb31e60d3e9890826d974d
+ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94429766"
+ms.lasthandoff: 01/28/2021
+ms.locfileid: "98983572"
 ---
 # <a name="reverse-engineering"></a> Reverse Engineering
 
@@ -48,8 +48,8 @@ Wenn Sie ein ASP.net Core-Projekt haben, können Sie die-Syntax verwenden, `Name
 Dies funktioniert gut mit dem [Geheimnis-Manager-Tool](/aspnet/core/security/app-secrets#secret-manager) , um das Daten Bank Kennwort von ihrer CodeBase getrennt zu halten.
 
 ```dotnetcli
-dotnet user-secrets set ConnectionStrings.Chinook "Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Chinook"
-dotnet ef dbcontext scaffold Name=ConnectionStrings.Chinook Microsoft.EntityFrameworkCore.SqlServer
+dotnet user-secrets set ConnectionStrings:Chinook "Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Chinook"
+dotnet ef dbcontext scaffold Name=ConnectionStrings:Chinook Microsoft.EntityFrameworkCore.SqlServer
 ```
 
 ## <a name="provider-name"></a>Anbietername
