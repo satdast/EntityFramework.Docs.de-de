@@ -4,12 +4,12 @@ description: Muster für das Erstellen und Verwalten von DbContext-Instanzen mit
 author: ajcvickers
 ms.date: 11/07/2020
 uid: core/dbcontext-configuration/index
-ms.openlocfilehash: 10ed474df2c4c52e61083d9d671909be02cd8cef
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: 5b3143edbcfb82312b8026fb09c96dac85427831
+ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98129030"
+ms.lasthandoff: 01/28/2021
+ms.locfileid: "98983520"
 ---
 # <a name="dbcontext-lifetime-configuration-and-initialization"></a>DbContext-Lebensdauer, -Konfiguration und -Initialisierung
 
@@ -314,7 +314,7 @@ Die folgende Tabelle enthält Beispiele für gängige Methoden, die für `DbCont
 > [!NOTE]
 > <xref:Microsoft.EntityFrameworkCore.ProxiesExtensions.UseLazyLoadingProxies%2A> und <xref:Microsoft.EntityFrameworkCore.ProxiesExtensions.UseChangeTrackingProxies%2A> sind Erweiterungsmethoden aus dem NuGet-Paket [Microsoft.EntityFrameworkCore.Proxies](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Proxies/). Diese Art von „.UseSomething()“-Aufruf ist die empfohlene Methode zur Konfiguration und/oder Verwendung von EF Core-Erweiterungen, die in anderen Paketen enthalten sind.
 
-### <a name="dbcontextoptions-verses-dbcontextoptionstcontext"></a>`DbContextOptions` und `DbContextOptions<TContext>` im Vergleich
+### <a name="dbcontextoptions-versus-dbcontextoptionstcontext"></a>`DbContextOptions` im Vergleich mit `DbContextOptions<TContext>`
 
 Die meisten `DbContext`-Unterklassen, die `DbContextOptions` akzeptieren, sollten die [generische](/dotnet/csharp/programming-guide/generics/) `DbContextOptions<TContext>`-Variation verwenden. Beispiel:
 
