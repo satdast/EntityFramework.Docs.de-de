@@ -5,10 +5,10 @@ author: roji
 ms.date: 05/27/2020
 uid: core/modeling/entity-properties
 ms.openlocfilehash: fe6dd2c24b8f8ffffa8e0101f69966b7b7c74036
-ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
+ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/19/2020
+ms.lasthandoff: 02/05/2021
 ms.locfileid: "97635548"
 ---
 # <a name="entity-properties"></a>Entitätseigenschaften
@@ -45,7 +45,7 @@ Wenn Sie Ihre Spalten lieber mit unterschiedlichen Namen konfigurieren möchten,
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/ColumnName.cs?Name=ColumnName&highlight=3-5)]
 
-**_
+***
 
 ## <a name="column-data-types"></a>Spaltendatentypen
 
@@ -63,7 +63,7 @@ Sie können auch die Spalten so konfigurieren, dass Sie einen exakten Datentyp f
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/ColumnDataType.cs?name=ColumnDataType&highlight=5-6)]
 
-_*_
+***
 
 ### <a name="maximum-length"></a>Maximale Länge
 
@@ -82,7 +82,7 @@ Im folgenden Beispiel bewirkt das Konfigurieren einer maximalen Länge von 500, 
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/MaxLength.cs?name=MaxLength&highlight=3-5)]
 
-_*_
+***
 
 ### <a name="precision-and-scale"></a>Genauigkeit und Skalierung
 
@@ -106,7 +106,7 @@ Genauigkeit und Skalierung können zurzeit nicht über Daten Anmerkungen konfigu
 > [!NOTE]
 > Die Skalierung wird nie definiert, ohne dass zuerst die Genauigkeit definiert wird, daher ist die fließende API zum Definieren der Skala `HasPrecision(precision, scale)` .
 
-_*_
+***
 
 ## <a name="required-and-optional-properties"></a>Erforderliche und optionale Eigenschaften
 
@@ -118,7 +118,7 @@ Gemäß der Konvention wird eine Eigenschaft, deren .NET-Typ NULL enthalten kann
 
 In c# 8 wurde ein neues Feature namens " [Werte zulässt Reference Types (NRT)](/dotnet/csharp/tutorials/nullable-reference-types)" eingeführt, mit dem Verweis Typen mit Anmerkungen versehen werden können. Dies gibt an, ob es zulässig ist, dass NULL-Werte enthalten sind. Diese Funktion ist standardmäßig deaktiviert und wirkt sich auf das Verhalten EF Core wie folgt aus:
 
-_ Wenn Verweis Typen, die NULL-Werte zulassen, deaktiviert sind (Standardeinstellung), werden alle Eigenschaften mit .net-Verweis Typen gemäß der Konvention (z. b.) als optional konfiguriert `string` .
+* Wenn NULL-Werte zulassen (Standardeinstellung), werden alle Eigenschaften mit .net-Verweis Typen gemäß der Konvention (z. b.) als optional konfiguriert `string` .
 * Wenn Verweis Typen, die NULL-Werte zulassen, aktiviert sind, werden die Eigenschaften basierend auf der c#-NULL-Zulässigkeit ihres .net-Typs konfiguriert: `string?` wird als optional konfiguriert, `string` wird jedoch als erforderlich konfiguriert.
 
 Das folgende Beispiel zeigt einen Entitätstyp mit erforderlichen und optionalen Eigenschaften, wobei die Verweis Funktion NULL-Werte ist deaktiviert (Standard) und aktiviert ist:
@@ -152,7 +152,7 @@ Eine Eigenschaft, die gemäß der Konvention optional ist, kann so konfiguriert 
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Required.cs?name=Required&highlight=3-5)]
 
-**_
+***
 
 ## <a name="column-collations"></a>Spalten Sortierungen
 
@@ -182,4 +182,4 @@ Sie können einen beliebigen Textkommentar festlegen, der für die Daten Bank Sp
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/ColumnComment.cs?name=ColumnComment&highlight=5)]
 
-_**
+***

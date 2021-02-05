@@ -5,10 +5,10 @@ author: bricelam
 ms.date: 10/27/2020
 uid: core/managing-schemas/migrations/managing
 ms.openlocfilehash: ef5e1b9bb10d6f1cd428db2fee327ec513c3f528
-ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
+ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 11/20/2020
+ms.lasthandoff: 02/05/2021
 ms.locfileid: "95003275"
 ---
 # <a name="managing-migrations"></a>Verwalten von Migrationen
@@ -68,7 +68,7 @@ Add-Migration InitialCreate -OutputDir Your\Directory
 > [!NOTE]
 > In EF Core 5,0 können Sie den Namespace auch unabhängig vom Verzeichnis mithilfe von ändern `-Namespace` .
 
-**_
+***
 
 ## <a name="customize-migration-code"></a>Anpassen des Migrationscodes
 
@@ -164,10 +164,10 @@ migrationBuilder.Sql(
 
 Dies kann verwendet werden, um einen beliebigen Aspekt der Datenbank zu verwalten, einschließlich:
 
-_ Gespeicherte Prozeduren
+* Gespeicherte Prozeduren
 * Volltextsuche
 * Funktionen
-* Trigger
+* Auslöser
 * Ansichten
 
 In den meisten Fällen wird jede Migration beim Anwenden von Migrationen von EF Core automatisch in der eigenen Transaktion umschlossen. Leider können einige Migrations Vorgänge nicht innerhalb einer Transaktion in einigen Datenbanken ausgeführt werden. in diesen Fällen können Sie die Transaktion ablehnen, indem Sie an übergeben `suppressTransaction: true` `migrationBuilder.Sql` .
@@ -216,11 +216,11 @@ dotnet ef migrations list
 Get-Migration
 ```
 
-**_
+***
 
 ## <a name="resetting-all-migrations"></a>Zurücksetzen aller Migrationen
 
-In einigen Extremfällen ist es möglicherweise erforderlich, alle Migrationen zu entfernen und zu beginnen. Dies lässt sich problemlos erreichen, indem der Ordner _ *Migrationen** gelöscht und die Datenbank gelöscht wird. an diesem Punkt können Sie eine neue anfängliche Migration erstellen, die das gesamte aktuelle Schema enthält.
+In einigen Extremfällen ist es möglicherweise erforderlich, alle Migrationen zu entfernen und zu beginnen. Dies kann problemlos durch Löschen Ihres **Migrations** Ordners und Löschen der Datenbank erfolgen. an diesem Punkt können Sie eine neue anfängliche Migration erstellen, die das gesamte aktuelle Schema enthält.
 
 Es ist auch möglich, alle Migrationen zurückzusetzen und eine einzelne zu erstellen, ohne die Daten zu verlieren. Dies wird mitunter als "Squashing" bezeichnet und umfasst einige manuelle Aufgaben:
 

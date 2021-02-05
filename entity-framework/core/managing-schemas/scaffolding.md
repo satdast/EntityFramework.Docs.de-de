@@ -8,7 +8,7 @@ ms.openlocfilehash: 4cad43f4b1300e1ef3cb31e60d3e9890826d974d
 ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/28/2021
+ms.lasthandoff: 02/05/2021
 ms.locfileid: "98983572"
 ---
 # <a name="reverse-engineering"></a> Reverse Engineering
@@ -80,7 +80,7 @@ Verwenden Sie ein Array, um mehrere Tabellen einzubeziehen:
 Scaffold-DbContext ... -Tables Artist, Album
 ```
 
-**_
+***
 
 ## <a name="preserving-names"></a>Beibehalten von Namen
 
@@ -108,7 +108,7 @@ public string Title { get; set; }
 
 ## <a name="dbcontext-name"></a>Dbcontext-Name
 
-Der Name der dbcontext-Klasse mit dem Gerüst ist der Name der Datenbank, der standardmäßig mit _Context * versehen wird. Um einen anderen anzugeben, verwenden Sie `-Context` in der PMC und `--context` in der .net Core-CLI.
+Der Name der dbcontext-Klasse mit dem Gerüst ist der Name der Datenbank, der standardmäßig mit dem *Kontext* versehen wird. Um einen anderen anzugeben, verwenden Sie `-Context` in der PMC und `--context` in der .net Core-CLI.
 
 ## <a name="directories-and-namespaces"></a>Verzeichnisse und Namespaces
 

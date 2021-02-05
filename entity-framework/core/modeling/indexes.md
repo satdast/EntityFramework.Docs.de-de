@@ -5,10 +5,10 @@ author: roji
 ms.date: 12/16/2019
 uid: core/modeling/indexes
 ms.openlocfilehash: ab81b108c4ff518cf98b7e835da3553c0c41efed
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
 ms.translationtype: MT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/12/2021
+ms.lasthandoff: 02/05/2021
 ms.locfileid: "98128536"
 ---
 # <a name="indexes"></a>Indizes
@@ -47,9 +47,9 @@ Ein Index kann sich auch über mehrere Spalten erstrecken:
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/IndexComposite.cs?name=Composite&highlight=4)]
 
-**_
+***
 
-Indizes für mehrere Spalten, auch bekannt als _composite Indizes *, beschleunigen Abfragen, die nach Index Spalten filtern, aber auch Abfragen, die nur nach den *ersten* Spalten filtern, die vom Index abgedeckt werden. Weitere Informationen finden Sie in der Dokumentation zur [Leistung](xref:core/performance/efficient-querying#use-indexes-properly) .
+Indizes für mehrere Spalten, die auch als zusammen *gesetzte Indizes* bezeichnet werden, beschleunigen Abfragen, die nach Index Spalten filtern, aber auch Abfragen, die nur nach den *ersten* Spalten filtern, die vom Index abgedeckt werden. Weitere Informationen finden Sie in der Dokumentation zur [Leistung](xref:core/performance/efficient-querying#use-indexes-properly) .
 
 ## <a name="index-uniqueness"></a>Index Eindeutigkeit
 
