@@ -5,10 +5,10 @@ author: bricelam
 ms.date: 10/28/2020
 uid: core/managing-schemas/migrations/index
 ms.openlocfilehash: b9547298714af59453aeae6d05742a03c067708b
-ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
+ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 12/19/2020
+ms.lasthandoff: 02/05/2021
 ms.locfileid: "95003394"
 ---
 # <a name="migrations-overview"></a>Migrationsübersicht
@@ -59,9 +59,9 @@ dotnet ef migrations add InitialCreate
 Add-Migration InitialCreate
 ```
 
-**_
+***
 
-EF Core erstellt ein Verzeichnis namens _ *Migrations** in Ihrem Projekt und generiert einige Dateien. Es ist eine gute Idee, zu überprüfen, was genau EF Core generiert hat (und es möglicherweise zu ändern), aber wir überspringen dies vorerst.
+EF Core erstellt ein Verzeichnis namens **Migrations** in Ihrem Projekt und generiert einige Dateien. Es ist eine gute Idee, zu überprüfen, was genau EF Core generiert hat (und es möglicherweise zu ändern), aber wir überspringen dies vorerst.
 
 ### <a name="create-your-database-and-schema"></a>Erstellen der Datenbank und des Schemas
 
@@ -79,7 +79,7 @@ dotnet ef database update
 Update-Database
 ```
 
-**_
+***
 
 Das ist alles: Ihre Anwendung ist bereit, mit Ihrer neuen Datenbank ausgeführt zu werden, und Sie mussten nicht eine einzige Zeile SQL-Code schreiben. Beachten Sie, dass diese Art der Anwendung von Migrationen ideal für die lokale Entwicklung ist, aber für Produktionsumgebungen weniger geeignet ist. Weitere Informationen finden Sie auf der Seite [Anwenden von Migrationen](xref:core/managing-schemas/migrations/applying).
 
@@ -110,7 +110,7 @@ dotnet ef migrations add AddBlogCreatedTimestamp
 Add-Migration AddBlogCreatedTimestamp
 ```
 
-_*_
+***
 
 Beachten Sie, dass wir Migrationen einen beschreibenden Namen geben, um den Projektverlauf später leichter verständlich zu machen.
 
@@ -134,7 +134,7 @@ Update-Database
 
 <!--markdownlint-enable MD024-->
 
-_*_
+***
 
 Beachten Sie, dass EF dieses Mal erkennt, dass die Datenbank bereits vorhanden ist. Darüber hinaus wurde diese Tatsache bei der Anwendung unserer ersten Migration oben in einer speziellen Migrationsverlaufstabelle in Ihrer Datenbank aufgezeichnet. Dies ermöglicht es EF, automatisch nur die neue Migration anzuwenden.
 
@@ -153,4 +153,4 @@ Die Ausführungen oben waren nur eine kurze Einführung in Migrationen. Weitere 
 
 ## <a name="additional-resources"></a>Zusätzliche Ressourcen
 
-_ [EF Core Community Standup-Sitzung](https://www.youtube.com/watch?v=mSsGERmrhnE&list=PLdo4fOcmZ0oX-DBuRG4u58ZTAJgBAeQ-t&index=20) mit neuen Migrationsfeatures in EF Core 5.0.
+* [EF Core Community Standup-Sitzung](https://www.youtube.com/watch?v=mSsGERmrhnE&list=PLdo4fOcmZ0oX-DBuRG4u58ZTAJgBAeQ-t&index=20) mit neuen Migrationsfeatures in EF Core 5.0.
