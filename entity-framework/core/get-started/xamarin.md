@@ -5,12 +5,12 @@ author: codemillmatt
 ms.date: 07/07/2020
 ms.author: masoucou
 uid: core/get-started/xamarin
-ms.openlocfilehash: c19c70903926c2c8ff4b51cca7781859af7e3567
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: e4a26d7a0c6909002be0974ee9fe1c5db7c1046a
+ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98128783"
+ms.lasthandoff: 01/28/2021
+ms.locfileid: "98983598"
 ---
 # <a name="getting-started-with-ef-core-and-xamarin"></a>Erste Schritte mit EF Core und Xamarin
 
@@ -78,8 +78,7 @@ Dabei wird davon ausgegangen, dass Sie mit den Xamarin.Forms-Themen zum [Anzeige
 >
 > * Die erste ist, `--linkskip System.Core` zu **Weitere mtouch-Argumente** in den **iOS-Build**-Optionen hinzuzufügen.
 > * Alternativ können Sie das Xamarin.iOS-**Linkerverhalten** in den **iOS-Build**-Optionen auf `Don't Link` festlegen.
-> [Dieser Artikel enthält weitere Informationen zum Xamarin.iOS-Linker](/xamarin/ios/deploy-test/linker), unter anderem zum Festlegen des Verhaltens in Xamarin.iOS.
->
+> [Dieser Artikel enthält weitere Informationen zum Xamarin.iOS-Linker](/xamarin/ios/deploy-test/linker), unter anderem zum Festlegen des Verhaltens in Xamarin.iOS. (Dieser Ansatz ist nicht ideal, da er möglicherweise zu einer Ablehnung durch den Speicher führt).
 
 ## <a name="entity-framework-core-nuget-packages"></a>NuGet-Pakete für Entity Framework Core
 

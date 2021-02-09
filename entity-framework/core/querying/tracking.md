@@ -4,12 +4,12 @@ description: Informationen zu Abfragen mit und ohne Nachverfolgung in Entity Fra
 author: smitpatel
 ms.date: 11/09/2020
 uid: core/querying/tracking
-ms.openlocfilehash: 1b3c1db702438390c0de4a2ad5d13e868a522b65
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: cb18125fb3453bb533981afb36480b12727cd6f2
+ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98128900"
+ms.lasthandoff: 01/28/2021
+ms.locfileid: "98983416"
 ---
 # <a name="tracking-vs-no-tracking-queries"></a>Abfragen mit Nachverfolgung im Vergleich zu Abfragen ohne Nachverfolgung
 
@@ -27,7 +27,7 @@ Abfragen, die Entitätstypen zurückgeben, verfügen standardmäßig über Nachv
 
 [!code-csharp[Main](../../../samples/core/Querying/Tracking/Program.cs#Tracking)]
 
-Wenn die Ergebnisse in einer Abfrage mit Nachverfolgung zurückgegeben werden, prüft EF Core, ob die Entität bereits im Kontext ist. Wenn EF Core eine vorhandene Entität findet, wird dieselbe Instanz zurückgegeben. EF Core überschreibt im Eintrag mit den Datenbankwerten nicht die aktuellen und ursprünglichen Werte der Eigenschaften der Entität. Wenn die Entität nicht im Kontext gefunden wird, erstellt EF Core eine neue Entitätsinstanz und fügt sie an den Kontext an. Abfrageergebnisse enthalten keine Entität, die dem Kontext hinzugefügt, aber noch nicht in der Datenbank gespeichert wurde.
+Wenn die Ergebnisse in einer Abfrage mit Nachverfolgung zurückgegeben werden, prüft EF Core, ob die Entität bereits im Kontext ist. Wenn EF Core eine vorhandene Entität findet, wird dieselbe Instanz zurückgegeben. EF Core überschreibt im Eintrag mit den Datenbankwerten nicht die aktuellen und ursprünglichen Werte der Eigenschaften der Entität. Wenn die Entität nicht im Kontext gefunden wird, erstellt EF Core eine neue Entitätsinstanz und fügt sie dem Kontext an. Abfrageergebnisse enthalten keine Entität, die dem Kontext hinzugefügt, aber noch nicht in der Datenbank gespeichert wurde.
 
 ## <a name="no-tracking-queries"></a>Abfragen ohne Nachverfolgung
 
@@ -82,5 +82,5 @@ Vor Version 3.0 wies EF Core bei der Nachverfolgung einige Unterschiede auf. We
   - In bestimmten Fällen wurden aus der LINQ-Komposition stammende Objekte von EF Core nicht nachverfolgt. Im folgenden Beispiel wurde `Post` nicht nachverfolgt.
     [!code-csharp[Main](../../../samples/core/Querying/Tracking/Program.cs#CustomProjection2)]
 
-- Wenn Abfrageergebnisse schlüssellose Entitätstypen enthielten, wurde die gesamte Abfrage nicht nachverfolgt. Dies bedeutet, dass Entitätstypen mit Schlüsseln, die sich in einem Ergebnis befanden, auch nicht nachverfolgt wurden.
-- EF Core führte in Abfragen ohne Nachverfolgung keine Identitätsauflösung durch. Schwache Verweise wurden verwendet, um bereits zurückgegebene Entitäten nachzuverfolgen. Wenn also ein Resultset dieselbe Entität mehrfach enthielt, erhielten Sie für jedes Vorkommen dieselbe Instanz. Auch wenn ein vorheriges Ergebnis mit derselben Identität den Gültigkeitsbereich verließ und eine Garbage Collection durchgeführt wurde, gab EF Core eine neue Instanz zurück.
+- Wenn Abfrageergebnisse schlüssellose Entitätstypen enthielten, wurde die gesamte Abfrage nicht nachverfolgt. Dies bedeutet, dass Entitätstypen mit Schlüsseln, die sich im Ergebnis befanden, auch nicht nachverfolgt wurden.
+- EF Core führte in Abfragen ohne Nachverfolgung eine Identitätsauflösung durch. Schwache Verweise wurden verwendet, um bereits zurückgegebene Entitäten nachzuverfolgen. Wenn also ein Resultset dieselbe Entität mehrfach enthielt, erhielten Sie für jedes Vorkommen dieselbe Instanz. Auch wenn ein vorheriges Ergebnis mit derselben Identität den Gültigkeitsbereich verließ und eine Garbage Collection durchgeführt wurde, gab EF Core eine neue Instanz zurück.

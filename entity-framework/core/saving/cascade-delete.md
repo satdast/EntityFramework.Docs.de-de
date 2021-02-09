@@ -4,12 +4,12 @@ description: In diesem Artikel finden Sie Informationen zur Konfiguration des ka
 author: ajcvickers
 ms.date: 01/07/2021
 uid: core/saving/cascade-delete
-ms.openlocfilehash: 7c35de900930cf42da0e534df76124b5fb19ca52
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: 27ba84fa5d7e0d72e66ccbd96df9b6a5008791fb
+ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98128861"
+ms.lasthandoff: 01/28/2021
+ms.locfileid: "98983338"
 ---
 # <a name="cascade-delete"></a>Kaskadierendes Delete
 
@@ -473,11 +473,11 @@ In der folgenden Tabelle werden die Ergebnisse der einzelnen `OnDelete`-Werte f�
 |:----------------------|--------------------------
 | Cascade               | ON DELETE CASCADE
 | Einschränken              | ON DELETE NO ACTION
-| NoAction              | <database default>
+| NoAction              | Datenbankstandard
 | SetNull               | ON DELETE SET NULL
 | ClientSetNull         | ON DELETE NO ACTION
 | ClientCascade         | ON DELETE NO ACTION
-| ClientNoAction        | <database default>
+| ClientNoAction        | Datenbankstandard
 
 > [!NOTE]
 > Da diese Tabelle verwirrend sein kann, wird sie in einem zukünftigen Release überarbeitet. Weitere Informationen finden Sie unter [GitHub-Issue #21252](https://github.com/dotnet/efcore/issues/21252).

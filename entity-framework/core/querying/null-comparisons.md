@@ -4,12 +4,12 @@ description: Hier erfahren Sie, wie Entity Framework Core NULL-Vergleiche in Abf
 author: maumar
 ms.date: 11/11/2020
 uid: core/querying/null-comparisons
-ms.openlocfilehash: d1235eb8df7fd22c7a930b3661ec38a99f75e5fa
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: fc63d0e0e6aea09e46b1700152312d4b74270219
+ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
 ms.translationtype: HT
 ms.contentlocale: de-DE
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98129537"
+ms.lasthandoff: 01/28/2021
+ms.locfileid: "98983351"
 ---
 # <a name="query-null-semantics"></a>NULL-Semantik in Abfragen
 
@@ -77,7 +77,7 @@ Die Optimierung kann auch für benutzerdefinierte Funktionen verwendet werden. W
 
 - Das Vergleichen von Non-Nullable-Spalten ist einfacher und schneller als das Vergleichen von Nullwerte zulassenden Spalten. Markieren Sie Spalten, wenn möglich, immer als Non-Nullable.
 
-- Die Überprüfung auf Gleichheit (`==`) ist einfacher und schneller als die Überprüfung auf Ungleichheit (`!=`), da die Abfrage nicht zwischen `null`- und `false`-Ergebnissen unterscheiden muss. Verwenden Sie, wenn möglich, immer den Gleichheitsvergleich. Der Vergleich mit einer einfachen Negation `==` ist jedoch identisch mit `!=` und führt nicht zu einer Leistungsverbesserung.
+- Die Überprüfung auf Gleichheit (`==`) ist einfacher und schneller als die Überprüfung auf Ungleichheit (`!=`), da die Abfrage nicht zwischen `null`- und `false`-Ergebnissen unterscheiden muss. Verwenden Sie nach Möglichkeit den Gleichheitsvergleich. Den Vergleich `==` einfach zu negieren ist jedoch identisch mit `!=` und führt nicht zu einer Leistungsverbesserung.
 
 - In einigen Fällen ist es möglich, einen komplexen Vergleich zu vereinfachen, indem `null`-Werte explizit aus einer Spalte herausgefiltert werden, z. B. wenn keine `null`-Werte vorhanden oder diese im Ergebnis nicht relevant sind. Betrachten Sie das folgende Beispiel:
 
